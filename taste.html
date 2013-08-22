@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/menu.html">Community</a></li>
+            </ul>
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="AHundredLinesofOCaml">A Hundred Lines of OCaml</h1>
+<p><em>Table of contents</em></p>
+<p>OCaml possesses an <a href='description.html#interactive'>interactive system</a>,
+called “toploop”, that lets you type OCaml code and have it evaluated
+immediately. It is a great way to learn the language and to quickly
+experiment with ideas. Below, we demonstrate the use of the toploop to
+illustrate basic capabilities of the language.</p>
+<p>Some indications for the code below. The prompt at which you type is
+“<code>#</code>”. The code must end with “<code>;;</code>” (this is only an indication to the
+interactive system that the input has to be evaluated and is not really
+part of the OCaml code). The output of the system is displayed in
+<code>this color</code>.</p>
+<h2 id="Elementaryfunctions">Elementary functions</h2>
+<p>Let us define the square function and the recursive factorial function.
+Then, let us apply these functions to sample values. Unlike the majority
+of languages, OCaml uses parentheses for grouping but not for the
+arguments of a function.</p>
+<pre><code>let square x = x * x;;
+  square 3;;
+  let rec fact x =
+    if x &lt;= 1 then 1 else x * fact (x - 1);;
+fact 5;;
+square 120;;</code></pre>
+<h2 id="Automaticmemorymanagement">Automatic memory management</h2>
+<p>All allocation and deallocation operations are fully automatic. For
+example, let us consider simply linked lists.</p>
+<p>Lists are predefined in OCaml. The empty list is written <code>[]</code>. The
+constructor that allows prepending an element to a list is written <code>::</code>
+(in infix form).</p>
+<pre><code>let l = 1 :: 2 :: 3 :: [];;
+[1; 2; 3];;
+5 :: l;;</code></pre>
+<h2 id="Polymorphismsortinglists">Polymorphism: sorting lists</h2>
+<p>Insertion sort is defined using two recursive functions.</p>
+<pre><code>let rec sort = function
+  | [] -&gt; []
+  | x :: l -&gt; insert x (sort l)
+and insert elem = function
+  | [] -&gt; [elem]
+  | x :: l -&gt; if elem &lt; x then elem :: x :: l
+              else x :: insert elem l;;</code></pre>
+<p>Note that the type of the list elements remains unspecified: it is
+represented by a <em>type variable</em> <code>&apos;a</code>. Thus, <code>sort</code> can be applied both
+to a list of integers and to a list of strings.</p>
+<pre><code>sort [2; 1; 0];;
+sort [&quot;yes&quot;; &quot;ok&quot;; &quot;sure&quot;; &quot;ya&quot;; &quot;yep&quot;];;</code></pre>
+<h2 id="Imperativefeatures">Imperative features</h2>
+<p>Let us encode polynomials as arrays of integer coefficients. Then, to
+add two polynomials, we first allocate the result array, then fill its
+slots using two successive <code>for</code> loops.</p>
+<pre><code>let add_polynom p1 p2 =
+  let n1 = Array.length p1
+  and n2 = Array.length p2 in
+  let result = Array.create (max n1 n2) 0 in
+  for i = 0 to n1 - 1 do result.(i) &lt;- p1.(i) done;
+  for i = 0 to n2 - 1 do result.(i) &lt;- result.(i) + p2.(i) done;
+  result;;
+add_polynom [| 1; 2 |] [| 1; 2; 3 |];;</code></pre>
+<p>OCaml offers updatable memory cells, called <em>references</em>: <code>ref init</code>
+returns a new cell with initial contents <code>init</code>, <code>!cell</code> returns the
+current contents of <code>cell</code>, and <code>cell := v</code> writes the value <code>v</code> into
+<code>cell</code>.</p>
+<p>We may redefine <code>fact</code> using a reference cell and a <code>for</code> loop:</p>
+<pre><code>  let fact n =
+    let result = ref 1 in
+    for i = 2 to n do
+      result := i * !result
+    done;
+    !result;;
+  fact 5;;</code></pre>
+<h2 id="Higherorderfunctions">Higher-order functions</h2>
+<p>There is no restriction on functions, which may thus be passed as
+arguments to other functions. Let us define a function <code>sigma</code> that
+returns the sum of the results of applying a given function <code>f</code> to each
+element of a list:</p>
+<pre><code>  let rec sigma f = function
+    | [] -&gt; 0
+    | x :: l -&gt; f x + sigma f l</code></pre>
+<p>Anonymous functions may be defined using the <code>fun</code> or <code>function</code>
+construct:</p>
+<pre><code>sigma (fun x -&gt; x * x) [1; 2; 3];;</code></pre>
+<p>Polymorphism and higher-order functions allow defining function
+composition in its most general form:</p>
+<pre><code>  let compose f g = fun x -&gt; f (g x);;
+  let square_o_fact = compose square fact;;
+  square_o_fact 5;;</code></pre>
+<h2 id="Thepoweroffunctions">The power of functions</h2>
+<p>The power of functions cannot be better illustrated than by the <code>power</code>
+function:</p>
+<pre><code>  let rec power f n = 
+    if n = 0 then fun x -&gt; x 
+    else compose f (power f (n - 1));;</code></pre>
+<p>The <code>n</code><sup>>th</sup> derivative of a function can be computed as in
+mathematics by raising the derivative function to the <code>n</code><sup>>th</sup>
+power:</p>
+<pre><code>  let derivative dx f = fun x -&gt; (f (x +. dx) -. f x) /. dx;;
+  let sin&apos;&apos;&apos; = power (derivative 1e-5) 3 sin;;
+  let pi = 4.0 *. atan 1.0 in sin&apos;&apos;&apos; pi;;</code></pre>
+<h2 id="Symboliccomputation">Symbolic computation</h2>
+<p>Let us consider simple symbolic expressions made up of integers,
+variables, <code>let</code> bindings, and binary operators. Such expressions can be
+defined as a new data type, as follows:</p>
+<pre><code>  type expression =
+    | Num of int
+    | Var of string
+    | Let of string * expression * expression
+    | Binop of string * expression * expression;;</code></pre>
+<p>Evaluation of these expressions involves an environment that maps
+identifiers to values, represented as a list of pairs.</p>
+<pre><code>  let rec eval env = function
+    | Num i -&gt; i
+    | Var x -&gt; List.assoc x env
+    | Let (x, e1, in_e2) -&gt;
+       let val_x = eval env e1 in
+       eval ((x, val_x) :: env) in_e2
+    | Binop (op, e1, e2) -&gt;
+       let v1 = eval env e1 in
+       let v2 = eval env e2 in
+       eval_op op v1 v2
+  and eval_op op v1 v2 =
+    match op with
+    | &quot;+&quot; -&gt; v1 + v2
+    | &quot;-&quot; -&gt; v1 - v2
+    | &quot;*&quot; -&gt; v1 * v2
+    | &quot;/&quot; -&gt; v1 / v2
+    | _ -&gt; failwith (&quot;Unknown operator: &quot; ^ op);;</code></pre>
+<p>As an example, we evaluate the phrase <code>let   x = 1 in x   +       x</code>:</p>
+<pre><code>  eval [] (Let (&quot;x&quot;, Num 1, Binop (&quot;+&quot;, Var &quot;x&quot;, Var &quot;x&quot;)));;</code></pre>
+<p>Pattern matching eases the definition of functions operating on symbolic
+data, by giving function definitions and type declarations similar
+shapes. Indeed, note the close resemblance between the definition of the
+<code>eval</code> function and that of the <code>expression</code> type.</p>
+<h2 id="Elementarydebugging">Elementary debugging</h2>
+<p>To conclude, here is the simplest way of spying over functions:</p>
+<pre><code>  let rec fib x = if x &lt;= 1 then 1 else fib (x - 1) + fib (x - 2);;
+# #trace fib;;
+fib is now traced.
+# fib 3;;
+fib &lt;-- 3
+fib &lt;-- 1
+fib --&gt; 1
+fib &lt;-- 2
+fib &lt;-- 0
+fib --&gt; 1
+fib &lt;-- 1
+fib --&gt; 1
+fib --&gt; 2
+fib --&gt; 3
+- : int = 3</code></pre>
+<p>Go and <a href='http://try.ocamlpro.com/'>try it in your browser</a> or
+<a href='install.html'>install</a> it and read some <a href='tutorials/'>tutorials</a>.
+</p>
+
+            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+              <div class="navbar-inner">
+                <div class="container-fluid">
+                  <ul class="nav pull-right">
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Find us on GitHub</a></li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <!-- Load javascript from CDN -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
