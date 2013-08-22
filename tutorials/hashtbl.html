@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/menu.html">Community</a></li>
+            </ul>
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <p>Hashtbl</p>
+<h1 id="Hashtbl">Hashtbl</h1>
+<h2 id="ModuleHashtbl">Module Hashtbl</h2>
+<p>The Hashtbl module implements an efficient, mutable lookup table. To
+create a hash table we could write:</p>
+<pre><code>let my_hash = Hashtbl.create 123456;;</code></pre>
+<p>The 123456 is the initial size of the hashtbl. This initial number is
+just your best guess as to the amount of data that you will be putting
+into the hash table. The hash table can grow if you under-estimate the
+size so don&apos;t worry about it too much. The type of my_hash is:</p>
+<pre><code>val my_hash : (&apos;_a, &apos;_b) Hashtbl.t = </code></pre>
+<p>The &apos;_a and &apos;_b correspond to the key and value types, respectively.
+There are no concrete types (e.g., int or float * string) filled in in
+those slots because the type of the key and value are not yet
+determined. The underscore indicates that the key and data types, once
+chosen, will be fixed. In other words, you can&apos;t sometimes use a given
+hashtable with ints for keys, and then later use a string as a key in
+that same hashtable.</p>
+<p>Lets add some data to my_hash. Lets say I am working on a cross word
+solving program and I want to find all words that start with a certain
+letter. First I need to enter the data into my_hash.</p>
+<p>Note that a hashtable is modified by in-place updates, so, unlike a map,
+another hash table is not created every time you change the table. Thus,
+the code &quot;let my_hash = Hashtbl.add my_hash ...&quot; wouldn&apos;t make any
+sense. Instead, we would write something like this:</p>
+<pre><code>Hashtbl.add my_hash &quot;h&quot; &quot;hello&quot;;;
+Hashtbl.add my_hash &quot;h&quot; &quot;hi&quot;;;
+Hashtbl.add my_hash &quot;h&quot; &quot;hug&quot;;;
+Hashtbl.add my_hash &quot;h&quot; &quot;hard&quot;;;
+Hashtbl.add my_hash &quot;w&quot; &quot;wimp&quot;;;
+Hashtbl.add my_hash &quot;w&quot; &quot;world&quot;;;
+Hashtbl.add my_hash &quot;w&quot; &quot;wine&quot;;;</code></pre>
+<p>If we want to find one element in my_hash that has an &quot;h&quot; in it then we
+would write. Notice how it only returns just one element? That element
+was the last one entered in with the value of &quot;h&quot;.</p>
+<pre><code> 
+Hashtbl.find my_hash &quot;h&quot;;;</code></pre>
+<p>What we probably want is all the elements that start with &quot;h&quot;. To do
+this we want to find all of them. What better name for this then
+&quot;find_all&quot;?</p>
+<pre><code>Hashtbl.find_all my_hash &quot;h&quot;;;</code></pre>
+<p>returns</p>
+<pre><code>[&quot;hard&quot;; &quot;hug&quot;; &quot;hi&quot;; &quot;hello&quot;]</code></pre>
+<p>To find out if there is an entry in the my_hash for a letter we would
+do:</p>
+<pre><code>Hashtbl.mem my_hash &quot;h&quot;;;
+</code></pre>
+
+            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+              <div class="navbar-inner">
+                <div class="container-fluid">
+                  <ul class="nav pull-right">
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Find us on GitHub</a></li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <!-- Load javascript from CDN -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

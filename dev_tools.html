@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/menu.html">Community</a></li>
+            </ul>
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="DevelopmentTools">Development Tools</h1>
+<p><img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
+<h2 id="Editormodes">Editor modes</h2>
+<h3 id="Emacs"> Emacs</h3>
+<h3 id="vi"> vi</h3>
+<h3 id="Acme"> Acme</h3>
+<p><a href='https://en.wikipedia.org/wiki/Acme_(text_editor)'>Acme</a> is a
+minimalistic text editor from plan9. While there are no
+language-specific features to the editor, there are a few tricks one can
+use to make it friendlier:</p>
+<h4> Plumbimg</h4>
+<p>To allow plumbing of OCaml error messages, add the following to your
+plumbing rules:</p>
+<pre><code>type is text
+data matches &apos;File &quot;([.a-zA-Z¡-&lt;U+FFFF&gt;0-9_/&#92;-]*[a-zA-Z¡-&lt;U+FFFF&gt;0-9_/&#92;-])&quot;, line ([0-9]+), characters ([0-9]+)-([0-9]+):&apos;
+arg isfile      $1
+data set        $file
+attr add        addr=$2-#0+#$3,$2-#0+#$4
+plumb to edit
+plumb client $editor</code></pre>
+<h4> OCaml top-level</h4>
+<p>Simply execute <code>win</code> to get a shell and run <code>ocaml</code> from within this
+shell.</p>
+<h4> Commenting</h4>
+<p>The following <code>Edit</code> command will comment your selection.</p>
+<pre><code>Edit .{i/(*
+a/*)
+}</code></pre>
+<h4> Indenting</h4>
+<p>You can pipe your selection (or the whole file) through an external
+indenter such as <a href='https://github.com/OCamlPro/ocp-indent'><code>ocp-indent</code></a>
+middle-clicking on the command <code>|ocp-indent</code>.</p>
+<h2 id="Compilationtools">Compilation tools</h2>
+<h3 id="Findlibocamlfind"> Findlib/ocamlfind</h3>
+<p><a href='http://projects.camlcity.org/projects/findlib.html/'><code>ocamlfind</code></a> is
+<code>pkg-config</code> for OCaml.</p>
+<h3 id="ocamlbuild"> ocamlbuild</h3>
+<h3 id="oasis"> oasis</h3>
+<h3 id="OCamlMakefile"> OCamlMakefile</h3>
+<h3 id="OMake"> OMake</h3>
+<p><a href='http://omake.metaprl.org/index.html'>OMake</a> is a build system designed
+for scalability and portability. It uses a syntax similar to make
+utilities you may have used, but it features many additional
+enhancements.</p>
+<p>See the <a href='http://omake.metaprl.org/manual/omake.html'>guide</a>.</p>
+<h2 id="Distributinglibraries">Distributing libraries</h2>
+
+ <ul>
+  <li><p>Oasis oasis-db</p>
+</li>
+  <li><p>godi</p>
+</li>
+  <li><p><a href='http://yypkg.forge.ocamlcore.org'>Yypkg</a></p>
+</li>
+ </ul>
+
+<h2 id="Debugging">Debugging</h2>
+<p>Debugging facilities are described <a href='debug.html'>here</a>.
+</p>
+
+            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+              <div class="navbar-inner">
+                <div class="container-fluid">
+                  <ul class="nav pull-right">
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Find us on GitHub</a></li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <!-- Load javascript from CDN -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
