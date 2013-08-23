@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/menu.html">Community</a></li>
+            </ul>
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="CompilingwithOMake">Compiling with OMake</h1>
+<p>Here is the summary on how to compile an OCaml program with
+<a href='http://omake.metaprl.org/' title='OMake'>OMake</a>. It produces a native code
+executable or a bytecode executable if ocamlopt is not available, using
+ocamllex, ocamlyacc and regular ocaml files that use camlp4 syntax
+libraries as well as regular libraries, all managed by
+findlib/ocamlfind:</p>
+
+ <ol>
+  <li><p>Do <code>omake --install</code>: it creates a template OMakefile and OMakeroot
+ in the current directory. The OMakeroot file is left unchanged. The
+ OMakefile template doesn&apos;t show options for using ocamlfind, so we
+ will basically rewrite it, and grab some of the additional options
+ that are shown in the file.</p>
+</li>
+  <li><p>Our source files are <code>parser.mly</code>, <code>lexer.mll</code> and <code>main.ml</code>. Delete
+ or comment out the content of the automatically generated OMakefile,
+ and put the following:</p>
+<p>&lt;!-- --&gt;
+</p>
+<h1 id="Programnamewithoutextension"> Program name (without extension)</h1><p>
+PROGRAM = 
+</p>
+<h1 id="SourcefileswithoutextensionOneitemperlinenotrailingspaces"> Source files without extension. One item per line, no trailing spaces.</h1><p>
+FILES[] =
+   parser
+   lexer
+   main
+</p>
+<h1 id="Anothersyntaxforthesamething"> Another syntax for the same thing:</h1><h1 id="FILESparserlexer92"> FILES = parser lexer &#92;</h1><h1 id="precodecodepre"><pre><code>     </code></pre>
+</h1><h1 id="Weuseocamlfind"> We use ocamlfind</h1><p>
+
+USE_OCAMLFIND = true
+</p>
+<h1 id="Allocamlfindpackagesthatweuse"> All ocamlfind packages that we use</h1><p>
+OCAMLPACKS[] =
+   unix
+   micmatch_pcre
+   labltk
+</p>
+<h1 id="Weneedtotellomakethatwewantcamlp4preprocessing"> We need to tell omake that we want camlp4 preprocessing</h1><p>
+OCAMLFINDFLAGS = -syntax 
+</p>
+<h1 id="WeneedtotellOMakethatthesefilesneedtobecreated"> We need to tell OMake that these files need to be created</h1><h1 id="beforeitattemptstorunocamldep"> before it attempts to run ocamldep.</h1><h1 id="OMakeknowsthatocamllexandocamlyaccshouldbeused"> (OMake knows that ocamllex and ocamlyacc should be used)</h1><p>
+OCamlGeneratedFiles(lexer.ml parser.mli parser.ml
+</p>
+<h1 id="Compileintoanexecutable"> Compile into an executable</h1><p>
+OCamlProgram($(PROGRAM), $(FILES
+</p>
+<h1 id="Defaulttargetcompileintobytecodeornativecodeorboth"> Default target: compile into bytecode or native code, or both</h1><p>
+.DEFAULT: $(if $(BYTE_ENABLED), $(PROGRAM).run) <br/>
+</p>
+<pre><code>      $(if $(NATIVE_ENABLED), $(PROGRAM).opt</code></pre>
+<h1 id="Cleanup"> Cleanup</h1><p>
+
+.PHONY: clean
+clean:
+  rm -f <br/>
+</p>
+<pre><code> $(filter-proper-targets $(glob $(addsuffix .*, $(FILES)))) &#92;
+ $(PROGRAM).run $(PROGRAM).</code></pre>
+
+<p>Adapt your OMakefile to suit your needs in terms of source files, result
+files, libraries and options. Now you can run omake, it should compile
+an executable named either myprog.run (bytecode) or myprog.opt (native
+code), or whatever you chose to call it. The omake clean command removes
+files that were produced by the compilation.</p>
+<p>Go to <a href='http://omake.metaprl.org/' title='OMake&apos;s official site'>OMake&apos;s official
+site</a> for more
+information.
+</p>
+</li>
+ </ol>
+
+            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+              <div class="navbar-inner">
+                <div class="container-fluid">
+                  <ul class="nav pull-right">
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Find us on GitHub</a></li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <!-- Load javascript from CDN -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
