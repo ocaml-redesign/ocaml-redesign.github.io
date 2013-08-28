@@ -43,6 +43,20 @@
     <div class="container">
       <div class="row">
 
+
+ <ul>
+  <li><a href='#OCamlProgrammingGuidelines'>OCaml Programming Guidelines</a>
+   <ul>
+    <li><a href='#Generalguidelinestowriteprograms'>General guidelines to write programs</a></li>
+    <li><a href='#Programformattingguidelines'>Program formatting guidelines</a></li>
+    <li><a href='#Indentationofprograms'>Indentation of programs</a></li>
+    <li><a href='#Programmingguidelines'>Programming guidelines</a></li>
+    <li><a href='#Managingprogramdevelopment'>Managing program development</a>
+</li>
+   </ul>
+</li>
+ </ul>
+
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
@@ -80,12 +94,12 @@ modifications in mind, and never jeopardize readability.</p>
 programs with spaces; the space bar is the easiest key to find on the
 keyboard, press it as often as necessary!</p>
 </blockquote>
-<h4> Delimiters</h4>
+<h4 id="Delimiters"> Delimiters</h4>
 <p>A space should always follow a delimiter symbol, and spaces should
 surround operator symbols. It has been a great step forward in
 typography to separate words by spaces to make written texts easier to
 read. Do the same in your programs if you want them to be readable.</p>
-<h4> How to write pairs</h4>
+<h4 id="Howtowritepairs"> How to write pairs</h4>
 <p>A tuple is parenthesized and the commas therein (delimiters) are each
 followed by a space: <code>(1, 2)</code>, <code>let   triplet = (x, y, z)</code>...</p>
 
@@ -119,11 +133,11 @@ patterns are set off nicely by <code>|</code> and <code>-&gt;</code></p>
 </li>
  </ul>
 
-<h4> How to write lists</h4>
+<h4 id="Howtowritelists"> How to write lists</h4>
 <p>Write <code>x :: l</code> with spaces around the <code>::</code> (since <code>::</code> is an infix
 operator, hence surrounded by spaces) and <code>[1; 2; 3]</code> (since <code>;</code> is a
 delimiter, hence followed by a space).</p>
-<h4> How to write operator symbols</h4>
+<h4 id="Howtowriteoperatorsymbols"> How to write operator symbols</h4>
 <p>Be careful to keep operator symbols well separated by spaces: not only
 will your formulas be more readable, but you will avoid confusion with
 multi-character operators. (Obvious exceptions to this rule: the symbols
@@ -162,7 +176,7 @@ separated by spaces.
 follow: the space bar is the greatest and best situated key of the
 keyboard, it is the easiest to enter and you cannot miss it!</p>
 </blockquote>
-<h4> How to write long character strings</h4>
+<h4 id="Howtowritelongcharacterstrings"> How to write long character strings</h4>
 <p>Indent long character strings with the convention in force at that line
 plus an indication of string continuation at the end of each line (a <code>&#92;</code>
 character at the end of the line that omits white spaces on the
@@ -224,7 +238,7 @@ to easily customize the indentation amount.
 <strong>Answer</strong>: It seems almost impossible to use this method since you
 should always use tabulations to indent, which is hard and unnatural.</p>
 </blockquote>
-<h3 id="Howtoindentglobalcodeletcodedefinitions"> How to indent global <code>let ... ;;</code> definitions</h3>
+<h3 id="Howtoindentgloballetdefinitions"> How to indent global <code>let ... ;;</code> definitions</h3>
 <p>The body of a function defined globally in a module is generally
 indented normally. However, it&apos;s okay to treat this case specially to
 set off the definition better.</p>
@@ -272,7 +286,7 @@ nicely, so it&apos;s easier to pass from definition to definition.</p>
 </blockquote></li>
  </ul>
 
-<h3 id="Howtoindentcodeletincodeconstructs"> How to indent <code>let ... in</code> constructs</h3>
+<h3 id="Howtoindentletinconstructs"> How to indent <code>let ... in</code> constructs</h3>
 <p>The expression following a definition introduced by <code>let</code> is indented to
 the same level as the keyword <code>let</code>, and the keyword <code>in</code> which
 introduces it is written at the end of the line:</p>
@@ -301,8 +315,8 @@ Mult_expression (new_expr, new_expr)</code></pre>
 <blockquote><p>
 <strong>Criticism</strong>: Lack of consistency.</p>
 </blockquote>
-<h3 id="Howtoindentcodeifthenelsecode"> How to indent <code>if ... then   ... else ... </code></h3>
-<h4> Multiple branches</h4>
+<h3 id="Howtoindentifthenelse"> How to indent <code>if ... then   ... else ... </code></h3>
+<h4 id="Multiplebranches"> Multiple branches</h4>
 <p>Write conditions with multiple branches at the same level of
 indentation:</p>
 <pre><code>if cond1 ...
@@ -341,7 +355,7 @@ continued or another test is performed.
 conditions. Why a special case for the first condition?</p>
 </blockquote>
 <p>Yet again, choose your style and use it systematically.</p>
-<h4> Single branches</h4>
+<h4 id="Singlebranches"> Single branches</h4>
 <p>Several styles are possible for single branches, according to the size
 of the expressions in question and especially the presence of <code>begin</code>
 <code>end</code> or <code>(</code> <code>)</code> delimiters for these expressions.</p>
@@ -410,7 +424,7 @@ A mixture where <code>e1</code> requires <code>( )</code> but <code>e2</code> is
 ) else e2</code></pre>
 </blockquote></blockquote>
 <h3 id="Howtoindentpatternmatchingconstructs"> How to indent pattern-matching constructs</h3>
-<h4> General principles</h4>
+<h4 id="Generalprinciples"> General principles</h4>
 <p>All the pattern-matching clauses are introduced by a vertical bar,
 <em>including</em> the first one.</p>
 <blockquote><p>
@@ -432,7 +446,7 @@ break the line immediately after the arrow of the corresponding clause.
 Then indent normally, starting from the beginning of the pattern of the
 clause.</p>
 <p>Arrows of pattern matching clauses should not be aligned.</p>
-<h4> <code>match</code> or <code>try</code></h4>
+<h4 id="matchortry"> <code>match</code> or <code>try</code></h4>
 <p>For a <code>match</code> or a <code>try</code> align the clauses with the beginning of the
 construct:</p>
 <pre><code>match lam with
@@ -455,7 +469,7 @@ with
 <strong>Justification</strong>: The keyword <code>with</code>, on a line by itself shows that
 the program enters the pattern matching part of the construct.</p>
 </blockquote>
-<h4> Indenting expressions inside clauses</h4>
+<h4 id="Indentingexpressionsinsideclauses"> Indenting expressions inside clauses</h4>
 <p>If the expression on the right of the pattern matching arrow is too
 large, cut the line after the arrow.</p>
 <pre><code>match lam with
@@ -486,7 +500,7 @@ you are paid proportionally to the number of lines of code: in this
 case use this rule to get more money without adding more bugs in your
 OCaml programs!</p>
 </blockquote>
-<h4> Pattern matching in anonymous functions</h4>
+<h4 id="Patternmatchinginanonymousfunctions"> Pattern matching in anonymous functions</h4>
 <p>Similarly to <code>match</code> or <code>try</code>, pattern matching of anonymous functions,
 starting by <code>function</code>, are indented with respect to the <code>function</code>
 keyword:</p>
@@ -496,7 +510,7 @@ keyword:</p>
    | App (lam1, lam2) -&gt; size_lambda (size_lambda 0 lam1) lam2
    | Var v -&gt; 1)
   lambda_list</code></pre>
-<h4> Pattern matching in named functions</h4>
+<h4 id="Patternmatchinginnamedfunctions"> Pattern matching in named functions</h4>
 <p>Pattern-matching in functions defined by <code>let</code> or <code>let rec</code> gives rise
 to several reasonable styles which obey the preceding rules for pattern
 matching (the one for anonymous functions being evidently excepted). See
@@ -511,7 +525,7 @@ let rec size_lambda accu = function
 | App (lam1, lam2) -&gt; size_lambda (size_lambda accu lam1) lam2
 | Var v -&gt; succ accu</code></pre>
 <h3 id="Badindentationofpatternmatchingconstructs"> Bad indentation of pattern-matching constructs</h3>
-<h4> No <em>beastly</em> indentation of functions and case analyses.</h4>
+<h4 id="Nobeastlyindentationoffunctionsandcaseanalyses"> No <em>beastly</em> indentation of functions and case analyses.</h4>
 <p>This consists in indenting normally under the keyword <code>match</code> or
 <code>function</code> which has previously been pushed to the right. Don&apos;t write:</p>
 <pre><code>let rec f x = function
@@ -525,7 +539,7 @@ let rec size_lambda accu = function
 <strong>Justification</strong>: You bump into the margin. The aesthetic value is
 doubtful...</p>
 </blockquote>
-<h4> No <em>beastly</em> alignment of the <code>-&gt;</code> symbols in pattern-matching clauses.</h4>
+<h4 id="Nobeastlyalignmentofthegtsymbolsinpatternmatchingclauses"> No <em>beastly</em> alignment of the <code>-&gt;</code> symbols in pattern-matching clauses.</h4>
 <p>Careful alignment of the arrows of a pattern matching is considered bad
 practice, as exemplify in the following fragment:</p>
 <pre><code>let f = function
@@ -539,7 +553,7 @@ lines to change and so ... we often give up alignment at that time,
 then it is better not to align the arrows in the first place!).</p>
 </blockquote>
 <h3 id="Howtoindentfunctioncalls"> How to indent function calls</h3>
-<h4> Indentation to the function&apos;s name:</h4>
+<h4 id="Indentationtothefunctionapossname"> Indentation to the function&apos;s name:</h4>
 <p>No problem arises except for functions with many arguments --or very
 complicated arguments as well-- which can&apos;t fit on the same line. You
 must indent the expressions with respect to the name of the function (1
@@ -555,7 +569,7 @@ expressions is meaningful, the code is more readable as well.
 produces side effects, the <code>let</code> binding is in fact necessary to
 explicitly define the order of evaluation.</p>
 </blockquote>
-<h4> Naming complex arguments:</h4>
+<h4 id="Namingcomplexarguments"> Naming complex arguments:</h4>
 <p>In place of</p>
 <pre><code>let temp =
   f x y z
@@ -574,7 +588,7 @@ and u =
 let temp =
   f x y z t u in
 ...</code></pre>
-<h4> Naming anonymous functions:</h4>
+<h4 id="Naminganonymousfunctions"> Naming anonymous functions:</h4>
 <p>In the case of an iterator whose argument is a complex function, define
 the function by a <code>let</code> binding as well. In place of</p>
 <pre><code>List.map
@@ -634,20 +648,20 @@ x :: y
 <h2 id="Programmingguidelines">Programming guidelines</h2>
 <h3 id="Howtoprogram"> How to program</h3>
 <blockquote><p>
-<em>Always put your handiwork back on the bench,  
- and then polish it and re-polish it.</em></p>
+*Always put your handiwork back on the bench,  
+ and then polish it and re-polish it.*</p>
 </blockquote>
-<h4> Write simple and clear programs</h4>
+<h4 id="Writesimpleandclearprograms"> Write simple and clear programs</h4>
 <p>When this is done, reread, simplify and clarify. At every stage of
 creation, use your head!</p>
-<h4> Subdivide your programs into little functions</h4>
+<h4 id="Subdivideyourprogramsintolittlefunctions"> Subdivide your programs into little functions</h4>
 <p>Small functions are easier to master.</p>
-<h4> Factor out snippets of repeated code by defining them in separate functions</h4>
+<h4 id="Factoroutsnippetsofrepeatedcodebydefiningtheminseparatefunctions"> Factor out snippets of repeated code by defining them in separate functions</h4>
 <p>The sharing of code obtained in this way facilitates maintenance since
 every correction or improvement automatically spreads throughout the
 program. Besides, the simple act of isolating and naming a snippet of
 code sometimes lets you identify an unsuspected feature.</p>
-<h4> Never copy-paste code when programming</h4>
+<h4 id="Nevercopypastecodewhenprogramming"> Never copy-paste code when programming</h4>
 <p>Pasting code almost surely indicates introducing a default of code
 sharing and neglecting to identify and write a useful auxiliary
 function; hence, it means that some code sharing is lost in the program.
@@ -663,13 +677,13 @@ more difficult to understand.</p>
 <p>In conclusion, copy-pasting code leads to programs that are more
 difficult to read and more difficult to maintain: it has to be banished.</p>
 <h3 id="Howtocommentprograms"> How to comment programs</h3>
-<h4> Don&apos;t hesitate to comment when there&apos;s a difficulty</h4>
-<h4> If there&apos;s no difficulty, there&apos;s no point in commenting</h4>
-<h4> Avoid comments in the bodies of functions</h4>
-<h4> Prefer one comment at the beginning of the function...</h4>
+<h4 id="Donaposthesitatetocommentwhenthereapossadifficulty"> Don&apos;t hesitate to comment when there&apos;s a difficulty</h4>
+<h4 id="Ifthereapossnodifficultythereapossnopointincommenting"> If there&apos;s no difficulty, there&apos;s no point in commenting</h4>
+<h4 id="Avoidcommentsinthebodiesoffunctions"> Avoid comments in the bodies of functions</h4>
+<h4 id="Preferonecommentatthebeginningofthefunction"> Prefer one comment at the beginning of the function...</h4>
 <p>...which explains how the algorithm that is used works. Once more, if
 there is no difficulty, there is no point in commenting.</p>
-<h4> Avoid nocuous comments</h4>
+<h4 id="Avoidnocuouscomments"> Avoid nocuous comments</h4>
 <p>A <em>nocuous</em> comment is a comment that does not add any value, i.e. no
 non-trivial information. The nocuous comment is evidently not of
 interest; it is a nuisance since it uselessly distracts the reader. It
@@ -696,13 +710,13 @@ let rec print_lambda lam =
   | Abs l -&gt; printf &quot;&#92;&#92; %a&quot; print_lambda l
   | App (l1, l2) -&gt;
      printf &quot;(%a %a)&quot; print_lambda l1 print_lambda l2</code></pre>
-<h4> Usage in module interface</h4>
+<h4 id="Usageinmoduleinterface"> Usage in module interface</h4>
 <p>The function&apos;s usage must appear in the interface of the module which
 exports it, not in the program which implements it. Choose comments as
 in the OCaml system&apos;s interface modules, which will subsequently allow
 the documentation of the interface module to be extracted automatically
 if need be.</p>
-<h4> Use assertions</h4>
+<h4 id="Useassertions"> Use assertions</h4>
 <p>Use assertions as much as possible: they let you avoid verbose comments,
 while allowing a useful verification upon execution.</p>
 <p>For example, the conditions for the arguments of a function to be valid
@@ -715,7 +729,7 @@ it&apos;s more trustworthy: an assertion is forced to be pertinent because it
 is verified upon each execution, while a comment can quickly become
 obsolete and then becomes actually detrimental to the comprehension of
 the program.</p>
-<h4> Comments line by line in imperative code</h4>
+<h4 id="Commentslinebylineinimperativecode"> Comments line by line in imperative code</h4>
 <p>When writing difficult code, and particularly in case of highly
 imperative code with a lot of memory modifications (physical mutations
 in data structures), it is sometime mandatory to comment inside the body
@@ -728,11 +742,11 @@ commenting is mandatory, for each program line if necessary.</p>
 corresponding portion of the program. This is why you must devote
 particular care to this, emphasizing clarity and regularity of
 nomenclature.</p>
-<h4> Don&apos;t use abbreviations for global names</h4>
+<h4 id="Donapostuseabbreviationsforglobalnames"> Don&apos;t use abbreviations for global names</h4>
 <p>Global identifiers (including especially the names of functions) can be
 long, because it&apos;s important to understand what purpose they serve far
 from their definition.</p>
-<h4> Separate words by underscores: (<code>int_of_string</code>, not <code>intOfString</code>)</h4>
+<h4 id="SeparatewordsbyunderscoresintofstringnotintOfString"> Separate words by underscores: (<code>int_of_string</code>, not <code>intOfString</code>)</h4>
 <p>Case modifications are meaningful in OCaml: in effect capitalized words
 are reserved for constructors and module names in OCaml; in contrast
 regular variables (functions or identifiers) must start by a lowercase
@@ -740,11 +754,11 @@ letter. Those rules prevent proper usage of case modification for words
 separation in identifiers: the first word starts the identifier, hence
 it must be lower case and it is forbidden to choose <code>IntOfString</code> as the
 name of a function.</p>
-<h4> Always give the same name to function arguments which have the same meaning</h4>
+<h4 id="Alwaysgivethesamenametofunctionargumentswhichhavethesamemeaning"> Always give the same name to function arguments which have the same meaning</h4>
 <p>If necessary, make this nomenclature explicit in a comment at the top of
 the file); if there are several arguments with the same meaning then
 attach numeral suffixes to them.</p>
-<h4> Local identifiers can be brief, and should be reused from one function to another</h4>
+<h4 id="Localidentifierscanbebriefandshouldbereusedfromonefunctiontoanother"> Local identifiers can be brief, and should be reused from one function to another</h4>
 <p>This augments regularity of style. Avoid using identifiers whose
 appearance can lead to confusion such as <code>l</code> or <code>O</code>, easy to confuse
 with <code>1</code> and <code>0</code>.</p>
@@ -763,9 +777,9 @@ randomly throughout programs. To this end, you should know the usual
 precedences, that is, the combinations of operations which do not
 require parentheses. Quite fortunately this is not complicated if you
 know a little mathematics or strive to follow the following rules:</p>
-<h4> Arithmetic operators: the same rules as in mathematics</h4>
+<h4 id="Arithmeticoperatorsthesamerulesasinmathematics"> Arithmetic operators: the same rules as in mathematics</h4>
 <p>For example: <code>1 + 2 * x</code> means <code>1 + (2 * x)</code>.</p>
-<h4> Function application: the same rules as those in mathematics for usage of <em>trigonometric functions</em></h4>
+<h4 id="Functionapplicationthesamerulesasthoseinmathematicsforusageoftrigonometricfunctions"> Function application: the same rules as those in mathematics for usage of <em>trigonometric functions</em></h4>
 <p>In mathematics you write <code>sin x</code> to mean <code>sin (x)</code>. In the same way
 <code>sin x + cos x</code> means <code>(sin x) + (cos x)</code> not <code>sin (x + (cos x))</code>. Use
 the same conventions in OCaml: write <code>f x + g x</code> to mean
@@ -773,13 +787,13 @@ the same conventions in OCaml: write <code>f x + g x</code> to mean
 This convention generalizes <strong>to all (infix) operators</strong>: <code>f x :: g x</code>
 means <code>(f x) :: (g x)</code>, <code>f x @ g x</code> means <code>(f x) @ (g x)</code>, and
 <code>failwith s ^ s&apos;</code> means <code>(failwith s) ^ s&apos;</code>, <em>not</em> <code>failwith (s ^ s&apos;)</code>.</p>
-<h4> Comparisons and boolean operators</h4>
+<h4 id="Comparisonsandbooleanoperators"> Comparisons and boolean operators</h4>
 <p>Comparisons are infix operators, so the preceding rules apply. This is
 why <code>f x &lt; g x</code> means <code>(f x) &lt; (g x)</code>. For type reasons (no other
 sensible interpretation) the expression <code>f x &lt; x + 2</code> means
 <code>(f x) &lt; (x + 2)</code>. In the same way <code>f x &lt; x + 2 &amp;&amp; x &gt; 3</code> means
 <code>((f x) &lt; (x + 2)) &amp;&amp; (x &gt; 3)</code>.</p>
-<h4> The relative precedences of the boolean operators are those of mathematics</h4>
+<h4 id="Therelativeprecedencesofthebooleanoperatorsarethoseofmathematics"> The relative precedences of the boolean operators are those of mathematics</h4>
 <p>Although mathematicians have a tendency to overuse parens in this case,
 the boolean ``or&apos;&apos; operator is analogous to addition and the ``and&apos;&apos;
 to multiplication. So, just as <code>1 + 2 * x</code> means <code>1 + (2 * x)</code>,
@@ -792,7 +806,7 @@ that is, systematic, way.</p>
 <p>This explicit delimiting of constructs essentially concerns
 pattern-matching constructs or sequences embedded within
 <code>if then     else</code> constructs.</p>
-<h4> <code>match</code> construct in a <code>match</code> construct</h4>
+<h4 id="matchconstructinamatchconstruct"> <code>match</code> construct in a <code>match</code> construct</h4>
 <p>When a <code>match ... with</code> or <code>try ... with</code> construct appears in a
 pattern-matching clause, it is absolutely necessary to delimit this
 embedded construct (otherwise subsequent clauses of the enclosing
@@ -805,7 +819,7 @@ enclosed pattern-matching construct). For example:</p>
   end
 | 2 -&gt;
 ...</code></pre>
-<h4> Sequences inside branches of <code>if</code></h4>
+<h4 id="Sequencesinsidebranchesofif"> Sequences inside branches of <code>if</code></h4>
 <p>In the same way, a sequence which appears in the <code>then</code> or <code>else</code> part
 of a conditional must be delimited:</p>
 <pre><code>if cond then begin
@@ -816,12 +830,12 @@ end else begin
   e4
 end</code></pre>
 <h3 id="Howtousemodules"> How to use modules</h3>
-<h4> Subdividing into modules</h4>
+<h4 id="Subdividingintomodules"> Subdividing into modules</h4>
 <p>You must subdivide your programs into coherent modules.</p>
 <p>For each module, you must explicitly write an interface.</p>
 <p>For each interface, you must document the things defined by the module:
 functions, types, exceptions, etc.</p>
-<h4> Opening modules</h4>
+<h4 id="Openingmodules"> Opening modules</h4>
 <p>Avoid <code>open</code> directives, using instead the qualified identifier
 notation. Thus you will prefer short but meaningful module names.</p>
 <blockquote><p>
@@ -834,7 +848,7 @@ let lim = Array.length v - 1 in
 ...
 ... List.map succ ...
 ... Array.map succ ...</code></pre>
-<h4> When to use open modules rather than leaving them closed</h4>
+<h4 id="Whentouseopenmodulesratherthanleavingthemclosed"> When to use open modules rather than leaving them closed</h4>
 <p>You can consider it normal to open a module which modifies the
 environment, and brings other versions of an important set of functions.
 For example, the <code>Format</code> module provides automatically indented
@@ -874,8 +888,8 @@ these definitions into one or more module(s) without implementations
 (containing only types). Then it&apos;s acceptable to systematically open the
 module which exports the shared type definitions.</p>
 <h3 id="Patternmatching"> Pattern-matching</h3>
-<h4> Never be afraid of over-using pattern-matching!</h4>
-<h4> On the other hand, be careful to avoid non-exhaustive pattern-matching constructs</h4>
+<h4 id="Neverbeafraidofoverusingpatternmatching"> Never be afraid of over-using pattern-matching!</h4>
+<h4 id="Ontheotherhandbecarefultoavoidnonexhaustivepatternmatchingconstructs"> On the other hand, be careful to avoid non-exhaustive pattern-matching constructs</h4>
 <p>Complete them with care, without using a “catch-all” clause such as
 <code>| _ -&gt; ...</code> or <code>| x -&gt; ...</code> when it&apos;s possible to do without it (for
 example when matching a concrete type defined within the program). See
@@ -886,7 +900,7 @@ absolutely must heed them and correct your programs if compiling them
 produces such warnings. Besides, programs whose compilation produces
 warnings have an odor of amateurism which certainly doesn&apos;t suit your
 own work!</p>
-<h4> Pattern-matching warnings</h4>
+<h4 id="Patternmatchingwarnings"> Pattern-matching warnings</h4>
 <p>Warnings about pattern-matching must be treated with the upmost care:</p>
 
  <ul>
@@ -914,7 +928,7 @@ handled by the default case</p>
 </li>
  </ul>
 
-<h4> De-structuring <code>let</code> bindings</h4>
+<h4 id="Destructuringletbindings"> De-structuring <code>let</code> bindings</h4>
 <p>[Translator&apos;s note: a ``de-structuring <code>let</code> binding&apos;&apos; is one which
 binds several names to several expressions simultaneously. You pack all
 the names you want bound into a collection such as a tuple or a list,
@@ -938,7 +952,7 @@ can use it with more complex or simpler patterns. For instance</p>
 </li>
  </ul>
 
-<h4> The de-structuring <code>let</code> must be exhaustive</h4>
+<h4 id="Thedestructuringletmustbeexhaustive"> The de-structuring <code>let</code> must be exhaustive</h4>
 <p>Only use de-structuring <code>let</code> bindings in the case where the
 pattern-matching is exhaustive (the pattern can never fail to match).
 Typically, you will thus be limited to definitions of product types
@@ -969,7 +983,7 @@ exhaustive if you use general de-structuring <code>let</code> bindings.</p>
 </blockquote></li>
  </ul>
 
-<h4> Sequence warnings and <code>let _ = ...</code></h4>
+<h4 id="Sequencewarningsandlet"> Sequence warnings and <code>let _ = ...</code></h4>
 <p>When the compiler emits a warning about the type of an expression in a
 sequence, you have to explicitly indicate that you want to ignore the
 result of this expression. To this end:</p>
@@ -1031,7 +1045,7 @@ e3</code></pre>
 </blockquote></li>
  </ul>
 
-<h3 id="Thecodehdcodeandcodetlcodefunctions"> The <code>hd</code> and <code>tl</code> functions</h3>
+<h3 id="Thehdandtlfunctions"> The <code>hd</code> and <code>tl</code> functions</h3>
 <p>Don&apos;t use the <code>hd</code> and <code>tl</code> functions, but pattern-match the list
 argument explicitly.</p>
 <blockquote><p>
@@ -1041,7 +1055,7 @@ using <code>hd</code> and <code>tl</code> which must of necessity be protected b
 functions.</p>
 </blockquote>
 <h3 id="Loops"> Loops</h3>
-<h4> <code>for</code> loops</h4>
+<h4 id="forloops"> <code>for</code> loops</h4>
 <p>To simply traverse an array or a string, use a <code>for</code> loop.</p>
 <pre><code>for i = 0 to Array.length v - 1 do
   ...
@@ -1062,7 +1076,7 @@ be modified in any part of the body of the loop whatsoever (or even
 outside): on the contrary the recursive loop explicitly takes as
 arguments the values susceptible to change during the recursive calls.</p>
 </blockquote>
-<h4> <code>while</code> loops</h4>
+<h4 id="whileloops"> <code>while</code> loops</h4>
 <blockquote><p>
 <strong>While loops law</strong>: Beware: usually a while loop is wrong, unless its
 loop invariant has been explicitly written.</p>
@@ -1233,7 +1247,7 @@ to choose the programming paradigm that fits the best the problem at
 hand. When using one of those programming paradigms, the difficulty is
 to use the language construct that expresses in the most natural and
 easiest way the computation that implements the algorithm.</p>
-<h4> Style dangers</h4>
+<h4 id="Styledangers"> Style dangers</h4>
 <p>Concerning programming styles, one can usually observe the two
 symmetrical problematic behaviors: on the one hand, the ``all
 imperative&apos;&apos; way (<em>systematic</em> usage of loops and assignment), and on
@@ -1302,7 +1316,7 @@ versions, see the <a href='#equivalenceprogrammes'>note below</a>)</p>
 </li>
  </ul>
 
-<h4> OCaml code generally considered unreadable</h4>
+<h4 id="OCamlcodegenerallyconsideredunreadable"> OCaml code generally considered unreadable</h4>
 <p>The OCaml language includes powerful constructs which allow simple and
 clear programming. However the power of these constructs also lets you
 write uselessly complicated code, to the point where you get a perfectly
@@ -1391,7 +1405,7 @@ launched by <code>CTRL-C-CTRL-C</code>.</p>
 </li>
  </ul>
 
-<h4> Other emacs tricks</h4>
+<h4 id="Otheremacstricks"> Other emacs tricks</h4>
 <p>The <code>ESC-/</code> command (dynamic-abbrev-expand) automatically completes the
 word in front of the cursor with one of the words present in one of the
 files being edited. Thus this lets you always choose meaningful
@@ -1430,7 +1444,7 @@ dispersed among several sites linked on the Net.</p>
 OCaml compilers</a>, and the sources of
 other software related to OCaml.</p>
 <h3 id="Notes"> Notes</h3>
-<h4> Imperative and functional versions of <code>list_length</code></h4>
+<h4 id="Imperativeandfunctionalversionsoflistlength"> Imperative and functional versions of <code>list_length</code></h4>
 <p>The two versions of <code>list_length</code> are not completely equivalent in term
 of complexity, since the imperative version uses a constant amount of
 stack room to execute, whereas the functional version needs to store

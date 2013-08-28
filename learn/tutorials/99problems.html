@@ -43,6 +43,22 @@
     <div class="container">
       <div class="row">
 
+
+ <ul>
+  <li><a href='#99ProblemssolvedinOCaml'>99 Problems (solved) in OCaml</a>
+   <ul>
+    <li><a href='#Workingwithlists'>Working with lists</a></li>
+    <li><a href='#Arithmetic'>Arithmetic</a></li>
+    <li><a href='#LogicandCodes'>Logic and Codes</a></li>
+    <li><a href='#BinaryTrees'>Binary Trees</a></li>
+    <li><a href='#MultiwayTrees'>Multiway Trees</a></li>
+    <li><a href='#Graphs'>Graphs</a></li>
+    <li><a href='#MiscellaneousProblems'>Miscellaneous Problems</a>
+</li>
+   </ul>
+</li>
+ </ul>
+
         <div id="content-primary" class="span8">
           <div class="content">
             <p><strong>Your Help is Needed</strong>  
@@ -804,8 +820,8 @@ table for the frequency table <code>fs</code></p>
 <h2 id="BinaryTrees">Binary Trees</h2>
 <p> <img src='https://sites.google.com/site/prologsite/_/rsrc/1264934442609/prolog-problems/4/p67.gif' alt='Binary
 tree' /></p>
-<p><em>A binary tree is either empty or it is composed of a root element and
-two successors, which are binary trees themselves.</em></p>
+<p>*A binary tree is either empty or it is composed of a root element and
+two successors, which are binary trees themselves.*</p>
 <p>In OCaml, one can define a new type <code>binary_tree</code> that carries an
 arbitrary value of type <code>&apos;a</code> at each node.</p>
 <pre><code>  type &apos;a binary_tree =
@@ -942,9 +958,9 @@ tree.</p>
 maximum number of nodes it can contain? Clearly, <em>maxN = 2<sup>><code>h</code></sup>
 
  <ul>
-  <li>1</li>
+  <li>1*. However, what is the minimum number </li>
  </ul>
-</em>. However, what is the minimum number <em>minN</em>? This question is more
+</em>minN*? This question is more
 difficult. Try to find a recursive statement and turn it into a function
 <code>minNodes</code> defined as follows: <code>minNodes h</code> returns the minimum number
 of nodes in a height-balanced binary tree of height <code>h</code>.</p>
@@ -1133,10 +1149,10 @@ conversion in both directions. Use difference lists.</p>
 <h2 id="MultiwayTrees">Multiway Trees</h2>
 <p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264946214751/prolog-problems/5/p70.gif' alt='multiway
 tree' /></p>
-<p><em>A multiway tree is composed of a root element and a (possibly empty)
+<p>*A multiway tree is composed of a root element and a (possibly empty)
 set of successors which are multiway trees themselves. A multiway tree
 is never empty. The set of successor trees is sometimes called a
-forest.</em></p>
+forest.*</p>
 <p>To represent multiway trees, we will use the following type which is a
 direct translation of the definition:</p>
 <pre><code>  type &apos;a mult_tree = T of &apos;a * &apos;a mult_tree list</code></pre>
@@ -1240,8 +1256,8 @@ lispy notation of the tree.</p>
   lispy (T(&apos;a&apos;, [T(&apos;b&apos;, [])])) = &quot;(a b)&quot;;;
   lispy t = &quot;(a (f g) c (b d e))&quot;</code></pre>
 <h2 id="Graphs">Graphs</h2>
-<p><em>A graph is defined as a set of nodes and a set of edges, where each
-edge is a pair of different nodes.</em></p>
+<p>*A graph is defined as a set of nodes and a set of edges, where each
+edge is a pair of different nodes.*</p>
 <p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264948248705/prolog-problems/6/graph1.gif' alt='A
 graph' /></p>
 <p>There are several ways to represent graphs in OCaml.</p>
@@ -1307,21 +1323,19 @@ node <code>a</code> to node <code>b ≠ a</code> in the graph <code>g</code>. Th
 the list of all paths via backtracking.</p>
 <p>Solution
   (<em> The datastructures used here are far from the most efficient ones
-<pre><code> but allow for a straightforward implementation. </code></pre>
-</em>)
-  (<em> Returns all neighbors satisfying the condition. </em>)
+<pre><code> but allow for a straightforward implementation. *)</code></pre>
+  (* Returns all neighbors satisfying the condition. </em>)
   let neighbors g a cond =
 </p>
 <pre><code>let edge l (b,c) = if b = a &amp;&amp; cond c then c :: l
                    else if c = a &amp;&amp; cond b then b :: l
                    else l in
 List.fold_left edge [] g.edges</code></pre>
-<p>  let rec list<em>path g a to_b = match to_b with
-<pre><code>| [] -&gt; assert false (* [to_b] contains the path to [b]. *)
-| a&apos; :: </code></pre>
-</em> -&gt;
+<p>  let rec list_path g a to_b = match to_b with
 </p>
-<pre><code>   if a&apos; = a then [to_b]
+<pre><code>| [] -&gt; assert false (* [to_b] contains the path to [b]. *)
+| a&apos; :: _ -&gt;
+   if a&apos; = a then [to_b]
    else
      let n = neighbors g a&apos; (fun c -&gt; not(List.mem c to_b)) in
      List.concat(List.map (fun c -&gt; list_path g a (c :: to_b)) n</code></pre>

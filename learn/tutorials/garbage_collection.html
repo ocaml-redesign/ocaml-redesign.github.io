@@ -113,8 +113,8 @@ closed).</p>
 List.iter read_file files</code></pre>
 <p>Calls to <code>read_file</code> open the file but don&apos;t close it. Because OCaml
 uses a full garbage collector <code>chan</code> isn&apos;t collected until some time
-later when the minor heap becomes full. In addition, <strong>OCaml will not
-close the channel when it collects the handle&apos;s memory</strong>. So this
+later when the minor heap becomes full. In addition, **OCaml will not
+close the channel when it collects the handle&apos;s memory**. So this
 program would eventually run out of file descriptors.</p>
 <p>You need to be aware of this when writing OCaml code which uses files or
 directories or any other heavyweight object with complex finalisation.</p>
@@ -200,8 +200,8 @@ causes the GC to print a message at the start of every major collection.</p>
 <h2 id="FinalisationandtheWeakmodule">Finalisation and the Weak module</h2>
 <p>We can write a function called a <strong>finaliser</strong> which is called when an
 object is about to be freed by the GC.</p>
-<p>The <code>Weak</code> module lets us create so-called weak pointers. A <strong>weak
-pointer</strong> is best defined by comparing it to a &quot;normal pointer&quot;. When we
+<p>The <code>Weak</code> module lets us create so-called weak pointers. A **weak
+pointer** is best defined by comparing it to a &quot;normal pointer&quot;. When we
 have an ordinary OCaml object, we reference that object through a name
 (eg. <code>let name = ... in</code>) or through another object. The garbage
 collector sees that we have a reference to that object and won&apos;t collect

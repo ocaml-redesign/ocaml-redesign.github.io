@@ -320,7 +320,7 @@ Compile it using:</p>
 <p>&#92;&lt;img src=&quot;graphtest.gif&quot; width=&quot;648&quot; height=&quot;508&quot; alt=&quot;Screenshot&quot;/&#92;&gt;</p>
 <h3 id="Structureoflablgtk"> Structure of lablgtk</h3>
 <p>The lablgtk library has two layers, which I&apos;m going to call the <em>module
-layer</em> and the <em>object-oriented layer</em> (plus some ancillary library
+layer* and the </em>object-oriented layer* (plus some ancillary library
 modules which we&apos;ll also talk about). The layers are arranged like this
 in relation to your code:</p>
 <table>
@@ -345,7 +345,7 @@ in relation to your code:</p>
 the theory is indeed true for trivial programs. However for practical
 purposes you will need to understand how the library is built up from
 these layers (and why).</p>
-<h4> Gtk objects</h4>
+<h4 id="Gtkobjects"> Gtk objects</h4>
 <p>We&apos;ll start with the peculiarities of Gtk itself. This library is
 written in C and uses macros and &quot;clever&quot; hacks to (a) present an OO-ish
 interface and (b) perform simple garbage collection through reference
@@ -433,7 +433,7 @@ type toggle_button = [button|`toggle]</code></pre>
 <p>If you check the Gtk class hierarchy you&apos;ll see that the list of
 variants closely (but not exactly) matches the classes. A Gtk toggle
 button is-a Gtk button, Gtk container is-a Gtk widget, etc.</p>
-<h4> Object-oriented layer</h4>
+<h4 id="Objectorientedlayer"> Object-oriented layer</h4>
 <p>Now let&apos;s look at the object-oriented layer interface to the toggle
 button, so we can see how <code>&apos;a obj</code> comes into play. The <code>GButton</code> module
 defines a class for toggle buttons, but unusually you don&apos;t directly
@@ -495,7 +495,7 @@ val b : GButton.toggle_button = &lt;obj&gt;
 # b#as_widget;;
           (* note: returns a widget obj == [`base|`widget] obj *)
 - : Gtk.widget Gtk.obj = &lt;abstr&gt;</code></pre>
-<h4> Downcasts</h4>
+<h4 id="Downcasts"> Downcasts</h4>
 <p>Gtk is dynamically typed, and this means you can
 &#92;&lt;dfn&#92;&gt;downcast&#92;&lt;/dfn&#92;&gt;, for example, a widget into a toggle button. Gtk
 requires downcasting in some instances: for example you can pack widgets

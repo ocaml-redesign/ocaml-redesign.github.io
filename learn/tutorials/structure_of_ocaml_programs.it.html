@@ -55,7 +55,7 @@ concetti di OCaml che non saranno subito chiari, non avendoli noi mai
 visti prima. Non preoccupatevi dei dettagli, per ora. Concentratevi
 invece sulla forma complessiva dei programmi e sulle caratteristiche che
 rileverò.</p>
-<h3 id="quotVariabiliquotlocalieminrealtemespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3>
+<h3 id="quotVariabiliquotlocaliinrealtespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3>
 <p>Prendiamo la funzione <code>average</code> ed aggiungiamovi una variabile locale in
 C. (Confrontatela con la prima definizione che ne avevamo sopra).</p>
 <pre><code>double
@@ -99,7 +99,7 @@ compilatori dovrebbe poter compiere per voi questo passaggio di
 &quot;eliminazione di sottoepressione comune&quot;), ed è certamente più facile da
 leggere. <code>x</code> nel secondo esempio non è che una forma abbreviata per
 <code>a +. b</code>.</p>
-<h3 id="quotVariabiliquotglobalieminrealtemespressioniglobali"> &quot;Variabili&quot; globali (<em>in realtà</em> espressioni globali)</h3>
+<h3 id="quotVariabiliquotglobaliinrealtespressioniglobali"> &quot;Variabili&quot; globali (<em>in realtà</em> espressioni globali)</h3>
 <p>Potete anche definire nomi globali per cose al livello superiore, e come
 le nostre &quot;variabili&quot; locali sopra queste non sono affatto realmente
 variabili, ma soltanto nomi abbreviati per queste cose. Ecco un esempio
@@ -226,7 +226,7 @@ espressioni con nome locale:
 <p>Normalmente indenterete la definizione della funzione in una nuova riga
 come nell&apos;esempio sopra, e ricorderete di usare <code>let rec</code> al posto di
 <code>let</code> se la vostra funzione è ricorsiva (com&apos;è in quell&apos;esempio).</p>
-<h3 id="Moduliecodeopencode"> Moduli e <code>open</code></h3>
+<h3 id="Modulieopen"> Moduli e <code>open</code></h3>
 <p>OCaml è distribuito con parecchi moduli divertenti ed interessanti
 (librerie di codice utile). Vi sono ad esempio librerie standard per
 disegnare grafici, interfacciarsi con insiemi di accessori di
@@ -293,7 +293,7 @@ abbiamo ancora parlato: i loop for in stile imperativo, gli if-then-else
 e la ricorsione. Ne parleremo più avanti. Cionondimeno dovreste guardare
 questi programmi e provarli e trovare (1) come funzionano, e (2) come
 l&apos;inferenza dei tipi vi aiuta ad eliminare i bug.</p>
-<h3 id="IlmodulocodePervasivescode"> Il modulo <code>Pervasives</code></h3>
+<h3 id="IlmoduloPervasives"> Il modulo <code>Pervasives</code></h3>
 <p>C&apos;è un solo modulo per cui non serve mai usare &quot;<code>open</code>&quot;. È il modulo
 <code>Pervasives</code> (andate ora a leggervi
 <code>/usr/lib/ocaml/3.08/pervasives.mli</code>). Tutti i simboli del modulo
@@ -311,7 +311,7 @@ read_line ();;</code></pre>
 <p>In realtà questo è utile quando volete importare un modulo annidato (i
 moduli possono essere annidati l&apos;uno dentro l&apos;altro), ma non volete
 digitare ogni volta il percorso completo per il modulo annidato.</p>
-<h3 id="Usoedomissionedicodecodeecodecode"> Uso ed omissione di <code>;;</code> e <code>;</code></h3>
+<h3 id="Usoedomissionedie"> Uso ed omissione di <code>;;</code> e <code>;</code></h3>
 <p>Veniamo ora ad esaminare una questione assai importante. Quando dovreste
 usare <code>;;</code>, quando dovreste usare <code>;</code>, e quando non dovreste usare
 affatto alcuno di essi? È una questione ingannevole finché non &quot;la

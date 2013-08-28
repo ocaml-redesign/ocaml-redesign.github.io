@@ -43,6 +43,19 @@
     <div class="container">
       <div class="row">
 
+
+ <ul>
+  <li><a href='#PointersinOCaml'>Pointers in OCaml</a>
+   <ul>
+    <li><a href='#StatusofpointersinOCaml'>Status of pointers in OCaml</a></li>
+    <li><a href='#DefiningpointersinOCaml'>Defining pointers in OCaml</a></li>
+    <li><a href='#IntegerLists'>Integer Lists</a></li>
+    <li><a href='#Polymorphiclists'>Polymorphic lists</a>
+</li>
+   </ul>
+</li>
+ </ul>
+
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
@@ -66,7 +79,7 @@ classic imperative language), OCaml provides references that are
 full-fledged pointers, even first class citizen pointers (references can
 be passed as argument, embedded into arbitrary data structures, and
 returned as function results).</p>
-<h3 id="ExplicitpointersareOCamlvaluesoftypecoderefcode"> Explicit pointers are OCaml values of type <code>ref</code></h3>
+<h3 id="ExplicitpointersareOCamlvaluesoftyperef"> Explicit pointers are OCaml values of type <code>ref</code></h3>
 <p>You can program directly with explicit references if you want to, but
 this is normally a waste of time and effort.</p>
 <p>Let&apos;s examine the simple example of linked lists (integer lists to be

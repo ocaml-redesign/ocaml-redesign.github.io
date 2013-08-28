@@ -43,6 +43,23 @@
     <div class="container">
       <div class="row">
 
+
+ <ul>
+  <li><a href='#UsingtheFormatmodule'>Using the Format module</a>
+   <ul>
+    <li><a href='#Principles'>Principles</a></li>
+    <li><a href='#Boxes'>Boxes</a></li>
+    <li><a href='#Printingspaces'>Printing spaces</a></li>
+    <li><a href='#Indentationofnewlines'>Indentation of new lines</a></li>
+    <li><a href='#Refinementonhovboxes'>Refinement on “hov” boxes</a></li>
+    <li><a href='#Practicaladvice'>Practical advice</a></li>
+    <li><a href='#Printingtostdoutusingprintf'>Printing to <code>>stdout</code>: using <code>>printf</code></a></li>
+    <li><a href='#Aconcreteexample'>A concrete example</a>
+</li>
+   </ul>
+</li>
+ </ul>
+
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
@@ -73,12 +90,12 @@ is necessary”).</p>
 
    <ul>
     <li><p>A box can state the extra indentation of every new line opened
- in its scope. This extra indentation is named <strong>box breaking
- indentation</strong>.</p>
+ in its scope. This extra indentation is named **box breaking
+ indentation**.</p>
 </li>
     <li><p>A break hint can also set the additional indentation of the new
- line it may fire. This extra indentation is named <strong>hint
- breaking indentation</strong>.</p>
+ line it may fire. This extra indentation is named **hint
+ breaking indentation**.</p>
 </li>
     <li><p>If break hint <code>bh</code> fires a new line within box <code>b</code>, then the
  indentation of the new line is simply the sum of: the current
@@ -332,7 +349,7 @@ is printed like this:</p>
 </li>
  </ol>
 
-<h2 id="Printingtocodestdoutcodeusingcodeprintfcode">Printing to <code>stdout</code>: using <code>printf</code></h2>
+<h2 id="Printingtostdoutusingprintf">Printing to <code>stdout</code>: using <code>printf</code></h2>
 <p>The <code>format</code> module provides a general printing facility “à la”
 <code>printf</code>. In addition to the usual conversion facility provided by
 <code>printf</code>, you can write pretty-printing indications directly inside the
@@ -403,7 +420,7 @@ the <a href='../description.html#interactive'>interactive system</a>):</p>
     | e -&gt; print_app e</code></pre>
 <p>In Caml Light, replace the first line by:</p>
 <pre><code>#open &quot;format&quot;;;</code></pre>
-<h3 id="Mostgeneralprettyprintingusingcodefprintfcode"> Most general pretty-printing: using <code>fprintf</code></h3>
+<h3 id="Mostgeneralprettyprintingusingfprintf"> Most general pretty-printing: using <code>fprintf</code></h3>
 <p>We use the <code>fprintf</code> function to write the most versatile version of the
 pretty-printing functions for lambda-terms. Now, the functions get an
 extra argument, namely a pretty-printing formatter (the <code>ppf</code> argument)

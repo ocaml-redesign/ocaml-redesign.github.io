@@ -55,7 +55,7 @@
 minimalistic text editor from plan9. While there are no
 language-specific features to the editor, there are a few tricks one can
 use to make it friendlier:</p>
-<h4> Plumbimg</h4>
+<h4 id="Plumbimg"> Plumbimg</h4>
 <p>To allow plumbing of OCaml error messages, add the following to your
 plumbing rules:</p>
 <pre><code>type is text
@@ -65,15 +65,15 @@ data set        $file
 attr add        addr=$2-#0+#$3,$2-#0+#$4
 plumb to edit
 plumb client $editor</code></pre>
-<h4> OCaml top-level</h4>
+<h4 id="OCamltoplevel"> OCaml top-level</h4>
 <p>Simply execute <code>win</code> to get a shell and run <code>ocaml</code> from within this
 shell.</p>
-<h4> Commenting</h4>
+<h4 id="Commenting"> Commenting</h4>
 <p>The following <code>Edit</code> command will comment your selection.</p>
 <pre><code>Edit .{i/(*
 a/*)
 }</code></pre>
-<h4> Indenting</h4>
+<h4 id="Indenting"> Indenting</h4>
 <p>You can pipe your selection (or the whole file) through an external
 indenter such as <a href='https://github.com/OCamlPro/ocp-indent'><code>ocp-indent</code></a>
 middle-clicking on the command <code>|ocp-indent</code>.</p>

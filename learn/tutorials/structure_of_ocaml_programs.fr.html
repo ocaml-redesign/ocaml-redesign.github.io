@@ -54,7 +54,7 @@ passer sur plein de concepts d&apos;OCaml qui ne vous diront rien car nous ne
 les avons pas encore évoqués. Ne vous embarrassez pas des détails pour
 le moment. Occupez-vous uniquement de la forme générale des programmes,
 et aux fonctionnalités mises en avant.</p>
-<h2 id="Variableslocalesemplusexactementemexpressionslocales">« Variables » locales (<em>plus exactement</em> expressions locales)</h2>
+<h2 id="Variableslocalesplusexactementexpressionslocales">« Variables » locales (<em>plus exactement</em> expressions locales)</h2>
 <p>Prenons la fonction <code>average</code> écrite en C, et ajoutons lui une variable
 locale. (à comparer avec la première version que nous avions)</p>
 <pre><code>double
@@ -97,7 +97,7 @@ des compilateurs devraient être capable de faire cette étape
 d&apos;&quot;élimination de sous-expressions communes&quot; à votre place), et en tout
 cas elle est plus lisible. Dans le second exemple, <code>x</code> est une
 abréviation pour l&apos;expression <code>a +. b</code>.</p>
-<h2 id="Variablesglobalesemplusprcismentemexpressionsglobales">« Variables » globales (<em>plus précisément</em> expressions globales)</h2>
+<h2 id="Variablesglobalesplusprcismentexpressionsglobales">« Variables » globales (<em>plus précisément</em> expressions globales)</h2>
 <p>Vous pouvez aussi donner des noms à des choses dans l&apos;environnement
 global, et comme pour les &quot;variables&quot; locales ci-dessus, ce ne sont pas
 vraiment des variables, mais des abbréviations pour ces choses. Voici un
@@ -223,7 +223,7 @@ expressions locales : <code>let nom arguments = définition de fonction in</code
 à la ligne comme dans l&apos;exemple précédent, et n&apos;oubliez pas d&apos;utiliser
 <code>let rec</code> à la place de <code>let</code> si votre fonction est récursive (comme
 dans cet exemple).</p>
-<h2 id="Modulesetcodeopencode">Modules et <code>open</code></h2>
+<h2 id="Modulesetopen">Modules et <code>open</code></h2>
 <p>OCaml est accompagné d&apos;une quantité de modules amusants et intéressants,
 de bibliothèques de code utile. Par exemple on y trouve une bibliothèque
 pour dessiner des graphismes, interagir avec la collection de contrôles
@@ -290,7 +290,7 @@ encore parlé : boucles &quot;for&quot; dans le style impératif, if-then-else, 
 récursion. Nous en parlerons plus tard. Examinez-les cependant, et
 essayez de comprendre (1) comment ils fonctionnent, et (2) comment
 l&apos;inférence de type aide à éliminer des bugs.</p>
-<h2 id="LemodulecodePervasivescode">Le module <code>Pervasives</code></h2>
+<h2 id="LemodulePervasives">Le module <code>Pervasives</code></h2>
 <p>Il y a un module que vous n&apos;avez jamais besoin d&apos;ouvrir avec <code>open</code>,
 c&apos;est le module <code>Pervasives</code> (allez jeter un oeil sur
 <code>/usr/lib/ocaml/VERSION/pervasives.mli</code>). Tous les symboles définis dans
@@ -309,7 +309,7 @@ read_line ();;</code></pre>
 module imbriqué (les modules peuvent être imbriqués les uns dans les
 autres, eux-aussi), mais ne voulez pas avoir à taper à chaque fois le
 chemin d&apos;accès au module imbriqué.</p>
-<h2 id="Utiliseretomettrecodecodeetcodecode">Utiliser et omettre <code>;;</code> et <code>;</code></h2>
+<h2 id="Utiliseretomettreet">Utiliser et omettre <code>;;</code> et <code>;</code></h2>
 <p>Maintenant nous allons aborder un problème important. Quand utiliser
 <code>;;</code>, quand utiliser <code>;</code>, et quand n&apos;utiliser aucun des deux ? C&apos;est une
 question tordue, qui m&apos;a également embêté pendant longtemps alors que

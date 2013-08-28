@@ -1,0 +1,16 @@
+
+ <ul>
+  <li><a href='#UsingtheFormatmodule'>Using the Format module</a>
+   <ul>
+    <li><a href='#Principles'>Principles</a></li>
+    <li><a href='#Boxes'>Boxes</a></li>
+    <li><a href='#Printingspaces'>Printing spaces</a></li>
+    <li><a href='#Indentationofnewlines'>Indentation of new lines</a></li>
+    <li><a href='#Refinementonhovboxes'>Refinement on “hov” boxes</a></li>
+    <li><a href='#Practicaladvice'>Practical advice</a></li>
+    <li><a href='#Printingtostdoutusingprintf'>Printing to <code>>stdout</code>: using <code>>printf</code></a></li>
+    <li><a href='#Aconcreteexample'>A concrete example</a>
+</li>
+   </ul>
+</li>
+ </ul>

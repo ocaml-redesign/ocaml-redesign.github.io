@@ -131,9 +131,9 @@ channels that point to regular files, use <code>seek_in</code> or <code>seek_out
  <code>stdout</code> and <code>stderr</code>. Therefore if you do <code>open Unix</code>, you may get
  type errors. If you want to be sure that you are using the <code>stdout</code>
  channel and not the <code>stdout</code> file descriptor, you can prepend it
- with the module name where it comes from: <code>Pervasives.stdout</code>. <em>Note
+ with the module name where it comes from: <code>Pervasives.stdout</code>. *Note
  that most things that don&apos;t seem to belong to any module actually
- belong to the <code>Pervasives</code> module, which is automatically opened.</em></p>
+ belong to the <code>Pervasives</code> module, which is automatically opened.*</p>
 </li>
   <li><p><code>open_out</code> and <code>open_out_bin</code> truncate the given file if it already
  exists! Use <code>open_out_gen</code> if you want an alternate behavior.</p>

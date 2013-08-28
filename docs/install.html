@@ -294,8 +294,8 @@ notes</a>.</p>
  Microsoft-based native Win32 port, but generates 64-bit code. No
  binary distribution available yet; download the source distribution
  and compile it.</p>
-<p>To install libraries, you may use <a href='http://wodi.forge.ocamlcore.org/'>Godi for Windows or OPAM (see the <em>By
-Package Manager</em> tab).</a></p>
+<p>To install libraries, you may use <a href='http://wodi.forge.ocamlcore.org/'>Godi for Windows or OPAM (see the *By
+Package Manager* tab).</a></p>
 </li>
  </ul>
 
@@ -360,7 +360,7 @@ build tree is always in good shape.</p>
 <p>There is the issue of knowing which Fink packages have to be installed
 before you can install some of the Godi packages with all optioned
 enabled.</p>
-<h3 id="ahrefmacosxmacportsMacPortsa"> <a href='macosx-macports'>MacPorts</a></h3>
+<h3 id="MacPorts"> <a href='macosx-macports'>MacPorts</a></h3>
 <p><a href='http://www.macports.org/'>MacPorts</a>, formerly known as DarwinPorts, is
 a package management system for Mac OS X based on the BSD ports system.
 You will need to have the OS X Developer Tools installed before
@@ -392,7 +392,7 @@ be used to download and build the following packages:</p>
 party libraries that do not come with Mac OS X. This way you can let
 GODI take care of your OCaml build tree, and let MacPorts take care of
 the native libraries, such as GTK2 and PCRE.</p>
-<h3 id="ahrefmacosxsourcesBuildingfromsourcesa"> <a href='macosx-sources'>Building from sources</a></h3>
+<h3 id="Buildingfromsources"> <a href='macosx-sources'>Building from sources</a></h3>
 <p>Unfortunately, the packages available for both Fink and DarwinPorts
 don&apos;t yet include some of the more useful additions to the OCaml
 collection, such as Markus Mottl&apos;s PCRE-Ocaml library or Stolpmann&apos;s
@@ -488,7 +488,7 @@ one needs to consider before installing OCaml and labltk:</p>
 </li>
  </ol>
 
-<h4> Installing the fink libraries</h4>
+<h4 id="Installingthefinklibraries"> Installing the fink libraries</h4>
 <p>Once Fink is <a href='http://fink.sourceforge.net/doc/index.php?phpLang=en'>installed and
 configured</a>,
 install the Tcl/Tk libraries with the command
@@ -497,7 +497,7 @@ and install process to compete. Once this is done, OCaml&apos;s configure
 script should be able to locate the libraries and header files required
 to build labltk (provided fink is set up to install its packages in the
 /sw directory). Running the standard OCaml build will also build labltk.</p>
-<h4> Installing the Tcl/Tk Aqua libraries</h4>
+<h4 id="InstallingtheTclTkAqualibraries"> Installing the Tcl/Tk Aqua libraries</h4>
 <p>This framework comes with OS X 10.4 and later. Configure the OCaml build
 by using the following flags:</p>
 <pre><code>          ./configure -tkdefs &#92;

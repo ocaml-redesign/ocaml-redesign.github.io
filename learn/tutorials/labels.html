@@ -334,7 +334,7 @@ unspecified&quot;. Whereas if you type:</p>
 <pre><code>open_window;;</code></pre>
 <p>you mean &quot;give me the functional value&quot; or (more usually in the
 toplevel) &quot;print out the type of <code>open_window</code>&quot;.</p>
-<h3 id="Morecodecodeshorthand"> More <code>~</code>shorthand</h3>
+<h3 id="Moreshorthand"> More <code>~</code>shorthand</h3>
 <p>Let&apos;s rewrite the <code>range</code> function yet again, this time using as much
 shorthand as possible for the labels:</p>
 <pre><code>  let rec range ~first ~last =
@@ -344,7 +344,7 @@ shorthand as possible for the labels:</p>
 when calling functions as well as declaring the arguments to functions,
 hence in the above the highlighted red <code>~last</code> is short for
 <code>~last:last</code>.</p>
-<h3 id="Usingcodefoocodeinafunctioncall"> Using <code>?foo</code> in a function call</h3>
+<h3 id="Usingfooinafunctioncall"> Using <code>?foo</code> in a function call</h3>
 <p>There&apos;s another little wrinkle concerning optional arguments. Suppose we
 write a function around <code>open_window</code> to open up an application:</p>
 <pre><code>  let open_application ?width ?height () =
@@ -359,7 +359,7 @@ this, but conceptually that&apos;s the idea). So the correct way to write
 this function is:</p>
 <pre><code>  let open_application ?width ?height () =
     open_window ~title:&quot;My Application&quot; ?width ?height</code></pre>
-<h3 id="Whenandwhennottousecodecodeandcodecode"> When and when not to use <code>~</code> and <code>?</code></h3>
+<h3 id="Whenandwhennottouseand"> When and when not to use <code>~</code> and <code>?</code></h3>
 <p>The syntax for labels and optional arguments is confusing, and you may
 often wonder when to use <code>~foo</code>, when to use <code>?foo</code> and when to use
 plain <code>foo</code>. It&apos;s something of a black art which takes practice to get

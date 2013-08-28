@@ -275,7 +275,7 @@ widgets. Here is my simple implementation for <code>container</code>:</p>
  code outside the class. The reason for this is somewhat subtle, but
  basically comes down to the fact that OCaml&apos;s linked lists are
  immutable. Let&apos;s imagine that someone wrote this code:</p>
-<p>&lt;!-- --&gt;
+<!-- --><p>
 let list = container#get_widgets in
 x :: </p>
 <p>Would this modify the private internal representation of my <code>container</code>
@@ -362,7 +362,7 @@ b#repaint</p>
 </li>
  </ol>
 
-<h3 id="Anoteaboutcodeselfcode"> A note about <code>self</code></h3>
+<h3 id="Anoteaboutself"> A note about <code>self</code></h3>
 <p>In all the examples above we defined classes using the general pattern:</p>
 <pre><code>class name =
   object (self)
@@ -429,7 +429,7 @@ Advanced users should see:
 , that leads to
 <a href='http://remi.vanicat.free.fr/ocaml/hweak/' title='http://remi.vanicat.free.fr/ocaml/hweak/'>hweak</a>
 (old: http://caml.inria.fr/archives/200205/msg00397.html]</p>
-<h3 id="ThecodeOocodemoduleandcomparingobjects"> The <code>Oo</code> module and comparing objects</h3>
+<h3 id="TheOomoduleandcomparingobjects"> The <code>Oo</code> module and comparing objects</h3>
 <p>The <code>Oo</code> module contains a few useful functions for OO programming.</p>
 <p><code>Oo.copy</code> makes a shallow copy of an object. <code>Oo.id object</code> returns a
 unique identifying number for each object (a unique number across all

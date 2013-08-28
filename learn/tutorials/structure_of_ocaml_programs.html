@@ -55,7 +55,7 @@ references. For this we&apos;re going to look at a lot of OCaml concepts
 which won&apos;t yet make sense because we haven&apos;t seen them before. Don&apos;t
 worry about the details for the moment. Concentrate instead on the
 overall shape of the programs and the features which I&apos;ll point out.</p>
-<h3 id="Localquotvariablesquotemreallyemlocalexpressions"> Local &quot;variables&quot; (<em>really</em> local expressions)</h3>
+<h3 id="Localquotvariablesquotreallylocalexpressions"> Local &quot;variables&quot; (<em>really</em> local expressions)</h3>
 <p>Let&apos;s take the <code>average</code> function and add a local variable in C.
 (Compare it to the first definition we had above).</p>
 <pre><code>double
@@ -96,7 +96,7 @@ let f a b =
 to perform this step of &quot;common subexpression elimination&quot; for you), and
 it is certainly easier to read. <code>x</code> in the second example is just
 shorthand for <code>a +. b</code>.</p>
-<h3 id="Globalquotvariablesquotemreallyemglobalexpressions"> Global &quot;variables&quot; (<em>really</em> global expressions)</h3>
+<h3 id="Globalquotvariablesquotreallyglobalexpressions"> Global &quot;variables&quot; (<em>really</em> global expressions)</h3>
 <p>You can also define global names for things at the top level, and as
 with our local &quot;variables&quot; above, these aren&apos;t really variable at all,
 just shorthand names for things. Here&apos;s a real (but cut-down) example:</p>
@@ -217,7 +217,7 @@ expressions: <code>let name arguments = function-definition in</code>.</p>
 <p>You normally indent the function definition on a new line as in the
 example above, and remember to use <code>let rec</code> instead of <code>let</code> if your
 function is recursive (as it is in that example).</p>
-<h3 id="Modulesandcodeopencode"> Modules and <code>open</code></h3>
+<h3 id="Modulesandopen"> Modules and <code>open</code></h3>
 <p>OCaml comes with lots of fun and interesting modules (libraries of
 useful code). For example there are standard libraries for drawing
 graphics, interfacing with GUI widget sets, handling large numbers, data
@@ -284,7 +284,7 @@ yet: imperative-style for-loops, if-then-else and recursion. We&apos;ll talk
 about those later. Nevertheless you should look at these programs and
 try and find out (1) how they work, and (2) how type inference is
 helping you to eliminate bugs.</p>
-<h3 id="ThecodePervasivescodemodule"> The <code>Pervasives</code> module</h3>
+<h3 id="ThePervasivesmodule"> The <code>Pervasives</code> module</h3>
 <p>There&apos;s one module that you never need to &quot;<code>open</code>&quot;. That is the
 <code>Pervasives</code> module (go and read <code>/usr/lib/ocaml/3.08/pervasives.mli</code>
 now). All of the symbols from the <code>Pervasives</code> module are automatically
@@ -301,7 +301,7 @@ read_line ();;</code></pre>
 <p>Actually this is really useful when you want to import a nested module
 (modules can be nested inside one another), but you don&apos;t want to type
 out the full path to the nested module name each time.</p>
-<h3 id="Usingandomittingcodecodeandcodecode"> Using and omitting <code>;;</code> and <code>;</code></h3>
+<h3 id="Usingandomittingand"> Using and omitting <code>;;</code> and <code>;</code></h3>
 <p>Now we&apos;re going to look at a very important issue. When should you use
 <code>;;</code>, when should you use <code>;</code>, and when should you use none of these at
 all? This is a tricky issue until you &quot;get it&quot;, and it taxed the author
@@ -351,20 +351,19 @@ let rec iterate r x_init i =
 r *. x *. (1.0 -. x)</code></pre>
 <p>
 for x = 0 to 639 do
-  let r = 4.0 <em>. (float_of_int x) /. 640.0 in
+  let r = 4.0 *. (float_of_int x) /. 640.0 in
   for i = 0 to 39 do
+</p>
 <pre><code>let x_init = Random.float 1.0 in
 let x_final = iterate r x_init 500 in
-let y = int_of_float (x_final </code></pre>
-</em>. 480.) in
-</p>
-<pre><code>Graphics.plot x y</code></pre>
+let y = int_of_float (x_final *. 480.) in
+Graphics.plot x y</code></pre>
 <p>  done
 done
 read_line ()                  (<em> ;; </em></p>
 <p>Rules #3 and #4 refer to the single <code>;</code>. This is completely different
-from <code>;;</code>. The single semicolon <code>;</code> is what is known as a <strong>sequence
-point</strong>, which is to say it has exactly the same purpose as the single
+from <code>;;</code>. The single semicolon <code>;</code> is what is known as a **sequence
+point**, which is to say it has exactly the same purpose as the single
 semicolon in C, C++, Java and Perl. It means &quot;do the stuff before this
 point first, then do the stuff after this point when the first stuff has
 completed&quot;. Bet you didn&apos;t know that.</p>
