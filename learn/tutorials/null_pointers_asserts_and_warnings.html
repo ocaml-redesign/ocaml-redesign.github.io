@@ -48,6 +48,12 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 
+ <ul>
+  <li><a href='#Nullpointers'>Null pointers</a></li>
+  <li><a href='#Assertwarningsfatalerrorsandprintingtostderr'>Assert, warnings, fatal errors, and printing to stderr</a>
+</li>
+ </ul>
+
             </ul>
           </nav>
         </div>
@@ -55,11 +61,9 @@
           <div class="content">
             <p>Null Pointers, Asserts and Warnings</p>
 <p><em>Table of contents</em></p>
-<p>Null Pointers, Asserts and Warnings
-===================================</p>
-<p>Null pointers
-<hr/>
-So you&apos;ve got a survey on your website which asks your readers for their
+<h1 id="NullPointersAssertsandWarnings">Null Pointers, Asserts and Warnings</h1>
+<h2 id="Nullpointers">Null pointers</h2>
+<p>So you&apos;ve got a survey on your website which asks your readers for their
 names and ages. Only problem is that for some reason a few of your
 readers don&apos;t want to give you their age - they stubbornly refuse to
 fill that field in. What&apos;s a poor database administrator to do?</p>
@@ -105,9 +109,8 @@ polymorphic variant type defined (in <code>Pervasives</code>) as:</p>
 <pre><code>  [ None; Some 3; Some 6; None ]</code></pre>
 <p>And what about an optional list of ints?</p>
 <pre><code>  Some [1; 2; 3]</code></pre>
-<p>Assert, warnings, fatal errors, and printing to stderr
-<hr/>
-One great feature of Perl is the rich set of commands for debugging
+<h2 id="Assertwarningsfatalerrorsandprintingtostderr">Assert, warnings, fatal errors, and printing to stderr</h2>
+<p>One great feature of Perl is the rich set of commands for debugging
 programs and handling unexpected errors, including the ability to print
 stack traces, throw and catch exceptions and the like. OCaml doesn&apos;t
 have quite such a rich set of debugging commands - better than Java,

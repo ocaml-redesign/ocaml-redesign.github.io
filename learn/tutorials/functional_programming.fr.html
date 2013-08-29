@@ -45,11 +45,9 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Programmation fonctionnelle
-===========================</p>
-<p>Qu&apos;est-ce que la programmation fonctionnelle ?
-<hr/>
-Nous sommes arrivé relativement loin dans ce tutorial et nous n&apos;avons
+            <h1 id="Programmationfonctionnelle">Programmation fonctionnelle</h1>
+<h2 id="Quaposestcequelaprogrammationfonctionnelle">Qu&apos;est-ce que la programmation fonctionnelle ?</h2>
+<p>Nous sommes arrivé relativement loin dans ce tutorial et nous n&apos;avons
 pas encore abordé la <strong>programmation fonctionnelle</strong>. Il serait
 imaginable de voir toutes les fonctionnalités données jusqu&apos;à présent -
 rich data types, pattern matching, inférence de types, fonctions
@@ -139,9 +137,8 @@ du widget qu&apos;il essaye d&apos;enregistrer.</p>
 <p>Maintenant, jettons un oeil à <code>receiver_fn</code>. Cette fonction est une
 clôture correcte parce qu&apos;elle garde une référence à <code>chan</code> venant de
 son environnement.</p>
-<p>Application partielle et curryfication
-<hr/>
-Définissons une fonction plus qui ne fait qu&apos;ajouter deux entiers :</p>
+<h2 id="Applicationpartielleetcurryfication">Application partielle et curryfication</h2>
+<p>Définissons une fonction plus qui ne fait qu&apos;ajouter deux entiers :</p>
 <pre><code>let plus a b = a + b ;;</code></pre>
 <p>Quelques questions pour les endormis du fond de la classe :</p>
 
@@ -284,10 +281,11 @@ val plus : int -&gt; int -&gt; int = &lt;
 val list_of_functions : (int -&gt; int) list = [&lt;; &lt;; &lt;</p>
 </li>
    </ul>
+</li>
+ </ol>
 
-<p>En quoi la programmation fonctionnelle est utile ?
-<hr/>
-La programmation fonctionnelle, comme n&apos;importe quelle technique de
+<h2 id="Enquoilaprogrammationfonctionnelleestutile">En quoi la programmation fonctionnelle est utile ?</h2>
+<p>La programmation fonctionnelle, comme n&apos;importe quelle technique de
 programmation, est un outil utile dans votre boite à outils pour
 résoudre certaines classes de problèmes. Très utile pour les callbacks,
 qui sont utilisés dans les IHMs pour les boucles d&apos;évènements. C&apos;est
@@ -297,9 +295,8 @@ de liste. De la même manière, on peut définir des fonctions génériques
 sur les arbres. Certains types de problèmes d&apos;arithmétique peuvent être
 résolus plus rapidement avec la programmation fonctionnelle (par exemple
 calculer la dérivé d&apos;une fonction mathématique).</p>
-<p>Programmation fonctionnelle pure et impure
-<hr/>
-Une <strong>fonction pure</strong> est une fonction sans aucun <strong>effet de bord</strong>. Un
+<h2 id="Programmationfonctionnellepureetimpure">Programmation fonctionnelle pure et impure</h2>
+<p>Une <strong>fonction pure</strong> est une fonction sans aucun <strong>effet de bord</strong>. Un
 effet de bord signifie que la fonction garde une sorte d&apos;état caché en
 son sein. <code>strlen()</code> est un exemple de fonction pure en C. Si on appelle
 <code>strlen()</code> avec la même chaîne, elle retournera toujours la même taille.
@@ -317,12 +314,10 @@ qu&apos;écrire des fonctions impures est parfois utile.</p>
 <p>Voici les avantages théoriques d&apos;avoir des fonctions pures. Un avantage
 est que si une fonction est pure, alors elle peut être appelée plusieurs
 fois avec les même arguments, le compilateur n&apos;aura qu&apos;a appeler la
-fonction qu&apos;une seule fois. Un bon exemple en C est :
-for (i = 0; i &lt; strlen(s); ++i) {
-</p>
-<pre><code>// Du code qui n&apos;affecte pas s
-</code></pre>
-
+fonction qu&apos;une seule fois. Un bon exemple en C est :</p>
+<pre><code>for (i = 0; i &lt; strlen(s); ++i) {
+    // Du code qui n&apos;affecte pas s
+}</code></pre>
 <p>Si nativement compilé, la boucle est en O(n²) sur la taille de s parce
 que <code>strlen(s)</code> est appelé à chaque fois et <code>strlen()</code> doit itérer sur
 tout <code>s</code>. Si le compilateur est assez intelligent pour se rendre compte
@@ -337,17 +332,16 @@ chaque petite fonction au fur et à mesure de l&apos;avancement. La mode
 actuelle est de projeter les programmes en utilisant une approche
 top-bottom, mais dans l&apos;opinion de l&apos;auteur, cela résulte souvent à des
 échecs de projets.</p>
-<p>Evaluation stricte / paresseuse (strictness vs laziness)
-<hr/>
-Les langages dérivés de C et de ML sont stricts. Haskell et Miranda ne
+<h2 id="Evaluationstricteparesseusestrictnessvslaziness">Evaluation stricte / paresseuse (strictness vs laziness)</h2>
+<p>Les langages dérivés de C et de ML sont stricts. Haskell et Miranda ne
 sont pas stricts, ie ce sont des langages à évaluation paresseuse. OCaml
 est stricte par défaut mais autorise l&apos;évaluation paresseuse lorsque
 nécessaire.</p>
 <p>Dans un langage à évaluation stricte, les arguments des fonctions sont
 toujours évalués en premier, et le résultat est alors passé à la
 fonction. Par exemple dans un langage à évaluation stricte, cet appel va
-toujours sortir par une erreur de division par zéro :
- give_me_a_three (1/0)</p>
+toujours sortir par une erreur de division par zéro :</p>
+<pre><code> give_me_a_three (1/0);;</code></pre>
 <p>Si vous avez programmé dans n&apos;importe quel langage conventionnel, c&apos;est
 le comportement auquel vous vous attendrez, et vous serez surpris qu&apos;il
 en soit autrement.</p>
@@ -364,25 +358,20 @@ d&apos;itérer sur la totalité de la liste, cela fonctionne.</p>
 <p>OCaml est un langage à évaluation stricte, mais a un module d&apos;évaluation
 paresseuse (<code>Lazy</code>) qui permettent d&apos;écrire des expressions paresseuses.
 Voici un exemple. D&apos;abord nous créons une expression paresseuse pour
-<code>1/0</code> :
-</p>
-<h1 id="letlazyexprlazy10"> let lazy_expr = lazy (1/0);;</h1><p>
-val lazy_expr : int lazy_t = &lt;lazy</p>
+<code>1/0</code> :</p>
+<pre><code># let lazy_expr = lazy (1/0);;
+val lazy_expr : int lazy_t = &lt;lazy&gt;</code></pre>
 <p>A noter que le type de l&apos;expression est <code>int lazy_t</code></p>
 <p>Parce que <code>give_me_a_three</code> prend un <code>&apos;a</code> (tout type) nous pouvons passé
 cette expression à la fonction :</p>
-</li>
- </ol>
-
 <pre><code># give_me_a_three lazy_expr;;
 - : int = 3;;</code></pre>
 <p>Pour évaluer une expression paresseuse, nous devons utiliser la fonction
 <code>Lazy.force</code> :</p>
 <pre><code># Lazy.force lazy_expr;;
 Exception : Division_by_zero.</code></pre>
-<p>Boxed vs. unboxed types
-<hr/>
-(NDT: trouver une traduction correcte pour «boxed» et «unboxed»)</p>
+<h2 id="Boxedvsunboxedtypes">Boxed vs. unboxed types</h2>
+<p>(NDT: trouver une traduction correcte pour «boxed» et «unboxed»)</p>
 <p>Un terme qu&apos;on entend beaucoup lorsqu&apos;on parle de langages fonctionnels
 est «boxed». J&apos;étais très confus lorsque j&apos;ai entendu ce terme pour la
 première fois, mais en fait la distinction entre types «boxed» et

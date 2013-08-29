@@ -45,8 +45,7 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Install OCaml
-=============</p>
+            <h1 id="InstallOCaml">Install OCaml</h1>
 <p>The most recent version is <a href='releases/'>OCaml 4.00.1</a>, released on
 2012-10-05. It can be easily installed in several ways. Broadly, the
 options are:</p>
@@ -101,9 +100,13 @@ to download and install OCaml libraries. You can also find more packages
 
    <ul>
     <li><p><a href='#devel'>Development Version</a></p>
-<p>GODI
-<hr/>
-GODI is an independent distribution of OCaml and add-on software
+</li>
+   </ul>
+</li>
+ </ul>
+
+<h2 id="GODI">GODI</h2>
+<p>GODI is an independent distribution of OCaml and add-on software
 (covering both libraries and applications), running on multiple
 operating systems (Linux, MacOSX, Windows, and other). GODI compiles
 software from source, and allows it to adapt it to one&apos;s needs, using
@@ -113,49 +116,42 @@ releases as a user option.</p>
 click &quot;Get GODI&quot;, download the tarball, and follow the instructions in
 the README.</p>
 <p>For the impatient, do the following</p>
-<p> wget http://download.camlcity.org/download/godi-rocketboost-20110811.tar.gz
- tar xzvf http://download.camlcity.org/download/godi-rocketboost-20110811.tar.gz
- cd godi-rocketboost-20110811
- ./bootstrap</p>
+<pre><code>wget http://download.camlcity.org/download/godi-rocketboost-20110811.tar.gz
+tar xzvf http://download.camlcity.org/download/godi-rocketboost-20110811.tar.gz
+cd godi-rocketboost-20110811
+./bootstrap</code></pre>
 <p>You may need to use the <code>--prefix</code> option to the bootstrap command if
 you need to change the default installation location.</p>
-<p>OPAM
-<hr/>
-OPAM is a package manager for OCaml, based on the CUDF library
+<h2 id="OPAM">OPAM</h2>
+<p>OPAM is a package manager for OCaml, based on the CUDF library
 developped by the Mancoosi project, which is, among other things, used
 by Debian to manage their packages. It works well on Unix, Linux, and
 Mac OS X systems. Windows support is comming soon.</p>
 <p>To get started, go to the <a href='http://opam.ocamlpro.com/'>OPAM website</a>,
 click &quot;Try OPAM&quot; and follow the instructions.</p>
 <p>For the impatient, do the following</p>
-<p>Quick install:
-</p>
-<pre><code>  $ wget http://www.ocamlpro.com/pub/opam_installer.sh
-  $ sh ./opam_installer.sh /usr/local/bin  # You can change the path to install it in an other place.
-</code></pre>
-
-<p>From source:
-</p>
-<pre><code>  $ git clone https://github.com/OCamlPro/opam
-  $ cd opam
-  $ ./configure # (or ./configure --prefix=$HOME if you want to install under your $HOME)
-  $ make
-  $ make install
-  $ opam init
-  $ eval `opam config -env`
-  $ opam switch 4.00.1
-</code></pre>
-
-<p>Debian
-<hr/>
-OCaml is very easy to install under <a href='http://www.debian.org'>Debian</a>. We
+<p>Quick install:</p>
+<pre><code>          $ wget http://www.ocamlpro.com/pub/opam_installer.sh
+          $ sh ./opam_installer.sh /usr/local/bin  # You can change the path to install it in an other place.
+          </code></pre>
+<p>From source:</p>
+<pre><code>          $ git clone https://github.com/OCamlPro/opam
+          $ cd opam
+          $ ./configure # (or ./configure --prefix=$HOME if you want to install under your $HOME)
+          $ make
+          $ make install
+          $ opam init
+          $ eval `opam config -env`
+          $ opam switch 4.00.1
+          </code></pre>
+<h2 id="Debian">Debian</h2>
+<p>OCaml is very easy to install under <a href='http://www.debian.org'>Debian</a>. We
 recommend you install <code>ocaml-nox</code> to develop applications not needing
 the graphics library or <code>ocaml</code> if you need the
 <a href='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Graphics.html'><code> Graphics</code></a>
 module. We also recommend you install</p>
-</li>
-   </ul>
-</li>
+
+ <ul>
   <li><p><code>ocaml-native-compilers</code> to be able to compile your program the
  native code (this is not available on some more obscure
  architectures).</p>
@@ -170,38 +166,32 @@ module. We also recommend you install</p>
   <li><p><code>libpcre-ocaml-dev</code> which is a binding to PCRE.</p>
 <p>Check the <a href='http://packages.debian.org/search?keywords=ocaml&amp;searchon=all&amp;suite=testing&amp;section=all'>packages available in
 Debian</a>.</p>
-<p>Ubuntu
-<hr/>
-<a href='http://www.ubuntu.com/'>Ubuntu</a> being a derivative of Debian, it
+</li>
+ </ul>
+
+<h2 id="Ubuntu">Ubuntu</h2>
+<p><a href='http://www.ubuntu.com/'>Ubuntu</a> being a derivative of Debian, it
 inherits its ease of install of <a href='http://packages.ubuntu.com/search?keywords=ocaml'>OCaml
 packages</a>. The same
 recommendations as for Debian hold.</p>
-<p>Fedora
-<hr/>
-Since <a href='http://fedoraproject.org/'>Fedora 8</a>, Fedora has excellent
+<h2 id="Fedora">Fedora</h2>
+<p>Since <a href='http://fedoraproject.org/'>Fedora 8</a>, Fedora has excellent
 support for OCaml in the basic distribution. There is an active group of
 maintainers who keep up to date with the latest OCaml, and there is a
 wide range of packages available.</p>
-<p>To install the OCaml compiler just do:
-</p>
-<pre><code>    yum install </code></pre>
-
+<p>To install the OCaml compiler just do:</p>
+<pre><code>        yum install ocaml</code></pre>
 <p>To install an OCaml library called &apos;<code>foo</code>&apos;, and any dependencies it
-needs, you would do:
-</p>
-<pre><code>    yum install ocaml-foo-</code></pre>
-
-<p>A good set of basic development libraries can be installed by doing:
-</p>
-<pre><code>    yum install ocaml-camlp4-devel ocaml-ocamldoc ocaml-findlib-devel &#92;
-      ocaml-extlib-devel ocaml-calendar-</code></pre>
-
-<p>To list all OCaml packages use:
-</p>
-<pre><code>    yum search </code></pre>
-
+needs, you would do:</p>
+<pre><code>        yum install ocaml-foo-devel</code></pre>
+<p>A good set of basic development libraries can be installed by doing:</p>
+<pre><code>        yum install ocaml-camlp4-devel ocaml-ocamldoc ocaml-findlib-devel &#92;
+          ocaml-extlib-devel ocaml-calendar-devel</code></pre>
+<p>To list all OCaml packages use:</p>
+<pre><code>        yum search ocaml</code></pre>
 <p><strong>Packaging policy and mailing lists</strong></p>
-</li>
+
+ <ul>
   <li><p><a href='http://fedoraproject.org/wiki/Packaging/OCaml'>OCaml packaging
  policy</a> in Fedora.
  All Fedora OCaml packages have to obey this policy, ensuring a
@@ -213,22 +203,20 @@ needs, you would do:
   <li><p><a href='https://www.redhat.com/mailman/listinfo/fedora-ocaml-list'>fedora-ocaml-list</a>:
  mailing list for people interested in OCaml on Fedora or Red Hat
  Enterprise Linux.</p>
-<p>FreeBSD
-<hr/>
-<a href='http://www.freebsd.org/'>FreeBSD</a> had a great support for OCaml
+</li>
+ </ul>
+
+<h2 id="FreeBSD">FreeBSD</h2>
+<p><a href='http://www.freebsd.org/'>FreeBSD</a> had a great support for OCaml
 development for a long time. There are easy to use packages available
 for most popular platforms (i386, amd64, powerpc, sparc64) for both the
 core languages and supplimentary libraries, documentation, examples and
 development tools. There is a framework available to make adding new
 ocaml application and libraries easy.</p>
-<p>To install the OCaml compiler using packages do:
-</p>
-<pre><code>    pkg_add -r </code></pre>
-
-<p>or
-</p>
-<pre><code>pkg_add -r ocaml-</code></pre>
-
+<p>To install the OCaml compiler using packages do:</p>
+<pre><code>        pkg_add -r ocaml</code></pre>
+<p>or</p>
+<pre><code>    pkg_add -r ocaml-nox11</code></pre>
 <p>to install OCaml without X11-dependent libraries (e.g. to deploy on a
 headless server).</p>
 <p>To install the developer documentation, examples and emacs editing
@@ -237,69 +225,54 @@ packages.</p>
 <p>The same packages can be installed via the port system. There is a a
 large set of libraries available in the <code>devel</code> category of the ports
 system as well as in the specific topic-related categories.</p>
-<p>Gentoo
-<hr/>
-In order to get the basic tools under
-<a href='http://gentoo-portage.com/dev-ml/'>Gentoo</a>, execute:
-</p>
-<pre><code>    emerge ocaml</code></pre>
-
+<h2 id="Gentoo">Gentoo</h2>
+<p>In order to get the basic tools under
+<a href='http://gentoo-portage.com/dev-ml/'>Gentoo</a>, execute:</p>
+<pre><code>        emerge ocaml  </code></pre>
 <p>while being logged in as a user that is a member of the <code>portage</code> group
 (e.g. root). If you want to see what other related packages are
-available execute
-</p>
-<pre><code>    emerge -S ocaml</code></pre>
-
-<p>SuSE
-<hr/>
-Getting Started with OCaml on <a href='http://www.suse.com/'>SuSE</a> is part in
+available execute</p>
+<pre><code>        emerge -S ocaml </code></pre>
+<h2 id="SuSE">SuSE</h2>
+<p>Getting Started with OCaml on <a href='http://www.suse.com/'>SuSE</a> is part in
 the standard distribution. In openSuse 12.1, the package name is
 <code>ocaml-3.12.0-11.1.2</code> (outdated).</p>
-<p>Mageia
-<hr/>
-<a href='http://www.mageia.org/'>Mageia</a> has some support for OCaml in the
+<h2 id="Mageia">Mageia</h2>
+<p><a href='http://www.mageia.org/'>Mageia</a> has some support for OCaml in the
 distribution.</p>
-<p>To install the OCaml compilers just do:
-</p>
-<pre><code>    urpmi ocaml-</code></pre>
-
+<p>To install the OCaml compilers just do:</p>
+<pre><code>        urpmi ocaml-compiler</code></pre>
 <p>ocaml-compiler has no dependency on X11 libs, to install the libs that
-have some (for example the module Graphics):
-</p>
-<pre><code>    urpmi ocaml-</code></pre>
-
-<p>To install camlp4:
-</p>
-<pre><code>    urpmi </code></pre>
-
+have some (for example the module Graphics):</p>
+<pre><code>        urpmi ocaml-x11</code></pre>
+<p>To install camlp4:</p>
+<pre><code>        urpmi camlp4</code></pre>
 <p>To install an OCaml library called &apos;<code>foo</code>&apos;, and any dependencies it
-needs, you would do:
-</p>
-<pre><code>    urpmi ocaml-foo-</code></pre>
-
-<p>A good set of basic development libraries can be installed by doing:
-</p>
-<pre><code>    urpmi camlp4-devel ocaml-doc ocaml-findlib-devel &#92;
-      ocaml-extlib-devel ocaml-extlib-doc ocaml-batteries-devel &#92;
-      ocaml-ounit-devel ocaml-sexplib-devel ocaml-xml-light-devel &#92;
-      </code></pre>
-
-<p>To list OCaml packages use:
-</p>
-<pre><code>    urpmq --list | grep </code></pre>
-
+needs, you would do:</p>
+<pre><code>        urpmi ocaml-foo-devel</code></pre>
+<p>A good set of basic development libraries can be installed by doing:</p>
+<pre><code>        urpmi camlp4-devel ocaml-doc ocaml-findlib-devel &#92;
+          ocaml-extlib-devel ocaml-extlib-doc ocaml-batteries-devel &#92;
+          ocaml-ounit-devel ocaml-sexplib-devel ocaml-xml-light-devel &#92;
+          ocamlmakefile</code></pre>
+<p>To list OCaml packages use:</p>
+<pre><code>        urpmq --list | grep ocaml</code></pre>
 <p><strong>Packaging policy</strong></p>
-</li>
+
+ <ul>
   <li><p><a href='https://wiki.mageia.org/en/OCaml_policy'>OCaml packaging policy</a> in
  Mageia. All Mageia OCaml packages have to obey this policy, ensuring
  a minimum standard for all OCaml packages we ship.</p>
-<p>Windows
-<hr/>
-Four ports of OCaml for Microsoft Windows are currently available. For
+</li>
+ </ul>
+
+<h2 id="Windows">Windows</h2>
+<p>Four ports of OCaml for Microsoft Windows are currently available. For
 additional information, please consult the list of <a href='portability.html'>portability
 issues</a> or the <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/notes/README.win32'>Windows release
 notes</a>.</p>
-</li>
+
+ <ul>
   <li><p><a href='http://protz.github.com/ocaml-installer/'>Cygwin-based native Win32 port
  (4.00.1)</a>. A self
  installer. The interactive loop comes with a simple graphical user
@@ -323,17 +296,16 @@ notes</a>.</p>
  and compile it.</p>
 <p>To install libraries, you may use <a href='http://wodi.forge.ocamlcore.org/'>Godi for Windows or OPAM (see the *By
 Package Manager* tab).</a></p>
-<p>Mac OS X
-<hr/>
-Under Mac OS X, there are, at least for the base package, five different
+</li>
+ </ul>
+
+<h2 id="MacOSX">Mac OS X</h2>
+<p>Under Mac OS X, there are, at least for the base package, five different
 ways to go: Install the binary package from Inria; Install via Fink;
 Install via MacPorts; Build via <a href='#godi'>GODI</a>; or build it manually from
 sources. For each of the four approaches, you will need to have at least
 the OS X developer tools installed — any other requirements will be
 discussed below.</p>
-</li>
- </ul>
-
 <h3 id="Inriaapossbinarypackage"> Inria&apos;s binary package</h3>
 <p>This is the easiest way to set up a basic OCaml installation for OS X.
 For 10.4 (Tiger), simply <a href='releases/'>download</a> Intel disk image, mount
@@ -604,22 +576,17 @@ Shark.app.</p>
 <p>Note that if your executable doesn&apos;t run for long enough Shark won&apos;t be
 able to take any samples and won&apos;t report any statistics. More function
 names will show up in the profiles if you compile with <code>-g</code>.</p>
-<p>Oasis-DB
-<hr/>
-<img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
-<p>ODB
-<hr/>
-<img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
-<p>OPAM
-<hr/>
-<img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
-<p>ocamlbrew
-<hr/>
-<img src='img/under_construction_icon.gif' alt='Under Construction' />
+<h2 id="OasisDB">Oasis-DB</h2>
+<p><img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
+<h2 id="ODB">ODB</h2>
+<p><img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
+<h2 id="OPAMx">OPAM</h2>
+<p><img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
+<h2 id="ocamlbrew">ocamlbrew</h2>
+<p><img src='img/under_construction_icon.gif' alt='Under Construction' />
 <a href='https://github.com/hcarty/ocamlbrew'>ocamlbrew</a></p>
-<p>Source
-<hr/>
-<img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
+<h2 id="Source">Source</h2>
+<p><img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
 <p>Download the <a href='releases/svn.html'>latest development version</a> using
 subversion and follow the instructions included therein.
 </p>

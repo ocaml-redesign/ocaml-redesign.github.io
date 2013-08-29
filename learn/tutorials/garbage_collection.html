@@ -45,11 +45,9 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Garbage Collection
-==================</p>
-<p>Garbage collection, reference counting, explicit allocation
-<hr/>
-As with all modern languages, OCaml provides a garbage collector so that
+            <h1 id="GarbageCollection">Garbage Collection</h1>
+<h2 id="Garbagecollectionreferencecountingexplicitallocation">Garbage collection, reference counting, explicit allocation</h2>
+<p>As with all modern languages, OCaml provides a garbage collector so that
 you don&apos;t need to explicitly allocate and free memory as in C/C++.</p>
 <p>As JWZ writes in his <a href='http://www.jwz.org/doc/java.html' title='http://www.jwz.org/doc/java.html'>&quot;Java sucks&quot;
 rant</a>:</p>
@@ -140,36 +138,36 @@ disadvantages of reference counting schemes:</p>
 </li>
   <li><p>Graph algorithms, of course, violate the previous assumption. Don&apos;t
  try to implement the TSP in Perl!</p>
-<p>The Gc module
-<hr/>
-The <code>Gc</code> module contains some useful functions for querying and calling
+</li>
+ </ul>
+
+<h2 id="TheGcmodule">The Gc module</h2>
+<p>The <code>Gc</code> module contains some useful functions for querying and calling
 the garbage collector from OCaml programs.</p>
 <p>Here is a program which runs and then prints out GC statistics just
-before quitting:
-let rec iterate r x_init i =
+before quitting:</p>
+<pre><code>let rec iterate r x_init i =
   if i = 1 then x_init
   else
-</p>
-<pre><code>let x = iterate r x_init (i-1) in
-r *. x *. (1.0 -. x</code></pre>
-<p>
+    let x = iterate r x_init (i-1) in
+    r *. x *. (1.0 -. x)
+
 let () =
   Random.self_init ();
   Graphics.open_graph &quot; 640x480&quot;
   for x = 0 to 640 do
-</p>
-<pre><code>let r = 4.0 *. (float_of_int x) /. 640.0 in
-for i = 0 to 39 do
-  let x_init = Random.float 1.0 in
-  let x_final = iterate r x_init 500 in
-  let y = int_of_float (x_final *. 480.) in
-  Graphics.plot x y
-done</code></pre>
-<p>  done;
+    let r = 4.0 *. (float_of_int x) /. 640.0 in
+    for i = 0 to 39 do
+      let x_init = Random.float 1.0 in
+      let x_final = iterate r x_init 500 in
+      let y = int_of_float (x_final *. 480.) in
+      Graphics.plot x y
+    done
+  done;
   read_line ();
-  Gc.print_stat </p>
-<p>Here is what it printed out for me:
-minor_words: 115926165          # Total number of words allocated
+  Gc.print_stat stdout</code></pre>
+<p>Here is what it printed out for me:</p>
+<pre><code>minor_words: 115926165          # Total number of words allocated
 promoted_words: 31217           # Promoted from minor -&gt; major
 major_words: 31902              # Large objects allocated in major directly
 minor_collections: 3538         # Number of minor heap collections
@@ -183,7 +181,7 @@ free_words: 60794
 free_blocks: 4
 largest_free: 31586
 fragments: 0
-compactions: </p>
+compactions: 0</code></pre>
 <p>We can see that minor heap collections are approximately 100 times more
 frequent than major heap collections (in this example, not necessarily
 in general). Over the lifetime of the program, an astonishing 440 MB of
@@ -194,14 +192,13 @@ large objects which would have been allocated directly onto the major
 heap.</p>
 <p>We can instruct the GC to print out debugging messages when one of
 several events happen (eg. on every major collection). Try adding the
-following code to the example above near the beginning:
-Gc.set { (Gc.get ()) with Gc.verbose = 0x01 </p>
+following code to the example above near the beginning:</p>
+<pre><code>Gc.set { (Gc.get ()) with Gc.verbose = 0x01 }</code></pre>
 <p>(We haven&apos;t seen the <code>{ expression with field = value }</code> form before,
 but it should be mostly obvious what it does). The above code anyway
 causes the GC to print a message at the start of every major collection.</p>
-<p>Finalisation and the Weak module
-<hr/>
-We can write a function called a <strong>finaliser</strong> which is called when an
+<h2 id="FinalisationandtheWeakmodule">Finalisation and the Weak module</h2>
+<p>We can write a function called a <strong>finaliser</strong> which is called when an
 object is about to be freed by the GC.</p>
 <p>The <code>Weak</code> module lets us create so-called weak pointers. A **weak
 pointer** is best defined by comparing it to a &quot;normal pointer&quot;. When we
@@ -222,10 +219,11 @@ data to be loaded into memory all at once, and anyway other programs
 might access the data on the disk, so we need to lock individual records
 when we hold copies of them in memory.</p>
 <p>The <em>public</em> interface to our &quot;in-memory object database cache&quot; is going
-to be just two functions:
-type record = { mutable name : string; mutable address : string 
+to be just two functions:</p>
+<pre><code>type record = { mutable name : string; mutable address : string }
+
 val get_record : int -&gt; record
-val sync_records : unit -&gt; </p>
+val sync_records : unit -&gt; unit</code></pre>
 <p>The <code>get_record</code> call is the only call that most programs will need to
 make. It gets the n<sup>>th</sup> record either out of the cache or from
 disk and returns it. The program can then read and/or update the
@@ -236,8 +234,8 @@ going to write the record back out to disk at some later point in time.</p>
 function synchronises the disk copy and in-memory copies of all records.</p>
 <p>OCaml doesn&apos;t currently run finalisers at exit. However you can easily
 force it to by adding the following command to your code. This command
-causes a full major GC cycle on exit:
-at<em>exit Gc.full</em></p>
+causes a full major GC cycle on exit:</p>
+<pre><code>at_exit Gc.full_major</code></pre>
 <p>Our code is also going to implement a cache of recently accessed records
 using the <code>Weak</code> module. The advantage of using the <code>Weak</code> module rather
 than hand-rolling our own code is two-fold: Firstly the garbage
@@ -252,97 +250,101 @@ the address field (192 bytes). Before a record can be loaded into
 memory, the program must acquire an exclusive lock on the record. After
 the in-memory copy is written back out to the file, the program must
 release the lock. Here is some code to define the on-disk format and
-some low-level functions to read, write, lock and unlock records:
-open 
-(<em> On-disk format. </em>)
+some low-level functions to read, write, lock and unlock records:</p>
+<pre><code>open Unix
+
+(* On-disk format. *)
 let record_size = 256
 let name_size = 64
-let addr_size = 
-(<em> Low-level load/save records to file. </em>)
-let seek<em>record n fd =
-  lseek fd (n * record_size) SEEK</em>
+let addr_size = 192
+
+(* Low-level load/save records to file. *)
+let seek_record n fd =
+  lseek fd (n * record_size) SEEK_SET
+
 let write_record record n fd =
   seek_record n fd;
   write fd record.name 0 name_size;
-  write fd record.address 0 addr_
+  write fd record.address 0 addr_size
+
 let read_record record n fd =
   seek_record n fd;
   read fd record.name 0 name_size;
-  read fd record.address 0 addr_
-(<em> Lock/unlock the nth record in a file. </em>)
-let lock<em>record n fd =
+  read fd record.address 0 addr_size
+
+(* Lock/unlock the nth record in a file. *)
+let lock_record n fd =
   seek_record n fd;
-  lockf fd F_LOCK record</em>
-let unlock<em>record n fd =
+  lockf fd F_LOCK record_size
+
+let unlock_record n fd =
   seek_record n fd;
-  lockf fd F_ULOCK record</em></p>
-<p>We also need a function to create new, empty in-memory <code>record</code> objects:
-(<em> Create a new, empty record. </em>)
+  lockf fd F_ULOCK record_size</code></pre>
+<p>We also need a function to create new, empty in-memory <code>record</code> objects:</p>
+<pre><code>(* Create a new, empty record. *)
 let new_record () =
   { name = (String.make name_size &apos; &apos;);
-</p>
-<pre><code>address = (String.make addr_size &apos; &apos;) </code></pre>
-
+    address = (String.make addr_size &apos; &apos;) }</code></pre>
 <p>Because this is a really simple program, we&apos;re going to fix the number
-of records in advance:
-(<em> Total number of records. </em>)
-let nr_records = 
-(<em> On-disk file. </em>)
-let diskfile = openfile &quot;users.bin&quot; [ O_RDWR ] </p>
+of records in advance:</p>
+<pre><code>(* Total number of records. *)
+let nr_records = 10000
+
+(* On-disk file. *)
+let diskfile = openfile &quot;users.bin&quot; [ O_RDWR ] 0</code></pre>
 <p>Download <a href='../img/users.bin.gz'>users.bin.gz</a> and decompress it before
 running the program.</p>
-<p>Our cache of records is very simple:
-(<em> Cache of records. </em>)
-let cache = Weak.create nr_</p>
+<p>Our cache of records is very simple:</p>
+<pre><code>(* Cache of records. *)
+let cache = Weak.create nr_records</code></pre>
 <p>The <code>get_record</code> function is very short and basically composed of two
 halves. We grab the record from the cache. If the cache gives us <code>None</code>,
 then that either means that we haven&apos;t loaded this record from the cache
 yet, or else it has been written out to disk (finalised) and dropped
 from the cache. If the cache gives us <code>Some record</code> then we just return
 <code>record</code> (this promotes the weak pointer to the record to a normal
-pointer).
-open 
-(<em> The finaliser function. </em>)
+pointer).</p>
+<pre><code>open Printf
+
+(* The finaliser function. *)
 let finaliser n record =
   printf &quot;*** objcache: finalising record %d&#92;n&quot; n;
   write_record record n diskfile;
-  unlock_record n 
-(<em> Get a record from the cache or off disk. </em>)
+  unlock_record n diskfile
+
+(* Get a record from the cache or off disk. *)
 let get_record n =
   match Weak.get cache n with
   | Some record -&gt;
-</p>
-<pre><code>  printf &quot;*** objcache: fetching record %d from memory cache&#92;n&quot; n;
-  record</code></pre>
-<p>  | None -&gt;
-</p>
-<pre><code>  printf &quot;*** objcache: loading record %d from disk&#92;n&quot; n;
-  let record = new_record () in
-  Gc.finalise (finaliser n) record;
-  lock_record n diskfile;
-  read_record record n diskfile;
-  Weak.set cache n (Some record);
-  </code></pre>
-
+      printf &quot;*** objcache: fetching record %d from memory cache&#92;n&quot; n;
+      record
+  | None -&gt;
+      printf &quot;*** objcache: loading record %d from disk&#92;n&quot; n;
+      let record = new_record () in
+      Gc.finalise (finaliser n) record;
+      lock_record n diskfile;
+      read_record record n diskfile;
+      Weak.set cache n (Some record);
+      record</code></pre>
 <p>The <code>sync_records</code> function is even easier. First of all it empties the
 cache by replacing all the weak pointers with <code>None</code>. This now means
 that the garbage collector <em>can</em> collect and finalise all of those
 records. But it doesn&apos;t necessarily mean that the GC <em>will</em> collect the
 records straightaway (in fact it&apos;s not likely that it will), so to force
-the GC to collect the records immediately, we also invoke a major cycle:
-(<em> Synchronise all records. </em>)
+the GC to collect the records immediately, we also invoke a major cycle:</p>
+<pre><code>(* Synchronise all records. *)
 let sync_records () =
   Weak.fill cache 0 nr_records None;
-  Gc.full_major (</p>
+  Gc.full_major ()</code></pre>
 <p>Finally we have some test code. I won&apos;t reproduce the test code, but you
 can download the complete program and test code
-<a href='_file/objcache.ml'>objcache.ml</a>, and compile it with:
-ocamlc -w s unix.cma objcache.ml -o </p>
-<p>Exercises
-<hr/>
-Here are some ways to extend the example above, in approximately
+<a href='_file/objcache.ml'>objcache.ml</a>, and compile it with:</p>
+<pre><code>ocamlc -w s unix.cma objcache.ml -o objcache</code></pre>
+<h2 id="Exercises">Exercises</h2>
+<p>Here are some ways to extend the example above, in approximately
 increasing order of difficulty:</p>
-</li>
+
+ <ol>
   <li><p>Implement the record as an <strong>object</strong>, and allow it to transparently
  pad/unpad strings. You will need to provide methods to set and get
  the name and address fields (four public methods in all). Hide as
@@ -364,7 +366,7 @@ increasing order of difficulty:</p>
   <li><p>Provide a general-purpose cache fronting a &quot;users&quot; table in your
  choice of <strong>relational database</strong> (with locking).</p>
 </li>
- </ul>
+ </ol>
 
 
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">

@@ -45,22 +45,19 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Command-line arguments
-======================</p>
+            <h1 id="Commandlinearguments">Command-line arguments</h1>
 <p>This is a short tutorial for those who are writing their first OCaml
 program and are wondering how to read arguments that are passed on the
 command line.</p>
-<p>argv
-<hr/>
-Like in the C programming language, the arguments that are passed to a
+<h2 id="argv">argv</h2>
+<p>Like in the C programming language, the arguments that are passed to a
 given program are stored in an array. Following the tradition, this
 array is named <code>argv</code>. It is found in the <code>Sys</code> module of the standard
 library, therefore its full name is <code>Sys.argv</code>. The number of arguments
 including the name of the program itself is simply the length of the
 array. It is obtained using the <code>Array.length</code> function.</p>
-<p>Simple example
-<hr/>
-The following program displays the arguments with their position in
+<h2 id="Simpleexample">Simple example</h2>
+<p>The following program displays the arguments with their position in
 <code>Sys.argv</code>:</p>
 <pre><code>open Printf
 
@@ -82,9 +79,8 @@ program using <code>ocamlopt -o args args.ml</code>, and then run
 [1] arg1
 [2] arg2
 [3] arg3</code></pre>
-<p>Tools for parsing command-line options
-<hr/>
-A few libraries exist that let you process command-line arguments
+<h2 id="Toolsforparsingcommandlineoptions">Tools for parsing command-line options</h2>
+<p>A few libraries exist that let you process command-line arguments
 without having to scan the <code>Sys.argv</code> array yourself:</p>
 
  <ul>

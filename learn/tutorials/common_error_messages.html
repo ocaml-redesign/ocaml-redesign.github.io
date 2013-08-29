@@ -45,14 +45,11 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Common error messages
-=====================</p>
+            <h1 id="Commonerrormessages">Common error messages</h1>
 <p>This page gives a list of quick explanations for some error or warning
 messages that are emitted by the OCaml compilers. Longer explanations
 are usually given in dedicated sections of this tutorial.</p>
-<p>Type errors
-<hr/>
-</p>
+<h2 id="Typeerrors">Type errors</h2>
 <h3 id="Thisexpressionhastypebutishereusedwithtype"> This expression has type ... but is here used with type ...</h3>
 <p>When the type of an object is not compatible with the context in which
 it is used, it is frequent to obtain this kind of message:</p>
@@ -112,9 +109,7 @@ using <code>x</code> later, the compiler can infer the type of <code>x</code>:<
 <pre><code>x;;</code></pre>
 <p>More details are given in the <a href='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html#variables_de_types_faibles' title='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html#variables_de_types_faibles'>OCaml
 FAQ</a>.</p>
-<p>Pattern matching warnings and errors
-<hr/>
-</p>
+<h2 id="Patternmatchingwarningsanderrors">Pattern matching warnings and errors</h2>
 <h3 id="Thispatternisunused"> This pattern is unused</h3>
 <p>This warning should be considered as an error, since there is no reason
 to intentionally keep such code. It may happen when the programmer
@@ -162,9 +157,7 @@ solution is to add a catch-all case which should never be reached:</p>
     | 0 -&gt; true
     | 1 | -1 -&gt; false
     | _ -&gt; assert false</code></pre>
-<p>Problems recompiling valid programs
-<hr/>
-</p>
+<h2 id="Problemsrecompilingvalidprograms">Problems recompiling valid programs</h2>
 <h3 id="xcmiisnotacompiledinterface"> x.cmi is not a compiled interface</h3>
 <p>When recompiling some old program or compiling a program from an
 external source that was not cleaned properly, it is possible to get

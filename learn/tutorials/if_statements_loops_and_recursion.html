@@ -45,11 +45,9 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>If Statements, Loops and Recursion
-==================================</p>
-<p>If statements (actually these are if expressions)
-<hr/>
-OCaml has an if statement with two variations, and the obvious meaning:</p>
+            <h1 id="IfStatementsLoopsandRecursion">If Statements, Loops and Recursion</h1>
+<h2 id="Ifstatementsactuallytheseareifexpressions">If statements (actually these are if expressions)</h2>
+<p>OCaml has an if statement with two variations, and the obvious meaning:</p>
 <pre><code>if boolean-condition then expression
 
 if boolean-condition then expression else other-expression</code></pre>
@@ -144,9 +142,8 @@ of writing <code>string_of_float</code>:</p>
   if String.contains s &apos;.&apos; || String.contains s &apos;e&apos;
   then s
   else s ^ &quot;.&quot;</code></pre>
-<p>Using begin ... end
-<hr/>
-Here is some code from lablgtk:</p>
+<h2 id="Usingbeginend">Using begin ... end</h2>
+<p>Here is some code from lablgtk:</p>
 <pre><code>if GtkBase.Object.is_a obj cls then
   fun _ -&gt; f obj
 else begin
@@ -187,9 +184,8 @@ simple examples:</p>
     print_endline &quot;ELSE&quot;;
     failwith &quot;else clause&quot;
   );;</code></pre>
-<p>For loops and while loops
-<hr/>
-OCaml supports a rather limited form of the familiar <code>for</code> loop:</p>
+<h2 id="Forloopsandwhileloops">For loops and while loops</h2>
+<p>OCaml supports a rather limited form of the familiar <code>for</code> loop:</p>
 <pre><code>for variable = start_value to end_value do
   expression
 done
@@ -264,37 +260,38 @@ while not !quit_loop do
 </p>
 <pre><code>quit_loop := true</code></pre>
 <p>done</p>
-<p>Looping over lists
-<hr/>
-If you want to loop over a list, don&apos;t be an imperative programmer and
+</li>
+ </ul>
+
+<h2 id="Loopingoverlists">Looping over lists</h2>
+<p>If you want to loop over a list, don&apos;t be an imperative programmer and
 reach for your trusty six-shooter Mr. For Loop! OCaml has some better
 and faster ways to loop over lists, and they are all located in the
 <code>List</code> module. There are in fact dozens of good functions in <code>List</code>, but
 I&apos;ll only talk about the most useful ones here.</p>
-<p>First off, let&apos;s define a list for us to use:
-let my_list = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10</p>
+<p>First off, let&apos;s define a list for us to use:</p>
+<pre><code>let my_list = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]</code></pre>
 <p>If you want to call a function once on every element of the list, use
-<code>List.iter</code>, like this:
-  let f elem =
-</p>
-<pre><code>Printf.printf &quot;I&apos;m looking at element %d now&#92;n&quot; elem in</code></pre>
-<p>  List.iter f my_</p>
+<code>List.iter</code>, like this:</p>
+<pre><code>  let f elem =
+    Printf.printf &quot;I&apos;m looking at element %d now&#92;n&quot; elem in
+  List.iter f my_list</code></pre>
 <p><code>List.iter</code> is in fact what you should think about using first every
 time your cerebellum suggests you use a for loop.</p>
 <p>If you want to <em>transform</em> each element separately in the list - for
 example, doubling each element in the list - then use <code>List.map</code>. This
 function will be familiar to people who&apos;ve</p>
-<p>programmed in Perl before.
-  List.map (( * ) 2) my_</p>
+<p>programmed in Perl before.</p>
+<pre><code>  List.map (( * ) 2) my_list</code></pre>
 <p>Perl has the useful function &quot;grep&quot; for filtering only elements of a
 list which satisfy some condition - eg. returning all even numbers in a
-list. In OCaml this function is called <code>List.filter</code>:
-  let is<em>even i =
-<pre><code>i mod 2 = 0 in</code></pre>
-  List.filter is_even my</em></p>
+list. In OCaml this function is called <code>List.filter</code>:</p>
+<pre><code>  let is_even i =
+    i mod 2 = 0 in
+  List.filter is_even my_list</code></pre>
 <p>To find out if a list contains some element, use <code>List.mem</code> (short for
-member):
-  List.mem 12 my_</p>
+member):</p>
+<pre><code>  List.mem 12 my_list</code></pre>
 <p><code>List.for_all</code> and <code>List.exists</code> are the same as the &quot;forall&quot; and
 &quot;exist&quot; operators in predicate logic.</p>
 <p>For operating over two lists at the same time, there are &quot;-2&quot; variants
@@ -305,8 +302,8 @@ isolation. &#92;&lt;dfn&#92;&gt;Fold&#92;&lt;/dfn&#92;&gt; is a more unusual ope
 thought about as &quot;inserting an operator between each element of the
 list&quot;. Suppose I wanted to add all the numbers in my list together. In
 hand-waving terms what I want to do is insert a plus sign between the
-elements in my list:
-1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + </p>
+elements in my list:</p>
+<pre><code>1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10</code></pre>
 <p>The fold operation does this, although the exact details are a little
 bit more tricky. First of all, what happens if I try to fold an empty
 list? In the case of summing the list it would be nice if the answer was
@@ -321,30 +318,28 @@ from the right and worked left. For this reason there are two versions
 of fold, called <code>List.fold_left</code> (works left to right) and
 <code>List.fold_right</code> (works right to left, and is also less efficient).</p>
 <p>Let&apos;s use <code>List.fold_left</code> to define <code>sum</code> and <code>product</code> functions for
-integer lists:
-let sum = List.fold_left ( + ) 0;;
+integer lists:</p>
+<pre><code>let sum = List.fold_left ( + ) 0;;
 let product = List.fold_left ( * ) 1;;
 sum my_list;;
-product my_list</p>
+product my_list;;</code></pre>
 <p>That was easy! Notice that I&apos;ve accidentally come up with a way to do
-mathematical factorials:
-let fact n = product (range 1 n);;
-fact 10</p>
+mathematical factorials:</p>
+<pre><code>let fact n = product (range 1 n);;
+fact 10;;</code></pre>
 <p>(Notice that this factorial function isn&apos;t very useful because it
 overflows the integers and gives wrong answers even for quite small
 values of <code>n</code>. A real factorial function would use the <code>Big_int</code>
 module.)</p>
-<p>Looping over strings
-<hr/>
-The <code>String</code> module also contains many dozens of useful string-related
+<h2 id="Loopingoverstrings">Looping over strings</h2>
+<p>The <code>String</code> module also contains many dozens of useful string-related
 functions, and some of them are concerned with looping over strings.</p>
 <p><code>String.fill</code> and <code>String.blit</code> are the equivalents to C <code>memset</code> and
 <code>strcpy</code> respectively. <code>String.copy</code> copies a string, like <code>strdup</code>.</p>
 <p>There is also a <code>String.iter</code> function which works like <code>List.iter</code>,
 except over the characters of the string.</p>
-<p>Recursion
-<hr/>
-Now we come to a hard topic - recursion. Functional programmers are
+<h2 id="Recursion">Recursion</h2>
+<p>Now we come to a hard topic - recursion. Functional programmers are
 defined by their love of recursive functions, and in many ways recursive
 functions in f.p. are the equivalent of loops in imperative programming.
 In functional languages loops are second-class citizens, whilest
@@ -355,9 +350,6 @@ just an introduction and examples.</p>
 <p>In the first example we&apos;re going to read the whole of a file into memory
 (into a long string). There are essentially three possible approaches to
 this:</p>
-</li>
- </ul>
-
 <h3 id="Approach1"> Approach 1</h3>
 <p>Get the length of the file, and read it all in one go using the
 <code>really_input</code> method. This is the simplest, but it might not work on
@@ -826,9 +818,8 @@ function can appear to work for small inputs (during testing), but fail
 catastrophically in the field when exposed to large inputs. This is one
 argument <em>against</em> using recursive functions, and for using explicit
 while loops when possible.</p>
-<p>Mutable records, references (again!) and arrays
-<hr/>
-Previously we mentioned records in passing. These are like C <code>struct</code>s:</p>
+<h2 id="Mutablerecordsreferencesagainandarrays">Mutable records, references (again!) and arrays</h2>
+<p>Previously we mentioned records in passing. These are like C <code>struct</code>s:</p>
 <pre><code>type pair_of_ints = { a : int; b : int };;
 {a=3; b=5};;
 {a=3};;</code></pre>

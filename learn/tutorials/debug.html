@@ -49,13 +49,21 @@
               <li class="nav-header"><a href="#">Contents</a></li>
 
  <ul>
-  <li><a href='#Polymorphicfunction'> Polymorphic function</a></li>
-  <li><a href='#Limitations'> Limitations</a></li>
-  <li><a href='#Launchingthedebugger'> Launching the debugger</a></li>
-  <li><a href='#Findingthecauseofaspuriousexception'> Finding the cause of a spurious exception</a></li>
-  <li><a href='#Gettinghelpandinfointhedebugger'> Getting help and info in the debugger</a></li>
-  <li><a href='#Settingbreakpoints'> Setting break points</a></li>
-  <li><a href='#UsingthedebuggerunderXEmacs'> Using the debugger under (X)Emacs</a>
+  <li><a href='#Tracingfunctionscallsinthetoplevel'>Tracing functions calls in the toplevel</a>
+   <ul>
+    <li><a href='#Polymorphicfunction'> Polymorphic function</a></li>
+    <li><a href='#Limitations'> Limitations</a></li>
+   </ul>
+</li>
+  <li><a href='#TheOCamldebugger'>The OCaml debugger</a>
+   <ul>
+    <li><a href='#Launchingthedebugger'> Launching the debugger</a></li>
+    <li><a href='#Findingthecauseofaspuriousexception'> Finding the cause of a spurious exception</a></li>
+    <li><a href='#Gettinghelpandinfointhedebugger'> Getting help and info in the debugger</a></li>
+    <li><a href='#Settingbreakpoints'> Setting break points</a></li>
+    <li><a href='#UsingthedebuggerunderXEmacs'> Using the debugger under (X)Emacs</a>
+</li>
+   </ul>
 </li>
  </ul>
 
@@ -65,8 +73,7 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
-<p>Debugging
-=========</p>
+<h1 id="Debugging">Debugging</h1>
 <p>This note quickly presents two techniques to debug OCaml programs:</p>
 
  <ul>
@@ -74,13 +81,12 @@
 </li>
   <li><p><a href='#ocamldebug'>OCaml debugger</a>, which allows analysing programes
  compiled with <code>ocamlc</code>.</p>
-<p>Tracing functions calls in the toplevel
-<hr/>
-The simplest way to debug programs in the toplevel is to follow the
-function calls, by “tracing” the faulty function:</p>
 </li>
  </ul>
 
+<h2 id="Tracingfunctionscallsinthetoplevel">Tracing functions calls in the toplevel</h2>
+<p>The simplest way to debug programs in the toplevel is to follow the
+function calls, by “tracing” the faulty function:</p>
 <pre><code>  let rec fib x = if x &lt;= 1 then 1 else fib (x - 1) + fib (x - 2);;
 # #trace fib;;
 fib is now traced.
@@ -192,9 +198,8 @@ allows the reduction of the trace material : only useful data are
 printed and special purpose formats are more suited to get the relevant
 information, than what can be output automatically by the generic
 pretty-printer used by the trace mechanism.</p>
-<p>The OCaml debugger
-<hr/>
-We now give a quick tutorial for the OCaml debugger (<code>ocamldebug</code>).
+<h2 id="TheOCamldebugger">The OCaml debugger</h2>
+<p>We now give a quick tutorial for the OCaml debugger (<code>ocamldebug</code>).
 Before starting, please note that <code>ocamldebug</code> does not work under
 native Windows ports of OCaml (but it runs under the Cygwin port.</p>
 <h3 id="Launchingthedebugger"> Launching the debugger</h3>

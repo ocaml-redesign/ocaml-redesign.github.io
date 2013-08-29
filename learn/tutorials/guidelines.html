@@ -49,42 +49,62 @@
               <li class="nav-header"><a href="#">Contents</a></li>
 
  <ul>
-  <li><a href='#Besimpleandreadable'> Be simple and readable</a></li>
-  <li><a href='#Lexicalconventions'> Lexical conventions</a></li>
-  <li><a href='#Consistencyofindentation'> Consistency of indentation</a></li>
-  <li><a href='#Widthofthepage'> Width of the page</a></li>
-  <li><a href='#Heightofthepage'> Height of the page</a></li>
-  <li><a href='#Howmuchtoindent'> How much to indent</a></li>
-  <li><a href='#Usingtabstops'> Using tab stops</a></li>
-  <li><a href='#Howtoindentgloballetdefinitions'> How to indent global <code>>let ... ;;</code> definitions</a></li>
-  <li><a href='#Howtoindentletinconstructs'> How to indent <code>>let ... in</code> constructs</a></li>
-  <li><a href='#Howtoindentifthenelse'> How to indent <code>>if ... then   ... else ... </code></a></li>
-  <li><a href='#Howtoindentpatternmatchingconstructs'> How to indent pattern-matching constructs</a></li>
-  <li><a href='#Badindentationofpatternmatchingconstructs'> Bad indentation of pattern-matching constructs</a></li>
-  <li><a href='#Howtoindentfunctioncalls'> How to indent function calls</a></li>
-  <li><a href='#Howtoindentoperations'> How to indent operations</a></li>
-  <li><a href='#Howtoprogram'> How to program</a></li>
-  <li><a href='#Howtocommentprograms'> How to comment programs</a></li>
-  <li><a href='#Howtochooseidentifiers'> How to choose identifiers</a></li>
-  <li><a href='#Whentouseparentheseswithinanexpression'> When to use parentheses within an expression</a></li>
-  <li><a href='#Howtodelimitconstructsinprograms'> How to delimit constructs in programs</a></li>
-  <li><a href='#Howtousemodules'> How to use modules</a></li>
-  <li><a href='#Patternmatching'> Pattern-matching</a></li>
-  <li><a href='#Compilerwarnings'> Compiler warnings</a></li>
-  <li><a href='#Thehdandtlfunctions'> The <code>>hd</code> and <code>>tl</code> functions</a></li>
-  <li><a href='#Loops'> Loops</a></li>
-  <li><a href='#Exceptions'> Exceptions</a></li>
-  <li><a href='#Datastructures'> Data structures</a></li>
-  <li><a href='#Whentousemutables'> When to use mutables</a></li>
-  <li><a href='#Iterators'> Iterators</a></li>
-  <li><a href='#Howtooptimizeprograms'> How to optimize programs</a></li>
-  <li><a href='#Howtochoosebetweenclassesandmodules'> How to choose between classes and modules</a></li>
-  <li><a href='#ClarityofOCamlcode'> Clarity of OCaml code</a></li>
-  <li><a href='#Howtoeditprograms'> How to edit programs</a></li>
-  <li><a href='#Howtoeditwiththeinteractivesystem'> How to edit with the interactive system</a></li>
-  <li><a href='#Howtocompile'> How to compile</a></li>
-  <li><a href='#Howtodevelopasateamversioncontrol'> How to develop as a team: version control</a></li>
-  <li><a href='#Notes'> Notes</a>
+  <li><a href='#Generalguidelinestowriteprograms'>General guidelines to write programs</a>
+   <ul>
+    <li><a href='#Besimpleandreadable'> Be simple and readable</a></li>
+   </ul>
+</li>
+  <li><a href='#Programformattingguidelines'>Program formatting guidelines</a>
+   <ul>
+    <li><a href='#Lexicalconventions'> Lexical conventions</a></li>
+   </ul>
+</li>
+  <li><a href='#Indentationofprograms'>Indentation of programs</a>
+   <ul>
+    <li><a href='#Consistencyofindentation'> Consistency of indentation</a></li>
+    <li><a href='#Widthofthepage'> Width of the page</a></li>
+    <li><a href='#Heightofthepage'> Height of the page</a></li>
+    <li><a href='#Howmuchtoindent'> How much to indent</a></li>
+    <li><a href='#Usingtabstops'> Using tab stops</a></li>
+    <li><a href='#Howtoindentgloballetdefinitions'> How to indent global <code>>let ... ;;</code> definitions</a></li>
+    <li><a href='#Howtoindentletinconstructs'> How to indent <code>>let ... in</code> constructs</a></li>
+    <li><a href='#Howtoindentifthenelse'> How to indent <code>>if ... then   ... else ... </code></a></li>
+    <li><a href='#Howtoindentpatternmatchingconstructs'> How to indent pattern-matching constructs</a></li>
+    <li><a href='#Badindentationofpatternmatchingconstructs'> Bad indentation of pattern-matching constructs</a></li>
+    <li><a href='#Howtoindentfunctioncalls'> How to indent function calls</a></li>
+    <li><a href='#Howtoindentoperations'> How to indent operations</a></li>
+   </ul>
+</li>
+  <li><a href='#Programmingguidelines'>Programming guidelines</a>
+   <ul>
+    <li><a href='#Howtoprogram'> How to program</a></li>
+    <li><a href='#Howtocommentprograms'> How to comment programs</a></li>
+    <li><a href='#Howtochooseidentifiers'> How to choose identifiers</a></li>
+    <li><a href='#Whentouseparentheseswithinanexpression'> When to use parentheses within an expression</a></li>
+    <li><a href='#Howtodelimitconstructsinprograms'> How to delimit constructs in programs</a></li>
+    <li><a href='#Howtousemodules'> How to use modules</a></li>
+    <li><a href='#Patternmatching'> Pattern-matching</a></li>
+    <li><a href='#Compilerwarnings'> Compiler warnings</a></li>
+    <li><a href='#Thehdandtlfunctions'> The <code>>hd</code> and <code>>tl</code> functions</a></li>
+    <li><a href='#Loops'> Loops</a></li>
+    <li><a href='#Exceptions'> Exceptions</a></li>
+    <li><a href='#Datastructures'> Data structures</a></li>
+    <li><a href='#Whentousemutables'> When to use mutables</a></li>
+    <li><a href='#Iterators'> Iterators</a></li>
+    <li><a href='#Howtooptimizeprograms'> How to optimize programs</a></li>
+    <li><a href='#Howtochoosebetweenclassesandmodules'> How to choose between classes and modules</a></li>
+    <li><a href='#ClarityofOCamlcode'> Clarity of OCaml code</a></li>
+   </ul>
+</li>
+  <li><a href='#Managingprogramdevelopment'>Managing program development</a>
+   <ul>
+    <li><a href='#Howtoeditprograms'> How to edit programs</a></li>
+    <li><a href='#Howtoeditwiththeinteractivesystem'> How to edit with the interactive system</a></li>
+    <li><a href='#Howtocompile'> How to compile</a></li>
+    <li><a href='#Howtodevelopasateamversioncontrol'> How to develop as a team: version control</a></li>
+    <li><a href='#Notes'> Notes</a>
+</li>
+   </ul>
 </li>
  </ul>
 
@@ -94,8 +114,7 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
-<p>OCaml Programming Guidelines
-============================</p>
+<h1 id="OCamlProgrammingGuidelines">OCaml Programming Guidelines</h1>
 <p>This is a set of reasonable guidelines for formatting OCaml
 programs—guidelines which reflect the consensus among veteran OCaml
 programmers. Nevertheless, all detailed notifications of possible errors
@@ -108,9 +127,7 @@ Datta</a>.</p>
 this page: Daniel de Rauglaudre, Luc Maranget, Jacques Garrigue, Damien
 Doligez, Xavier Leroy, Bruno Verlyck, Bruno Petazzoni, Francois Maltey,
 Basile Starynkevitch, Toby Moth, Pierre Lescanne.</p>
-<p>General guidelines to write programs
-<hr/>
-</p>
+<h2 id="Generalguidelinestowriteprograms">General guidelines to write programs</h2>
 <h3 id="Besimpleandreadable"> Be simple and readable</h3>
 <p>The time you spend typing the programs is neglectable compared to the
 time spent reading them. That&apos;s the reason why you save a lot of time if
@@ -124,9 +141,7 @@ debugging).</p>
 times, and read 100 times. So simplify its writing, always keep future
 modifications in mind, and never jeopardize readability.</p>
 </blockquote>
-<p>Program formatting guidelines
-<hr/>
-</p>
+<h2 id="Programformattingguidelines">Program formatting guidelines</h2>
 <h3 id="Lexicalconventions"> Lexical conventions</h3>
 <blockquote><p>
 <strong>Pseudo spaces law</strong>: never hesitate to separate words of your
@@ -224,9 +239,7 @@ beginning of next line):</p>
   &quot;-1- Programs are born and remain free and equal under the law;&#92;n&#92;
    distinctions can only be based on the common good.&quot; in
   ...</code></pre>
-<p>Indentation of programs
-<hr/>
-</p>
+<h2 id="Indentationofprograms">Indentation of programs</h2>
 <blockquote><p>
 <strong>Landin&apos;s pseudo law</strong>: Treat the indentation of your programs as if
 it determines the meaning of your programs.</p>
@@ -686,9 +699,7 @@ the unreadable expression</p>
   expression&apos;&apos; in
 x :: y
 :: z + 1 :: t :: u</code></pre>
-<p>Programming guidelines
-<hr/>
-</p>
+<h2 id="Programmingguidelines">Programming guidelines</h2>
 <h3 id="Howtoprogram"> How to program</h3>
 <blockquote><p>
 *Always put your handiwork back on the bench,  
@@ -1419,14 +1430,13 @@ x + </code></pre>
 <p>If you naturally write the program <code>print_string &quot;Hello world!&quot;</code> in this
 way, you can without a doubt submit your work to the <a href='mailto:Pierre.Weis@inria.fr'>Obfuscated OCaml
 Contest</a>.</p>
-<p>Managing program development
-<hr/>
-We give here tips from veteran OCaml programmers, which have served in
-developing the compilers which are good examples of large complex
-programs developed by small teams.</p>
 </li>
  </ul>
 
+<h2 id="Managingprogramdevelopment">Managing program development</h2>
+<p>We give here tips from veteran OCaml programmers, which have served in
+developing the compilers which are good examples of large complex
+programs developed by small teams.</p>
 <h3 id="Howtoeditprograms"> How to edit programs</h3>
 <p>Many developers nurture a kind of veneration towards the Emacs editor
 (gnu-emacs in general) which they use to write their programs. The

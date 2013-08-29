@@ -46,11 +46,9 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p>Data Types and Matching</p>
-<p>Data Types and Matching
-=======================</p>
-<p>Linked lists
-<hr/>
-As with Perl, OCaml has support for lists built into the language. All
+<h1 id="DataTypesandMatching">Data Types and Matching</h1>
+<h2 id="Linkedlists">Linked lists</h2>
+<p>As with Perl, OCaml has support for lists built into the language. All
 elements of a list in OCaml must be the same type. To write a list, use:</p>
 <pre><code>[1; 2; 3]</code></pre>
 <p>(Note semicolons, NOT commas).</p>
@@ -83,9 +81,8 @@ good example of this. It doesn&apos;t matter if the list contains ints or
 strings or objects or small furry animals, the <code>List.length</code> function
 can still be called on it. The type of <code>List.length</code> is therefore:</p>
 <pre><code>List.length : &apos;a list -&gt; int</code></pre>
-<p>Structures
-<hr/>
-C and C++ have the concept of a simple <code>struct</code>, short for structure.
+<h2 id="Structures">Structures</h2>
+<p>C and C++ have the concept of a simple <code>struct</code>, short for structure.
 Java has classes which can be used to similar effect, albeit much more
 laboriously.</p>
 <p>Consider this simple C structure:</p>
@@ -112,9 +109,8 @@ objects of this type.</p>
 {a=3; b=5};;
 {a=3};;</code></pre>
 <p>So OCaml won&apos;t let you leave some fields in your structure undefined.</p>
-<p>Variants (qualified unions and enums)
-<hr/>
-A &quot;qualified union&quot; doesn&apos;t really exist in C, although there is support
+<h2 id="Variantsqualifiedunionsandenums">Variants (qualified unions and enums)</h2>
+<p>A &quot;qualified union&quot; doesn&apos;t really exist in C, although there is support
 in the gcc compiler for it. Here is the pattern which one commonly uses
 for a qualified union in C:</p>
 <pre><code>struct foo {
@@ -196,9 +192,8 @@ Cons(1, Cons(2, Nil));;</code></pre>
 the simple syntactic sugar of <code>[1; 2; 3]</code> or more formally as
 <code>1 :: 2 :: 3 :: []</code>. If you look at the definition for <code>&apos;a list</code> above,
 you may be able to see the reason for the formal definition.</p>
-<p>Lists, structures and variants - summary
-<hr/>
-OCaml name Example type definition Example usage</p>
+<h2 id="Listsstructuresandvariantssummary">Lists, structures and variants - summary</h2>
+<p>OCaml name Example type definition Example usage</p>
 <pre><code>list            int list                               [1; 2; 3]
 tuple           int * string                           (3, &quot;hello&quot;)
 record          type pair = { a : int; b : string }    { a = 3; b = &quot;hello&quot; }
@@ -208,9 +203,8 @@ variant         type sign = Positive | Zero            Positive
                             | Negative                 Zero
 parameterized   type &apos;a my_list = Empty                Cons (1, Cons (2, Empty))
   variant                   | Cons of &apos;a * &apos;a my_list</code></pre>
-<p>Pattern matching (on datatypes)
-<hr/>
-So one Really Cool Feature of functional languages is the ability to
+<h2 id="Patternmatchingondatatypes">Pattern matching (on datatypes)</h2>
+<p>So one Really Cool Feature of functional languages is the ability to
 break apart data structures and do pattern matching on the data. This is
 again not really a &quot;functional&quot; feature - you could imagine some
 variation of C appearing which would let you do this, but it&apos;s a Cool

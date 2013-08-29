@@ -49,8 +49,15 @@
               <li class="nav-header"><a href="#">Contents</a></li>
 
  <ul>
-  <li><a href='#ExplicitpointersareOCamlvaluesoftyperef'> Explicit pointers are OCaml values of type <code>>ref</code></a></li>
-  <li><a href='#Pointersandmutablefieldsorvectors'> Pointers and mutable fields or vectors</a>
+  <li><a href='#StatusofpointersinOCaml'>Status of pointers in OCaml</a>
+   <ul>
+    <li><a href='#ExplicitpointersareOCamlvaluesoftyperef'> Explicit pointers are OCaml values of type <code>>ref</code></a></li>
+    <li><a href='#Pointersandmutablefieldsorvectors'> Pointers and mutable fields or vectors</a></li>
+   </ul>
+</li>
+  <li><a href='#DefiningpointersinOCaml'>Defining pointers in OCaml</a></li>
+  <li><a href='#IntegerLists'>Integer Lists</a></li>
+  <li><a href='#Polymorphiclists'>Polymorphic lists</a>
 </li>
  </ul>
 
@@ -60,11 +67,9 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
-<p>Pointers in OCaml
-=================</p>
-<p>Status of pointers in OCaml
-<hr/>
-Pointers exist in OCaml, and in fact they spread all over the place.
+<h1 id="PointersinOCaml">Pointers in OCaml</h1>
+<h2 id="StatusofpointersinOCaml">Status of pointers in OCaml</h2>
+<p>Pointers exist in OCaml, and in fact they spread all over the place.
 They are used either implicitely (in the most cases), or explicitely (in
 the rare occasions where implicit pointers are not more handy). The vast
 majority of pointers usages that are found in usual programming
@@ -168,9 +173,8 @@ the OCaml compiler.</p>
 Pascal or C, but this is not natural, since you get back the usual
 drawbacks and difficulties of explicit pointers manipulation of
 classical algorithmic languages. See a more complete example below.</p>
-<p>Defining pointers in OCaml
-<hr/>
-The general pointer type can be defined using the definition of a
+<h2 id="DefiningpointersinOCaml">Defining pointers in OCaml</h2>
+<p>The general pointer type can be defined using the definition of a
 pointer: a pointer is either null, or a pointer to an assignable memory
 location:</p>
 <pre><code>type &apos;a pointer = Null | Pointer of &apos;a ref</code></pre>
@@ -193,9 +197,8 @@ given value:</p>
 <pre><code>  let p = new_pointer 0;;
   p ^:= 1;;
   !^p;;</code></pre>
-<p>Integer Lists
-<hr/>
-Now we can define lists using explicit pointers as in usual imperative
+<h2 id="IntegerLists">Integer Lists</h2>
+<p>Now we can define lists using explicit pointers as in usual imperative
 languages:</p>
 <pre><code>  (* The list type ``à la Pascal&apos;&apos; *)
   type ilist = cell pointer
@@ -244,9 +247,8 @@ manipulating pointers. Try for instance, the seemingly harmless:</p>
 <pre><code>  append l1 l1;;</code></pre>
 <p>Then evaluate <code>l1</code>:</p>
 <pre><code>  l1;;</code></pre>
-<p>Polymorphic lists
-<hr/>
-To go beyond Pascal type system, we define polymorphic lists using
+<h2 id="Polymorphiclists">Polymorphic lists</h2>
+<p>To go beyond Pascal type system, we define polymorphic lists using
 pointers; here is a simple implementation of those polymorphic mutable
 lists:</p>
 <pre><code>  type &apos;a lists = &apos;a cell pointer

@@ -45,11 +45,9 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Objects
-=======</p>
-<p>Objects and classes
-<hr/>
-OCaml is an object-oriented, imperative, functional programming language
+            <h1 id="Objects">Objects</h1>
+<h2 id="Objectsandclasses">Objects and classes</h2>
+<p>OCaml is an object-oriented, imperative, functional programming language
 :-) It mixes all these paradigms and lets you use the most appropriate
 (or most familiar) programming paradigm for the task at hand. In this
 chapter I&apos;m going to look at object-oriented programming in OCaml, but
@@ -440,9 +438,8 @@ classes).</p>
 object and its copy are not physically identical). You can also use <code>&lt;</code>
 etc. which provides an ordering of objects based apparently on their
 IDs.</p>
-<p>Objects without class
-<hr/>
-Here we examine how to use objects pretty much like records, without
+<h2 id="Objectswithoutclass">Objects without class</h2>
+<p>Here we examine how to use objects pretty much like records, without
 necessarily using classes.</p>
 <h3 id="Immediateobjectsandobjecttypes"> Immediate objects and object types</h3>
 <p>Objects can be used instead of records, and have some nice properties
@@ -520,9 +517,8 @@ explicit type coercion using the <code>:&gt;</code> operator:</p>
 let y = object method get = 80 method special = &quot;hello&quot; end;;
 let l = [ x; y ];;
 let l = [ x; (y :&gt; t) ];;</code></pre>
-<p>More objects
-<hr/>
-The OCaml manual, chapter 3, contains the canonical reference for
+<h2 id="Moreobjects">More objects</h2>
+<p>The OCaml manual, chapter 3, contains the canonical reference for
 objects and classes. Amongst the things which I have not covered here,
 but which are covered in the manual, are:</p>
 
