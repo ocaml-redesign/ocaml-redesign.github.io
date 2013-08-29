@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -48,17 +48,6 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 
- <ul>
-  <li><a href='#Workingwithlists'>Working with lists</a></li>
-  <li><a href='#Arithmetic'>Arithmetic</a></li>
-  <li><a href='#LogicandCodes'>Logic and Codes</a></li>
-  <li><a href='#BinaryTrees'>Binary Trees</a></li>
-  <li><a href='#MultiwayTrees'>Multiway Trees</a></li>
-  <li><a href='#Graphs'>Graphs</a></li>
-  <li><a href='#MiscellaneousProblems'>Miscellaneous Problems</a>
-</li>
- </ul>
-
             </ul>
           </nav>
         </div>
@@ -69,7 +58,8 @@
 Nicollet</a>. Please
 contribute more solutions or improve the existing ones.</p>
 <p><em>Table of contents</em></p>
-<h1 id="99ProblemssolvedinOCaml">99 Problems (solved) in OCaml</h1>
+<p>99 Problems (solved) in OCaml
+=============================</p>
 <p>This section is inspired by <a href='http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html'>Ninety-Nine Lisp
 Problems</a>
 which in turn was based on “<a href='https://sites.google.com/site/prologsite/prolog-problems/'>Prolog problem
@@ -80,8 +70,9 @@ recommend you first <a href='../install.html'>install OCaml</a> or use it <a hre
 your browser</a>. The source of the following
 problems is available on
 <a href='https://github.com/VictorNicollet/99-Problems-OCaml'>GitHub</a>.</p>
-<h2 id="Workingwithlists">Working with lists</h2>
-<p>Write a function <code>last : &apos;a list -&gt; &apos;a       option</code> that returns the
+<p>Working with lists
+<hr/>
+Write a function <code>last : &apos;a list -&gt; &apos;a       option</code> that returns the
 last element of a list.</p>
 <p>Solution</p>
 <pre><code>  let rec last = function
@@ -539,8 +530,9 @@ first, others with a more frequent length come later.</p>
                    [&quot;i&quot;;&quot;j&quot;;&quot;k&quot;;&quot;l&quot;]; [&quot;m&quot;;&quot;n&quot;]; [&quot;o&quot;] ]
   = [[&quot;i&quot;; &quot;j&quot;; &quot;k&quot;; &quot;l&quot;]; [&quot;o&quot;]; [&quot;a&quot;; &quot;b&quot;; &quot;c&quot;]; [&quot;f&quot;; &quot;g&quot;; &quot;h&quot;];
      [&quot;d&quot;; &quot;e&quot;]; [&quot;d&quot;; &quot;e&quot;]; [&quot;m&quot;; &quot;n&quot;]]</code></pre>
-<h2 id="Arithmetic">Arithmetic</h2>
-<p>Determine whether a given integer number is prime.</p>
+<p>Arithmetic
+<hr/>
+Determine whether a given integer number is prime.</p>
 <p>Solution</p>
 <p>Recall that <code>d</code> divides <code>n</code> iff <code>n mod d =     0</code>. This is a naive
 solution. See the <a href='http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'>Sieve of
@@ -713,8 +705,9 @@ range 2..3000.</p>
   goldbach_limit 1 2000 50
   = [(992, (73, 919)); (1382, (61, 1321)); (1856, (67, 1789));
      (1928, (61, 1867))]</code></pre>
-<h2 id="LogicandCodes">Logic and Codes</h2>
-<p>Let us define a small “language” for boolean expressions containing
+<p>Logic and Codes
+<hr/>
+Let us define a small “language” for boolean expressions containing
 variables:</p>
 <pre><code>  type bool_expr =
     | Var of string
@@ -820,8 +813,9 @@ be
 <code>huffman</code> defined as follows: <code>huffman(fs)</code> returns the Huffman code
 table for the frequency table <code>fs</code></p>
 <p>Solution</p>
-<h2 id="BinaryTrees">Binary Trees</h2>
-<p> <img src='https://sites.google.com/site/prologsite/_/rsrc/1264934442609/prolog-problems/4/p67.gif' alt='Binary
+<p>Binary Trees
+<hr/>
+ <img src='https://sites.google.com/site/prologsite/_/rsrc/1264934442609/prolog-problems/4/p67.gif' alt='Binary
 tree' /></p>
 <p>*A binary tree is either empty or it is composed of a root element and
 two successors, which are binary trees themselves.*</p>
@@ -1146,28 +1140,27 @@ representation of binary trees</a>” is represented as
 diagrams) and then write a function <code>tree_dotstring</code> which does the
 conversion in both directions. Use difference lists.</p>
 <p>Solution</p>
-</li>
- </ul>
-
-<h2 id="MultiwayTrees">Multiway Trees</h2>
-<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264946214751/prolog-problems/5/p70.gif' alt='multiway
+<p>Multiway Trees
+<hr/>
+<img src='https://sites.google.com/site/prologsite/_/rsrc/1264946214751/prolog-problems/5/p70.gif' alt='multiway
 tree' /></p>
 <p>*A multiway tree is composed of a root element and a (possibly empty)
 set of successors which are multiway trees themselves. A multiway tree
 is never empty. The set of successor trees is sometimes called a
 forest.*</p>
 <p>To represent multiway trees, we will use the following type which is a
-direct translation of the definition:</p>
-<pre><code>  type &apos;a mult_tree = T of &apos;a * &apos;a mult_tree list</code></pre>
+direct translation of the definition:
+  type &apos;a mult_tree = T of &apos;a * &apos;a mult_tree </p>
 <p>The example tree depicted opposite is therefore represented by the
-following OCaml expression:</p>
-<pre><code>  T(&apos;a&apos;, [T(&apos;f&apos;,[T(&apos;g&apos;,[])]); T(&apos;c&apos;,[]); T(&apos;b&apos;,[T(&apos;d&apos;,[]); T(&apos;e&apos;,[])])])</code></pre>
+following OCaml expression:
+  T(&apos;a&apos;, [T(&apos;f&apos;,[T(&apos;g&apos;,[])]); T(&apos;c&apos;,[]); T(&apos;b&apos;,[T(&apos;d&apos;,[]); T(&apos;e&apos;,[])])]</p>
 <p>Count the nodes of a multiway tree</p>
-<p>Solution</p>
-<pre><code>  let rec count_nodes (T(_, sub)) =
-    List.fold_left (fun n t -&gt; n + count_nodes t) 1 sub
-
-  count_nodes (T(&apos;a&apos;, [T(&apos;f&apos;,[]) ])) = 2</code></pre>
+<p>Solution
+  let rec count<em>nodes (T(</em>, sub)) =
+</p>
+<pre><code>List.fold_left (fun n t -&gt; n + count_nodes t) 1 </code></pre>
+<p>
+  count_nodes (T(&apos;a&apos;, [T(&apos;f&apos;,[]) ])) = </p>
 <p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264946214751/prolog-problems/5/p70.gif' alt='multiway
 tree' /></p>
 <p>Tree construction from a node string</p>
@@ -1181,55 +1174,61 @@ backtrack to the previous level.</p>
 the string representing the tree and
 <code>tree_of_string : string -&gt; char mult_tree</code> to construct the tree when
 the string is given.</p>
-<p>Solution</p>
-<pre><code>  (* We could build the final string by string concatenation but this is
-     expensive due to the number of operations.  We use a buffer instead. *)
-  let rec add_string_of_tree buf (T(c, sub)) =
-    Buffer.add_char buf c;
-    List.iter (add_string_of_tree buf) sub;
-    Buffer.add_char buf &apos;^&apos;
-  let string_of_tree t =
-    let buf = Buffer.create 128 in
-    add_string_of_tree buf t;
-    Buffer.contents buf;;
-  let rec tree_of_substring t s i len =
-    if i &gt;= len || s.[i] = &apos;^&apos; then List.rev t, i + 1
-    else
-      let sub, j = tree_of_substring [] s (i+1) len in
-      tree_of_substring (T(s.[i], sub) ::t) s j len
-  let tree_of_string s =
-    match tree_of_substring [] s 0 (String.length s) with
-    | [t], _ -&gt; t
-    | _ -&gt; failwith &quot;tree_of_string&quot;
-
+<p>Solution
+  (* We could build the final string by string concatenation but this is
+</p>
+<pre><code> expensive due to the number of operations.  We use a buffer instead. *)</code></pre>
+<p>  let rec add_string_of_tree buf (T(c, sub)) =
+</p>
+<pre><code>Buffer.add_char buf c;
+List.iter (add_string_of_tree buf) sub;
+Buffer.add_char buf &apos;^&apos;</code></pre>
+<p>  let string_of_tree t =
+</p>
+<pre><code>let buf = Buffer.create 128 in
+add_string_of_tree buf t;
+Buffer.contents buf;;</code></pre>
+<p>  let rec tree_of_substring t s i len =
+</p>
+<pre><code>if i &gt;= len || s.[i] = &apos;^&apos; then List.rev t, i + 1
+else
+  let sub, j = tree_of_substring [] s (i+1) len in
+  tree_of_substring (T(s.[i], sub) ::t) s j len</code></pre>
+<p>  let tree_of_string s =
+</p>
+<pre><code>match tree_of_substring [] s 0 (String.length s) with
+| [t], _ -&gt; t
+| _ -&gt; failwith &quot;tree_of_string</code></pre>
+<p>
   let t =
-    T(&apos;a&apos;, [T(&apos;f&apos;,[T(&apos;g&apos;,[])]); T(&apos;c&apos;,[]); T(&apos;b&apos;,[T(&apos;d&apos;,[]); T(&apos;e&apos;,[])])]);;
-  string_of_tree t = &quot;afg^^c^bd^e^^^&quot;;;
-  tree_of_string &quot;afg^^c^bd^e^^^&quot; = t;;</code></pre>
+</p>
+<pre><code>T(&apos;a&apos;, [T(&apos;f&apos;,[T(&apos;g&apos;,[])]); T(&apos;c&apos;,[]); T(&apos;b&apos;,[T(&apos;d&apos;,[]); T(&apos;e&apos;,[])])]);;</code></pre>
+<p>  string_of_tree t = &quot;afg^^c^bd^e^^^&quot;;;
+  tree_of_string &quot;afg^^c^bd^e^^^&quot; = t</p>
 <p>Determine the internal path length of a tree</p>
 <p>We define the internal path length of a multiway tree as the total sum
 of the path lengths from the root to all nodes of the tree. By this
 definition, the tree <code>t</code> in the figure of the previous problem has an
 internal path length of 9. Write a function <code>ipl tree</code> that returns the
 internal path length of <code>tree</code>.</p>
-<p>Solution</p>
-<pre><code>  let rec ipl_sub len (T(_, sub)) =
-    (* [len] is the distance of the current node to the root.  Add the
-       distance of all sub-nodes. *)
-    List.fold_left (fun sum t -&gt; sum + ipl_sub (len + 1) t) len sub
-  let ipl t = ipl_sub 0 t
-
-  ipl t = 9</code></pre>
+<p>Solution
+  let rec ipl<em>sub len (T(</em>, sub)) =
+</p>
+<pre><code>(* [len] is the distance of the current node to the root.  Add the
+   distance of all sub-nodes. *)
+List.fold_left (fun sum t -&gt; sum + ipl_sub (len + 1) t) len sub</code></pre>
+<p>  let ipl t = ipl_sub 0 
+  ipl t = </p>
 <p>Construct the bottom-up order sequence of the tree nodes</p>
 <p>Write a function <code>bottom_up t</code> which constructs the bottom-up sequence
 of the nodes of the multiway tree <code>t</code>.</p>
-<p>Solution</p>
-<pre><code>  let rec prepend_bottom_up (T(c, sub)) l =
-    List.fold_right (fun t l -&gt; prepend_bottom_up t l) sub (c :: l)
-  let bottom_up t = prepend_bottom_up t []
-
+<p>Solution
+  let rec prepend_bottom_up (T(c, sub)) l =
+</p>
+<pre><code>List.fold_right (fun t l -&gt; prepend_bottom_up t l) sub (c :: l)</code></pre>
+<p>  let bottom_up t = prepend_bottom_up t [
   bottom_up (T(&apos;a&apos;, [T(&apos;b&apos;, [])])) = [&apos;b&apos;; &apos;a&apos;];;
-  bottom_up t = [&apos;g&apos;; &apos;f&apos;; &apos;c&apos;; &apos;d&apos;; &apos;e&apos;; &apos;b&apos;; &apos;a&apos;]</code></pre>
+  bottom_up t = [&apos;g&apos;; &apos;f&apos;; &apos;c&apos;; &apos;d&apos;; &apos;e&apos;; &apos;b&apos;; &apos;a&apos;</p>
 <p>Lisp-like tree representation</p>
 <p>There is a particular notation for multiway trees in Lisp. The following
 pictures show how multiway tree structures are represented in Lisp.</p>
@@ -1242,30 +1241,32 @@ atoms and parentheses &apos;(&apos; and &apos;)&apos;. This is very close to the
 are represented in OCaml, except that no constructor <code>T</code> is used. Write
 a function <code>lispy :       char mult_tree -&gt; string</code> that returns the
 lispy notation of the tree.</p>
-<p>Solution</p>
-<pre><code>  let rec add_lispy buf = function
-    | T(c, []) -&gt; Buffer.add_char buf c
-    | T(c, sub) -&gt;
-       Buffer.add_char buf &apos;(&apos;;
-       Buffer.add_char buf c;
-       List.iter (fun t -&gt; Buffer.add_char buf &apos; &apos;; add_lispy buf t) sub;
-       Buffer.add_char buf &apos;)&apos;
-  let lispy t =
-    let buf = Buffer.create 128 in
-    add_lispy buf t;
-    Buffer.contents buf
-
+<p>Solution
+  let rec add_lispy buf = function
+</p>
+<pre><code>| T(c, []) -&gt; Buffer.add_char buf c
+| T(c, sub) -&gt;
+   Buffer.add_char buf &apos;(&apos;;
+   Buffer.add_char buf c;
+   List.iter (fun t -&gt; Buffer.add_char buf &apos; &apos;; add_lispy buf t) sub;
+   Buffer.add_char buf &apos;)&apos;</code></pre>
+<p>  let lispy t =
+</p>
+<pre><code>let buf = Buffer.create 128 in
+add_lispy buf t;
+Buffer.contents </code></pre>
+<p>
   lispy (T(&apos;a&apos;, [])) = &quot;a&quot;;;
   lispy (T(&apos;a&apos;, [T(&apos;b&apos;, [])])) = &quot;(a b)&quot;;;
-  lispy t = &quot;(a (f g) c (b d e))&quot;</code></pre>
-<h2 id="Graphs">Graphs</h2>
-<p>*A graph is defined as a set of nodes and a set of edges, where each
+  lispy t = &quot;(a (f g) c (b d e))</p>
+<p>Graphs
+<hr/>
+*A graph is defined as a set of nodes and a set of edges, where each
 edge is a pair of different nodes.*</p>
 <p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264948248705/prolog-problems/6/graph1.gif' alt='A
 graph' /></p>
 <p>There are several ways to represent graphs in OCaml.</p>
-
- <ul>
+</li>
   <li><p>One method is to list all edges, an edge being a pair of nodes. In
  this form, the graph depicted opposite is represented as the
  following expression:
@@ -1447,11 +1448,9 @@ there?</p>
 <p>See also the <a href='https://sites.google.com/site/prologsite/prolog-problems/6/solutions-6/p6_11.txt?attredirects=0&amp;d=1'>table of
 results</a>.</p>
 <p>Solution</p>
-</li>
- </ul>
-
-<h2 id="MiscellaneousProblems">Miscellaneous Problems</h2>
-<p>Eight queens problem</p>
+<p>Miscellaneous Problems
+<hr/>
+Eight queens problem</p>
 <p>This is a classical problem in computer science. The objective is to
 place eight queens on a chessboard so that no two queens are attacking
 each other; i.e., no two queens are in the same row, the same column, or
@@ -1514,26 +1513,27 @@ are purely recursive. Using these modified diagrams, write a function
 string is a legal identifier.</p>
 <p>Solution</p>
 <p>Sudoku</p>
-<p>Sudoku puzzles go like this:</p>
-<pre><code>   Problem statement                 Solution
+<p>Sudoku puzzles go like this:
+   Problem statement                 
+</p>
+<pre><code>.  .  4 | 8  .  . | .  1  7      9  3  4 | 8  2  5 | 6  1  7
+        |         |                      |         |
+6  7  . | 9  .  . | .  .  .      6  7  2 | 9  1  4 | 8  5  3
+        |         |                      |         |
+5  .  8 | .  3  . | .  .  4      5  1  8 | 6  3  7 | 9  2  4
+--------+---------+--------      --------+---------+--------
+3  .  . | 7  4  . | 1  .  .      3  2  5 | 7  4  8 | 1  6  9
+        |         |                      |         |
+.  6  9 | .  .  . | 7  8  .      4  6  9 | 1  5  3 | 7  8  2
+        |         |                      |         |
+.  .  1 | .  6  9 | .  .  5      7  8  1 | 2  6  9 | 4  3  5
+--------+---------+--------      --------+---------+--------
+1  .  . | .  8  . | 3  .  6      1  9  7 | 5  8  2 | 3  4  6
+        |         |                      |         |
+.  .  . | .  .  6 | .  9  1      8  5  3 | 4  7  6 | 2  9  1
+        |         |                      |         |
+2  4  . | .  .  1 | 5  .  .      2  4  6 | 3  9  1 | 5  7  </code></pre>
 
-    .  .  4 | 8  .  . | .  1  7      9  3  4 | 8  2  5 | 6  1  7
-            |         |                      |         |
-    6  7  . | 9  .  . | .  .  .      6  7  2 | 9  1  4 | 8  5  3
-            |         |                      |         |
-    5  .  8 | .  3  . | .  .  4      5  1  8 | 6  3  7 | 9  2  4
-    --------+---------+--------      --------+---------+--------
-    3  .  . | 7  4  . | 1  .  .      3  2  5 | 7  4  8 | 1  6  9
-            |         |                      |         |
-    .  6  9 | .  .  . | 7  8  .      4  6  9 | 1  5  3 | 7  8  2
-            |         |                      |         |
-    .  .  1 | .  6  9 | .  .  5      7  8  1 | 2  6  9 | 4  3  5
-    --------+---------+--------      --------+---------+--------
-    1  .  . | .  8  . | 3  .  6      1  9  7 | 5  8  2 | 3  4  6
-            |         |                      |         |
-    .  .  . | .  .  6 | .  9  1      8  5  3 | 4  7  6 | 2  9  1
-            |         |                      |         |
-    2  4  . | .  .  1 | 5  .  .      2  4  6 | 3  9  1 | 5  7  8</code></pre>
 <p>Every spot in the puzzle belongs to a (horizontal) row and a (vertical)
 column, as well as to one single 3x3 square (which we call &quot;square&quot; for
 short). At the beginning, some of the spots carry a single-digit number
@@ -1551,20 +1551,21 @@ situation: you can have your computer do the work!</p>
 <p>The puzzle goes like this: Essentially, each row and column of a
 rectangular bitmap is annotated with the respective lengths of its
 distinct strings of occupied cells. The person who solves the puzzle
-must complete the bitmap given only these lengths.</p>
-<pre><code>          Problem statement:          Solution:
+must complete the bitmap given only these lengths.
+</p>
+<pre><code>      Problem statement:          Solution</code></pre>
+<pre><code>      |_|_|_|_|_|_|_|_| 3         |_|X|X|X|_|_|_|_| 3
+      |_|_|_|_|_|_|_|_| 2 1       |X|X|_|X|_|_|_|_| 2 1
+      |_|_|_|_|_|_|_|_| 3 2       |_|X|X|X|_|_|X|X| 3 2
+      |_|_|_|_|_|_|_|_| 2 2       |_|_|X|X|_|_|X|X| 2 2
+      |_|_|_|_|_|_|_|_| 6         |_|_|X|X|X|X|X|X| 6
+      |_|_|_|_|_|_|_|_| 1 5       |X|_|X|X|X|X|X|_| 1 5
+      |_|_|_|_|_|_|_|_| 6         |X|X|X|X|X|X|_|_| 6
+      |_|_|_|_|_|_|_|_| 1         |_|_|_|_|X|_|_|_| 1
+      |_|_|_|_|_|_|_|_| 2         |_|_|_|X|X|_|_|_| 2
+       1 3 1 7 5 3 4 3             1 3 1 7 5 3 4 3
+       2 1 5 1                     2 1 5 </code></pre>
 
-          |_|_|_|_|_|_|_|_| 3         |_|X|X|X|_|_|_|_| 3
-          |_|_|_|_|_|_|_|_| 2 1       |X|X|_|X|_|_|_|_| 2 1
-          |_|_|_|_|_|_|_|_| 3 2       |_|X|X|X|_|_|X|X| 3 2
-          |_|_|_|_|_|_|_|_| 2 2       |_|_|X|X|_|_|X|X| 2 2
-          |_|_|_|_|_|_|_|_| 6         |_|_|X|X|X|X|X|X| 6
-          |_|_|_|_|_|_|_|_| 1 5       |X|_|X|X|X|X|X|_| 1 5
-          |_|_|_|_|_|_|_|_| 6         |X|X|X|X|X|X|_|_| 6
-          |_|_|_|_|_|_|_|_| 1         |_|_|_|_|X|_|_|_| 1
-          |_|_|_|_|_|_|_|_| 2         |_|_|_|X|X|_|_|_| 2
-           1 3 1 7 5 3 4 3             1 3 1 7 5 3 4 3
-           2 1 5 1                     2 1 5 1</code></pre>
 <p>For the example above, the problem can be stated as the two lists
 <code>[[3];[2;1];[3;2];[2;2];[6];[1;5];[6];[1];[2]]</code> and
 <code>[[1;2];[3;1];[1;5];[7;1];[5];[3];[4];[3]]</code> which give the &quot;solid&quot;
@@ -1596,8 +1597,7 @@ horizontal or vertical sequence of character places in the crossword
 puzzle framework is called a site. Our problem is to find a compatible
 way of placing words onto sites.</p>
 <p><strong>Hints:</strong></p>
-
- <ol>
+</li>
   <li><p>The problem is not easy. You will need some time to thoroughly
  understand it. So, don&apos;t give up too early! And remember that the
  objective is a clean solution, not just a quick-and-dirty hack!</p>
@@ -1606,7 +1606,7 @@ way of placing words onto sites.</p>
  to sort the words and the sites in a particular order.</p>
 <p>Solution</p>
 </li>
- </ol>
+ </ul>
 
 
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">

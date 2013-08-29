@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -45,9 +45,11 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="Typesdedonnesetfiltragedemotif">Types de données et filtrage de motif</h1>
-<h2 id="Listeschanes">Listes chaînées</h2>
-<p>Comme en Perl, la notion de liste est directement supportée dans le
+            <p>Types de données et filtrage de motif
+=====================================</p>
+<p>Listes chaînées
+<hr/>
+Comme en Perl, la notion de liste est directement supportée dans le
 langage OCaml. En OCaml, tous les éléments d&apos;une liste doivent avoir le
 même type. Une liste s&apos;écrit :</p>
 <pre><code>[1; 2; 3]</code></pre>
@@ -84,8 +86,9 @@ est un bon exemple. Peu importe si une liste contient des entiers, des
 chaînes, des objets ou des ratons-laveurs, la fonction <code>List.length</code>
 peut être utilisée dessus. Le type de <code>List.length</code> est donc :</p>
 <pre><code>List.length : &apos;a list -&gt; int</code></pre>
-<h2 id="Structures">Structures</h2>
-<p>Le C et le C++ proposent le concept simple de <code>struct</code>, abbréviation de
+<p>Structures
+<hr/>
+Le C et le C++ proposent le concept simple de <code>struct</code>, abbréviation de
 structure. En Java on peut utiliser des classes à la place, mais c&apos;est
 beaucoup plus laborieux.</p>
 <p>Considérons cette simple structure C :</p>
@@ -118,8 +121,9 @@ type paire_dentiers = { a : int; b : int; }
 Some record field labels are undefined: b</code></pre>
 <p>Donc OCaml refuse de laisser certains champs d&apos;un enregistrement non
 définis.</p>
-<h2 id="Variantsunionsmarquesetnumrations">Variants (unions marquées et énumérations)</h2>
-<p>Le concept d&apos;&quot;union marquée&quot; n&apos;existe pas vraiment en C, bien qu&apos;il
+<p>Variants (unions marquées et énumérations)
+<hr/>
+Le concept d&apos;&quot;union marquée&quot; n&apos;existe pas vraiment en C, bien qu&apos;il
 existe dans le compileur gcc. Voici comment on traduit d&apos;habitude une
 union marquée en C:</p>
 <pre><code>struct foo {
@@ -217,8 +221,9 @@ type &apos;a list = Nil | :: of &apos;a * &apos;a list
 <code>[1; 2; 3]</code> ou sous la forme plus formelle <code>1 :: 2 :: 3 :: []</code>. En
 regardant la définition de <code>&apos;a list</code> ci-dessus, l&apos;origine de la syntaxe
 formelle devrait vous paraître plus clairement.</p>
-<h2 id="ListesstructuresetvariantsRsum">Listes, structures et variants — Résumé</h2>
-<p>tableau en 3 colonnes avec nom et exemples de définition et de valeur.</p>
+<p>Listes, structures et variants — Résumé
+<hr/>
+tableau en 3 colonnes avec nom et exemples de définition et de valeur.</p>
 <pre><code>nom OCaml        Example de définition de type          Exemple(s) de valeur(s) 
 liste            int list                               [1; 2; 3]
 n-uplet          int * string                           (3, &quot;hello&quot;)
@@ -229,8 +234,9 @@ variant          type sign = Positive | Zero            Positive
                            | Negative                   Zero
 variant          type &apos;a my_list = Empty                Cons (1, Cons (2, Empty))
   paramétré                | Cons of &apos;a * &apos;a my_list</code></pre>
-<h2 id="Filtragesurlesstructuresdedonnes">Filtrage (sur les structures de données)</h2>
-<p>Une &quot;Fonctionnalité Vraiment Cool&quot;(tm) des langages fonctionnels est
+<p>Filtrage (sur les structures de données)
+<hr/>
+Une &quot;Fonctionnalité Vraiment Cool&quot;(tm) des langages fonctionnels est
 leur capacité à démonter les structures de données et à effectuer du
 filtrage (pattern matching) sur les données. Ce n&apos;est pas à proprement
 parler une propriété &quot;fonctionnelle&quot; - on pourrait très bien imaginer

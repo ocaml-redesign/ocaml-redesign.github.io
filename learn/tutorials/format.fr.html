@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -46,13 +46,15 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table des matières</em></p>
-<h1 id="UtiliserlemoduleFormat">Utiliser le module Format</h1>
+<p>Utiliser le module Format
+=========================</p>
 <p>Le module Format des librairies standard de Caml Light et OCaml propose
 une méthode d&apos;impression enjolivée. Ce module implémente un moteur
 d&apos;impression qui coupe « bien » les lignes (« bien » signifie à-peu-près
 ici « automatiquement et quand nécessaire »).</p>
-<h2 id="Principes">Principes</h2>
-<p>La coupure des lignes repose sur trois concepts:</p>
+<p>Principes
+<hr/>
+La coupure des lignes repose sur trois concepts:</p>
 
  <ul>
   <li><p><strong>Les boîtes</strong> : une boîte est une unité logique d&apos;impression, qui
@@ -87,16 +89,13 @@ ici « automatiquement et quand nécessaire »).</p>
  <code>+</code> l&apos;indentation additionnelle de boîte définie par la boîte
  <code>b</code> <code>+</code> l&apos;indication additionnelle de coupure définie par
  l&apos;indication de coupure <code>bh</code>.</p>
+<p>Les boîtes
+<hr/>
+Il y a 4 types de boîtes. (La plus communément utilisée est la boîte «
+hov », laissez tomber les autres types en première lecture.)</p>
 </li>
    </ul>
 </li>
- </ul>
-
-<h2 id="Lesbotes">Les boîtes</h2>
-<p>Il y a 4 types de boîtes. (La plus communément utilisée est la boîte «
-hov », laissez tomber les autres types en première lecture.)</p>
-
- <ul>
   <li><p><strong>Boîte horizontale</strong> (boîte <em>h</em>, ouverte par la procédure
  <code>open_hbox</code>) : dans cette boîte les indications de coupures ne
  donnent pas lieu à retour à la ligne.</p>
@@ -168,11 +167,10 @@ coupure aurait aussi donné lieu à un retour à la ligne et
 <pre><code>    ---b
     ---b
     </code></pre>
-</li>
- </ul>
 
-<h2 id="Impressiondesespaces">Impression des espaces</h2>
-<p>Les indications de coupure sont aussi utilisées pour imprimer des
+<p>Impression des espaces
+<hr/>
+Les indications de coupure sont aussi utilisées pour imprimer des
 espaces (si la ligne n&apos;est pas coupée quand l&apos;indication de coupure est
 traitée, sinon le retour à la ligne sépare correctement les éléments à
 imprimer). Vous donnez une indication de coupure en appelant
@@ -183,8 +181,7 @@ ligne.</p>
 <p>Par exemple, si l&apos;on imprime &quot;--b--b--&quot; (où <code>b</code> est <code>print_break 1 0</code>,
 ce qui correspond à l&apos;impression d&apos;un espace), on obtient la sortie
 suivante :</p>
-
- <ul>
+</li>
   <li><p>dans une boîte « h » :
 </p>
 <pre><code>   -- -- </code></pre>
@@ -210,13 +207,10 @@ ou, suivant la place restante sur la ligne
 d&apos;espaces lui-même mais émet des indications de coupure. (Par exemple à
 l&apos;aide de <code>print_space ()</code> qui est synonyme de <code>print_break     1 0</code> et
 écrit un espace ou déclenche une coupure de ligne.)</p>
+<p>Indentation des lignes nouvelles
+<hr/>
+On dispose de deux moyens de fixer l&apos;indentation des lignes :</p>
 </li>
- </ul>
-
-<h2 id="Indentationdeslignesnouvelles">Indentation des lignes nouvelles</h2>
-<p>On dispose de deux moyens de fixer l&apos;indentation des lignes :</p>
-
- <ul>
   <li><p><strong>En définissant la boîte où la ligne apparaît</strong>: à l&apos;ouverture de
  la boîte, on peut fixer l&apos;indentation ajoutée à chaque ligne ouverte
  dans la boîte.  
@@ -253,10 +247,13 @@ d&apos;impression. Ainsi le dernier « écran » est en fait
 <pre><code>   ---[-- --
          --
          </code></pre>
+
+<p>Raffinement sur les boîtes « hov »
+<hr/>
+</p>
 </li>
  </ul>
 
-<h2 id="Raffinementsurlesboteshov">Raffinement sur les boîtes « hov »</h2>
 <h3 id="Botehovtassanteetbotehovstructurelle"> Boîte « hov » tassante et boîte « hov » structurelle</h3>
 <p>Les boîtes « hov » se subdivisent en deux catégories au comportement
 légèrement différent en ce qui concerne les coupures qui interviennent
@@ -305,8 +302,9 @@ de boîte et produit donc une coupure; on obtient alors :</p>
   )
  )
 )</code></pre>
-<h2 id="Conseilspratiques">Conseils pratiques</h2>
-<p>En écrivant vos fonctions d&apos;impression, suivez les règles simples
+<p>Conseils pratiques
+<hr/>
+En écrivant vos fonctions d&apos;impression, suivez les règles simples
 suivantes :</p>
 
  <ol>
@@ -355,11 +353,9 @@ suivantes :</p>
  <code>print_newline ()</code>, qui vide les tables de l&apos;imprimeur (et donc
  termine l&apos;impression). (Notez que le système interactif le fait
  également à la fin de chaque phrase entrée.)</p>
-</li>
- </ol>
-
-<h2 id="Impressionsurlasortiestandardutilisationdeprintf">Impression sur la sortie standard: utilisation de <code>printf</code></h2>
-<p>Le module <code>format</code> vous propose une fonction générale de formattage à la
+<p>Impression sur la sortie standard: utilisation de <code>printf</code>
+<hr/>
+Le module <code>format</code> vous propose une fonction générale de formattage à la
 <code>printf</code>. En plus des indications de format habituelles à la primitive
 <code>printf</code>, on dispose dans le format de caractères qui commandent
 ouvertures et fermetures de boîtes ainsi que l&apos;émission d&apos;indications de
@@ -368,8 +364,7 @@ coupure de ligne.</p>
 introduites par le caractère <code>@</code>. À peu près toutes les fonctions du
 module <code>format</code> peuvent être appelées depuis un format de <code>printf</code>.
 Ainsi :</p>
-
- <ul>
+</li>
   <li><p>« <code>@[</code> » ouvre une boîte (<code>open_box             0</code>). On peut
  préciser le type de la boîte en argument supplémentaire. Par exemple
  <code>@[&lt;hov n&gt;</code> est équivalent à <code>open_hovbox n</code>.</p>
@@ -392,13 +387,9 @@ Prix TTC = 100 </p>
 
    <ul>
     <li><p>: unit = ()</p>
-</li>
-   </ul>
-</li>
- </ul>
-
-<h2 id="Unexempleconcret">Un exemple concret</h2>
-<p>Voici un exemple complet : le plus petit exemple non trivial qu&apos;on
+<p>Un exemple concret
+<hr/>
+Voici un exemple complet : le plus petit exemple non trivial qu&apos;on
 puisse imaginer, c&apos;est-à-dire le &#92;$&#92;lambda-&#92;$calculus :)</p>
 <p>Le problème est donc d&apos;imprimer les valeurs d&apos;un type concret qui
 modélise un langage d&apos;expressions qui définissent les fonctions et leur
@@ -406,33 +397,36 @@ application à des arguments.</p>
 <p>D&apos;abord, je donne la syntaxe abstraite des lambda-termes (nous utilisons
 le <a href='../description.html#interactive'>système interactif</a> pour évaluer ce
 code) :</p>
-<pre><code>  type lambda =
-    | Lambda of string * lambda
-    | Var of string
-    | Apply of lambda * lambda</code></pre>
+<p> type lambda =
+ | Lambda of string * lambda
+ | Var of string
+ | Apply of lambda * lambda</p>
 <p>J&apos;utilise le module format pour imprimer les lambda-termes:</p>
-<pre><code>  open Format;;
-
-  let ident = print_string
-  let kwd = print_string;;
-
-  let rec print_exp0 = function
-    | Var s -&gt;  ident s
-    | lam -&gt; open_hovbox 1; kwd &quot;(&quot;; print_lambda lam; kwd &quot;)&quot;; close_box ()
-  and print_app = function
-    | e -&gt; open_hovbox 2; print_other_applications e; close_box ()
-  and print_other_applications f =
-    match f with
-    | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
-    | f -&gt; print_exp0 f
-  and print_lambda = function
-    | Lambda (s, lam) -&gt;
-        open_hovbox 1;
-        kwd &quot;&#92;&#92;&quot;; ident s; kwd &quot;.&quot;; print_space(); print_lambda lam;
-        close_box()
-    | e -&gt; print_app e</code></pre>
+<p> open Format;;</p>
+<p> let ident = print_string
+ let kwd = print_string;;</p>
+<p> let rec print_exp0 = function
+ | Var s -&gt;  ident s
+ | lam -&gt; open_hovbox 1; kwd &quot;(&quot;; print_lambda lam; kwd &quot;)&quot;; close_box ()
+ and print_app = function
+ | e -&gt; open_hovbox 2; print_other_applications e; close_box ()
+ and print_other_applications f =
+ match f with
+ | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
+ | f -&gt; print_exp0 f
+ and print_lambda = function
+ | Lambda (s, lam) -&gt;
+ open_hovbox 1;
+ kwd &quot;&#92;&quot;; ident s; kwd &quot;.&quot;; print_space(); print_lambda lam;
+ close_box()
+ | e -&gt; print_app e</p>
 <p>En Caml Light, remplacez la première ligne par :</p>
-<pre><code>#open &quot;format&quot;;;</code></pre>
+<p> #open &quot;format&quot;;;</p>
+</li>
+   </ul>
+</li>
+ </ol>
+
 <h3 id="Impressionlaplusgnraleutilisationdefprintf"> Impression la plus générale: utilisation de <code>fprintf</code></h3>
 <p>On utilise maintenant la fonction <code>fprintf</code> et toutes les fonctions
 d&apos;impression prennent en argument supplémentaire le formatteur (c&apos;est

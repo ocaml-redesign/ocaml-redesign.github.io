@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -45,10 +45,12 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="UnecentainedelignesdaposOCaml">Une centaine de lignes d&apos;OCaml</h1>
+            <p>Une centaine de lignes d&apos;OCaml
+==============================</p>
 <p><em>Sur cette page</em></p>
-<h2 id="Fonctionslmentaires">Fonctions élémentaires</h2>
-<p>Avec le système interactif, définissons la fonction <code>square</code> (carré) et
+<p>Fonctions élémentaires
+<hr/>
+Avec le système interactif, définissons la fonction <code>square</code> (carré) et
 la fonction factorielle dans sa version récursive. Puis, appliquons ces
 fonctions à quelques valeurs choisies :</p>
 <pre><code>let square x = x * x;;
@@ -57,8 +59,9 @@ fonctions à quelques valeurs choisies :</p>
     if x &lt;= 1 then 1 else x * fact (x - 1);;
 fact 5;;
 square 120;;</code></pre>
-<h2 id="Gestionautomatiquedelammoire">Gestion automatique de la mémoire</h2>
-<p>Toutes les opérations d&apos;allocation et de libération de la mémoire sont
+<p>Gestion automatique de la mémoire
+<hr/>
+Toutes les opérations d&apos;allocation et de libération de la mémoire sont
 complètement automatiques. Par exemple, considérons les listes
 simplement chaînées.</p>
 <p>Les listes sont prédéfinies en OCaml. La liste vide est notée <code>[]</code>. Le
@@ -67,8 +70,9 @@ infixe).</p>
 <pre><code>let l = 1 :: 2 :: 3 :: [];;
 [1; 2; 3];;
 5 :: l;;</code></pre>
-<h2 id="Polymorphismeletrideslistes">Polymorphisme : le tri des listes</h2>
-<p>Le tri par insertion est défini à l&apos;aide de deux fonctions récursives.</p>
+<p>Polymorphisme : le tri des listes
+<hr/>
+Le tri par insertion est défini à l&apos;aide de deux fonctions récursives.</p>
 <pre><code>let rec sort = function
   | [] -&gt; []
   | x :: l -&gt; insert x (sort l)
@@ -82,8 +86,9 @@ donc être appliquée aussi bien à une liste d&apos;entiers qu&apos;à une list
 chaînes de caractères.</p>
 <pre><code>sort [2; 1; 0];;
 sort [&quot;yes&quot;; &quot;ok&quot;; &quot;sure&quot;; &quot;ya&quot;; &quot;yep&quot;];;</code></pre>
-<h2 id="Programmationimprative">Programmation impérative</h2>
-<p>Représentons les polynômes des tableaux de coefficients entiers. Alors,
+<p>Programmation impérative
+<hr/>
+Représentons les polynômes des tableaux de coefficients entiers. Alors,
 pour ajouter deux polynômes, on alloue d&apos;abord le tableau résultat, puis
 on le remplit à l&apos;aide de deux boucles <code>for</code> successives.</p>
 <pre><code>let add_polynom p1 p2 =
@@ -107,8 +112,9 @@ add_polynom [| 1; 2 |] [| 1; 2; 3 |];;</code></pre>
     done;
     !result;;
   fact 5;;</code></pre>
-<h2 id="Fonctionsdaposordresuprieur">Fonctions d&apos;ordre supérieur</h2>
-<p>Il n&apos;y a pas de restriction sur les fonctions, qui peuvent donc être
+<p>Fonctions d&apos;ordre supérieur
+<hr/>
+Il n&apos;y a pas de restriction sur les fonctions, qui peuvent donc être
 passés en argument à d&apos;autres fonctions. Définissons une fonction
 <code>sigma</code> qui renvoie la somme des résultats de l&apos;application d&apos;une
 fonction <code>f</code> donnée aux éléments d&apos;une liste :</p>
@@ -123,8 +129,9 @@ composition de fonctions sous sa forme la plus générale :</p>
 <pre><code>  let compose f g = fun x -&gt; f (g x);;
   let square_o_fact = compose square fact;;
   square_o_fact 5;;</code></pre>
-<h2 id="Lapuissancedesfonctions">La puissance des fonctions</h2>
-<p>La puissance des fonctions ne peut pas être mieux illustrée que par la
+<p>La puissance des fonctions
+<hr/>
+La puissance des fonctions ne peut pas être mieux illustrée que par la
 fonction « puissance » :</p>
 <pre><code>  let rec power f n = 
     if n = 0 then fun x -&gt; x 
@@ -134,8 +141,9 @@ en mathématiques en élevant la fonction dérivée à la puissance <code>n</cod
 <pre><code>  let derivative dx f = fun x -&gt; (f (x +. dx) -. f x) /. dx;;
   let sin&apos;&apos;&apos; = power (derivative 1e-5) 3 sin;;
   let pi = 4.0 *. atan 1.0 in sin&apos;&apos;&apos; pi;;</code></pre>
-<h2 id="Calculsymbolique">Calcul symbolique</h2>
-<p>Considérons des expressions symboliques simples comprenant des entiers,
+<p>Calcul symbolique
+<hr/>
+Considérons des expressions symboliques simples comprenant des entiers,
 des variables, un opérateur de liaison <code>let</code>, et des opérateurs
 binaires. Ces expressions peuvent être définies à l&apos;aide d&apos;un nouveau
 type de données, de la façon suivante :</p>
@@ -170,8 +178,9 @@ des données symboliques, en donnant aux définitions de fonctions une
 forme similaire à celle des déclarations de types. Notez, en effet, la
 similitude entre la définition de la fonction <code>eval</code> et la définition du
 type <code>expression</code>.</p>
-<h2 id="Tracedesfonctions">Trace des fonctions</h2>
-<p>Pour terminer, voici le moyen le plus élémentaire pour espionner les
+<p>Trace des fonctions
+<hr/>
+Pour terminer, voici le moyen le plus élémentaire pour espionner les
 fonctions :</p>
 <pre><code>  let rec fib x = if x &lt;= 1 then 1 else fib (x - 1) + fib (x - 2);;
 # #trace fib;;

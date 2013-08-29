@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -45,7 +45,8 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="StructuredesprogrammesOCaml">Structure des programmes OCaml</h1>
+            <p>Structure des programmes OCaml
+==============================</p>
 <p>Maintenant nous allons passer un peu de temps à observer la structure
 d&apos;ensemble de quelque vrais programmes en OCaml. Je veux vous parler des
 définitions locales et globales, quand utiliser <code>;;</code> ou <code>;</code>, les
@@ -54,8 +55,9 @@ passer sur plein de concepts d&apos;OCaml qui ne vous diront rien car nous ne
 les avons pas encore évoqués. Ne vous embarrassez pas des détails pour
 le moment. Occupez-vous uniquement de la forme générale des programmes,
 et aux fonctionnalités mises en avant.</p>
-<h2 id="Variableslocalesplusexactementexpressionslocales">« Variables » locales (<em>plus exactement</em> expressions locales)</h2>
-<p>Prenons la fonction <code>average</code> écrite en C, et ajoutons lui une variable
+<p>« Variables » locales (<em>plus exactement</em> expressions locales)
+<hr/>
+Prenons la fonction <code>average</code> écrite en C, et ajoutons lui une variable
 locale. (à comparer avec la première version que nous avions)</p>
 <pre><code>double
 average (double a, double b)
@@ -97,8 +99,9 @@ des compilateurs devraient être capable de faire cette étape
 d&apos;&quot;élimination de sous-expressions communes&quot; à votre place), et en tout
 cas elle est plus lisible. Dans le second exemple, <code>x</code> est une
 abréviation pour l&apos;expression <code>a +. b</code>.</p>
-<h2 id="Variablesglobalesplusprcismentexpressionsglobales">« Variables » globales (<em>plus précisément</em> expressions globales)</h2>
-<p>Vous pouvez aussi donner des noms à des choses dans l&apos;environnement
+<p>« Variables » globales (<em>plus précisément</em> expressions globales)
+<hr/>
+Vous pouvez aussi donner des noms à des choses dans l&apos;environnement
 global, et comme pour les &quot;variables&quot; locales ci-dessus, ce ne sont pas
 vraiment des variables, mais des abbréviations pour ces choses. Voici un
 exemple pris dans un programme réel :</p>
@@ -129,11 +132,13 @@ d&apos;autres langages impératifs. Aucun emplacement n&apos;est réservé pour
 d&apos;assigner quelque chose à <code>html</code>, par exemple pour lui faire désigner
 un autre widget. Dans la section suivante nous parlerons des références,
 qui sont de vraies variables.</p>
-<h2 id="Letbinding">Let-binding (?)</h2>
-<p>Les utilisations de <code>let ...</code> aussi bien au niveau global que dans une
+<p>Let-binding (?)
+<hr/>
+Les utilisations de <code>let ...</code> aussi bien au niveau global que dans une
 fonction, sont souvent appellées des <strong>let-binding</strong>.</p>
-<h2 id="Rfrenceslesvraiesvariables">Références : les vraies variables</h2>
-<p>Comment faire si vous voulez une vraie variable que vous pouvez assigner
+<p>Références : les vraies variables
+<hr/>
+Comment faire si vous voulez une vraie variable que vous pouvez assigner
 puis changer à votre gré dans votre programme ? Il vous faut une
 <strong>référence</strong>. Les références sont similaires aux pointeurs en C/C++. En
 Java, toutes les variables qui stockent des objets sont en fait des
@@ -165,8 +170,9 @@ my_ref := 100;;         *my_ptr = 100;
 les utiliserez pas si souvent. La plupart du temps, vous utiliserez
 <code>let nom = expression in</code> pour nommer des expressions locales dans vos
 définitions de fonctions.</p>
-<h2 id="Fonctionsimbriques">Fonctions imbriquées</h2>
-<p>Le langage C n&apos;a pas réellement de notion de fonctions imbriquées. GCC
+<p>Fonctions imbriquées
+<hr/>
+Le langage C n&apos;a pas réellement de notion de fonctions imbriquées. GCC
 les supporte, mais je ne connais pas de programme qui en tire parti. En
 tout cas, voici ce que la page info de gcc dit sur les fonctions
 imbriquées :</p>
@@ -223,8 +229,9 @@ expressions locales : <code>let nom arguments = définition de fonction in</code
 à la ligne comme dans l&apos;exemple précédent, et n&apos;oubliez pas d&apos;utiliser
 <code>let rec</code> à la place de <code>let</code> si votre fonction est récursive (comme
 dans cet exemple).</p>
-<h2 id="Modulesetopen">Modules et <code>open</code></h2>
-<p>OCaml est accompagné d&apos;une quantité de modules amusants et intéressants,
+<p>Modules et <code>open</code>
+<hr/>
+OCaml est accompagné d&apos;une quantité de modules amusants et intéressants,
 de bibliothèques de code utile. Par exemple on y trouve une bibliothèque
 pour dessiner des graphismes, interagir avec la collection de contrôles
 de l&apos;interface-utilisateur graphique, pour manipuler des grands nombres,
@@ -290,14 +297,16 @@ encore parlé : boucles &quot;for&quot; dans le style impératif, if-then-else, 
 récursion. Nous en parlerons plus tard. Examinez-les cependant, et
 essayez de comprendre (1) comment ils fonctionnent, et (2) comment
 l&apos;inférence de type aide à éliminer des bugs.</p>
-<h2 id="LemodulePervasives">Le module <code>Pervasives</code></h2>
-<p>Il y a un module que vous n&apos;avez jamais besoin d&apos;ouvrir avec <code>open</code>,
+<p>Le module <code>Pervasives</code>
+<hr/>
+Il y a un module que vous n&apos;avez jamais besoin d&apos;ouvrir avec <code>open</code>,
 c&apos;est le module <code>Pervasives</code> (allez jeter un oeil sur
 <code>/usr/lib/ocaml/VERSION/pervasives.mli</code>). Tous les symboles définis dans
 le module <code>Pervasives</code> sont implicitement importés dans tous les
 programmes OCaml.</p>
-<h2 id="Renommagedemodules">Renommage de modules</h2>
-<p>Que faire si vous voulez utiliser des symboles en provenance du module
+<p>Renommage de modules
+<hr/>
+Que faire si vous voulez utiliser des symboles en provenance du module
 <code>Graphics</code>, mais ne voulez pas tous les importer, et n&apos;avez pas envie de
 taper <code>Graphics.</code> à chaque fois ? Renommez le module avec cette astuce :</p>
 <pre><code>module Gr = Graphics;;
@@ -309,8 +318,9 @@ read_line ();;</code></pre>
 module imbriqué (les modules peuvent être imbriqués les uns dans les
 autres, eux-aussi), mais ne voulez pas avoir à taper à chaque fois le
 chemin d&apos;accès au module imbriqué.</p>
-<h2 id="Utiliseretomettreet">Utiliser et omettre <code>;;</code> et <code>;</code></h2>
-<p>Maintenant nous allons aborder un problème important. Quand utiliser
+<p>Utiliser et omettre <code>;;</code> et <code>;</code>
+<hr/>
+Maintenant nous allons aborder un problème important. Quand utiliser
 <code>;;</code>, quand utiliser <code>;</code>, et quand n&apos;utiliser aucun des deux ? C&apos;est une
 question tordue, qui m&apos;a également embêté pendant longtemps alors que
 j&apos;apprenais le langage OCaml.</p>
@@ -425,11 +435,9 @@ l&apos;opérateur <code>;</code>).</p>
 fonction. Par exemple, je peux définir une fonction <code>sum_list</code> pour
 calculer la somme d&apos;une liste d&apos;entier comme ceci :
 let sum_list = List.fold_left ( + ) </p>
-</li>
- </ul>
-
-<h2 id="Toutescesnotionsensembleunexempledecoderel">Toutes ces notions ensemble : un exemple de code réel</h2>
-<p>Dans cette section nous allons regarder quelques fragments de vrai code
+<p>Toutes ces notions ensemble : un exemple de code réel
+<hr/>
+Dans cette section nous allons regarder quelques fragments de vrai code
 pris dans la bibliothèque lablgtk 1.2. (Lablgtk est la bibliothèque
 OCaml d&apos;interfaçage avec la bibliothèque de widgets Gtk, native sous
 Unix). Un avertissement : ces fragments utilisent beaucoup de concepts
@@ -440,8 +448,7 @@ comment ils ont indenté le code, et utilisé des expressions nommées
 locales ou globales.</p>
 <p>... Je vais quand même vous donner quelques indices pour que vous ne
 soyez pas totalement perdus !</p>
-
- <ul>
+</li>
   <li><p><code>?foo</code> et <code>~foo</code> est la façon de passer des paramètres optionels et
  nommés en OCaml. Il n&apos;y a pas vraiment d&apos;équivalent dans les
  langages de la famille de C, mais Perl, Python et Smalltalk

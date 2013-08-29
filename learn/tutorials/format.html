@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -49,23 +49,9 @@
               <li class="nav-header"><a href="#">Contents</a></li>
 
  <ul>
-  <li><a href='#Principles'>Principles</a></li>
-  <li><a href='#Boxes'>Boxes</a></li>
-  <li><a href='#Printingspaces'>Printing spaces</a></li>
-  <li><a href='#Indentationofnewlines'>Indentation of new lines</a></li>
-  <li><a href='#Refinementonhovboxes'>Refinement on “hov” boxes</a>
-   <ul>
-    <li><a href='#Packingandstructuralhovboxes'> Packing and structural “hov” boxes</a></li>
-    <li><a href='#Differencesbetweenapackingandastructuralhovbox'> Differences between a packing and a structural “hov” box</a></li>
-   </ul>
-</li>
-  <li><a href='#Practicaladvice'>Practical advice</a></li>
-  <li><a href='#Printingtostdoutusingprintf'>Printing to <code>>stdout</code>: using <code>>printf</code></a></li>
-  <li><a href='#Aconcreteexample'>A concrete example</a>
-   <ul>
-    <li><a href='#Mostgeneralprettyprintingusingfprintf'> Most general pretty-printing: using <code>>fprintf</code></a>
-</li>
-   </ul>
+  <li><a href='#Packingandstructuralhovboxes'> Packing and structural “hov” boxes</a></li>
+  <li><a href='#Differencesbetweenapackingandastructuralhovbox'> Differences between a packing and a structural “hov” box</a></li>
+  <li><a href='#Mostgeneralprettyprintingusingfprintf'> Most general pretty-printing: using <code>>fprintf</code></a>
 </li>
  </ul>
 
@@ -75,14 +61,16 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p><em>Table of contents</em></p>
-<h1 id="UsingtheFormatmodule">Using the Format module</h1>
+<p>Using the Format module
+=======================</p>
 <p>The <code>Format</code> module of Caml Light and OCaml&apos;s standard libraries
 provides pretty-printing facilities to get a fancy display for printing
 routines. This module implements a “pretty-printing engine” that is
 intended to break lines in a nice way (let&apos;s say “automatically when it
 is necessary”).</p>
-<h2 id="Principles">Principles</h2>
-<p>Line breaking is based on three concepts:</p>
+<p>Principles
+<hr/>
+Line breaking is based on three concepts:</p>
 
  <ul>
   <li><p><strong>boxes</strong>: a box is a logical pretty-printing unit, which defines a
@@ -114,16 +102,13 @@ is necessary”).</p>
  indentation of box <code>b</code> <code>+</code> the additional box breaking
  indentation, as defined by box <code>b</code> <code>+</code> the additional hint
  breaking indentation, as defined by break hint <code>bh</code>.</p>
+<p>Boxes
+<hr/>
+There are 4 types of boxes. (The most often used is the “hov” box type,
+so skip the rest at first reading).</p>
 </li>
    </ul>
 </li>
- </ul>
-
-<h2 id="Boxes">Boxes</h2>
-<p>There are 4 types of boxes. (The most often used is the “hov” box type,
-so skip the rest at first reading).</p>
-
- <ul>
   <li><p><strong>horizontal box</strong> (<em>h</em> box, as obtained by the <code>open_hbox</code>
  procedure): within this box, break hints do not lead to line breaks.</p>
 </li>
@@ -189,19 +174,17 @@ lead to a new line and &quot;---b---b---&quot; is written as
 <pre><code>    ---b
     ---b
     </code></pre>
-</li>
- </ul>
 
-<h2 id="Printingspaces">Printing spaces</h2>
-<p>Break hints are also used to output spaces (if the line is not split
+<p>Printing spaces
+<hr/>
+Break hints are also used to output spaces (if the line is not split
 when the break is encountered, otherwise the new line indicates properly
 the separation between printing items). You output a break hint using
 <code>print_break sp indent</code>, and this <code>sp</code> integer is used to print “sp”
 spaces. Thus <code>print_break sp ...</code> may be thought as: print <code>sp</code> spaces
 or output a new line.</p>
 <p>For instance, if b is <code>break 1 0</code> in the output &quot;--b--b--&quot;, we get</p>
-
- <ul>
+</li>
   <li><p>within a “h” box:
 </p>
 <pre><code>   -- -- </code></pre>
@@ -228,13 +211,10 @@ directly output white spaces: the routine should use break hints
 instead. (For instance <code>print_space ()</code> that is a convenient
 abbreviation for <code>print_break 1 0</code> and outputs a single space or break
 the line.)</p>
+<p>Indentation of new lines
+<hr/>
+The user gets 2 ways to fix the indentation of new lines:</p>
 </li>
- </ul>
-
-<h2 id="Indentationofnewlines">Indentation of new lines</h2>
-<p>The user gets 2 ways to fix the indentation of new lines:</p>
-
- <ul>
   <li><p><strong>when defining the box</strong>: when you open a box, you can fix the
  indentation added to each new line opened within that box.  
  For instance: <code>open_hovbox 1</code> opens a “hov” box with new lines
@@ -269,10 +249,13 @@ box. Last “screen” stands for
 <pre><code>   ---[-- --
          --
          </code></pre>
+
+<p>Refinement on “hov” boxes
+<hr/>
+</p>
 </li>
  </ul>
 
-<h2 id="Refinementonhovboxes">Refinement on “hov” boxes</h2>
 <h3 id="Packingandstructuralhovboxes"> Packing and structural “hov” boxes</h3>
 <p>The “hov” box type is refined into two categories.</p>
 
@@ -312,8 +295,9 @@ is printed like this:</p>
   )
  )
 )</code></pre>
-<h2 id="Practicaladvice">Practical advice</h2>
-<p>When writing a pretty-printing routine, follow these simple rules:</p>
+<p>Practical advice
+<hr/>
+When writing a pretty-printing routine, follow these simple rules:</p>
 
  <ol>
   <li><p>Boxes must be opened and closed consistently (<code>open_*</code> and
@@ -358,11 +342,9 @@ is printed like this:</p>
  pretty-printer tables (hence the output). (Note that the top-level
  loop of the interactive system does it as well, just before a new
  input.)</p>
-</li>
- </ol>
-
-<h2 id="Printingtostdoutusingprintf">Printing to <code>stdout</code>: using <code>printf</code></h2>
-<p>The <code>format</code> module provides a general printing facility “à la”
+<p>Printing to <code>stdout</code>: using <code>printf</code>
+<hr/>
+The <code>format</code> module provides a general printing facility “à la”
 <code>printf</code>. In addition to the usual conversion facility provided by
 <code>printf</code>, you can write pretty-printing indications directly inside the
 format string (opening and closing boxes, indicating breaking hints,
@@ -370,8 +352,7 @@ etc).</p>
 <p>Pretty-printing annotations are introduced by the <code>@</code> symbol, directly
 into the string format. Almost any function of the <code>format</code> module can
 be called from within a <code>printf</code> format string. For instance</p>
-
- <ul>
+</li>
   <li><p>“<code>@[</code>” open a box (<code>open_box     0</code>). You may precise the type as an
  extra argument. For instance <code>@[&lt;hov n&gt;</code> is equivalent to
  <code>open_hovbox       n</code>.</p>
@@ -392,46 +373,45 @@ Prix TTC = 100 </p>
 
    <ul>
     <li><p>: unit = ()</p>
-</li>
-   </ul>
-</li>
- </ul>
-
-<h2 id="Aconcreteexample">A concrete example</h2>
-<p>Let me give a full example: the shortest non trivial example you could
+<p>A concrete example
+<hr/>
+Let me give a full example: the shortest non trivial example you could
 imagine, that is the λ-calculus :)</p>
 <p>Thus the problem is to pretty-print the values of a concrete data type
 that models a language of expressions that defines functions and their
 applications to arguments.</p>
 <p>First, I give the abstract syntax of lambda-terms (we illustrate is in
 the <a href='../description.html#interactive'>interactive system</a>):</p>
-<pre><code>  type lambda =
-    | Lambda of string * lambda
-    | Var of string
-    | Apply of lambda * lambda</code></pre>
+<p> type lambda =
+ | Lambda of string * lambda
+ | Var of string
+ | Apply of lambda * lambda</p>
 <p>I use the format library to print the lambda-terms:</p>
-<pre><code>  open Format;;
-
-  let ident = print_string
-  let kwd = print_string;;
-
-  let rec print_exp0 = function
-    | Var s -&gt;  ident s
-    | lam -&gt; open_hovbox 1; kwd &quot;(&quot;; print_lambda lam; kwd &quot;)&quot;; close_box ()
-  and print_app = function
-    | e -&gt; open_hovbox 2; print_other_applications e; close_box ()
-  and print_other_applications f =
-    match f with
-    | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
-    | f -&gt; print_exp0 f
-  and print_lambda = function
-    | Lambda (s, lam) -&gt;
-        open_hovbox 1;
-        kwd &quot;&#92;&#92;&quot;; ident s; kwd &quot;.&quot;; print_space(); print_lambda lam;
-        close_box()
-    | e -&gt; print_app e</code></pre>
+<p> open Format;;</p>
+<p> let ident = print_string
+ let kwd = print_string;;</p>
+<p> let rec print_exp0 = function
+ | Var s -&gt;  ident s
+ | lam -&gt; open_hovbox 1; kwd &quot;(&quot;; print_lambda lam; kwd &quot;)&quot;; close_box ()
+ and print_app = function
+ | e -&gt; open_hovbox 2; print_other_applications e; close_box ()
+ and print_other_applications f =
+ match f with
+ | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
+ | f -&gt; print_exp0 f
+ and print_lambda = function
+ | Lambda (s, lam) -&gt;
+ open_hovbox 1;
+ kwd &quot;&#92;&quot;; ident s; kwd &quot;.&quot;; print_space(); print_lambda lam;
+ close_box()
+ | e -&gt; print_app e</p>
 <p>In Caml Light, replace the first line by:</p>
-<pre><code>#open &quot;format&quot;;;</code></pre>
+<p> #open &quot;format&quot;;;</p>
+</li>
+   </ul>
+</li>
+ </ol>
+
 <h3 id="Mostgeneralprettyprintingusingfprintf"> Most general pretty-printing: using <code>fprintf</code></h3>
 <p>We use the <code>fprintf</code> function to write the most versatile version of the
 pretty-printing functions for lambda-terms. Now, the functions get an

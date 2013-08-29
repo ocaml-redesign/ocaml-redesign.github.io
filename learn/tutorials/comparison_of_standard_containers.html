@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -48,17 +48,6 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 
- <ul>
-  <li><a href='#Listsimmutablesinglylinkedlists'>Lists: immutable singly-linked lists</a></li>
-  <li><a href='#Arraysandstringsmutablevectors'>Arrays and strings: mutable vectors</a></li>
-  <li><a href='#SetandMapimmutabletrees'>Set and Map: immutable trees</a></li>
-  <li><a href='#Hashtblautomaticallygrowinghashtables'>Hashtbl: automatically growing hash tables</a></li>
-  <li><a href='#Bufferextensiblestrings'>Buffer: extensible strings</a></li>
-  <li><a href='#Queue'>Queue</a></li>
-  <li><a href='#Stack'>Stack</a>
-</li>
- </ul>
-
             </ul>
           </nav>
         </div>
@@ -66,7 +55,8 @@
           <div class="content">
             <p>Comparison of Standard Containers</p>
 <p><em>Table of contents</em></p>
-<h1 id="ComparisonofStandardContainers">Comparison of Standard Containers</h1>
+<p>Comparison of Standard Containers
+=================================</p>
 <p>This is a rough comparison of the different container types that are
 provided by the OCaml language or by the OCaml standard library. In each
 case, n is the number of valid elements in the container.</p>
@@ -77,8 +67,9 @@ you should read the documentation about each of the modules. Often, it
 is also instructive to read the corresponding implementation.</p>
 <p>See also: <a href='standard_library_examples.html' title='Standard Library Examples'>Standard Library
 Examples</a></p>
-<h2 id="Listsimmutablesinglylinkedlists">Lists: immutable singly-linked lists</h2>
-<p>Adding an element always creates a new list l from an element x and list
+<p>Lists: immutable singly-linked lists
+<hr/>
+Adding an element always creates a new list l from an element x and list
 tl. tl remains unchanged, but it is not copied either.</p>
 
  <ul>
@@ -91,14 +82,11 @@ tl. tl remains unchanged, but it is not copied either.</p>
   <li><p>finding an element: O(n)</p>
 <p>Well-suited for: IO, pattern-matching</p>
 <p>Not very efficient for: random access, indexed elements</p>
-</li>
- </ul>
-
-<h2 id="Arraysandstringsmutablevectors">Arrays and strings: mutable vectors</h2>
-<p>Arrays and strings are very similar. Strings are specialized in storing
+<p>Arrays and strings: mutable vectors
+<hr/>
+Arrays and strings are very similar. Strings are specialized in storing
 chars (bytes), have some convenient syntax and store them compactly.</p>
-
- <ul>
+</li>
   <li><p>&quot;adding&quot; an element: O(n)</p>
 </li>
   <li><p>length: O(1), function Array.length</p>
@@ -109,14 +97,11 @@ chars (bytes), have some convenient syntax and store them compactly.</p>
 <p>Well-suited for sets of elements of known size, access by numeric index,
 in-place modification. Basic arrays and strings have a fixed length. For
 extensible strings, the standard Buffer type can be used (see below).</p>
-</li>
- </ul>
-
-<h2 id="SetandMapimmutabletrees">Set and Map: immutable trees</h2>
-<p>Like lists, these are immutable and they may share some subtrees. They
+<p>Set and Map: immutable trees
+<hr/>
+Like lists, these are immutable and they may share some subtrees. They
 are a good solution for keeping older versions of sets of items.</p>
-
- <ul>
+</li>
   <li><p>&quot;adding&quot; an element: O(log n)</p>
 </li>
   <li><p>returning the number of elements: O(n)</p>
@@ -124,14 +109,11 @@ are a good solution for keeping older versions of sets of items.</p>
   <li><p>finding an element: O(log n)</p>
 <p>Sets and maps are very useful in compilation and meta-programming, but
 in other situations hash tables are often more appropriate (see below).</p>
-</li>
- </ul>
-
-<h2 id="Hashtblautomaticallygrowinghashtables">Hashtbl: automatically growing hash tables</h2>
-<p>Ocaml hash tables are mutable data structures, which are a good solution
+<p>Hashtbl: automatically growing hash tables
+<hr/>
+Ocaml hash tables are mutable data structures, which are a good solution
 for storing (key, data) pairs in one single place.</p>
-
- <ul>
+</li>
   <li><p>adding an element: O(1) if the initial size of the table is larger
  than the number of elements it contains; O(log n) on average if n
  elements have been added in a table which is initially much smaller
@@ -140,14 +122,11 @@ for storing (key, data) pairs in one single place.</p>
   <li><p>returning the number of elements: O(1)</p>
 </li>
   <li><p>finding an element: O(1)</p>
-</li>
- </ul>
-
-<h2 id="Bufferextensiblestrings">Buffer: extensible strings</h2>
-<p>Buffers provide an efficient way to accumulate a sequence of bytes in a
+<p>Buffer: extensible strings
+<hr/>
+Buffers provide an efficient way to accumulate a sequence of bytes in a
 single place. They are mutable.</p>
-
- <ul>
+</li>
   <li><p>adding a char: O(1) if the buffer is big enough, or O(log n) on
  average if the initial size of the buffer was much smaller than the
  number of bytes n.</p>
@@ -157,27 +136,21 @@ single place. They are mutable.</p>
   <li><p>length: O(1)</p>
 </li>
   <li><p>accessing cell i: O(1)</p>
+<p>Queue
+<hr/>
+OCaml queues are mutable first-in-first-out (FIFO) data structures.</p>
 </li>
- </ul>
-
-<h2 id="Queue">Queue</h2>
-<p>OCaml queues are mutable first-in-first-out (FIFO) data structures.</p>
-
- <ul>
   <li><p>adding an element: O(1)</p>
 </li>
   <li><p>taking an element: O(1)</p>
 </li>
   <li><p>length: O(1)</p>
-</li>
- </ul>
-
-<h2 id="Stack">Stack</h2>
-<p>OCaml stacks are mutable last-in-first-out (LIFO) data structures. They
+<p>Stack
+<hr/>
+OCaml stacks are mutable last-in-first-out (LIFO) data structures. They
 are just like lists, except that they are mutable, i.e. adding an
 element doesn&apos;t create a new stack but simply adds it to the stack.</p>
-
- <ul>
+</li>
   <li><p>adding an element: O(1)</p>
 </li>
   <li><p>taking an element: O(1)</p>

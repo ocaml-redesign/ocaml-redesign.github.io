@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -46,9 +46,11 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p>Modules</p>
-<h1 id="Modules">Modules</h1>
-<h2 id="Basicusage">Basic usage</h2>
-<p>In OCaml, every piece of code is wrapped into a module. Optionally, a
+<p>Modules
+=======</p>
+<p>Basic usage
+<hr/>
+In OCaml, every piece of code is wrapped into a module. Optionally, a
 module itself can be a submodule of another module, pretty much like
 directories in a file system-but we don&apos;t do this very often.</p>
 <p>When you write a program let&apos;s say using two files <code>amodule.ml</code> and
@@ -92,8 +94,9 @@ the beginning of the file.</p>
 <pre><code>open Printf
 let my_data = [ &quot;a&quot;; &quot;beautiful&quot;; &quot;day&quot; ]
 let () = List.iter (fun s -&gt; printf &quot;%s&#92;n&quot; s) my_data</code></pre>
-<h2 id="Interfacesandsignatures">Interfaces and signatures</h2>
-<p>A module can provide a certain number of things (functions, types,
+<p>Interfaces and signatures
+<hr/>
+A module can provide a certain number of things (functions, types,
 submodules, ...) to the rest of the program that is using it. If nothing
 special is done, everything which is defined in a module will be
 accessible from outside. That&apos;s often fine in small personal programs,
@@ -124,8 +127,9 @@ using <code>ocamlopt</code>:</p>
 <pre><code>ocamlc -c amodule.mli
 ocamlopt -c amodule.ml
 ...</code></pre>
-<h2 id="Abstracttypes">Abstract types</h2>
-<p>What about type definitions? We saw that values such as functions can be
+<p>Abstract types
+<hr/>
+What about type definitions? We saw that values such as functions can be
 exported by placing their name and their type in a .mli file, e.g.</p>
 <pre><code>val hello : unit -&gt; unit</code></pre>
 <p>But modules often define new types. Let&apos;s define a simple record type
@@ -163,10 +167,12 @@ relies on this module! This takes all its sense in a library since
 subsequent versions of the same library can continue to expose the same
 interface, while internally changing the implementation, including data
 structures.</p>
+<p>Submodules
+<hr/>
+</p>
 </li>
  </ol>
 
-<h2 id="Submodules">Submodules</h2>
 <h3 id="Submoduleimplementation"> Submodule implementation</h3>
 <p>We saw that one <code>example.ml</code> file results automatically in one module
 implementation named <code>Example</code>. Its module signature is automatically
@@ -219,8 +225,9 @@ end</code></pre>
 module interfaces.</p>
 <p>Although having submodules may be useful in some cases, their real
 utility becomes apparent with functors. This is the next section.</p>
-<h2 id="Functors">Functors</h2>
-<p>Functors are probably one of the most complex features of OCaml, but you
+<p>Functors
+<hr/>
+Functors are probably one of the most complex features of OCaml, but you
 don&apos;t have to use them extensively to be a successful OCaml programmer.
 Actually, you may never have to define a functor yourself, but you will
 surely encounter them in the standard library. They are the only way of
@@ -277,7 +284,9 @@ look at the source files <code>set.ml</code> or <code>map.ml</code> of the stand
 programs, not to improve performance. There is even a runtime penalty,
 unless you use a defunctorizer such as ocamldefun, which requires access
 to the source code of the functor.</p>
-<h2 id="Practicalmanipulationofmodules">Practical manipulation of modules</h2>
+<p>Practical manipulation of modules
+<hr/>
+</p>
 <h3 id="Displayingtheinterfaceofamodule"> Displaying the interface of a module</h3>
 <p>In the <code>ocaml</code> toplevel, the following trick allows to visualize the
 contents of an existing module, such as <code>List</code>:</p>

@@ -27,11 +27,11 @@
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li ><a href="/menu.html">Learn</a></li>
+              <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/documentation.html">Documentation</a></li>
               <li ><a href="/platform.html">Platform</a></li>
               <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/menu.html">Community</a></li>
+              <li ><a href="/community/">Community</a></li>
             </ul>
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
@@ -48,24 +48,13 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 
- <ul>
-  <li><a href='#Elementaryfunctions'>Elementary functions</a></li>
-  <li><a href='#Automaticmemorymanagement'>Automatic memory management</a></li>
-  <li><a href='#Polymorphismsortinglists'>Polymorphism: sorting lists</a></li>
-  <li><a href='#Imperativefeatures'>Imperative features</a></li>
-  <li><a href='#Higherorderfunctions'>Higher-order functions</a></li>
-  <li><a href='#Thepoweroffunctions'>The power of functions</a></li>
-  <li><a href='#Symboliccomputation'>Symbolic computation</a></li>
-  <li><a href='#Elementarydebugging'>Elementary debugging</a>
-</li>
- </ul>
-
             </ul>
           </nav>
         </div>
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="AHundredLinesofOCaml">A Hundred Lines of OCaml</h1>
+            <p>A Hundred Lines of OCaml
+========================</p>
 <p><em>Table of contents</em></p>
 <p>OCaml possesses an <a href='description.html#interactive'>interactive system</a>,
 called “toploop”, that lets you type OCaml code and have it evaluated
@@ -77,8 +66,9 @@ illustrate basic capabilities of the language.</p>
 interactive system that the input has to be evaluated and is not really
 part of the OCaml code). The output of the system is displayed in
 <code>this color</code>.</p>
-<h2 id="Elementaryfunctions">Elementary functions</h2>
-<p>Let us define the square function and the recursive factorial function.
+<p>Elementary functions
+<hr/>
+Let us define the square function and the recursive factorial function.
 Then, let us apply these functions to sample values. Unlike the majority
 of languages, OCaml uses parentheses for grouping but not for the
 arguments of a function.</p>
@@ -88,8 +78,9 @@ arguments of a function.</p>
     if x &lt;= 1 then 1 else x * fact (x - 1);;
 fact 5;;
 square 120;;</code></pre>
-<h2 id="Automaticmemorymanagement">Automatic memory management</h2>
-<p>All allocation and deallocation operations are fully automatic. For
+<p>Automatic memory management
+<hr/>
+All allocation and deallocation operations are fully automatic. For
 example, let us consider simply linked lists.</p>
 <p>Lists are predefined in OCaml. The empty list is written <code>[]</code>. The
 constructor that allows prepending an element to a list is written <code>::</code>
@@ -97,8 +88,9 @@ constructor that allows prepending an element to a list is written <code>::</cod
 <pre><code>let l = 1 :: 2 :: 3 :: [];;
 [1; 2; 3];;
 5 :: l;;</code></pre>
-<h2 id="Polymorphismsortinglists">Polymorphism: sorting lists</h2>
-<p>Insertion sort is defined using two recursive functions.</p>
+<p>Polymorphism: sorting lists
+<hr/>
+Insertion sort is defined using two recursive functions.</p>
 <pre><code>let rec sort = function
   | [] -&gt; []
   | x :: l -&gt; insert x (sort l)
@@ -111,8 +103,9 @@ represented by a <em>type variable</em> <code>&apos;a</code>. Thus, <code>sort</
 to a list of integers and to a list of strings.</p>
 <pre><code>sort [2; 1; 0];;
 sort [&quot;yes&quot;; &quot;ok&quot;; &quot;sure&quot;; &quot;ya&quot;; &quot;yep&quot;];;</code></pre>
-<h2 id="Imperativefeatures">Imperative features</h2>
-<p>Let us encode polynomials as arrays of integer coefficients. Then, to
+<p>Imperative features
+<hr/>
+Let us encode polynomials as arrays of integer coefficients. Then, to
 add two polynomials, we first allocate the result array, then fill its
 slots using two successive <code>for</code> loops.</p>
 <pre><code>let add_polynom p1 p2 =
@@ -135,8 +128,9 @@ current contents of <code>cell</code>, and <code>cell := v</code> writes the val
     done;
     !result;;
   fact 5;;</code></pre>
-<h2 id="Higherorderfunctions">Higher-order functions</h2>
-<p>There is no restriction on functions, which may thus be passed as
+<p>Higher-order functions
+<hr/>
+There is no restriction on functions, which may thus be passed as
 arguments to other functions. Let us define a function <code>sigma</code> that
 returns the sum of the results of applying a given function <code>f</code> to each
 element of a list:</p>
@@ -151,8 +145,9 @@ composition in its most general form:</p>
 <pre><code>  let compose f g = fun x -&gt; f (g x);;
   let square_o_fact = compose square fact;;
   square_o_fact 5;;</code></pre>
-<h2 id="Thepoweroffunctions">The power of functions</h2>
-<p>The power of functions cannot be better illustrated than by the <code>power</code>
+<p>The power of functions
+<hr/>
+The power of functions cannot be better illustrated than by the <code>power</code>
 function:</p>
 <pre><code>  let rec power f n = 
     if n = 0 then fun x -&gt; x 
@@ -163,8 +158,9 @@ power:</p>
 <pre><code>  let derivative dx f = fun x -&gt; (f (x +. dx) -. f x) /. dx;;
   let sin&apos;&apos;&apos; = power (derivative 1e-5) 3 sin;;
   let pi = 4.0 *. atan 1.0 in sin&apos;&apos;&apos; pi;;</code></pre>
-<h2 id="Symboliccomputation">Symbolic computation</h2>
-<p>Let us consider simple symbolic expressions made up of integers,
+<p>Symbolic computation
+<hr/>
+Let us consider simple symbolic expressions made up of integers,
 variables, <code>let</code> bindings, and binary operators. Such expressions can be
 defined as a new data type, as follows:</p>
 <pre><code>  type expression =
@@ -197,8 +193,9 @@ identifiers to values, represented as a list of pairs.</p>
 data, by giving function definitions and type declarations similar
 shapes. Indeed, note the close resemblance between the definition of the
 <code>eval</code> function and that of the <code>expression</code> type.</p>
-<h2 id="Elementarydebugging">Elementary debugging</h2>
-<p>To conclude, here is the simplest way of spying over functions:</p>
+<p>Elementary debugging
+<hr/>
+To conclude, here is the simplest way of spying over functions:</p>
 <pre><code>  let rec fib x = if x &lt;= 1 then 1 else fib (x - 1) + fib (x - 2);;
 # #trace fib;;
 fib is now traced.
