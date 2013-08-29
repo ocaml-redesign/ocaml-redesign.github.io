@@ -351,19 +351,14 @@ let rec iterate r x_init i =
 r *. x *. (1.0 -. x)</code></pre>
 <p>
 for x = 0 to 639 do
-  let r = 4.0 *. (float_of_int x) /. 640.0 in
-  for i = 0 to 39 do
+  let r = 4.0 <em>. (float_of_int x) /. 640.0 in  for i = 0 to 39 do    let x_init = Random.float 1.0 in    let x_final = iterate r x_init 500 in    let y = int_of_float (x_final </em>. 480.) in
 </p>
-<pre><code>let x_init = Random.float 1.0 in
-let x_final = iterate r x_init 500 in
-let y = int_of_float (x_final *. 480.) in
-Graphics.plot x y</code></pre>
+<pre><code>Graphics.plot x y</code></pre>
 <p>  done
 done
 read_line ()                  (<em> ;; </em></p>
 <p>Rules #3 and #4 refer to the single <code>;</code>. This is completely different
-from <code>;;</code>. The single semicolon <code>;</code> is what is known as a **sequence
-point**, which is to say it has exactly the same purpose as the single
+from <code>;;</code>. The single semicolon <code>;</code> is what is known as a <strong>sequencepoint</strong>, which is to say it has exactly the same purpose as the single
 semicolon in C, C++, Java and Perl. It means &quot;do the stuff before this
 point first, then do the stuff after this point when the first stuff has
 completed&quot;. Bet you didn&apos;t know that.</p>
