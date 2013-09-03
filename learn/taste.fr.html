@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -46,12 +40,10 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <h1 id="UnecentainedelignesdaposOCaml">Une centaine de lignes d&apos;OCaml</h1>
-<p><em>Sur cette page</em></p>
-<h2 id="Fonctionslmentaires">Fonctions élémentaires</h2>
+<p><em>Sur cette page</em></p><h2 id="Fonctionslmentaires">Fonctions élémentaires</h2>
 <p>Avec le système interactif, définissons la fonction <code>square</code> (carré) et
 la fonction factorielle dans sa version récursive. Puis, appliquons ces
-fonctions à quelques valeurs choisies :</p>
-<pre><code>let square x = x * x;;
+fonctions à quelques valeurs choisies :</p><pre><code>let square x = x * x;;
   square 3;;
   let rec fact x =
     if x &lt;= 1 then 1 else x * fact (x - 1);;
@@ -60,16 +52,13 @@ square 120;;</code></pre>
 <h2 id="Gestionautomatiquedelammoire">Gestion automatique de la mémoire</h2>
 <p>Toutes les opérations d&apos;allocation et de libération de la mémoire sont
 complètement automatiques. Par exemple, considérons les listes
-simplement chaînées.</p>
-<p>Les listes sont prédéfinies en OCaml. La liste vide est notée <code>[]</code>. Le
+simplement chaînées.</p><p>Les listes sont prédéfinies en OCaml. La liste vide est notée <code>[]</code>. Le
 constructeur d&apos;ajout d&apos;un élément à une liste est noté <code>::</code> (sous forme
-infixe).</p>
-<pre><code>let l = 1 :: 2 :: 3 :: [];;
+infixe).</p><pre><code>let l = 1 :: 2 :: 3 :: [];;
 [1; 2; 3];;
 5 :: l;;</code></pre>
 <h2 id="Polymorphismeletrideslistes">Polymorphisme : le tri des listes</h2>
-<p>Le tri par insertion est défini à l&apos;aide de deux fonctions récursives.</p>
-<pre><code>let rec sort = function
+<p>Le tri par insertion est défini à l&apos;aide de deux fonctions récursives.</p><pre><code>let rec sort = function
   | [] -&gt; []
   | x :: l -&gt; insert x (sort l)
 and insert elem = function
@@ -79,14 +68,12 @@ and insert elem = function
 <p>On notera que le type des éléments de la liste reste non spécifié: il
 est représenté par une <em>variable de types</em> <code>&apos;a</code>. La fonction <code>sort</code> peut
 donc être appliquée aussi bien à une liste d&apos;entiers qu&apos;à une liste de
-chaînes de caractères.</p>
-<pre><code>sort [2; 1; 0];;
+chaînes de caractères.</p><pre><code>sort [2; 1; 0];;
 sort [&quot;yes&quot;; &quot;ok&quot;; &quot;sure&quot;; &quot;ya&quot;; &quot;yep&quot;];;</code></pre>
 <h2 id="Programmationimprative">Programmation impérative</h2>
 <p>Représentons les polynômes des tableaux de coefficients entiers. Alors,
 pour ajouter deux polynômes, on alloue d&apos;abord le tableau résultat, puis
-on le remplit à l&apos;aide de deux boucles <code>for</code> successives.</p>
-<pre><code>let add_polynom p1 p2 =
+on le remplit à l&apos;aide de deux boucles <code>for</code> successives.</p><pre><code>let add_polynom p1 p2 =
   let n1 = Array.length p1
   and n2 = Array.length p2 in
   let result = Array.create (max n1 n2) 0 in
@@ -97,10 +84,8 @@ add_polynom [| 1; 2 |] [| 1; 2; 3 |];;</code></pre>
 <p>OCaml offre des cellules mémoire modifiables appelées <em>références</em> :
 <code>ref init</code> renvoie une nouvelle cellule, dont le contenu initial est
 <code>init</code>, <code>!cell</code> renvoie le contenu actuel de <code>cell</code>, et
-<code>cell     :=       x</code> met dans <code>cell</code> la valeur <code>x</code>.</p>
-<p>On peut redéfinir <code>fact</code> à l&apos;aide d&apos;une référence et d&apos;une boucle <code>for</code>
-:</p>
-<pre><code>  let fact n =
+<code>cell     :=       x</code> met dans <code>cell</code> la valeur <code>x</code>.</p><p>On peut redéfinir <code>fact</code> à l&apos;aide d&apos;une référence et d&apos;une boucle <code>for</code>
+:</p><pre><code>  let fact n =
     let result = ref 1 in
     for i = 2 to n do
       result := i * !result
@@ -111,42 +96,35 @@ add_polynom [| 1; 2 |] [| 1; 2; 3 |];;</code></pre>
 <p>Il n&apos;y a pas de restriction sur les fonctions, qui peuvent donc être
 passés en argument à d&apos;autres fonctions. Définissons une fonction
 <code>sigma</code> qui renvoie la somme des résultats de l&apos;application d&apos;une
-fonction <code>f</code> donnée aux éléments d&apos;une liste :</p>
-<pre><code>  let rec sigma f = function
+fonction <code>f</code> donnée aux éléments d&apos;une liste :</p><pre><code>  let rec sigma f = function
     | [] -&gt; 0
     | x :: l -&gt; f x + sigma f l</code></pre>
 <p>On peut définir des fonctions anonymes à l&apos;aide de la construction <code>fun</code>
-ou <code>function</code> :</p>
-<pre><code>sigma (fun x -&gt; x * x) [1; 2; 3];;</code></pre>
+ou <code>function</code> :</p><pre><code>sigma (fun x -&gt; x * x) [1; 2; 3];;</code></pre>
 <p>Polymorphisme et fonctions d&apos;ordre supérieur permettent de définir la
-composition de fonctions sous sa forme la plus générale :</p>
-<pre><code>  let compose f g = fun x -&gt; f (g x);;
+composition de fonctions sous sa forme la plus générale :</p><pre><code>  let compose f g = fun x -&gt; f (g x);;
   let square_o_fact = compose square fact;;
   square_o_fact 5;;</code></pre>
 <h2 id="Lapuissancedesfonctions">La puissance des fonctions</h2>
 <p>La puissance des fonctions ne peut pas être mieux illustrée que par la
-fonction « puissance » :</p>
-<pre><code>  let rec power f n = 
+fonction « puissance » :</p><pre><code>  let rec power f n = 
     if n = 0 then fun x -&gt; x 
     else compose f (power f (n - 1));;</code></pre>
 <p>La dérivée <code>n</code><sup>>ième</sup> d&apos;une fonction peut alors se définir comme
-en mathématiques en élevant la fonction dérivée à la puissance <code>n</code> :</p>
-<pre><code>  let derivative dx f = fun x -&gt; (f (x +. dx) -. f x) /. dx;;
+en mathématiques en élevant la fonction dérivée à la puissance <code>n</code> :</p><pre><code>  let derivative dx f = fun x -&gt; (f (x +. dx) -. f x) /. dx;;
   let sin&apos;&apos;&apos; = power (derivative 1e-5) 3 sin;;
   let pi = 4.0 *. atan 1.0 in sin&apos;&apos;&apos; pi;;</code></pre>
 <h2 id="Calculsymbolique">Calcul symbolique</h2>
 <p>Considérons des expressions symboliques simples comprenant des entiers,
 des variables, un opérateur de liaison <code>let</code>, et des opérateurs
 binaires. Ces expressions peuvent être définies à l&apos;aide d&apos;un nouveau
-type de données, de la façon suivante :</p>
-<pre><code>  type expression =
+type de données, de la façon suivante :</p><pre><code>  type expression =
     | Num of int
     | Var of string
     | Let of string * expression * expression
     | Binop of string * expression * expression;;</code></pre>
 <p>L&apos;évaluation de ces expressions utilise un environnement qui à un
-identificateur associe une valeur, représenté par une liste de paires.</p>
-<pre><code>  let rec eval env = function
+identificateur associe une valeur, représenté par une liste de paires.</p><pre><code>  let rec eval env = function
     | Num i -&gt; i
     | Var x -&gt; List.assoc x env
     | Let (x, e1, in_e2) -&gt;
@@ -163,17 +141,14 @@ identificateur associe une valeur, représenté par une liste de paires.</p>
     | &quot;*&quot; -&gt; v1 * v2
     | &quot;/&quot; -&gt; v1 / v2
     | _ -&gt; failwith (&quot;Unknown operator: &quot; ^ op);;</code></pre>
-<p>Évaluons par exemple la phrase <code>let x =   1 in x + x</code> :</p>
-<pre><code>  eval [] (Let (&quot;x&quot;, Num 1, Binop (&quot;+&quot;, Var &quot;x&quot;, Var &quot;x&quot;)));;</code></pre>
+<p>Évaluons par exemple la phrase <code>let x =   1 in x + x</code> :</p><pre><code>  eval [] (Let (&quot;x&quot;, Num 1, Binop (&quot;+&quot;, Var &quot;x&quot;, Var &quot;x&quot;)));;</code></pre>
 <p>L&apos;emploi du filtrage facilite la définition des fonctions opérant sur
 des données symboliques, en donnant aux définitions de fonctions une
 forme similaire à celle des déclarations de types. Notez, en effet, la
 similitude entre la définition de la fonction <code>eval</code> et la définition du
-type <code>expression</code>.</p>
-<h2 id="Tracedesfonctions">Trace des fonctions</h2>
+type <code>expression</code>.</p><h2 id="Tracedesfonctions">Trace des fonctions</h2>
 <p>Pour terminer, voici le moyen le plus élémentaire pour espionner les
-fonctions :</p>
-<pre><code>  let rec fib x = if x &lt;= 1 then 1 else fib (x - 1) + fib (x - 2);;
+fonctions :</p><pre><code>  let rec fib x = if x &lt;= 1 then 1 else fib (x - 1) + fib (x - 2);;
 # #trace fib;;
 fib is now traced.
 # fib 3;;

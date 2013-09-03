@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -46,37 +40,35 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <h1 id="CamlLightFAQ">Caml Light - FAQ</h1>
-<p>Is it possible to get error message in my own language?</p>
-<p>You can choose the language that Caml Light uses to write its messages.
+<p>Is it possible to get error message in my own language?</p><p>You can choose the language that Caml Light uses to write its messages.
 For this:</p>
-
  <ul>
-  <li><p>under Unix: define the <code>LANG</code> environment variable, or call the Caml
- Light system with option <code>-lang</code>.</p>
-</li>
-  <li><p>under Windows use the <code>-lang</code> option on the command line, or in the
- <code>CAMLWIN.INI</code> file.</p>
-</li>
-  <li><p>with a Macintosh, edit the resource of the Caml application.</p>
+  <li>under Unix: define the <code>LANG</code> environment variable, or call the Caml
+ Light system with option <code>-lang</code>.
+  </li>
+  <li>under Windows use the <code>-lang</code> option on the command line, or in the
+ <code>CAMLWIN.INI</code> file.
+  </li>
+  <li>with a Macintosh, edit the resource of the Caml application.</li>
+ </ul>
+
 <p>Language currently available are:</p>
-</li>
-  <li><p><code>fr</code>: french.</p>
-</li>
-  <li><p><code>es</code>: spanish.</p>
-</li>
-  <li><p><code>de</code>: german.</p>
-</li>
-  <li><p><code>it</code>: italian.</p>
-</li>
-  <li><p><code>src</code>: english.</p>
+ <ul>
+  <li><code>fr</code>: french.
+  </li>
+  <li><code>es</code>: spanish.
+  </li>
+  <li><code>de</code>: german.
+  </li>
+  <li><code>it</code>: italian.
+  </li>
+  <li><code>src</code>: english.</li>
+ </ul>
+
 <p>English is the default language for messages that cannot be translated.
 If your language is not yet available, and if you want to translate Caml
 Light messages (about 50 messages), you&apos;re welcome to contact the Caml
-team (mail to caml-light@inria.fr).
-</p>
-</li>
- </ul>
-
+team (mail to caml-light@inria.fr).</p>
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
               <div class="navbar-inner">
                 <div class="container-fluid">

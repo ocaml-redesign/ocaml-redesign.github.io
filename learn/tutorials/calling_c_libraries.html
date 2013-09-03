@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -47,32 +41,25 @@
           <div class="content">
             <h1 id="CallingClibraries">Calling C libraries</h1>
 <h2 id="NotefromRich">Note from Rich</h2>
-<p>Chapters 12 and 13 really need to be rewritten from scratch.</p>
-<p>I&apos;ve left them here - you can read them, but the formatting is screwy.</p>
-<h2 id="MiniGtk">MiniGtk</h2>
+<p>Chapters 12 and 13 really need to be rewritten from scratch.</p><p>I&apos;ve left them here - you can read them, but the formatting is screwy.</p><h2 id="MiniGtk">MiniGtk</h2>
 <p>While the structure of lablgtk outlined in <a href='introduction_to_gtk.html' title='Introduction to Gtk'>Introduction to
 Gtk</a> seems perhaps
 over-complex, it&apos;s worth considering exactly why the author chose two
 layers. To appreciate this, you really need to get your hands dirty and
-look at other ways that a Gtk wrapper might have been written.</p>
-<p>To this end I played around with something I call
+look at other ways that a Gtk wrapper might have been written.</p><p>To this end I played around with something I call
 &#92;&lt;dfn&#92;&gt;MiniGtk&#92;&lt;/dfn&#92;&gt;, intended as a simple Gtk wrapper. All MiniGtk is
 capable of is opening a window with a label, but after writing MiniGtk I
-had renewed respect for the author of lablgtk!</p>
-<p>MiniGtk is also a good tutorial for people who want to write OCaml
+had renewed respect for the author of lablgtk!</p><p>MiniGtk is also a good tutorial for people who want to write OCaml
 bindings around their favorite C library. If you&apos;ve ever tried to write
 bindings for Perl or Java, you&apos;ll find doing the same for OCaml is
 surprisingly easy, although you do have to worry a bit about the garbage
-collector.</p>
-<p>Let&apos;s talk first about how MiniGtk is structured: rather than using a
+collector.</p><p>Let&apos;s talk first about how MiniGtk is structured: rather than using a
 two layered approach as with lablgtk, I wanted to implement MiniGtk
 using a single (object-oriented) layer. This means that MiniGtk consists
 of a bunch of class definitions. Methods in those classes pretty much
-directly translate into calls to the C <code>libgtk-1.2.so</code> library.</p>
-<p>I also wanted to rationalise the module naming scheme for Gtk. So there
+directly translate into calls to the C <code>libgtk-1.2.so</code> library.</p><p>I also wanted to rationalise the module naming scheme for Gtk. So there
 is exactly one top-level module called (surprise!) <code>Gtk</code> and all classes
-are inside this module. A test program looks like this:</p>
-<pre><code>let win = new Gtk.window ~title:&quot;My window&quot; ();;
+are inside this module. A test program looks like this:</p><pre><code>let win = new Gtk.window ~title:&quot;My window&quot; ();;
 let lbl = new Gtk.label ~text:&quot;Hello&quot; ();;
 win#add lbl;;
 
@@ -80,24 +67,20 @@ let () =
   Gtk.main ()</code></pre>
 <p>I defined a single abstract type to cover all <code>GtkObject</code>s (and
 &quot;subclasses&quot; of this C structure). In the <code>Gtk</code> module you&apos;ll find this
-type definition:</p>
-<pre><code>type obj</code></pre>
+type definition:</p><pre><code>type obj</code></pre>
 <p>As discussed in the last chapter, this defines an abstract type of which
 it is impossible to create any instances. In OCaml, at least. Certain C
 functions are going to create instances of this type. For instance, the
 function which creates new labels (ie. <code>GtkLabel</code> structures) is defined
-this way:</p>
-<pre><code>external gtk_label_new : string -&gt; obj = &quot;gtk_label_new_c&quot;</code></pre>
+this way:</p><pre><code>external gtk_label_new : string -&gt; obj = &quot;gtk_label_new_c&quot;</code></pre>
 <p>This strange function definition defines an &#92;&lt;dfn&#92;&gt;external
 function&#92;&lt;/dfn&#92;&gt;, one coming from C. The C function is called
 <code>gtk_label_new_c</code>, and it takes a string and returns one of our abstract
-<code>obj</code> types.</p>
-<p>OCaml doesn&apos;t quite let you call <em>any</em> C function yet. You need to write
+<code>obj</code> types.</p><p>OCaml doesn&apos;t quite let you call <em>any</em> C function yet. You need to write
 a little C wrapper around the library&apos;s function to translate to and
 from OCaml&apos;s internal types and C types. <code>gtk_label_new_c</code> (note the
 additional <code>_c</code>) is my wrapper around the real Gtk C function called
-<code>gtk_label_new</code>. Here it is. I&apos;ll explain more about it later.</p>
-<pre><code>CAMLprim value
+<code>gtk_label_new</code>. Here it is. I&apos;ll explain more about it later.</p><pre><code>CAMLprim value
 gtk_label_new_c (value str)
 {
   CAMLparam1 (str);
@@ -110,8 +93,7 @@ actual Gtk widget hierarchy as closely as possible. All Gtk widgets are
 derived from a virtual base class called <code>GtkObject</code>. In fact from this
 class is derived <code>GtkWidget</code> and the whole variety of Gtk widgets are
 derived from this. So we define our own <code>GtkObject</code> equivalent class
-like this (note that <code>object</code> is a reserved word in OCaml).</p>
-<pre><code>type obj
+like this (note that <code>object</code> is a reserved word in OCaml).</p><pre><code>type obj
 
 class virtual gtk_object (obj : obj) =
 object (self)
@@ -121,24 +103,20 @@ end</code></pre>
 <p><code>type obj</code> defines our abstract object type, and <code>class gtk_object</code>
 takes one of these &quot;things&quot; as a parameter to its constructor. Recall
 from above that this parameter is actually the C <code>GtkObject</code> structure
-(in fact it&apos;s a specially wrapped pointer to this structure).</p>
-<p>You can&apos;t create <code>gtk_object</code> instances directly because it&apos;s a virtual
+(in fact it&apos;s a specially wrapped pointer to this structure).</p><p>You can&apos;t create <code>gtk_object</code> instances directly because it&apos;s a virtual
 class, but if you could you&apos;d have to construct them like this:
 <code>new gtk_object obj</code>. What would you pass as that <code>obj</code> parameter? You&apos;d
 pass the return value of, for instance, <code>gtk_label_new</code> (go back and
 have a look at how that <code>external</code> function was typed). This is shown
-below:</p>
-<pre><code>(* Example code, not really part of MiniGtk! *)
+below:</p><pre><code>(* Example code, not really part of MiniGtk! *)
 class label text =
   let obj = gtk_label_new text in
   object (self)
     inherit gtk_object obj
   end</code></pre>
 <p>Of course the real <code>label</code> class doesn&apos;t inherit directly from
-<code>gtk_object</code> as shown above, but in principle this is how it works.</p>
-<p>Following the Gtk class hierarchy the only class derived directly from
-<code>gtk_object</code> is our <code>widget</code> class, defined like this:</p>
-<pre><code>external gtk_widget_show : obj -&gt; unit = &quot;gtk_widget_show_c&quot;
+<code>gtk_object</code> as shown above, but in principle this is how it works.</p><p>Following the Gtk class hierarchy the only class derived directly from
+<code>gtk_object</code> is our <code>widget</code> class, defined like this:</p><pre><code>external gtk_widget_show : obj -&gt; unit = &quot;gtk_widget_show_c&quot;
 external gtk_widget_show_all : obj -&gt; unit = &quot;gtk_widget_show_all_c&quot;
 
 class virtual widget ?show obj =
@@ -149,8 +127,7 @@ class virtual widget ?show obj =
     initializer if show &lt;&gt; Some false then self#show
   end</code></pre>
 <p>This class is considerably more complex. Let&apos;s look at the
-initialization code first:</p>
-<pre><code>class virtual widget ?show obj =
+initialization code first:</p><pre><code>class virtual widget ?show obj =
   object (self)
     inherit gtk_object obj
     initializer
@@ -162,22 +139,18 @@ in other languages. In this case we check the boolean optional <code>show</code>
 argument and unless the user specified it explicitly as <code>false</code> we
 automatically call the <code>#show</code> method. (All Gtk widgets need to be
 &quot;shown&quot; after being created unless you want a widget to be created but
-hidden).</p>
-<p>The actual definition of the methods happens with the help of a couple
+hidden).</p><p>The actual definition of the methods happens with the help of a couple
 of external functions. These are basically direct calls to the C library
 (well, in fact there&apos;s a tiny bit of wrapper code, but that&apos;s not
-functionally important).</p>
-<pre><code>method show = gtk_widget_show obj
+functionally important).</p><pre><code>method show = gtk_widget_show obj
 method show_all = gtk_widget_show_all obj</code></pre>
 <p>Notice that we pass the underlying <code>GtkObject</code> to both C library calls.
 This makes sense because these functions are prototyped as
 <code>void gtk_widget_show (GtkWidget *);</code> in C (<code>GtkWidget</code> and <code>GtkObject</code>
-are safely used interchangably in this context).</p>
-<p>I want to describe the <code>label</code> class (the real one this time!), but in
+are safely used interchangably in this context).</p><p>I want to describe the <code>label</code> class (the real one this time!), but in
 between <code>widget</code> and <code>label</code> is <code>misc</code>, a generic class which describes
 a large class of miscellaneous widgets. This class just adds padding and
-alignment around a widget such as a label. Here is its definition:</p>
-<pre><code>let may f x =
+alignment around a widget such as a label. Here is its definition:</p><pre><code>let may f x =
   match x with
   | None -&gt; ()
   | Some x -&gt; f x
@@ -200,13 +173,11 @@ class virtual misc ?alignment ?padding ?show obj =
 <code>may : (&apos;a -&gt; unit) -&gt; &apos;a option -&gt; unit</code> which invokes its first
 argument on the contents of its second unless the second argument is
 <code>None</code>. This trick (stolen from lablgtk of course) is very useful when
-dealing with optional arguments as we&apos;ll see.</p>
-<p>The methods in <code>misc</code> should be straightforward. What is tricky is the
+dealing with optional arguments as we&apos;ll see.</p><p>The methods in <code>misc</code> should be straightforward. What is tricky is the
 initialization code. First notice that we take optional <code>alignment</code> and
 <code>padding</code> arguments to the constructor, and we pass the optional <code>show</code>
 and mandatory <code>obj</code> arguments directly up to <code>widget</code>. What do we do
-with the optional <code>alignment</code> and <code>padding</code>? The initializer uses these:</p>
-<pre><code>initializer
+with the optional <code>alignment</code> and <code>padding</code>? The initializer uses these:</p><pre><code>initializer
   may (gtk_misc_set_alignment obj) alignment;
   may (gtk_misc_set_padding obj) padding </code></pre>
 <p>It&apos;s that tricky <code>may</code> function in action. <em>If</em> the user gave an
@@ -216,10 +187,8 @@ the user will omit the <code>alignment</code> argument, in which case <code>alig
 is <code>None</code> and this does nothing. (In effect we get Gtk&apos;s default
 alignment, whatever that is). A similar thing happens with the
 <code>padding</code>. Note there is a certain simplicity and elegance in the way
-this is done.</p>
-<p>Now we can finally get to the <code>label</code> class, which is derived directly
-from <code>misc</code>:</p>
-<pre><code>external gtk_label_new :
+this is done.</p><p>Now we can finally get to the <code>label</code> class, which is derived directly
+from <code>misc</code>:</p><pre><code>external gtk_label_new :
     string -&gt; obj  = &quot;gtk_label_new_c&quot;
 external gtk_label_set_text :
     obj -&gt; string -&gt; unit = &quot;gtk_label_set_text_c&quot;
@@ -249,8 +218,7 @@ class label ~text
 it&apos;s really more of the same idea, <em>except</em> that this class isn&apos;t
 virtual. You can create instances of this class which means it finally
 has to call <code>gtk_..._new</code>. This is the initialization code (we discussed
-this pattern above):</p>
-<pre><code>class label ~text ... () =
+this pattern above):</p><pre><code>class label ~text ... () =
   let obj = gtk_label_new text in
   object (self)
     inherit misc ... obj
@@ -258,11 +226,9 @@ this pattern above):</p>
 <p>(Pop quiz: what happens if we need to define a class which is both a
 base class from which other classes can be derived, and is also a
 non-virtual class of which the user should be allowed to create
-instances?)</p>
-<h4 id="WrappingcallstoClibraries"> Wrapping calls to C libraries</h4>
+instances?)</p><h4 id="WrappingcallstoClibraries"> Wrapping calls to C libraries</h4>
 <p>Now we&apos;ll look in more detail at actually wrapping up calls to C library
-functions. Here&apos;s a simple example:</p>
-<pre><code>/* external gtk_label_set_text :
+functions. Here&apos;s a simple example:</p><pre><code>/* external gtk_label_set_text :
      obj -&gt; string -&gt; unit
        = &quot;gtk_label_set_text_c&quot; */
 
@@ -276,19 +242,19 @@ gtk_label_set_text_c (value obj, value str)
 }</code></pre>
 <p>Comparing the OCaml prototype for the external function call (in the
 comment) with the definition of the function we can see two things:</p>
-
  <ul>
-  <li><p>The C function that OCaml calls is named <code>&quot;gtk_label_set_text_c&quot;</code>.</p>
-</li>
-  <li><p>Two arguments are passed (<code>value obj</code> and <code>value str</code>) and a unit is
- returned.</p>
+  <li>The C function that OCaml calls is named <code>&quot;gtk_label_set_text_c&quot;</code>.
+  </li>
+  <li>Two arguments are passed (<code>value obj</code> and <code>value str</code>) and a unit is
+ returned.</li>
+ </ul>
+
 <p>Values are OCaml&apos;s internal representation of all sorts of things from
 simple integers through to strings and even objects. I&apos;m not going to go
 into any great detail about the <code>value</code> type because it is more than
 adequately covered in the OCaml manual. To use <code>value</code> you need to just
 know what macros are available to convert between a <code>value</code> and some C
-type. The macros look like this:</p>
-<p>&#92;&lt;dl&#92;&gt; &#92;&lt;dt&#92;&gt;<code>String_val (val)</code>&#92;&lt;/dt&#92;&gt; &#92;&lt;dd&#92;&gt; Convert from a <code>value</code>
+type. The macros look like this:</p><p>&#92;&lt;dl&#92;&gt; &#92;&lt;dt&#92;&gt;<code>String_val (val)</code>&#92;&lt;/dt&#92;&gt; &#92;&lt;dd&#92;&gt; Convert from a <code>value</code>
 which is known to be a string to a C string (ie. <code>char *</code>). &#92;&lt;/dd&#92;&gt;
 &#92;&lt;dt&#92;&gt;<code>Val_unit</code>&#92;&lt;/dt&#92;&gt; &#92;&lt;dd&#92;&gt; The OCaml unit <code>()</code> as a <code>value</code>. &#92;&lt;/dd&#92;&gt;
 &#92;&lt;dt&#92;&gt;<code>Int_val (val)</code>&#92;&lt;/dt&#92;&gt; boolean &#92;&lt;dd&#92;&gt; Convert from a <code>value</code> which
@@ -297,15 +263,12 @@ is known to be an integer to a C <code>int</code>. &#92;&lt;/dd&#92;&gt;
 integer <code>value</code>. &#92;&lt;/dd&#92;&gt; &#92;&lt;dt&#92;&gt;<code>Bool_val (val)</code>&#92;&lt;/dt&#92;&gt; &#92;&lt;dd&#92;&gt; Convert
 from a <code>value</code> which is known to be a boolean to a C boolean (ie. an
 <code>int</code>). &#92;&lt;/dd&#92;&gt; &#92;&lt;dt&#92;&gt;<code>Val_bool (i)</code>&#92;&lt;/dt&#92;&gt; &#92;&lt;dd&#92;&gt; Convert from a C
-integer <code>i</code> into a boolean <code>value</code>. &#92;&lt;/dd&#92;&gt; &#92;&lt;/dl&#92;&gt;</p>
-<p>You can guess the others or consult the manual. Note that there is no
+integer <code>i</code> into a boolean <code>value</code>. &#92;&lt;/dd&#92;&gt; &#92;&lt;/dl&#92;&gt;</p><p>You can guess the others or consult the manual. Note that there is no
 straightforward conversion from C <code>char *</code> to a value. This involves
-allocating memory, which is somewhat more complicated.</p>
-<p>In <code>gtk_label_set_text_c</code> above, the <code>external</code> definition, plus strong
+allocating memory, which is somewhat more complicated.</p><p>In <code>gtk_label_set_text_c</code> above, the <code>external</code> definition, plus strong
 typing and type inference, has already ensured that the arguments are of
 the correct type, so to convert <code>value str</code> to a C <code>char *</code> we called
-<code>String_val (str)</code>.</p>
-<p>The other parts of the function are a bit stranger. To ensure that the
+<code>String_val (str)</code>.</p><p>The other parts of the function are a bit stranger. To ensure that the
 garbage collector &quot;knows&quot; that your C function is still using <code>obj</code> and
 <code>str</code> while the C function is running (remember that the garbage
 collector might be triggered within your C function by a number of
@@ -314,30 +277,27 @@ functions), you need to frame the function to add code to tell the
 garbage collector about the &quot;roots&quot; that you&apos;re using. And tell the
 garbage collector when you finish using those roots too, of course. This
 is done by framing the function within <code>CAMLparamN</code> ... <code>CAMLreturn</code>.
-Hence:
-CAMLparam2 (obj, str);
+Hence:</p><pre><code>CAMLparam2 (obj, str);
 ...
-CAMLreturn (Val_unit);</p>
+CAMLreturn (Val_unit); </code></pre>
 <p><code>CAMLparam2</code> is a macro saying that you&apos;re using two <code>value</code> parameters.
 (There is another macro for annotating local <code>value</code> variables too). You
 need to use <code>CAMLreturn</code> instead of plain <code>return</code> which tells the GC
 you&apos;ve finished with those roots. It might be instructive to examine
 what code is inlined when you write <code>CAMLparam2 (obj, str)</code>. This is the
 generated code (with the author&apos;s version of OCaml, so it might vary
-between implementations slightly):
-struct caml__roots_block *caml__frame
-</p>
-<pre><code>= local_roots;</code></pre>
-<p>struct caml__roots_block caml__roots_obj
+between implementations slightly):</p><pre><code>struct caml__roots_block *caml__frame
+    = local_roots;
+struct caml__roots_block caml__roots_obj;
+
 caml__roots_obj.next = local_roots;
 local_roots = &amp;caml__roots_obj;
 caml__roots_obj.nitems = 1;
 caml__roots_obj.ntables = 2;
 caml__roots_obj.tables [0] = &amp;obj;
-caml__roots_obj.tables [1] = &amp;str;</p>
-<p>And for <code>CAMLreturn (foo)</code>:
-local_roots = caml__frame;
-return (foo);</p>
+caml__roots_obj.tables [1] = &amp;str; </code></pre>
+<p>And for <code>CAMLreturn (foo)</code>:</p><pre><code>local_roots = caml__frame;
+return (foo); </code></pre>
 <p>If you follow the code closely you&apos;ll see that <code>local_roots</code> is
 obviously a linked list of <code>caml__roots_block</code> structures. One (or more)
 of these structures is pushed onto the linked list when we enter the
@@ -345,36 +305,27 @@ function, and all of these are popped back off when we leave, thus
 restoring <code>local_roots</code> to its previous state when we leave the
 function. (<em>If</em> you remembered to call <code>CAMLreturn</code> instead of <code>return</code>
 of course - otherwise <code>local_roots</code> will end up pointing at
-uninitialised data on the stack with &quot;hilarious&quot; consequences).</p>
-<p>Each <code>caml__roots_block</code> structure has space for up to five <code>value</code>s
+uninitialised data on the stack with &quot;hilarious&quot; consequences).</p><p>Each <code>caml__roots_block</code> structure has space for up to five <code>value</code>s
 (you can have multiple blocks, so this isn&apos;t a limitation). When the GC
 runs we can infer that it must walk through the linked list, starting at
 <code>local_roots</code>, and treat each <code>value</code> as a root for garbage collection
 purposes. The consequences of <em>not</em> declaring a <code>value</code> parameter or
 local <code>value</code> variable in this way would be that the garbage collector
 might treat that variable as unreachable memory and thus reclaim it
-while your function is running!</p>
-<p><code>CAMLprim</code> is a Windows-only thing and so we won&apos;t talk about it ...</p>
-<p>Finally there is the mysterious <code>unwrap</code> macro. This is one I wrote
+while your function is running!</p><p><code>CAMLprim</code> is a Windows-only thing and so we won&apos;t talk about it ...</p><p>Finally there is the mysterious <code>unwrap</code> macro. This is one I wrote
 myself, or rather, this is one I mostly copied from lablgtk. There are
 two related functions, called <code>wrap</code> and <code>unwrap</code> and as you might
 possibly have guessed, they wrap and unwrap <code>GtkObject</code>s in OCaml
 <code>value</code>s. These functions establish the somewhat magical relationship
 between <code>GtkObject</code> and our opaque, mysterious <code>obj</code> type which we
 defined for OCaml (see the very first part of this chapter to remind
-yourself).</p>
-<p>The problem is how do we wrap up (and hide) the C <code>GtkObject</code> structure
+yourself).</p><p>The problem is how do we wrap up (and hide) the C <code>GtkObject</code> structure
 in a way that we can pass it around as an opaque &quot;thing&quot; (<code>obj</code>) through
 our OCaml code, and hopefully pass it back later to a C function which
-can unwrap it and retrieve the same <code>GtkObject</code> back again?</p>
-<p>In order for it to get passed to OCaml code at all, we must somehow
+can unwrap it and retrieve the same <code>GtkObject</code> back again?</p><p>In order for it to get passed to OCaml code at all, we must somehow
 convert it to a <code>value</code>. Luckily we can quite easily use the C API to
 create <code>value</code> blocks which the OCaml garbage collector <em>won&apos;t</em> examine
-too closely ......
-</p>
-</li>
- </ul>
-
+too closely ......</p>
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
               <div class="navbar-inner">
                 <div class="container-fluid">

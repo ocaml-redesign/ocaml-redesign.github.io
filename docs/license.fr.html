@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -47,22 +41,16 @@
           <div class="content">
             <p>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
-&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</p>
-<p>&lt;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-  &lt;
-</p>
-<pre><code></code></pre>
+&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</p><p>&lt;xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+  &lt;</p><pre><code></code></pre>
 <p>&lt;content=&quot;text/html; charset=utf-8&quot; http-equiv=&quot;Content-Type&quot; /&gt;
 &lt;
 Licence
 &lt;/title&gt;
   &lt;/head&gt;
-  &lt;
-</p>
-<pre><code>&lt;h1&gt;</code></pre>
+  &lt;</p><pre><code>&lt;h1&gt;</code></pre>
 <p>La licence d&apos;OCaml
-&lt;/h1&gt;</p>
-<!--                                -*-html-*- --><p>
+&lt;/h1&gt;</p><!--                                -*-html-*- --><p>
 In the following, “the Library” refers to all files marked “Copyright
 Inria” in the following directories and their sub-directories of the
 distribution:
@@ -114,11 +102,9 @@ in clause 3 of the GNU Library General Public License. This exception
 does not however invalidate any other reasons why the executable file
 might be covered by the GNU Library General Public License.
 </p>
-<p>&lt;
-<a  name="qpl" id="qpl"><!--0--></a>The Q Public License, version 1.0
-&lt;/h2&gt;
-</p>
-<pre xml:space="preserve">
+<h2>
+<a name="qpl" id="qpl"><!--0--></a>The Q Public License, version 1.0
+</h2><pre xml:space="preserve">
               Copyright (C) 1999 Troll Tech AS, Norway.
                   Everyone is permitted to copy and
                   distribute this license document.
@@ -220,10 +206,10 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 This license is governed by the Laws of France.
 </pre>
-<p>&lt;
-<a  name="lgpl" id="lgpl"><!--0--></a>The GNU Library General Public
+<h2>
+<a name="lgpl" id="lgpl"><!--0--></a>The GNU Library General Public
 License, version 2
-&lt;/h2&gt;</p>
+</h2>
 <pre xml:space="preserve">
  Copyright (C) 1991 Free Software Foundation, Inc.
  59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
@@ -706,7 +692,6 @@ necessary.  Here is a sample; alter the names:
 That's all there is to it!
 </pre><p>&lt;/body&gt;
 &lt;/html&gt;</p>
-
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
               <div class="navbar-inner">
                 <div class="container-fluid">

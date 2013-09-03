@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -45,51 +39,37 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Set</p>
-<h1 id="Set">Set</h1>
+            <p>Set</p><h1 id="Set">Set</h1>
 <h2 id="ModuleSet">Module Set</h2>
-<p>To make a set of strings:</p>
-<pre><code>module SS = Set.Make(String);;</code></pre>
-<p>To create a set you need to start somewhere so here is the empty set</p>
-<pre><code>let s = SS.empty;;</code></pre>
+<p>To make a set of strings:</p><pre><code>module SS = Set.Make(String);;</code></pre>
+<p>To create a set you need to start somewhere so here is the empty set</p><pre><code>let s = SS.empty;;</code></pre>
 <p>Alternatively if we know an element to start with we can create a set
-like</p>
-<pre><code>let s = SS.singleton &quot;hello&quot;;;</code></pre>
-<p>To add some elements to the the set we can do.</p>
-<pre><code>let s = List.fold_right SS.add [&quot;hello&quot;; &quot;world&quot;; &quot;community&quot;; &quot;manager&quot;;
+like</p><pre><code>let s = SS.singleton &quot;hello&quot;;;</code></pre>
+<p>To add some elements to the the set we can do.</p><pre><code>let s = List.fold_right SS.add [&quot;hello&quot;; &quot;world&quot;; &quot;community&quot;; &quot;manager&quot;;
                                  &quot;stuff&quot;; &quot;blue&quot;; &quot;green&quot;] s;;</code></pre>
 <p>Now if we are playing around with sets we will probably want to see what
 is in the set that we have created. To do this we can write a function
-that will print the set out.</p>
-<pre><code>(* Prints a new line &quot;&#92;n&quot; after each string is printed *)
+that will print the set out.</p><pre><code>(* Prints a new line &quot;&#92;n&quot; after each string is printed *)
 let print_set s = 
    SS.iter print_endline s;;</code></pre>
 <p>If we want to remove a specific element of a set there is a remove
 function. However if we want to remove several elements at once we could
 think of it as doing a &apos;filter&apos;. Let&apos;s filter out all words that are
-longer than 5 characters.</p>
-<p>This can be written as:</p>
-<pre><code>let my_filter str =
+longer than 5 characters.</p><p>This can be written as:</p><pre><code>let my_filter str =
   String.length str &lt;= 5;;
 let s2 = SS.filter my_filter s;;</code></pre>
-<p>or using an anonymous function:</p>
-<pre><code>let s2 = SS.filter (fun str -&gt; String.length str &lt;= 5) s;;</code></pre>
+<p>or using an anonymous function:</p><pre><code>let s2 = SS.filter (fun str -&gt; String.length str &lt;= 5) s;;</code></pre>
 <p>If we want to check and see if an element is in the set it might look
-like this.</p>
-<pre><code>SS.exists (fun str -&gt; str = &quot;hello&quot;) s2;;</code></pre>
-<p>or even:</p>
-<pre><code>SS.exists (( = ) &quot;hello&quot;) s2;;</code></pre>
+like this.</p><pre><code>SS.exists (fun str -&gt; str = &quot;hello&quot;) s2;;</code></pre>
+<p>or even:</p><pre><code>SS.exists (( = ) &quot;hello&quot;) s2;;</code></pre>
 <p>The Set module also provides the set theoretic operations union,
 intersection and difference. For example, the difference of the original
 set and the set with short strings (&#92;&lt;=5 characters) is the set of long
-strings:</p>
-<pre><code>print_set (SS.diff s s2);;</code></pre>
+strings:</p><pre><code>print_set (SS.diff s s2);;</code></pre>
 <p>Note that the Set module provides a purely functional data structure:
 removing an element from a set does not alter that set but, rather,
 returns a new set that is very similar to (and shares much of its
-internals with) the original set.
-</p>
-
+internals with) the original set.</p>
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
               <div class="navbar-inner">
                 <div class="container-fluid">

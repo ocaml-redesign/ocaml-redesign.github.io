@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -50,8 +44,7 @@
 Camlp4 3.10 Foreach Tutorial
 &lt;/title&gt;
 &lt;/head&gt;
-&lt;</p>
-<div class="pull-right hero-unit" style="margin-left: 1em" >
+&lt;</p><div class="pull-right hero-unit" style="margin-left: 1em" >
       
 <em>Table of contents</em>
 <div ml:replace="toc 2 2"></div>
@@ -76,9 +69,9 @@ The reader is expected to be familiar with context-free parsing. Some
 experience with yacc or ocamlyacc will be helpful. Knowing the
 difference between LL, LR and LALR parsers is a plus.
 </p>
-<p>&lt;
-<a  name="Camlp4_3_10_Motivtion">Motivation</a>
-&lt;/h2&gt;</p>
+<h2>
+<a name="Camlp4_3_10_Motivtion">Motivation</a>
+</h2>
 <p>
 One of the greatest strengths of OCaml is Camlp4, a modular
 pre-processor pretty-printer that lets you add syntactic sugar to the
@@ -149,12 +142,9 @@ done
 where module <code>M</code> implements an iterator over the elements in
 collection <em>e</em>; most of the time, <em>e</em> also has the type
 <code>M.t</code>, though this is not strictly required.
-</p><p>
-&lt;
-<a  name="Towards_the_First_Try">Towards the First Try</a>
-&lt;/h2&gt;
-</p>
-<p>
+</p><h2>
+<a name="Towards_the_First_Try">Towards the First Try</a>
+</h2><p>
 Without going into too much detail, we can write a simple extension as
 the following:
 </p><pre ml:content="ocaml noeval">
@@ -227,12 +217,9 @@ And it doesn't support <code>Hashtbl.iter</code> yet because, so far, we
 can only generate functions with one argument. <code>Hashtbl.iter</code>
 passes two arguments to the function, the key and the value. We will
 address these issues in the next section.
-</p><p>
-&lt;
-<a  name="Supporting_Multiple_Patterns">Supporting Multiple Patterns</a>
-&lt;/h2&gt;
-</p>
-<p>
+</p><h2>
+<a name="Supporting_Multiple_Patterns">Supporting Multiple Patterns</a>
+</h2><p>
 We're now beginning to use Camlp4 features that are less documented. It
 is useful to keep in mind that syntax extension <em>is</em> modifying
 existing parsing rules, and we can't do without an understanding of how
@@ -311,12 +298,9 @@ and that multiple arguments work:
 <p>
 There are still some subtle problems with this approach. In the next
 section, we'll discuss solutions to these problems.
-</p><p>
-&lt;
-<a  name="Final_Touch_up">Final Touch-up</a>
-&lt;/h2&gt;
-</p>
-<p>
+</p><h2>
+<a name="Final_Touch_up">Final Touch-up</a>
+</h2><p>
 The first problem we find out is that foreach body is supposed to be a
 sequence, but that doesn't work:
 </p><pre ml:content="ocaml noeval">
@@ -348,8 +332,7 @@ Parse error: [ipatt] or [a_LIDENT] expected after "for" (in [expr])
 </pre><p>
 
 <!-- FIXME: If one tries to eval the code, an error is raised by
-     Errors.report_error --></p>
-<p>
+     Errors.report_error --></p><p>
 It turns out that the new rule we add for "for" doesn't play nice with
 the original rule. The solution is to rewrite the original rule so it
 becomes compatible with the new rule.
@@ -439,11 +422,9 @@ $ ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach3.ml
     Printf.printf "%d: %sn" k v
   done;;
 </pre>
-<p>&lt;
-<a  name="Conclusion">Conclusion</a>
-&lt;/h2&gt;
-</p>
-<p>
+<h2>
+<a name="Conclusion">Conclusion</a>
+</h2><p>
 We begin with a simple Camlp4 syntax extension for the for-each iterator
 syntax, then explored further refinements to that idea that works around
 parsing issues both in embedded code and in the rules.

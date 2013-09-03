@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -46,78 +40,84 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p><a href='#'>Découvrir ****</a></p>
-
  <ul>
-  <li><p><a href='description.html'>Qu&apos;est ce qu&apos;OCaml ?</a></p>
-</li>
-  <li><p><a href='http://try.ocamlpro.com/'>Essayez le dans votre navigateur</a></p>
-</li>
-  <li><p><a href='taste.html'>Une centaine de lignes d&apos;OCaml</a></p>
-</li>
-  <li><p><a href='success.html'>Quelques succès</a></p>
-</li>
-  <li><p><a href='companies.html'>Qui l&apos;utilise ?</a></p>
-</li>
-  <li><p><a href='http://pleac.sourceforge.net/pleac_ocaml/'>Pleac</a></p>
-</li>
-  <li><p><a href='http://rosettacode.org/wiki/Category:OCaml'>Rosetta</a>
- <a href='http://langref.org/ocaml'>langref.org</a></p>
+  <li><a href='description.html'>Qu&apos;est ce qu&apos;OCaml ?</a>
+  </li>
+  <li><a href='http://try.ocamlpro.com/'>Essayez le dans votre navigateur</a>
+  </li>
+  <li><a href='taste.html'>Une centaine de lignes d&apos;OCaml</a>
+  </li>
+  <li><a href='success.html'>Quelques succès</a>
+  </li>
+  <li><a href='companies.html'>Qui l&apos;utilise ?</a>
+  </li>
+  <li><a href='http://pleac.sourceforge.net/pleac_ocaml/'>Pleac</a>
+  </li>
+  <li><a href='http://rosettacode.org/wiki/Category:OCaml'>Rosetta</a>
+ <a href='http://langref.org/ocaml'>langref.org</a></li>
+ </ul>
+
 <p><a href='#'>Apprendre ****</a></p>
-</li>
-  <li><p><a href='install.html'>Installation</a></p>
-</li>
-  <li><p><a href='tutorials/'>Tutoriaux</a></p>
-</li>
-  <li><p><a href='faq.html'>FAQ</a></p>
-</li>
-  <li><p><a href='books.html'>Livres</a></p>
-</li>
-  <li><p><a href='videos.html'>Vidéos</a></p>
-</li>
-  <li><p><a href='papers.html'>Papers</a></p>
+ <ul>
+  <li><a href='install.html'>Installation</a>
+  </li>
+  <li><a href='tutorials/'>Tutoriaux</a>
+  </li>
+  <li><a href='faq.html'>FAQ</a>
+  </li>
+  <li><a href='books.html'>Livres</a>
+  </li>
+  <li><a href='videos.html'>Vidéos</a>
+  </li>
+  <li><a href='papers.html'>Papers</a></li>
+ </ul>
+
 <p><a href='#'>Utilisation ****</a></p>
-</li>
-  <li><p><a href='releases/'>Releases</a></p>
-</li>
-  <li><p><a href='libraries.html'>Bibliothèques</a></p>
-</li>
-  <li><p><a href='dev_tools.html'>Outiles de développement</a></p>
-</li>
-  <li><p><a href='http://caml.inria.fr/pub/docs/manual-ocaml/'>Manuel</a></p>
-</li>
-  <li><p><a href='cheat_sheets.html'>Cheat Sheets</a></p>
-</li>
-  <li><p><a href='http://search.ocaml.jp/'>Recherche dans l&apos;API</a></p>
-</li>
-  <li><p><a href='http://forge.ocamlcore.org/'>Forge</a></p>
-</li>
-  <li><p><a href='https://github.com/languages/OCaml'>GitHub</a></p>
-</li>
-  <li><p><a href='https://bitbucket.org/repo/all?name=ocaml'>Bitbucket</a></p>
+ <ul>
+  <li><a href='releases/'>Releases</a>
+  </li>
+  <li><a href='libraries.html'>Bibliothèques</a>
+  </li>
+  <li><a href='dev_tools.html'>Outiles de développement</a>
+  </li>
+  <li><a href='http://caml.inria.fr/pub/docs/manual-ocaml/'>Manuel</a>
+  </li>
+  <li><a href='cheat_sheets.html'>Cheat Sheets</a>
+  </li>
+  <li><a href='http://search.ocaml.jp/'>Recherche dans l&apos;API</a>
+  </li>
+  <li><a href='http://forge.ocamlcore.org/'>Forge</a>
+  </li>
+  <li><a href='https://github.com/languages/OCaml'>GitHub</a>
+  </li>
+  <li><a href='https://bitbucket.org/repo/all?name=ocaml'>Bitbucket</a></li>
+ </ul>
+
 <p><a href='#'>Communauté ****</a></p>
-</li>
-  <li><p><a href='http://caml.inria.fr/resources/forums.en.html'>Listes de diffusion</a></p>
-</li>
-  <li><p><a href='planet/'>Blogs</a></p>
-</li>
-  <li><p><a href='meetings/'>Conférences</a></p>
-</li>
-  <li><p><a href='irc://irc.freenode.net/ocaml'>IRC</a></p>
-</li>
-  <li><p><a href='http://stackoverflow.com/questions/tagged?tagnames=ocaml'>Stack
- Overflow</a></p>
-</li>
-  <li><p><a href='http://www.reddit.com/r/ocaml/'>Reddit</a></p>
-</li>
-  <li><p><a href='support.html'>Support Commercial</a></p>
+ <ul>
+  <li><a href='http://caml.inria.fr/resources/forums.en.html'>Listes de diffusion</a>
+  </li>
+  <li><a href='planet/'>Blogs</a>
+  </li>
+  <li><a href='meetings/'>Conférences</a>
+  </li>
+  <li><a href='irc://irc.freenode.net/ocaml'>IRC</a>
+  </li>
+  <li><a href='http://stackoverflow.com/questions/tagged?tagnames=ocaml'>Stack
+ Overflow</a>
+  </li>
+  <li><a href='http://www.reddit.com/r/ocaml/'>Reddit</a>
+  </li>
+  <li><a href='support.html'>Support Commercial</a></li>
+ </ul>
+
 <p><a href='#'>Plus ****</a></p>
-</li>
-  <li><p><a href='http://caml.inria.fr/mantis/'>Mantis Bug Tracker</a></p>
-</li>
-  <li><p><a href='caml-light/'>Caml Light</a></p>
-</li>
-  <li><p><a href='logos.html'>Logos</a></p>
-</li>
+ <ul>
+  <li><a href='http://caml.inria.fr/mantis/'>Mantis Bug Tracker</a>
+  </li>
+  <li><a href='caml-light/'>Caml Light</a>
+  </li>
+  <li><a href='logos.html'>Logos</a></li>
  </ul>
 
 

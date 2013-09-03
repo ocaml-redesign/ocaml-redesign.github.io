@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -46,10 +40,8 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <h1 id="Quelquessuccs">Quelques succès</h1>
-<p><em>Contenu</em></p>
-<h2 id="LesynchroniseurdefichiersUnison">Le synchroniseur de fichiers Unison</h2>
-<p><a href='http://caml.inria.fr/about/successes-images/unison.jpg'><img src='http://caml.inria.fr/about/successes-images/unison-thumb.jpg' alt='Screenshot'  title='Screenshot of Unison&apos;s main window' /></a></p>
-<p><a href='http://www.cis.upenn.edu/%7Ebcpierce/unison/'>Unison</a> est un outil de
+<p><em>Contenu</em></p><h2 id="LesynchroniseurdefichiersUnison">Le synchroniseur de fichiers Unison</h2>
+<p><a href='http://caml.inria.fr/about/successes-images/unison.jpg'><img src='http://caml.inria.fr/about/successes-images/unison-thumb.jpg' alt='Screenshot'  title='Screenshot of Unison&apos;s main window' /></a></p><p><a href='http://www.cis.upenn.edu/%7Ebcpierce/unison/'>Unison</a> est un outil de
 synchronisation de fichiers populaire, qui fonctionne sous Windows et
 sous la plupart des variantes d&apos;Unix. Il permet de stocker deux
 répliques d&apos;une collection de fichiers et de répertoires sur deux
@@ -63,8 +55,8 @@ tandis que les changements incompatibles sont détectés et signalés.
 Unison est également résistant aux échecs : il prend soin de laisser les
 deux répliques, ainsi que ses propres structures privées, dans un état
 cohérent à tout instant, même en cas d&apos;arrêt abrupt ou de panne de
-communication.</p>
-<p><em><a href='http://www.cis.upenn.edu/%7Ebcpierce/'>Benjamin C. Pierce</a> (Universityof Pennsylvania), chef du projet Unison :</em> « Je pense qu&apos;Unison est un
+communication.</p><p><em><a href='http://www.cis.upenn.edu/%7Ebcpierce/'>Benjamin C. Pierce</a> (University
+of Pennsylvania), chef du projet Unison :</em> « Je pense qu&apos;Unison est un
 succès très clair pour OCaml – en particulier, grâce à l&apos;extrême
 portabilité et l&apos;excellente conception générale du compilateur et de
 l&apos;environnement d&apos;exécution. Le typage statique fort d&apos;OCaml, ainsi que
@@ -75,18 +67,15 @@ plusieurs années de travail, et avec la participation de nombreux
 programmeurs. En fait, Unison présente la caractéristique, peut-être
 unique parmi les projets de grande taille écrits en OCaml, d&apos;avoir été
 <em>traduit</em> de Java vers OCaml à mi-chemin au cours de son développement.
-L&apos;adoption d&apos;OCaml a été comme une bouffée d&apos;air pur. »</p>
-<h2 id="LeclientpairpairMLdonkey">Le client pair-à-pair MLdonkey</h2>
-<p><a href='http://caml.inria.fr/about/successes-images/mldonkey.jpg'><img src='http://caml.inria.fr/about/successes-images/mldonkey-thumb.jpg' alt='Screenshot'  title='Screenshot of one of MLdonkey&apos;s windows' /></a></p>
-<p><a href='http://mldonkey.sourceforge.net/Main_Page'>MLdonkey</a> est un client
+L&apos;adoption d&apos;OCaml a été comme une bouffée d&apos;air pur. »</p><h2 id="LeclientpairpairMLdonkey">Le client pair-à-pair MLdonkey</h2>
+<p><a href='http://caml.inria.fr/about/successes-images/mldonkey.jpg'><img src='http://caml.inria.fr/about/successes-images/mldonkey-thumb.jpg' alt='Screenshot'  title='Screenshot of one of MLdonkey&apos;s windows' /></a></p><p><a href='http://mldonkey.sourceforge.net/Main_Page'>MLdonkey</a> est un client
 pair-à-pair multi-plateformes et multi-réseaux. Il a été le premier
 client « open source » à permettre l&apos;accès au réseau eDonkey.
 Aujourd&apos;hui, MLdonkey autorise également l&apos;accès à plusieurs autres
 réseaux importants, parmi lesquels Overnet, Bittorrent, Gnutella,
 Gnutella2, Fasttrack, Soulseek, Direct-Connect et Opennap. Il permet
 d&apos;effectuer une recherche en parallèle sur plusieurs réseaux, et échange
-des fichiers avec de multiples pairs en parallèle.</p>
-<p><em>Un des développeurs de MLdonkey :</em> « Début 2002, nous avons décidé
+des fichiers avec de multiples pairs en parallèle.</p><p><em>Un des développeurs de MLdonkey :</em> « Début 2002, nous avons décidé
 d&apos;utiliser OCaml pour programmer une application réseau dans le monde
 émergent des systèmes pair-à-pair. Le résultat de notre travail,
 MLdonkey, a surpassé nos espérances : MLdonkey est aujourd&apos;hui le client
@@ -96,39 +85,32 @@ utilisateurs quotidiens. De plus, MLdonkey est le seul client capable de
 se connecter à plusieurs réseaux pair-à-pair pour télécharger et
 échanger des fichiers. Il fonctionne en tant que démon, c&apos;est-à-dire en
 tâche de fond et sans surveillance humaine, et peut être contrôlé à
-l&apos;aide d&apos;une interface au choix parmi trois : GTK, web et telnet. »</p>
-<h2 id="LeLangagedeModlisationFinanciredeLexiFi">Le Langage de Modélisation Financière de LexiFi</h2>
-<p><a href='http://caml.inria.fr/about/successes-images/lexifi.png'><img src='http://caml.inria.fr/about/successes-images/lexifi-thumb.png' alt='Screenshot'  title='A report produced by LexiFi software' /></a></p>
-<p>Développé par la société <a href='http://www.lexifi.com/'>LexiFi</a>, le Langage de
+l&apos;aide d&apos;une interface au choix parmi trois : GTK, web et telnet. »</p><h2 id="LeLangagedeModlisationFinanciredeLexiFi">Le Langage de Modélisation Financière de LexiFi</h2>
+<p><a href='http://caml.inria.fr/about/successes-images/lexifi.png'><img src='http://caml.inria.fr/about/successes-images/lexifi-thumb.png' alt='Screenshot'  title='A report produced by LexiFi software' /></a></p><p>Développé par la société <a href='http://www.lexifi.com/'>LexiFi</a>, le Langage de
 Modélisation Financière (MLFi) est le premier langage formel capable de
 décrire les produits d&apos;investissement, de crédit et de marché de
 capitaux les plus sophistiqués. MLFi est implanté comme une extension
-d&apos;OCaml.</p>
-<p>Les utilisateurs de MLFi retirent deux importants bénéfices de
+d&apos;OCaml.</p><p>Les utilisateurs de MLFi retirent deux importants bénéfices de
 l&apos;approche par programmation fonctionnelle. D&apos;abord, le formalisme
 déclaratif des langages de programmation fonctionnels est adapté à la
 <em>spécification</em> de structures de données et d&apos;algorithmes complexes.
 Ensuite, ces langages offrent de nombreuses facilités pour la
 manipulation des listes. Or, les listes jouent un rôle central en
 finance, où elles sont utilisées de façon intensive pour définir des
-agendas d&apos;événements de contrats et de paiements.</p>
-<p>De plus, MLFi est doté de capacités d&apos;intégration cruciales, héritées
+agendas d&apos;événements de contrats et de paiements.</p><p>De plus, MLFi est doté de capacités d&apos;intégration cruciales, héritées
 d&apos;OCaml et des outils et librairies qui l&apos;accompagnent, Cela permet aux
 utilisateurs, par exemple, d&apos;interopérer avec des programmes C et Java,
 de manipuler des schémas et documents XML, et de s&apos;interfacer avec des
-bases de données SQL.</p>
-<p>Des modèles de données et modèles objets visant à encapsuler les
+bases de données SQL.</p><p>Des modèles de données et modèles objets visant à encapsuler les
 définitions et le comportement des instruments financiers ont été
 développés par l&apos;industrie bancaire depuis deux décennies, mais font
-face à des limitations inhérentes qu&apos;OCaml a aidé à surpasser.</p>
-<p>L&apos;approche de LexiFi pour la modélisation de contrats financiers
+face à des limitations inhérentes qu&apos;OCaml a aidé à surpasser.</p><p>L&apos;approche de LexiFi pour la modélisation de contrats financiers
 complexes a reçu une récompense académique en 2000, et l&apos;implantation de
 MLFi a été nommée « Produit Logiciel de l&apos;Année 2001 » par le magazine
 <em>Risk</em>, la principale publication dans le domaine des échanges
 financiers et de la gestion des risques. Les solutions basées sur MLFi
 gagnent en reconnaissance à travers l&apos;Europe et contribuent à répandre
-l&apos;utilisation d&apos;OCaml dans l&apos;industrie des services financiers.</p>
-<h2 id="LesystmedecommunicationdistribueEnsemble">Le système de communication distribuée Ensemble</h2>
+l&apos;utilisation d&apos;OCaml dans l&apos;industrie des services financiers.</p><h2 id="LesystmedecommunicationdistribueEnsemble">Le système de communication distribuée Ensemble</h2>
 <p><em>Ohad Rodeh (IBM Haifa), un des développeurs d&apos;Ensemble :</em>
 « <a href='http://dsl.cs.technion.ac.il/projects/Ensemble/'>Ensemble</a> est un
 système de communication de groupe écrit en OCaml, développé à Cornell
@@ -145,15 +127,13 @@ code a ensuite fait ses preuves sur le terrain, et nous avons continué à
 développer en OCaml. Le système de types fort, les types de données
 algébriques, la récupération automatique de la mémoire et
 l&apos;environnement d&apos;exécution sont les principales raisons de notre
-intérêt pour OCaml. »</p>
-<h2 id="LaposassistantdepreuveCoq">L&apos;assistant de preuve Coq</h2>
-<p><a href='http://caml.inria.fr/about/successes-images/coq.jpg'><img src='http://caml.inria.fr/about/successes-images/coq-thumb.jpg' alt='Screenshot'  title='Screenshot of Coq&apos;s integrated development environment' /></a></p>
-<p><em><a href='http://www.lri.fr/%7Efilliatr/'>Jean-Christophe Filliâtre</a> (CNRS), undes développeurs de Coq :</em> « L&apos;outil <a href='http://coq.inria.fr/'>Coq</a> est un
+intérêt pour OCaml. »</p><h2 id="LaposassistantdepreuveCoq">L&apos;assistant de preuve Coq</h2>
+<p><a href='http://caml.inria.fr/about/successes-images/coq.jpg'><img src='http://caml.inria.fr/about/successes-images/coq-thumb.jpg' alt='Screenshot'  title='Screenshot of Coq&apos;s integrated development environment' /></a></p><p><em><a href='http://www.lri.fr/%7Efilliatr/'>Jean-Christophe Filliâtre</a> (CNRS), un
+des développeurs de Coq :</em> « L&apos;outil <a href='http://coq.inria.fr/'>Coq</a> est un
 système de manipulation de preuves mathématiques formelles ; une preuve
 réalisée avec Coq est mécaniquement vérifiée par la machine. Outre ses
 applications en mathématiques, l&apos;outil Coq permet également de certifier
-la correction de programmes informatiques. »</p>
-<p>« L&apos;intérêt de OCaml du point de vue de Coq est multiple. D&apos;une part, le
+la correction de programmes informatiques. »</p><p>« L&apos;intérêt de OCaml du point de vue de Coq est multiple. D&apos;une part, le
 langage OCaml est parfaitement adapté aux manipulations symboliques, qui
 sont prépondérantes dans un assistant de preuve. D&apos;autre part, le
 système de types de OCaml, et notamment sa notion de type abstrait,
@@ -162,38 +142,33 @@ garantissant ainsi la cohérence logique de l&apos;ensemble du système. Enfin,
 le typage fort de OCaml assure de fait une grande qualité au code de Coq
 (tel que l&apos;absence d&apos;erreurs à l&apos;exécution du type « segmentation
 fault »), ce qui est indispensable à un outil dont le but premier est
-justement la rigueur. »</p>
-<h2 id="LaposanalyseurstatiqueASTRE">L&apos;analyseur statique ASTRÉE</h2>
-<p><a href='http://www.airbus.com/product/a330_a340_backgrounder.asp'><img src='http://caml.inria.fr/about/successes-images/astree.gif' alt='A340'  title='ASTRÉE has been used to certify the Airbus A340 flight control software' /></a></p>
-<p><em><a href='http://www-verimag.imag.fr/~monniaux/'>David Monniaux</a> (CNRS), membredu projet ASTRÉE :</em> « <a href='http://www.astree.ens.fr/'>ASTRÉE</a> est un
+justement la rigueur. »</p><h2 id="LaposanalyseurstatiqueASTRE">L&apos;analyseur statique ASTRÉE</h2>
+<p><a href='http://www.airbus.com/product/a330_a340_backgrounder.asp'><img src='http://caml.inria.fr/about/successes-images/astree.gif' alt='A340'  title='ASTRÉE has been used to certify the Airbus A340 flight control software' /></a></p><p><em><a href='http://www-verimag.imag.fr/~monniaux/'>David Monniaux</a> (CNRS), membre
+du projet ASTRÉE :</em> « <a href='http://www.astree.ens.fr/'>ASTRÉE</a> est un
 <em>analyseur statique</em> basé sur <a href='http://www.di.ens.fr/%7Ecousot/aiintro.shtml'>l&apos;interprétation
 abstraite</a> et qui vise à
 établir l&apos;absence d&apos;erreurs d&apos;exécution dans des logiciels critiques
-écrits dans un sous-ensemble du langage C. »</p>
-<p>« Une analyse automatique et exacte visant à vérifier des propriétés
+écrits dans un sous-ensemble du langage C. »</p><p>« Une analyse automatique et exacte visant à vérifier des propriétés
 telles que l&apos;absence d&apos;erreurs d&apos;exécution est impossible en général,
 pour des raisons mathématiques. L&apos;analyse statique par interprétation
 abstraite contourne cette impossibilité, et permet de prouver des
 propriétés de programmes, en sur-estimant l&apos;ensemble des comportements
 possibles d&apos;un programme. Il est possible de concevoir des
 approximations pessimistes qui, en pratique, permettent d&apos;établir la
-propriété souhaitée pour une large gamme de logiciels. »</p>
-<p>« À ce jour, ASTRÉE a prouvé l&apos;absence d&apos;erreurs d&apos;exécution dans le
+propriété souhaitée pour une large gamme de logiciels. »</p><p>« À ce jour, ASTRÉE a prouvé l&apos;absence d&apos;erreurs d&apos;exécution dans le
 logiciel de contrôle primaire de la <a href='http://www.airbus.com/product/a330_a340_backgrounder.asp'>famille Airbus
 A340</a>. Cela
 serait impossible par de simples <em>tests</em>, car le test ne considère qu&apos;un
 <em>sous-ensemble</em> limité des cas, tandis que l&apos;interprétation abstraite
 considère un <em>sur-ensemble</em> de tous les comportements possibles du
-système. »</p>
-<p>« <a href='http://www.astree.ens.fr/'>ASTRÉE</a> est écrit en OCaml et mesure
+système. »</p><p>« <a href='http://www.astree.ens.fr/'>ASTRÉE</a> est écrit en OCaml et mesure
 environ 44000 lignes (plus des librairies externes). Nous avions besoin
 d&apos;un langage doté d&apos;une bonne performance (en termes de vitesse et
 d&apos;occupation mémoire) sur un matériel raisonnable, favorisant l&apos;emploi
 de structures de données avancées, et garantissant la sûreté mémoire.
 OCaml permet également d&apos;organiser le code source de façon modulaire,
 claire et compacte, et facilite la gestion de structures de données
-récursives comme les arbres de syntaxe abstraite. »</p>
-<h2 id="SLAM">SLAM</h2>
+récursives comme les arbres de syntaxe abstraite. »</p><h2 id="SLAM">SLAM</h2>
 <p>Le projet <a href='http://research.microsoft.com/en-us/projects/slam/'>SLAM</a> a
 débuté à Microsoft Research début 2000. Son but était de vérifier
 automatiquement qu&apos;un programme C utilise correctement l&apos;interface d&apos;une
@@ -205,12 +180,13 @@ appelé SDV (Vérification Statique de Drivers) qui analyse
 systématiquement le code source des drivers (pilotes de périphériques)
 Windows et vérifie leur conformité vis-à-vis d&apos;un ensemble de règles qui
 caractérisent les interactions correctes entre un driver et le noyau du
-système d&apos;exploitation Windows.</p>
-<p><em>Dans le rapport technique<a href='http://research.microsoft.com/apps/pubs/default.aspx?id=70038'>MSR-TR-2004-08</a>,T.Ball, B.Cook, V.Levin and S.K.Rajamani, les auteurs de SLAM,écrivent:</em> “The Right Tools for the Job: We developed SLAM using Inria&apos;s
+système d&apos;exploitation Windows.</p><p><em>Dans le rapport technique
+<a href='http://research.microsoft.com/apps/pubs/default.aspx?id=70038'>MSR-TR-2004-08</a>,
+T.Ball, B.Cook, V.Levin and S.K.Rajamani, les auteurs de SLAM,
+écrivent:</em> “The Right Tools for the Job: We developed SLAM using Inria&apos;s
 OCaml functional programming language. The expressiveness of this
 language and robustness of its implementation provided a great
-productivity boost.”</p>
-<h2 id="FFTW">FFTW</h2>
+productivity boost.”</p><h2 id="FFTW">FFTW</h2>
 <p><a href='http://www.fftw.org/'>FFTW</a> est une librairie C <a href='http://www.fftw.org/benchfft/'>très
 rapide</a> permettant d&apos;effectuer des
 Transformées de Fourier Discrètes (DFT). Elle emploie un puissant
@@ -218,17 +194,14 @@ optimiseur symbolique écrit en OCaml qui, étant donné un entier N,
 produit du code C hautement optimisé pour effectuer des DFTs de taille
 N. FFTW a reçu en 1999 le <a href='http://www.mcs.anl.gov/research/opportunities/wilkinsonprize/3rd-1999.php'>prix
 Wilkinson</a>
-pour les logiciels de calcul numérique.</p>
-<p>Des mesures effectuées sur diverses plate-formes montrent que les
+pour les logiciels de calcul numérique.</p><p>Des mesures effectuées sur diverses plate-formes montrent que les
 performances de FFTW sont typiquement supérieures à celles des autres
 logiciels de DFT disponibles publiquement, et peuvent même concurrencer
 le code optimisé proposé par certains fabriquants de processeurs. À la
 différence de ce code propriétaire, cependant, les performances de FFTW
 sont portables : un même programme donnera de bons résultats sur la
 plupart des architectures sans modification. D&apos;où le nom « FFTW, » qui
-signifie « Fastest Fourier Transform in the West. »
-</p>
-
+signifie « Fastest Fourier Transform in the West. »</p>
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
               <div class="navbar-inner">
                 <div class="container-fluid">

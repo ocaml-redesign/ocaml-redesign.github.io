@@ -26,13 +26,7 @@
           </button>
           <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li ><a href="/learn/">Learn</a></li>
-              <li ><a href="/docs/">Documentation</a></li>
-              <li ><a href="/platform.html">Platform</a></li>
-              <li ><a href="/menu.html">Packages</a></li>
-              <li ><a href="/community/">Community</a></li>
-            </ul>
+            (( input navbar_tpl.mpp ))
             <form class="navbar-search pull-right">
               <input class="search-query" type="text" placeholder="Search" />
             </form>
@@ -45,8 +39,7 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Map</p>
-<h1 id="Map">Map</h1>
+            <p>Map</p><h1 id="Map">Map</h1>
 <h2 id="ModuleMap">Module Map</h2>
 <p>Map creates a &quot;mapping&quot;. For instance, lets say I have some data that is
 users and their associated passwords. I could with the Map module create
@@ -54,39 +47,28 @@ a mapping from user names to their passwords. The mapping module not
 only does this but it does it fairly efficiently. It also does this in a
 functional way. In the example below I am going to do a mapping from
 strings to strings. However it is possible to do mappings with all
-different types of data.</p>
-<p>To create a Map I can do:</p>
-<pre><code>module MyUsers = Map.Make(String);;</code></pre>
+different types of data.</p><p>To create a Map I can do:</p><pre><code>module MyUsers = Map.Make(String);;</code></pre>
 <p>Ok, we have created the module. Now, lets start putting something into
-it. Where do we start? Well, lets try an empty module to begin with:</p>
-<pre><code>let m = MyUsers.empty;;</code></pre>
-<p>Hummm. An empty module is kind of boring, so lets add some data.</p>
-<pre><code>let m = MyUsers.add &quot;fred&quot; &quot;sugarplums&quot; m;;</code></pre>
+it. Where do we start? Well, lets try an empty module to begin with:</p><pre><code>let m = MyUsers.empty;;</code></pre>
+<p>Hummm. An empty module is kind of boring, so lets add some data.</p><pre><code>let m = MyUsers.add &quot;fred&quot; &quot;sugarplums&quot; m;;</code></pre>
 <p>We have now added &quot;fred&quot; and his password of &quot;sugarplums&quot; to our module.
 There is a fairly important point to make here. Once we have added the
 string &quot;sugarplums&quot; we have fixed the types of mappings that we can do.
 This means our mapping in our module MyUsers is from strings to strings.
 If we want a mapping from strings to integers or a mapping from integers
-to whatever we will have to create a different mapping.</p>
-<p>Lets add in some additional data just for kicks.</p>
-<pre><code>let m = MyUsers.add &quot;tom&quot; &quot;ilovelucy&quot; m;;
+to whatever we will have to create a different mapping.</p><p>Lets add in some additional data just for kicks.</p><pre><code>let m = MyUsers.add &quot;tom&quot; &quot;ilovelucy&quot; m;;
 let m = MyUsers.add &quot;mark&quot; &quot;ocamlrules&quot; m;;
 let m = MyUsers.add &quot;pete&quot; &quot;linux&quot; m;;</code></pre>
 <p>Now that we have some data inside of our Map module, wouldn&apos;t it be nice
 to be able to view that data at some point? Lets begin by creating a
-simple print function.</p>
-<pre><code>let print_users key password = print_string(key ^ &quot; &quot; ^ password ^ &quot;&#92;n&quot;);;</code></pre>
+simple print function.</p><pre><code>let print_users key password = print_string(key ^ &quot; &quot; ^ password ^ &quot;&#92;n&quot;);;</code></pre>
 <p>We have here a function that will take two strings, a key and a pasword,
 and print them out nicely, including a new line character at the end.
 All we need to do is to have this function applied to our mapping. Here
-is what that would look like.</p>
-<pre><code>MyUsers.iter print_users m;;</code></pre>
+is what that would look like.</p><pre><code>MyUsers.iter print_users m;;</code></pre>
 <p>The reason we put our data into a mapping however is probably so we can
-quickly find the data. Lets actually show how to do a find.</p>
-<pre><code>MyUsers.find &quot;fred&quot; m;;</code></pre>
-<p>This should quickly and efficienty return Fred&apos;s password: &quot;sugarplums&quot;.
-</p>
-
+quickly find the data. Lets actually show how to do a find.</p><pre><code>MyUsers.find &quot;fred&quot; m;;</code></pre>
+<p>This should quickly and efficienty return Fred&apos;s password: &quot;sugarplums&quot;.</p>
             <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
               <div class="navbar-inner">
                 <div class="container-fluid">
