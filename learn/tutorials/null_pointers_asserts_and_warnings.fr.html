@@ -52,7 +52,8 @@
 lecteurs leurs noms et leurs âges. Le problème, c&apos;est que pour une
 raison quelconque certains de vos lecteurs refusent de donner leur âge -
 ils refusent avec obstination de remplir ce champ. Que doit faire
-l&apos;administrateur de la base de données ?</p><p>Supposons que l&apos;âge soit représenté par un entier (<code>int</code>), il y a deux
+l&apos;administrateur de la base de données ?</p>
+<p>Supposons que l&apos;âge soit représenté par un entier (<code>int</code>), il y a deux
 façons de régler le problème. La façon la plus commune (et la plus
 <em>incorrecte</em>) est d&apos;utiliser une valeur &quot;magique&quot; pour l&apos;âge pour
 signifier que cette information c&apos;est pas disponible. Si, par exemple,
@@ -62,9 +63,11 @@ exemple, l&apos;âge moyen de votre audience. Si vous oubliez de traiter
 spécialement la valeur magique, vous allez conclure que l&apos;âge moyen de
 vos visiteurs est 7 ans et demi, supprimer tous les mots compliqués de
 votre site, et demander à votre graphiste d&apos;employer davantage les
-couleurs primaires.</p><p>L&apos;autre méthode, plus correcte, est de stocker les âges dans un champ de
+couleurs primaires.</p>
+<p>L&apos;autre méthode, plus correcte, est de stocker les âges dans un champ de
 type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
-âges ressemblerait à :</p><pre><code>create table users
+âges ressemblerait à :</p>
+<pre><code>create table users
 (
   userid serial,
   name text not null,
@@ -72,7 +75,8 @@ type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
 );</code></pre>
 <p>Si l&apos;âge n&apos;est pas connu, c&apos;est la valeur spéciale SQL <code>NULL</code> qui est
 enregistrée. SQL ne tient pas compte de ces entrées si on demande à
-calculer la moyenne des âges, etc.</p><p>Les langages de programmation ont aussi leurs valeurs nulles, mais leur
+calculer la moyenne des âges, etc.</p>
+<p>Les langages de programmation ont aussi leurs valeurs nulles, mais leur
 facilité d&apos;utilisation est variable. En Perl, n&apos;importe quel scalaire
 (nombre ou chaîne) peut prendre la valeur <code>undef</code> (la valeur nulle en
 Perl). C&apos;est la source de beaucoup d&apos;avertissements (warnings), souvent
@@ -83,17 +87,22 @@ cas de stocker les âges avec des <code>Integer</code>, et d&apos;admettre que l
 références vers un âge puissent prendre la valeur <code>null</code>. En C les
 pointeurs peuvent, bien sûr, être nuls, mais pour utiliser cette
 fonctionalité avec un bête entier, il faut tout d&apos;abord l&apos;encapsuler
-dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</p><p>OCaml propose une solution élégante pour les valeurs nulles, en
+dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</p>
+<p>OCaml propose une solution élégante pour les valeurs nulles, en
 utilisant un simple type variant polymorphique, défini (jusqu&apos;à
-récemment, dans le module <code>Pervasives</code>) comme :</p><pre><code>type &apos;a option = None | Some of &apos;a</code></pre>
+récemment, dans le module <code>Pervasives</code>) comme :</p>
+<pre><code>type &apos;a option = None | Some of &apos;a</code></pre>
 <p>Une &quot;valeur nulle&quot; s&apos;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
 l&apos;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> dans le chapitre
-précédent).</p><pre><code># Some 3;;
+précédent).</p>
+<pre><code># Some 3;;
 - : int option = Some 3</code></pre>
-<p>Une liste d&apos;entiers optionels ?</p><pre><code># [ None; Some 3; Some 6; None ];;
+<p>Une liste d&apos;entiers optionels ?</p>
+<pre><code># [ None; Some 3; Some 6; None ];;
 - : int option list = [None; Some 3; Some 6; None]</code></pre>
-<p>Et une liste optionelle d&apos;entiers ?</p><pre><code># Some [1; 2; 3];;
+<p>Et une liste optionelle d&apos;entiers ?</p>
+<pre><code># Some [1; 2; 3];;
 - : int list option = Some [1; 2; 3]</code></pre>
 <h2 id="Assertionsavertissementserreursfatalesetcritureversstderr">Assertions, avertissements, erreurs fatales, et écriture vers stderr</h2>
 <p>Perl se distingue par un riche ensemble de commandes pour déboguer les
@@ -102,18 +111,23 @@ possibilité d&apos;imprimer l&apos;état de la pile d&apos;appels, de lever et 
 ratrapper des exceptions, etc. OCaml n&apos;est pas aussi bien doté en
 fonctionnalités de débogage - mieux que Java, à peu près équivalent au
 C, mais loin d&apos;égaler Perl. (Nous reparlerons des exceptions en détail
-plus tard.)</p><p>Tout d&apos;abord, les assertions. <code>assert</code> prend comme argument une
+plus tard.)</p>
+<p>Tout d&apos;abord, les assertions. <code>assert</code> prend comme argument une
 expression booléenne, et lève une exception si elle est fausse. En
 supposant que vous ne rattrapiez pas cette exception (ce qui est
 recommandé, tout particulièrement pour les débutants), son effet sera de
 stopper le programme, et d&apos;afficher l&apos;emplacement (nom du fichier,
-numéro de ligne et de colonne) où l&apos;erreur est survenue. Par exemple :</p><pre><code># assert (Sys.os_type = &quot;Win32&quot;);;
+numéro de ligne et de colonne) où l&apos;erreur est survenue. Par exemple :</p>
+<pre><code># assert (Sys.os_type = &quot;Win32&quot;);;
 Exception: Assert_failure (&quot;&quot;, 0, 30).</code></pre>
-<p>(Bien entendu, cette exception ne sera pas levée sous Win32.)</p><p>Vous pouvez utiliser <code>assert false</code> pour stopper votre programme dans
-les situations critiques, mais il est souvent préférable d&apos;utiliser...</p><p><code>failwith &quot;message d&apos;erreur&quot;</code>, pour lever une exception <code>Failure</code>, qui
+<p>(Bien entendu, cette exception ne sera pas levée sous Win32.)</p>
+<p>Vous pouvez utiliser <code>assert false</code> pour stopper votre programme dans
+les situations critiques, mais il est souvent préférable d&apos;utiliser...</p>
+<p><code>failwith &quot;message d&apos;erreur&quot;</code>, pour lever une exception <code>Failure</code>, qui
 elle aussi, à moins d&apos;être rattrappée, va stopper le programme et
 afficher le message d&apos;erreur fourni. <code>failwith</code> est souvent utilisé lors
-du filtrage, comme dans cet exemple réel :</p><pre><code>  match Sys.os_type with
+du filtrage, comme dans cet exemple réel :</p>
+<pre><code>  match Sys.os_type with
     &quot;Unix&quot; | &quot;Cygwin&quot; -&gt;   (* code omit *)
   | &quot;Win32&quot; -&gt;             (* code omit *)
   | &quot;MacOS&quot; -&gt;             (* code omit *)
@@ -121,10 +135,12 @@ du filtrage, comme dans cet exemple réel :</p><pre><code>  match Sys.os_type wi
 <p>A noter l&apos;utilisation d&apos;un couple de fonctionnalités supplémentaires du
 système de filtrage. L&apos;union de motifs est utilisée pour reconnaître
 <code>&quot;Unix&quot;</code> ou <code>&quot;Cygwin&quot;</code>, et le motif spécial <code>_</code> pour reconnaître
-&quot;n&apos;importe quoi d&apos;autre&quot;.</p><p>Si vous voulez déboguer votre programme mais, comme moi, avez une
+&quot;n&apos;importe quoi d&apos;autre&quot;.</p>
+<p>Si vous voulez déboguer votre programme mais, comme moi, avez une
 aversion pour les débogueurs autres que gdb, vous voudrez sûrement faire
 afficher des avertissements par vos fonctions. Voici un exemple (notez
-le code surligné) :</p><pre><code>open Graphics;;
+le code surligné) :</p>
+<pre><code>open Graphics;;
 
 open_graph &quot; 640x480&quot;;;
 for i = 12 downto 1 do
@@ -135,7 +151,8 @@ for i = 12 downto 1 do
 done;;
 read_line ();;</code></pre>
 <p>Si vous préférez le style <code>printf</code> du langage C, essayez plutôt le
-module <code>Printf</code> d&apos;OCaml :</p><pre><code>open Graphics;;
+module <code>Printf</code> d&apos;OCaml :</p>
+<pre><code>open Graphics;;
 &lt;em&gt;open Printf;;&lt;/em&gt;
 
 open_graph &quot; 640x480&quot;;;
@@ -149,19 +166,23 @@ done;;
 read_line ();;
 </code></pre>
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

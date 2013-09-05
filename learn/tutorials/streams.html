@@ -52,8 +52,10 @@
 is to read the file in as a single large string and use something like
 <code>Str.split</code> to turn it into a list. This works when the file is small,
 but because the entire file is loaded into memory, it does not scale
-well when the file is large.</p><p>More commonly, the <code>input_line</code> function can be used to read one line at
-a time from a channel. This typically looks like:</p><pre><code>let in_channel = open_in &quot;lines.txt&quot; in
+well when the file is large.</p>
+<p>More commonly, the <code>input_line</code> function can be used to read one line at
+a time from a channel. This typically looks like:</p>
+<pre><code>let in_channel = open_in &quot;lines.txt&quot; in
 try
   while true do
     let line = input_line in_channel in
@@ -68,11 +70,13 @@ cannot be reused in cases where the text is already in memory. The
 it is the programmer&apos;s responsibility to ensure that the file is closed
 appropriately. In fact, if there is any other exception in the above
 example, the file will not be closed at all. Altogether, there is a lot
-going on: channels, I/O, exceptions, and files.</p><p>Streams offer an abstraction over one part of this process: reading
+going on: channels, I/O, exceptions, and files.</p>
+<p>Streams offer an abstraction over one part of this process: reading
 items from a sequence. They don&apos;t assume anything about files or
 channels, and they replace the <code>End_of_file</code> exception with a more
 structured approach to dealing with the end of input. Here is a function
-that builds a stream of lines from an input channel:</p><pre><code>let line_stream_of_channel channel =
+that builds a stream of lines from an input channel:</p>
+<pre><code>let line_stream_of_channel channel =
   Stream.from
     (fun _ -&gt;
        try Some (input_line channel) with End_of_file -&gt; None)</code></pre>
@@ -83,11 +87,14 @@ value (<code>Some x</code>), that value will be the next item in the stream. If 
 has no value (<code>None</code>), this indicates that the stream is empty and no
 further reads will be attempted. Since the option is polymorphic,
 <code>Stream.from</code> can construct streams of any type. These streams have a
-type of <code>&apos;a Stream.t</code>.</p><p>With this simple function, we can now easily construct line streams from
-any input channel:</p><pre><code>let in_channel = open_in &quot;_oasis&quot;;;
+type of <code>&apos;a Stream.t</code>.</p>
+<p>With this simple function, we can now easily construct line streams from
+any input channel:</p>
+<pre><code>let in_channel = open_in &quot;_oasis&quot;;;
 let lines = line_stream_of_channel in_channel;;</code></pre>
 <p>This variable <code>lines</code> is a stream of strings, one string per line. We
-can now begin reading lines from it by passing it to <code>Stream.next</code>:</p><pre><code>Stream.next lines;;
+can now begin reading lines from it by passing it to <code>Stream.next</code>:</p>
+<pre><code>Stream.next lines;;
 Stream.next lines;;
 Stream.next lines;;
 Stream.next lines;;
@@ -96,10 +103,12 @@ while true do ignore(Stream.next lines) done;;</code></pre>
 or raises a <code>Stream.Failure</code> exception indicating that the stream is
 empty. Likewise, with a little help from the <code>Stream.of_list</code>
 constructor and the <code>Str</code> regular expression module, we could build a
-stream of lines from a string in memory:</p><pre><code>#load &quot;str.cma&quot;;;
+stream of lines from a string in memory:</p>
+<pre><code>#load &quot;str.cma&quot;;;
 let line_stream_of_string string =
   Stream.of_list (Str.split (Str.regexp &quot;&#92;n&quot;) string)</code></pre>
-<p>and these streams could be used exactly the same way:</p><pre><code>let lines = line_stream_of_string &quot;hello&#92;nstream&#92;nworld&quot;;;
+<p>and these streams could be used exactly the same way:</p>
+<pre><code>let lines = line_stream_of_string &quot;hello&#92;nstream&#92;nworld&quot;;;
 Stream.next lines;;
 Stream.next lines;;
 Stream.next lines;;
@@ -107,9 +116,11 @@ Stream.next lines;;</code></pre>
 <p>Since both cases raise <code>Stream.Failure</code> on an empty stream, there is no
 need to worry about catching <code>End_of_file</code> in the case of file I/O. This
 unified interface makes it much easier to write functions that can
-receive data from multiple sources.</p><p>The <code>Stream.iter</code> function automates the common task of performing an
+receive data from multiple sources.</p>
+<p>The <code>Stream.iter</code> function automates the common task of performing an
 operation for each item. With it, we can rewrite the original example as
-follows:</p><pre><code>  let in_channel = open_in &quot;_oasis&quot; in
+follows:</p>
+<pre><code>  let in_channel = open_in &quot;_oasis&quot; in
   try
     Stream.iter
       (fun line -&gt;
@@ -123,7 +134,8 @@ follows:</p><pre><code>  let in_channel = open_in &quot;_oasis&quot; in
 <p>Note how much easier it is to handle I/O exceptions properly, since we
 can deal with them independently from the end-of-file condition. This
 separation of concerns allows us to decompose this into simpler and more
-reusable functions:</p><pre><code>let process_line line =
+reusable functions:</p>
+<pre><code>let process_line line =
   print_endline line
 
 let process_lines lines =
@@ -142,23 +154,24 @@ let process_string string =
   process_lines (line_stream_of_string string)</code></pre>
 <h2 id="Constructingstreams">Constructing streams</h2>
 <p>In the above examples, we saw two methods for constructing streams:</p>
- <ul>
-  <li>Stream.from, which builds a stream from a callback function
-  </li>
-  <li>Stream.of_list, which builds a stream from a list in memory</li>
- </ul>
+<ul>
+ <li>Stream.from, which builds a stream from a callback function
+ </li>
+ <li>Stream.of_list, which builds a stream from a list in memory</li>
+</ul>
 
 <p>The <code>Stream</code> module provides a few other stream builders:</p>
- <ul>
-  <li>Stream.of_string, which builds a character stream from a string
-  </li>
-  <li>Stream.of_channel, which builds a character stream from a channel</li>
- </ul>
+<ul>
+ <li>Stream.of_string, which builds a character stream from a string
+ </li>
+ <li>Stream.of_channel, which builds a character stream from a channel</li>
+</ul>
 
 <p><code>Stream.from</code> is the most general, and it can be used to produce streams
 of any type. It is not limited to I/O and can even produce infinite
 sequences. Here are a few simple stream builders defined with
-<code>Stream.from</code>:</p><pre><code>  (* A stream that is always empty. *)
+<code>Stream.from</code>:</p>
+<pre><code>  (* A stream that is always empty. *)
   let empty_stream () = Stream.from (fun _ -&gt; None);;
   (* A stream that yields the same item repeatedly. *)
   let const_stream k = Stream.from (fun _ -&gt; Some k);;
@@ -171,7 +184,8 @@ preferable: <code>Stream.peek</code> and <code>Stream.junk</code>. When used tog
 functions allow you to see what the next item would be. This feature,
 known as &quot;look ahead&quot;, is very useful when writing parsers. Even if you
 don&apos;t need to look ahead, the peek/junk protocol may be nicer to work
-with because it uses options instead of exceptions:</p><pre><code>let lines = line_stream_of_string &quot;hello&#92;nworld&quot;;;
+with because it uses options instead of exceptions:</p>
+<pre><code>let lines = line_stream_of_string &quot;hello&#92;nworld&quot;;;
 Stream.peek lines;;
 Stream.peek lines;;
 Stream.junk lines;;
@@ -181,9 +195,11 @@ Stream.peek lines;;</code></pre>
 <p>As you can see, it is necessary to call <code>Stream.junk</code> to advance to the
 next item. <code>Stream.peek</code> will always give you either the next item or
 <code>None</code>, and it will never fail. Likewise, <code>Stream.junk</code> always succeeds
-(even if the stream is empty).</p><h2 id="AmorecomplexquotStreamfromquotexample">A more complex &quot;Stream.from&quot; example</h2>
+(even if the stream is empty).</p>
+<h2 id="AmorecomplexquotStreamfromquotexample">A more complex &quot;Stream.from&quot; example</h2>
 <p>Here is a function that converts a line stream into a paragraph stream.
-As such, it is both a stream consumer and a stream producer.</p><pre><code>  let paragraphs lines =
+As such, it is both a stream consumer and a stream producer.</p>
+<pre><code>  let paragraphs lines =
     let rec next para_lines i =
       match Stream.peek lines, para_lines with
       | None, [] -&gt; None
@@ -198,28 +214,31 @@ As such, it is both a stream consumer and a stream producer.</p><pre><code>  let
     Stream.from (next [])</code></pre>
 <p>This function uses an extra parameter to <code>next</code> (the <code>Stream.from</code>
 callback) called <code>para_lines</code> in order to collect the lines for each
-paragraph. Paragraphs are delimited by any number of blank lines.</p><p>Each time <code>next</code> is called, a <code>match</code> expression tests two values: the
+paragraph. Paragraphs are delimited by any number of blank lines.</p>
+<p>Each time <code>next</code> is called, a <code>match</code> expression tests two values: the
 next line in the stream, and the contents of <code>para_lines</code>. Four cases
 are handled:</p>
- <ol>
-  <li>If the end of the stream is reached and no lines have been
+<ol>
+ <li>If the end of the stream is reached and no lines have been
  collected, the paragraph stream ends as well.
-  </li>
-  <li>If the next line is blank and no lines have been collected, the
+ </li>
+ <li>If the next line is blank and no lines have been collected, the
  blank is ignored and <code>next</code> is called recursively to keep looking
  for a non-blank line.
-  </li>
-  <li>If a blank line or end of stream is reached and lines <strong>have</strong> been
+ </li>
+ <li>If a blank line or end of stream is reached and lines <strong>have</strong> been
  collected, the paragraph is returned by concatenating <code>para_lines</code>
  to a single string.
-  </li>
-  <li>Finally, if a non-blank line has been reached, the line is collected
+ </li>
+ <li>Finally, if a non-blank line has been reached, the line is collected
  by recursively calling <code>para_lines</code>.</li>
- </ol>
+</ol>
 
 <p>Happily, we can rely on the OCaml compiler&apos;s exhaustiveness checking to
-ensure that we are handling all possible cases.</p><p>With this new tool, we can now work just as easily with paragraphs as we
-could before with lines:</p><pre><code>  (* Print each paragraph, followed by a separator. *)
+ensure that we are handling all possible cases.</p>
+<p>With this new tool, we can now work just as easily with paragraphs as we
+could before with lines:</p>
+<pre><code>  (* Print each paragraph, followed by a separator. *)
   let lines = line_stream_of_channel in_channel in
   Stream.iter
     (fun para -&gt;
@@ -227,11 +246,13 @@ could before with lines:</p><pre><code>  (* Print each paragraph, followed by a 
        print_endline &quot;--&quot;)
     (paragraphs lines)</code></pre>
 <p>Functions like <code>paragraphs</code> that produce and consume streams can be
-composed together in a manner very similar to UNIX pipes and filters.</p><h2 id="Streamcombinators">Stream combinators</h2>
+composed together in a manner very similar to UNIX pipes and filters.</p>
+<h2 id="Streamcombinators">Stream combinators</h2>
 <p>Just like lists and arrays, common iteration patterns such as <code>map</code>,
 <code>filter</code>, and <code>fold</code> can be very useful. The <code>Stream</code> module does not
 provide such functions, but they can be built easily using
-<code>Stream.from</code>:</p><pre><code>  let stream_map f stream =
+<code>Stream.from</code>:</p>
+<pre><code>  let stream_map f stream =
     let rec next i =
       try Some (f (Stream.next stream))
       with Stream.Failure -&gt; None in
@@ -251,20 +272,25 @@ provide such functions, but they can be built easily using
       (fun x -&gt; result := f x !result)
       stream;
     !result</code></pre>
-<p>For example, here is a stream of leap years starting with 2000:</p><pre><code>  let is_leap year =
+<p>For example, here is a stream of leap years starting with 2000:</p>
+<pre><code>  let is_leap year =
     year mod 4 = 0 &amp;&amp; (year mod 100 &lt;&gt; 0 || year mod 400 = 0)
   let leap_years = stream_filter is_leap (count_stream 2000)</code></pre>
 <p>We can use the <code>Stream.npeek</code> function to look ahead by more than one
 item. In this case, we&apos;ll peek at the next 30 items to make sure that
 the year 2100 is not a leap year (since it&apos;s divisible by 100 but not
-400!):</p><pre><code>Stream.npeek 30 leap_years;;</code></pre>
+400!):</p>
+<pre><code>Stream.npeek 30 leap_years;;</code></pre>
 <p>Note that we must be careful not to use <code>Stream.iter</code> on an infinite
 stream like <code>leap_years</code>. This applies to <code>stream_fold</code>, as well as any
-function that attempts to consume the entire stream.</p><pre><code>stream_fold (+) (Stream.of_list [1; 2; 3]) 0;;</code></pre>
-<p><code>stream_fold (+) (count_stream 0) 0</code> runs forever.</p><h2 id="Otherusefulstreambuilders">Other useful stream builders</h2>
+function that attempts to consume the entire stream.</p>
+<pre><code>stream_fold (+) (Stream.of_list [1; 2; 3]) 0;;</code></pre>
+<p><code>stream_fold (+) (count_stream 0) 0</code> runs forever.</p>
+<h2 id="Otherusefulstreambuilders">Other useful stream builders</h2>
 <p>The previously defined <code>const_stream</code> function builds a stream that
 repeats a single value. It is also useful to build a stream that repeats
-a sequence of values. The following function does just that:</p><pre><code>  let cycle items =
+a sequence of values. The following function does just that:</p>
+<pre><code>  let cycle items =
     let buf = ref [] in
     let rec next i =
       if !buf = [] then buf := items;
@@ -276,7 +302,8 @@ a sequence of values. The following function does just that:</p><pre><code>  let
 generation of alternating background colors for HTML. By using <code>cycle</code>
 with <code>stream_combine</code>, explained in the next section, an infinite stream
 of background colors can be combined with a finite stream of data to
-produce a sequence of HTML blocks:</p><pre><code>  let stream_combine stream1 stream2 =
+produce a sequence of HTML blocks:</p>
+<pre><code>  let stream_combine stream1 stream2 =
     let rec next i =
       try Some (Stream.next stream1, Stream.next stream2)
       with Stream.Failure -&gt; None in
@@ -288,7 +315,8 @@ produce a sequence of HTML blocks:</p><pre><code>  let stream_combine stream1 st
        (stream_combine
           (cycle [&quot;#eee&quot;; &quot;#fff&quot;])
           (Stream.of_list [&quot;hello&quot;; &quot;html&quot;; &quot;world&quot;])))</code></pre>
-<p>Here is a simple <code>range</code> function that produces a sequence of integers:</p><pre><code>  let range ?(start=0) ?(stop=0) ?(step=1) () =
+<p>Here is a simple <code>range</code> function that produces a sequence of integers:</p>
+<pre><code>  let range ?(start=0) ?(stop=0) ?(step=1) () =
     let in_range = if step &lt; 0 then (&gt;) else (&lt;) in
     let current = ref start in
     let rec next i =
@@ -299,7 +327,8 @@ produce a sequence of HTML blocks:</p><pre><code>  let stream_combine stream1 st
     Stream.from next</code></pre>
 <p>This works just like Python&apos;s <code>xrange</code> built-in function, providing an
 easy way to produce an assortment of lazy integer sequences by
-specifying combinations of <code>start</code>, <code>stop</code>, or <code>step</code> values:</p><pre><code>Stream.npeek 10 (range ~start:5 ~stop:10 ());;
+specifying combinations of <code>start</code>, <code>stop</code>, or <code>step</code> values:</p>
+<pre><code>Stream.npeek 10 (range ~start:5 ~stop:10 ());;
 Stream.npeek 10 (range ~stop:10 ~step:2 ());;
 Stream.npeek 10 (range ~start:10 ~step:(-1) ());;
 Stream.npeek 10 (range ~start:10 ~stop:5 ~step:(-1) ());;</code></pre>
@@ -307,7 +336,8 @@ Stream.npeek 10 (range ~start:10 ~stop:5 ~step:(-1) ());;</code></pre>
 <p>There are several ways to combine streams. One is to produce a stream of
 streams and then concatenate them into a single stream. The following
 function works just like <code>List.concat</code>, but instead of turning a list of
-lists into a list, it turns a stream of streams into a stream:</p><pre><code>  let stream_concat streams =
+lists into a list, it turns a stream of streams into a stream:</p>
+<pre><code>  let stream_concat streams =
     let current_stream = ref None in
     let rec next i =
       try
@@ -323,27 +353,31 @@ lists into a list, it turns a stream of streams into a stream:</p><pre><code>  l
       with Stream.Failure -&gt; None in
     Stream.from next</code></pre>
 <p>Here is a sequence of ranges which are themselves derived from a range,
-concatenated with <code>stream_concat</code> to produce a flattened <code>int Stream.t</code>.</p><pre><code>  Stream.npeek 10
+concatenated with <code>stream_concat</code> to produce a flattened <code>int Stream.t</code>.</p>
+<pre><code>  Stream.npeek 10
     (stream_concat
        (stream_map
           (fun i -&gt; range ~stop:i ())
           (range ~stop:5 ())))</code></pre>
 <p>Another way to combine streams is to iterate through them in a pairwise
-fashion:</p><pre><code>  let stream_combine stream1 stream2 =
+fashion:</p>
+<pre><code>  let stream_combine stream1 stream2 =
     let rec next i =
       try Some (Stream.next stream1, Stream.next stream2)
       with Stream.Failure -&gt; None in
     Stream.from next</code></pre>
 <p>This is useful, for instance, if you have a stream of keys and a stream
 of corresponding values. Iterating through key value pairs is then as
-simple as:</p><pre><code>Stream.iter
+simple as:</p>
+<pre><code>Stream.iter
   (fun (key, value) -&gt;
      (* do something with &apos;key&apos; and &apos;value&apos; *)
      ())
   (stream_combine key_stream value_stream)</code></pre>
 <p>Since <code>stream_combine</code> stops as soon as either of its input streams runs
 out, it can be used to combine an infinite stream with a finite one.
-This provides a neat way to add indexes to a sequence:</p><pre><code>  let items = [&quot;this&quot;; &quot;is&quot;; &quot;a&quot;; &quot;test&quot;];;
+This provides a neat way to add indexes to a sequence:</p>
+<pre><code>  let items = [&quot;this&quot;; &quot;is&quot;; &quot;a&quot;; &quot;test&quot;];;
   Stream.iter
     (fun (index, value) -&gt;
        Printf.printf &quot;%d. %s&#92;n%!&quot; index value)
@@ -354,7 +388,8 @@ longer available unless you save a copy somewhere. What if you want to
 use the same stream more than once? One way is to create a &quot;tee&quot;. The
 following function creates two output streams from one input stream,
 intelligently queueing unseen values until they have been produced by
-both streams:</p><pre><code>  let stream_tee stream =
+both streams:</p>
+<pre><code>  let stream_tee stream =
     let next self other i =
       try
         if Queue.is_empty self
@@ -368,7 +403,8 @@ both streams:</p><pre><code>  let stream_tee stream =
     let q1 = Queue.create () in
     let q2 = Queue.create () in
     (Stream.from (next q1 q2), Stream.from (next q2 q1))</code></pre>
-<p>Here is an example of a stream tee in action:</p><pre><code>let letters = Stream.of_list [&apos;a&apos;; &apos;b&apos;; &apos;c&apos;; &apos;d&apos;; &apos;e&apos;];;
+<p>Here is an example of a stream tee in action:</p>
+<pre><code>let letters = Stream.of_list [&apos;a&apos;; &apos;b&apos;; &apos;c&apos;; &apos;d&apos;; &apos;e&apos;];;
 let s1, s2 = stream_tee letters;;
 Stream.next s1;;
 Stream.next s1;;
@@ -377,14 +413,16 @@ Stream.next s1;;
 Stream.next s2;;
 Stream.next s2;;</code></pre>
 <p>Again, since streams are destructive, you probably want to leave the
-original stream alone or you will lose items from the copied streams:</p><pre><code>Stream.next letters;;
+original stream alone or you will lose items from the copied streams:</p>
+<pre><code>Stream.next letters;;
 Stream.next s1;;
 Stream.next s2;;</code></pre>
 <h2 id="Convertingstreams">Converting streams</h2>
 <p>Here are a few functions for converting between streams and lists,
 arrays, and hash tables. These probably belong in the standard library,
 but they are simple to define anyhow. Again, beware of infinite streams,
-which will cause these functions to hang.</p><pre><code>  (* This one is free. *)
+which will cause these functions to hang.</p>
+<pre><code>  (* This one is free. *)
   let stream_of_list = Stream.of_list
 
   let list_of_stream stream =
@@ -413,7 +451,8 @@ which will cause these functions to hang.</p><pre><code>  (* This one is free. *
     result</code></pre>
 <p>What if you want to convert arbitary data types to streams? Well, if the
 data type defines an <code>iter</code> function, and you don&apos;t mind using threads,
-you can use a producer-consumer arrangement to invert control:</p><pre><code>  #directory &quot;+threads&quot;;;
+you can use a producer-consumer arrangement to invert control:</p>
+<pre><code>  #directory &quot;+threads&quot;;;
   #load &quot;threads.cma&quot;;;
   let elements iter coll =
     let channel = Event.new_channel () in
@@ -426,7 +465,8 @@ you can use a producer-consumer arrangement to invert control:</p><pre><code>  #
     ignore (Thread.create producer ());
     Stream.from consumer</code></pre>
 <p>Now it is possible to build a stream from an <code>iter</code> function and a
-corresponding value:</p><pre><code>module StringSet = Set.Make(String);;
+corresponding value:</p>
+<pre><code>module StringSet = Set.Make(String);;
 
 let set = StringSet.empty;;
 let set = StringSet.add &quot;here&quot; set;;
@@ -436,7 +476,8 @@ let set = StringSet.add &quot;values&quot; set;;
 let stream = elements StringSet.iter set;;
 Stream.iter print_endline stream;;</code></pre>
 <p>Some data types, like Hashtbl and Map, provide an <code>iter</code> function that
-iterates through key-value pairs. Here&apos;s a function for those, too:</p><pre><code>  let items iter coll =
+iterates through key-value pairs. Here&apos;s a function for those, too:</p>
+<pre><code>  let items iter coll =
     let channel = Event.new_channel () in
     let producer () =
       let () =
@@ -448,19 +489,21 @@ iterates through key-value pairs. Here&apos;s a function for those, too:</p><pre
     ignore (Thread.create producer ());
     Stream.from consumer</code></pre>
 <p>If we want just the keys, or just the values, it is simple to transform
-the output of <code>items</code> using <code>stream_map</code>:</p><pre><code>let keys iter coll = stream_map (fun (k, v) -&gt; k) (items iter coll)
+the output of <code>items</code> using <code>stream_map</code>:</p>
+<pre><code>let keys iter coll = stream_map (fun (k, v) -&gt; k) (items iter coll)
 let values iter coll = stream_map (fun (k, v) -&gt; v) (items iter coll)</code></pre>
 <p>Keep in mind that these techniques spawn producer threads which carry a
 few risks: they only terminate when they have finished iterating, and
 any change to the original data structure while iterating may produce
-unexpected results.</p><h2 id="OtherbuiltinStreamfunctions">Other built-in Stream functions</h2>
+unexpected results.</p>
+<h2 id="OtherbuiltinStreamfunctions">Other built-in Stream functions</h2>
 <p>There are a few other documented methods in the <code>Stream</code> module:</p>
- <ul>
-  <li>Stream.empty, which raises <code>Stream.Failure</code> unless a stream is empty
-  </li>
-  <li>Stream.count, which returns the stream count (number of discarded
+<ul>
+ <li>Stream.empty, which raises <code>Stream.Failure</code> unless a stream is empty
+ </li>
+ <li>Stream.count, which returns the stream count (number of discarded
  elements)</li>
- </ul>
+</ul>
 
 <p>In addition, there are a few undocumented functions: <code>iapp</code>, <code>icons</code>,
 <code>ising</code>, <code>lapp</code>, <code>lcons</code>, <code>lsing</code>, <code>sempty</code>, <code>slazy</code>, and <code>dump</code>. They
@@ -470,19 +513,24 @@ Camlp4 <a href='stream_expressions.html' title='Stream Expressions'>Stream
 Expressions</a>, which are
 based on the <code>Stream</code> module as well. In any case, they are best left
 alone.</p>
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

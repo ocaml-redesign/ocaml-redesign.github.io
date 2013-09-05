@@ -48,25 +48,27 @@
           <nav id="nav-secondary">
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
-
- <ul>
-  <li><a href='#Nullpointers'>Null pointers</a>
-  </li>
-  <li><a href='#Assertwarningsfatalerrorsandprintingtostderr'>Assert, warnings, fatal errors, and printing to stderr</a>
-  </li>
- </ul>
+<ul>
+ <li><a href='#Nullpointers'>Null pointers</a>
+ </li>
+ <li><a href='#Assertwarningsfatalerrorsandprintingtostderr'>Assert, warnings, fatal errors, and printing to stderr</a>
+ </li>
+</ul>
 
             </ul>
           </nav>
         </div>
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>Null Pointers, Asserts and Warnings</p><p><em>Table of contents</em></p><h1 id="NullPointersAssertsandWarnings">Null Pointers, Asserts and Warnings</h1>
+            <p>Null Pointers, Asserts and Warnings</p>
+<p><em>Table of contents</em></p>
+<h1 id="NullPointersAssertsandWarnings">Null Pointers, Asserts and Warnings</h1>
 <h2 id="Nullpointers">Null pointers</h2>
 <p>So you&apos;ve got a survey on your website which asks your readers for their
 names and ages. Only problem is that for some reason a few of your
 readers don&apos;t want to give you their age - they stubbornly refuse to
-fill that field in. What&apos;s a poor database administrator to do?</p><p>Assume that the age is represented by an <code>int</code>, there are two possible
+fill that field in. What&apos;s a poor database administrator to do?</p>
+<p>Assume that the age is represented by an <code>int</code>, there are two possible
 ways to solve this problem. The most common one (and the most <em>wrong</em>
 one) is to assume some sort of &quot;special&quot; value for the age which means
 that the age information wasn&apos;t collected. So if, say, age = -1 then the
@@ -75,8 +77,10 @@ not valid!). This method kind of works until you start, for example,
 calculating the mean age of visitors to your website. Since you forgot
 to take into account your special value, you conclude that the mean age
 of visitors is 7½ years old, and you employ web designers to remove all
-the long words and use primary colours everywhere.</p><p>The other, correct method is to store the age in a field which has type
-&quot;int or null&quot;. Here&apos;s a SQL table for storing ages:</p><pre><code>create table users
+the long words and use primary colours everywhere.</p>
+<p>The other, correct method is to store the age in a field which has type
+&quot;int or null&quot;. Here&apos;s a SQL table for storing ages:</p>
+<pre><code>create table users
 (
   userid serial,
   name text not null,
@@ -84,7 +88,8 @@ the long words and use primary colours everywhere.</p><p>The other, correct meth
 );</code></pre>
 <p>If the age data isn&apos;t collected, then it goes into the database as a
 special SQL <code>NULL</code> value. SQL ignores this automatically when you ask it
-to compute averages and so on.</p><p>Programming languages also support nulls, although they may be easier to
+to compute averages and so on.</p>
+<p>Programming languages also support nulls, although they may be easier to
 use in some than in others. In Perl, any scalar (ie. number or string)
 can be <code>undef</code> (Perl&apos;s way of saying null). This is a cause of many
 warnings which are often ignored by inexperienced programmers, even
@@ -93,38 +98,50 @@ an object can also be null, so it might make sense in Java to store the
 age as an <code>Integer</code> and allow references to the age to be <code>null</code>. In C
 pointers can, of course, be null, but if you wanted a simple integer to
 be null, you&apos;d have to first box it up into an object allocated by
-<code>malloc</code> on the heap.</p><p>OCaml has an elegant solution to the problem of nulls, using a simple
-polymorphic variant type defined (in <code>Pervasives</code>) as:</p><pre><code>  type &apos;a option = None | Some of &apos;a</code></pre>
+<code>malloc</code> on the heap.</p>
+<p>OCaml has an elegant solution to the problem of nulls, using a simple
+polymorphic variant type defined (in <code>Pervasives</code>) as:</p>
+<pre><code>  type &apos;a option = None | Some of &apos;a</code></pre>
 <p>A &quot;null pointer&quot; is written <code>None</code>. The type of age in our example above
 (an <code>int</code> which can be null) is <code>int option</code> [remember: backwards like
-<code>int list</code> and <code>int binary_tree</code>].</p><pre><code>  Some 3</code></pre>
-<p>What about a list of optional ints?</p><pre><code>  [ None; Some 3; Some 6; None ]</code></pre>
-<p>And what about an optional list of ints?</p><pre><code>  Some [1; 2; 3]</code></pre>
+<code>int list</code> and <code>int binary_tree</code>].</p>
+<pre><code>  Some 3</code></pre>
+<p>What about a list of optional ints?</p>
+<pre><code>  [ None; Some 3; Some 6; None ]</code></pre>
+<p>And what about an optional list of ints?</p>
+<pre><code>  Some [1; 2; 3]</code></pre>
 <h2 id="Assertwarningsfatalerrorsandprintingtostderr">Assert, warnings, fatal errors, and printing to stderr</h2>
 <p>One great feature of Perl is the rich set of commands for debugging
 programs and handling unexpected errors, including the ability to print
 stack traces, throw and catch exceptions and the like. OCaml doesn&apos;t
 have quite such a rich set of debugging commands - better than Java,
 about the same as C, not nearly as good as Perl. (We&apos;ll talk about
-exceptions in more detail later on.)</p><p>First of all, <code>assert</code> takes an expression as an argument and throws an
+exceptions in more detail later on.)</p>
+<p>First of all, <code>assert</code> takes an expression as an argument and throws an
 exception. Assuming that you don&apos;t catch this exception (it&apos;s probably
 unwise to catch this exception, particularly for beginners), this
 results in the program stopping and printing out the source file and
-line number where the error occurred. An example:</p><pre><code>  assert (Sys.os_type = &quot;Win32&quot;)</code></pre>
-<p>(Running this on Win32, of course, won&apos;t throw an error).</p><p>You can also just call <code>assert false</code> to stop your program if things
-just aren&apos;t going well, but you&apos;re probably better to use ...</p><p><code>failwith &quot;error message&quot;</code> throws a <code>Failure</code> exception, which again
+line number where the error occurred. An example:</p>
+<pre><code>  assert (Sys.os_type = &quot;Win32&quot;)</code></pre>
+<p>(Running this on Win32, of course, won&apos;t throw an error).</p>
+<p>You can also just call <code>assert false</code> to stop your program if things
+just aren&apos;t going well, but you&apos;re probably better to use ...</p>
+<p><code>failwith &quot;error message&quot;</code> throws a <code>Failure</code> exception, which again
 assuming you don&apos;t try to catch it, will stop the program with the given
 error message. <code>failwith</code> is often used during pattern matching, like
-this real example:</p><pre><code>match Sys.os_type with
+this real example:</p>
+<pre><code>match Sys.os_type with
 | &quot;Unix&quot; | &quot;Cygwin&quot; -&gt;   (* code omitted *)
 | &quot;Win32&quot; -&gt;             (* code omitted *)
 | &quot;MacOS&quot; -&gt;             (* code omitted *)
 | _ -&gt; failwith &quot;this system is not supported&quot;</code></pre>
 <p>Note a couple of extra pattern matching features in this example too. A
 so-called &quot;range pattern&quot; is used to match either <code>&quot;Unix&quot;</code> or
-<code>&quot;Cygwin&quot;</code>, and the special <code>_</code> pattern which matches &quot;anything else&quot;.</p><p>If you want to debug your program, but, like me, you have an aversion to
+<code>&quot;Cygwin&quot;</code>, and the special <code>_</code> pattern which matches &quot;anything else&quot;.</p>
+<p>If you want to debug your program, but, like me, you have an aversion to
 debuggers which aren&apos;t gdb, then you&apos;ll probably want to print out a
-warning some way through your function. Here&apos;s an example:</p><pre><code>open Graphics
+warning some way through your function. Here&apos;s an example:</p>
+<pre><code>open Graphics
 
 let () =
   open_graph &quot; 640x480&quot;;
@@ -136,7 +153,8 @@ let () =
   done;
   read_line ()</code></pre>
 <p>If you prefer C-style <code>printf</code>&apos;s then try using OCaml&apos;s <code>Printf</code> module
-instead:</p><pre><code>open Graphics
+instead:</p>
+<pre><code>open Graphics
 open Printf
 
 let () =
@@ -150,19 +168,23 @@ let () =
   read_line ()
 </code></pre>
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

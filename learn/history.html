@@ -51,11 +51,13 @@
 Language</em>. It was a pun on CAM, the Categorical Abstract Machine, and
 ML, the family of programming languages to which Caml belongs. The name
 Caml has remained throughout the evolution of the language, even though
-the present implementation has no relation with the CAM.</p><p>Caml was first designed and implemented by
+the present implementation has no relation with the CAM.</p>
+<p>Caml was first designed and implemented by
 <a href='http://www.inria.fr/index.en.html'>Inria</a>&apos;s <em>Formel</em> team, headed by
 <a href='http://cristal.inria.fr/~huet/'>Gérard Huet</a>. Its development continued
 within the <a href='http://cristal.inria.fr/'>Cristal</a> team, and its current
-successor, <a href='http://gallium.inria.fr/'>Gallium</a>.</p><h2 id="TheOrigin">The Origin</h2>
+successor, <a href='http://gallium.inria.fr/'>Gallium</a>.</p>
+<h2 id="TheOrigin">The Origin</h2>
 <p>The Formel team became interested in the ML language in 1980–81. ML was
 the <em>meta-language</em> of the Edinburgh version of the LCF proof assistant,
 both designed by <a href='http://www.cl.cam.ac.uk/~rm135/'>Robin Milner</a>. It was
@@ -70,7 +72,8 @@ implementation compatible with various Lisp compilers (MacLisp,
 FranzLisp, LeLisp, ZetaLisp). This work involved <a href='http://www.pps.jussieu.fr/~cousinea/'>Guy
 Cousineau</a> and <a href='http://www.cl.cam.ac.uk/users/lcp/'>Larry
 Paulson</a>. The performance of the ML
-implementation was improved by the addition of a compiler.</p><p><a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> also added
+implementation was improved by the addition of a compiler.</p>
+<p><a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> also added
 algebraic data types and pattern-matching, following ideas from <a href='http://www.cl.cam.ac.uk/~rm135/'>Robin
 Milner</a>, which he in turn had borrowed
 from Hope, a programming language designed by <a href='http://www.dcs.ed.ac.uk/home/rb/'>Rod
@@ -80,22 +83,23 @@ implementation was called Le_ML, a name that did not survive. It was
 used by <a href='http://www.cl.cam.ac.uk/users/lcp/'>Larry Paulson</a> to develop
 Cambridge LCF and by <a href='http://www.cl.cam.ac.uk/users/mjcg/'>Mike Gordon</a>
 for the first version of HOL, as recalled in Gordon&apos;s <a href='http://www.cl.cam.ac.uk/users/mjcg/papers/HolHistory.html'>short history of
-HOL</a>.</p><p>Around 1984, three events motivated us to get even more involved in the
+HOL</a>.</p>
+<p>Around 1984, three events motivated us to get even more involved in the
 development of ML:</p>
- <ul>
-  <li>In Edinburgh, <a href='http://lucacardelli.name/'>Luca Cardelli</a> developed a
+<ul>
+ <li>In Edinburgh, <a href='http://lucacardelli.name/'>Luca Cardelli</a> developed a
  much faster implementation of ML using his <em>Functional Abstract
  Machine (FAM)</em>. He also designed his own version of the language,
  known at that time as <em>Cardelli&apos;s ML</em>.
-  </li>
-  <li><a href='http://www.cl.cam.ac.uk/~rm135/'>Robin Milner</a> thought it was a
+ </li>
+ <li><a href='http://www.cl.cam.ac.uk/~rm135/'>Robin Milner</a> thought it was a
  good moment to propose a new definition of ML in order to avoid
  divergence between various implementations. He defined the core
  Standard ML language, which was later complemented by a module
  system designed by <a href='http://people.cs.uchicago.edu/~dbm/'>Dave
  McQueen</a>.
-  </li>
-  <li>At the same time, <a href='http://www.pps.jussieu.fr/~curien/'>Pierre-Louis
+ </li>
+ <li>At the same time, <a href='http://www.pps.jussieu.fr/~curien/'>Pierre-Louis
  Curien</a> developed a calculus of
  categorical combinators, as well as a correspondence between
  lambda-calculus and categorical combinators, which, as noticed by
@@ -104,7 +108,7 @@ development of ML:</p>
  original implementation technique of Edinburgh ML, but could be
  described, proved correct, and optimized in a simple way. This led
  to the definition of the Categorical Abstract Machine (CAM).</li>
- </ul>
+</ul>
 
 <p>This urged <a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> to
 develop a new implementation of ML, based on the CAM. However, the
@@ -123,13 +127,15 @@ modifications that seemed useful to us would have introduced too much
 delay in our work. Furthermore, our philosophy was in conflict with that
 of a “standard” language, which is not supposed to evolve too quickly.
 We did incorporate into Caml most of the improvements brought by
-Standard ML over Edinburgh ML.</p><h2 id="TheFirstImplementation">The First Implementation</h2>
+Standard ML over Edinburgh ML.</p>
+<h2 id="TheFirstImplementation">The First Implementation</h2>
 <p>The first implementation of Caml appeared in 1987 and was further
 developed until 1992. It was created mainly by Ascander Suarez. After
 Ascander left in 1988, <a href='http://cristal.inria.fr/~weis/'>Pierre Weis</a> and
 <a href='http://cristal.inria.fr/~mauny/'>Michel Mauny</a>, carried on with the
 development and maintenance of the system. This implementation compiled
-Caml down to LLM3, the virtual machine of the Le_Lisp system.</p><p><a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> modestly recalls:
+Caml down to LLM3, the virtual machine of the Le_Lisp system.</p>
+<p><a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> modestly recalls:
 “I must admit that when the Caml development started, my experience with
 programming language implementation was very limited. Relying on the
 LLM3 abstract machine and on the Le_Lisp memory allocation and garbage
@@ -142,7 +148,8 @@ that it was more important to have good performance on non-functional
 programs than on very functional ones. Above all, I had overlooked the
 importance of portability and openness. In spite of these inadequacies,
 for which I am initially responsible, Ascander, Pierre and Michel did
-quite a nice piece of work.”</p><h2 id="CamlLight">Caml Light</h2>
+quite a nice piece of work.”</p>
+<h2 id="CamlLight">Caml Light</h2>
 <p>In 1990 and 1991, <a href='http://cristal.inria.fr/~xleroy/'>Xavier Leroy</a>
 designed a completely new implementation of Caml, based on a bytecode
 interpreter written in C. <a href='http://cristal.inria.fr/~doligez/'>Damien
@@ -153,7 +160,8 @@ and PCs. It replaced the old Caml implementation and highly helped
 promote the use of Caml in education and in research teams. Its support
 for data streams and its parsing facilities, due to <a href='http://cristal.inria.fr/~mauny/'>Michel
 Mauny</a>, were issued from a continued
-effort of the Formel team to promote syntax manipulation tools.</p><h2 id="CamlSpecialLight">Caml Special Light</h2>
+effort of the Formel team to promote syntax manipulation tools.</p>
+<h2 id="CamlSpecialLight">Caml Special Light</h2>
 <p>In 1995, <a href='http://cristal.inria.fr/~xleroy/'>Xavier Leroy</a> released Caml
 Special Light, which improved over Caml Light in several ways. First, an
 optimizing native-code compiler was added to the bytecode compiler. This
@@ -164,7 +172,8 @@ languages such as C++. Second, Caml Special Light offered a high-level
 module system, designed by <a href='http://cristal.inria.fr/~xleroy/'>Xavier
 Leroy</a> and inspired by the module
 system of Standard ML. This module system provides powerful abstraction
-and parametrization facilities for programming in the large.</p><h2 id="ObjectiveCaml">Objective Caml</h2>
+and parametrization facilities for programming in the large.</p>
+<h2 id="ObjectiveCaml">Objective Caml</h2>
 <p>Type systems and type inference for object-oriented programming has been
 a hot area of research since the early 1990&apos;s. <a href='http://cristal.inria.fr/~remy/'>Didier
 Rémy</a>, later joined by <a href='http://www.pps.jussieu.fr/~vouillon/'>Jérôme
@@ -178,11 +187,13 @@ static typing and type inference. It supports many advanced OO
 programming idioms (type-parametric classes, binary methods, mytype
 specialization) in a statically type-safe way, while these idioms cause
 unsoundness or require run-time type checks in other OO languages such
-as C++ and Java.</p><p>In 2000, <a href='http://www.math.nagoya-u.ac.jp/~garrigue/'>Jacques Garrigue</a>
+as C++ and Java.</p>
+<p>In 2000, <a href='http://www.math.nagoya-u.ac.jp/~garrigue/'>Jacques Garrigue</a>
 extended Objective Caml with several new features, which he had been
 experimenting with for a few years in the Objective Label dialect of
 Objective Caml. Among these features were polymorphic methods, labeled
-and optional function arguments, and polymorphic variants.</p><h2 id="TheriseofOCaml">The rise of OCaml</h2>
+and optional function arguments, and polymorphic variants.</p>
+<h2 id="TheriseofOCaml">The rise of OCaml</h2>
 <p>Since the late 1990&apos;s, OCaml has been steadily gaining in popularity and
 attracted a significant user base. In addition to impressive programs
 developed in OCaml, the user community also contributed many
@@ -191,37 +202,45 @@ graphical user interfaces and database bindings to Web and network
 programming, cross-language interoperability and static program
 analysis. In parallel, the core OCaml development team actively
 maintains the base system, improving the quality of the implementation
-and porting it to the latest architectures and systems.</p><h2 id="SomeCloseRelatives">Some Close Relatives</h2>
+and porting it to the latest architectures and systems.</p>
+<h2 id="SomeCloseRelatives">Some Close Relatives</h2>
 <p>In addition to these mainstream versions of Caml, one should mention
 many related compilers. <a href='http://cristal.inria.fr/~mauny/'>Michel Mauny</a>
 and <a href='http://cristal.inria.fr/~ddr/'>Daniel de Rauglaudre</a> designed
 Chamau, which offers unique syntax manipulation facilities which are now
-offered in the Camlp4 pre-processor for OCaml.</p><p><a href='http://www-sop.inria.fr/members/Manuel.Serrano/'>Manuel Serrano</a> and
+offered in the Camlp4 pre-processor for OCaml.</p>
+<p><a href='http://www-sop.inria.fr/members/Manuel.Serrano/'>Manuel Serrano</a> and
 <a href='http://cristal.inria.fr/~weis/'>Pierre Weis</a> created BIGLOO. Régis
 Cridlig made Camlot. Jean Goubault-Larrecq wrote HimML, which features
 implicit hash-consing and efficient operations on sets and maps.
 <a href='http://www.pps.jussieu.fr/~emmanuel/'>Emmanuel Chailloux</a> published
 CeML. In the <em>Para</em> team, Francis Dupont implemented Caml for parallel
 machines, while <a href='http://cristal.inria.fr/~maranget/'>Luc Maranget</a> built
-Gaml, a compiler for a lazy functional programming language.</p><h2 id="FinalQuote">Final Quote</h2>
+Gaml, a compiler for a lazy functional programming language.</p>
+<h2 id="FinalQuote">Final Quote</h2>
 <p>In 1996, <a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> wrote:
 “Certainly, the history of Caml could have been more linear. However,
 through trial and error, a capacity for producing high performance,
 portable, and flexible functional programming language implementations
 has emerged in France.”</p>
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -55,15 +55,18 @@ funzioni annidate, e sui riferimenti. A questo scopo osserveremo molti
 concetti di OCaml che non saranno subito chiari, non avendoli noi mai
 visti prima. Non preoccupatevi dei dettagli, per ora. Concentratevi
 invece sulla forma complessiva dei programmi e sulle caratteristiche che
-rileverò.</p><h3 id="quotVariabiliquotlocaliinrealtespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3>
+rileverò.</p>
+<h3 id="quotVariabiliquotlocaliinrealtespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3>
 <p>Prendiamo la funzione <code>average</code> ed aggiungiamovi una variabile locale in
-C. (Confrontatela con la prima definizione che ne avevamo sopra).</p><pre><code>double
+C. (Confrontatela con la prima definizione che ne avevamo sopra).</p>
+<pre><code>double
 average (double a, double b)
 {
   double sum = a + b;
   return sum / 2;
 }</code></pre>
-<p>Faccia ora lo stesso con la nostra versione in OCaml:</p><pre><code>let average a b =
+<p>Faccia ora lo stesso con la nostra versione in OCaml:</p>
+<pre><code>let average a b =
   let sum = a +. b in
   sum /. 2.0;;</code></pre>
 <p>La frase standard <code>let nome = espressione in</code> è usata per definire
@@ -71,7 +74,8 @@ un&apos;espressione locale dotata di nome, e <code>name</code> può dunque esser
 utilizzato in seguito nella funzione al posto di <code>espressione</code>, fino ad
 un <code>;;</code> che termina il blocco di codice. Notate che non indentiamo dopo
 l&apos;<code>in</code>. Pensate semplicemente a <code>let ... in</code> come se fosse
-un&apos;istruzione.</p><p>Ora, confrontare le variabili locali di C e queste espressioni locali
+un&apos;istruzione.</p>
+<p>Ora, confrontare le variabili locali di C e queste espressioni locali
 dotate di nome è un trucco. In realtà sono cose alquanto differenti. La
 variabile C <code>sum</code> ha uno slot allocato per sé nello stack. Potete
 assegnare più tardi valori a <code>sum</code> nella funzione se volete, o anche
@@ -79,26 +83,32 @@ ottenete l&apos;indirizzo di <code>sum</code>. Questo NON è vero per la version
 OCaml. Nella versione in OCaml, <code>sum</code> è soltanto un nome abbreviato per
 l&apos;espressione <code>a +. b</code>. Non vi è modo alcuno di assegnare un valore a
 <code>sum</code> o di modificarne il valore. (Vedremo presto come potete fare delle
-vere variabili).</p><p>Ecco un altro esempio per rendere più chiaro ciò. I due frammenti di
+vere variabili).</p>
+<p>Ecco un altro esempio per rendere più chiaro ciò. I due frammenti di
 codice che seguono dovrebbero restituire il medesimo valore (ossia (a+b)</p>
- <ul>
-  <li><p>(a+b)<sup>>2</sup>):</p><p>let f a b =
+<ul>
+ <li><p>(a+b)<sup>2</sup>):</p>
+<p>let f a b =
   (a +. b) +. (a +. b) ** 2.
-  ;;</p><p>let f a b =
+  ;;</p>
+<p>let f a b =
   let x = a +. b in
   x +. x ** 2.
-  ;;</p></li>
- </ul>
+  ;;</p>
+ </li>
+</ul>
 
 <p>La seconda versione potrebbe essere più veloce (ma la maggior parte dei
 compilatori dovrebbe poter compiere per voi questo passaggio di
 &quot;eliminazione di sottoepressione comune&quot;), ed è certamente più facile da
 leggere. <code>x</code> nel secondo esempio non è che una forma abbreviata per
-<code>a +. b</code>.</p><h3 id="quotVariabiliquotglobaliinrealtespressioniglobali"> &quot;Variabili&quot; globali (<em>in realtà</em> espressioni globali)</h3>
+<code>a +. b</code>.</p>
+<h3 id="quotVariabiliquotglobaliinrealtespressioniglobali"> &quot;Variabili&quot; globali (<em>in realtà</em> espressioni globali)</h3>
 <p>Potete anche definire nomi globali per cose al livello superiore, e come
 le nostre &quot;variabili&quot; locali sopra queste non sono affatto realmente
 variabili, ma soltanto nomi abbreviati per queste cose. Ecco un esempio
-reale (ma ridotto):</p><pre><code>let html =
+reale (ma ridotto):</p>
+<pre><code>let html =
   let content = read_whole_file file in
   GHtml.html_from_string content
   ;;
@@ -116,34 +126,43 @@ let main () =
 <p>In questo reale pezzo di codice, <code>html</code> è un accessorio di editing HTML
 (un oggetto della libreria lablgtk) che è creato una sola volta
 all&apos;inizio del programma dalla prima istruzione <code>let html =</code>. Vi si fa
-quindi riferimento in diverse funzioni successive.</p><p>Notate che il nome <code>html</code> nel frammento di codice sopra non dovrebbe
+quindi riferimento in diverse funzioni successive.</p>
+<p>Notate che il nome <code>html</code> nel frammento di codice sopra non dovrebbe
 essere realmente confrontato con una vera variabile globale come in C o
 in altri linguaggi imperativi. Non vi è spazio allocato per
 &quot;immagazzinare&quot; il &quot;puntatore <code>html</code>&quot;. Né è possibile assegnare alcunché
 ad <code>html</code>, per esempio per riassegnarlo perché punti ad un accessorio
 differente. Nella prossima sezione parleremo dei riferimenti, che sono
-vere variabili.</p><h3 id="Letbinding"> Let-binding</h3>
+vere variabili.</p>
+<h3 id="Letbinding"> Let-binding</h3>
 <p>Ciascun utilizzo di <code>let ...</code>, sia esso al livello superiore
 (globalmente) o all&apos;interno di una funzione, è spesso chiamato
-<strong>let-binding</strong>.</p><h3 id="Riferimentiverevariabili"> Riferimenti: vere variabili</h3>
+<strong>let-binding</strong>.</p>
+<h3 id="Riferimentiverevariabili"> Riferimenti: vere variabili</h3>
 <p>Che cosa succede se volete una vera variabile a cui possiate assegnare
 valori e che possiate modificare all&apos;interno del vostro programma?
 Dovrete utilizzare un <strong>riferimento</strong>. I riferimenti sono molto simili
 ai puntatori in C/C++. In Java, tutte le variabili che immagazzinano
 oggetti sono in realtà riferiment (puntatori) agli oggetti. In Perl, i
-riferimenti sono riferimenti - la medesima cosa che sono in OCaml.</p><p>Ecco come creiamo un riferimento ad un <code>int</code> in OCaml:</p><pre><code>ref 0;;</code></pre>
+riferimenti sono riferimenti - la medesima cosa che sono in OCaml.</p>
+<p>Ecco come creiamo un riferimento ad un <code>int</code> in OCaml:</p>
+<pre><code>ref 0;;</code></pre>
 <p>In realtà tale istruzione non era veramente molto utile. Abbiamo creato
 il riferimento e quindi, poiché che non gli abbiamo dato un nome, il
 garbage collector è arrivato e l&apos;ha raccolto immediatamente dopo! (in
 realtà, è stato probabilmente gettato via durante la compilazione.)
-Diamo un nome al riferimento:</p><pre><code>let my_ref = ref 0;;</code></pre>
+Diamo un nome al riferimento:</p>
+<pre><code>let my_ref = ref 0;;</code></pre>
 <p>Questo riferimento sta attualmente immagazzinando un intero pari a zero.
-Mettiamoci dentro qualcosa d&apos;altro (assegnamento):</p><pre><code>my_ref := 100;;</code></pre>
-<p>E troviamo che cosa contiene ora il riferimento:</p><pre><code># !my_ref;;
+Mettiamoci dentro qualcosa d&apos;altro (assegnamento):</p>
+<pre><code>my_ref := 100;;</code></pre>
+<p>E troviamo che cosa contiene ora il riferimento:</p>
+<pre><code># !my_ref;;
 - : int = 100</code></pre>
 <p>Quindi l&apos;operatore <code>:=</code> è utilizzato per fare assegnamenti a
 riferimenti, e l&apos;operatore <code>!</code> dereferenzia per ottenere i contenuti.
-Ecco un pronto ed approssimativo confronto con C/C++:</p><pre><code>OCaml                   C/C++
+Ecco un pronto ed approssimativo confronto con C/C++:</p>
+<pre><code>OCaml                   C/C++
 
 let my_ref = ref 0;;    int a = 0; int *my_ptr = &amp;a;
 my_ref := 100;;         *my_ptr = 100;
@@ -151,16 +170,19 @@ my_ref := 100;;         *my_ptr = 100;
 <p>I riferimenti hanno il loro posto, ma potrete trovare di non utilizzare
 i riferimenti molto spesso. Molto più spesso utilizzerete
 <code>let name = espressione in</code> per dare nomi ad espressioni locali nelle
-vostre definizioni di funzione.</p><h3 id="Funzioniannidate"> Funzioni annidate</h3>
+vostre definizioni di funzione.</p>
+<h3 id="Funzioniannidate"> Funzioni annidate</h3>
 <p>C non ha realmente un concetto di funzioni annidate. GCC supporta le
 funzioni annidate per programmi C, ma non so di programmi che utilizzino
 effettivamente tale estensione. Ecco comunque che cos&apos;ha da dire la
-pagina info di gcc a proposito delle funzioni annidate:</p><p>Una &quot;funzione annidata&quot; (&quot;nested function&quot; nell&apos;originale inglese, NdT)
+pagina info di gcc a proposito delle funzioni annidate:</p>
+<p>Una &quot;funzione annidata&quot; (&quot;nested function&quot; nell&apos;originale inglese, NdT)
 è una funzione definita all&apos;interno di un&apos;altra funzione. (Le funzioni
 annidate non sono supportate per GNU C++.) Il nome di una funzione
 annidata è locale rispetto al blocco in cui essa è definita. Ad esempio,
 di seguito definiamo una funzione annidata chiamata `square&apos;, e la
-chiamiamo due volte:</p><pre><code>foo (double a, double b)
+chiamiamo due volte:</p>
+<pre><code>foo (double a, double b)
 {
   double square (double z) { return z * z; }
 
@@ -170,7 +192,8 @@ chiamiamo due volte:</p><pre><code>foo (double a, double b)
 che la contiene le quali siano visibili al punto a cui essa è definita.
 Ciò è detto &quot;scoping lessicale&quot; (&quot;lexical scoping&quot; nell&apos;originale, NdT).
 Ad esempio, mostriamo qui una funzione annidata che utilizza una
-variabile ereditata chiamata `offset&apos;:</p><pre><code>bar (int *array, int offset, int size)
+variabile ereditata chiamata `offset&apos;:</p>
+<pre><code>bar (int *array, int offset, int size)
 {
   int access (int *array, int index)
     { return array[index + offset]; }
@@ -181,7 +204,8 @@ variabile ereditata chiamata `offset&apos;:</p><pre><code>bar (int *array, int o
 }</code></pre>
 <p>Afferrate l&apos;idea. Le funzioni annidate sono tuttavia molto utili e molto
 diffusamente utilizzate in OCaml. Ecco un esempio di funzione annidata
-proveniente da codice reale:</p><pre><code>let read_whole_channel chan =
+proveniente da codice reale:</p>
+<pre><code>let read_whole_channel chan =
   let buf = Buffer.create 4096 in
   let rec loop () =
     let newline = input_line chan in
@@ -199,18 +223,23 @@ invece sulla funzione annidata centrale chiamata <code>loop</code> che prende
 soltanto un argomento di tipo unit. Potete chiamare <code>loop ()</code> da dentro
 la funzione <code>read_whole_channel</code>, ma essa non è definita al di fuori di
 tale funzione. La funzione annidata può accedere alle variabili definite
-nella funzione principale (qui <code>loop</code> accede al nome locale <code>buf</code>).</p><p>La forma per le funzioni annidate è la medesima utilizzata per le
+nella funzione principale (qui <code>loop</code> accede al nome locale <code>buf</code>).</p>
+<p>La forma per le funzioni annidate è la medesima utilizzata per le
 espressioni con nome locale:
-<code>let nome argomenti = definizione-della-funzione in</code>.</p><p>Normalmente indenterete la definizione della funzione in una nuova riga
+<code>let nome argomenti = definizione-della-funzione in</code>.</p>
+<p>Normalmente indenterete la definizione della funzione in una nuova riga
 come nell&apos;esempio sopra, e ricorderete di usare <code>let rec</code> al posto di
-<code>let</code> se la vostra funzione è ricorsiva (com&apos;è in quell&apos;esempio).</p><h3 id="Modulieopen"> Moduli e <code>open</code></h3>
+<code>let</code> se la vostra funzione è ricorsiva (com&apos;è in quell&apos;esempio).</p>
+<h3 id="Modulieopen"> Moduli e <code>open</code></h3>
 <p>OCaml è distribuito con parecchi moduli divertenti ed interessanti
 (librerie di codice utile). Vi sono ad esempio librerie standard per
 disegnare grafici, interfacciarsi con insiemi di accessori di
 interfaccia grafica, trattare grandi numeri, strutture di dati, e fare
 chiamate di sistema POSIX. Tali librerie sono collocate in
 <code>/usr/lib/ocaml/VERSIONE/</code> (negli Unix comunque). Per questi esempi ci
-concentreremo su un modulo piuttosto semplice chiamato <code>Graphics</code>.</p><p>Il modulo <code>Graphics</code> è installato in 5 file (sul mio sistema):</p><pre><code>/usr/lib/ocaml/3.08/graphics.a
+concentreremo su un modulo piuttosto semplice chiamato <code>Graphics</code>.</p>
+<p>Il modulo <code>Graphics</code> è installato in 5 file (sul mio sistema):</p>
+<pre><code>/usr/lib/ocaml/3.08/graphics.a
 /usr/lib/ocaml/3.08/graphics.cma
 /usr/lib/ocaml/3.08/graphics.cmi
 /usr/lib/ocaml/3.08/graphics.cmxa
@@ -219,14 +248,17 @@ concentreremo su un modulo piuttosto semplice chiamato <code>Graphics</code>.</p
 un file di testo, per cui lo potete leggere ora. Notate innanzitutto che
 il nome è <code>graphics.mli</code> e non <code>Graphics.mli</code>. OCaml mette sempre in
 maiuscolo la prima lettera del nome del file per ottenere il nome del
-modulo. Ciò può confondervi assai finché non lo sapete!</p><p>Se vogliamo utilizzare le funzioni contenute in <code>Graphics</code> vi sono due
+modulo. Ciò può confondervi assai finché non lo sapete!</p>
+<p>Se vogliamo utilizzare le funzioni contenute in <code>Graphics</code> vi sono due
 modi in cui lo possiamo fare. O abbiamo all&apos;inizio del programma la
 dichiarazione <code>open Graphics;;</code>. Oppure dotiamo di prefisso tutte le
 chiamate alle funzioni come segue: <code>Graphics.open_graph</code>. <code>open</code> è un
 poco come l&apos;istruzione <code>import</code> di Java, e molto più come l&apos;istruzione
-<code>use</code> di Perl.</p><p>Un paio di esempi dovrebbero rendere chiaro quanto detto. (I due esempi
+<code>use</code> di Perl.</p>
+<p>Un paio di esempi dovrebbero rendere chiaro quanto detto. (I due esempi
 disegnano cose diverse - provateli). Si noti che il primo esempio chiama
-<code>open_graph</code> ed il secondo <code>Graphics.open_graph</code>.</p><pre><code>(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)
+<code>open_graph</code> ed il secondo <code>Graphics.open_graph</code>.</p>
+<pre><code>(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)
 
 open Graphics;;
 
@@ -264,29 +296,36 @@ read_line ();;</code></pre>
 abbiamo ancora parlato: i loop for in stile imperativo, gli if-then-else
 e la ricorsione. Ne parleremo più avanti. Cionondimeno dovreste guardare
 questi programmi e provarli e trovare (1) come funzionano, e (2) come
-l&apos;inferenza dei tipi vi aiuta ad eliminare i bug.</p><h3 id="IlmoduloPervasives"> Il modulo <code>Pervasives</code></h3>
+l&apos;inferenza dei tipi vi aiuta ad eliminare i bug.</p>
+<h3 id="IlmoduloPervasives"> Il modulo <code>Pervasives</code></h3>
 <p>C&apos;è un solo modulo per cui non serve mai usare &quot;<code>open</code>&quot;. È il modulo
 <code>Pervasives</code> (andate ora a leggervi
 <code>/usr/lib/ocaml/3.08/pervasives.mli</code>). Tutti i simboli del modulo
 <code>Pervasives</code> sono importati automaticamente in qualunque programma
-OCaml.</p><h3 id="Rinominaremoduli"> Rinominare moduli</h3>
+OCaml.</p>
+<h3 id="Rinominaremoduli"> Rinominare moduli</h3>
 <p>Che cosa succede se volete utilizzare i simboli del modulo <code>Graphics</code>,
 ma non volete importarli tutti e non sopportate il fastidio di digitare
-<code>Graphics</code> ogni volta? Semplicemente rinominatelo usando questo trucco:</p><pre><code>module Gr = Graphics;;
+<code>Graphics</code> ogni volta? Semplicemente rinominatelo usando questo trucco:</p>
+<pre><code>module Gr = Graphics;;
 
 Gr.open_graph &quot; 640x480&quot;;;
 Gr.fill_circle 320 240 240;;
 read_line ();;</code></pre>
 <p>In realtà questo è utile quando volete importare un modulo annidato (i
 moduli possono essere annidati l&apos;uno dentro l&apos;altro), ma non volete
-digitare ogni volta il percorso completo per il modulo annidato.</p><h3 id="Usoedomissionedie"> Uso ed omissione di <code>;;</code> e <code>;</code></h3>
+digitare ogni volta il percorso completo per il modulo annidato.</p>
+<h3 id="Usoedomissionedie"> Uso ed omissione di <code>;;</code> e <code>;</code></h3>
 <p>Veniamo ora ad esaminare una questione assai importante. Quando dovreste
 usare <code>;;</code>, quando dovreste usare <code>;</code>, e quando non dovreste usare
 affatto alcuno di essi? È una questione ingannevole finché non &quot;la
 afferri&quot;, e ha messo a lungo alla prova l&apos;autore quando anch&apos;egli stava
-imparando OCaml.</p><p>La regola n° 1 è che dovreste usare <code>;;</code> per separare istruzioni al più
+imparando OCaml.</p>
+<p>La regola n° 1 è che dovreste usare <code>;;</code> per separare istruzioni al più
 altto livello del vostro codice, e <em>mai</em> all&apos;interno di definizioni di
-funzioni o di qualunque altro tipo di istruzione.</p><p>Osservate una sezione dal secondo esempio su &quot;graphics&quot; sopra:</p><pre><code>Random.self_init ();;
+funzioni o di qualunque altro tipo di istruzione.</p>
+<p>Osservate una sezione dal secondo esempio su &quot;graphics&quot; sopra:</p>
+<pre><code>Random.self_init ();;
 Graphics.open_graph &quot; 640x480&quot;;;
 
 let rec iterate r x_init i =
@@ -296,27 +335,29 @@ let rec iterate r x_init i =
                 r *. x *. (1.0 -. x);;</code></pre>
 <p>Abbiamo due istruzioni del livello più alto ed una definizione di
 funzione (per una funzione chiamata <code>iterate</code>). Ciascuna è seguita da
-<code>;;</code>.</p><p>La regola n° 2 è che <em>a volte</em> potete elidere [omettere] il <code>;;</code>. Come
+<code>;;</code>.</p>
+<p>La regola n° 2 è che <em>a volte</em> potete elidere [omettere] il <code>;;</code>. Come
 principianti non dovreste preoccuparvene - dovreste sempre immettere il
 <code>;;</code> come stabilito dala regola n° 1. Ma dal momento che leggerete anche
 una quantità di codice scritto da altre persone dovete sapere che a
 volte possiamo elidere <code>;;</code>. I posti particolari in cui ciò è concesso
 sono:</p>
- <ul>
-  <li>Prima della parola chiave <code>let</code>.
-  </li>
-  <li>Prima della parola chiave <code>open</code>.
-  </li>
-  <li>Prima della parola chiave <code>type</code>.
-  </li>
-  <li>Precisamente in fondo al file.
-  </li>
-  <li>Alcuni altri (assai rari) posti in cui OCaml può &quot;indovinare&quot; che
+<ul>
+ <li>Prima della parola chiave <code>let</code>.
+ </li>
+ <li>Prima della parola chiave <code>open</code>.
+ </li>
+ <li>Prima della parola chiave <code>type</code>.
+ </li>
+ <li>Precisamente in fondo al file.
+ </li>
+ <li>Alcuni altri (assai rari) posti in cui OCaml può &quot;indovinare&quot; che
  ciò che segue è l&apos;inizio di una nuova istruzione e non la
  continuazione dell&apos;istruzione corrente.</li>
- </ul>
+</ul>
 
-<p>Ecco del codice funzionante con <code>;;</code> eliso ovunque possibile:</p><pre><code>open Random                   (* ;; *)
+<p>Ecco del codice funzionante con <code>;;</code> eliso ovunque possibile:</p>
+<pre><code>open Random                   (* ;; *)
 open Graphics;;
 
 self_init ();;
@@ -345,11 +386,15 @@ differente da <code>;;</code>. Il punto e virgola singolo <code>;</code> è ciò
 funzione del punto e virgola singolo in C, C++, Java e Perl. Esso
 significa &quot;fai la roba che c&apos;è prima di questo punto, poi fai lo roba
 che c&apos;è dopo questo punto quando la prima roba è completata&quot;. Scommetto
-che non lo sapevate.</p><p>La regola n° 3 è: Considera <code>let ... in</code> come un&apos;istruzione, e non porre
-mai dopo di essa un singolo <code>;</code>.</p><p>La regola n° 4 è: Per tutte le altre istruzioni all&apos;interno di un blocco
+che non lo sapevate.</p>
+<p>La regola n° 3 è: Considera <code>let ... in</code> come un&apos;istruzione, e non porre
+mai dopo di essa un singolo <code>;</code>.</p>
+<p>La regola n° 4 è: Per tutte le altre istruzioni all&apos;interno di un blocco
 di codice, falle seguire da un singolo <code>;</code>, <em>eccetto</em> per l&apos;ultima in
-fondo.</p><p>Il ciclo for interno nel nostro esempio sopra è una buona dimostrazione.
-Notate che in questo codice non usiamo mai un singolo <code>;</code>:</p><pre><code>        for i = 0 to 39 do
+fondo.</p>
+<p>Il ciclo for interno nel nostro esempio sopra è una buona dimostrazione.
+Notate che in questo codice non usiamo mai un singolo <code>;</code>:</p>
+<pre><code>        for i = 0 to 39 do
                 let x_init = Random.float 1.0 in
                 let x_final = iterate r x_init 500 in
                 let y = int_of_float (x_final *. 480.) in
@@ -357,17 +402,21 @@ Notate che in questo codice non usiamo mai un singolo <code>;</code>:</p><pre><c
         done</code></pre>
 <p>L&apos;unico posto nel codice sopra dove si potrebbe pensare di inserire un
 <code>;</code> è dopo il <code>Graphics.plot x y</code>, ma poiché questa è l&apos;ultima
-istruzione nel blocco, la regola n° 4 ci dice di non metterne uno lì.</p><p><strong>Nota sul &quot;;&quot;</strong> Brian Hurt scrive per correggermi sul &quot;;&quot;</p><p>Il <code>;</code> è un operatore, proprio come lo è il <code>+</code>. O meglio, non
+istruzione nel blocco, la regola n° 4 ci dice di non metterne uno lì.</p>
+<p><strong>Nota sul &quot;;&quot;</strong> Brian Hurt scrive per correggermi sul &quot;;&quot;</p>
+<p>Il <code>;</code> è un operatore, proprio come lo è il <code>+</code>. O meglio, non
 esattamente come lo è <code>+</code>, ma concettualmente è lo stesso. <code>+</code> ha tipo
 <code>int -&gt; int -&gt; int</code> - esso prende due int e restituisce un int (la
 somma). <code>;</code> ha tipo <code>unit -&gt; &apos;b -&gt; &apos;b</code> - esso prende due valori e
 semplicemente restituisce il secondo. Piuttosto come l&apos;operatore <code>,</code>
 (virgola) del C. Potete scrivere <code>a ; b ; c ; d</code> con la facilità con cui
-potete scrivere <code>a + b + c + d</code>.</p><p>Questo è uno di quei &quot;salti mentali&quot; che non sono mai spiegati molto
+potete scrivere <code>a + b + c + d</code>.</p>
+<p>Questo è uno di quei &quot;salti mentali&quot; che non sono mai spiegati molto
 bene - in OCaml, pressoché ogni cosa è un&apos;espressione. <code>if/then/else</code> è
 un&apos;espressione. <code>a ; b</code> è un&apos;espressione. <code>match foo with ...</code> è un
 espressione. Il codice che segue è perfettamente legale (e tutto fa la
-medesima cosa):</p><pre><code>let f x b y = if b then x+y else x+0
+medesima cosa):</p>
+<pre><code>let f x b y = if b then x+y else x+0
 
 let f x b y = x + (if b then y else 0)
 
@@ -377,13 +426,16 @@ let f x b y = x + (let g z = function true -&gt; z | false -&gt; 0 in g y b)
 
 let f x b y = x + (let _ = y + 3 in (); if b then y else 0)</code></pre>
 <p>Si noti in special modo la prima - uso <code>;</code> come operatore per &quot;unire&quot;
-due istruzioni. Tutte le funzioni in OCaml possono essere espresse come:</p><pre><code>let nome [parametri] = espressione</code></pre>
+due istruzioni. Tutte le funzioni in OCaml possono essere espresse come:</p>
+<pre><code>let nome [parametri] = espressione</code></pre>
 <p>La definizione di OCaml di che cos&apos;è un&apos;espressione è soltanto un po&apos;
 più ampia che quella di C. Infatti, C ha il concetto di &quot;istruzione&quot; -
 ma tutte le istruzioni di C sono in OCaml semplicemente espressioni
-(combinate con l&apos;operatore <code>;</code>).</p><p>L&apos;unico punto in cui <code>;</code> differisce da <code>+</code> è che posso fare riferimento
+(combinate con l&apos;operatore <code>;</code>).</p>
+<p>L&apos;unico punto in cui <code>;</code> differisce da <code>+</code> è che posso fare riferimento
 a <code>+</code> semplicemente come ad una funzione. Ad esempio, posso definire una
-funzione <code>sum_list</code>, per sommare una lista di int, come segue:</p><pre><code>let sum_list = List.fold_left ( + ) 0</code></pre>
+funzione <code>sum_list</code>, per sommare una lista di int, come segue:</p>
+<pre><code>let sum_list = List.fold_left ( + ) 0</code></pre>
 <h3 id="Metteretuttoinsiemedelcodicereale"> Mettere tutto insieme: del codice reale</h3>
 <p>In questa sezione mostreremo dei frammenti di codice reale provenienti
 dalla libreria lablgtk 1.2. (Lablgtk è l&apos;interfaccia di OCaml alla
@@ -392,26 +444,28 @@ frammenti contengono parecchie idee che non abbiamo ancora discusse. Non
 guardate i dettagli, guardate piuttosto l&apos;aspetto complessivo del
 codice, dove gli autori hanno usato <code>;;</code>, dove hanno usato <code>;</code> e dove
 hanno usato <code>open</code>, come hanno indentato il codice, come hanno usato
-espressioni con nomi locali e globali.</p><p>... Vi darò però degli indizi, perché non vi perdiate totalmente!</p>
- <ul>
-  <li><code>?foo</code> e <code>~foo</code> è la maniera di OCaml di dare argomenti opzionali e
+espressioni con nomi locali e globali.</p>
+<p>... Vi darò però degli indizi, perché non vi perdiate totalmente!</p>
+<ul>
+ <li><code>?foo</code> e <code>~foo</code> è la maniera di OCaml di dare argomenti opzionali e
  dotati di nome alle funzioni. Non v&apos;è alcun reale parallelo a ciò in
  linguaggi derivati da C, ma Perl,Python e Smalltalk hanno tutti
  questo concetto per cui è possibile nominare gli argomenti in una
  chiamata di funzione, ometterne alcuni e fornire gli altri
  nell&apos;ordine che si preferisce.
-  </li>
-  <li><code>foo#bar</code> è un&apos;invocazione di metodo (chiamare un metodo di nome
+ </li>
+ <li><code>foo#bar</code> è un&apos;invocazione di metodo (chiamare un metodo di nome
  <code>bar</code> su un oggetto di nome <code>foo</code>). È simile a <code>foo-&gt;bar</code> o
  <code>foo.bar</code> o <code>$foo-&gt;bar</code> rispettivamente in C++, Java o Perl.</li>
- </ul>
+</ul>
 
 <p>Primo frammento: Il programmatore apre un paio di librerie standard
 (elidendo <code>;;</code> poiché la successiva parola chiave è rispettivamente
 <code>open</code> e <code>let</code>). Egli crea quindi una funzione chiamata <code>file_dialog</code>.
 All&apos;interno di questa funzione definisce un&apos;espressione con nome
 chiamata <code>sel</code> usando un&apos;istruzione <code>let sel = ... in</code> su due righe.
-Quindi chiama diversi metodi su <code>sel</code>.</p><pre><code>(* Primo frammento *)
+Quindi chiama diversi metodi su <code>sel</code>.</p>
+<pre><code>(* Primo frammento *)
 
 open StdLabels
 open GMain
@@ -424,7 +478,8 @@ let file_dialog ~title ~callback ?filename () =
   sel#show ()</code></pre>
 <p>Secondo frammento: Solo una lunga lista di nomi globali al livello
 superiore. Notate che l&apos;autore ha eliso ogni singolo <code>;;</code> grazie alla
-regola n° 2.</p><pre><code>(* Secondo frammento *)
+regola n° 2.</p>
+<pre><code>(* Secondo frammento *)
 
 let window = GWindow.window ~width:500 ~height:300 ~title:&quot;editor&quot; ()
 let vbox = GPack.vbox ~packing:window#add ()
@@ -447,9 +502,11 @@ caso, &quot;calcola il valore dell&apos;espressione&quot; significa eseguire
 laterale di far sbucare la finestra sullo schermo ed eseguire l&apos;intera
 applicazione. Il &quot;risultato&quot; di <code>Main.main ()</code> è insignificante -
 probabilmente un valore di ritorno <code>unit</code>, ma non ho verificato - e non
-è restituito finché l&apos;applicazione non esce infine.</p><p>Notate che in questo frammento abbiamo una lunga serie di comandi
+è restituito finché l&apos;applicazione non esce infine.</p>
+<p>Notate che in questo frammento abbiamo una lunga serie di comandi
 essenzialmente procedurali. Questo è in realtà un classico programma
-imperativo.</p><pre><code>(* Terzo frammento *)
+imperativo.</p>
+<pre><code>(* Terzo frammento *)
 
 open GdkKeysyms
 
@@ -483,19 +540,23 @@ let _ =
   Main.main ()
 </code></pre>
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

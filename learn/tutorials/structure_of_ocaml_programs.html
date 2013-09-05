@@ -46,7 +46,8 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <p>The Structure of OCaml Programs</p><h1 id="TheStructureofOCamlPrograms">The Structure of OCaml Programs</h1>
+            <p>The Structure of OCaml Programs</p>
+<h1 id="TheStructureofOCamlPrograms">The Structure of OCaml Programs</h1>
 <h2 id="ThestructureofOCamlprograms">The structure of OCaml programs</h2>
 <p>Now we&apos;re going to take some time out to take a high-level look at some
 real OCaml programs. I want to teach you about local and global
@@ -54,31 +55,37 @@ definitions, when to use <code>;;</code> vs. <code>;</code>, modules, nested fun
 references. For this we&apos;re going to look at a lot of OCaml concepts
 which won&apos;t yet make sense because we haven&apos;t seen them before. Don&apos;t
 worry about the details for the moment. Concentrate instead on the
-overall shape of the programs and the features which I&apos;ll point out.</p><h3 id="Localquotvariablesquotreallylocalexpressions"> Local &quot;variables&quot; (<em>really</em> local expressions)</h3>
+overall shape of the programs and the features which I&apos;ll point out.</p>
+<h3 id="Localquotvariablesquotreallylocalexpressions"> Local &quot;variables&quot; (<em>really</em> local expressions)</h3>
 <p>Let&apos;s take the <code>average</code> function and add a local variable in C.
-(Compare it to the first definition we had above).</p><pre><code>double
+(Compare it to the first definition we had above).</p>
+<pre><code>double
 average (double a, double b)
 {
   double sum = a + b;
   return sum / 2;
 }</code></pre>
-<p>Now let&apos;s do the same to our OCaml version:</p><pre><code>let average a b =
+<p>Now let&apos;s do the same to our OCaml version:</p>
+<pre><code>let average a b =
   let sum = a +. b in
   sum /. 2.0;;</code></pre>
 <p>The standard phrase <code>let name = expression in</code> is used to define a named
 local expression, and <code>name</code> can then be used later on in the function
 instead of <code>expression</code>, till a <code>;;</code> which ends the block of code.
 Notice that we don&apos;t indent after the <code>in</code>. Just think of <code>let ... in</code>
-as if it were a statement.</p><p>Now comparing C local variables and these named local expressions is a
+as if it were a statement.</p>
+<p>Now comparing C local variables and these named local expressions is a
 sleight of hand. In fact they are somewhat different. The C variable
 <code>sum</code> has a slot allocated for it on the stack. You can assign to <code>sum</code>
 later in the function if you want, or even take the address of <code>sum</code>.
 This is NOT true for the OCaml version. In the OCaml version, <code>sum</code> is
 just a shorthand name for the expression <code>a +. b</code>. There is no way to
 assign to <code>sum</code> or change its value in any way. (We&apos;ll see how you can
-do variables whose value changes in a minute).</p><p>Here&apos;s another example to make this clearer. The following two code
+do variables whose value changes in a minute).</p>
+<p>Here&apos;s another example to make this clearer. The following two code
 snippets should return the same value (namely (a+b) +
-(a+b)<sup>>2</sup>):</p><pre><code>let f a b =
+(a+b)<sup>2</sup>):</p>
+<pre><code>let f a b =
   (a +. b) +. (a +. b) ** 2.
   ;;
 
@@ -89,10 +96,12 @@ let f a b =
 <p>The second version might be faster (but most compilers ought to be able
 to perform this step of &quot;common subexpression elimination&quot; for you), and
 it is certainly easier to read. <code>x</code> in the second example is just
-shorthand for <code>a +. b</code>.</p><h3 id="Globalquotvariablesquotreallyglobalexpressions"> Global &quot;variables&quot; (<em>really</em> global expressions)</h3>
+shorthand for <code>a +. b</code>.</p>
+<h3 id="Globalquotvariablesquotreallyglobalexpressions"> Global &quot;variables&quot; (<em>really</em> global expressions)</h3>
 <p>You can also define global names for things at the top level, and as
 with our local &quot;variables&quot; above, these aren&apos;t really variable at all,
-just shorthand names for things. Here&apos;s a real (but cut-down) example:</p><pre><code>let html =
+just shorthand names for things. Here&apos;s a real (but cut-down) example:</p>
+<pre><code>let html =
   let content = read_whole_file file in
   GHtml.html_from_string content
   ;;
@@ -110,29 +119,40 @@ let main () =
 <p>In this real piece of code, <code>html</code> is an HTML editing widget (an object
 from the lablgtk library) which is created once at the beginning of the
 program by the first <code>let html =</code> statement. It is then referred to in
-several later functions.</p><p>Note that the <code>html</code> name in the code snippet above shouldn&apos;t really be
+several later functions.</p>
+<p>Note that the <code>html</code> name in the code snippet above shouldn&apos;t really be
 compared to a real global variable as in C or other imperative
 languages. There is no space allocated to &quot;store&quot; the &quot;<code>html</code> pointer&quot;.
 Nor is it possible to assign anything to <code>html</code>, for example to reassign
 it to point to a different widget. In the next section we&apos;ll talk about
-references, which are real variables.</p><h3 id="Letbindings"> Let-bindings</h3>
+references, which are real variables.</p>
+<h3 id="Letbindings"> Let-bindings</h3>
 <p>Any use of <code>let ...</code>, whether at the top level (globally) or within a
-function, is often called a <strong>let-binding</strong>.</p><h3 id="Referencesrealvariables"> References: real variables</h3>
+function, is often called a <strong>let-binding</strong>.</p>
+<h3 id="Referencesrealvariables"> References: real variables</h3>
 <p>What happens if you want a real variable that you can assign to and
 change throughout your program? You need to use a <strong>reference</strong>.
 References are very similar to pointers in C/C++. In Java, all variables
 which store objects are really references (pointers) to the objects. In
-Perl, references are references - the same thing as in OCaml.</p><p>Here&apos;s how we create a reference to an <code>int</code> in OCaml:</p><pre><code>ref 0;;</code></pre>
+Perl, references are references - the same thing as in OCaml.</p>
+<p>Here&apos;s how we create a reference to an <code>int</code> in OCaml:</p>
+<pre><code>ref 0;;</code></pre>
 <p>Actually that statement wasn&apos;t really very useful. We created the
 reference and then, because we didn&apos;t name it, the garbage collector
 came along and collected it immediately afterwards! (actually, it was
-probably thrown away at compile-time.) Let&apos;s name the reference:</p><pre><code>let my_ref = ref 0</code></pre>
+probably thrown away at compile-time.) Let&apos;s name the reference:</p>
+<pre><code>let my_ref = ref 0</code></pre>
 <p>This reference is currently storing a zero integer. Let&apos;s put something
-else into it (assignment):</p><pre><code>my_ref := 100</code></pre>
-<p>And let&apos;s find out what the reference contains now:</p><pre><code>!my_ref</code></pre>
+else into it (assignment):</p>
+<pre><code>my_ref := 100</code></pre>
+<p>And let&apos;s find out what the reference contains now:</p>
+<pre><code>!my_ref</code></pre>
 <p>So the <code>:=</code> operator is used to assign to references, and the <code>!</code>
 operator dereferences to get out the contents. Here&apos;s a rough-and-ready
-comparison with C/C++:</p><p>OCaml</p><p>C/C++</p><pre><code>let my_ref = ref 0;;
+comparison with C/C++:</p>
+<p>OCaml</p>
+<p>C/C++</p>
+<pre><code>let my_ref = ref 0;;
 my_ref := 100;;
 !my_ref
 
@@ -142,14 +162,17 @@ int a = 0; int *my_ptr = &amp;a;
 <p>References have their place, but you may find that you don&apos;t use
 references very often. Much more often you&apos;ll be using
 <code>let name = expression in</code> to name local expressions in your function
-definitions.</p><h3 id="Nestedfunctions"> Nested functions</h3>
+definitions.</p>
+<h3 id="Nestedfunctions"> Nested functions</h3>
 <p>C doesn&apos;t really have a concept of nested functions. GCC supports nested
 functions for C programs but I don&apos;t know of any program which actually
 uses this extension. Anyway, here&apos;s what the gcc info page has to say
-about nested functions:</p><p>A &quot;nested function&quot; is a function defined inside another function.
+about nested functions:</p>
+<p>A &quot;nested function&quot; is a function defined inside another function.
 (Nested functions are not supported for GNU C++.) The nested function&apos;s
 name is local to the block where it is defined. For example, here we
-define a nested function named `square&apos;, and call it twice:</p><pre><code>foo (double a, double b)
+define a nested function named `square&apos;, and call it twice:</p>
+<pre><code>foo (double a, double b)
 {
   double square (double z) { return z * z; }
 
@@ -158,7 +181,8 @@ define a nested function named `square&apos;, and call it twice:</p><pre><code>f
 <p>The nested function can access all the variables of the containing
 function that are visible at the point of its definition. This is called
 &quot;lexical scoping&quot;. For example, here we show a nested function which
-uses an inherited variable named `offset&apos;:</p><pre><code>bar (int *array, int offset, int size)
+uses an inherited variable named `offset&apos;:</p>
+<pre><code>bar (int *array, int offset, int size)
 {
   int access (int *array, int index)
     { return array[index + offset]; }
@@ -169,7 +193,8 @@ uses an inherited variable named `offset&apos;:</p><pre><code>bar (int *array, i
 }</code></pre>
 <p>You get the idea. Nested functions are, however, very useful and very
 heavily used in OCaml. Here is an example of a nested function from some
-real code:</p><pre><code>  let read_whole_channel chan =
+real code:</p>
+<pre><code>  let read_whole_channel chan =
     let buf = Buffer.create 4096 in
     let rec loop () =
       let newline = input_line chan in
@@ -187,16 +212,21 @@ central nested function called <code>loop</code> which takes just a unit argumen
 You can call <code>loop ()</code> from within the function <code>read_whole_channel</code>,
 but it&apos;s not defined outside this function. The nested function can
 access variables defined in the main function (here <code>loop</code> accesses the
-local names <code>buf</code> and <code>chan</code>).</p><p>The form for nested functions is the same as for local named
-expressions: <code>let name arguments = function-definition in</code>.</p><p>You normally indent the function definition on a new line as in the
+local names <code>buf</code> and <code>chan</code>).</p>
+<p>The form for nested functions is the same as for local named
+expressions: <code>let name arguments = function-definition in</code>.</p>
+<p>You normally indent the function definition on a new line as in the
 example above, and remember to use <code>let rec</code> instead of <code>let</code> if your
-function is recursive (as it is in that example).</p><h3 id="Modulesandopen"> Modules and <code>open</code></h3>
+function is recursive (as it is in that example).</p>
+<h3 id="Modulesandopen"> Modules and <code>open</code></h3>
 <p>OCaml comes with lots of fun and interesting modules (libraries of
 useful code). For example there are standard libraries for drawing
 graphics, interfacing with GUI widget sets, handling large numbers, data
 structures, and making POSIX system calls. These libraries are located
 in <code>/usr/lib/ocaml/VERSION/</code> (on Unix anyway). For these examples we&apos;re
-going to concentrate on one quite simple module called <code>Graphics</code>.</p><p>The <code>Graphics</code> module is installed into 5 files (on my system):</p><pre><code>/usr/lib/ocaml/3.08/graphics.a
+going to concentrate on one quite simple module called <code>Graphics</code>.</p>
+<p>The <code>Graphics</code> module is installed into 5 files (on my system):</p>
+<pre><code>/usr/lib/ocaml/3.08/graphics.a
 /usr/lib/ocaml/3.08/graphics.cma
 /usr/lib/ocaml/3.08/graphics.cmi
 /usr/lib/ocaml/3.08/graphics.cmxa
@@ -205,15 +235,19 @@ going to concentrate on one quite simple module called <code>Graphics</code>.</p
 is a text file, so you can read it now. Notice first of all that the
 name is <code>graphics.mli</code> and not <code>Graphics.mli</code>. OCaml always capitalizes
 the first letter of the file name to get the module name. This can be
-very confusing until you know about it!</p><p>If we want to use the functions in <code>Graphics</code> there are two ways we can
+very confusing until you know about it!</p>
+<p>If we want to use the functions in <code>Graphics</code> there are two ways we can
 do it. Either at the start of our program we have the <code>open Graphics;;</code>
 declaration. Or we prefix all calls to the functions like this:
 <code>Graphics.open_graph</code>. <code>open</code> is a little bit like Java&apos;s <code>import</code>
-statement, and much more like Perl&apos;s <code>use</code> statement.</p><p>[Windows users: For this example to work interactively on Windows, you
+statement, and much more like Perl&apos;s <code>use</code> statement.</p>
+<p>[Windows users: For this example to work interactively on Windows, you
 will need to create a custom toplevel. Issue the command
-<code>ocamlmktop -o ocaml-graphics graphics.cma</code> from the command line.]</p><p>A couple of examples should make this clear. (The two examples draw
+<code>ocamlmktop -o ocaml-graphics graphics.cma</code> from the command line.]</p>
+<p>A couple of examples should make this clear. (The two examples draw
 different things - try them out). Note the first example calls
-<code>open_graph</code> and the second one <code>Graphics.open_graph</code>.</p><pre><code>(* To compile this example: ocamlc graphics.cma grtest1.ml -o grtest1 *)
+<code>open_graph</code> and the second one <code>Graphics.open_graph</code>.</p>
+<pre><code>(* To compile this example: ocamlc graphics.cma grtest1.ml -o grtest1 *)
 open Graphics;;
 
 open_graph &quot; 640x480&quot;;;
@@ -250,27 +284,34 @@ read_line ();;</code></pre>
 yet: imperative-style for-loops, if-then-else and recursion. We&apos;ll talk
 about those later. Nevertheless you should look at these programs and
 try and find out (1) how they work, and (2) how type inference is
-helping you to eliminate bugs.</p><h3 id="ThePervasivesmodule"> The <code>Pervasives</code> module</h3>
+helping you to eliminate bugs.</p>
+<h3 id="ThePervasivesmodule"> The <code>Pervasives</code> module</h3>
 <p>There&apos;s one module that you never need to &quot;<code>open</code>&quot;. That is the
 <code>Pervasives</code> module (go and read <code>/usr/lib/ocaml/3.08/pervasives.mli</code>
 now). All of the symbols from the <code>Pervasives</code> module are automatically
-imported into every OCaml program.</p><h3 id="Renamingmodules"> Renaming modules</h3>
+imported into every OCaml program.</p>
+<h3 id="Renamingmodules"> Renaming modules</h3>
 <p>What happens if you want to use symbols in the <code>Graphics</code> module, but
 you don&apos;t want to import all of them and you can&apos;t be bothered to type
-<code>Graphics</code> each time? Just rename it using this trick:</p><pre><code>module Gr = Graphics;;
+<code>Graphics</code> each time? Just rename it using this trick:</p>
+<pre><code>module Gr = Graphics;;
 
 Gr.open_graph &quot; 640x480&quot;;;
 Gr.fill_circle 320 240 240;;
 read_line ();;</code></pre>
 <p>Actually this is really useful when you want to import a nested module
 (modules can be nested inside one another), but you don&apos;t want to type
-out the full path to the nested module name each time.</p><h3 id="Usingandomittingand"> Using and omitting <code>;;</code> and <code>;</code></h3>
+out the full path to the nested module name each time.</p>
+<h3 id="Usingandomittingand"> Using and omitting <code>;;</code> and <code>;</code></h3>
 <p>Now we&apos;re going to look at a very important issue. When should you use
 <code>;;</code>, when should you use <code>;</code>, and when should you use none of these at
 all? This is a tricky issue until you &quot;get it&quot;, and it taxed the author
-for a long time while he was learning OCaml too.</p><p>Rule #1 is that you should use <code>;;</code> to separate statements at the
+for a long time while he was learning OCaml too.</p>
+<p>Rule #1 is that you should use <code>;;</code> to separate statements at the
 top-level of your code, and <em>never</em> within function definitions or any
-other kind of statement.</p><p>Have a look at a section from the second graphics example above:</p><pre><code>Random.self_init ();;
+other kind of statement.</p>
+<p>Have a look at a section from the second graphics example above:</p>
+<pre><code>Random.self_init ();;
 Graphics.open_graph &quot; 640x480&quot;;;
 
 let rec iterate r x_init i =
@@ -279,26 +320,28 @@ let rec iterate r x_init i =
     let x = iterate r x_init (i-1) in
     r *. x *. (1.0 -. x);;</code></pre>
 <p>We have two top-level statements and a function definition (of a
-function called <code>iterate</code>). Each one is followed by <code>;;</code>.</p><p>Rule #2 is that <em>sometimes</em> you can elide [omit] the <code>;;</code>. As a
+function called <code>iterate</code>). Each one is followed by <code>;;</code>.</p>
+<p>Rule #2 is that <em>sometimes</em> you can elide [omit] the <code>;;</code>. As a
 beginner you shouldn&apos;t worry about this - you should always put in the
 <code>;;</code> as directed by Rule #1. But since you&apos;ll also be reading a lot of
 other peoples&apos; code you&apos;ll need to know that sometimes we can elide
 <code>;;</code>. The particular places where this is allowed are:</p>
- <ul>
-  <li>Before the keyword <code>let</code>.
-  </li>
-  <li>Before the keyword <code>open</code>.
-  </li>
-  <li>Before the keyword <code>type</code>.
-  </li>
-  <li>At the very end of the file.
-  </li>
-  <li>A few other (very rare) places where OCaml can &quot;guess&quot; that the next
+<ul>
+ <li>Before the keyword <code>let</code>.
+ </li>
+ <li>Before the keyword <code>open</code>.
+ </li>
+ <li>Before the keyword <code>type</code>.
+ </li>
+ <li>At the very end of the file.
+ </li>
+ <li>A few other (very rare) places where OCaml can &quot;guess&quot; that the next
  thing is the start of a new statement and not the continuation of
  the current statement.</li>
- </ul>
+</ul>
 
-<p>Here is some working code with <code>;;</code> elided wherever possible:</p><pre><code>open Random                   (* ;; *)
+<p>Here is some working code with <code>;;</code> elided wherever possible:</p>
+<pre><code>open Random                   (* ;; *)
 open Graphics;;
 
 self_init ();;
@@ -326,10 +369,14 @@ from <code>;;</code>. The single semicolon <code>;</code> is what is known as a 
 point</strong>, which is to say it has exactly the same purpose as the single
 semicolon in C, C++, Java and Perl. It means &quot;do the stuff before this
 point first, then do the stuff after this point when the first stuff has
-completed&quot;. Bet you didn&apos;t know that.</p><p>Rule #3 is: Consider <code>let ... in</code> as a statement, and never put a
-single <code>;</code> after it.</p><p>Rule #4 is: For all other statements within a block of code, follow
-them with a single <code>;</code>, <em>except</em> for the very last one.</p><p>The inner for-loop in our example above is a good demonstration. Notice
-that we never use any single <code>;</code> in this code:</p><pre><code>for i = 0 to 39 do
+completed&quot;. Bet you didn&apos;t know that.</p>
+<p>Rule #3 is: Consider <code>let ... in</code> as a statement, and never put a
+single <code>;</code> after it.</p>
+<p>Rule #4 is: For all other statements within a block of code, follow
+them with a single <code>;</code>, <em>except</em> for the very last one.</p>
+<p>The inner for-loop in our example above is a good demonstration. Notice
+that we never use any single <code>;</code> in this code:</p>
+<pre><code>for i = 0 to 39 do
   let x_init = Random.float 1.0 in
   let x_final = iterate r x_init 500 in
   let y = int_of_float (x_final *. 480.) in
@@ -337,32 +384,39 @@ that we never use any single <code>;</code> in this code:</p><pre><code>for i = 
 done</code></pre>
 <p>The only place in the above code where might think about putting in a
 <code>;</code> is after the <code>Graphics.plot x y</code>, but because this is the last
-statement in the block, Rule #4 tells us not to put one there.</p><h3 id="Noteaboutquotquot"> Note about &quot;;&quot;</h3>
-<p>Brian Hurt writes to correct me on &quot;;&quot;</p><blockquote><p>
+statement in the block, Rule #4 tells us not to put one there.</p>
+<h3 id="Noteaboutquotquot"> Note about &quot;;&quot;</h3>
+<p>Brian Hurt writes to correct me on &quot;;&quot;</p>
+<blockquote><p>
 The <code>;</code> is an operator, just like <code>+</code> is. Well, not quite just like
 <code>+</code> is, but conceptually the same. <code>+</code> has type <code>int -&gt; int -&gt; int</code> -
 it takes two ints and returns an int (the sum). <code>;</code> has type
 <code>unit -&gt; &apos;b -&gt; &apos;b</code> - it takes two values and simply returns the second
 one. Rather like C&apos;s <code>,</code> (comma) operator. You can write
-<code>a ; b ; c ; d</code> just as easily as you can write <code>a + b + c + d</code>.</p><p>This is one of those &quot;mental leaps&quot; which is never spelled out very
+<code>a ; b ; c ; d</code> just as easily as you can write <code>a + b + c + d</code>.</p>
+<p>This is one of those &quot;mental leaps&quot; which is never spelled out very
 well - in OCaml, nearly everything is an expression. <code>if/then/else</code> is
 an expression. <code>a ; b</code> is an expression. <code>match foo with ...</code> is an
 expression. The following code is perfectly legal (and all do the same
-thing):</p><pre><code>let f x b y = if b then x+y else x+0
+thing):</p>
+<pre><code>let f x b y = if b then x+y else x+0
 let f x b y = x + (if b then y else 0)
 let f x b y = x + (match b with true -&gt; y | false -&gt; 0)
 let f x b y = x + (let g z = function true -&gt; z | false -&gt; 0 in g y b)
 let f x b y = x + (let _ = y + 3 in (); if b then y else 0)</code></pre>
 <p>
 Note especially the last one - I&apos;m using <code>;</code> as an operator to &quot;join&quot;
-two statements. All functions in OCaml can be expressed as:</p><pre><code> let name [parameters] = expression</code></pre>
+two statements. All functions in OCaml can be expressed as:</p>
+<pre><code> let name [parameters] = expression</code></pre>
 <p>
 OCaml&apos;s definition of what is an expression is just a little wider
 than C&apos;s. In fact, C has the concept of &quot;statements&quot;- but all of C&apos;s
 statements are just expressions in OCaml (combined with the <code>;</code>
-operator).</p><p>The one place that <code>;</code> is different from <code>+</code> is that I can refer to
+operator).</p>
+<p>The one place that <code>;</code> is different from <code>+</code> is that I can refer to
 <code>+</code> just like a function. For instance, I can define a <code>sum_list</code>
-function, to sum a list of ints, like:</p><pre><code> let sum_list = List.fold_left ( + ) 0</code></pre>
+function, to sum a list of ints, like:</p>
+<pre><code> let sum_list = List.fold_left ( + ) 0</code></pre>
 </blockquote>
 <h3 id="Puttingitalltogethersomerealcode"> Putting it all together: some real code</h3>
 <p>In this section we&apos;re going to show some real code fragments from the
@@ -371,25 +425,27 @@ Gtk widget library). A word of warning: these fragments contain a lot of
 ideas which we haven&apos;t discussed yet. Don&apos;t look at the details, look
 instead at the overall shape of the code, where the authors used <code>;;</code>,
 where they used <code>;</code> and where they used <code>open</code>, how they indented the
-code, how they used local and global named expressions.</p><p>... However, I&apos;ll give you some clues so you don&apos;t get totally lost!</p>
- <ul>
-  <li><code>?foo</code> and <code>~foo</code> is OCaml&apos;s way of doing optional and named
+code, how they used local and global named expressions.</p>
+<p>... However, I&apos;ll give you some clues so you don&apos;t get totally lost!</p>
+<ul>
+ <li><code>?foo</code> and <code>~foo</code> is OCaml&apos;s way of doing optional and named
  arguments to functions. There is no real parallel to this in
  C-derived languages, but Perl, Python and Smalltalk all have this
  concept that you can name the arguments in a function call, omit
  some of them, and supply the others in any order you like.
-  </li>
-  <li><code>foo#bar</code> is a method invocation (calling a method called <code>bar</code> on
+ </li>
+ <li><code>foo#bar</code> is a method invocation (calling a method called <code>bar</code> on
  an object called <code>foo</code>). It&apos;s similar to <code>foo-&gt;bar</code> or <code>foo.bar</code> or
  <code>$foo-&gt;bar</code> in C++, Java or Perl respectively.</li>
- </ul>
+</ul>
 
 <p>First snippet: The programmer opens a couple of standard libraries
 (eliding the <code>;;</code> because the next keyword is <code>open</code> and <code>let</code>
 respectively). He then creates a function called <code>file_dialog</code>. Inside
 this function he defines a named expression called <code>sel</code> using a
 two-line <code>let sel = ... in</code> statement. Then he calls several methods on
-<code>sel</code>.</p><pre><code>(* First snippet *)
+<code>sel</code>.</p>
+<pre><code>(* First snippet *)
 open StdLabels
 open GMain
 
@@ -401,7 +457,8 @@ let file_dialog ~title ~callback ?filename () =
   sel#show ()</code></pre>
 <p>Second snippet: Just a long list of global names at the top level.
 Notice that the author elided every single one of the <code>;;</code> because of
-Rule #2.</p><pre><code>(* Second snippet *)
+Rule #2.</p>
+<pre><code>(* Second snippet *)
 let window = GWindow.window ~width:500 ~height:300 ~title:&quot;editor&quot; ()
 let vbox = GPack.vbox ~packing:window#add ()
 
@@ -422,8 +479,10 @@ value of the expression&quot; means to run <code>Main.main ()</code> which is Gt
 loop, which has the side-effect of popping the window onto the screen
 and running the whole application. The &quot;result&quot; of <code>Main.main ()</code> is
 insignificant - probably a <code>unit</code> return value, but I haven&apos;t checked -
-and it doesn&apos;t get returned until the application finally exits.</p><p>Notice in this snippet how we have a long series of essentially
-procedural commands. This is really a classic imperative program.</p><pre><code>(* Third snippet *)
+and it doesn&apos;t get returned until the application finally exits.</p>
+<p>Notice in this snippet how we have a long series of essentially
+procedural commands. This is really a classic imperative program.</p>
+<pre><code>(* Third snippet *)
 open GdkKeysyms
 
 let () =
@@ -455,19 +514,23 @@ let () =
   Main.main ()
 </code></pre>
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

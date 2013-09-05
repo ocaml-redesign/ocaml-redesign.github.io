@@ -48,11 +48,14 @@
           <div class="content">
             <h1 id="Filenames">Filenames</h1>
 <p>This is a reference to the standard <strong>filenames</strong> and extensions used by
-various parts of the OCaml build system.</p><p>Note: There is an <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html'>extended mailing list posting about filenames used by
+various parts of the OCaml build system.</p>
+<p>Note: There is an <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html'>extended mailing list posting about filenames used by
 OCaml
-here</a>.</p><h2 id="Sourceandobjectfiles">Source and object files</h2>
+here</a>.</p>
+<h2 id="Sourceandobjectfiles">Source and object files</h2>
 <p>The basic source, object and binary files, with comparisons to C
-programming:</p><table>
+programming:</p>
+<table>
 <thead>
 <tr class="header">
 <th align="left">Purpose</th>
@@ -95,9 +98,8 @@ programming:</p><table>
 </tbody>
 </table>
 <h3 id="Notes"> Notes</h3>
-
- <ol>
-  <li>In C the header files describe the functions, etc., but only by
+<ol>
+ <li>In C the header files describe the functions, etc., but only by
  convention. In OCaml, the *.mli file is the exported signature of
  the <a href='modules.html' title='modules'>module</a>, and the compiler strictly
  enforces it.   
@@ -108,35 +110,41 @@ programming:</p><table>
  uppercase to get the module name. For example, Extlib contains a
  file called <code>uTF8.mli</code> which is the signature of a module called
  <code>UTF8</code>.
-  </li>
-  <li>There is also a corresponding *.o file which contains the actual
+ </li>
+ <li>There is also a corresponding *.o file which contains the actual
  machine code, but you can usually ignore this file.
-  </li>
-  <li>There is also a corresponding *.a file which contains the actual
+ </li>
+ <li>There is also a corresponding *.a file which contains the actual
  machine code, but you can usually ignore this file.
-  </li>
-  <li>This is the convention often used by OCaml programs, but in fact you
+ </li>
+ <li>This is the convention often used by OCaml programs, but in fact you
  can name binary programs however you want.</li>
- </ol>
+</ol>
 
 <h2 id="cmifiles">*.cmi files</h2>
 <p><code>*.cmi</code> files are intermediate files which are compiled forms of the
-<code>.mli</code> (interface or &quot;header file&quot;).</p><p>To produce them, just compile the <code>.mli</code> file:</p><pre><code>ocamlc -c foo.mli
+<code>.mli</code> (interface or &quot;header file&quot;).</p>
+<p>To produce them, just compile the <code>.mli</code> file:</p>
+<pre><code>ocamlc -c foo.mli
 </code></pre>
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

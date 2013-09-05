@@ -53,17 +53,17 @@ executable or a bytecode executable if ocamlopt is not available, using
 ocamllex, ocamlyacc and regular ocaml files that use camlp4 syntax
 libraries as well as regular libraries, all managed by
 findlib/ocamlfind:</p>
- <ol>
-  <li>Do <code>omake --install</code>: it creates a template OMakefile and OMakeroot
+<ol>
+ <li>Do <code>omake --install</code>: it creates a template OMakefile and OMakeroot
  in the current directory. The OMakeroot file is left unchanged. The
  OMakefile template doesn&apos;t show options for using ocamlfind, so we
  will basically rewrite it, and grab some of the additional options
  that are shown in the file.
-  </li>
-  <li>Our source files are <code>parser.mly</code>, <code>lexer.mll</code> and <code>main.ml</code>. Delete
+ </li>
+ <li>Our source files are <code>parser.mly</code>, <code>lexer.mll</code> and <code>main.ml</code>. Delete
  or comment out the content of the automatically generated OMakefile,
  and put the following:</li>
- </ol>
+</ol>
 
 <!-- -->
 <pre><code># Program name (without extension)
@@ -110,22 +110,28 @@ clean:
 files, libraries and options. Now you can run omake, it should compile
 an executable named either myprog.run (bytecode) or myprog.opt (native
 code), or whatever you chose to call it. The omake clean command removes
-files that were produced by the compilation.</p><p>Go to <a href='http://omake.metaprl.org/' title='OMake&apos;s official site'>OMake&apos;s official
+files that were produced by the compilation.</p>
+<p>Go to <a href='http://omake.metaprl.org/' title='OMake&apos;s official site'>OMake&apos;s official
 site</a> for more
 information.</p>
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

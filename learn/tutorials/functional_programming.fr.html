@@ -55,41 +55,52 @@ rich data types, pattern matching, inférence de types, fonctions
 imbriquées - dans une espèce de «Super langage C». Ce sont certainement
 des fonctionnalités «cools» qui rendent le code concis, facile à lire et
 qui permettent d&apos;avoir moins de bugs, mais elles n&apos;ont que très peu à
-voir avec la programmation fonctionnelle.</p><p>En fait, la raison pour laquelle les langages fonctionnels sont si bien
+voir avec la programmation fonctionnelle.</p>
+<p>En fait, la raison pour laquelle les langages fonctionnels sont si bien
 n&apos;est <em>pas</em> grâce à la programmation fonctionnelle, mais parce que nous
 sommes restés avec des langages de type C pendant des années et pendant
-ce temps la pointe de la programmation a avancé considérablement.</p><p>Ainsi pendant que nous écrivions <code>struct { int type; union { ... } }</code>
+ce temps la pointe de la programmation a avancé considérablement.</p>
+<p>Ainsi pendant que nous écrivions <code>struct { int type; union { ... } }</code>
 pour la n-ième fois, les programmeurs ML et haskell avaient déjà les
 safe variants et le pattern matching sur les types de données. Pendant
 qu&apos;on faisait attention à bien faire des <code>free()</code> pour chaque
 <code>malloc()</code>, les langages à garbage collectors étaient arrivaient à faire
-mieux depuis les années 80.</p><p>Maintenant, arrêtons de tourner autour du pot, et abordons ce qu&apos;est la
-programmation fonctionnelle.</p><p>La définition de base, bien que pas forcément claire est : «Dans un
-langage fonctionnel, les fonctions sont des citoyens de première classe»</p><p>Que de mots qui n&apos;ont pas vraiment de sens. Voyons plutôt un exemple :</p><pre><code># let double x= x *2 in
+mieux depuis les années 80.</p>
+<p>Maintenant, arrêtons de tourner autour du pot, et abordons ce qu&apos;est la
+programmation fonctionnelle.</p>
+<p>La définition de base, bien que pas forcément claire est : «Dans un
+langage fonctionnel, les fonctions sont des citoyens de première classe»</p>
+<p>Que de mots qui n&apos;ont pas vraiment de sens. Voyons plutôt un exemple :</p>
+<pre><code># let double x= x *2 in
    List.map double [ 1; 2; 3 ];;
 - : int list = [2; 4, 6]</code></pre>
 <p>Dans cet exemple, j&apos;ai d&apos;abord définit une fonction imbriquée appelée
 <code>double</code> qui prend un argument <code>x</code> et qui retourne <code>x * 2</code>. Puis <code>map</code>
 appelle <code>double</code> sur chaque élément de la liste donnée <code>([1; 2; 3])</code>
-pour produire le résultat : une liste avec chaque nombre doublé.</p><p><code>map</code> est appelé une <strong>higher-order function</strong> (HOF). Les HOF sont juste
+pour produire le résultat : une liste avec chaque nombre doublé.</p>
+<p><code>map</code> est appelé une <strong>higher-order function</strong> (HOF). Les HOF sont juste
 une jolie manière de dire que la fonction prend une fonction parmi ses
-arguments.</p><p>Si vous êtes familiers avec le C/C++, alors cela ressemble au passage
+arguments.</p>
+<p>Si vous êtes familiers avec le C/C++, alors cela ressemble au passage
 d&apos;un pointeur de fonction. Java a une espèce d&apos;abomination qu&apos;on appelle
 une classe anonyme qui est une clôture stupide, lente et peu pratique.
 Si vous connaissez Perl alors vous devez déjà avoir utilisé les clôtures
 de Perl et sa fonction <code>map</code>, qui est exactement ce dont nous parlons.
-En fait, perl est un plutôt bon langage fonctionnel.</p><p>Les <strong>clôtures</strong> sont des fonctions qui portent une partie de
+En fait, perl est un plutôt bon langage fonctionnel.</p>
+<p>Les <strong>clôtures</strong> sont des fonctions qui portent une partie de
 l&apos;«environnement» dans lequel elles ont été définies. En particulier,
 une clôture peut référencer des variables qui sont disponibles au moment
 de la définition. Généralisons la fonction précédente de façons à
 prendre n&apos;importe quelle liste d&apos;entiers et multiplier chaque élément
-par une valeur <code>n</code> arbitraire :</p><pre><code>let multiply n list =
+par une valeur <code>n</code> arbitraire :</p>
+<pre><code>let multiply n list =
     let f x =
         n * x
     in
     List.map f list
     ;:</code></pre>
-<p>Ainsi :</p><pre><code># multiply 2 [1; 2; 3];;
+<p>Ainsi :</p>
+<pre><code># multiply 2 [1; 2; 3];;
 - : int list = [2; 4; 6]
 # multiply 5 [1; 2; 3];;
 - : int list = [5; 10; 15]</code></pre>
@@ -97,17 +108,22 @@ par une valeur <code>n</code> arbitraire :</p><pre><code>let multiply n list =
 fonction imbriquée <code>f</code>. C&apos;est une clôture. Regardez comment <code>f</code> utilise
 la valeur de <code>n</code> qui n&apos;est pas passé en tant qu&apos;argument explicite à
 <code>f</code>. A la place, <code>f</code> est pris de l&apos;environnement - c&apos;est un argument de
-la fonction <code>multiply</code>, ainsi disponible au sein de cette fonction.</p><p>Ceci peut paraître un peu trop raccourci, mais regardons de plus près à
-cet appel à <code>map</code> : <code>List.map f list</code></p><p><code>map</code> est défini dans le module <code>List</code>, très loin du code courrant. En
+la fonction <code>multiply</code>, ainsi disponible au sein de cette fonction.</p>
+<p>Ceci peut paraître un peu trop raccourci, mais regardons de plus près à
+cet appel à <code>map</code> : <code>List.map f list</code></p>
+<p><code>map</code> est défini dans le module <code>List</code>, très loin du code courrant. En
 d&apos;autres mots, nous passons <code>f</code> dans un module défini «a long time ago,
 in a galaxy far far away». Tout ce que nous pouvons savoir c&apos;est que ce
 code peut passer f à d&apos;autres modules ou en garder une référence quelque
 part et l&apos;appeler ultérieurement. Que ce soit le cas ou non, cette
 clôture va assurer que <code>f</code> aie toujours accès à l&apos;environnement hérité,
-donc à <code>n</code>.</p><p>Voici un exemple concret de lablgtk. Ceci est une méthode d&apos;une classe
+donc à <code>n</code>.</p>
+<p>Voici un exemple concret de lablgtk. Ceci est une méthode d&apos;une classe
 (nous n&apos;avons pas encore abordé les classes et les objets pour
 l&apos;instant, mais considérons juste cela comme une définition de fonction
-pour l&apos;instant).</p><p><code> class html_skel obj = object (self)</code></p><pre><code> ...
+pour l&apos;instant).</p>
+<p><code> class html_skel obj = object (self)</code></p>
+<pre><code> ...
  ...
  method save_to_channel chan =
    let receiver_fn content =
@@ -118,32 +134,39 @@ pour l&apos;instant).</p><p><code> class html_skel obj = object (self)</code></p
 <p>Tout d&apos;abord, il faut savoir que la fonction <code>save</code> appelée à la fin de
 la méthode prend en second argument une fonction, en l&apos;occurence
 <code>receiver_fn</code>. Il l&apos;appelle à répétition avec des morceaux de textes que
-du widget qu&apos;il essaye d&apos;enregistrer.</p><p>Maintenant, jettons un oeil à <code>receiver_fn</code>. Cette fonction est une
+du widget qu&apos;il essaye d&apos;enregistrer.</p>
+<p>Maintenant, jettons un oeil à <code>receiver_fn</code>. Cette fonction est une
 clôture correcte parce qu&apos;elle garde une référence à <code>chan</code> venant de
-son environnement.</p><h2 id="Applicationpartielleetcurryfication">Application partielle et curryfication</h2>
-<p>Définissons une fonction plus qui ne fait qu&apos;ajouter deux entiers :</p><pre><code>let plus a b = a + b ;;</code></pre>
+son environnement.</p>
+<h2 id="Applicationpartielleetcurryfication">Application partielle et curryfication</h2>
+<p>Définissons une fonction plus qui ne fait qu&apos;ajouter deux entiers :</p>
+<pre><code>let plus a b = a + b ;;</code></pre>
 <p>Quelques questions pour les endormis du fond de la classe :</p>
- <ol>
-  <li>Qu&apos;est-ce que <code>plus</code> ?
-  </li>
-  <li>Qu&apos;est-ce que <code>plus 2 3</code> ?
-  </li>
-  <li>Qu&apos;est-ce que <code>plus 2</code> ?</li>
- </ol>
+<ol>
+ <li>Qu&apos;est-ce que <code>plus</code> ?
+ </li>
+ <li>Qu&apos;est-ce que <code>plus 2 3</code> ?
+ </li>
+ <li>Qu&apos;est-ce que <code>plus 2</code> ?</li>
+</ol>
 
 <p>La première réponse est facile. <code>plus</code> est uen fonction qui prend deux
 arguments qui sont entiers et qui retourne un entier. Son type s&apos;écrit
-ainsi :</p><pre><code>plus : int -&gt; int -&gt; int</code></pre>
+ainsi :</p>
+<pre><code>plus : int -&gt; int -&gt; int</code></pre>
 <p>La deuxième réponse est encore plus évidente. <code>plus 2 3</code> est un nombre,
-l&apos;entier <code>5</code>. Sa valeur et son type s&apos;écrivent :</p><pre><code>5 : int</code></pre>
+l&apos;entier <code>5</code>. Sa valeur et son type s&apos;écrivent :</p>
+<pre><code>5 : int</code></pre>
 <p>Mais quid de la question 3 ? Il semblerait que <code>plus 2</code> soit une erreur,
 un bug. Alors qu&apos;en fait, il n&apos;en est point. Si nous typons cela dans le
-toplevel d&apos;OCaml, nous obtenons :</p><pre><code># plus 2;;
+toplevel d&apos;OCaml, nous obtenons :</p>
+<pre><code># plus 2;;
 - : int -&gt; int = &lt;fun&gt;</code></pre>
 <p>Ceci n&apos;est pas une erreur. Il nous dit que <code>plus 2</code> est en fait une
 <em>fonction</em>, qui prend un <code>int</code> et qui retourne un <code>int</code>. Quelle genre de
 fonction cela est-il ? Essayons d&apos;abord de lui donner un nom, puis de
-lui donner quelques entiers en argument, pour voir ce que ça donne :</p><pre><code># let f = plus 2;;
+lui donner quelques entiers en argument, pour voir ce que ça donne :</p>
+<pre><code># let f = plus 2;;
 val f : int -&gt; int = &lt;fun&gt;
 # f 10;;
 - : int = 12
@@ -154,12 +177,16 @@ val f : int -&gt; int = &lt;fun&gt;
 <p>Ceci est une <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>preuve par
 l&apos;exemple</a>
 suffisante pour nous dire que <code>plus 2</code> est la fonction qu&apos;ajoute 2 à des
-choses.</p><p>Revenons à la définition originelle, et remplaçons le premier argument,
-soit <code>a</code>, par la valeur <code>2</code> pour obtenir :</p><pre><code>let plus 2 b = 2 + b ;;
+choses.</p>
+<p>Revenons à la définition originelle, et remplaçons le premier argument,
+soit <code>a</code>, par la valeur <code>2</code> pour obtenir :</p>
+<pre><code>let plus 2 b = 2 + b ;;
 (* /!&#92; Ce n&apos;est pas du code OCaml valide *)</code></pre>
 <p>On peut maintenant mieux voir pourquoi <code>plus 2</code> est la fonction qui
-ajoute <code>2</code> à quelque chose.</p><p>En regardant le type de ces expressions, on peut démystifier la notation
-flèchée bizarre utilisée pour les types de fonctions :</p><pre><code>     plus : int -&gt; int -&gt; int
+ajoute <code>2</code> à quelque chose.</p>
+<p>En regardant le type de ces expressions, on peut démystifier la notation
+flèchée bizarre utilisée pour les types de fonctions :</p>
+<pre><code>     plus : int -&gt; int -&gt; int
    plus 2 : int -&gt; int
  plus 2 3 : int</code></pre>
 <p>Ce processus est appelé
@@ -170,20 +197,25 @@ les mathématiques derrière OCaml, parce que ça rendrait le tutorial très
 ennuyeux et inutile, je n&apos;irai pas plus loin sur le sujet. Pour trouver
 plus d&apos;informations sur le sujet, une simple <a href='http://www.google.com/search?q=currying' title='http://www.google.com/search?q=currying'>recherche
 google</a>
-suffit.</p><p>Vous rappelez-vous des fonctions <code>double</code> et <code>multiply</code> vues
-précédemment ? <code>multiply</code> était définit ainsi :</p><pre><code>let multiply n list =
+suffit.</p>
+<p>Vous rappelez-vous des fonctions <code>double</code> et <code>multiply</code> vues
+précédemment ? <code>multiply</code> était définit ainsi :</p>
+<pre><code>let multiply n list =
     let f x = n * x in
     List.map f list
     ;;</code></pre>
 <p>Nous pouvons maintenant définir <code>double</code>, <code>triple</code>, etc, très facilement
-comme suit :</p><pre><code>let double = multiply 2;;
+comme suit :</p>
+<pre><code>let double = multiply 2;;
 let triple = multiply 3;;</code></pre>
-<p>Ce sont de réelles fonctions, la preuve :</p><pre><code># double [1; 2; 3];;
+<p>Ce sont de réelles fonctions, la preuve :</p>
+<pre><code># double [1; 2; 3];;
 - : int list = [2; 4; 6]
 # triple [1; 2; 3];;
 - : int list = [3; 6; 9]</code></pre>
 <p>On peut aussi utiliser l&apos;application partielle (sans la fonction
-intermédiaire <code>f</code>) de cette façon :</p><pre><code># let multiply n = List.map (( * ) n);;
+intermédiaire <code>f</code>) de cette façon :</p>
+<pre><code># let multiply n = List.map (( * ) n);;
 val multiply : int -&gt; int list -&gt; int list = &lt;fun&gt;
 
 # let double = multiply 2;;
@@ -197,13 +229,16 @@ val triple : int list -&gt; int list = &lt;fun&gt;
 <p>Dans l&apos;exemple ci-dessus,
 <code>((*) n) est l&apos;application partielle de la fonction (*)</code>, c&apos;est-à-dire,
 multiplier. À noter les espaces ajoutés pour qu&apos;OCaml ne croit pas que
-c&apos;est un début de commentaire.</p><p>On peut mettre des opérateurs infixes entre parenthèses pour faire des
+c&apos;est un début de commentaire.</p>
+<p>On peut mettre des opérateurs infixes entre parenthèses pour faire des
 fonction. Voici une définition identique à la précédente avec la
-fonction <code>plus</code> :</p><pre><code># let plus = (+);;
+fonction <code>plus</code> :</p>
+<pre><code># let plus = (+);;
 val plus : int -&gt; int -&gt; int = &lt;fun&gt;
 # plus 2 3;;
 - : int = 5</code></pre>
-<p>Voici encore plus de curryfication :</p><pre><code># List.map (plus 2) [1; 2; 3];;
+<p>Voici encore plus de curryfication :</p>
+<pre><code># List.map (plus 2) [1; 2; 3];;
 - : int list = [3; 4; 5]
 # let list_of_functions = List.map plus [1; 2; 3];;
 val list_of_functions : (int -&gt; int) list = [&lt;fun&gt;; &lt;fun&gt;; &lt;fun&gt;]</code></pre>
@@ -217,7 +252,8 @@ fonction générique pour appliquer des fonction sur n&apos;importe quel type
 de liste. De la même manière, on peut définir des fonctions génériques
 sur les arbres. Certains types de problèmes d&apos;arithmétique peuvent être
 résolus plus rapidement avec la programmation fonctionnelle (par exemple
-calculer la dérivé d&apos;une fonction mathématique).</p><h2 id="Programmationfonctionnellepureetimpure">Programmation fonctionnelle pure et impure</h2>
+calculer la dérivé d&apos;une fonction mathématique).</p>
+<h2 id="Programmationfonctionnellepureetimpure">Programmation fonctionnelle pure et impure</h2>
 <p>Une <strong>fonction pure</strong> est une fonction sans aucun <strong>effet de bord</strong>. Un
 effet de bord signifie que la fonction garde une sorte d&apos;état caché en
 son sein. <code>strlen()</code> est un exemple de fonction pure en C. Si on appelle
@@ -226,15 +262,18 @@ La sortie de <code>strlen()</code> (la taille) ne dépend que des entrées (la
 chaîne) et rien d&apos;autre. Plein de fonctions en C sont, malheureusement,
 impures. Par exemple, <code>malloc()</code>, évidemment, repose sur beaucoup
 d&apos;éléments d&apos;états internes (les objets alloués sur le tas, le type
-d&apos;allocation utilisé, la façon de prendre des pages de l&apos;OS, etc..).</p><p>Les langages dérivés de ML tel que OCaml sont «presque purs». Ils
+d&apos;allocation utilisé, la façon de prendre des pages de l&apos;OS, etc..).</p>
+<p>Les langages dérivés de ML tel que OCaml sont «presque purs». Ils
 autorisent des effets de bord au travers des références et des tableaux,
 mais la plupart des codes que vous écrirez seront fonctionnels purs
 parce qu&apos;ils encouragent cette pensée. Haskell, un autre langage
 fonctionnel, est pur fonctionnel. OCaml est donc plus pratique parce
-qu&apos;écrire des fonctions impures est parfois utile.</p><p>Voici les avantages théoriques d&apos;avoir des fonctions pures. Un avantage
+qu&apos;écrire des fonctions impures est parfois utile.</p>
+<p>Voici les avantages théoriques d&apos;avoir des fonctions pures. Un avantage
 est que si une fonction est pure, alors elle peut être appelée plusieurs
 fois avec les même arguments, le compilateur n&apos;aura qu&apos;a appeler la
-fonction qu&apos;une seule fois. Un bon exemple en C est :</p><pre><code>for (i = 0; i &lt; strlen(s); ++i) {
+fonction qu&apos;une seule fois. Un bon exemple en C est :</p>
+<pre><code>for (i = 0; i &lt; strlen(s); ++i) {
     // Du code qui n&apos;affecte pas s
 }</code></pre>
 <p>Si nativement compilé, la boucle est en O(n²) sur la taille de s parce
@@ -244,48 +283,62 @@ que <code>strlen()</code> est purement fonctionnel <em>et</em> que <code>s</code
 dans la boucle, alors il peut retirer les appels redondants à <code>strlen()</code>
 et passer la boucle en O(n). Les compilateurs font-ils vraiment cela ?
 Dans le cas de <code>strlen</code> très certainement, mais dans d&apos;autres,
-probablement pas.</p><p>Se concentrer en écrivant des fonctions fonctionnelles pures permettent
+probablement pas.</p>
+<p>Se concentrer en écrivant des fonctions fonctionnelles pures permettent
 d&apos;écrire du code réutilisable en utilisant l&apos;approche bottom-up, testant
 chaque petite fonction au fur et à mesure de l&apos;avancement. La mode
 actuelle est de projeter les programmes en utilisant une approche
 top-bottom, mais dans l&apos;opinion de l&apos;auteur, cela résulte souvent à des
-échecs de projets.</p><h2 id="Evaluationstricteparesseusestrictnessvslaziness">Evaluation stricte / paresseuse (strictness vs laziness)</h2>
+échecs de projets.</p>
+<h2 id="Evaluationstricteparesseusestrictnessvslaziness">Evaluation stricte / paresseuse (strictness vs laziness)</h2>
 <p>Les langages dérivés de C et de ML sont stricts. Haskell et Miranda ne
 sont pas stricts, ie ce sont des langages à évaluation paresseuse. OCaml
 est stricte par défaut mais autorise l&apos;évaluation paresseuse lorsque
-nécessaire.</p><p>Dans un langage à évaluation stricte, les arguments des fonctions sont
+nécessaire.</p>
+<p>Dans un langage à évaluation stricte, les arguments des fonctions sont
 toujours évalués en premier, et le résultat est alors passé à la
 fonction. Par exemple dans un langage à évaluation stricte, cet appel va
-toujours sortir par une erreur de division par zéro :</p><pre><code> give_me_a_three (1/0);;</code></pre>
+toujours sortir par une erreur de division par zéro :</p>
+<pre><code> give_me_a_three (1/0);;</code></pre>
 <p>Si vous avez programmé dans n&apos;importe quel langage conventionnel, c&apos;est
 le comportement auquel vous vous attendrez, et vous serez surpris qu&apos;il
-en soit autrement.</p><p>Dans un langage à évaluation paresseuse, des choses bizarres se passent.
+en soit autrement.</p>
+<p>Dans un langage à évaluation paresseuse, des choses bizarres se passent.
 Les arguments de fonctions ne sont évalués que si la fonction les
 utilise. Vous rappelez-vous que la fonction <code>give_me_a_three</code> n&apos;utilise
 pas ses arguments, et retourne toujours 3 ? Dans un langage à évaluation
 paresseuse, cet appel précédent ne fera <em>pas</em> d&apos;erreur, simplement parce
 que <code>give_me_a_three</code> ne regarde jamais à ses arguments, donc si
-l&apos;argument n&apos;est jamais évalué, la division par zéro n&apos;arrive pas.</p><p>Les langages à analyse paresseuse permettent de faire d&apos;autres choses
+l&apos;argument n&apos;est jamais évalué, la division par zéro n&apos;arrive pas.</p>
+<p>Les langages à analyse paresseuse permettent de faire d&apos;autres choses
 bizarres, comme la définition d&apos;une liste infinie. Tant qu&apos;on essaye pas
-d&apos;itérer sur la totalité de la liste, cela fonctionne.</p><p>OCaml est un langage à évaluation stricte, mais a un module d&apos;évaluation
+d&apos;itérer sur la totalité de la liste, cela fonctionne.</p>
+<p>OCaml est un langage à évaluation stricte, mais a un module d&apos;évaluation
 paresseuse (<code>Lazy</code>) qui permettent d&apos;écrire des expressions paresseuses.
 Voici un exemple. D&apos;abord nous créons une expression paresseuse pour
-<code>1/0</code> :</p><pre><code># let lazy_expr = lazy (1/0);;
+<code>1/0</code> :</p>
+<pre><code># let lazy_expr = lazy (1/0);;
 val lazy_expr : int lazy_t = &lt;lazy&gt;</code></pre>
-<p>A noter que le type de l&apos;expression est <code>int lazy_t</code></p><p>Parce que <code>give_me_a_three</code> prend un <code>&apos;a</code> (tout type) nous pouvons passé
-cette expression à la fonction :</p><pre><code># give_me_a_three lazy_expr;;
+<p>A noter que le type de l&apos;expression est <code>int lazy_t</code></p>
+<p>Parce que <code>give_me_a_three</code> prend un <code>&apos;a</code> (tout type) nous pouvons passé
+cette expression à la fonction :</p>
+<pre><code># give_me_a_three lazy_expr;;
 - : int = 3;;</code></pre>
 <p>Pour évaluer une expression paresseuse, nous devons utiliser la fonction
-<code>Lazy.force</code> :</p><pre><code># Lazy.force lazy_expr;;
+<code>Lazy.force</code> :</p>
+<pre><code># Lazy.force lazy_expr;;
 Exception : Division_by_zero.</code></pre>
 <h2 id="Boxedvsunboxedtypes">Boxed vs. unboxed types</h2>
-<p>(NDT: trouver une traduction correcte pour «boxed» et «unboxed»)</p><p>Un terme qu&apos;on entend beaucoup lorsqu&apos;on parle de langages fonctionnels
+<p>(NDT: trouver une traduction correcte pour «boxed» et «unboxed»)</p>
+<p>Un terme qu&apos;on entend beaucoup lorsqu&apos;on parle de langages fonctionnels
 est «boxed». J&apos;étais très confus lorsque j&apos;ai entendu ce terme pour la
 première fois, mais en fait la distinction entre types «boxed» et
 «unboxed» est très simple si vous avez déjà fait du C, du C++ ou du java
-avant (en Perl tout est «boxed»).</p><p>La façon de voir un objet «boxed» est de penser à un objet qui a été
+avant (en Perl tout est «boxed»).</p>
+<p>La façon de voir un objet «boxed» est de penser à un objet qui a été
 alloué dans le tas en utilisant <code>malloc()</code> en C (ou <code>new</code> en C++), et/ou
-qui est y est réferré via un pointeur. Prenons ce programme C :</p><pre><code>#include &lt;stdio.h&gt;
+qui est y est réferré via un pointeur. Prenons ce programme C :</p>
+<pre><code>#include &lt;stdio.h&gt;
 
 void printit (int* ptr) {
     printf(&quot;the number is %d&#92;n&quot;, *ptr);
@@ -299,28 +352,38 @@ int main () {
 
     return 0;
 }</code></pre>
-<p>La variable <code>a</code> est allouée dans la pile, et est clairement «unboxed».</p><p>La fonction <code>printit()</code> prends un entier «boxed» et l&apos;affiche.</p><p>Le diagramme ci-dessous (NDT: non-existant à l&apos;écriture de la
+<p>La variable <code>a</code> est allouée dans la pile, et est clairement «unboxed».</p>
+<p>La fonction <code>printit()</code> prends un entier «boxed» et l&apos;affiche.</p>
+<p>Le diagramme ci-dessous (NDT: non-existant à l&apos;écriture de la
 traduction) montre un tableau de «unboxed» (en haut) face à des entiers
-«unboxed» (en bas) :</p><p><img src='../img/boxedarray.png' alt='Boxed Array' /></p><p>Pas de prix pour avoir deviné que le tableau d&apos;entiers «unboxed» est
+«unboxed» (en bas) :</p>
+<p><img src='../img/boxedarray.png' alt='Boxed Array' /></p>
+<p>Pas de prix pour avoir deviné que le tableau d&apos;entiers «unboxed» est
 plus rapide que le tableau d&apos;entiers «boxed». De plus, parce qu&apos;il y a
 moins d&apos;allocations séparés, le garbage collector est plus rapide à
-nettoyer et plus simple sur le tableau d&apos;objets «unboxed».</p><p>En C ou C++ vous n&apos;aurez aucun problème pour construire chacun des
+nettoyer et plus simple sur le tableau d&apos;objets «unboxed».</p>
+<p>En C ou C++ vous n&apos;aurez aucun problème pour construire chacun des
 tableaux ci-dessus. En java, on a deux types, <code>int</code> qui est «unboxed» et
 <code>Integer</code> qui est «boxed», et donc considérablement moins efficace. En
 OCaml, tous les types primitifs sont «unboxed».</p>
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

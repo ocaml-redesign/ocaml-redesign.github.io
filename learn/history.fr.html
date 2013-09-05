@@ -51,11 +51,13 @@
 Machine Language</em>. C&apos;était un jeu de mots sur CAM, la Machine Abstraite
 Catégorique, et ML, la famille de langages de programmation à laquelle
 Caml appartient. Le nom Caml est resté à travers l&apos;évolution du langage,
-bien que l&apos;implantation actuelle n&apos;ait rien à voir avec la CAM.</p><p>Caml fut d&apos;abord conçu et implanté par l&apos;équipe <em>Formel</em> de
+bien que l&apos;implantation actuelle n&apos;ait rien à voir avec la CAM.</p>
+<p>Caml fut d&apos;abord conçu et implanté par l&apos;équipe <em>Formel</em> de
 l&apos;<a href='http://www.inria.fr/index.fr.html'>Inria</a>, dirigée par <a href='http://cristal.inria.fr/~huet/'>Gérard
 Huet</a>. Son développement a continué dans
 l&apos;équipe <a href='http://cristal.inria.fr/'>Cristal</a>, et aujourd&apos;hui dans son
-successeur, <a href='http://gallium.inria.fr/'>Gallium</a>.</p><h2 id="Laposorigine">L&apos;origine</h2>
+successeur, <a href='http://gallium.inria.fr/'>Gallium</a>.</p>
+<h2 id="Laposorigine">L&apos;origine</h2>
 <p>L&apos;équipe Formel commença à s&apos;intéresser au langage ML en 1980–81. ML
 était le <em>métalangage</em> de la version d&apos;Édimbourg de l&apos;assistant de
 preuve LCF, tous deux conçus par <a href='http://www.cl.cam.ac.uk/~rm135/'>Robin
@@ -84,23 +86,24 @@ Paulson</a> pour développer Cambridge
 LCF et par <a href='http://www.cl.cam.ac.uk/users/mjcg/'>Mike Gordon</a> pour la
 première version de HOL, comme le rappelle la <a href='http://www.cl.cam.ac.uk/users/mjcg/papers/HolHistory.html'>courte histoire de
 HOL</a> de
-Gordon.</p><p>Vers 1984, trois événements nous encouragèrent à prendre une part plus
+Gordon.</p>
+<p>Vers 1984, trois événements nous encouragèrent à prendre une part plus
 grande dans le développement de ML:</p>
- <ul>
-  <li>À Édimbourg, <a href='http://lucacardelli.name/'>Luca Cardelli</a> développa
+<ul>
+ <li>À Édimbourg, <a href='http://lucacardelli.name/'>Luca Cardelli</a> développa
  une implantation beaucoup plus rapide de ML à l&apos;aide de sa
  <em>Functional Abstract Machine (FAM)</em>. Il conçut également sa propre
  version du langage, connue à l&apos;époque sous le nom de <em>Cardelli&apos;s
  ML</em>.
-  </li>
-  <li><a href='http://www.cl.cam.ac.uk/~rm135/'>Robin Milner</a> pensait que le
+ </li>
+ <li><a href='http://www.cl.cam.ac.uk/~rm135/'>Robin Milner</a> pensait que le
  moment était venu de proposer une nouvelle définition de ML, de
  façon à éviter la divergence entre les diverses implantations. Il
  définit le noyau du langage Standard ML, qui fut ensuite complété
  par un système de modules conçu par <a href='http://people.cs.uchicago.edu/~dbm/'>Dave
  McQueen</a>.
-  </li>
-  <li>Au même moment, <a href='http://www.pps.jussieu.fr/~curien/'>Pierre-Louis
+ </li>
+ <li>Au même moment, <a href='http://www.pps.jussieu.fr/~curien/'>Pierre-Louis
  Curien</a> développa un calcul de
  combinateurs catégoriques, ainsi qu&apos;une correspondance entre
  lambda-calcul et combinateurs catégoriques, qui, comme le remarqua
@@ -110,7 +113,7 @@ grande dans le développement de ML:</p>
  d&apos;Édimbourg, mais pouvait être décrite, vérifiée, et optimisée de
  façon simple. Ceci mena à la définition de la Machine Abstraite
  Catégorique (CAM).</li>
- </ul>
+</ul>
 
 <p>Ceci poussa <a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> à
 développer une nouvelle implantation de ML, basée sur la CAM. Cependant,
@@ -130,14 +133,16 @@ nous semblaient utiles aurait retardé notre travail de façon trop
 importante. De plus, notre philosophie entrait en conflit avec celle
 d&apos;un langage « standard », qui n&apos;est pas censé évoluer trop rapidement.
 Néanmoins, nous incorporâmes effectivement dans Caml la plupart des
-améliorations apportées par Standard ML vis-à-vis du ML d&apos;Édimbourg.</p><h2 id="Lapremireimplantation">La première implantation</h2>
+améliorations apportées par Standard ML vis-à-vis du ML d&apos;Édimbourg.</p>
+<h2 id="Lapremireimplantation">La première implantation</h2>
 <p>La première implantation de Caml fut publiée en 1987, et développée
 jusqu&apos;en 1992. Elle était principalement l&apos;œuvre d&apos;Ascander Suarez.
 Après le départ d&apos;Ascander en 1988, <a href='http://cristal.inria.fr/~weis/'>Pierre
 Weis</a> et <a href='http://michel.mauny.net/index.fr.php'>Michel
 Mauny</a> continuèrent le
 développement et la maintenance du système. Cette implantation compilait
-Caml vers LLM3, la machine virtuelle du système Le_Lisp.</p><p><a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> se souvient
+Caml vers LLM3, la machine virtuelle du système Le_Lisp.</p>
+<p><a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> se souvient
 modestement: « Je dois admettre que lorsque le développement de Caml
 commença, mon expérience de l&apos;implémentation des langages de
 programmation était très limitée. S&apos;appuyer sur la machine abstraite
@@ -153,7 +158,8 @@ performances aux programmes non fonctionnels qu&apos;aux programmes très
 fonctionnels. Par-dessus tout, j&apos;avais négligé l&apos;importance de la
 portabilité et de l&apos;ouverture. Malgré ces inadéquations, dont je suis
 initialement responsable, Ascander, Pierre et Michel ont fait du beau
-travail. »</p><h2 id="CamlLight">Caml Light</h2>
+travail. »</p>
+<h2 id="CamlLight">Caml Light</h2>
 <p>En 1990 et 1991, <a href='http://cristal.inria.fr/~xleroy/'>Xavier Leroy</a> mit au
 point une implantation totalement nouvelle de Caml, basée sur un
 interprète de code-octets écrit en C. <a href='http://cristal.inria.fr/~doligez/'>Damien
@@ -166,7 +172,8 @@ Caml dans l&apos;enseignement et la recherche. Sa notion de flux de données
 et ses facilités pour l&apos;analyse syntaxique, dues à <a href='http://michel.mauny.net/index.fr.php'>Michel
 Mauny</a>, faisaient suite à un
 effort de longue haleine de l&apos;équipe Formel pour promouvoir les outils
-de manipulation syntaxique.</p><h2 id="CamlSpecialLight">Caml Special Light</h2>
+de manipulation syntaxique.</p>
+<h2 id="CamlSpecialLight">Caml Special Light</h2>
 <p>En 1995, <a href='http://cristal.inria.fr/~xleroy/'>Xavier Leroy</a> publia Caml
 Special Light, qui surpassait Caml Light de plusieurs façons. En premier
 lieu, un compilateur optimisant produisant du code natif est venu
@@ -179,11 +186,12 @@ Special Light proposait un système de modules de haut niveau, conçu par
 <a href='http://cristal.inria.fr/~xleroy/'>Xavier Leroy</a> et inspiré par les
 modules de Standard ML. Ce système de modules fournit de puissants
 mécanismes d&apos;abstraction et de paramétrisation, essentiels pour la
-programmation à grande échelle.</p><h2 id="ObjectiveCaml">Objective Caml</h2>
+programmation à grande échelle.</p>
+<h2 id="ObjectiveCaml">Objective Caml</h2>
 <p>Les systèmes de types et l&apos;inférence de types pour la programmation par
 objets sont un domaine actif de recherche depuis le début des années</p>
- <ol>
-  <li><a href='http://cristal.inria.fr/~remy/'>Didier Rémy</a> et ensuite <a href='http://www.pps.jussieu.fr/~vouillon/'>Jérôme
+<ol>
+ <li><a href='http://cristal.inria.fr/~remy/'>Didier Rémy</a> et ensuite <a href='http://www.pps.jussieu.fr/~vouillon/'>Jérôme
 Vouillon</a> ont conçu un système de
 types élégant et très expressif pour les objets et les classes. Ce
 design fut intégré à et implémenté dans Caml Special Light, donnant
@@ -197,14 +205,15 @@ programmation par objets (classes paramétrées par des types, méthodes
 binaires, spécialisation du type de l&apos;objet), idiomes qui sont traités
 de manière non sûre ou à l&apos;aide de vérifications dynamiques de types
 dans d&apos;autres langages à objets comme C++ et Java.</li>
- </ol>
+</ol>
 
 <p>En 2000, <a href='http://www.math.nagoya-u.ac.jp/~garrigue/home-f.html'>Jacques
 Garrigue</a> ajouta à
 Objective Caml plusieurs nouveaux traits, qu&apos;il avait expérimentés
 pendant quelques années dans le dialecte Objective Label. Parmi ceux-ci
 se trouvaient les méthodes polymorphes, les arguments de fonctions
-étiquetés et optionnels, et les variantes polymorphes.</p><h2 id="LamonteenpuissancedaposOCaml">La montée en puissance d&apos;OCaml</h2>
+étiquetés et optionnels, et les variantes polymorphes.</p>
+<h2 id="LamonteenpuissancedaposOCaml">La montée en puissance d&apos;OCaml</h2>
 <p>Depuis la fin des années 1990, OCaml a régulièrement gagné en popularité
 et a attiré une communauté significative d&apos;utilisateurs. En plus de
 programmes complets de haute technicité écrits en OCaml, cette
@@ -215,7 +224,8 @@ la programmation du Web et des réseaux, l&apos;interopérabilité avec d&apos;a
 langages, et l&apos;analyse statique de programmes. En parallèle, l&apos;équipe
 initiale de développement d&apos;OCaml travaille toujours activement sur le
 système de base, améliorant sans cesse la qualité de l&apos;implémentation et
-l&apos;adaptant aux architectures et systèmes les plus récents.</p><h2 id="Quelquesparentsproches">Quelques parents proches</h2>
+l&apos;adaptant aux architectures et systèmes les plus récents.</p>
+<h2 id="Quelquesparentsproches">Quelques parents proches</h2>
 <p>En plus de ces versions officielles de Caml, il faut mentionner de
 nombreux compilateurs voisins. <a href='http://michel.mauny.net/index.fr.php'>Michel
 Mauny</a> et <a href='http://cristal.inria.fr/~ddr/'>Daniel de
@@ -231,25 +241,31 @@ Chailloux</a> a publié CeML. Dans
 l&apos;équipe <em>Para</em>, Francis Dupont a implanté Caml pour des machines
 parallèles, tandis que <a href='http://cristal.inria.fr/~maranget/'>Luc
 Maranget</a> a construit Gaml, un
-compilateur pour un langage de programmation fonctionnel paresseux.</p><h2 id="Citationfinale">Citation finale</h2>
+compilateur pour un langage de programmation fonctionnel paresseux.</p>
+<h2 id="Citationfinale">Citation finale</h2>
 <p>En 1996, <a href='http://www.pps.jussieu.fr/~cousinea/'>Guy Cousineau</a> écrivait:
 « L&apos;histoire de Caml aurait certainement pu être plus linéaire.
 Néanmoins, à travers une série de tâtonnements, une capacité à produire
 des implantations de haute performance, portables et flexibles, pour les
 langages de programmation fonctionnels a émergé en France. »</p>
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

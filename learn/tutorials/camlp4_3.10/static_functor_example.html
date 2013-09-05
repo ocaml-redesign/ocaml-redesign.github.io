@@ -47,7 +47,8 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <h1 id="Camlp4310staticfunctorexample">Camlp4 3.10: static functor example</h1>
-<p>static_functor_example.ml</p><pre><code>type t1 = A | B
+<p>static_functor_example.ml</p>
+<pre><code>type t1 = A | B
 type t2 = Foo of string * t1
 open Camlp4.PreCast
 module Lexer = struct
@@ -65,19 +66,23 @@ Gram.parse_string foo (Loc.mk &quot;&lt;string&gt;&quot;) &quot;foo x?&quot; = F
 DELETE_RULE Gram foo: &quot;foo&quot;; LIDENT; bar END
 </code></pre>
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -49,60 +49,69 @@
             <h1 id="Commandlinearguments">Command-line arguments</h1>
 <p>This is a short tutorial for those who are writing their first OCaml
 program and are wondering how to read arguments that are passed on the
-command line.</p><h2 id="argv">argv</h2>
+command line.</p>
+<h2 id="argv">argv</h2>
 <p>Like in the C programming language, the arguments that are passed to a
 given program are stored in an array. Following the tradition, this
 array is named <code>argv</code>. It is found in the <code>Sys</code> module of the standard
 library, therefore its full name is <code>Sys.argv</code>. The number of arguments
 including the name of the program itself is simply the length of the
-array. It is obtained using the <code>Array.length</code> function.</p><h2 id="Simpleexample">Simple example</h2>
+array. It is obtained using the <code>Array.length</code> function.</p>
+<h2 id="Simpleexample">Simple example</h2>
 <p>The following program displays the arguments with their position in
-<code>Sys.argv</code>:</p><pre><code>open Printf
+<code>Sys.argv</code>:</p>
+<pre><code>open Printf
 
 let () =
   for i = 0 to Array.length Sys.argv - 1 do
     printf &quot;[%i] %s&#92;n&quot; i Sys.argv.(i)
   done</code></pre>
 <p>If you save the program above as <code>args.ml</code>, and run
-<code>ocaml args.ml arg1 arg2 arg3</code>, here is what you get:</p><pre><code>[0] args.ml
+<code>ocaml args.ml arg1 arg2 arg3</code>, here is what you get:</p>
+<pre><code>[0] args.ml
 [1] arg1
 [2] arg2
 [3] arg3</code></pre>
 <p>Note that <code>ocaml</code> launched a subprocess that actually runs the program
 where argv is <code>args.ml arg1 arg2 arg3</code>. You can also compile your
 program using <code>ocamlopt -o args args.ml</code>, and then run
-<code>./args arg1 arg2 arg3</code> and you will get:</p><pre><code>[0] ./args
+<code>./args arg1 arg2 arg3</code> and you will get:</p>
+<pre><code>[0] ./args
 [1] arg1
 [2] arg2
 [3] arg3</code></pre>
 <h2 id="Toolsforparsingcommandlineoptions">Tools for parsing command-line options</h2>
 <p>A few libraries exist that let you process command-line arguments
 without having to scan the <code>Sys.argv</code> array yourself:</p>
- <ul>
-  <li><code>Arg</code> is a module of the standard library.
-  </li>
-  <li><code>Getopt</code> for OCaml is similar to <a href='http://www.gnu.org/software/libc/manual/html_node/Getopt.html' title='http://www.gnu.org/software/libc/manual/html_node/Getopt.html'>GNU
+<ul>
+ <li><code>Arg</code> is a module of the standard library.
+ </li>
+ <li><code>Getopt</code> for OCaml is similar to <a href='http://www.gnu.org/software/libc/manual/html_node/Getopt.html' title='http://www.gnu.org/software/libc/manual/html_node/Getopt.html'>GNU
  getopt</a>.
-  </li>
-  <li>The
+ </li>
+ <li>The
  <a href='http://www.cs.cornell.edu/~ebreck/pa_arg/' title='http://www.cs.cornell.edu/~ebreck/pa_arg/'>Pa_arg</a>
  library offers a convenient syntax for defining and reading options.</li>
- </ul>
+</ul>
 
 
-            <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="navbar-inner">
-                <div class="container-fluid">
-                  <ul class="nav pull-right">
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Contact us</a></li>
-                    <li><a href="#">Find us on GitHub</a></li>
-                  </ul>
-                </div>
-              </div>
-            </footer>
-            <!-- Load javascript from CDN -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
