@@ -47,9 +47,9 @@
         <div id="content-primary" class="span8">
           <div class="content">
             <p>Functional Programming</p>
-<h1 id="FunctionalProgramming">Functional Programming</h1>
-<h2 id="Whatisfunctionalprogramming">What is functional programming?</h2>
-<p>We&apos;ve got quite far into the tutorial, yet we haven&apos;t really considered
+<h1 id="FunctionalProgramming"> Functional Programming</h1><h2 id="Whatisfunctionalprogramming"> What is functional programming?</h2><p>
+
+We&apos;ve got quite far into the tutorial, yet we haven&apos;t really considered
 <strong>functional programming</strong>. All of the features given so far - rich data
 types, pattern matching, type inference, nested functions - you could
 imagine could exist in a kind of &quot;super C&quot; language. These are Cool
@@ -71,9 +71,11 @@ anyhow.</p>
 <strong>functional language</strong>, <strong>functions</strong> are first-class citizens.</p>
 <p>Lot of words there that don&apos;t really make much sense. So let&apos;s have an
 example:</p>
-<pre><code>  let double x = x * 2 in
-  List.map double [ 1; 2; 3 ]</code></pre>
-<p>In this example, I&apos;ve first defined a nested function called <code>double</code>
+<pre><code class='ocaml'>  <span class='k'>let</span> double x <span class='k'>=</span> x <span class='o'>*</span> 2 <span class='k'>in</span>
+  <span class='m'>List</span><span class='o'>.</span>map double <span class='o'>[</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3 <span class='o'>]</span>
+</code></pre>
+<p>
+In this example, I&apos;ve first defined a nested function called <code>double</code>
 which takes an argument <code>x</code> and returns <code>x * 2</code>. Then <code>map</code> calls
 <code>double</code> on each element of the given list (<code>[1; 2; 3]</code>) to produce the
 result: a list with each number doubled.</p>
@@ -92,14 +94,18 @@ in which they were defined. In particular, a closure can reference
 variables which were available at the point of its definition. Let&apos;s
 generalise the function above so that now we can take any list of
 integers and multiply each element by an arbitrary value <code>n</code>:</p>
-<pre><code>  let multiply n list =
-    let f x =
-      n * x in
-    List.map f list</code></pre>
-<p>Hence:</p>
-<pre><code>multiply 2 [1; 2; 3];;
-multiply 5 [1; 2; 3];;</code></pre>
-<p>The important point to note about the <code>multiply</code> function is the nested
+<pre><code class='ocaml'>  <span class='k'>let</span> multiply n list <span class='k'>=</span>
+    <span class='k'>let</span> f x <span class='k'>=</span>
+      n <span class='o'>*</span> x <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map f list
+</code></pre>
+<p>
+Hence:</p>
+<pre><code class='ocaml'>multiply 2 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+multiply 5 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+The important point to note about the <code>multiply</code> function is the nested
 function <code>f</code>. This is a closure. Look at how <code>f</code> uses the value of <code>n</code>
 which isn&apos;t actually passed as an explicit argument to <code>f</code>. Instead <code>f</code>
 picks it up from its environment - it&apos;s an argument to the <code>multiply</code>
@@ -115,25 +121,29 @@ always has access back to its parental environment, and to <code>n</code>.</p>
 <p>Here&apos;s a real example from lablgtk. This is actually a method on a class
 (we haven&apos;t talked about classes and objects yet, but just think of it
 as a function definition for now).</p>
-<pre><code>class html_skel obj = object (self)
-  ...
-  ...
-  method save_to_channel chan =
-    let receiver_fn content =
-      output_string chan content;
-      true in
-    save obj receiver_fn</code></pre>
-<p>First of all you need to know that the <code>save</code> function called at the end
+<pre><code class='ocaml'><span class='k'>class</span> html_skel obj <span class='k'>=</span> object (self)
+  <span class='o'>...</span>
+  <span class='o'>...</span>
+  <span class='k'>method</span> save_to_channel chan <span class='k'>=</span>
+    let rec<span class='o'>eiver_fn</span> content <span class='k'>=</span>
+      output_string chan content<span class='o'>;</span>
+      <span class='o'>true</span> <span class='k'>in</span>
+    save obj receiver_fn
+</code></pre>
+<p>
+First of all you need to know that the <code>save</code> function called at the end
 of the method takes as its second argument a function (<code>receiver_fn</code>).
 It repeatedly calls <code>receiver_fn</code> with snippets of text from the widget
 that it&apos;s trying to save.</p>
 <p>Now look at the definition of <code>receiver_fn</code>. This function is a closure
 alright because it keeps a reference to <code>chan</code> from its environment.</p>
-<h3 id="Partialfunctionapplicationsandcurrying"> Partial function applications and currying</h3>
-<p>Let&apos;s define a plus function which just adds two integers:</p>
-<pre><code>  let plus a b =
-    a + b</code></pre>
-<p>Some questions for people asleep at the back of the class.</p>
+<h3 id="Partialfunctionapplicationsandcurrying"> Partial function applications and currying</h3><p>
+Let&apos;s define a plus function which just adds two integers:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> plus a b <span class='k'>=</span>
+    a <span class='o'>+</span> b
+</code></pre>
+<p>
+Some questions for people asleep at the back of the class.</p>
 <ol>
  <li>What is <code>plus</code>?
  </li>
@@ -144,38 +154,50 @@ alright because it keeps a reference to <code>chan</code> from its environment.<
 
 <p>Question 1 is easy. <code>plus</code> is a function, it takes two arguments which
 are integers and it returns an integer. We write its type like this:</p>
-<pre><code>  plus : int -&gt; int -&gt; int</code></pre>
-<p>Question 2 is even easier. <code>plus 2 3</code> is a number, the integer <code>5</code>. We
+<pre><code class='ocaml'>  plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+</code></pre>
+<p>
+Question 2 is even easier. <code>plus 2 3</code> is a number, the integer <code>5</code>. We
 write its value and type like this:</p>
-<pre><code>  5 : int</code></pre>
-<p>But what about question 3? It looks like <code>plus 2</code> is a mistake, a bug.
+<pre><code class='ocaml'>  5 <span class='o'>:</span> int
+</code></pre>
+<p>
+But what about question 3? It looks like <code>plus 2</code> is a mistake, a bug.
 In fact, however, it isn&apos;t. If we type this into the OCaml toplevel, it
 tells us:</p>
-<pre><code>  plus 2</code></pre>
-<p>This isn&apos;t an error. It&apos;s telling us that <code>plus 2</code> is in fact a
+<pre><code class='ocaml'>  plus 2
+</code></pre>
+<p>
+This isn&apos;t an error. It&apos;s telling us that <code>plus 2</code> is in fact a
 <em>function</em>, which takes an <code>int</code> and returns an <code>int</code>. What sort of
 function is this? We experiment by first of all giving this mysterious
 function a name (<code>f</code>), and then trying it out on a few integers to see
 what it does:</p>
-<pre><code>let f = plus 2;;
-f 10;;
-f 15;;
-f 99;;</code></pre>
-<p>In engineering this is sufficient <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>proof by
+<pre><code class='ocaml'><span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
+f 10<span class='o'>;;</span>
+f 15<span class='o'>;;</span>
+f 99<span class='o'>;;</span>
+</code></pre>
+<p>
+In engineering this is sufficient <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>proof by
 example</a>
 for us to state that <code>plus 2</code> is the function which adds 2 to things.</p>
 <p>Going back to the original definition, let&apos;s &quot;fill in&quot; the first
 argument (<code>a</code>) setting it to 2 to get:</p>
-<pre><code>let plus 2 b =       (* This is not real OCaml code! *)
-  2 + b</code></pre>
-<p>You can kind of see, I hope, why <code>plus 2</code> is the function which adds 2
+<pre><code class='ocaml'><span class='k'>let</span> plus 2 b <span class='k'>=</span>       <span class='com2'>(* This is not real OCaml code<span class='ic'>!</span> *)</span><!-- end comment -->
+  2 <span class='o'>+</span> b
+</code></pre>
+<p>
+You can kind of see, I hope, why <code>plus 2</code> is the function which adds 2
 to things.</p>
 <p>Looking at the types of these expressions we may be able to see some
 rationale for the strange -&#92;&gt; arrow notation used for function types:</p>
-<pre><code>    plus : int -&gt; int -&gt; int
-  plus 2 : int -&gt; int
-plus 2 3 : int</code></pre>
-<p>This process is called <strong>currying</strong> (or perhaps it&apos;s called
+<pre><code class='ocaml'>    plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+  plus 2 <span class='o'>:</span> int <span class='k'>-></span> int
+plus 2 3 <span class='o'>:</span> int
+</code></pre>
+<p>
+This process is called <strong>currying</strong> (or perhaps it&apos;s called
 <strong>uncurrying</strong>, I never was really sure which was which). It is called
 this after Haskell Curry who did some important stuff related to the
 lambda calculus. Since I&apos;m trying to avoid entering into the mathematics
@@ -185,36 +207,48 @@ information about currying if it interests you by <a href='http://www.google.com
 Google</a>.</p>
 <p>Remember our <code>double</code> and <code>multiply</code> functions from earlier on?
 <code>multiply</code> was defined as this:</p>
-<pre><code>  let multiply n list =
-    let f x =
-      n * x in
-    List.map f list</code></pre>
-<p>We can now define <code>double</code>, <code>triple</code> &amp;c functions very easily just like
+<pre><code class='ocaml'>  <span class='k'>let</span> multiply n list <span class='k'>=</span>
+    <span class='k'>let</span> f x <span class='k'>=</span>
+      n <span class='o'>*</span> x <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map f list
+</code></pre>
+<p>
+We can now define <code>double</code>, <code>triple</code> &amp;c functions very easily just like
 this:</p>
-<pre><code>let double = multiply 2;;
-let triple = multiply 3;;</code></pre>
-<p>They really are functions, look:</p>
-<pre><code>double [1; 2; 3];;
-triple [1; 2; 3];;</code></pre>
-<p>You can also use partial application directly (without the intermediate
+<pre><code class='ocaml'><span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
+<span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
+</code></pre>
+<p>
+They really are functions, look:</p>
+<pre><code class='ocaml'>double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+You can also use partial application directly (without the intermediate
 <code>f</code> function) like this:</p>
-<pre><code>let multiply n = List.map (( * ) n);;
-let double = multiply 2;;
-let triple = multiply 3;;
-double [1; 2; 3];;
-triple [1; 2; 3];;</code></pre>
-<p>In the example above, <code>((*) n)</code> is the partial application of the <code>(*)</code>
+<pre><code class='ocaml'><span class='k'>let</span> multiply n <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) n)<span class='o'>;;</span>
+<span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
+<span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
+double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+In the example above, <code>((*) n)</code> is the partial application of the <code>(*)</code>
 (times) function. Note the extra spaces needed so that OCaml doesn&apos;t
 think <code>(*</code> starts a comment.</p>
 <p>You can put infix operators into brackets to make functions. Here&apos;s an
 identical definition of the <code>plus</code> function as before:</p>
-<pre><code>let plus = ( + );;
-plus 2 3;;</code></pre>
-<p>Here&apos;s some more currying fun:</p>
-<pre><code>List.map (plus 2) [1; 2; 3];;
-let list_of_functions = List.map plus [1; 2; 3];;</code></pre>
-<h3 id="Whatisfunctionalprogramminggoodfor"> What is functional programming good for?</h3>
-<p>Functional programming, like any good programming technique, is a useful
+<pre><code class='ocaml'><span class='k'>let</span> plus <span class='k'>=</span> ( <span class='o'>+</span> )<span class='o'>;;</span>
+plus 2 3<span class='o'>;;</span>
+</code></pre>
+<p>
+Here&apos;s some more currying fun:</p>
+<pre><code class='ocaml'><span class='m'>List</span><span class='o'>.</span>map (plus 2) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='k'>let</span> list_of_functions <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map plus <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<h3 id="Whatisfunctionalprogramminggoodfor"> What is functional programming good for?</h3><p>
+
+Functional programming, like any good programming technique, is a useful
 tool in your armoury for solving some classes of problems. It&apos;s very
 good for callbacks, which have multiple uses from GUIs through to
 event-driven loops. It&apos;s great for expressing generic algorithms.
@@ -223,8 +257,8 @@ type of list. Similarly you can define generic functions over trees.
 Certain types of numerical problems can be solved more quickly with
 functional programming (for example, numerically calculating the
 derivative of a mathematical function).</p>
-<h3 id="Pureandimpurefunctionalprogramming"> Pure and impure functional programming</h3>
-<p>A <strong>pure function</strong> is one without any <strong>side-effects</strong>. A side-effect
+<h3 id="Pureandimpurefunctionalprogramming"> Pure and impure functional programming</h3><p>
+A <strong>pure function</strong> is one without any <strong>side-effects</strong>. A side-effect
 really means that the function keeps some sort of hidden state inside
 it. <code>strlen</code> is a good example of a pure function in C. If you call
 <code>strlen</code> with the same string, it always returns the same length. The
@@ -245,11 +279,13 @@ functions is sometimes useful.</p>
 advantage is that if a function is pure, then if it is called several
 times with the same arguments, the compiler only needs to actually call
 the function once. A good example in C is:</p>
-<pre><code>for (i = 0; i &lt; strlen (s); ++i)
-  {
-    // Do something which doesn&apos;t affect s.
-  }</code></pre>
-<p>If naively compiled, this loop is O(n<sup>2</sup>) because <code>strlen (s)</code>
+<pre><code class='ocaml'><span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> strlen (s)<span class='o'>;</span> <span class='o'>++</span>i)
+  <span class='o'>/span>
+    <span class='o'>//</span> Do something which doesn't affect s<span class='o'>.</span>
+  <span class='o'</span>
+</code></pre>
+<p>
+If naively compiled, this loop is O(n<sup>2</sup>) because <code>strlen (s)</code>
 is called each time and <code>strlen</code> needs to iterate over the whole of <code>s</code>.
 If the compiler is smart enough to work out that <code>strlen</code> is pure
 functional <em>and</em> that <code>s</code> is not updated in the loop, then it can remove
@@ -261,17 +297,19 @@ reusable code using a bottom-up approach, testing each small function as
 you go along. The current fashion is for carefully planning your
 programs using a top-down approach, but in the author&apos;s opinion this
 often results in projects failing.</p>
-<h3 id="Strictnessvslaziness"> Strictness vs laziness</h3>
-<p>C-derived and ML-derived languages are strict. Haskell and Miranda are
+<h3 id="Strictnessvslaziness"> Strictness vs laziness</h3><p>
+C-derived and ML-derived languages are strict. Haskell and Miranda are
 non-strict, or lazy, languages. OCaml is strict by default but allows a
 lazy style of programming where it is needed.</p>
 <p>In a strict language, arguments to functions are always evaluated first,
 and the results are then passed to the function. For example in a strict
 language, the call <code>give_me_a_three (1/0)</code> is always going to result in
 a divide-by-zero error:</p>
-<pre><code>let give_me_a_three _ = 3;;
-give_me_a_three (1/0);;</code></pre>
-<p>If you&apos;ve programmed in any conventional language, this is just how
+<pre><code class='ocaml'><span class='k'>let</span> give_me_a_three <span class='o'>_</span> <span class='k'>=</span> 3<span class='o'>;;</span>
+give_me_a_three (1<span class='o'>/</span>0)<span class='o'>;;</span>
+</code></pre>
+<p>
+If you&apos;ve programmed in any conventional language, this is just how
 things work, and you&apos;d be surprised that things could work any other
 way.</p>
 <p>In a lazy language, something stranger happens. Arguments to functions
@@ -287,15 +325,21 @@ first 10 elements).</p>
 <p>OCaml is a strict language, but has a <code>Lazy</code> module that lets you write
 lazy expressions. Here&apos;s an example. First we create a lazy expression
 for <code>1/0</code>:</p>
-<pre><code>let lazy_expr = lazy (1/0)</code></pre>
-<p>Notice the type of this lazy expression is <code>int lazy_t</code>.</p>
+<pre><code class='ocaml'><span class='k'>let</span> lazy_expr <span class='k'>=</span> <span class='k'>lazy</span> (1<span class='o'>/</span>0)
+</code></pre>
+<p>
+Notice the type of this lazy expression is <code>int lazy_t</code>.</p>
 <p>Because <code>give_me_a_three</code> takes <code>&apos;a</code> (any type) we can pass this lazy
 expression into the function:</p>
-<pre><code>give_me_a_three lazy_expr</code></pre>
-<p>To evaluate a lazy expression, you must use the <code>Lazy.force</code> function:</p>
-<pre><code>Lazy.force lazy_expr</code></pre>
-<h3 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h3>
-<p>One term which you&apos;ll hear a lot when discussing functional languages is
+<pre><code class='ocaml'>give_me_a_three lazy_expr
+</code></pre>
+<p>
+To evaluate a lazy expression, you must use the <code>Lazy.force</code> function:</p>
+<pre><code class='ocaml'><span class='m'>Lazy</span><span class='o'>.</span>force lazy_expr
+</code></pre>
+<h3 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h3><p>
+
+One term which you&apos;ll hear a lot when discussing functional languages is
 &quot;boxed&quot;. I was very confused when I first heard this term, but in fact
 the distinction between boxed and unboxed types is quite simple if
 you&apos;ve used C, C++ or Java before (in Perl, everything is boxed).</p>
@@ -303,23 +347,25 @@ you&apos;ve used C, C++ or Java before (in Perl, everything is boxed).</p>
 been allocated on the heap using <code>malloc</code> in C (or equivalently <code>new</code> in
 C++), and/or is referred to through a pointer. Take a look at this
 example C program:</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class='ocaml'><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
 
 void
-printit (int *ptr)
-{
-  printf (&quot;the number is %d&#92;n&quot;, *ptr);
-}
+printit (int <span class='o'>*</span>ptr)
+<span class='o'>/span>
+  printf (<span class='s'>&#34;the number is %d\n&#34;</span><span class='o'>,</span> <span class='o'>*</span>ptr)<span class='o'>;</span>
+<span class='o'</span>
 
 void
 main ()
-{
-  int a = 3;
-  int *p = &amp;a;
+<span class='o'>/span>
+  int a <span class='k'>=</span> 3<span class='o'>;</span>
+  int <span class='o'>*</span>p <span class='k'>=</span> <span class='o'>&#38;</span>a<span class='o'>;</span>
 
-  printit (p);
-}</code></pre>
-<p>The variable <code>a</code> is allocated on the stack, and is quite definitely
+  printit (p)<span class='o'>;</span>
+<span class='o'</span>
+</code></pre>
+<p>
+The variable <code>a</code> is allocated on the stack, and is quite definitely
 unboxed.</p>
 <p>The function <code>printit</code> takes a boxed integer and prints it.</p>
 <p>The diagram below shows an array of unboxed (top) vs. boxed (below)

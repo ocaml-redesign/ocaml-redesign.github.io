@@ -367,10 +367,8 @@ We also notice that the original for-loop syntax ceases working:
 # for i = 0 to 5 do print_int i done;;
 Parse error: [ipatt] or [a_LIDENT] expected after "for" (in [expr])
 </pre>
-<p>
-
 <!-- FIXME: If one tries to eval the code, an error is raised by
-     Errors.report_error --></p>
+     Errors.report_error -->
 <p>
 It turns out that the new rule we add for "for" doesn't play nice with
 the original rule. The solution is to rewrite the original rule so it

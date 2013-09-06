@@ -46,24 +46,26 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="Streams">Streams</h1>
-<h2 id="Streamsx">Streams</h2>
-<p>Suppose you need to process each line of a text file. One way to do this
+            <h1 id="Streams"> Streams</h1><h2 id="Streamsx"> Streams</h2><p>
+
+Suppose you need to process each line of a text file. One way to do this
 is to read the file in as a single large string and use something like
 <code>Str.split</code> to turn it into a list. This works when the file is small,
 but because the entire file is loaded into memory, it does not scale
 well when the file is large.</p>
 <p>More commonly, the <code>input_line</code> function can be used to read one line at
 a time from a channel. This typically looks like:</p>
-<pre><code>let in_channel = open_in &quot;lines.txt&quot; in
-try
-  while true do
-    let line = input_line in_channel in
-    (* do something with line *)
-  done
-with End_of_file -&gt;
-  close_in in_channel</code></pre>
-<p>The above code is efficient with memory, but it can be inconvenient in
+<pre><code class='ocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;lines.txt&#34;</span> <span class='k'>in</span>
+<span class='k'>try</span>
+  <span class='k'>while</span> <span class='o'>true</span> <span class='k'>do</span>
+    <span class='k'>let</span> line <span class='k'>=</span> input_line in_channel <span class='k'>in</span>
+    <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> line *)</span><!-- end comment -->
+  <span class='k'>done</span>
+<span class='k'>with</span> End_of_file <span class='k'>-></span>
+  close_in in_channel
+</code></pre>
+<p>
+The above code is efficient with memory, but it can be inconvenient in
 other ways. Since <code>input_line</code> only works with the <code>in_channel</code> type, it
 cannot be reused in cases where the text is already in memory. The
 <code>End_of_file</code> exception can be raised at any point during iteration, and
@@ -76,11 +78,13 @@ items from a sequence. They don&apos;t assume anything about files or
 channels, and they replace the <code>End_of_file</code> exception with a more
 structured approach to dealing with the end of input. Here is a function
 that builds a stream of lines from an input channel:</p>
-<pre><code>let line_stream_of_channel channel =
-  Stream.from
-    (fun _ -&gt;
-       try Some (input_line channel) with End_of_file -&gt; None)</code></pre>
-<p>The &quot;Stream.from&quot; function builds a stream from a callback function.
+<pre><code class='ocaml'><span class='k'>let</span> line_stream_of_channel channel <span class='k'>=</span>
+  <span class='m'>Stream</span><span class='o'>.</span>from
+    (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span>
+       <span class='k'>try</span> Some (input_line channel) <span class='k'>with</span> End_of_file <span class='k'>-></span> None)
+</code></pre>
+<p>
+The &quot;Stream.from&quot; function builds a stream from a callback function.
 This function is passed the current stream count (starting with 0) as an
 argument and is expected to return an <code>&apos;a option</code>. If the option has a
 value (<code>Some x</code>), that value will be the next item in the stream. If it
@@ -90,70 +94,82 @@ further reads will be attempted. Since the option is polymorphic,
 type of <code>&apos;a Stream.t</code>.</p>
 <p>With this simple function, we can now easily construct line streams from
 any input channel:</p>
-<pre><code>let in_channel = open_in &quot;_oasis&quot;;;
-let lines = line_stream_of_channel in_channel;;</code></pre>
-<p>This variable <code>lines</code> is a stream of strings, one string per line. We
+<pre><code class='ocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span><span class='o'>;;</span>
+<span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_channel in_channel<span class='o'>;;</span>
+</code></pre>
+<p>
+This variable <code>lines</code> is a stream of strings, one string per line. We
 can now begin reading lines from it by passing it to <code>Stream.next</code>:</p>
-<pre><code>Stream.next lines;;
-Stream.next lines;;
-Stream.next lines;;
-Stream.next lines;;
-while true do ignore(Stream.next lines) done;;</code></pre>
-<p>As you can see, <code>Stream.next</code> either returns the next item in the stream
+<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='k'>while</span> <span class='o'>true</span> <span class='k'>do</span> ignore(<span class='m'>Stream</span><span class='o'>.</span>next lines) <span class='k'>done</span><span class='o'>;;</span>
+</code></pre>
+<p>
+As you can see, <code>Stream.next</code> either returns the next item in the stream
 or raises a <code>Stream.Failure</code> exception indicating that the stream is
 empty. Likewise, with a little help from the <code>Stream.of_list</code>
 constructor and the <code>Str</code> regular expression module, we could build a
 stream of lines from a string in memory:</p>
-<pre><code>#load &quot;str.cma&quot;;;
-let line_stream_of_string string =
-  Stream.of_list (Str.split (Str.regexp &quot;&#92;n&quot;) string)</code></pre>
-<p>and these streams could be used exactly the same way:</p>
-<pre><code>let lines = line_stream_of_string &quot;hello&#92;nstream&#92;nworld&quot;;;
-Stream.next lines;;
-Stream.next lines;;
-Stream.next lines;;
-Stream.next lines;;</code></pre>
-<p>Since both cases raise <code>Stream.Failure</code> on an empty stream, there is no
+<pre><code class='ocaml'><span class='o'>#</span>load <span class='s'>&#34;str.cma&#34;</span><span class='o'>;;</span>
+<span class='k'>let</span> line_stream_of_string string <span class='k'>=</span>
+  <span class='m'>Stream</span><span class='o'>.</span>of_list (<span class='m'>Str</span><span class='o'>.</span>split (<span class='m'>Str</span><span class='o'>.</span>regexp <span class='s'>&#34;\n&#34;</span>) string)
+</code></pre>
+<p>
+and these streams could be used exactly the same way:</p>
+<pre><code class='ocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nstream\nworld&#34;</span><span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+</code></pre>
+<p>
+Since both cases raise <code>Stream.Failure</code> on an empty stream, there is no
 need to worry about catching <code>End_of_file</code> in the case of file I/O. This
 unified interface makes it much easier to write functions that can
 receive data from multiple sources.</p>
 <p>The <code>Stream.iter</code> function automates the common task of performing an
 operation for each item. With it, we can rewrite the original example as
 follows:</p>
-<pre><code>  let in_channel = open_in &quot;_oasis&quot; in
-  try
-    Stream.iter
-      (fun line -&gt;
-         (* do something with line *)
+<pre><code class='ocaml'>  <span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span> <span class='k'>in</span>
+  <span class='k'>try</span>
+    <span class='m'>Stream</span><span class='o'>.</span>iter
+      (<span class='k'>fun</span> line <span class='k'>-></span>
+         <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> line *)</span><!-- end comment -->
          print_endline line)
-      (line_stream_of_channel in_channel);
+      (line_stream_of_channel in_channel)<span class='o'>;</span>
     close_in in_channel
-  with e -&gt;
-    close_in in_channel;
-    raise e</code></pre>
-<p>Note how much easier it is to handle I/O exceptions properly, since we
+  <span class='k'>with</span> e <span class='k'>-></span>
+    close_in in_channel<span class='o'>;</span>
+    raise e
+</code></pre>
+<p>
+Note how much easier it is to handle I/O exceptions properly, since we
 can deal with them independently from the end-of-file condition. This
 separation of concerns allows us to decompose this into simpler and more
 reusable functions:</p>
-<pre><code>let process_line line =
+<pre><code class='ocaml'><span class='k'>let</span> process_line line <span class='k'>=</span>
   print_endline line
 
-let process_lines lines =
-  Stream.iter process_line lines
+<span class='k'>let</span> process_lines lines <span class='k'>=</span>
+  <span class='m'>Stream</span><span class='o'>.</span>iter process_line lines
 
-let process_file filename =
-  let in_channel = open_in filename in
-  try
-    process_lines (line_stream_of_channel in_channel);
+<span class='k'>let</span> process_file filename <span class='k'>=</span>
+  <span class='k'>let</span> in_channel <span class='k'>=</span> open_in filename <span class='k'>in</span>
+  <span class='k'>try</span>
+    process_lines (line_stream_of_channel in_channel)<span class='o'>;</span>
     close_in in_channel
-  with e -&gt;
+  <span class='k'>with</span> e <span class='k'>-></span>
     close_in in_channel
     raise e
 
-let process_string string =
-  process_lines (line_stream_of_string string)</code></pre>
-<h2 id="Constructingstreams">Constructing streams</h2>
-<p>In the above examples, we saw two methods for constructing streams:</p>
+<span class='k'>let</span> process_string string <span class='k'>=</span>
+  process_lines (line_stream_of_string string)
+</code></pre>
+<h2 id="Constructingstreams"> Constructing streams</h2><p>
+
+In the above examples, we saw two methods for constructing streams:</p>
 <ul>
  <li>Stream.from, which builds a stream from a callback function
  </li>
@@ -171,48 +187,54 @@ let process_string string =
 of any type. It is not limited to I/O and can even produce infinite
 sequences. Here are a few simple stream builders defined with
 <code>Stream.from</code>:</p>
-<pre><code>  (* A stream that is always empty. *)
-  let empty_stream () = Stream.from (fun _ -&gt; None);;
-  (* A stream that yields the same item repeatedly. *)
-  let const_stream k = Stream.from (fun _ -&gt; Some k);;
-  (* A stream that yields consecutive integers starting with &apos;i&apos;. *)
-  let count_stream i = Stream.from (fun j -&gt; Some (i + j));;</code></pre>
-<h2 id="Deconstructingstreams">Deconstructing streams</h2>
-<p>We already saw the <code>Stream.next</code> function, which retrieves a single item
+<pre><code class='ocaml'>  <span class='com2'>(* A stream that is always empty<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> empty_stream () <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> None)<span class='o'>;;</span>
+  <span class='com2'>(* A stream that yields the same item repeatedly<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> const_stream k <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> Some k)<span class='o'>;;</span>
+  <span class='com2'>(* A stream that yields consecutive integers starting <span class='ic'>with</span> <span class='ic'>&#39;i&#39;</span><span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> count_stream i <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> j <span class='k'>-></span> Some (i <span class='o'>+</span> j))<span class='o'>;;</span>
+</code></pre>
+<h2 id="Deconstructingstreams"> Deconstructing streams</h2><p>
+
+We already saw the <code>Stream.next</code> function, which retrieves a single item
 from a stream. There is another way to work with streams that is often
 preferable: <code>Stream.peek</code> and <code>Stream.junk</code>. When used together, these
 functions allow you to see what the next item would be. This feature,
 known as &quot;look ahead&quot;, is very useful when writing parsers. Even if you
 don&apos;t need to look ahead, the peek/junk protocol may be nicer to work
 with because it uses options instead of exceptions:</p>
-<pre><code>let lines = line_stream_of_string &quot;hello&#92;nworld&quot;;;
-Stream.peek lines;;
-Stream.peek lines;;
-Stream.junk lines;;
-Stream.peek lines;;
-Stream.junk lines;;
-Stream.peek lines;;</code></pre>
-<p>As you can see, it is necessary to call <code>Stream.junk</code> to advance to the
+<pre><code class='ocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nworld&#34;</span><span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
+</code></pre>
+<p>
+As you can see, it is necessary to call <code>Stream.junk</code> to advance to the
 next item. <code>Stream.peek</code> will always give you either the next item or
 <code>None</code>, and it will never fail. Likewise, <code>Stream.junk</code> always succeeds
 (even if the stream is empty).</p>
-<h2 id="AmorecomplexquotStreamfromquotexample">A more complex &quot;Stream.from&quot; example</h2>
-<p>Here is a function that converts a line stream into a paragraph stream.
+<h2 id="AmorecomplexquotStreamfromquotexample"> A more complex &quot;Stream.from&quot; example</h2><p>
+Here is a function that converts a line stream into a paragraph stream.
 As such, it is both a stream consumer and a stream producer.</p>
-<pre><code>  let paragraphs lines =
-    let rec next para_lines i =
-      match Stream.peek lines, para_lines with
-      | None, [] -&gt; None
-      | Some &quot;&quot;, [] -&gt;
-          Stream.junk lines;
+<pre><code class='ocaml'>  <span class='k'>let</span> paragraphs lines <span class='k'>=</span>
+    <span class='k'>let rec</span> next para_lines i <span class='k'>=</span>
+      <span class='k'>match</span> <span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>,</span> para_lines <span class='k'>with</span>
+      <span class='o'>|</span> None<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None
+      <span class='o'>|</span> Some <span class='s'>&#34;&#34;</span><span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span>
+          <span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;</span>
           next para_lines i
-      | Some &quot;&quot;, _ | None, _ -&gt;
-          Some (String.concat &quot;&#92;n&quot; (List.rev para_lines))
-      | Some line, _ -&gt;
-          Stream.junk lines;
-          next (line :: para_lines) i in
-    Stream.from (next [])</code></pre>
-<p>This function uses an extra parameter to <code>next</code> (the <code>Stream.from</code>
+      <span class='o'>|</span> Some <span class='s'>&#34;&#34;</span><span class='o'>,</span> <span class='o'>_</span> <span class='o'>|</span> None<span class='o'>,</span> <span class='o'>_</span> <span class='k'>-></span>
+          Some (<span class='m'>String</span><span class='o'>.</span>concat <span class='s'>&#34;\n&#34;</span> (<span class='m'>List</span><span class='o'>.</span>rev para_lines))
+      <span class='o'>|</span> Some line<span class='o'>,</span> <span class='o'>_</span> <span class='k'>-></span>
+          <span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;</span>
+          next (line <span class='o'>::</span> para_lines) i <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from (next <span class='o'>[</span><span class='o'>]</span>)
+</code></pre>
+<p>
+This function uses an extra parameter to <code>next</code> (the <code>Stream.from</code>
 callback) called <code>para_lines</code> in order to collect the lines for each
 paragraph. Paragraphs are delimited by any number of blank lines.</p>
 <p>Each time <code>next</code> is called, a <code>match</code> expression tests two values: the
@@ -238,266 +260,310 @@ are handled:</p>
 ensure that we are handling all possible cases.</p>
 <p>With this new tool, we can now work just as easily with paragraphs as we
 could before with lines:</p>
-<pre><code>  (* Print each paragraph, followed by a separator. *)
-  let lines = line_stream_of_channel in_channel in
-  Stream.iter
-    (fun para -&gt;
-       print_endline para;
-       print_endline &quot;--&quot;)
-    (paragraphs lines)</code></pre>
-<p>Functions like <code>paragraphs</code> that produce and consume streams can be
+<pre><code class='ocaml'>  <span class='com2'>(* Print each paragraph<span class='ic'>,</span> followed by a separator<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_channel in_channel <span class='k'>in</span>
+  <span class='m'>Stream</span><span class='o'>.</span>iter
+    (<span class='k'>fun</span> para <span class='k'>-></span>
+       print_endline para<span class='o'>;</span>
+       print_endline <span class='s'>&#34;--&#34;</span>)
+    (paragraphs lines)
+</code></pre>
+<p>
+Functions like <code>paragraphs</code> that produce and consume streams can be
 composed together in a manner very similar to UNIX pipes and filters.</p>
-<h2 id="Streamcombinators">Stream combinators</h2>
-<p>Just like lists and arrays, common iteration patterns such as <code>map</code>,
+<h2 id="Streamcombinators"> Stream combinators</h2><p>
+Just like lists and arrays, common iteration patterns such as <code>map</code>,
 <code>filter</code>, and <code>fold</code> can be very useful. The <code>Stream</code> module does not
 provide such functions, but they can be built easily using
 <code>Stream.from</code>:</p>
-<pre><code>  let stream_map f stream =
-    let rec next i =
-      try Some (f (Stream.next stream))
-      with Stream.Failure -&gt; None in
-    Stream.from next
+<pre><code class='ocaml'>  <span class='k'>let</span> stream_map f stream <span class='k'>=</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>try</span> Some (f (<span class='m'>Stream</span><span class='o'>.</span>next stream))
+      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next
 
-  let stream_filter p stream =
-    let rec next i =
-      try
-        let value = Stream.next stream in
-        if p value then Some value else next i
-      with Stream.Failure -&gt; None in
-    Stream.from next
+  <span class='k'>let</span> stream_filter p stream <span class='k'>=</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>try</span>
+        <span class='k'>let</span> value <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>next stream <span class='k'>in</span>
+        <span class='k'>if</span> p value <span class='k'>then</span> Some value <span class='k'>else</span> next i
+      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next
   
-  let stream_fold f stream init =
-    let result = ref init in
-    Stream.iter
-      (fun x -&gt; result := f x !result)
-      stream;
-    !result</code></pre>
-<p>For example, here is a stream of leap years starting with 2000:</p>
-<pre><code>  let is_leap year =
-    year mod 4 = 0 &amp;&amp; (year mod 100 &lt;&gt; 0 || year mod 400 = 0)
-  let leap_years = stream_filter is_leap (count_stream 2000)</code></pre>
-<p>We can use the <code>Stream.npeek</code> function to look ahead by more than one
+  <span class='k'>let</span> stream_fold f stream init <span class='k'>=</span>
+    <span class='k'>let</span> result <span class='k'>=</span> ref init <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>iter
+      (<span class='k'>fun</span> x <span class='k'>-></span> result <span class='o'>:=</span> f x <span class='o'>!</span>result)
+      stream<span class='o'>;</span>
+    <span class='o'>!</span>result
+</code></pre>
+<p>
+For example, here is a stream of leap years starting with 2000:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> is_leap year <span class='k'>=</span>
+    year <span class='k'>mod</span> 4 <span class='k'>=</span> 0 <span class='o'>&#38;&#38;</span> (year <span class='k'>mod</span> 100 <span class='o'>&#60;&#62;</span> 0 <span class='o'>||</span> year <span class='k'>mod</span> 400 <span class='k'>=</span> 0)
+  <span class='k'>let</span> leap_years <span class='k'>=</span> stream_filter is_leap (count_stream 2000)
+</code></pre>
+<p>
+We can use the <code>Stream.npeek</code> function to look ahead by more than one
 item. In this case, we&apos;ll peek at the next 30 items to make sure that
 the year 2100 is not a leap year (since it&apos;s divisible by 100 but not
 400!):</p>
-<pre><code>Stream.npeek 30 leap_years;;</code></pre>
-<p>Note that we must be careful not to use <code>Stream.iter</code> on an infinite
+<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 30 leap_years<span class='o'>;;</span>
+</code></pre>
+<p>
+Note that we must be careful not to use <code>Stream.iter</code> on an infinite
 stream like <code>leap_years</code>. This applies to <code>stream_fold</code>, as well as any
 function that attempts to consume the entire stream.</p>
-<pre><code>stream_fold (+) (Stream.of_list [1; 2; 3]) 0;;</code></pre>
-<p><code>stream_fold (+) (count_stream 0) 0</code> runs forever.</p>
-<h2 id="Otherusefulstreambuilders">Other useful stream builders</h2>
-<p>The previously defined <code>const_stream</code> function builds a stream that
+<pre><code class='ocaml'>stream_fold <span class='o'>(+</span>) (<span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>) 0<span class='o'>;;</span>
+</code></pre>
+<p>
+<code>stream_fold (+) (count_stream 0) 0</code> runs forever.</p>
+<h2 id="Otherusefulstreambuilders"> Other useful stream builders</h2><p>
+The previously defined <code>const_stream</code> function builds a stream that
 repeats a single value. It is also useful to build a stream that repeats
 a sequence of values. The following function does just that:</p>
-<pre><code>  let cycle items =
-    let buf = ref [] in
-    let rec next i =
-      if !buf = [] then buf := items;
-      match !buf with
-        | h :: t -&gt; (buf := t; Some h)
-        | [] -&gt; None in
-    Stream.from next</code></pre>
-<p>One common task that can benefit from this kind of stream is the
+<pre><code class='ocaml'>  <span class='k'>let</span> cycle items <span class='k'>=</span>
+    <span class='k'>let</span> buf <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>if</span> <span class='o'>!</span>buf <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>then</span> buf <span class='o'>:=</span> items<span class='o'>;</span>
+      <span class='k'>match</span> <span class='o'>!</span>buf <span class='k'>with</span>
+        <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> (buf <span class='o'>:=</span> t<span class='o'>;</span> Some h)
+        <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next
+</code></pre>
+<p>
+One common task that can benefit from this kind of stream is the
 generation of alternating background colors for HTML. By using <code>cycle</code>
 with <code>stream_combine</code>, explained in the next section, an infinite stream
 of background colors can be combined with a finite stream of data to
 produce a sequence of HTML blocks:</p>
-<pre><code>  let stream_combine stream1 stream2 =
-    let rec next i =
-      try Some (Stream.next stream1, Stream.next stream2)
-      with Stream.Failure -&gt; None in
-    Stream.from next;;
-  Stream.iter print_endline
+<pre><code class='ocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream1<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>next stream2)
+      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next<span class='o'>;;</span>
+  <span class='m'>Stream</span><span class='o'>.</span>iter print_endline
     (stream_map
-       (fun (bg, s) -&gt;
-          Printf.sprintf &quot;&lt;div style=&apos;background: %s&apos;&gt;%s&lt;/div&gt;&quot; bg s)
+       (<span class='k'>fun</span> (bg<span class='o'>,</span> s) <span class='k'>-></span>
+          <span class='m'>Printf</span><span class='o'>.</span>sprintf <span class='s'>&#34;&#60;div style=&#39;background: %s&#39;&#62;%s&#60;/div&#62;&#34;</span> bg s)
        (stream_combine
-          (cycle [&quot;#eee&quot;; &quot;#fff&quot;])
-          (Stream.of_list [&quot;hello&quot;; &quot;html&quot;; &quot;world&quot;])))</code></pre>
-<p>Here is a simple <code>range</code> function that produces a sequence of integers:</p>
-<pre><code>  let range ?(start=0) ?(stop=0) ?(step=1) () =
-    let in_range = if step &lt; 0 then (&gt;) else (&lt;) in
-    let current = ref start in
-    let rec next i =
-      if in_range !current stop
-      then let result = !current in (current := !current + step;
+          (cycle <span class='o'>[</span><span class='s'>&#34;#eee&#34;</span><span class='o'>;</span> <span class='s'>&#34;#fff&#34;</span><span class='o'>]</span>)
+          (<span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span><span class='s'>&#34;hello&#34;</span><span class='o'>;</span> <span class='s'>&#34;html&#34;</span><span class='o'>;</span> <span class='s'>&#34;world&#34;</span><span class='o'>]</span>)))
+</code></pre>
+<p>
+Here is a simple <code>range</code> function that produces a sequence of integers:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> range <span class='o'>?</span>(start<span class='k'>=</span>0) <span class='o'>?</span>(stop<span class='k'>=</span>0) <span class='o'>?</span>(step<span class='k'>=</span>1) () <span class='k'>=</span>
+    <span class='k'>let</span> in_range <span class='k'>=</span> <span class='k'>if</span> step <span class='o'>&#60;</span> 0 <span class='k'>then</span> <span class='o'>(&#62;</span>) <span class='k'>else</span> <span class='o'>(&#60;</span>) <span class='k'>in</span>
+    <span class='k'>let</span> current <span class='k'>=</span> ref start <span class='k'>in</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>if</span> in_range <span class='o'>!</span>current stop
+      <span class='k'>then</span> <span class='k'>let</span> result <span class='k'>=</span> <span class='o'>!</span>current <span class='k'>in</span> (current <span class='o'>:=</span> <span class='o'>!</span>current <span class='o'>+</span> step<span class='o'>;</span>
                                      Some result)
-      else None in
-    Stream.from next</code></pre>
-<p>This works just like Python&apos;s <code>xrange</code> built-in function, providing an
+      <span class='k'>else</span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next
+</code></pre>
+<p>
+This works just like Python&apos;s <code>xrange</code> built-in function, providing an
 easy way to produce an assortment of lazy integer sequences by
 specifying combinations of <code>start</code>, <code>stop</code>, or <code>step</code> values:</p>
-<pre><code>Stream.npeek 10 (range ~start:5 ~stop:10 ());;
-Stream.npeek 10 (range ~stop:10 ~step:2 ());;
-Stream.npeek 10 (range ~start:10 ~step:(-1) ());;
-Stream.npeek 10 (range ~start:10 ~stop:5 ~step:(-1) ());;</code></pre>
-<h2 id="Combiningstreams">Combining streams</h2>
-<p>There are several ways to combine streams. One is to produce a stream of
+<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>5 <span class='o'>~</span>stop<span class='o'>:</span>10 ())<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>stop<span class='o'>:</span>10 <span class='o'>~</span>step<span class='o'>:</span>2 ())<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>10 <span class='o'>~</span>step<span class='o'>:</span><span class='o'>(-</span>1) ())<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>10 <span class='o'>~</span>stop<span class='o'>:</span>5 <span class='o'>~</span>step<span class='o'>:</span><span class='o'>(-</span>1) ())<span class='o'>;;</span>
+</code></pre>
+<h2 id="Combiningstreams"> Combining streams</h2><p>
+
+There are several ways to combine streams. One is to produce a stream of
 streams and then concatenate them into a single stream. The following
 function works just like <code>List.concat</code>, but instead of turning a list of
 lists into a list, it turns a stream of streams into a stream:</p>
-<pre><code>  let stream_concat streams =
-    let current_stream = ref None in
-    let rec next i =
-      try
-        let stream =
-          match !current_stream with
-          | Some stream -&gt; stream
-          | None -&gt;
-             let stream = Stream.next streams in
-             current_stream := Some stream;
-             stream in
-        try Some (Stream.next stream)
-        with Stream.Failure -&gt; (current_stream := None; next i)
-      with Stream.Failure -&gt; None in
-    Stream.from next</code></pre>
-<p>Here is a sequence of ranges which are themselves derived from a range,
+<pre><code class='ocaml'>  <span class='k'>let</span> stream_concat streams <span class='k'>=</span>
+    <span class='k'>let</span> current_stream <span class='k'>=</span> ref None <span class='k'>in</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>try</span>
+        <span class='k'>let</span> stream <span class='k'>=</span>
+          <span class='k'>match</span> <span class='o'>!</span>current_stream <span class='k'>with</span>
+          <span class='o'>|</span> Some stream <span class='k'>-></span> stream
+          <span class='o'>|</span> None <span class='k'>-></span>
+             <span class='k'>let</span> stream <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>next streams <span class='k'>in</span>
+             current_stream <span class='o'>:=</span> Some stream<span class='o'>;</span>
+             stream <span class='k'>in</span>
+        <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream)
+        <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> (current_stream <span class='o'>:=</span> None<span class='o'>;</span> next i)
+      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next
+</code></pre>
+<p>
+Here is a sequence of ranges which are themselves derived from a range,
 concatenated with <code>stream_concat</code> to produce a flattened <code>int Stream.t</code>.</p>
-<pre><code>  Stream.npeek 10
+<pre><code class='ocaml'>  <span class='m'>Stream</span><span class='o'>.</span>npeek 10
     (stream_concat
        (stream_map
-          (fun i -&gt; range ~stop:i ())
-          (range ~stop:5 ())))</code></pre>
-<p>Another way to combine streams is to iterate through them in a pairwise
+          (<span class='k'>fun</span> i <span class='k'>-></span> range <span class='o'>~</span>stop<span class='o'>:</span>i ())
+          (range <span class='o'>~</span>stop<span class='o'>:</span>5 ())))
+</code></pre>
+<p>
+Another way to combine streams is to iterate through them in a pairwise
 fashion:</p>
-<pre><code>  let stream_combine stream1 stream2 =
-    let rec next i =
-      try Some (Stream.next stream1, Stream.next stream2)
-      with Stream.Failure -&gt; None in
-    Stream.from next</code></pre>
-<p>This is useful, for instance, if you have a stream of keys and a stream
+<pre><code class='ocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
+    <span class='k'>let rec</span> next i <span class='k'>=</span>
+      <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream1<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>next stream2)
+      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from next
+</code></pre>
+<p>
+This is useful, for instance, if you have a stream of keys and a stream
 of corresponding values. Iterating through key value pairs is then as
 simple as:</p>
-<pre><code>Stream.iter
-  (fun (key, value) -&gt;
-     (* do something with &apos;key&apos; and &apos;value&apos; *)
+<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>iter
+  (<span class='k'>fun</span> (key<span class='o'>,</span> value) <span class='k'>-></span>
+     <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> 'key' <span class='ic'>and</span> 'value' *)</span><!-- end comment -->
      ())
-  (stream_combine key_stream value_stream)</code></pre>
-<p>Since <code>stream_combine</code> stops as soon as either of its input streams runs
+  (stream_combine key_stream value_stream)
+</code></pre>
+<p>
+Since <code>stream_combine</code> stops as soon as either of its input streams runs
 out, it can be used to combine an infinite stream with a finite one.
 This provides a neat way to add indexes to a sequence:</p>
-<pre><code>  let items = [&quot;this&quot;; &quot;is&quot;; &quot;a&quot;; &quot;test&quot;];;
-  Stream.iter
-    (fun (index, value) -&gt;
-       Printf.printf &quot;%d. %s&#92;n%!&quot; index value)
-    (stream_combine (count_stream 1) (Stream.of_list items))</code></pre>
-<h2 id="Copyingstreams">Copying streams</h2>
-<p>Streams are destructive; once you discard an item in a stream, it is no
+<pre><code class='ocaml'>  <span class='k'>let</span> items <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;this&#34;</span><span class='o'>;</span> <span class='s'>&#34;is&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;test&#34;</span><span class='o'>]</span><span class='o'>;;</span>
+  <span class='m'>Stream</span><span class='o'>.</span>iter
+    (<span class='k'>fun</span> (index<span class='o'>,</span> value) <span class='k'>-></span>
+       <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;%d. %s\n%!&#34;</span> index value)
+    (stream_combine (count_stream 1) (<span class='m'>Stream</span><span class='o'>.</span>of_list items))
+</code></pre>
+<h2 id="Copyingstreams"> Copying streams</h2><p>
+
+Streams are destructive; once you discard an item in a stream, it is no
 longer available unless you save a copy somewhere. What if you want to
 use the same stream more than once? One way is to create a &quot;tee&quot;. The
 following function creates two output streams from one input stream,
 intelligently queueing unseen values until they have been produced by
 both streams:</p>
-<pre><code>  let stream_tee stream =
-    let next self other i =
-      try
-        if Queue.is_empty self
-        then
-          let value = Stream.next stream in
-          Queue.add value other;
+<pre><code class='ocaml'>  <span class='k'>let</span> stream_tee stream <span class='k'>=</span>
+    <span class='k'>let</span> next self other i <span class='k'>=</span>
+      <span class='k'>try</span>
+        <span class='k'>if</span> <span class='m'>Queue</span><span class='o'>.</span>is_empty self
+        <span class='k'>then</span>
+          <span class='k'>let</span> value <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>next stream <span class='k'>in</span>
+          <span class='m'>Queue</span><span class='o'>.</span>add value other<span class='o'>;</span>
           Some value
-        else
-          Some (Queue.take self)
-      with Stream.Failure -&gt; None in
-    let q1 = Queue.create () in
-    let q2 = Queue.create () in
-    (Stream.from (next q1 q2), Stream.from (next q2 q1))</code></pre>
-<p>Here is an example of a stream tee in action:</p>
-<pre><code>let letters = Stream.of_list [&apos;a&apos;; &apos;b&apos;; &apos;c&apos;; &apos;d&apos;; &apos;e&apos;];;
-let s1, s2 = stream_tee letters;;
-Stream.next s1;;
-Stream.next s1;;
-Stream.next s2;;
-Stream.next s1;;
-Stream.next s2;;
-Stream.next s2;;</code></pre>
-<p>Again, since streams are destructive, you probably want to leave the
+        <span class='k'>else</span>
+          Some (<span class='m'>Queue</span><span class='o'>.</span>take self)
+      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
+    <span class='k'>let</span> q1 <span class='k'>=</span> <span class='m'>Queue</span><span class='o'>.</span>create () <span class='k'>in</span>
+    <span class='k'>let</span> q2 <span class='k'>=</span> <span class='m'>Queue</span><span class='o'>.</span>create () <span class='k'>in</span>
+    (<span class='m'>Stream</span><span class='o'>.</span>from (next q1 q2)<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>from (next q2 q1))
+</code></pre>
+<p>
+Here is an example of a stream tee in action:</p>
+<pre><code class='ocaml'><span class='k'>let</span> let<span class='o'>ters</span> <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span><span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>]</span><span class='o'>;;</span>
+<span class='k'>let</span> s1<span class='o'>,</span> s2 <span class='k'>=</span> stream_tee let<span class='o'>ters</span><span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
+</code></pre>
+<p>
+Again, since streams are destructive, you probably want to leave the
 original stream alone or you will lose items from the copied streams:</p>
-<pre><code>Stream.next letters;;
-Stream.next s1;;
-Stream.next s2;;</code></pre>
-<h2 id="Convertingstreams">Converting streams</h2>
-<p>Here are a few functions for converting between streams and lists,
+<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>next let<span class='o'>ters</span><span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
+</code></pre>
+<h2 id="Convertingstreams"> Converting streams</h2><p>
+
+Here are a few functions for converting between streams and lists,
 arrays, and hash tables. These probably belong in the standard library,
 but they are simple to define anyhow. Again, beware of infinite streams,
 which will cause these functions to hang.</p>
-<pre><code>  (* This one is free. *)
-  let stream_of_list = Stream.of_list
+<pre><code class='ocaml'>  <span class='com2'>(* This one is free<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> stream_of_list <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list
 
-  let list_of_stream stream =
-    let result = ref [] in
-    Stream.iter (fun value -&gt; result := value :: !result) stream;
-    List.rev !result
+  <span class='k'>let</span> list_of_stream stream <span class='k'>=</span>
+    <span class='k'>let</span> result <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>iter (<span class='k'>fun</span> value <span class='k'>-></span> result <span class='o'>:=</span> value <span class='o'>::</span> <span class='o'>!</span>result) stream<span class='o'>;</span>
+    <span class='m'>List</span><span class='o'>.</span>rev <span class='o'>!</span>result
   
-  let stream_of_array array =
-    Stream.of_list (Array.to_list array)
+  <span class='k'>let</span> stream_of_array array <span class='k'>=</span>
+    <span class='m'>Stream</span><span class='o'>.</span>of_list (<span class='m'>Array</span><span class='o'>.</span>to_list array)
   
-  let array_of_stream stream =
-    Array.of_list (list_of_stream stream)
+  <span class='k'>let</span> array_of_stream stream <span class='k'>=</span>
+    <span class='m'>Array</span><span class='o'>.</span>of_list (list_of_stream stream)
   
-  let stream_of_hash hash =
-    let result = ref [] in
-    Hashtbl.iter
-      (fun key value -&gt; result := (key, value) :: !result)
-      hash;
-    Stream.of_list !result
+  <span class='k'>let</span> stream_of_hash hash <span class='k'>=</span>
+    <span class='k'>let</span> result <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
+    <span class='m'>Hashtbl</span><span class='o'>.</span>iter
+      (<span class='k'>fun</span> key value <span class='k'>-></span> result <span class='o'>:=</span> (key<span class='o'>,</span> value) <span class='o'>::</span> <span class='o'>!</span>result)
+      hash<span class='o'>;</span>
+    <span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>!</span>result
   
-  let hash_of_stream stream =
-    let result = Hashtbl.create 0 in
-    Stream.iter
-      (fun (key, value) -&gt; Hashtbl.replace result key value)
-      stream;
-    result</code></pre>
-<p>What if you want to convert arbitary data types to streams? Well, if the
+  <span class='k'>let</span> hash_of_stream stream <span class='k'>=</span>
+    <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 0 <span class='k'>in</span>
+    <span class='m'>Stream</span><span class='o'>.</span>iter
+      (<span class='k'>fun</span> (key<span class='o'>,</span> value) <span class='k'>-></span> <span class='m'>Hashtbl</span><span class='o'>.</span>replace result key value)
+      stream<span class='o'>;</span>
+    result
+</code></pre>
+<p>
+What if you want to convert arbitary data types to streams? Well, if the
 data type defines an <code>iter</code> function, and you don&apos;t mind using threads,
 you can use a producer-consumer arrangement to invert control:</p>
-<pre><code>  #directory &quot;+threads&quot;;;
-  #load &quot;threads.cma&quot;;;
-  let elements iter coll =
-    let channel = Event.new_channel () in
-    let producer () =
-      let () =
-        iter (fun x -&gt; Event.sync (Event.send channel (Some x))) coll in
-      Event.sync (Event.send channel None) in
-    let consumer i =
-      Event.sync (Event.receive channel) in
-    ignore (Thread.create producer ());
-    Stream.from consumer</code></pre>
-<p>Now it is possible to build a stream from an <code>iter</code> function and a
+<pre><code class='ocaml'>  <span class='o'>#</span>directory <span class='s'>&#34;+threads&#34;</span><span class='o'>;;</span>
+  <span class='o'>#</span>load <span class='s'>&#34;threads.cma&#34;</span><span class='o'>;;</span>
+  <span class='k'>let</span> elements iter coll <span class='k'>=</span>
+    <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
+    <span class='k'>let</span> producer () <span class='k'>=</span>
+      <span class='k'>let</span> () <span class='k'>=</span>
+        iter (<span class='k'>fun</span> x <span class='k'>-></span> <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel (Some x))) coll <span class='k'>in</span>
+      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel None) <span class='k'>in</span>
+    <span class='k'>let</span> consumer i <span class='k'>=</span>
+      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>receive channel) <span class='k'>in</span>
+    ignore (<span class='m'>Thread</span><span class='o'>.</span>create producer ())<span class='o'>;</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from consumer
+</code></pre>
+<p>
+Now it is possible to build a stream from an <code>iter</code> function and a
 corresponding value:</p>
-<pre><code>module StringSet = Set.Make(String);;
+<pre><code class='ocaml'><span class='k'>module</span> StringSet <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
 
-let set = StringSet.empty;;
-let set = StringSet.add &quot;here&quot; set;;
-let set = StringSet.add &quot;are&quot; set;;
-let set = StringSet.add &quot;some&quot; set;;
-let set = StringSet.add &quot;values&quot; set;;
-let stream = elements StringSet.iter set;;
-Stream.iter print_endline stream;;</code></pre>
-<p>Some data types, like Hashtbl and Map, provide an <code>iter</code> function that
+<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>empty<span class='o'>;;</span>
+<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;here&#34;</span> set<span class='o'>;;</span>
+<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;are&#34;</span> set<span class='o'>;;</span>
+<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;some&#34;</span> set<span class='o'>;;</span>
+<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;values&#34;</span> set<span class='o'>;;</span>
+<span class='k'>let</span> stream <span class='k'>=</span> elements <span class='m'>StringSet</span><span class='o'>.</span>iter set<span class='o'>;;</span>
+<span class='m'>Stream</span><span class='o'>.</span>iter print_endline stream<span class='o'>;;</span>
+</code></pre>
+<p>
+Some data types, like Hashtbl and Map, provide an <code>iter</code> function that
 iterates through key-value pairs. Here&apos;s a function for those, too:</p>
-<pre><code>  let items iter coll =
-    let channel = Event.new_channel () in
-    let producer () =
-      let () =
-        iter (fun k v -&gt;
-                Event.sync (Event.send channel (Some (k, v)))) coll in
-      Event.sync (Event.send channel None) in
-    let consumer i =
-      Event.sync (Event.receive channel) in
-    ignore (Thread.create producer ());
-    Stream.from consumer</code></pre>
-<p>If we want just the keys, or just the values, it is simple to transform
+<pre><code class='ocaml'>  <span class='k'>let</span> items iter coll <span class='k'>=</span>
+    <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
+    <span class='k'>let</span> producer () <span class='k'>=</span>
+      <span class='k'>let</span> () <span class='k'>=</span>
+        iter (<span class='k'>fun</span> k v <span class='k'>-></span>
+                <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel (Some (k<span class='o'>,</span> v)))) coll <span class='k'>in</span>
+      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel None) <span class='k'>in</span>
+    <span class='k'>let</span> consumer i <span class='k'>=</span>
+      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>receive channel) <span class='k'>in</span>
+    ignore (<span class='m'>Thread</span><span class='o'>.</span>create producer ())<span class='o'>;</span>
+    <span class='m'>Stream</span><span class='o'>.</span>from consumer
+</code></pre>
+<p>
+If we want just the keys, or just the values, it is simple to transform
 the output of <code>items</code> using <code>stream_map</code>:</p>
-<pre><code>let keys iter coll = stream_map (fun (k, v) -&gt; k) (items iter coll)
-let values iter coll = stream_map (fun (k, v) -&gt; v) (items iter coll)</code></pre>
-<p>Keep in mind that these techniques spawn producer threads which carry a
+<pre><code class='ocaml'><span class='k'>let</span> keys iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> k) (items iter coll)
+<span class='k'>let</span> values iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> v) (items iter coll)
+</code></pre>
+<p>
+Keep in mind that these techniques spawn producer threads which carry a
 few risks: they only terminate when they have finished iterating, and
 any change to the original data structure while iterating may produce
 unexpected results.</p>
-<h2 id="OtherbuiltinStreamfunctions">Other built-in Stream functions</h2>
-<p>There are a few other documented methods in the <code>Stream</code> module:</p>
+<h2 id="OtherbuiltinStreamfunctions"> Other built-in Stream functions</h2><p>
+There are a few other documented methods in the <code>Stream</code> module:</p>
 <ul>
  <li>Stream.empty, which raises <code>Stream.Failure</code> unless a stream is empty
  </li>

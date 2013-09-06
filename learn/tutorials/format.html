@@ -49,15 +49,15 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 <ul>
- <li><a href='#Principles'>Principles</a>
+ <li><a href='#Principles'> Principles</a>
  </li>
- <li><a href='#Boxes'>Boxes</a>
+ <li><a href='#Boxes'> Boxes</a>
  </li>
- <li><a href='#Printingspaces'>Printing spaces</a>
+ <li><a href='#Printingspaces'> Printing spaces</a>
  </li>
- <li><a href='#Indentationofnewlines'>Indentation of new lines</a>
+ <li><a href='#Indentationofnewlines'> Indentation of new lines</a>
  </li>
- <li><a href='#Refinementonhovboxes'>Refinement on “hov” boxes</a>
+ <li><a href='#Refinementonhovboxes'> Refinement on “hov” boxes</a>
   <ul>
    <li><a href='#Packingandstructuralhovboxes'> Packing and structural “hov” boxes</a>
    </li>
@@ -65,11 +65,11 @@
    </li>
   </ul>
  </li>
- <li><a href='#Practicaladvice'>Practical advice</a>
+ <li><a href='#Practicaladvice'> Practical advice</a>
  </li>
- <li><a href='#Printingtostdoutusingprintf'>Printing to <code>stdout</code>: using <code>printf</code></a>
+ <li><a href='#Printingtostdoutusingprintf'> Printing to <code>stdout</code>: using <code>printf</code></a>
  </li>
- <li><a href='#Aconcreteexample'>A concrete example</a>
+ <li><a href='#Aconcreteexample'> A concrete example</a>
   <ul>
    <li><a href='#Mostgeneralprettyprintingusingfprintf'> Most general pretty-printing: using <code>fprintf</code></a>
    </li>
@@ -83,14 +83,14 @@
         <div id="content-primary" class="span8">
           <div class="content">
             
-<h1 id="UsingtheFormatmodule">Using the Format module</h1>
-<p>The <code>Format</code> module of Caml Light and OCaml&apos;s standard libraries
+<h1 id="UsingtheFormatmodule"> Using the Format module</h1><p>
+The <code>Format</code> module of Caml Light and OCaml&apos;s standard libraries
 provides pretty-printing facilities to get a fancy display for printing
 routines. This module implements a “pretty-printing engine” that is
 intended to break lines in a nice way (let&apos;s say “automatically when it
 is necessary”).</p>
-<h2 id="Principles">Principles</h2>
-<p>Line breaking is based on three concepts:</p>
+<h2 id="Principles"> Principles</h2><p>
+Line breaking is based on three concepts:</p>
 <ul>
  <li><strong>boxes</strong>: a box is a logical pretty-printing unit, which defines a
  behaviour of the pretty-printing engine to display the material
@@ -124,8 +124,8 @@ is necessary”).</p>
  </li>
 </ul>
 
-<h2 id="Boxes">Boxes</h2>
-<p>There are 4 types of boxes. (The most often used is the “hov” box type,
+<h2 id="Boxes"> Boxes</h2><p>
+There are 4 types of boxes. (The most often used is the “hov” box type,
 so skip the rest at first reading).</p>
 <ul>
  <li><strong>horizontal box</strong> (<em>h</em> box, as obtained by the <code>open_hbox</code>
@@ -155,50 +155,56 @@ and <code>b</code> stands for a break hint given to the pretty-printing engine.<
 <p>The output &quot;--b--b--&quot; is displayed like this (the b symbol stands for
 the value of the break that is explained below):</p>
 <ul>
- <li>within a “h” box:
-<pre><code>   --b--b--</code></pre>
- </li>
+ <li>within a “h” box:</li>
 </ul>
 
+<pre><code class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
+</code></pre>
 <ul>
- <li>within a “v” box:
-<pre><code>   --b
-   --b
-   --</code></pre>
- </li>
+ <li>within a “v” box:</li>
 </ul>
 
+<pre><code class='ocaml'>   <span class='o'>--</span>b
+   <span class='o'>--</span>b
+   <span class='o'>--</span>
+</code></pre>
 <ul>
- <li><p>within a “hv” box:</p>
+ <li>within a “hv” box:</li>
+</ul>
+
 <p>If there is enough room to print the box on the line:</p>
-<pre><code>   --b--b--</code></pre>
-<p>But &quot;---b---b---&quot; that cannot fit on the line is written</p>
-<pre><code>   ---b
-   ---b
-   ---</code></pre>
- </li>
+<pre><code class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
+</code></pre>
+<p>
+But &quot;---b---b---&quot; that cannot fit on the line is written</p>
+<pre><code class='ocaml'>   <span class='o'>---</span>b
+   <span class='o'>---</span>b
+   <span class='o'>---</span>
+</code></pre>
+<ul>
+ <li>within a “hov” box:</li>
 </ul>
 
-<ul>
- <li><p>within a “hov” box:</p>
 <p>If there is enough room to print the box on the line:</p>
-<pre><code>   --b--b--</code></pre>
-<p>But if &quot;---b---b---&quot; cannot fit on the line, it is written as</p>
-<pre><code>   ---b---b
-   ---</code></pre>
-<p>The first break hint does not lead to a new line, since there is
+<pre><code class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
+</code></pre>
+<p>
+But if &quot;---b---b---&quot; cannot fit on the line, it is written as</p>
+<pre><code class='ocaml'>   <span class='o'>---</span>b<span class='o'>---</span>b
+   <span class='o'>---</span>
+</code></pre>
+<p>
+The first break hint does not lead to a new line, since there is
 enough room on the line. The second one leads to a new line since
 there is no more room to print the material following it. If the
 room left on the line were even shorter, the first break hint may
 lead to a new line and &quot;---b---b---&quot; is written as:</p>
-<pre><code>    ---b
-    ---b
-    ---</code></pre>
- </li>
-</ul>
-
-<h2 id="Printingspaces">Printing spaces</h2>
-<p>Break hints are also used to output spaces (if the line is not split
+<pre><code class='ocaml'>    <span class='o'>---</span>b
+    <span class='o'>---</span>b
+    <span class='o'>---</span>
+</code></pre>
+<h2 id="Printingspaces"> Printing spaces</h2><p>
+Break hints are also used to output spaces (if the line is not split
 when the break is encountered, otherwise the new line indicates properly
 the separation between printing items). You output a break hint using
 <code>print_break sp indent</code>, and this <code>sp</code> integer is used to print “sp”
@@ -206,29 +212,31 @@ spaces. Thus <code>print_break sp ...</code> may be thought as: print <code>sp</
 or output a new line.</p>
 <p>For instance, if b is <code>break 1 0</code> in the output &quot;--b--b--&quot;, we get</p>
 <ul>
- <li>within a “h” box:
-<pre><code>   -- -- --</code></pre>
- </li>
+ <li>within a “h” box:</li>
 </ul>
 
+<pre><code class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
+</code></pre>
 <ul>
- <li>within a “v” box:
-<pre><code>   --
-   --
-   --</code></pre>
- </li>
+ <li>within a “v” box:</li>
 </ul>
 
+<pre><code class='ocaml'>   <span class='o'>--</span>
+   <span class='o'>--</span>
+   <span class='o'>--</span>
+</code></pre>
 <ul>
- <li><p>within a “hv” box:</p>
-<pre><code>   -- -- --</code></pre>
-<p>or, according to the remaining room on the line:</p>
-<pre><code>   --
-   --
-   --</code></pre>
- </li>
+ <li>within a “hv” box:</li>
 </ul>
 
+<pre><code class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
+</code></pre>
+<p>
+or, according to the remaining room on the line:</p>
+<pre><code class='ocaml'>   <span class='o'>--</span>
+   <span class='o'>--</span>
+   <span class='o'>--</span>
+</code></pre>
 <ul>
  <li>and similarly for “hov” boxes.</li>
 </ul>
@@ -238,46 +246,50 @@ directly output white spaces: the routine should use break hints
 instead. (For instance <code>print_space ()</code> that is a convenient
 abbreviation for <code>print_break 1 0</code> and outputs a single space or break
 the line.)</p>
-<h2 id="Indentationofnewlines">Indentation of new lines</h2>
-<p>The user gets 2 ways to fix the indentation of new lines:</p>
+<h2 id="Indentationofnewlines"> Indentation of new lines</h2><p>
+The user gets 2 ways to fix the indentation of new lines:</p>
 <ul>
- <li><p><strong>when defining the box</strong>: when you open a box, you can fix the
- indentation added to each new line opened within that box.  
+ <li><strong>when defining the box</strong>: when you open a box, you can fix the
+ indentation added to each new line opened within that box.<br />
  For instance: <code>open_hovbox 1</code> opens a “hov” box with new lines
  indented 1 more than the initial indentation of the box. With output
- &quot;---[--b--b--b--&quot;, we get:</p>
-<pre><code>   ---[--b--b
-        --b--</code></pre>
-<p>with <code>open_hovbox 2</code>, we get</p>
-<pre><code>   ---[--b--b
-         --b--</code></pre>
-<p>Note: the <code>[</code> sign in the display is not visible on the screen, it
-is just there to materialise the aperture of the pretty-printing
-box. Last “screen” stands for:</p>
-<pre><code>    -----b--b
-         --b--</code></pre>
- </li>
+ &quot;---[--b--b--b--&quot;, we get:</li>
 </ul>
 
+<pre><code class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
+        <span class='o'>--</span>b<span class='o'>--</span>
+</code></pre>
+<p>
+with <code>open_hovbox 2</code>, we get</p>
+<pre><code class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
+         <span class='o'>--</span>b<span class='o'>--</span>
+</code></pre>
+<p>
+Note: the <code>[</code> sign in the display is not visible on the screen, it
+is just there to materialise the aperture of the pretty-printing
+box. Last “screen” stands for:</p>
+<pre><code class='ocaml'>    <span class='o'>-----</span>b<span class='o'>--</span>b
+         <span class='o'>--</span>b<span class='o'>--</span>
+</code></pre>
 <ul>
  <li><strong>when defining the break that makes the new line</strong>. As said above,
  you output a break hint using <code>print_break     sp           indent</code>.
  The <code>indent</code> integer is used to fix the additional indentation of
  the new line. Namely, it is added to the default indentation offset
- of the box where the break occurs.  
+ of the box where the break occurs.<br />
  For instance, if <code>[</code> stands for the opening of a “hov” box with 1
  as extra indentation (as obtained by <code>open_hovbox 1</code>), and b is
  <code>print_break       1       2</code>, then from output &quot;---[--b--b--b--&quot;,
- we get:
-<pre><code>   ---[-- --
-         --
-         --</code></pre>
- </li>
+ we get:</li>
 </ul>
 
-<h2 id="Refinementonhovboxes">Refinement on “hov” boxes</h2>
-<h3 id="Packingandstructuralhovboxes"> Packing and structural “hov” boxes</h3>
-<p>The “hov” box type is refined into two categories.</p>
+<pre><code class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span> <span class='o'>--</span>
+         <span class='o'>--</span>
+         <span class='o'>--</span>
+</code></pre>
+<h2 id="Refinementonhovboxes"> Refinement on “hov” boxes</h2><h3 id="Packingandstructuralhovboxes"> Packing and structural “hov” boxes</h3><p>
+
+The “hov” box type is refined into two categories.</p>
 <ul>
  <li><strong>the vertical or horizontal <em>packing</em> box</strong> (as obtained by the
  open_hovbox procedure): break hints are used to cut the line when
@@ -291,8 +303,8 @@ box. Last “screen” stands for:</p>
  to new lines even if there is enough room on the current line.</li>
 </ul>
 
-<h3 id="Differencesbetweenapackingandastructuralhovbox"> Differences between a packing and a structural “hov” box</h3>
-<p>The difference between a packing and a structural “hov” box is shown by
+<h3 id="Differencesbetweenapackingandastructuralhovbox"> Differences between a packing and a structural “hov” box</h3><p>
+The difference between a packing and a structural “hov” box is shown by
 a routine that closes boxes and parentheses at the end of printing: with
 packing boxes, the closure of boxes and parentheses do not lead to new
 lines if there is enough room on the line, whereas with structural boxes
@@ -300,21 +312,25 @@ each break hint will lead to a new line. For instance, when printing
 &quot;[(---[(----[(---b)]b)]b)]&quot;, where &quot;b&quot; is a break hint without extra
 indentation (<code>print_cut ()</code>). If &quot;[&quot; means opening of a packing “hov”
 box (open_hovbox), &quot;[(---[(----[(---b)]b)]b)]&quot; is printed as follows:</p>
-<pre><code>(---
- (----
-  (---)))</code></pre>
-<p>If we replace the packing boxes by structural boxes (open_box), each
+<pre><code class='ocaml'><span class='o'>(---</span>
+ <span class='o'>(----</span>
+  <span class='o'>(---</span>)))
+</code></pre>
+<p>
+If we replace the packing boxes by structural boxes (open_box), each
 break hint that precedes a closing parenthesis can show the boxes
 structure, if it leads to a new line; hence &quot;[(---[(----[(---b)]b)]b)]&quot;
 is printed like this:</p>
-<pre><code>(---
- (----
-  (---
+<pre><code class='ocaml'><span class='o'>(---</span>
+ <span class='o'>(----</span>
+  <span class='o'>(---</span>
   )
  )
-)</code></pre>
-<h2 id="Practicaladvice">Practical advice</h2>
-<p>When writing a pretty-printing routine, follow these simple rules:</p>
+)
+</code></pre>
+<h2 id="Practicaladvice"> Practical advice</h2><p>
+
+When writing a pretty-printing routine, follow these simple rules:</p>
 <ol>
  <li>Boxes must be opened and closed consistently (<code>open_*</code> and
  <code>close_box</code> must be nested like parentheses).
@@ -360,8 +376,8 @@ is printed like this:</p>
  input.)</li>
 </ol>
 
-<h2 id="Printingtostdoutusingprintf">Printing to <code>stdout</code>: using <code>printf</code></h2>
-<p>The <code>format</code> module provides a general printing facility “à la”
+<h2 id="Printingtostdoutusingprintf"> Printing to <code>stdout</code>: using <code>printf</code></h2><p>
+The <code>format</code> module provides a general printing facility “à la”
 <code>printf</code>. In addition to the usual conversion facility provided by
 <code>printf</code>, you can write pretty-printing indications directly inside the
 format string (opening and closing boxes, indicating breaking hints,
@@ -387,47 +403,55 @@ be called from within a <code>printf</code> format string. For instance</p>
 </ul>
 
 <p>For instance</p>
-<pre><code>printf &quot;@[&lt;1&gt;%s@ =@ %d@ %s@]@.&quot; &quot;Prix TTC&quot; 100 &quot;Euros&quot;;;
-Prix TTC = 100 Euros
+<pre><code class='ocaml'>printf <span class='s'>&#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34;</span> <span class='s'>&#34;Prix TTC&#34;</span> 100 <span class='s'>&#34;Euros&#34;</span><span class='o'>;;</span>
+Prix TTC <span class='k'>=</span> 100 Euros
 
-- : unit = ()</code></pre>
-<h2 id="Aconcreteexample">A concrete example</h2>
-<p>Let me give a full example: the shortest non trivial example you could
+<span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
+</code></pre>
+<h2 id="Aconcreteexample"> A concrete example</h2><p>
+
+Let me give a full example: the shortest non trivial example you could
 imagine, that is the λ-calculus :)</p>
 <p>Thus the problem is to pretty-print the values of a concrete data type
 that models a language of expressions that defines functions and their
 applications to arguments.</p>
 <p>First, I give the abstract syntax of lambda-terms (we illustrate is in
 the <a href='../description.html#interactive'>interactive system</a>):</p>
-<pre><code>  type lambda =
-    | Lambda of string * lambda
-    | Var of string
-    | Apply of lambda * lambda</code></pre>
-<p>I use the format library to print the lambda-terms:</p>
-<pre><code>  open Format;;
+<pre><code class='ocaml'>  <span class='k'>type</span> lambda <span class='k'>=</span>
+    <span class='o'>|</span> Lambda <span class='k'>of</span> string <span class='o'>*</span> lambda
+    <span class='o'>|</span> Var <span class='k'>of</span> string
+    <span class='o'>|</span> Apply <span class='k'>of</span> lambda <span class='o'>*</span> lambda
+</code></pre>
+<p>
+I use the format library to print the lambda-terms:</p>
+<pre><code class='ocaml'>  <span class='k'>open</span> Format<span class='o'>;;</span>
 
-  let ident = print_string
-  let kwd = print_string;;
+  <span class='k'>let</span> ident <span class='k'>=</span> print_string
+  <span class='k'>let</span> kwd <span class='k'>=</span> print_string<span class='o'>;;</span>
 
-  let rec print_exp0 = function
-    | Var s -&gt;  ident s
-    | lam -&gt; open_hovbox 1; kwd &quot;(&quot;; print_lambda lam; kwd &quot;)&quot;; close_box ()
-  and print_app = function
-    | e -&gt; open_hovbox 2; print_other_applications e; close_box ()
-  and print_other_applications f =
-    match f with
-    | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
-    | f -&gt; print_exp0 f
-  and print_lambda = function
-    | Lambda (s, lam) -&gt;
-        open_hovbox 1;
-        kwd &quot;&#92;&#92;&quot;; ident s; kwd &quot;.&quot;; print_space(); print_lambda lam;
+  <span class='k'>let rec</span> print_exp0 <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Var s <span class='k'>-></span>  ident s
+    <span class='o'>|</span> lam <span class='k'>-></span> open_hovbox 1<span class='o'>;</span> kwd <span class='s'>&#34;(&#34;</span><span class='o'>;</span> print_lambda lam<span class='o'>;</span> kwd <span class='s'>&#34;)&#34;</span><span class='o'>;</span> close_box ()
+  <span class='k'>and</span> print_app <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> e <span class='k'>-></span> open_hovbox 2<span class='o'>;</span> print_other_applications e<span class='o'>;</span> close_box ()
+  <span class='k'>and</span> print_other_applications f <span class='k'>=</span>
+    <span class='k'>match</span> f <span class='k'>with</span>
+    <span class='o'>|</span> Apply (f<span class='o'>,</span> arg) <span class='k'>-></span> print_app f<span class='o'>;</span> print_space ()<span class='o'>;</span> print_exp0 arg
+    <span class='o'>|</span> f <span class='k'>-></span> print_exp0 f
+  <span class='k'>and</span> print_lambda <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Lambda (s<span class='o'>,</span> lam) <span class='k'>-></span>
+        open_hovbox 1<span class='o'>;</span>
+        kwd <span class='s'>&#34;\\&#34;; ident s; kwd &#34;</span><span class='o'>.</span>"<span class='o'>;</span> print_space()<span class='o'>;</span> print_lambda lam<span class='o'>;</span>
         close_box()
-    | e -&gt; print_app e</code></pre>
-<p>In Caml Light, replace the first line by:</p>
-<pre><code>#open &quot;format&quot;;;</code></pre>
-<h3 id="Mostgeneralprettyprintingusingfprintf"> Most general pretty-printing: using <code>fprintf</code></h3>
-<p>We use the <code>fprintf</code> function to write the most versatile version of the
+    <span class='o'>|</span> e <span class='k'>-></span> print_app e
+</code></pre>
+<p>
+In Caml Light, replace the first line by:</p>
+<pre><code class='ocaml'><span class='o'>#</span><span class='k'>open</span> <span class='s'>&#34;format&#34;</span><span class='o'>;;</span>
+</code></pre>
+<h3 id="Mostgeneralprettyprintingusingfprintf"> Most general pretty-printing: using <code>fprintf</code></h3><p>
+
+We use the <code>fprintf</code> function to write the most versatile version of the
 pretty-printing functions for lambda-terms. Now, the functions get an
 extra argument, namely a pretty-printing formatter (the <code>ppf</code> argument)
 where printing will occur. This way the printing routines are more
@@ -440,29 +464,32 @@ function (these user&apos;s supplied functions also have a formatter as first
 argument).</p>
 <p>Using <code>fprintf</code>, the lambda-terms printing routines can be written as
 follows:</p>
-<pre><code>  open Format;;
+<pre><code class='ocaml'>  <span class='k'>open</span> Format<span class='o'>;;</span>
 
-  let ident ppf s = fprintf ppf &quot;%s&quot; s
-  let kwd ppf s = fprintf ppf &quot;%s&quot; s;;
+  <span class='k'>let</span> ident ppf s <span class='k'>=</span> fprintf ppf <span class='s'>&#34;%s&#34;</span> s
+  <span class='k'>let</span> kwd ppf s <span class='k'>=</span> fprintf ppf <span class='s'>&#34;%s&#34;</span> s<span class='o'>;;</span>
 
-  let rec pr_exp0 ppf = function
-    | Var s -&gt; fprintf ppf &quot;%a&quot; ident s
-    | lam -&gt; fprintf ppf &quot;@[&lt;1&gt;(%a)@]&quot; pr_lambda lam
-  and pr_app ppf e =
-    fprintf ppf &quot;@[&lt;2&gt;%a@]&quot; pr_other_applications e
-  and pr_other_applications ppf f =
-    match f with
-    | Apply (f, arg) -&gt; fprintf ppf &quot;%a@ %a&quot; pr_app f pr_exp0 arg
-    | f -&gt; pr_exp0 ppf f
-  and pr_lambda ppf = function
-    | Lambda (s, lam) -&gt;
-       fprintf ppf &quot;@[&lt;1&gt;%a%a%a@ %a@]&quot;
-               kwd &quot;&#92;&#92;&quot; ident s kwd &quot;.&quot; pr_lambda lam
-    | e -&gt; pr_app ppf e</code></pre>
-<p>Given those general printing routines, procedures to print to <code>stdout</code>
+  <span class='k'>let rec</span> pr_exp0 ppf <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Var s <span class='k'>-></span> fprintf ppf <span class='s'>&#34;%a&#34;</span> ident s
+    <span class='o'>|</span> lam <span class='k'>-></span> fprintf ppf <span class='s'>&#34;@[&#60;1&#62;(%a)@]&#34;</span> pr_lambda lam
+  <span class='k'>and</span> pr_app ppf e <span class='k'>=</span>
+    fprintf ppf <span class='s'>&#34;@[&#60;2&#62;%a@]&#34;</span> pr_other_applications e
+  <span class='k'>and</span> pr_other_applications ppf f <span class='k'>=</span>
+    <span class='k'>match</span> f <span class='k'>with</span>
+    <span class='o'>|</span> Apply (f<span class='o'>,</span> arg) <span class='k'>-></span> fprintf ppf <span class='s'>&#34;%a@ %a&#34;</span> pr_app f pr_exp0 arg
+    <span class='o'>|</span> f <span class='k'>-></span> pr_exp0 ppf f
+  <span class='k'>and</span> pr_lambda ppf <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Lambda (s<span class='o'>,</span> lam) <span class='k'>-></span>
+       fprintf ppf <span class='s'>&#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;</span>
+               kwd <span class='s'>&#34;\\&#34; ident s kwd &#34;</span><span class='o'>.</span>" pr_lambda lam
+    <span class='o'>|</span> e <span class='k'>-></span> pr_app ppf e
+</code></pre>
+<p>
+Given those general printing routines, procedures to print to <code>stdout</code>
 or <code>stderr</code> is just a matter of partial application:</p>
-<pre><code>  let print_lambda = pr_lambda std_formatter
-  let eprint_lambda = pr_lambda err_formatter
+<pre><code class='ocaml'>  <span class='k'>let</span> print_lambda <span class='k'>=</span> pr_lambda std_formatter
+  <span class='k'>let</span> eprint_lambda <span class='k'>=</span> pr_lambda err_formatter
+
 </code></pre>
 
           </div>

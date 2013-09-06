@@ -49,19 +49,17 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 <ul>
- <li><a href='#StatusofpointersinOCaml'>Status of pointers in OCaml</a>
+ <li><a href='#StatusofpointersinOCaml'> Status of pointers in OCaml</a>
   <ul>
-   <li><a href='#ExplicitpointersareOCamlvaluesoftyperef'> Explicit pointers are OCaml values of type <code>ref</code></a>
-   </li>
    <li><a href='#Pointersandmutablefieldsorvectors'> Pointers and mutable fields or vectors</a>
    </li>
   </ul>
  </li>
- <li><a href='#DefiningpointersinOCaml'>Defining pointers in OCaml</a>
+ <li><a href='#DefiningpointersinOCaml'> Defining pointers in OCaml</a>
  </li>
- <li><a href='#IntegerLists'>Integer Lists</a>
+ <li><a href='#IntegerLists'> Integer Lists</a>
  </li>
- <li><a href='#Polymorphiclists'>Polymorphic lists</a>
+ <li><a href='#Polymorphiclists'> Polymorphic lists</a>
  </li>
 </ul>
 
@@ -71,80 +69,86 @@
         <div id="content-primary" class="span8">
           <div class="content">
             
-<h1 id="PointersinOCaml">Pointers in OCaml</h1>
-<h2 id="StatusofpointersinOCaml">Status of pointers in OCaml</h2>
-<p>Pointers exist in OCaml, and in fact they spread all over the place.
+<h1 id="PointersinOCaml"> Pointers in OCaml</h1><h2 id="StatusofpointersinOCaml"> Status of pointers in OCaml</h2><p>
+
+Pointers exist in OCaml, and in fact they spread all over the place.
 They are used either implicitely (in the most cases), or explicitely (in
 the rare occasions where implicit pointers are not more handy). The vast
 majority of pointers usages that are found in usual programming
 languages simply disapear in OCaml, or more exactly, those pointers are
 totally automatically handled by the compiler and the OCaml programmer
 can safely just ignore their existence, focusing on the semantic of its
-program.   
- For instance lists or trees are defined without explicit pointers using
-a concrete datatype definition. The underlying implementation uses
-pointers, but this is transparent to the programmer since pointer
-handling is done by the compiler.</p>
-<p>In the rare occasions where explicit pointers are needed (the most
-common case is when translating in OCaml an algorithm described in a
-classic imperative language), OCaml provides references that are
-full-fledged pointers, even first class citizen pointers (references can
-be passed as argument, embedded into arbitrary data structures, and
-returned as function results).</p>
-<h3 id="ExplicitpointersareOCamlvaluesoftyperef"> Explicit pointers are OCaml values of type <code>ref</code></h3>
-<p>You can program directly with explicit references if you want to, but
-this is normally a waste of time and effort.</p>
-<p>Let&apos;s examine the simple example of linked lists (integer lists to be
-simple). This data type is defined in C (or in Pascal) using explicit
-pointers, for instance:</p>
-<pre><code>/* Cells and lists type in C */
-struct cell {
-  int hd;
-  struct cell *tl;
-};
-
-typedef struct cell cell, *list;
-
-{Cells and lists type in Pascal}
+program.<br />.)constructor <code>Cons</code> the( list empty non and )constructor<code>Nil</code>
+the( list empty alternatives, two the with evident, is lists
+of structure recursive the and pairs, as represented thus are lists Cell</p>
+<pre><code>list * int of Cons | Nil = list type  
+ocaml</code></pre>
+<p>:pointers
+without definition, type sum a using OCaml, in this translate can We</p>
+<pre><code>;end 
+;cell :tl  
+;integer :hd  
+record = cell 
+;cell^ = list 
 type
- list = ^cell;
- cell = record
-  hd: integer;
-  tl: cell;
- end;</code></pre>
-<p>We can translate this in OCaml, using a sum type definition, without
-pointers:</p>
-<pre><code>  type list = Nil | Cons of int * list</code></pre>
-<p>Cell lists are thus represented as pairs, and the recursive structure of
-lists is evident, with the two alternatives, empty list (the
-<code>Nil</code>constructor) and non empty list (the <code>Cons</code> constructor).  
+}Pascal in type lists and Cells{
+
+;list* cell, cell struct typedef
+
+;}
+;tl* cell struct  
+;hd int  
+{ cell struct
+/* C in type lists and Cells */
+ocaml</code></pre>
+<p>:instance for pointers,
+explicit using )Pascal in or( C in defined is type data This .)simple
+be to lists integer( lists linked of example simple the examine s&apos;Let</p>
+<p>.effort and time of waste a normally is this
+but to, want you if references explicit with directly program can You
+<code>ref</code> type of values OCaml are pointers Explicit  ###</p>
+<p>.)results function as returned
+and structures, data arbitrary into embedded argument, as passed be
+can references( pointers citizen class first even pointers, fledged-full
+are that references provides OCaml ,)language imperative classic
+a in described algorithm an OCaml in translating when is case common
+most the( needed are pointers explicit where occasions rare the In</p>
+<p>.compiler the by done is handling
+pointer since programmer the to transparent is this but pointers,
+uses implementation underlying The .definition datatype concrete a
+using pointers explicit without defined are trees or lists instance For 
+<br />
  Automatic management of pointers and automatic memory allocation shine
 when allocating list values: one just writes <code>Cons (x, l)</code> to add <code>x</code> in
 front of the list <code>l</code>. In C, you need to write this function, to
 allocate a new cell and then fill its fields. For instance:</p>
-<pre><code>/* The empty list */
-#define nil NULL
+<pre><code class='ocaml'><span class='o'>/*</span> The empty list <span class='o'>*/</span>
+<span class='o'>#</span>define nil NULL
 
-/* The constructor of lists */
-list cons (element x, list l)
-{
-  list result;
-  result = (list) malloc (sizeof (cellule));
-  result -&gt; hd = x;
-  result -&gt; tl = l;
-  return (result);
-}</code></pre>
-<p>Similarly, in Pascal:</p>
-<pre><code>{Creating a list cell}
-function cons (x: integer; l: list): list;
- var p: list;
- begin
-  new(p);
-  p^.hd := x;
-  p^.tl := l;
-  cons := p
- end;</code></pre>
-<p>We thus see that fields of list cells in the C program have to be
+<span class='o'>/*</span> The constructor <span class='k'>of</span> lists <span class='o'>*/</span>
+list cons (element x<span class='o'>,</span> list l)
+<span class='o'>/span>
+  list result<span class='o'>;</span>
+  result <span class='k'>=</span> (list) malloc (sizeof (cellule))<span class='o'>;</span>
+  result <span class='k'>-></span> hd <span class='k'>=</span> x<span class='o'>;</span>
+  result <span class='k'>-></span> tl <span class='k'>=</span> l<span class='o'>;</span>
+  return (result)<span class='o'>;</span>
+<span class='o'</span>
+</code></pre>
+<p>
+Similarly, in Pascal:</p>
+<pre><code class='ocaml'><span class='o'>/span>Creating a list cell<span class='o'</span>
+<span class='k'>function</span> cons (x<span class='o'>:</span> integer<span class='o'>;</span> l<span class='o'>:</span> list)<span class='o'>:</span> list<span class='o'>;</span>
+ var p<span class='o'>:</span> list<span class='o'>;</span>
+ <span class='k'>begin</span>
+  <span class='k'>new</span>(p)<span class='o'>;</span>
+  p<span class='o'>^.</span>hd <span class='o'>:=</span> x<span class='o'>;</span>
+  p<span class='o'>^.</span>tl <span class='o'>:=</span> l<span class='o'>;</span>
+  cons <span class='o'>:=</span> p
+ <span class='k'>end</span><span class='o'>;</span>
+</code></pre>
+<p>
+We thus see that fields of list cells in the C program have to be
 mutable, otherwise initialization is impossible. By contrast in OCaml,
 allocation and initialization are merged into a single basic operation:
 constructor application. This way, immutable data structures are
@@ -153,19 +157,23 @@ definable (those data types are often refered to as “pure” or
 for other reasons than mere initialization, OCaml provides records with
 mutable fields. For instance, a list type defining lists whose elements
 can be in place modified could be written:</p>
-<pre><code>type list = Nil | Cons of cell
-and cell = { mutable hd : int; tl : list }</code></pre>
-<p>If the structure of the list itself must also be modified (cells must be
+<pre><code class='ocaml'><span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> cell
+<span class='k'>and</span> cell <span class='k'>=</span> <span class='o'>/span> <span class='k'>mutable</span> hd <span class='o'>:</span> int<span class='o'>;</span> tl <span class='o'>:</span> list <span class='o'</span>
+</code></pre>
+<p>
+If the structure of the list itself must also be modified (cells must be
 physically removed from the list), the <code>tl</code> field would also be declared
 as mutable:</p>
-<pre><code>type list = Nil | Cons of cell
-and cell = {mutable hd : int; mutable tl : list};;</code></pre>
-<p>Physical assignments are still useless to allocate mutable data: you
+<pre><code class='ocaml'><span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> cell
+<span class='k'>and</span> cell <span class='k'>=</span> <span class='o'>/span><span class='k'>mutable</span> hd <span class='o'>:</span> int<span class='o'>;</span> <span class='k'>mutable</span> tl <span class='o'>:</span> list<span class='o'</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Physical assignments are still useless to allocate mutable data: you
 write <code>Cons {hd = 1; tl = l}</code> to add <code>1</code> to the list <code>l</code>. Physical
 assigments that remain in OCaml programs should be just those
 assignments that are mandatory to implement the algorithm at hand.</p>
-<h3 id="Pointersandmutablefieldsorvectors"> Pointers and mutable fields or vectors</h3>
-<p>Very often, pointers are used to implement physical modification of data
+<h3 id="Pointersandmutablefieldsorvectors"> Pointers and mutable fields or vectors</h3><p>
+Very often, pointers are used to implement physical modification of data
 structures. In OCaml programs this means using vectors or mutable fields
 in records. For this kind of use of pointers, the Pascal&apos;s instruction:
 <code>x^.label := val</code> (where <code>x</code> is a value of a record having a <code>label</code>
@@ -177,102 +185,123 @@ the OCaml compiler.</p>
 Pascal or C, but this is not natural, since you get back the usual
 drawbacks and difficulties of explicit pointers manipulation of
 classical algorithmic languages. See a more complete example below.</p>
-<h2 id="DefiningpointersinOCaml">Defining pointers in OCaml</h2>
-<p>The general pointer type can be defined using the definition of a
+<h2 id="DefiningpointersinOCaml"> Defining pointers in OCaml</h2><p>
+The general pointer type can be defined using the definition of a
 pointer: a pointer is either null, or a pointer to an assignable memory
 location:</p>
-<pre><code>type &apos;a pointer = Null | Pointer of &apos;a ref</code></pre>
-<p>Explicit dereferencing (or reading the pointer&apos;s designated value) and
+<pre><code class='ocaml'><span class='k'>type</span> 'a pointer <span class='k'>=</span> Null <span class='o'>|</span> Pointer <span class='k'>of</span> 'a ref
+</code></pre>
+<p>
+Explicit dereferencing (or reading the pointer&apos;s designated value) and
 pointer assignment (or writing to the pointer&apos;s designated memory
 location) are easily defined. We define dereferencing as a prefix
 operator named <code>!^</code>, and assigment as the infix <code>^:=</code>.</p>
-<pre><code>  let ( !^ ) = function
-    | Null -&gt; invalid_arg &quot;Attempt to dereference the null pointer&quot;
-    | Pointer r -&gt; !r;;
+<pre><code class='ocaml'>  <span class='k'>let</span> ( <span class='o'>!^</span> ) <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Null <span class='k'>-></span> invalid_arg <span class='s'>&#34;Attempt to dereference the null pointer&#34;</span>
+    <span class='o'>|</span> Pointer r <span class='k'>-></span> <span class='o'>!</span>r<span class='o'>;;</span>
   
-  let ( ^:= ) p v =
-    match p with
-    | Null -&gt; invalid_arg &quot;Attempt to assign the null pointer&quot;
-    | Pointer r -&gt; r := v;;</code></pre>
-<p>Now we define the allocation of a new pointer initialized to points to a
+  <span class='k'>let</span> ( <span class='o'>^:=</span> ) p v <span class='k'>=</span>
+    <span class='k'>match</span> p <span class='k'>with</span>
+    <span class='o'>|</span> Null <span class='k'>-></span> invalid_arg <span class='s'>&#34;Attempt to assign the null pointer&#34;</span>
+    <span class='o'>|</span> Pointer r <span class='k'>-></span> r <span class='o'>:=</span> v<span class='o'>;;</span>
+</code></pre>
+<p>
+Now we define the allocation of a new pointer initialized to points to a
 given value:</p>
-<pre><code>  let new_pointer x = Pointer (ref x);;</code></pre>
-<p>For instance, let&apos;s define and then assign a pointer to an integer:</p>
-<pre><code>  let p = new_pointer 0;;
-  p ^:= 1;;
-  !^p;;</code></pre>
-<h2 id="IntegerLists">Integer Lists</h2>
-<p>Now we can define lists using explicit pointers as in usual imperative
+<pre><code class='ocaml'>  <span class='k'>let</span> new_pointer x <span class='k'>=</span> Pointer (ref x)<span class='o'>;;</span>
+</code></pre>
+<p>
+For instance, let&apos;s define and then assign a pointer to an integer:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> p <span class='k'>=</span> new_pointer 0<span class='o'>;;</span>
+  p <span class='o'>^:=</span> 1<span class='o'>;;</span>
+  <span class='o'>!^</span>p<span class='o'>;;</span>
+</code></pre>
+<h2 id="IntegerLists"> Integer Lists</h2><p>
+
+Now we can define lists using explicit pointers as in usual imperative
 languages:</p>
-<pre><code>  (* The list type ``à la Pascal&apos;&apos; *)
-  type ilist = cell pointer
-  and cell = {mutable hd : int; mutable tl : ilist}</code></pre>
-<p>We then define allocation of a new cell, the list constructor and its
+<pre><code class='ocaml'>  <span class='com2'>(* The list <span class='ic'>type</span> ``à la Pascal'' *)</span><!-- end comment -->
+  <span class='k'>type</span> ilist <span class='k'>=</span> cell pointer
+  <span class='k'>and</span> cell <span class='k'>=</span> <span class='o'>/span><span class='k'>mutable</span> hd <span class='o'>:</span> int<span class='o'>;</span> <span class='k'>mutable</span> tl <span class='o'>:</span> ilist<span class='o'</span>
+</code></pre>
+<p>
+We then define allocation of a new cell, the list constructor and its
 associated destructors.</p>
-<pre><code>  let new_cell () = {hd = 0; tl = Null};;
+<pre><code class='ocaml'>  <span class='k'>let</span> new_cell () <span class='k'>=</span> <span class='o'>/span>hd <span class='k'>=</span> 0<span class='o'>;</span> tl <span class='k'>=</span> Null<span class='o'</span><span class='o'>;;</span>
 
-  let cons x l =
-    let c = new_cell () in
-    c.hd &lt;- x;
-    c.tl &lt;- l;
-    (new_pointer c : ilist);;
+  <span class='k'>let</span> cons x l <span class='k'>=</span>
+    <span class='k'>let</span> c <span class='k'>=</span> new_cell () <span class='k'>in</span>
+    c<span class='o'>.</span>hd <span class='o'>&#60;-</span> x<span class='o'>;</span>
+    c<span class='o'>.</span>tl <span class='o'>&#60;-</span> l<span class='o'>;</span>
+    (new_pointer c <span class='o'>:</span> ilist)<span class='o'>;;</span>
 
-  let hd (l : ilist) = !^l.hd;;
-  let tl (l : ilist) = !^l.tl;;</code></pre>
-<p>We can now write all kind of classical algorithms, based on pointers
+  <span class='k'>let</span> hd (l <span class='o'>:</span> ilist) <span class='k'>=</span> <span class='o'>!^</span>l<span class='o'>.</span>hd<span class='o'>;;</span>
+  <span class='k'>let</span> tl (l <span class='o'>:</span> ilist) <span class='k'>=</span> <span class='o'>!^</span>l<span class='o'>.</span>tl<span class='o'>;;</span>
+</code></pre>
+<p>
+We can now write all kind of classical algorithms, based on pointers
 manipulation, with their associated loops, their unwanted sharing
 problems and their null pointer errors. For instance, list
 concatenation, as often described in litterature, physically modifies
 its first list argument, hooking the second list to the end of the
 first:</p>
-<pre><code>  (* Physical append *)
-  let append (l1 : ilist) (l2 : ilist) =
-    let temp = ref l1 in
-    while tl !temp &lt;&gt; Null do
-      temp := tl !temp
-    done;
-    !^ !temp.tl &lt;- l2;;
+<pre><code class='ocaml'>  <span class='com2'>(* Physical append *)</span><!-- end comment -->
+  <span class='k'>let</span> append (l1 <span class='o'>:</span> ilist) (l2 <span class='o'>:</span> ilist) <span class='k'>=</span>
+    <span class='k'>let</span> temp <span class='k'>=</span> ref l1 <span class='k'>in</span>
+    <span class='k'>while</span> tl <span class='o'>!</span>temp <span class='o'>&#60;&#62;</span> Null <span class='k'>do</span>
+      temp <span class='o'>:=</span> tl <span class='o'>!</span>temp
+    <span class='k'>done</span><span class='o'>;</span>
+    <span class='o'>!^</span> <span class='o'>!</span>temp<span class='o'>.</span>tl <span class='o'>&#60;-</span> l2<span class='o'>;;</span>
 
-  (* An example: *)
-  let l1 = cons 1 (cons 2 Null);;
+  <span class='com2'>(* An example<span class='ic'>:</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> l1 <span class='k'>=</span> cons 1 (cons 2 Null)<span class='o'>;;</span>
 
-  let l2 = cons 3 Null;;
+  <span class='k'>let</span> l2 <span class='k'>=</span> cons 3 Null<span class='o'>;;</span>
 
-  append l1 l2;;</code></pre>
-<p>The lists <code>l1</code> and <code>l2</code> are effectively catenated:</p>
-<pre><code>  l1;;</code></pre>
-<p>Just a nasty side effect of physical list concatenation: <code>l1</code> now
+  append l1 l2<span class='o'>;;</span>
+</code></pre>
+<p>
+The lists <code>l1</code> and <code>l2</code> are effectively catenated:</p>
+<pre><code class='ocaml'>  l1<span class='o'>;;</span>
+</code></pre>
+<p>
+Just a nasty side effect of physical list concatenation: <code>l1</code> now
 contains the concatenation of the two lists <code>l1</code> and <code>l2</code>, thus the list
 <code>l1</code> no longer exists: in some sense <code>append</code> <em>consumes</em> its first
 argument. In other words, the value of a list data now depends on its
 history, that is on the sequence of function calls that use the value.
 This strange behaviour leads to a lot of difficulties when explicitely
 manipulating pointers. Try for instance, the seemingly harmless:</p>
-<pre><code>  append l1 l1;;</code></pre>
-<p>Then evaluate <code>l1</code>:</p>
-<pre><code>  l1;;</code></pre>
-<h2 id="Polymorphiclists">Polymorphic lists</h2>
-<p>To go beyond Pascal type system, we define polymorphic lists using
+<pre><code class='ocaml'>  append l1 l1<span class='o'>;;</span>
+</code></pre>
+<p>
+Then evaluate <code>l1</code>:</p>
+<pre><code class='ocaml'>  l1<span class='o'>;;</span>
+</code></pre>
+<h2 id="Polymorphiclists"> Polymorphic lists</h2><p>
+
+To go beyond Pascal type system, we define polymorphic lists using
 pointers; here is a simple implementation of those polymorphic mutable
 lists:</p>
-<pre><code>  type &apos;a lists = &apos;a cell pointer
-  and &apos;a cell = {mutable hd : &apos;a pointer; mutable tl : &apos;a lists};;
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a lists <span class='k'>=</span> 'a cell pointer
+  <span class='k'>and</span> 'a cell <span class='k'>=</span> <span class='o'>/span><span class='k'>mutable</span> hd <span class='o'>:</span> 'a pointer<span class='o'>;</span> <span class='k'>mutable</span> tl <span class='o'>:</span> 'a lists<span class='o'</span><span class='o'>;;</span>
 
-  let new_cell () = {hd = Null; tl = Null};;
-  let cons x l =
-    let c = new_cell () in
-    c.hd &lt;- new_pointer x;
-    c.tl &lt;- l;
-    (new_pointer c : &apos;a lists);;
-  let hd (l : &apos;a lists) = !^l.hd;;
-  let tl (l : &apos;a lists) = !^l.tl;;
+  <span class='k'>let</span> new_cell () <span class='k'>=</span> <span class='o'>/span>hd <span class='k'>=</span> Null<span class='o'>;</span> tl <span class='k'>=</span> Null<span class='o'</span><span class='o'>;;</span>
+  <span class='k'>let</span> cons x l <span class='k'>=</span>
+    <span class='k'>let</span> c <span class='k'>=</span> new_cell () <span class='k'>in</span>
+    c<span class='o'>.</span>hd <span class='o'>&#60;-</span> new_pointer x<span class='o'>;</span>
+    c<span class='o'>.</span>tl <span class='o'>&#60;-</span> l<span class='o'>;</span>
+    (new_pointer c <span class='o'>:</span> 'a lists)<span class='o'>;;</span>
+  <span class='k'>let</span> hd (l <span class='o'>:</span> 'a lists) <span class='k'>=</span> <span class='o'>!^</span>l<span class='o'>.</span>hd<span class='o'>;;</span>
+  <span class='k'>let</span> tl (l <span class='o'>:</span> 'a lists) <span class='k'>=</span> <span class='o'>!^</span>l<span class='o'>.</span>tl<span class='o'>;;</span>
 
-  let append (l1 : &apos;a lists) (l2 : &apos;a lists) =
-    let temp = ref l1 in
-    while tl !temp &lt;&gt; Null do
-      temp := tl !temp
-    done;
-    !^ !temp.tl &lt;- l2;;
+  <span class='k'>let</span> append (l1 <span class='o'>:</span> 'a lists) (l2 <span class='o'>:</span> 'a lists) <span class='k'>=</span>
+    <span class='k'>let</span> temp <span class='k'>=</span> ref l1 <span class='k'>in</span>
+    <span class='k'>while</span> tl <span class='o'>!</span>temp <span class='o'>&#60;&#62;</span> Null <span class='k'>do</span>
+      temp <span class='o'>:=</span> tl <span class='o'>!</span>temp
+    <span class='k'>done</span><span class='o'>;</span>
+    <span class='o'>!^</span> <span class='o'>!</span>temp<span class='o'>.</span>tl <span class='o'>&#60;-</span> l2<span class='o'>;;</span>
+
 </code></pre>
 
           </div>

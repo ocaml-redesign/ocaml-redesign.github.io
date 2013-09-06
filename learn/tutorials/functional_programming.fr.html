@@ -46,9 +46,9 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="Programmationfonctionnelle">Programmation fonctionnelle</h1>
-<h2 id="Quaposestcequelaprogrammationfonctionnelle">Qu&apos;est-ce que la programmation fonctionnelle ?</h2>
-<p>Nous sommes arrivé relativement loin dans ce tutorial et nous n&apos;avons
+            <h1 id="Programmationfonctionnelle"> Programmation fonctionnelle</h1><h2 id="Quaposestcequelaprogrammationfonctionnelle"> Qu&apos;est-ce que la programmation fonctionnelle ?</h2><p>
+
+Nous sommes arrivé relativement loin dans ce tutorial et nous n&apos;avons
 pas encore abordé la <strong>programmation fonctionnelle</strong>. Il serait
 imaginable de voir toutes les fonctionnalités données jusqu&apos;à présent -
 rich data types, pattern matching, inférence de types, fonctions
@@ -71,10 +71,12 @@ programmation fonctionnelle.</p>
 <p>La définition de base, bien que pas forcément claire est : «Dans un
 langage fonctionnel, les fonctions sont des citoyens de première classe»</p>
 <p>Que de mots qui n&apos;ont pas vraiment de sens. Voyons plutôt un exemple :</p>
-<pre><code># let double x= x *2 in
-   List.map double [ 1; 2; 3 ];;
-- : int list = [2; 4, 6]</code></pre>
-<p>Dans cet exemple, j&apos;ai d&apos;abord définit une fonction imbriquée appelée
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> double x<span class='k'>=</span> x <span class='o'>*</span>2 <span class='k'>in</span>
+   <span class='m'>List</span><span class='o'>.</span>map double <span class='o'>[</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3 <span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>,</span> 6<span class='o'>]</span>
+</code></pre>
+<p>
+Dans cet exemple, j&apos;ai d&apos;abord définit une fonction imbriquée appelée
 <code>double</code> qui prend un argument <code>x</code> et qui retourne <code>x * 2</code>. Puis <code>map</code>
 appelle <code>double</code> sur chaque élément de la liste donnée <code>([1; 2; 3])</code>
 pour produire le résultat : une liste avec chaque nombre doublé.</p>
@@ -93,18 +95,22 @@ une clôture peut référencer des variables qui sont disponibles au moment
 de la définition. Généralisons la fonction précédente de façons à
 prendre n&apos;importe quelle liste d&apos;entiers et multiplier chaque élément
 par une valeur <code>n</code> arbitraire :</p>
-<pre><code>let multiply n list =
-    let f x =
-        n * x
-    in
-    List.map f list
-    ;:</code></pre>
-<p>Ainsi :</p>
-<pre><code># multiply 2 [1; 2; 3];;
-- : int list = [2; 4; 6]
-# multiply 5 [1; 2; 3];;
-- : int list = [5; 10; 15]</code></pre>
-<p>Le point important à noter à propos de la fonction <code>multiply</code> est la
+<pre><code class='ocaml'><span class='k'>let</span> multiply n list <span class='k'>=</span>
+    <span class='k'>let</span> f x <span class='k'>=</span>
+        n <span class='o'>*</span> x
+    <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map f list
+    <span class='o'>;:</span>
+</code></pre>
+<p>
+Ainsi :</p>
+<pre><code class='ocaml'><span class='o'>#</span> multiply 2 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>;</span> 6<span class='o'>]</span>
+<span class='o'>#</span> multiply 5 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>5<span class='o'>;</span> 10<span class='o'>;</span> 15<span class='o'>]</span>
+</code></pre>
+<p>
+Le point important à noter à propos de la fonction <code>multiply</code> est la
 fonction imbriquée <code>f</code>. C&apos;est une clôture. Regardez comment <code>f</code> utilise
 la valeur de <code>n</code> qui n&apos;est pas passé en tant qu&apos;argument explicite à
 <code>f</code>. A la place, <code>f</code> est pris de l&apos;environnement - c&apos;est un argument de
@@ -123,25 +129,29 @@ donc à <code>n</code>.</p>
 l&apos;instant, mais considérons juste cela comme une définition de fonction
 pour l&apos;instant).</p>
 <p><code> class html_skel obj = object (self)</code></p>
-<pre><code> ...
- ...
- method save_to_channel chan =
-   let receiver_fn content =
-     output_string chan content;
-     true
-   in
-   save obj receiver_fn</code></pre>
-<p>Tout d&apos;abord, il faut savoir que la fonction <code>save</code> appelée à la fin de
+<pre><code class='ocaml'> <span class='o'>...</span>
+ <span class='o'>...</span>
+ <span class='k'>method</span> save_to_channel chan <span class='k'>=</span>
+   let rec<span class='o'>eiver_fn</span> content <span class='k'>=</span>
+     output_string chan content<span class='o'>;</span>
+     <span class='o'>true</span>
+   <span class='k'>in</span>
+   save obj receiver_fn
+</code></pre>
+<p>
+Tout d&apos;abord, il faut savoir que la fonction <code>save</code> appelée à la fin de
 la méthode prend en second argument une fonction, en l&apos;occurence
 <code>receiver_fn</code>. Il l&apos;appelle à répétition avec des morceaux de textes que
 du widget qu&apos;il essaye d&apos;enregistrer.</p>
 <p>Maintenant, jettons un oeil à <code>receiver_fn</code>. Cette fonction est une
 clôture correcte parce qu&apos;elle garde une référence à <code>chan</code> venant de
 son environnement.</p>
-<h2 id="Applicationpartielleetcurryfication">Application partielle et curryfication</h2>
-<p>Définissons une fonction plus qui ne fait qu&apos;ajouter deux entiers :</p>
-<pre><code>let plus a b = a + b ;;</code></pre>
-<p>Quelques questions pour les endormis du fond de la classe :</p>
+<h2 id="Applicationpartielleetcurryfication"> Application partielle et curryfication</h2><p>
+Définissons une fonction plus qui ne fait qu&apos;ajouter deux entiers :</p>
+<pre><code class='ocaml'><span class='k'>let</span> plus a b <span class='k'>=</span> a <span class='o'>+</span> b <span class='o'>;;</span>
+</code></pre>
+<p>
+Quelques questions pour les endormis du fond de la classe :</p>
 <ol>
  <li>Qu&apos;est-ce que <code>plus</code> ?
  </li>
@@ -153,43 +163,55 @@ son environnement.</p>
 <p>La première réponse est facile. <code>plus</code> est uen fonction qui prend deux
 arguments qui sont entiers et qui retourne un entier. Son type s&apos;écrit
 ainsi :</p>
-<pre><code>plus : int -&gt; int -&gt; int</code></pre>
-<p>La deuxième réponse est encore plus évidente. <code>plus 2 3</code> est un nombre,
+<pre><code class='ocaml'>plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+</code></pre>
+<p>
+La deuxième réponse est encore plus évidente. <code>plus 2 3</code> est un nombre,
 l&apos;entier <code>5</code>. Sa valeur et son type s&apos;écrivent :</p>
-<pre><code>5 : int</code></pre>
-<p>Mais quid de la question 3 ? Il semblerait que <code>plus 2</code> soit une erreur,
+<pre><code class='ocaml'>5 <span class='o'>:</span> int
+</code></pre>
+<p>
+Mais quid de la question 3 ? Il semblerait que <code>plus 2</code> soit une erreur,
 un bug. Alors qu&apos;en fait, il n&apos;en est point. Si nous typons cela dans le
 toplevel d&apos;OCaml, nous obtenons :</p>
-<pre><code># plus 2;;
-- : int -&gt; int = &lt;fun&gt;</code></pre>
-<p>Ceci n&apos;est pas une erreur. Il nous dit que <code>plus 2</code> est en fait une
+<pre><code class='ocaml'><span class='o'>#</span> plus 2<span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+</code></pre>
+<p>
+Ceci n&apos;est pas une erreur. Il nous dit que <code>plus 2</code> est en fait une
 <em>fonction</em>, qui prend un <code>int</code> et qui retourne un <code>int</code>. Quelle genre de
 fonction cela est-il ? Essayons d&apos;abord de lui donner un nom, puis de
 lui donner quelques entiers en argument, pour voir ce que ça donne :</p>
-<pre><code># let f = plus 2;;
-val f : int -&gt; int = &lt;fun&gt;
-# f 10;;
-- : int = 12
-# f 15;;
-- : int = 17
-# f 99;;
-- : int = 101</code></pre>
-<p>Ceci est une <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>preuve par
-l&apos;exemple</a>
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
+<span class='k'>val</span> f <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+<span class='o'>#</span> f 10<span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 12
+<span class='o'>#</span> f 15<span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 17
+<span class='o'>#</span> f 99<span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 101
+</code></pre>
+<p>
+Ceci est une <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>preuve par
+l&amp;apos;exemple</a>
 suffisante pour nous dire que <code>plus 2</code> est la fonction qu&apos;ajoute 2 à des
 choses.</p>
 <p>Revenons à la définition originelle, et remplaçons le premier argument,
 soit <code>a</code>, par la valeur <code>2</code> pour obtenir :</p>
-<pre><code>let plus 2 b = 2 + b ;;
-(* /!&#92; Ce n&apos;est pas du code OCaml valide *)</code></pre>
-<p>On peut maintenant mieux voir pourquoi <code>plus 2</code> est la fonction qui
+<pre><code class='ocaml'><span class='k'>let</span> plus 2 b <span class='k'>=</span> 2 <span class='o'>+</span> b <span class='o'>;;</span>
+<span class='com2'>(* <span class='ic'>/!\</span> Ce n'est pas du code OCaml valide *)</span><!-- end comment -->
+</code></pre>
+<p>
+On peut maintenant mieux voir pourquoi <code>plus 2</code> est la fonction qui
 ajoute <code>2</code> à quelque chose.</p>
 <p>En regardant le type de ces expressions, on peut démystifier la notation
 flèchée bizarre utilisée pour les types de fonctions :</p>
-<pre><code>     plus : int -&gt; int -&gt; int
-   plus 2 : int -&gt; int
- plus 2 3 : int</code></pre>
-<p>Ce processus est appelé
+<pre><code class='ocaml'>     plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+   plus 2 <span class='o'>:</span> int <span class='k'>-></span> int
+ plus 2 3 <span class='o'>:</span> int
+</code></pre>
+<p>
+Ce processus est appelé
 <strong><a href='http://fr.wikipedia.org/wiki/Curryfication' title='http://fr.wikipedia.org/wiki/Curryfication'>curryfication</a></strong>.
 Le nom vient de Haskell Curry qui a été à l&apos;origine de choses
 importantes sur le lambda calcul. Comme j&apos;essaye d&apos;éviter d&apos;entrer dans
@@ -200,50 +222,62 @@ google</a>
 suffit.</p>
 <p>Vous rappelez-vous des fonctions <code>double</code> et <code>multiply</code> vues
 précédemment ? <code>multiply</code> était définit ainsi :</p>
-<pre><code>let multiply n list =
-    let f x = n * x in
-    List.map f list
-    ;;</code></pre>
-<p>Nous pouvons maintenant définir <code>double</code>, <code>triple</code>, etc, très facilement
+<pre><code class='ocaml'><span class='k'>let</span> multiply n list <span class='k'>=</span>
+    <span class='k'>let</span> f x <span class='k'>=</span> n <span class='o'>*</span> x <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map f list
+    <span class='o'>;;</span>
+</code></pre>
+<p>
+Nous pouvons maintenant définir <code>double</code>, <code>triple</code>, etc, très facilement
 comme suit :</p>
-<pre><code>let double = multiply 2;;
-let triple = multiply 3;;</code></pre>
-<p>Ce sont de réelles fonctions, la preuve :</p>
-<pre><code># double [1; 2; 3];;
-- : int list = [2; 4; 6]
-# triple [1; 2; 3];;
-- : int list = [3; 6; 9]</code></pre>
-<p>On peut aussi utiliser l&apos;application partielle (sans la fonction
+<pre><code class='ocaml'><span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
+<span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
+</code></pre>
+<p>
+Ce sont de réelles fonctions, la preuve :</p>
+<pre><code class='ocaml'><span class='o'>#</span> double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>;</span> 6<span class='o'>]</span>
+<span class='o'>#</span> triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>;</span> 6<span class='o'>;</span> 9<span class='o'>]</span>
+</code></pre>
+<p>
+On peut aussi utiliser l&apos;application partielle (sans la fonction
 intermédiaire <code>f</code>) de cette façon :</p>
-<pre><code># let multiply n = List.map (( * ) n);;
-val multiply : int -&gt; int list -&gt; int list = &lt;fun&gt;
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> multiply n <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) n)<span class='o'>;;</span>
+<span class='k'>val</span> multiply <span class='o'>:</span> int <span class='k'>-></span> int list <span class='k'>-></span> int list <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 
-# let double = multiply 2;;
-val double : int list -&gt; int list = &lt;fun&gt;
-# let triple = multiply 3;;
-val triple : int list -&gt; int list = &lt;fun&gt;
-# double [1; 2; 3];;
-- : int list = [2; 4; 6]
-# triple [1; 2; 3];;
-- : int list = [3; 6; 9]</code></pre>
-<p>Dans l&apos;exemple ci-dessus,
+<span class='o'>#</span> <span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
+<span class='k'>val</span> double <span class='o'>:</span> int list <span class='k'>-></span> int list <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+<span class='o'>#</span> <span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
+<span class='k'>val</span> triple <span class='o'>:</span> int list <span class='k'>-></span> int list <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+<span class='o'>#</span> double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>;</span> 6<span class='o'>]</span>
+<span class='o'>#</span> triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>;</span> 6<span class='o'>;</span> 9<span class='o'>]</span>
+</code></pre>
+<p>
+Dans l&apos;exemple ci-dessus,
 <code>((*) n) est l&apos;application partielle de la fonction (*)</code>, c&apos;est-à-dire,
 multiplier. À noter les espaces ajoutés pour qu&apos;OCaml ne croit pas que
 c&apos;est un début de commentaire.</p>
 <p>On peut mettre des opérateurs infixes entre parenthèses pour faire des
 fonction. Voici une définition identique à la précédente avec la
 fonction <code>plus</code> :</p>
-<pre><code># let plus = (+);;
-val plus : int -&gt; int -&gt; int = &lt;fun&gt;
-# plus 2 3;;
-- : int = 5</code></pre>
-<p>Voici encore plus de curryfication :</p>
-<pre><code># List.map (plus 2) [1; 2; 3];;
-- : int list = [3; 4; 5]
-# let list_of_functions = List.map plus [1; 2; 3];;
-val list_of_functions : (int -&gt; int) list = [&lt;fun&gt;; &lt;fun&gt;; &lt;fun&gt;]</code></pre>
-<h2 id="Enquoilaprogrammationfonctionnelleestutile">En quoi la programmation fonctionnelle est utile ?</h2>
-<p>La programmation fonctionnelle, comme n&apos;importe quelle technique de
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> plus <span class='k'>=</span> <span class='o'>(+</span>)<span class='o'>;;</span>
+<span class='k'>val</span> plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+<span class='o'>#</span> plus 2 3<span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 5
+</code></pre>
+<p>
+Voici encore plus de curryfication :</p>
+<pre><code class='ocaml'><span class='o'>#</span> <span class='m'>List</span><span class='o'>.</span>map (plus 2) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>;</span> 4<span class='o'>;</span> 5<span class='o'>]</span>
+<span class='o'>#</span> <span class='k'>let</span> list_of_functions <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map plus <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<span class='k'>val</span> list_of_functions <span class='o'>:</span> (int <span class='k'>-></span> int) list <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;;</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;;</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span><span class='o'>]</span>
+</code></pre>
+<h2 id="Enquoilaprogrammationfonctionnelleestutile"> En quoi la programmation fonctionnelle est utile ?</h2><p>
+
+La programmation fonctionnelle, comme n&apos;importe quelle technique de
 programmation, est un outil utile dans votre boite à outils pour
 résoudre certaines classes de problèmes. Très utile pour les callbacks,
 qui sont utilisés dans les IHMs pour les boucles d&apos;évènements. C&apos;est
@@ -253,8 +287,8 @@ de liste. De la même manière, on peut définir des fonctions génériques
 sur les arbres. Certains types de problèmes d&apos;arithmétique peuvent être
 résolus plus rapidement avec la programmation fonctionnelle (par exemple
 calculer la dérivé d&apos;une fonction mathématique).</p>
-<h2 id="Programmationfonctionnellepureetimpure">Programmation fonctionnelle pure et impure</h2>
-<p>Une <strong>fonction pure</strong> est une fonction sans aucun <strong>effet de bord</strong>. Un
+<h2 id="Programmationfonctionnellepureetimpure"> Programmation fonctionnelle pure et impure</h2><p>
+Une <strong>fonction pure</strong> est une fonction sans aucun <strong>effet de bord</strong>. Un
 effet de bord signifie que la fonction garde une sorte d&apos;état caché en
 son sein. <code>strlen()</code> est un exemple de fonction pure en C. Si on appelle
 <code>strlen()</code> avec la même chaîne, elle retournera toujours la même taille.
@@ -273,10 +307,12 @@ qu&apos;écrire des fonctions impures est parfois utile.</p>
 est que si une fonction est pure, alors elle peut être appelée plusieurs
 fois avec les même arguments, le compilateur n&apos;aura qu&apos;a appeler la
 fonction qu&apos;une seule fois. Un bon exemple en C est :</p>
-<pre><code>for (i = 0; i &lt; strlen(s); ++i) {
-    // Du code qui n&apos;affecte pas s
-}</code></pre>
-<p>Si nativement compilé, la boucle est en O(n²) sur la taille de s parce
+<pre><code class='ocaml'><span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> strlen(s)<span class='o'>;</span> <span class='o'>++</span>i) <span class='o'>/span>
+    <span class='o'>//</span> Du code qui n'affecte pas s
+<span class='o'</span>
+</code></pre>
+<p>
+Si nativement compilé, la boucle est en O(n²) sur la taille de s parce
 que <code>strlen(s)</code> est appelé à chaque fois et <code>strlen()</code> doit itérer sur
 tout <code>s</code>. Si le compilateur est assez intelligent pour se rendre compte
 que <code>strlen()</code> est purement fonctionnel <em>et</em> que <code>s</code> n&apos;est pas modifié
@@ -290,8 +326,8 @@ chaque petite fonction au fur et à mesure de l&apos;avancement. La mode
 actuelle est de projeter les programmes en utilisant une approche
 top-bottom, mais dans l&apos;opinion de l&apos;auteur, cela résulte souvent à des
 échecs de projets.</p>
-<h2 id="Evaluationstricteparesseusestrictnessvslaziness">Evaluation stricte / paresseuse (strictness vs laziness)</h2>
-<p>Les langages dérivés de C et de ML sont stricts. Haskell et Miranda ne
+<h2 id="Evaluationstricteparesseusestrictnessvslaziness"> Evaluation stricte / paresseuse (strictness vs laziness)</h2><p>
+Les langages dérivés de C et de ML sont stricts. Haskell et Miranda ne
 sont pas stricts, ie ce sont des langages à évaluation paresseuse. OCaml
 est stricte par défaut mais autorise l&apos;évaluation paresseuse lorsque
 nécessaire.</p>
@@ -299,8 +335,10 @@ nécessaire.</p>
 toujours évalués en premier, et le résultat est alors passé à la
 fonction. Par exemple dans un langage à évaluation stricte, cet appel va
 toujours sortir par une erreur de division par zéro :</p>
-<pre><code> give_me_a_three (1/0);;</code></pre>
-<p>Si vous avez programmé dans n&apos;importe quel langage conventionnel, c&apos;est
+<pre><code class='ocaml'> give_me_a_three (1<span class='o'>/</span>0)<span class='o'>;;</span>
+</code></pre>
+<p>
+Si vous avez programmé dans n&apos;importe quel langage conventionnel, c&apos;est
 le comportement auquel vous vous attendrez, et vous serez surpris qu&apos;il
 en soit autrement.</p>
 <p>Dans un langage à évaluation paresseuse, des choses bizarres se passent.
@@ -317,19 +355,25 @@ d&apos;itérer sur la totalité de la liste, cela fonctionne.</p>
 paresseuse (<code>Lazy</code>) qui permettent d&apos;écrire des expressions paresseuses.
 Voici un exemple. D&apos;abord nous créons une expression paresseuse pour
 <code>1/0</code> :</p>
-<pre><code># let lazy_expr = lazy (1/0);;
-val lazy_expr : int lazy_t = &lt;lazy&gt;</code></pre>
-<p>A noter que le type de l&apos;expression est <code>int lazy_t</code></p>
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> lazy_expr <span class='k'>=</span> <span class='k'>lazy</span> (1<span class='o'>/</span>0)<span class='o'>;;</span>
+<span class='k'>val</span> lazy_expr <span class='o'>:</span> int lazy_t <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>lazy</span><span class='o'>&#62;</span>
+</code></pre>
+<p>
+A noter que le type de l&apos;expression est <code>int lazy_t</code></p>
 <p>Parce que <code>give_me_a_three</code> prend un <code>&apos;a</code> (tout type) nous pouvons passé
 cette expression à la fonction :</p>
-<pre><code># give_me_a_three lazy_expr;;
-- : int = 3;;</code></pre>
-<p>Pour évaluer une expression paresseuse, nous devons utiliser la fonction
+<pre><code class='ocaml'><span class='o'>#</span> give_me_a_three lazy_expr<span class='o'>;;</span>
+<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 3<span class='o'>;;</span>
+</code></pre>
+<p>
+Pour évaluer une expression paresseuse, nous devons utiliser la fonction
 <code>Lazy.force</code> :</p>
-<pre><code># Lazy.force lazy_expr;;
-Exception : Division_by_zero.</code></pre>
-<h2 id="Boxedvsunboxedtypes">Boxed vs. unboxed types</h2>
-<p>(NDT: trouver une traduction correcte pour «boxed» et «unboxed»)</p>
+<pre><code class='ocaml'><span class='o'>#</span> <span class='m'>Lazy</span><span class='o'>.</span>force lazy_expr<span class='o'>;;</span>
+Exception <span class='o'>:</span> <span class='m'>Division_by_zero</span><span class='o'>.</span>
+</code></pre>
+<h2 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h2><p>
+
+(NDT: trouver une traduction correcte pour «boxed» et «unboxed»)</p>
 <p>Un terme qu&apos;on entend beaucoup lorsqu&apos;on parle de langages fonctionnels
 est «boxed». J&apos;étais très confus lorsque j&apos;ai entendu ce terme pour la
 première fois, mais en fait la distinction entre types «boxed» et
@@ -338,21 +382,23 @@ avant (en Perl tout est «boxed»).</p>
 <p>La façon de voir un objet «boxed» est de penser à un objet qui a été
 alloué dans le tas en utilisant <code>malloc()</code> en C (ou <code>new</code> en C++), et/ou
 qui est y est réferré via un pointeur. Prenons ce programme C :</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre><code class='ocaml'><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
 
-void printit (int* ptr) {
-    printf(&quot;the number is %d&#92;n&quot;, *ptr);
-}
+void printit (int<span class='o'>*</span> ptr) <span class='o'>/span>
+    printf(<span class='s'>&#34;the number is %d\n&#34;</span><span class='o'>,</span> <span class='o'>*</span>ptr)<span class='o'>;</span>
+<span class='o'</span>
 
-int main () {
-    int a = 3;
-    int *p = &amp;a;
+int main () <span class='o'>/span>
+    int a <span class='k'>=</span> 3<span class='o'>;</span>
+    int <span class='o'>*</span>p <span class='k'>=</span> <span class='o'>&#38;</span>a<span class='o'>;</span>
 
-    printit (p);
+    printit (p)<span class='o'>;</span>
 
-    return 0;
-}</code></pre>
-<p>La variable <code>a</code> est allouée dans la pile, et est clairement «unboxed».</p>
+    return 0<span class='o'>;</span>
+<span class='o'</span>
+</code></pre>
+<p>
+La variable <code>a</code> est allouée dans la pile, et est clairement «unboxed».</p>
 <p>La fonction <code>printit()</code> prends un entier «boxed» et l&apos;affiche.</p>
 <p>Le diagramme ci-dessous (NDT: non-existant à l&apos;écriture de la
 traduction) montre un tableau de «unboxed» (en haut) face à des entiers

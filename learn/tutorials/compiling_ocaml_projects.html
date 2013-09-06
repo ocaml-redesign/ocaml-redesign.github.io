@@ -46,15 +46,15 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="CompilingOCamlprojects">Compiling OCaml projects</h1>
-<p>This tutorial describes the base compilation commands provided with
+            <h1 id="CompilingOCamlprojects"> Compiling OCaml projects</h1><p>
+This tutorial describes the base compilation commands provided with
 OCaml. It is useful to learn these commands to understand OCaml&apos;s
 compilation model. However, eventually you will want to use a build tool
 that automatically calls these commands internally. See <a href='../dev_tools.html#compilation_tools'>Compilation
 Tools</a> for more information on the
 available options.</p>
-<h2 id="Compilationbasics">Compilation basics</h2>
-<p>The core OCaml distribution provides the <code>ocamlc</code> and <code>ocamlopt</code>
+<h2 id="Compilationbasics"> Compilation basics</h2><p>
+The core OCaml distribution provides the <code>ocamlc</code> and <code>ocamlopt</code>
 compilers. Using them directly is fine, but if you are using third party
 libraries, you should use the <code>ocamlfind</code> front-end, since it saves you
 from worrying about where libraries have been installed on your
@@ -66,8 +66,8 @@ only ocamlc or ocamlopt. Then we will see how to use libraries and how
 to take advantage of the
 <a href='http://www.ocaml-programming.de/programming/findlib.html' title='http://www.ocaml-programming.de/programming/findlib.html'>findlib</a>
 system, which provides the <code>ocamlfind</code> command.</p>
-<h3 id="ocamlcandocamlopt"> <code>ocamlc</code> and <code>ocamlopt</code></h3>
-<p><code>ocamlc</code> is the bytecode compiler, and <code>ocamlopt</code> is the native code
+<h3 id="ocamlcandocamlopt"> <code>ocamlc</code> and <code>ocamlopt</code></h3><p>
+<code>ocamlc</code> is the bytecode compiler, and <code>ocamlopt</code> is the native code
 compiler. If you don&apos;t know which one to use, use <code>ocamlopt</code> since it
 provides standalone executables that are normally faster than bytecode.</p>
 <p>Let&apos;s assume that your program <code>progprog</code> has two source files,
@@ -75,8 +75,10 @@ provides standalone executables that are normally faster than bytecode.</p>
 using <code>ocamlopt</code>. For now, we also assume that they do not use any other
 library than the standard library, which is automatically loaded. You
 can compile the program in one single step:</p>
-<pre><code>ocamlopt -o progprog module1.ml module2.ml</code></pre>
-<p>That&apos;s it. The compiler produced an executable named <code>progprog</code> or
+<pre><code class='ocaml'>ocamlopt <span class='o'>-</span>o progprog module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+</code></pre>
+<p>
+That&apos;s it. The compiler produced an executable named <code>progprog</code> or
 <code>progprog.exe</code>. If you are wondering how to write a program in multiple
 files, see our <a href='modules.html' title='Modules'>Modules</a> tutorial. Don&apos;t forget
 that the order of the source files matters, and that <code>module1.ml</code> cannot
@@ -103,8 +105,10 @@ to 3D graphics. You must understand the following:</p>
 
 <p>If your program uses only the unix library (provides system calls not
 only for Unix systems), the command line would be:</p>
-<pre><code>ocamlopt -o progprog unix.cmxa module1.ml module2.ml</code></pre>
-<p><code>.cmxa</code> is the extension of native code libraries, while <code>.cma</code> is the
+<pre><code class='ocaml'>ocamlopt <span class='o'>-</span>o progprog unix<span class='o'>.</span>cmxa module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+</code></pre>
+<p>
+<code>.cmxa</code> is the extension of native code libraries, while <code>.cma</code> is the
 extension of bytecode libraries. The file <code>unix.cmxa</code> is found because
 it is always installed at the same place as the standard library, and
 this directory is in the library search path.</p>
@@ -120,8 +124,8 @@ on which these libraries depend. Here, the bigarray library is needed by
 OCamlSDL. You must also pass the -I option to <code>ocamlopt</code> for each
 directory where they should be looked for. Since this information
 installation-dependent, we will use ocamlfind instead.</p>
-<h3 id="Usingtheocamlfindfrontend"> Using the <code>ocamlfind</code> front-end</h3>
-<p>Using <code>ocamlfind</code> is highly recommended for compiling any program or
+<h3 id="Usingtheocamlfindfrontend"> Using the <code>ocamlfind</code> front-end</h3><p>
+Using <code>ocamlfind</code> is highly recommended for compiling any program or
 library that uses third-party OCaml libraries. Library authors
 themselves should make their library installable with <code>ocamlfind</code> as
 well. If they don&apos;t, you may have to do it yourself, which is not very
@@ -130,35 +134,41 @@ the libraries you want to use have been installed properly with
 ocamlfind.</p>
 <p>You can see which packages and subpackages are available in your system
 by typing:</p>
-<pre><code>ocamlfind list</code></pre>
-<p>This shows the list of package names, with their version ID.</p>
+<pre><code class='ocaml'>ocamlfind list
+</code></pre>
+<p>
+This shows the list of package names, with their version ID.</p>
 <p>For our example using LablGL and OCamlSDL, we are going to use the
 following packages: lablGL, sdl, sdl.sdlimage, sdl.sdlmixer, sdl.sdlttf.
 The bigarray package is needed by the sdl package, but we don&apos;t need to
 worry about that since <code>ocamlfind</code> knows it.</p>
 <p>The command for compiling our program will be:</p>
-<pre><code>ocamlfind ocamlopt -o progprog -linkpkg &#92;
-  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf &#92;
-  module1.ml module2.ml</code></pre>
-<p>And it will work regardless of the location of the libraries, as long as
+<pre><code class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
+  <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
+  module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+</code></pre>
+<p>
+And it will work regardless of the location of the libraries, as long as
 they are known by <code>ocamlfind</code>.</p>
 <p>Note that you can compile the files separately. This is mostly useful if
 you want to recompile only some parts of the programs. Here are the
 equivalent commands that perform a separate compilation of the source
 files and link them together in a final step:</p>
-<pre><code>ocamlfind ocamlopt -c &#92;
-  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf &#92;
-  module1.ml
-ocamlfind ocamlopt -c &#92;
-  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf &#92;
-  module2.ml
-ocamlfind ocamlopt -o progprog -linkpkg &#92;
-  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf &#92;
-  module1.cmx module2.cmx</code></pre>
-<p>Separate compilation is usually not performed manually but only when
+<pre><code class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
+  <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
+  module1<span class='o'>.</span>ml
+ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
+  <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
+  module2<span class='o'>.</span>ml
+ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
+  <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
+  module1<span class='o'>.</span>cmx module2<span class='o'>.</span>cmx
+</code></pre>
+<p>
+Separate compilation is usually not performed manually but only when
 using a Makefile that will take care of recompiling only what it
 necessary. See next section.</p>
-<h2 id="Automatedbuildsystems">Automated build systems</h2>
+<h2 id="Automatedbuildsystems"> Automated build systems</h2>
           </div>
         </div>
       </div>

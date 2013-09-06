@@ -46,24 +46,25 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="Camlp4310staticfunctorexample">Camlp4 3.10: static functor example</h1>
-<p>static_functor_example.ml</p>
-<pre><code>type t1 = A | B
-type t2 = Foo of string * t1
-open Camlp4.PreCast
-module Lexer = struct
-  ... if you need a different lexer ...
-end
-module Gram = MakeGram(Lexer)
-let foo = Gram.Entry.mk &quot;foo&quot;
-let foo = Gram.Entry.mk &quot;foo&quot;
+            <h1 id="Camlp4310staticfunctorexample"> Camlp4 3.10: static functor example</h1><p>
+static_functor_example.ml</p>
+<pre><code class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
+<span class='k'>type</span> t2 <span class='k'>=</span> Foo <span class='k'>of</span> string <span class='o'>*</span> t1
+<span class='k'>open</span> <span class='m'>Camlp4</span><span class='o'>.</span>PreCast
+<span class='k'>module</span> Lexer <span class='k'>=</span> <span class='k'>struct</span>
+  <span class='o'>...</span> <span class='k'>if</span> you need a different lexer <span class='o'>...</span>
+<span class='k'>end</span>
+<span class='k'>module</span> Gram <span class='k'>=</span> MakeGram(Lexer)
+<span class='k'>let</span> foo <span class='k'>=</span> <span class='m'>Gram</span><span class='o'>.</span><span class='m'>Entry</span><span class='o'>.</span>mk <span class='s'>&#34;foo&#34;</span>
+<span class='k'>let</span> foo <span class='k'>=</span> <span class='m'>Gram</span><span class='o'>.</span><span class='m'>Entry</span><span class='o'>.</span>mk <span class='s'>&#34;foo&#34;</span>
 EXTEND Gram
-  GLOBAL: foo;
-  foo: [ [ &quot;foo&quot;; i = LIDENT; b = bar -&gt; Foo(i, b) ] ];
-  bar: [ [ &quot;?&quot; -&gt; A | &quot;.&quot; -&gt; B ] ];
-END;;
-Gram.parse_string foo (Loc.mk &quot;&lt;string&gt;&quot;) &quot;foo x?&quot; = Foo(&quot;x&quot;, A)
-DELETE_RULE Gram foo: &quot;foo&quot;; LIDENT; bar END
+  GLOBAL<span class='o'>:</span> foo<span class='o'>;</span>
+  foo<span class='o'>:</span> <span class='o'>[</span> <span class='o'>[</span> <span class='s'>&#34;foo&#34;</span><span class='o'>;</span> i <span class='k'>=</span> LIDENT<span class='o'>;</span> b <span class='k'>=</span> bar <span class='k'>-></span> Foo(i<span class='o'>,</span> b) <span class='o'>]</span> <span class='o'>]</span><span class='o'>;</span>
+  bar<span class='o'>:</span> <span class='o'>[</span> <span class='o'>[</span> <span class='s'>&#34;?&#34;</span> <span class='k'>-></span> A <span class='o'>|</span> <span class='s'>&#34;.&#34;</span> <span class='k'>-></span> B <span class='o'>]</span> <span class='o'>]</span><span class='o'>;</span>
+END<span class='o'>;;</span>
+<span class='m'>Gram</span><span class='o'>.</span>parse_string foo (<span class='m'>Loc</span><span class='o'>.</span>mk <span class='s'>&#34;&#60;string&#62;&#34;</span>) <span class='s'>&#34;foo x?&#34;</span> <span class='k'>=</span> Foo(<span class='s'>&#34;x&#34;</span><span class='o'>,</span> A)
+DELETE_RULE Gram foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span><span class='o'>;</span> LIDENT<span class='o'>;</span> bar END
+
 </code></pre>
 
           </div>

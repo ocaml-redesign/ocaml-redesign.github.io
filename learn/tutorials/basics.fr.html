@@ -46,16 +46,18 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="Notionsdebase">Notions de base</h1>
-<h2 id="Commentaires">Commentaires</h2>
-<p>Les commentaires OCaml sont délimités par <code>(*</code> et <code>*)</code>, comme ceci:</p>
-<pre><code>(* Ceci est une ligne de commentaire. *)
+            <h1 id="Notionsdebase"> Notions de base</h1><h2 id="Commentaires"> Commentaires</h2><p>
 
-(* Ceci est
- * un commentaire
- * multi-ligne.
- *)</code></pre>
-<p>Autrement dit, les commentaires ressemblent fortement aux commentaires
+Les commentaires OCaml sont délimités par <code>(*</code> et <code>*)</code>, comme ceci:</p>
+<pre><code class='ocaml'><span class='com2'>(* Ceci est une ligne de commentaire<span class='ic'>.</span> *)</span><!-- end comment -->
+
+<span class='com2'>(* Ceci est</span>
+<span class='com2'> <span class='ic'>*</span> un commentaire</span>
+<span class='com2'> <span class='ic'>*</span> multi<span class='ic'>-</span>ligne<span class='ic'>.</span></span>
+<span class='com2'> *)</span><!-- end comment -->
+</code></pre>
+<p>
+Autrement dit, les commentaires ressemblent fortement aux commentaires
 du C traditionnel (<code>/* ... */</code>).</p>
 <p>Il n&apos;y a pas actuellement de syntaxe pour les commentaires de fin de
 ligne comme <code># ...</code> en Perl ou <code>// ...</code> en C99/C++/Java. L&apos;emploi de
@@ -63,28 +65,34 @@ ligne comme <code># ...</code> en Perl ou <code>// ...</code> en C99/C++/Java. L
 l&apos;équipe d&apos;OCaml d&apos;ajouter ça dans les versions à venir.</p>
 <p>OCaml prend en compte les commentaires imbriqués, ce qui permet
 facilement de mettre des portions de code en commentaire:</p>
-<pre><code>(* Ce code n&apos;est pas au point...
+<pre><code class='ocaml'><span class='com2'>(* Ce code n'est pas au point<span class='ic'>...</span></span>
+<span class='com2'></span>
+<span class='com2'><span class='other'>(* Test de primalité<span class='other'>.</span> *)</span></span>
+<span class='com2'><span class='ic'>let</span> is_prime n <span class='ic'>=</span></span>
+<span class='com2'>  <span class='other'>(* pense<span class='other'>-</span>bête<span class='other'>:</span> demander ça aux mailing lists *)</span> XXX<span class='ic'>;;</span></span>
+<span class='com2'></span>
+<span class='com2'>*)</span><!-- end comment -->
+</code></pre>
+<h2 id="Appelsdefonctions"> Appels de fonctions</h2><p>
 
-(* Test de primalité. *)
-let is_prime n =
-  (* pense-bête: demander ça aux mailing lists *) XXX;;
-
-*)</code></pre>
-<h2 id="Appelsdefonctions">Appels de fonctions</h2>
-<p>Supposons que vous ayez écrit une fonction nommée <code>repeated</code>, qui prend
+Supposons que vous ayez écrit une fonction nommée <code>repeated</code>, qui prend
 en argument une chaîne de caractères <code>s</code> et un nombre <code>n</code> et renvoie une
 nouvelle chaîne de caractères qui contient l&apos;originale répétée <code>n</code> fois.</p>
 <p>Dans la plupart des languages dérivés du C, un appel de fonction
 ressemble à ça :</p>
-<pre><code>repeated (&quot;hello&quot;, 3)  /* c&apos;est du code C */</code></pre>
-<p>Ca veut dire « appelle la fonction <code>repeated</code> avec deux arguments, le
+<pre><code class='ocaml'>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> c'est du code C <span class='o'>*/</span>
+</code></pre>
+<p>
+Ca veut dire « appelle la fonction <code>repeated</code> avec deux arguments, le
 premier étant la chaîne de caractères hello et le second étant le nombre
 3 ».</p>
 <p>OCaml, tout comme d&apos;autres langages fonctionnels, écrit et parenthèse
 différemment les appels de fonctions, ce qui entraîne bien des erreurs
 au début. Voici le même appel de fonction en OCaml :</p>
-<pre><code>repeated &quot;hello&quot; 3  (* c&apos;est du code OCaml *)</code></pre>
-<p>Notez-bien : <strong>pas</strong> de parenthèses, et <strong>pas</strong> de virgule entre les
+<pre><code class='ocaml'>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* c'est du code OCaml *)</span><!-- end comment -->
+</code></pre>
+<p>
+Notez-bien : <strong>pas</strong> de parenthèses, et <strong>pas</strong> de virgule entre les
 arguments.</p>
 <p>Maintenant ce qui est source de confusion est que
 <code>repeated (&quot;hello&quot;, 3)</code> <strong>a un sens</strong> particulier en OCaml. Cela
@@ -101,34 +109,42 @@ fonctions.</p>
 qui demande à l&apos;utilisateur de taper quelque chose et renvoie la chaîne
 de caractère ainsi entrée. Nous voulons passer cette chaîne de
 caractères à la fonction <code>repeated</code>. Voici les versions C et OCaml :</p>
-<pre><code>/* code C: */
-repeated (get_string_from_user (&quot;Veuillez entrer une chaîne de caractères.&quot;), 3)
+<pre><code class='ocaml'><span class='o'>/*</span> code C<span class='o'>:</span> <span class='o'>*/</span>
+repeated (get_string_from_user (<span class='s'>&#34;Veuillez entrer une chaîne de caractères.&#34;</span>)<span class='o'>,</span> 3)
 
-(* code OCaml: *)
-repeated (get_string_from_user &quot;Veuillez entrer une chaîne de caractères.&quot;) 3</code></pre>
-<p>Soyez attentif au parenthésage et à l&apos;absence de virgules. En général la
+<span class='com2'>(* code OCaml<span class='ic'>:</span> *)</span><!-- end comment -->
+repeated (get_string_from_user <span class='s'>&#34;Veuillez entrer une chaîne de caractères.&#34;</span>) 3
+</code></pre>
+<p>
+Soyez attentif au parenthésage et à l&apos;absence de virgules. En général la
 règle est la suivante : « mettez des parenthèses autour de tout l&apos;appel
 de fonction - ne mettez pas de parenthèses autour des arguments passés à
 une fonction ». Voici quelques exemples supplémentaires :</p>
-<pre><code>f 5 (g &quot;hello&quot;) 3    (* f a 3 arguments, g a un argument *)
-f (g 3 4)            (* f a un argument, g a 2 arguments *)
+<pre><code class='ocaml'>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f a 3 arguments<span class='ic'>,</span> g a un argument *)</span><!-- end comment -->
+f (g 3 4)            <span class='com2'>(* f a un argument<span class='ic'>,</span> g a 2 arguments *)</span><!-- end comment -->
 
-# repeated (&quot;hello&quot;, 3);;     (* OCaml va repérer l&apos;erreur *)
-This expression has type string * int but is here used with type string</code></pre>
-<h2 id="Dfinirunefonction">Définir une fonction</h2>
-<p>Vous savez tous comment on définit une fonction (ou une méthode
+<span class='o'>#</span> repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)<span class='o'>;;</span>     <span class='com2'>(* OCaml va repérer l'erreur *)</span><!-- end comment -->
+This expression has <span class='k'>type</span> string <span class='o'>*</span> int but is here used <span class='k'>with</span> <span class='k'>type</span> string
+</code></pre>
+<h2 id="Dfinirunefonction"> Définir une fonction</h2><p>
+
+Vous savez tous comment on définit une fonction (ou une méthode
 statique, pour ceux qui pensent en Java) dans d&apos;autres langages. Comment
 fait-on ça en OCaml ?</p>
 <p>La syntaxe d&apos;OCaml est agréablement concise. Voici une fonction qui
 prend deux nombres flottants et calcule leur moyenne :</p>
-<pre><code>let average a b =
-  (a +. b) /. 2.0;;</code></pre>
-<p>Tapez ceci dans le « toplevel » OCaml (sous Unix, tapez <code>ocaml</code> depuis
+<pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
+  (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
+</code></pre>
+<p>
+Tapez ceci dans le « toplevel » OCaml (sous Unix, tapez <code>ocaml</code> depuis
 le shell) et voici ce que vous verrez :</p>
-<pre><code># let average a b =
-  (a +. b) /. 2.0;;
-val average : float -&gt; float -&gt; float = &lt;fun&gt;</code></pre>
-<p>Si vous regardez la définition de fonction d&apos;un peu plus près, et aussi
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
+  (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
+<span class='k'>val</span> average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+</code></pre>
+<p>
+Si vous regardez la définition de fonction d&apos;un peu plus près, et aussi
 ce qu&apos;OCaml vous affiche, vous devez vous posez un certain nombre de
 questions :</p>
 <ul>
@@ -142,12 +158,14 @@ mais commençons plutôt par définir la même fonction en C (la version
 Java serait très semblable à la version C), et normalement ça devrait
 soulever encore plus d&apos;interrogations. Voici notre version C de
 <code>average</code>:</p>
-<pre><code>double
-average (double a, double b)
-{
-  return (a + b) / 2;
-}</code></pre>
-<p>Maintenant revenez sur la définition OCaml vue précédemment. Vous
+<pre><code class='ocaml'>double
+average (double a<span class='o'>,</span> double b)
+<span class='o'>/span>
+  return (a <span class='o'>+</span> b) <span class='o'>/</span> 2<span class='o'>;</span>
+<span class='o'</span>
+</code></pre>
+<p>
+Maintenant revenez sur la définition OCaml vue précédemment. Vous
 devriez vous demander :</p>
 <ul>
  <li>Pourquoi n&apos;a-t-on pas besoin de définir les types de <code>a</code> et <code>b</code> dans
@@ -186,18 +204,20 @@ devriez vous demander :</p>
 
 <p>Les détails sur tout ça vont être expliqués dans les sections et
 chapitres qui suivent.</p>
-<h2 id="Typesdebase">Types de base</h2>
-<p>En OCaml les types de base sont:</p>
-<pre><code>Type OCaml     Intervalle de définition
+<h2 id="Typesdebase"> Types de base</h2><p>
+En OCaml les types de base sont:</p>
+<pre><code class='ocaml'>Type OCaml     Intervalle de définition
 
-int            Entier avec signe 31 bits (environ +/- 1 milliard) avec processeurs 32 bits
+int            Entier avec signe 31 bits (environ <span class='o'>+/-</span> 1 milliard) avec processeurs 32 bits
                ou bien 63 bits avec processeurs 64 bits
-float          Nombre à virgule flottante double-précision IEEE, équivalent au type double du C
-bool           Un booléen, noté true (vrai) ou false (faux)
+float          Nombre à virgule flottante double<span class='o'>-</span>précision IEEE<span class='o'>,</span> équivalent au <span class='k'>type</span> double du C
+bool           Un booléen<span class='o'>,</span> noté <span class='o'>true</span> (vrai) ou <span class='o'>false</span> (faux)
 char           Un caractère à 8 bits
 string         Une chaîne de caractères à 8 bits
-unit           Valeur unique notée ()</code></pre>
-<p>Un des bits de chaque <code>int</code> est utilisé en interne par OCaml pour la
+unit           Valeur unique notée ()
+</code></pre>
+<p>
+Un des bits de chaque <code>int</code> est utilisé en interne par OCaml pour la
 gestion de la mémoire (garbage collection ou récupération automatique de
 mémoire). C&apos;est pourquoi le type <code>int</code> a 31 bits au lieu de 32 (63 si
 vous utilisez une plate-forme 64 bits). En pratique ce n&apos;est un problème
@@ -226,8 +246,8 @@ Unicode et leurs différents encodages.</p>
 représentation interne qui est particulièrement efficace.</p>
 <p>Le type <code>unit</code> est en quelque sorte l&apos;équivalent de <code>void</code> en C, nous en
 reparlerons plus tard.</p>
-<h2 id="Conversionsdetypesimplicitesouexplicites">Conversions de types implicites ou explicites</h2>
-<p>Dans les langages dérivés du C, les ints se retrouvent convertis en
+<h2 id="Conversionsdetypesimplicitesouexplicites"> Conversions de types implicites ou explicites</h2><p>
+Dans les langages dérivés du C, les ints se retrouvent convertis en
 flottants dans certaines circonstances. Par exemple si vous écrivez
 <code>1 + 2.5</code> le premier argument (qui est un entier) est converti en
 flottant, et le résultat est également un flottant. C&apos;est comme si vous
@@ -236,23 +256,29 @@ aviez écrit <code>((double) 1) + 2.5</code>, mais cela s&apos;est fait implicit
 En OCaml, <code>1 + 2.5</code> est une erreur de type. L&apos;opérateur <code>+</code> en OCaml
 requiert deux arguments entiers, et si on lui donne un int et un float,
 il indique cette erreur :</p>
-<pre><code># 1 + 2.5;;
-      ^^^
-This expression has type float but is here used with type int</code></pre>
-<p>Cela signifie &quot;ceci est un float, mais ici j&apos;attendais un int&quot;.</p>
+<pre><code class='ocaml'><span class='o'>#</span> 1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
+      <span class='o'>^^^</span>
+This expression has <span class='k'>type</span> float but is here used <span class='k'>with</span> <span class='k'>type</span> int
+</code></pre>
+<p>
+Cela signifie &quot;ceci est un float, mais ici j&apos;attendais un int&quot;.</p>
 <p>Pour ajouter deux floats, il faut utiliser un opérateur différent, <code>+.</code>
 (notez le point qui suit le plus).</p>
 <p>OCaml ne convertit pas les ints en floats automatiquement, donc le code
 suivant est également incorrect :</p>
-<pre><code># 1 +. 2.5;;
-  ^
-This expression has type int but is here used with type float</code></pre>
-<p>Dans ce cas OCaml se plaint du premier argument.</p>
+<pre><code class='ocaml'><span class='o'>#</span> 1 <span class='o'>+.</span> 2.5<span class='o'>;;</span>
+  <span class='o'>^</span>
+This expression has <span class='k'>type</span> int but is here used <span class='k'>with</span> <span class='k'>type</span> float
+</code></pre>
+<p>
+Dans ce cas OCaml se plaint du premier argument.</p>
 <p>Comment faire alors si on veut vraiment ajouter un int à un float ?
 (Supposons qu&apos;ils soient stockés dans des variables appelées <code>i</code> et
 <code>f</code>). En OCaml la conversion doit être explicite :</p>
-<pre><code>float_of_int i +. f;;</code></pre>
-<p><code>float_of_int</code> est une fonction qui prend un <code>int</code> et renvoie un
+<pre><code class='ocaml'>float_of_int i <span class='o'>+.</span> f<span class='o'>;;</span>
+</code></pre>
+<p>
+<code>float_of_int</code> est une fonction qui prend un <code>int</code> et renvoie un
 <code>float</code>. Il y a toute une collection de fonctions de ce genre, comme par
 exemple <code>int_of_float</code>, <code>char_of_int</code>, <code>int_of_char</code>, <code>string_of_int</code> et
 ainsi de suite, et elle font essentiellement ce qu&apos;on attend d&apos;elles.</p>
@@ -260,11 +286,13 @@ ainsi de suite, et elle font essentiellement ce qu&apos;on attend d&apos;elles.<
 particulièrement courante, la fonction <code>float_of_int</code> a également un
 autre nom, plus court : l&apos;exemple ci-dessus aurait pu simplement être
 écrit</p>
-<pre><code>float i +. f;;</code></pre>
-<p>(Remarquez bien que contrairement au C, en OCaml il est parfaitement
+<pre><code class='ocaml'>float i <span class='o'>+.</span> f<span class='o'>;;</span>
+</code></pre>
+<p>
+(Remarquez bien que contrairement au C, en OCaml il est parfaitement
 possible qu&apos;un type et qu&apos;une fonction portent le même nom.)</p>
-<h3 id="Quaposestcequiestmieuxconversionimpliciteouexplicite"> Qu&apos;est-ce qui est mieux, conversion implicite ou explicite ?</h3>
-<p>Vous être peut-être en train de vous dire que ces conversions explicites
+<h3 id="Quaposestcequiestmieuxconversionimpliciteouexplicite"> Qu&apos;est-ce qui est mieux, conversion implicite ou explicite ?</h3><p>
+Vous être peut-être en train de vous dire que ces conversions explicites
 sont lourdes, peut-être même qu&apos;elles font perdre du temps, et c&apos;est
 justifié, mais il y a au moins deux arguments en leur faveur.
 Premièrement, OCaml a besoin de cette conversion explicite pour
@@ -278,15 +306,17 @@ temps à vous demander où les conversions ont lieu. Les rendre explicites
 vous aide donc pour le débuggage. Troisièmement, certaines conversions
 (notamment int &#92;&lt;-&#92;&gt; float) sont vraiment des opérations coûteuses. Cela
 ne vous rapporte pas grand-chose de les cacher.</p>
-<h2 id="Fonctionsordinairesetfonctionsrcursives">Fonctions ordinaires et fonctions récursives</h2>
-<p>Contrairement au langage C et ses dérivés, une fonction en OCaml n&apos;est
+<h2 id="Fonctionsordinairesetfonctionsrcursives"> Fonctions ordinaires et fonctions récursives</h2><p>
+Contrairement au langage C et ses dérivés, une fonction en OCaml n&apos;est
 récursive que si vous le précisez en utilisant <code>let rec</code> au lieu de
 seulement <code>let</code>. Voici un exemple de fonction récursive :</p>
-<pre><code>let rec range a b =
-  if a &gt; b then []
-  else a :: range (a+1) b
-  ;;</code></pre>
-<p>Remarquez que <code>range</code> s&apos;appelle elle-même.</p>
+<pre><code class='ocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
+  <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
+  <span class='k'>else</span> a <span class='o'>::</span> range (a<span class='o'>+</span>1) b
+  <span class='o'>;;</span>
+</code></pre>
+<p>
+Remarquez que <code>range</code> s&apos;appelle elle-même.</p>
 <p>La seule différence entre <code>let</code> et <code>let rec</code> est au niveau de la
 visibilité du nom de la fonction. Si la fonction ci-dessus avait été
 définie avec <code>let</code> tout seul, alors l&apos;appel à <code>range</code> aurait essayé de
@@ -296,42 +326,56 @@ performance entre les fonctions définies avec <code>let</code> et celles défin
 avec <code>let rec</code>, donc si vous préférez vous pouvez toujours utiliser la
 forme <code>let rec</code> et vous aurez ainsi la même sémantique qu&apos;en C et
 dérivés.</p>
-<h2 id="Typesdesfonctions">Types des fonctions</h2>
-<p>Du fait de l&apos;inférence de type, vous n&apos;aurez presque jamais à écrire le
+<h2 id="Typesdesfonctions"> Types des fonctions</h2><p>
+Du fait de l&apos;inférence de type, vous n&apos;aurez presque jamais à écrire le
 type de vos fonctions. Cependant OCaml affiche fréquemment ce qu&apos;il
 pense être le type de vos fonctions, donc il vous faut connaître la
 syntax qu&apos;il utilise. Pour une fonction <code>f</code> qui prend comme arguments
 <code>arg1</code>, <code>arg2</code>, ... <code>argn</code>, et retourne quelque chose de type <code>rettype</code>,
 le compilateur affichera :</p>
-<pre><code>f : arg1 -&gt; arg2 -&gt; ... -&gt; argn -&gt; rettype</code></pre>
-<p>Cette syntaxe avec des flèches peut vous paraître étrange pour
+<pre><code class='ocaml'>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
+</code></pre>
+<p>
+Cette syntaxe avec des flèches peut vous paraître étrange pour
 l&apos;instant, mais lorsque nous parlerons de l&apos;application partielle, vous
 verrez pourquoi ça a été choisi comme ça. Pour le moment, voici
 simplement quelques exemples.</p>
 <p>Notre fonction <code>repeated</code> qui prend une chaîne de caractères et un
 entier et renvoie une chaîne de caractères a le type suivant :</p>
-<pre><code>repeated : string -&gt; int -&gt; string</code></pre>
-<p>Notre fonction <code>average</code> qui prend deux flottants et renvoie un flottant
+<pre><code class='ocaml'>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
+</code></pre>
+<p>
+Notre fonction <code>average</code> qui prend deux flottants et renvoie un flottant
 a le type suivant :</p>
-<pre><code>average : float -&gt; float -&gt; float</code></pre>
-<p>La fonction de conversion OCaml standard <code>int_of_char</code> a le type suivant
+<pre><code class='ocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+</code></pre>
+<p>
+La fonction de conversion OCaml standard <code>int_of_char</code> a le type suivant
 :</p>
-<pre><code>int_of_char : char -&gt; int</code></pre>
-<p>Si une fonction ne renvoie rien (<code>void</code> pour les programmeurs C et
+<pre><code class='ocaml'>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
+</code></pre>
+<p>
+Si une fonction ne renvoie rien (<code>void</code> pour les programmeurs C et
 Java), on écrit qu&apos;elle renvoie le type <code>unit</code>. Voici par exemple
 l&apos;équivalent OCaml de <code>fputc</code> :</p>
-<pre><code>output_char : out_channel -&gt; char -&gt; unit</code></pre>
-<h3 id="Fonctionspolymorphes"> Fonctions polymorphes</h3>
-<p>Voyons maintenant quelqu&apos;un d&apos;un peu plus étrange. Que pensez-vous d&apos;une
+<pre><code class='ocaml'>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
+</code></pre>
+<h3 id="Fonctionspolymorphes"> Fonctions polymorphes</h3><p>
+
+Voyons maintenant quelqu&apos;un d&apos;un peu plus étrange. Que pensez-vous d&apos;une
 fonction qui prend <em>n&apos;importe quoi</em> comme argument ? Voici une fonction
 bizarre qui prend un argument, l&apos;ignore et renvoie toujours 3 :</p>
-<pre><code>let give_me_a_three x = 3;;</code></pre>
-<p>Quel est le type de cette fonction ? En OCaml on utilise une notation
+<pre><code class='ocaml'><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3<span class='o'>;;</span>
+</code></pre>
+<p>
+Quel est le type de cette fonction ? En OCaml on utilise une notation
 spéciale pour dire « le type que vous voulez ». C&apos;est un caractères
 apostrophe suivi d&apos;une lettre. Le type de la fonction ci-dessus s&apos;écrit
 donc normalement comme ceci :</p>
-<pre><code>give_me_a_three : &apos;a -&gt; int</code></pre>
-<p>où <code>&apos;a</code> est mis pour n&apos;importe quel type. Vous pouvez par exemple
+<pre><code class='ocaml'>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
+</code></pre>
+<p>
+où <code>&apos;a</code> est mis pour n&apos;importe quel type. Vous pouvez par exemple
 utiliser cette fonction comme ceci: <code>give_me_a_three &quot;foo&quot;</code>, ou comme
 cela: <code>give_me_a_three 2.0</code>, et les deux sont tout-à-fait valides en
 OCaml.</p>
@@ -339,8 +383,8 @@ OCaml.</p>
 mais elles sont vraiment très utiles et très communes, nous en parlerons
 plus tard. (nous verrons que c&apos;est un peu comme les templates en C++ ou
 les generics en Java 1.5).</p>
-<h2 id="Infrencedetypes">Inférence de types</h2>
-<p>Donc le thème de ce tutoriel est que les langages fonctionnels ont un
+<h2 id="Infrencedetypes"> Inférence de types</h2><p>
+Donc le thème de ce tutoriel est que les langages fonctionnels ont un
 tas de Fonctionnalités Vraiment Cool, et OCaml est un langage qui a tous
 ces Trucs Bien Sympas en même temps, ce qui en fait un langage très
 pratique pour les programmeurs. Mais le plus bizarre est sans doute que
@@ -358,10 +402,12 @@ a probablement que les gourous qui auront éventuellement besoin de
 pratiquer ce genre de sport.</p>
 <p>Retournons maintenant à la fonction <code>average</code> que nous avions tapé ainsi
 dans le toplevel :</p>
-<pre><code># let average a b =
-  (a +. b) /. 2.0;;
-val average : float -&gt; float -&gt; float = &lt;fun&gt;</code></pre>
-<p>Oh merveille ! OCaml a deviné tout seul que la fonction prend deux
+<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
+  (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
+<span class='k'>val</span> average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
+</code></pre>
+<p>
+Oh merveille ! OCaml a deviné tout seul que la fonction prend deux
 arguments de type <code>float</code> et renvoie un <code>float</code>.</p>
 <p>Comment a-t-il fait ? Tout d&apos;abord il regarde où <code>a</code> et <code>b</code> sont
 utilisés, en l&apos;occurrence dans l&apos;expression <code>(a +. b)</code>. Ensuite, étant
@@ -372,8 +418,10 @@ type <code>float</code>.</p>
 valeur de retour de la fonction <code>average</code>. Donc <code>average</code> doit renvoyer
 un <code>float</code>. En conclusion, le type de <code>average</code> correspond à la
 signature suivante :</p>
-<pre><code>average : float -&gt; float -&gt; float</code></pre>
-<p>L&apos;inférence de types est bien sûr assez simple pour un programme aussi
+<pre><code class='ocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+</code></pre>
+<p>
+L&apos;inférence de types est bien sûr assez simple pour un programme aussi
 court, mais elle fonctionne aussi pour les programmes de grande taille.
 C&apos;est une des qualités majeures du langage parce que ça supprime toute
 une classe d&apos;erreurs qui produisent des segfaults,

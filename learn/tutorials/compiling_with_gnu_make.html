@@ -46,40 +46,44 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="CompilingwithGNUmake">Compiling with GNU make</h1>
-<h2 id="UsingGNUmakewithOCamlMakefile">Using GNU make with OCamlMakefile</h2>
-<p><a href='http://omake.metaprl.org/index.html' title='OCamlMakefile'>OCamlMakefile</a> is
+            <h1 id="CompilingwithGNUmake"> Compiling with GNU make</h1><h2 id="UsingGNUmakewithOCamlMakefile"> Using GNU make with OCamlMakefile</h2><p>
+
+<a href='http://omake.metaprl.org/index.html' title='OCamlMakefile'>OCamlMakefile</a> is
 a generic Makefile that greatly facilitates the process of compiling
 complex OCaml projects.</p>
 <p>For a basic OCaml program or library that doesn&apos;t use any library
 besides the standard library, just copy OCamlMakefile to the current
 directory and create the following Makefile:</p>
-<pre><code>RESULT = myprogram
-SOURCES = &#92;
-  mymodule1.mli mymodule1.ml &#92;
-  myparser.mli myparser.mly mylexer.mll mymodule2.ml &#92;
-  mymainprogram.ml
+<pre><code class='ocaml'>RESULT <span class='k'>=</span> myprogram
+SOURCES <span class='k'>=</span> <span class='o'>\</span>
+  mymodule1<span class='o'>.</span>mli mymodule1<span class='o'>.</span>ml <span class='o'>\</span>
+  myparser<span class='o'>.</span>mli myparser<span class='o'>.</span>mly mylexer<span class='o'>.</span>mll mymodule2<span class='o'>.</span>ml <span class='o'>\</span>
+  mymainprogram<span class='o'>.</span>ml
 
-OCAMLMAKEFILE = OCamlMakefile
-include $(OCAMLMAKEFILE)</code></pre>
-<p>This is already a fairly complex program which has 5 compilation units
+OCAMLMAKEFILE <span class='k'>=</span> OCamlMakefile
+<span class='k'>include</span> <span class='o'>$</span>(OCAMLMAKEFILE)
+</code></pre>
+<p>
+This is already a fairly complex program which has 5 compilation units
 and uses ocamlyacc and ocamllex. Only the source files must be given,
 except for the .mli files that are produced by ocamlyacc, myparser.mli
 in the example.</p>
 <p>The included OCamlMakefile provides a variety of targets. For details
 please refer to the documentation of OCamlMakefile, but here are the
 main ones:</p>
-<pre><code>nc     make a native code executable
+<pre><code class='ocaml'>nc     make a native code executable
 bc     make a bytecode executable
 ncl    make a native code library
 bcl    make a bytecode library
-libinstall    install library with ocamlfind
-libuninstall  uninstall library with ocamlfind
+libinstall    install library <span class='k'>with</span> ocamlfind
+libuninstall  uninstall library <span class='k'>with</span> ocamlfind
 top    make a custom toplevel from all your modules
-clean  remove everything that matches one of the files that could have been
-       automatically created by OCamlMakefile</code></pre>
-<h2 id="OCamlMakefilelibrariesCamlp4parsing">OCamlMakefile + libraries + Camlp4 parsing</h2>
-<p>The recommended tool for installing OCaml libraries is
+clean  remove everything that matches one <span class='k'>of</span> the files that could have been
+       automatically created by OCamlMakefile
+</code></pre>
+<h2 id="OCamlMakefilelibrariesCamlp4parsing"> OCamlMakefile + libraries + Camlp4 parsing</h2><p>
+
+The recommended tool for installing OCaml libraries is
 <a href='http://www.camlcity.org/archive/programming/findlib.html' title='Findlib'>Findlib</a>
 (ocamlfind command) since it knows where packages are installed, loads
 their dependencies and knows which file should be used in a given
@@ -88,22 +92,30 @@ situation.</p>
 by setting the LIBS and INCDIRS variable. LIBS is the list of the name
 of the library files (xxx.cma or xxx.cmxa) without the .cma or .cmxa
 extension:</p>
-<pre><code>LIBS = str unix</code></pre>
-<p>If you use non-standard libraries that are not installed in the same
+<pre><code class='ocaml'>LIBS <span class='k'>=</span> str unix
+</code></pre>
+<p>
+If you use non-standard libraries that are not installed in the same
 directory as the standard library, the INCDIRS variable must contain the
 list of these directories:</p>
-<pre><code>INCDIRS = /path/to/somelibdirectory/</code></pre>
-<p>Usually this requires some preliminary configuration as it is
+<pre><code class='ocaml'>INCDIRS <span class='k'>=</span> <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>somelibdirectory<span class='o'>/</span>
+</code></pre>
+<p>
+Usually this requires some preliminary configuration as it is
 traditionally performed with a configure script since the path can vary
 from one installation to another. An exception is when using standard
 directories which are not included in the search path by default such as
 /path/to/stdlib/camlp4. In this case, this should be enough and
 portable:</p>
-<pre><code>INCDIRS = +camlp4</code></pre>
-<p>OK, but we prefer libraries that are installed with ocamlfind. To use
+<pre><code class='ocaml'>INCDIRS <span class='k'>=</span> <span class='o'>+</span>camlp4
+</code></pre>
+<p>
+OK, but we prefer libraries that are installed with ocamlfind. To use
 them with OCamlMakefile, the PACKS variable must be set:</p>
-<pre><code>PACKS = netstring num</code></pre>
-<p>Note that libraries that not part of the standard library but are
+<pre><code class='ocaml'>PACKS <span class='k'>=</span> netstring num
+</code></pre>
+<p>
+Note that libraries that not part of the standard library but are
 shipped with any standard OCaml installation such as unix, str or
 bigarray are automatically considered as Findlib packages. Any package
 which is required by a given package (e.g. netstring requires unix and
@@ -112,28 +124,38 @@ pcre) is automatically loaded.</p>
 extensions, which are bytecode units that are loaded by the
 preprocessor. With OCamlMakefile, a preprocessor to be used can be
 defined in the first line of the file:</p>
-<pre><code>(*pp ...</code></pre>
-<p>So it could be something like:</p>
-<pre><code>(*pp camlp4o -I /path/to/pa_infix pa_infix.cmo *)</code></pre>
-<p>Well, this form is not very convenient, so we will use the same
+<pre><code class='ocaml'><span class='com2'>(*pp <span class='ic'>...</span></span>
+<span class='com2'></span></code></pre>
+<p>
+So it could be something like:</p>
+<pre><code class='ocaml'><span class='com2'>(*pp camlp4o <span class='ic'>-</span>I <span class='ic'>/</span>path<span class='ic'>/</span><span class='ic'>to</span><span class='ic'>/</span>pa_infix pa_infix<span class='ic'>.</span>cmo *)</span><!-- end comment -->
+</code></pre>
+<p>
+Well, this form is not very convenient, so we will use the same
 preprocessor for each file and store its value in the PP variable of the
 Makefile:</p>
-<pre><code>PP = camlp4o -I /path/to/pa_infix pa_infix.cmo
-export PP</code></pre>
-<p>So each OCaml file will start with:</p>
-<pre><code>(*pp $PP *)</code></pre>
-<p>This way of defining the preprocessor is still not satisfying: we would
+<pre><code class='ocaml'>PP <span class='k'>=</span> camlp4o <span class='o'>-</span>I <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>pa_infix pa_infix<span class='o'>.</span>cmo
+export PP
+</code></pre>
+<p>
+So each OCaml file will start with:</p>
+<pre><code class='ocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+</code></pre>
+<p>
+This way of defining the preprocessor is still not satisfying: we would
 like to take advantage of ocamlfind to load the appropriate syntax
 extension files. For this, we will use the <a href='http://martin.jambon.free.fr/ocaml.html' title='camlp4find script'>camlp4find
 script</a>.
 Every package which we use will listed as usual in the PACKS variable,
 and camlp4find will call ocamlfind to know which syntax extensions to
 load:</p>
-<pre><code>PACKS = unix micmatch_pcre &#92;
+<pre><code class='ocaml'>PACKS <span class='k'>=</span> unix micmatch_pcre <span class='o'>\</span>
    pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg
-PP = camlp4find $(PACKS)
-export PP</code></pre>
-<p><strong>Summary:</strong></p>
+PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
+export PP
+</code></pre>
+<p>
+<strong>Summary:</strong></p>
 <p>You need:</p>
 <ul>
  <li>GNU make
@@ -153,16 +175,19 @@ export PP</code></pre>
 
 <p>Full example using ocamllex and the unix and micmatch_pcre libraries.
 The Makefile file would be:</p>
-<pre><code>RESULT = myprogram
-SOURCES = mymodule1.mll mymodule2.mli mymodule2.ml mymainmodule.ml
-PACKS = unix micmatch_pcre
-PP = camlp4find $(PACKS)
+<pre><code class='ocaml'>RESULT <span class='k'>=</span> myprogram
+SOURCES <span class='k'>=</span> mymodule1<span class='o'>.</span>mll mymodule2<span class='o'>.</span>mli mymodule2<span class='o'>.</span>ml mymainmodule<span class='o'>.</span>ml
+PACKS <span class='k'>=</span> unix micmatch_pcre
+PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
 export PP
-CREATE_LIB = yes # ???
-OCAMLMAKEFILE = OCamlMakefile
-include $(OCAMLMAKEFILE)</code></pre>
-<p>And each .ml or .mli file starts with:</p>
-<pre><code>(*pp $PP *)
+CREATE_LIB <span class='k'>=</span> yes <span class='o'>#</span> <span class='o'>???</span>
+OCAMLMAKEFILE <span class='k'>=</span> OCamlMakefile
+<span class='k'>include</span> <span class='o'>$</span>(OCAMLMAKEFILE)
+</code></pre>
+<p>
+And each .ml or .mli file starts with:</p>
+<pre><code class='ocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+
 </code></pre>
 
           </div>

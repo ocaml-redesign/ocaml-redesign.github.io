@@ -46,9 +46,9 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="GarbageCollection">Garbage Collection</h1>
-<h2 id="Garbagecollectionreferencecountingexplicitallocation">Garbage collection, reference counting, explicit allocation</h2>
-<p>As with all modern languages, OCaml provides a garbage collector so that
+            <h1 id="GarbageCollection"> Garbage Collection</h1><h2 id="Garbagecollectionreferencecountingexplicitallocation"> Garbage collection, reference counting, explicit allocation</h2><p>
+
+As with all modern languages, OCaml provides a garbage collector so that
 you don&apos;t need to explicitly allocate and free memory as in C/C++.</p>
 <p>As JWZ writes in his <a href='http://www.jwz.org/doc/java.html' title='http://www.jwz.org/doc/java.html'>&quot;Java sucks&quot;
 rant</a>:</p>
@@ -86,8 +86,8 @@ to the major heap after some time, and the major heap is only collected
 infrequently.</p>
 <p>The OCaml GC is synchronous. It doesn&apos;t run in a separate thread, and it
 can only get called during an allocation request.</p>
-<h3 id="GCvsreferencecounting"> GC vs. reference counting</h3>
-<p>Perl has a form of garbage collection, but it uses a simple scheme
+<h3 id="GCvsreferencecounting"> GC vs. reference counting</h3><p>
+Perl has a form of garbage collection, but it uses a simple scheme
 called <strong>reference counting</strong>. Simply put, each Perl object keeps a
 count of the number of other objects pointing (referencing) itself. When
 the count falls to zero, nothing is pointing at this object, and so the
@@ -96,23 +96,27 @@ object can be freed.</p>
 computer scientists, yet it has one big practical advantage over full
 garbage collectors. With reference counting, you can avoid many explicit
 calls to <code>close</code>/<code>closedir</code> in code. For example:</p>
-<pre><code>foreach (@files)
-{
-  my $io = new IO::File &quot;&lt; $_&quot; or die;
-  # read from $io
-}</code></pre>
-<p>This Perl code iterates over a list of <code>@files</code>, opening and reading
+<pre><code class='ocaml'>foreach <span class='o'>(@</span>files)
+<span class='o'>/span>
+  my <span class='o'>$</span>io <span class='k'>=</span> <span class='k'>new</span> IO<span class='o'>::</span>File <span class='s'>&#34;&#60; $_&#34;</span> <span class='k'>or</span> die<span class='o'>;</span>
+  <span class='o'>#</span> read from <span class='o'>$</span>io
+<span class='o'</span>
+</code></pre>
+<p>
+This Perl code iterates over a list of <code>@files</code>, opening and reading
 each one. There is no need to close the <code>$io</code> file handle at the end of
 the loop. Because Perl uses reference counting, as soon as we reach the
 end of the loop, the <code>$io</code> variable goes out of scope, so the reference
 count on the file object goes to zero, and it is immediately freed (ie.
 closed).</p>
 <p>Consider the equivalent OCaml code:</p>
-<pre><code>let read_file filename =
-  let chan = open_in filename in
-  (* read from chan *) in
-List.iter read_file files</code></pre>
-<p>Calls to <code>read_file</code> open the file but don&apos;t close it. Because OCaml
+<pre><code class='ocaml'><span class='k'>let</span> read_file filename <span class='k'>=</span>
+  <span class='k'>let</span> chan <span class='k'>=</span> open_in filename <span class='k'>in</span>
+  <span class='com2'>(* read from chan *)</span><!-- end comment --> <span class='k'>in</span>
+<span class='m'>List</span><span class='o'>.</span>iter read_file files
+</code></pre>
+<p>
+Calls to <code>read_file</code> open the file but don&apos;t close it. Because OCaml
 uses a full garbage collector <code>chan</code> isn&apos;t collected until some time
 later when the minor heap becomes full. In addition, <strong>OCaml will not
 close the channel when it collects the handle&apos;s memory</strong>. So this
@@ -140,48 +144,52 @@ disadvantages of reference counting schemes:</p>
  try to implement the TSP in Perl!</li>
 </ul>
 
-<h2 id="TheGcmodule">The Gc module</h2>
-<p>The <code>Gc</code> module contains some useful functions for querying and calling
+<h2 id="TheGcmodule"> The Gc module</h2><p>
+The <code>Gc</code> module contains some useful functions for querying and calling
 the garbage collector from OCaml programs.</p>
 <p>Here is a program which runs and then prints out GC statistics just
 before quitting:</p>
-<pre><code>let rec iterate r x_init i =
-  if i = 1 then x_init
-  else
-    let x = iterate r x_init (i-1) in
-    r *. x *. (1.0 -. x)
+<pre><code class='ocaml'><span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
+  <span class='k'>if</span> i <span class='k'>=</span> 1 <span class='k'>then</span> x_init
+  <span class='k'>else</span>
+    <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
+    r <span class='o'>*.</span> x <span class='o'>*.</span> (1.0 <span class='o'>-.</span> x)
 
-let () =
-  Random.self_init ();
-  Graphics.open_graph &quot; 640x480&quot;
-  for x = 0 to 640 do
-    let r = 4.0 *. (float_of_int x) /. 640.0 in
-    for i = 0 to 39 do
-      let x_init = Random.float 1.0 in
-      let x_final = iterate r x_init 500 in
-      let y = int_of_float (x_final *. 480.) in
-      Graphics.plot x y
-    done
-  done;
-  read_line ();
-  Gc.print_stat stdout</code></pre>
-<p>Here is what it printed out for me:</p>
-<pre><code>minor_words: 115926165          # Total number of words allocated
-promoted_words: 31217           # Promoted from minor -&gt; major
-major_words: 31902              # Large objects allocated in major directly
-minor_collections: 3538         # Number of minor heap collections
-major_collections: 39           # Number of major heap collections
-heap_words: 63488               # Size of the heap, in words = approx. 256K
-heap_chunks: 1
-top_heap_words: 63488
-live_words: 2694
-live_blocks: 733
-free_words: 60794
-free_blocks: 4
-largest_free: 31586
-fragments: 0
-compactions: 0</code></pre>
-<p>We can see that minor heap collections are approximately 100 times more
+<span class='k'>let</span> () <span class='k'>=</span>
+  <span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;</span>
+  <span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span>
+  <span class='k'>for</span> x <span class='k'>=</span> 0 <span class='k'>to</span> 640 <span class='k'>do</span>
+    <span class='k'>let</span> r <span class='k'>=</span> 4.0 <span class='o'>*.</span> (float_of_int x) <span class='o'>/.</span> 640.0 <span class='k'>in</span>
+    <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
+      <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
+      <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
+      <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
+      <span class='m'>Graphics</span><span class='o'>.</span>plot x y
+    <span class='k'>done</span>
+  <span class='k'>done</span><span class='o'>;</span>
+  read_line ()<span class='o'>;</span>
+  <span class='m'>Gc</span><span class='o'>.</span>print_stat stdout
+</code></pre>
+<p>
+Here is what it printed out for me:</p>
+<pre><code class='ocaml'>minor_words<span class='o'>:</span> 115926165          <span class='o'>#</span> Total number <span class='k'>of</span> words allocated
+promoted_words<span class='o'>:</span> 31217           <span class='o'>#</span> Promoted from minor <span class='k'>-></span> major
+major_words<span class='o'>:</span> 31902              <span class='o'>#</span> Large objects allocated <span class='k'>in</span> major directly
+minor_collections<span class='o'>:</span> 3538         <span class='o'>#</span> Number <span class='k'>of</span> minor heap collections
+major_collections<span class='o'>:</span> 39           <span class='o'>#</span> Number <span class='k'>of</span> major heap collections
+heap_words<span class='o'>:</span> 63488               <span class='o'>#</span> Size <span class='k'>of</span> the heap<span class='o'>,</span> <span class='k'>in</span> words <span class='k'>=</span> approx<span class='o'>.</span> 256K
+heap_chunks<span class='o'>:</span> 1
+top_heap_words<span class='o'>:</span> 63488
+live_words<span class='o'>:</span> 2694
+live_blocks<span class='o'>:</span> 733
+free_words<span class='o'>:</span> 60794
+free_blocks<span class='o'>:</span> 4
+largest_free<span class='o'>:</span> 31586
+fragments<span class='o'>:</span> 0
+compactions<span class='o'>:</span> 0
+</code></pre>
+<p>
+We can see that minor heap collections are approximately 100 times more
 frequent than major heap collections (in this example, not necessarily
 in general). Over the lifetime of the program, an astonishing 440 MB of
 memory was allocated, although of course most of that would have been
@@ -192,12 +200,14 @@ heap.</p>
 <p>We can instruct the GC to print out debugging messages when one of
 several events happen (eg. on every major collection). Try adding the
 following code to the example above near the beginning:</p>
-<pre><code>Gc.set { (Gc.get ()) with Gc.verbose = 0x01 }</code></pre>
-<p>(We haven&apos;t seen the <code>{ expression with field = value }</code> form before,
+<pre><code class='ocaml'><span class='m'>Gc</span><span class='o'>.</span>set <span class='o'>/span> (<span class='m'>Gc</span><span class='o'>.</span>get ()) <span class='k'>with</span> <span class='m'>Gc</span><span class='o'>.</span>verbose <span class='k'>=</span> 0x01 <span class='o'</span>
+</code></pre>
+<p>
+(We haven&apos;t seen the <code>{ expression with field = value }</code> form before,
 but it should be mostly obvious what it does). The above code anyway
 causes the GC to print a message at the start of every major collection.</p>
-<h2 id="FinalisationandtheWeakmodule">Finalisation and the Weak module</h2>
-<p>We can write a function called a <strong>finaliser</strong> which is called when an
+<h2 id="FinalisationandtheWeakmodule"> Finalisation and the Weak module</h2><p>
+We can write a function called a <strong>finaliser</strong> which is called when an
 object is about to be freed by the GC.</p>
 <p>The <code>Weak</code> module lets us create so-called weak pointers. A <strong>weak
 pointer</strong> is best defined by comparing it to a &quot;normal pointer&quot;. When we
@@ -219,11 +229,13 @@ might access the data on the disk, so we need to lock individual records
 when we hold copies of them in memory.</p>
 <p>The <em>public</em> interface to our &quot;in-memory object database cache&quot; is going
 to be just two functions:</p>
-<pre><code>type record = { mutable name : string; mutable address : string }
+<pre><code class='ocaml'><span class='k'>type</span> record <span class='k'>=</span> <span class='o'>/span> <span class='k'>mutable</span> name <span class='o'>:</span> string<span class='o'>;</span> <span class='k'>mutable</span> address <span class='o'>:</span> string <span class='o'</span>
 
-val get_record : int -&gt; record
-val sync_records : unit -&gt; unit</code></pre>
-<p>The <code>get_record</code> call is the only call that most programs will need to
+<span class='k'>val</span> get_record <span class='o'>:</span> int <span class='k'>-></span> record
+<span class='k'>val</span> sync_records <span class='o'>:</span> unit <span class='k'>-></span> unit
+</code></pre>
+<p>
+The <code>get_record</code> call is the only call that most programs will need to
 make. It gets the n<sup>th</sup> record either out of the cache or from
 disk and returns it. The program can then read and/or update the
 <code>record.name</code> and <code>record.address</code> fields. The program then just
@@ -234,8 +246,10 @@ function synchronises the disk copy and in-memory copies of all records.</p>
 <p>OCaml doesn&apos;t currently run finalisers at exit. However you can easily
 force it to by adding the following command to your code. This command
 causes a full major GC cycle on exit:</p>
-<pre><code>at_exit Gc.full_major</code></pre>
-<p>Our code is also going to implement a cache of recently accessed records
+<pre><code class='ocaml'>at_exit <span class='m'>Gc</span><span class='o'>.</span>full_major
+</code></pre>
+<p>
+Our code is also going to implement a cache of recently accessed records
 using the <code>Weak</code> module. The advantage of using the <code>Weak</code> module rather
 than hand-rolling our own code is two-fold: Firstly the garbage
 collector has a global view of memory requirements for the whole
@@ -250,97 +264,111 @@ memory, the program must acquire an exclusive lock on the record. After
 the in-memory copy is written back out to the file, the program must
 release the lock. Here is some code to define the on-disk format and
 some low-level functions to read, write, lock and unlock records:</p>
-<pre><code>open Unix
+<pre><code class='ocaml'><span class='k'>open</span> Unix
 
-(* On-disk format. *)
-let record_size = 256
-let name_size = 64
-let addr_size = 192
+<span class='com2'>(* On<span class='ic'>-</span>disk format<span class='ic'>.</span> *)</span><!-- end comment -->
+let rec<span class='o'>ord_size</span> <span class='k'>=</span> 256
+<span class='k'>let</span> name_size <span class='k'>=</span> 64
+<span class='k'>let</span> addr_size <span class='k'>=</span> 192
 
-(* Low-level load/save records to file. *)
-let seek_record n fd =
-  lseek fd (n * record_size) SEEK_SET
+<span class='com2'>(* Low<span class='ic'>-</span>level load<span class='ic'>/</span>save records <span class='ic'>to</span> file<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> seek_record n fd <span class='k'>=</span>
+  lseek fd (n <span class='o'>*</span> record_size) SEEK_SET
 
-let write_record record n fd =
-  seek_record n fd;
-  write fd record.name 0 name_size;
-  write fd record.address 0 addr_size
+<span class='k'>let</span> write_record record n fd <span class='k'>=</span>
+  seek_record n fd<span class='o'>;</span>
+  write fd record<span class='o'>.</span>name 0 name_size<span class='o'>;</span>
+  write fd record<span class='o'>.</span>address 0 addr_size
 
-let read_record record n fd =
-  seek_record n fd;
-  read fd record.name 0 name_size;
-  read fd record.address 0 addr_size
+<span class='k'>let</span> read_record record n fd <span class='k'>=</span>
+  seek_record n fd<span class='o'>;</span>
+  read fd record<span class='o'>.</span>name 0 name_size<span class='o'>;</span>
+  read fd record<span class='o'>.</span>address 0 addr_size
 
-(* Lock/unlock the nth record in a file. *)
-let lock_record n fd =
-  seek_record n fd;
+<span class='com2'>(* Lock<span class='ic'>/</span>unlock the nth record <span class='ic'>in</span> a file<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> lock_record n fd <span class='k'>=</span>
+  seek_record n fd<span class='o'>;</span>
   lockf fd F_LOCK record_size
 
-let unlock_record n fd =
-  seek_record n fd;
-  lockf fd F_ULOCK record_size</code></pre>
-<p>We also need a function to create new, empty in-memory <code>record</code> objects:</p>
-<pre><code>(* Create a new, empty record. *)
-let new_record () =
-  { name = (String.make name_size &apos; &apos;);
-    address = (String.make addr_size &apos; &apos;) }</code></pre>
-<p>Because this is a really simple program, we&apos;re going to fix the number
+<span class='k'>let</span> unlock_record n fd <span class='k'>=</span>
+  seek_record n fd<span class='o'>;</span>
+  lockf fd F_ULOCK record_size
+</code></pre>
+<p>
+We also need a function to create new, empty in-memory <code>record</code> objects:</p>
+<pre><code class='ocaml'><span class='com2'>(* Create a <span class='ic'>new</span><span class='ic'>,</span> empty record<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> new_record () <span class='k'>=</span>
+  <span class='o'>/span> name <span class='k'>=</span> (<span class='m'>String</span><span class='o'>.</span>make name_size <span class='s'>&#39; &#39;</span>)<span class='o'>;</span>
+    address <span class='k'>=</span> (<span class='m'>String</span><span class='o'>.</span>make addr_size <span class='s'>&#39; &#39;</span>) <span class='o'</span>
+</code></pre>
+<p>
+Because this is a really simple program, we&apos;re going to fix the number
 of records in advance:</p>
-<pre><code>(* Total number of records. *)
-let nr_records = 10000
+<pre><code class='ocaml'><span class='com2'>(* Total number <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> nr_records <span class='k'>=</span> 10000
 
-(* On-disk file. *)
-let diskfile = openfile &quot;users.bin&quot; [ O_RDWR ] 0</code></pre>
-<p>Download <a href='../img/users.bin.gz'>users.bin.gz</a> and decompress it before
+<span class='com2'>(* On<span class='ic'>-</span>disk file<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> diskfile <span class='k'>=</span> openfile <span class='s'>&#34;users.bin&#34;</span> <span class='o'>[</span> O_RDWR <span class='o'>]</span> 0
+</code></pre>
+<p>
+Download <a href='../img/users.bin.gz'>users.bin.gz</a> and decompress it before
 running the program.</p>
 <p>Our cache of records is very simple:</p>
-<pre><code>(* Cache of records. *)
-let cache = Weak.create nr_records</code></pre>
-<p>The <code>get_record</code> function is very short and basically composed of two
+<pre><code class='ocaml'><span class='com2'>(* Cache <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> cache <span class='k'>=</span> <span class='m'>Weak</span><span class='o'>.</span>create nr_records
+</code></pre>
+<p>
+The <code>get_record</code> function is very short and basically composed of two
 halves. We grab the record from the cache. If the cache gives us <code>None</code>,
 then that either means that we haven&apos;t loaded this record from the cache
 yet, or else it has been written out to disk (finalised) and dropped
 from the cache. If the cache gives us <code>Some record</code> then we just return
 <code>record</code> (this promotes the weak pointer to the record to a normal
 pointer).</p>
-<pre><code>open Printf
+<pre><code class='ocaml'><span class='k'>open</span> Printf
 
-(* The finaliser function. *)
-let finaliser n record =
-  printf &quot;*** objcache: finalising record %d&#92;n&quot; n;
-  write_record record n diskfile;
+<span class='com2'>(* The finaliser <span class='ic'>function</span><span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> finaliser n record <span class='k'>=</span>
+  printf <span class='s'>&#34;*** objcache: finalising record %d\n&#34;</span> n<span class='o'>;</span>
+  write_record record n diskfile<span class='o'>;</span>
   unlock_record n diskfile
 
-(* Get a record from the cache or off disk. *)
-let get_record n =
-  match Weak.get cache n with
-  | Some record -&gt;
-      printf &quot;*** objcache: fetching record %d from memory cache&#92;n&quot; n;
+<span class='com2'>(* Get a record from the cache <span class='ic'>or</span> off disk<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> get_record n <span class='k'>=</span>
+  <span class='k'>match</span> <span class='m'>Weak</span><span class='o'>.</span>get cache n <span class='k'>with</span>
+  <span class='o'>|</span> Some record <span class='k'>-></span>
+      printf <span class='s'>&#34;*** objcache: fetching record %d from memory cache\n&#34;</span> n<span class='o'>;</span>
       record
-  | None -&gt;
-      printf &quot;*** objcache: loading record %d from disk&#92;n&quot; n;
-      let record = new_record () in
-      Gc.finalise (finaliser n) record;
-      lock_record n diskfile;
-      read_record record n diskfile;
-      Weak.set cache n (Some record);
-      record</code></pre>
-<p>The <code>sync_records</code> function is even easier. First of all it empties the
+  <span class='o'>|</span> None <span class='k'>-></span>
+      printf <span class='s'>&#34;*** objcache: loading record %d from disk\n&#34;</span> n<span class='o'>;</span>
+      let rec<span class='o'>ord</span> <span class='k'>=</span> new_record () <span class='k'>in</span>
+      <span class='m'>Gc</span><span class='o'>.</span>finalise (finaliser n) record<span class='o'>;</span>
+      lock_record n diskfile<span class='o'>;</span>
+      read_record record n diskfile<span class='o'>;</span>
+      <span class='m'>Weak</span><span class='o'>.</span>set cache n (Some record)<span class='o'>;</span>
+      record
+</code></pre>
+<p>
+The <code>sync_records</code> function is even easier. First of all it empties the
 cache by replacing all the weak pointers with <code>None</code>. This now means
 that the garbage collector <em>can</em> collect and finalise all of those
 records. But it doesn&apos;t necessarily mean that the GC <em>will</em> collect the
 records straightaway (in fact it&apos;s not likely that it will), so to force
 the GC to collect the records immediately, we also invoke a major cycle:</p>
-<pre><code>(* Synchronise all records. *)
-let sync_records () =
-  Weak.fill cache 0 nr_records None;
-  Gc.full_major ()</code></pre>
-<p>Finally we have some test code. I won&apos;t reproduce the test code, but you
+<pre><code class='ocaml'><span class='com2'>(* Synchronise all records<span class='ic'>.</span> *)</span><!-- end comment -->
+<span class='k'>let</span> sync_records () <span class='k'>=</span>
+  <span class='m'>Weak</span><span class='o'>.</span>fill cache 0 nr_records None<span class='o'>;</span>
+  <span class='m'>Gc</span><span class='o'>.</span>full_major ()
+</code></pre>
+<p>
+Finally we have some test code. I won&apos;t reproduce the test code, but you
 can download the complete program and test code
 <a href='_file/objcache.ml'>objcache.ml</a>, and compile it with:</p>
-<pre><code>ocamlc -w s unix.cma objcache.ml -o objcache</code></pre>
-<h2 id="Exercises">Exercises</h2>
-<p>Here are some ways to extend the example above, in approximately
+<pre><code class='ocaml'>ocamlc <span class='o'>-</span>w s unix<span class='o'>.</span>cma objcache<span class='o'>.</span>ml <span class='o'>-</span>o objcache
+</code></pre>
+<h2 id="Exercises"> Exercises</h2><p>
+
+Here are some ways to extend the example above, in approximately
 increasing order of difficulty:</p>
 <ol>
  <li>Implement the record as an <strong>object</strong>, and allow it to transparently

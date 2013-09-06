@@ -46,8 +46,8 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="Filemanipulation">File manipulation</h1>
-<p>This is a guide to basic file manipulation in OCaml using only what the
+            <h1 id="Filemanipulation"> File manipulation</h1><p>
+This is a guide to basic file manipulation in OCaml using only what the
 standard library provides.</p>
 <p>Official documentation for the modules of interest:
 <a href='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html' title='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html'>Pervasives</a>,
@@ -58,8 +58,8 @@ in third-party libraries such as
 <a href='http://ocaml-lib.sourceforge.net/' title='http://ocaml-lib.sourceforge.net/'>Extlib</a>.
 See <a href='http://ocaml-lib.sourceforge.net/doc/Std.html' title='http://ocaml-lib.sourceforge.net/doc/Std.html'>Std.input_file and
 Std.output_file</a>.</p>
-<h2 id="Bufferedchannels">Buffered channels</h2>
-<p>The normal way of opening a file in OCaml returns a <strong>channel</strong>. There
+<h2 id="Bufferedchannels"> Buffered channels</h2><p>
+The normal way of opening a file in OCaml returns a <strong>channel</strong>. There
 are two kinds of channels:</p>
 <ul>
  <li>channels that write to a file: type <code>out_channel</code>
@@ -67,8 +67,8 @@ are two kinds of channels:</p>
  <li>channels that read from a file: type <code>in_channel</code></li>
 </ul>
 
-<h3 id="Writing"> Writing</h3>
-<p>For writing into a file, you would do this:</p>
+<h3 id="Writing"> Writing</h3><p>
+For writing into a file, you would do this:</p>
 <ol>
  <li>Open the file to obtain an <code>out_channel</code>
  </li>
@@ -84,8 +84,8 @@ are two kinds of channels:</p>
 <p>Commonly used functions: <code>open_out</code>, <code>open_out_bin</code>, <code>flush</code>,
 <code>close_out</code>, <code>close_out_noerr</code></p>
 <p>Standard <code>out_channel</code>s: <code>stdout</code>, <code>stderr</code></p>
-<h3 id="Reading"> Reading</h3>
-<p>For reading data from a file you would do this:</p>
+<h3 id="Reading"> Reading</h3><p>
+For reading data from a file you would do this:</p>
 <ol>
  <li>Open the file to obtain an <code>in_channel</code>
  </li>
@@ -101,14 +101,13 @@ are two kinds of channels:</p>
 <p>Commonly used functions: <code>open_in</code>, <code>open_in_bin</code>, <code>close_in</code>,
 <code>close_in_noerr</code></p>
 <p>Standard <code>in_channel</code>: <code>stdin</code></p>
-<h3 id="Seeking"> Seeking</h3>
-<p>Whenever you write or read something to or from a channel, the current
+<h3 id="Seeking"> Seeking</h3><p>
+Whenever you write or read something to or from a channel, the current
 position changes to the next character after what you just wrote or
 read. Occasionally, you may want to skip to a particular position in the
 file, or restart reading from the beginning. This is possible for
 channels that point to regular files, use <code>seek_in</code> or <code>seek_out</code>.</p>
-<h3 id="Gotchas"> Gotchas</h3>
-<ul>
+<h3 id="Gotchas"> Gotchas</h3><ul>
  <li>Don&apos;t forget to flush your <code>out_channel</code>s if you want to actually
  write something. This is particularly important if you are writing
  to non-files such as the standard output (<code>stdout</code>) or a socket.
@@ -133,32 +132,32 @@ channels that point to regular files, use <code>seek_in</code> or <code>seek_out
  exists! Use <code>open_out_gen</code> if you want an alternate behavior.</li>
 </ul>
 
-<h3 id="Example"> Example</h3>
-<pre><code>open Printf
+<h3 id="Example"> Example</h3><pre><code class='ocaml'><span class='k'>open</span> Printf
 
-let file = &quot;example.dat&quot;
-let message = &quot;Hello!&quot;
+<span class='k'>let</span> file <span class='k'>=</span> <span class='s'>&#34;example.dat&#34;</span>
+<span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello!&#34;</span>
 
-let () =
-  (* Write message to file *)
-  let oc = open_out file in    (* create or truncate file, return channel *)
-  fprintf oc &quot;%s&#92;n&quot; message;   (* write something *)   
-  close_out oc;                (* flush and close the channel *)
+<span class='k'>let</span> () <span class='k'>=</span>
+  <span class='com2'>(* Write message <span class='ic'>to</span> file *)</span><!-- end comment -->
+  <span class='k'>let</span> oc <span class='k'>=</span> open_out file <span class='k'>in</span>    <span class='com2'>(* create <span class='ic'>or</span> truncate file<span class='ic'>,</span> return channel *)</span><!-- end comment -->
+  fprintf oc <span class='s'>&#34;%s\n&#34;</span> message<span class='o'>;</span>   <span class='com2'>(* write something *)</span><!-- end comment -->   
+  close_out oc<span class='o'>;</span>                <span class='com2'>(* flush <span class='ic'>and</span> close the channel *)</span><!-- end comment -->
 
-  (* Read file and display the first line *)
-  let ic = open_in file in
-  try 
-    let line = input_line ic in  (* read line from in_channel and discard &#92;n *)
-    print_endline line;          (* write the result to stdout *)
-    flush stdout;                (* write on the underlying device now *)
-    close_in ic                  (* close the input channel *) 
+  <span class='com2'>(* Read file <span class='ic'>and</span> display the first line *)</span><!-- end comment -->
+  <span class='k'>let</span> ic <span class='k'>=</span> open_in file <span class='k'>in</span>
+  <span class='k'>try</span> 
+    <span class='k'>let</span> line <span class='k'>=</span> input_line ic <span class='k'>in</span>  <span class='com2'>(* read line from in_channel <span class='ic'>and</span> discard <span class='ic'>\</span>n *)</span><!-- end comment -->
+    print_endline line<span class='o'>;</span>          <span class='com2'>(* write the result <span class='ic'>to</span> stdout *)</span><!-- end comment -->
+    flush stdout<span class='o'>;</span>                <span class='com2'>(* write on the underlying device now *)</span><!-- end comment -->
+    close_in ic                  <span class='com2'>(* close the input channel *)</span><!-- end comment --> 
 
-  with e -&gt;                      (* some unexpected exception occurs *)
-    close_in_noerr ic;           (* emergency closing *)
-    raise e                      (* exit with error: files are closed but
-                                    channels are not flushed *)
+  <span class='k'>with</span> e <span class='k'>-></span>                      <span class='com2'>(* some unexpected <span class='ic'>exception</span> occurs *)</span><!-- end comment -->
+    close_in_noerr ic<span class='o'>;</span>           <span class='com2'>(* emergency closing *)</span><!-- end comment -->
+    raise e                      <span class='com2'>(* exit <span class='ic'>with</span> error<span class='ic'>:</span> files are closed but</span>
+<span class='com2'>                                    channels are not flushed *)</span><!-- end comment -->
 
-  (* normal exit: all channels are flushed and closed *)
+  <span class='com2'>(* normal exit<span class='ic'>:</span> all channels are flushed <span class='ic'>and</span> closed *)</span><!-- end comment -->
+
 </code></pre>
 
           </div>

@@ -49,11 +49,11 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 <ul>
- <li><a href='#Strengths'>Strengths</a>
+ <li><a href='#Strengths'> Strengths</a>
  </li>
- <li><a href='#AWidelyUsedProgrammingLanguage'>A Widely Used Programming Language</a>
+ <li><a href='#AWidelyUsedProgrammingLanguage'> A Widely Used Programming Language</a>
  </li>
- <li><a href='#OverviewoftheOCamllanguageandtools'>Overview of the OCaml language and tools</a>
+ <li><a href='#OverviewoftheOCamllanguageandtools'> Overview of the OCaml language and tools</a>
   <ul>
    <li><a href='#Safety'> Safety</a>
    </li>
@@ -96,7 +96,7 @@
         </div>
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="WhatisOCaml">What is OCaml?</h1>
+            <h1 id="WhatisOCaml"> What is OCaml?</h1>
 <p><strong>OCaml</strong> is a general purpose industrial-strength programming language
 with an emphasis on expressiveness and safety. Developed for more than
 20 years at <a href='http://www.inria.fr/en'>Inria</a> by a group of leading
@@ -111,8 +111,8 @@ possibilities...</p>
 <p>OCaml is a modern, high-level programming language with many useful
 features. See “<a href='history.html'>A History of OCaml</a>” for an account of the
 origins of the language.</p>
-<h2 id="Strengths">Strengths</h2>
-<p>The OCaml language offers:</p>
+<h2 id="Strengths"> Strengths</h2><p>
+The OCaml language offers:</p>
 <ul>
  <li><strong>A powerful type system</strong>, equipped with parametric polymorphism
  and type inference. For instance, the type of a collection can be
@@ -153,8 +153,8 @@ origins of the language.</p>
  code for many architectures.</li>
 </ul>
 
-<h2 id="AWidelyUsedProgrammingLanguage">A Widely Used Programming Language</h2>
-<p>The OCaml language was initially used to develop applications that
+<h2 id="AWidelyUsedProgrammingLanguage"> A Widely Used Programming Language</h2><p>
+The OCaml language was initially used to develop applications that
 involve symbolic computation: automatic theorem provers, compilers and
 interpreters, program analyzers, etc. It is now used to develop software
 in many other application areas. This is illustrated by our list of
@@ -169,9 +169,9 @@ academic partners a formal framework for participating in the
 development, maintenance, and evolution of OCaml. Partners also enjoy
 very liberal licensing conditions regarding the OCaml software
 distribution.</p>
-<h2 id="OverviewoftheOCamllanguageandtools">Overview of the OCaml language and tools</h2>
-<h3 id="Safety"> Safety</h3>
-<p>OCaml is a safe language. Programs are verified by the compiler before
+<h2 id="OverviewoftheOCamllanguageandtools"> Overview of the OCaml language and tools</h2><h3 id="Safety"> Safety</h3><p>
+
+OCaml is a safe language. Programs are verified by the compiler before
 they can be executed. This rules out many programming errors, such as,
 for instance, confusing an integer and a pointer, or accessing a
 nonexistent field in a record. More precisely, this protects the
@@ -180,20 +180,20 @@ integrity of the data manipulated by an OCaml program.</p>
 types of function parameters, local variables, etc. be explicitly
 declared, contrary to, say, C or Java. Much of the necessary type
 information is automatically inferred by the compiler.</p>
-<h3 id="Functions"> Functions</h3>
-<p>OCaml is a functional programming language: there is no restriction on
+<h3 id="Functions"> Functions</h3><p>
+OCaml is a functional programming language: there is no restriction on
 the definition and use of functions. In other words, functions are
 ordinary values: a function can be passed as an argument to a function
 or returned by a function.</p>
-<h3 id="Imperativefeatures"> Imperative features</h3>
-<p>OCaml offers a full array of imperative features. In particular,
+<h3 id="Imperativefeatures"> Imperative features</h3><p>
+OCaml offers a full array of imperative features. In particular,
 variables, arrays, and record components can be declared as modifiable.
 Several varieties of loops are available.</p>
-<h3 id="Errorrecovery"> Error recovery</h3>
-<p>OCaml features a general exception mechanism to signal and handle errors
+<h3 id="Errorrecovery"> Error recovery</h3><p>
+OCaml features a general exception mechanism to signal and handle errors
 and exceptional situations.</p>
-<h3 id="DataTypes"> Data Types</h3>
-<p>OCaml offers numerous built-in data types, including:</p>
+<h3 id="DataTypes"> Data Types</h3><p>
+OCaml offers numerous built-in data types, including:</p>
 <ul>
  <li><strong>basic types</strong>: integers, floating point numbers, booleans,
  characters, strings.
@@ -216,8 +216,8 @@ only its name is known outside the module. It then becomes impossible,
 from the outside, to create or inspect values of this type.</p>
 <p>This mechanism provides fine-grained control over data encapsulation,
 which is mandatory for programming in the large.</p>
-<h3 id="Aptnesstosymboliccomputation"> Aptness to symbolic computation</h3>
-<p>OCaml features pattern matching, a generalization of the traditional
+<h3 id="Aptnesstosymboliccomputation"> Aptness to symbolic computation</h3><p>
+OCaml features pattern matching, a generalization of the traditional
 case analysis construct. Pattern matching offers a clean and elegant way
 of simultaneously examining and naming data. The OCaml compiler takes
 advantage of this feature to perform several checks: superfluous as well
@@ -226,14 +226,14 @@ pinpointing subtle errors. When no error is signaled, one can trust that
 no case has been overlooked.</p>
 <p>Pattern matching brings unrivaled comfort and safety to programs that
 manipulate symbolic data.</p>
-<h3 id="Polymorphism"> Polymorphism</h3>
-<p>OCaml features a polymorphic type system: some undetermined types can be
+<h3 id="Polymorphism"> Polymorphism</h3><p>
+OCaml features a polymorphic type system: some undetermined types can be
 represented by variables, which may later be instantiated at will. Thus,
 for instance, a single sorting function can be applied to lists of
 integers, lists of integer pairs, or lists of records, without requiring
 any code duplication.</p>
-<h3 id="Programminginthelarge"> Programming in the large</h3>
-<p>An OCaml program is made of compilation units that are dealt with
+<h3 id="Programminginthelarge"> Programming in the large</h3><p>
+An OCaml program is made of compilation units that are dealt with
 separately by the compiler. This scheme is fully compatible with the use
 of traditional project management tools, such as the “make” utility. The
 module system is powerful and safe: every interaction between modules is
@@ -241,42 +241,42 @@ statically typechecked. In OCaml, a module may contain submodules, which
 allows organizing modules hierarchically, and it is possible to
 parameterize a module over a number of other modules, or, in other
 words, to define functions from modules to modules.</p>
-<h3 id="Objectorientedprogramming"> Object-oriented programming</h3>
-<p>OCaml allows writing programs in an object-oriented style. In keeping
+<h3 id="Objectorientedprogramming"> Object-oriented programming</h3><p>
+OCaml allows writing programs in an object-oriented style. In keeping
 with the language&apos;s philosophy, the object-oriented layer obeys the
 “strong typing” paradigm: thus, it is impossible to send a message to
 some object that cannot answer it. Such safety does not come at a cost
 in expressiveness: thanks to features such as multiple inheritance and
 parametric classes, the most complex design patterns can be expressed in
 a natural manner.</p>
-<h3 id="Automaticmemorymanagementandincrementalgarbagecollection"> Automatic memory management and incremental garbage collection</h3>
-<p>OCaml features automatic memory management: allocation and deallocation
+<h3 id="Automaticmemorymanagementandincrementalgarbagecollection"> Automatic memory management and incremental garbage collection</h3><p>
+OCaml features automatic memory management: allocation and deallocation
 of data structures is implicit, and dealt with by the compiler: there is
 no “new”, “malloc”, “delete”, or “free” operator. This makes programs
 much safer: memory corruption cannot occur.</p>
 <p>Moreover, the memory manager is incremental: it runs in parallel with
 the application, so that garbage collection does not cause noticeable
 delays.</p>
-<h3 id="Evaluationregime"> Evaluation regime</h3>
-<p>OCaml&apos;s evaluation strategy is strict. A lazy evaluation regime may be
+<h3 id="Evaluationregime"> Evaluation regime</h3><p>
+OCaml&apos;s evaluation strategy is strict. A lazy evaluation regime may be
 simulated, when required, via explicit suspensions. Thus, it is
 possible, for instance, to manipulate potentially infinite data streams.</p>
-<h3 id="Efficientcompilerefficientcompiledcode"> Efficient compiler, efficient compiled code</h3>
-<p>OCaml offers two batch compilers: a bytecode compiler and a native code
+<h3 id="Efficientcompilerefficientcompiledcode"> Efficient compiler, efficient compiled code</h3><p>
+OCaml offers two batch compilers: a bytecode compiler and a native code
 compiler. Both support separate compilation. Caml Light only offers a
 bytecode compiler.</p>
 <p>The bytecode compilers generate small, portable executables.
 Furthermore, these compilers are extremely fast.</p>
 <p>The native code compiler produces more efficient machine code, whose
 performance meets the highest standards of modern compilers.</p>
-<h3 id="Interactivity"> Interactivity</h3>
-<p>OCaml provides an interactive “read-eval-print” loop, which is
+<h3 id="Interactivity"> Interactivity</h3><p>
+OCaml provides an interactive “read-eval-print” loop, which is
 convenient both for learning and for rapid testing and debugging of
 programs. Indeed, there is no need to create a file, or to insert
 display instructions into programs, since results are automatically
 printed by the interactive system.</p>
-<h3 id="Debuggingfacilities"> Debugging facilities</h3>
-<p>Several different methods are available to debug OCaml programs:</p>
+<h3 id="Debuggingfacilities"> Debugging facilities</h3><p>
+Several different methods are available to debug OCaml programs:</p>
 <ul>
  <li>the interactive system offers an elementary yet fast and simple
  method to test (small) functions: one types various inputs directly
@@ -294,12 +294,12 @@ printed by the interactive system.</p>
  a particular point of interest.</li>
 </ul>
 
-<h3 id="Parsing"> Parsing</h3>
-<p>OCaml offers parser generation tools analogous to “lex” and “yacc”.
+<h3 id="Parsing"> Parsing</h3><p>
+OCaml offers parser generation tools analogous to “lex” and “yacc”.
 Furthermore, it offers a built-in type of data streams which eases the
 definition of LL(1) recursive descent parsers.</p>
-<h3 id="Portability"> Portability</h3>
-<p>OCaml runs on a wide variety of platforms. Officially supported
+<h3 id="Portability"> Portability</h3><p>
+OCaml runs on a wide variety of platforms. Officially supported
 platforms are described <a href='portability.html'>here</a>, and other platforms
 are supported by the community. For example, OCaml apps are available in
 the Apple app store; compiling to iOS is described

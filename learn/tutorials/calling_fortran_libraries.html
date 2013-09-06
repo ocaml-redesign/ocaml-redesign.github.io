@@ -46,8 +46,8 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="CallingFortranlibraries">Calling Fortran libraries</h1>
-<p><strong>Calling Fortran libraries</strong></p>
+            <h1 id="CallingFortranlibraries"> Calling Fortran libraries</h1><p>
+<strong>Calling Fortran libraries</strong></p>
 <p>Fortran isn&apos;t a language the many people write new codes in but it still
 is in extensive use in the scientific communities. Many, many libraries
 exist for doing numerical calculation that will never be written in C or
@@ -66,8 +66,8 @@ parameters while <code>dens</code> and <code>temp</code> are output parameters.<
 <p>All of the examples below use the GNU Fortran 77 compiler (g77). None of
 these have been tested with the GNU fortran 90 compiler (gfort) and will
 not be until it has proven itself through some time.</p>
-<h3 id="Step1CompiletheFortranroutine"> Step 1: Compile the Fortran routine</h3>
-<p>Where C/C++ have only one category of subroutine (the function), Fortran
+<h3 id="Step1CompiletheFortranroutine"> Step 1: Compile the Fortran routine</h3><p>
+Where C/C++ have only one category of subroutine (the function), Fortran
 has two: the function and the subroutine. The function is the equivalent
 to a non-void C function in that it takes parameters and always returns
 a value. The subroutine is equivalent to a void C function.</p>
@@ -96,25 +96,27 @@ corresponding C prototype for our gtd6 function is</p>
 actually arrays. Failure to pass an array will cause a segmentation
 violation since the gtd6_ function is using them as arrays (yet another
 reason OCaml shines).</p>
-<h3 id="Step2CreatetheCwrapper"> Step 2: Create the C wrapper</h3>
-<p>Because OCaml&apos;s foreign function interface is C based, it is necessary
+<h3 id="Step2CreatetheCwrapper"> Step 2: Create the C wrapper</h3><p>
+Because OCaml&apos;s foreign function interface is C based, it is necessary
 to create a C wrapper. To avoid difficulties in passing back arrays of
 values, we are going to simply create a function that will return the
 second element of the temperature array as computed by the function and
 ignore the other return values (this is a very frequent use of the
 function). This function will be in the source file wrapper.c.</p>
-<pre><code>CAMLprim value gtd6_t (value iydV, value secVal, value altVal, value latVal, value lonVal) {
-   CAMLparam5( iydV, secVal, altVal, latVal, lonVal );
-   long iyd = Long_val( iydV );
-   float    sec = Double_val( secVal );
-   float    alt = Double_val( altVal );
-   float    lat = Double_val( latVal );
-   float    lon = Double_val( lonVal );
+<pre><code class='ocaml'>CAMLprim value gtd6_t (value iydV<span class='o'>,</span> value secVal<span class='o'>,</span> value altVal<span class='o'>,</span> value latVal<span class='o'>,</span> value lonVal) <span class='o'>/span>
+   CAMLparam5( iydV<span class='o'>,</span> secVal<span class='o'>,</span> altVal<span class='o'>,</span> latVal<span class='o'>,</span> lonVal )<span class='o'>;</span>
+   long iyd <span class='k'>=</span> Long_val( iydV )<span class='o'>;</span>
+   float    sec <span class='k'>=</span> Double_val( secVal )<span class='o'>;</span>
+   float    alt <span class='k'>=</span> Double_val( altVal )<span class='o'>;</span>
+   float    lat <span class='k'>=</span> Double_val( latVal )<span class='o'>;</span>
+   float    lon <span class='k'>=</span> Double_val( lonVal )<span class='o'>;</span>
 
-   gtd6_(&amp;iyd, &amp;sec, &amp;alt, &amp;glat, &amp;glon, d, t);
-   CAMLreturn( caml_copy_double( t[1] ) );
-}</code></pre>
-<p>A few points of interest</p>
+   gtd6_<span class='o'>(&#38;</span>iyd<span class='o'>,</span> <span class='o'>&#38;</span>sec<span class='o'>,</span> <span class='o'>&#38;</span>alt<span class='o'>,</span> <span class='o'>&#38;</span>glat<span class='o'>,</span> <span class='o'>&#38;</span>glon<span class='o'>,</span> d<span class='o'>,</span> t)<span class='o'>;</span>
+   CAMLreturn( caml_copy_double( t<span class='o'>[</span>1<span class='o'>]</span> ) )<span class='o'>;</span>
+<span class='o'</span>
+</code></pre>
+<p>
+A few points of interest</p>
 <ol>
  <li>The file must include the OCaml header files <code>alloc.h</code>, <code>memory.h</code>,
  and <code>mlvalue.h</code>.
@@ -133,8 +135,8 @@ function). This function will be in the source file wrapper.c.</p>
  return it respectively.</li>
 </ol>
 
-<h3 id="Step3Compilethesharedlibrary"> Step 3: Compile the shared library.</h3>
-<p>Now having the two source files funcs.f and wrapper.c we need to create
+<h3 id="Step3Compilethesharedlibrary"> Step 3: Compile the shared library.</h3><p>
+Now having the two source files funcs.f and wrapper.c we need to create
 a shared library that can be loaded by OCaml. Its easier to do this as a
 multistep process, so here are the commands:</p>
 <p><code>prompt&gt; g77 -c funcs.f</code></p>
@@ -144,21 +146,25 @@ multistep process, so here are the commands:</p>
 the fortran function and the wrapper function. The -lg2c option is
 required to provide the implementations of the built in fortran
 functions that are used.</p>
-<h3 id="Step4NowtoOCaml"> Step 4: Now to OCaml</h3>
-<p>Now in an OCaml file (gtd6.ml) we have to define the external reference
+<h3 id="Step4NowtoOCaml"> Step 4: Now to OCaml</h3><p>
+Now in an OCaml file (gtd6.ml) we have to define the external reference
 to the function and a function to call it.</p>
-<pre><code>external temp : int -&gt; float -&gt; float -&gt; float -&gt; float -&gt; float = &quot;gtd6_t&quot;
+<pre><code class='ocaml'><span class='k'>external</span> temp <span class='o'>:</span> int <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='s'>&#34;gtd6_t&#34;</span>
 
-let () =
-  print_double (temp 1 2.0 3.0 4.0 5.0);
-  print_newline ()</code></pre>
-<p>This tells OCaml that the temp function takes 5 parameters and returns a
+<span class='k'>let</span> () <span class='k'>=</span>
+  print_double (temp 1 2.0 3.0 4.0 5.0)<span class='o'>;</span>
+  print_newline ()
+</code></pre>
+<p>
+This tells OCaml that the temp function takes 5 parameters and returns a
 single floating point and calls the C function gtd6_t.</p>
 <p>At this point, the steps that are given are to compile this into
 bytecode. I don&apos;t yet have much experience compiling to native so I&apos;ll
 let some else help out (or wait until I learn how to do it).</p>
-<pre><code>prompt&gt; ocamlc -c gtd6.ml prompt&gt; ocamlc -o test gtd6.cmo wrapper.so</code></pre>
-<p>And voila, we&apos;ve called the fortran function from OCaml.</p>
+<pre><code class='ocaml'>prompt<span class='o'>&#62;</span> ocamlc <span class='o'>-</span>c gtd6<span class='o'>.</span>ml prompt<span class='o'>&#62;</span> ocamlc <span class='o'>-</span>o test gtd6<span class='o'>.</span>cmo wrapper<span class='o'>.</span>so
+</code></pre>
+<p>
+And voila, we&apos;ve called the fortran function from OCaml.</p>
 
           </div>
         </div>
