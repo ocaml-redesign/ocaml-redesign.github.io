@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <p>Map</p>
+<h1 id="Map"> Map</h1><h2 id="ModuleMap"> Module Map</h2><p>
+
+Map creates a &quot;mapping&quot;. For instance, lets say I have some data that is
+users and their associated passwords. I could with the Map module create
+a mapping from user names to their passwords. The mapping module not
+only does this but it does it fairly efficiently. It also does this in a
+functional way. In the example below I am going to do a mapping from
+strings to strings. However it is possible to do mappings with all
+different types of data.</p>
+<p>To create a Map I can do:</p>
+<pre><code class='ocaml'><span class='k'>module</span> MyUsers <span class='k'>=</span> <span class='m'>Map</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
+</code></pre>
+<p>
+Ok, we have created the module. Now, lets start putting something into
+it. Where do we start? Well, lets try an empty module to begin with:</p>
+<pre><code class='ocaml'><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>empty<span class='o'>;;</span>
+</code></pre>
+<p>
+Hummm. An empty module is kind of boring, so lets add some data.</p>
+<pre><code class='ocaml'><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;fred&#34;</span> <span class='s'>&#34;sugarplums&#34;</span> m<span class='o'>;;</span>
+</code></pre>
+<p>
+We have now added &quot;fred&quot; and his password of &quot;sugarplums&quot; to our module.
+There is a fairly important point to make here. Once we have added the
+string &quot;sugarplums&quot; we have fixed the types of mappings that we can do.
+This means our mapping in our module MyUsers is from strings to strings.
+If we want a mapping from strings to integers or a mapping from integers
+to whatever we will have to create a different mapping.</p>
+<p>Lets add in some additional data just for kicks.</p>
+<pre><code class='ocaml'><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;tom&#34;</span> <span class='s'>&#34;ilovelucy&#34;</span> m<span class='o'>;;</span>
+<span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;mark&#34;</span> <span class='s'>&#34;ocamlrules&#34;</span> m<span class='o'>;;</span>
+<span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;pete&#34;</span> <span class='s'>&#34;linux&#34;</span> m<span class='o'>;;</span>
+</code></pre>
+<p>
+Now that we have some data inside of our Map module, wouldn&apos;t it be nice
+to be able to view that data at some point? Lets begin by creating a
+simple print function.</p>
+<pre><code class='ocaml'><span class='k'>let</span> print_users key password <span class='k'>=</span> print_string(key <span class='o'>^</span> <span class='s'>&#34; &#34;</span> <span class='o'>^</span> password <span class='o'>^</span> <span class='s'>&#34;\n&#34;</span>)<span class='o'>;;</span>
+</code></pre>
+<p>
+We have here a function that will take two strings, a key and a pasword,
+and print them out nicely, including a new line character at the end.
+All we need to do is to have this function applied to our mapping. Here
+is what that would look like.</p>
+<pre><code class='ocaml'><span class='m'>MyUsers</span><span class='o'>.</span>iter print_users m<span class='o'>;;</span>
+</code></pre>
+<p>
+The reason we put our data into a mapping however is probably so we can
+quickly find the data. Lets actually show how to do a find.</p>
+<pre><code class='ocaml'><span class='m'>MyUsers</span><span class='o'>.</span>find <span class='s'>&#34;fred&#34;</span> m<span class='o'>;;</span>
+</code></pre>
+<p>
+This should quickly and efficienty return Fred&apos;s password: &quot;sugarplums&quot;.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

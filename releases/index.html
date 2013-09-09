@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="OCaml4001"> OCaml 4.00.1</h1><p>
+<strong>License</strong><br />
+ The OCaml system is open source software: the compiler is distributed
+under the terms of the Q Public License, and its library is under LGPL;
+please read the <a href='../license.html'>license</a> document for more details. A
+BSD-style license is also available for a fee through the <a href='../support.html#consortium'>OCaml
+Consortium</a>.</p>
+<p>The most recent released version of OCaml is OCaml 4.00.1, released on
+2012-10-05.</p>
+<p>Development versions, and <a href='http://caml.inria.fr/pub/distrib/'>earlier
+releases</a> are also available; the
+most recent stable release of the the previous major version of OCaml
+was <a href='3.12.1.html'>3.12.1</a>, released in 2011.</p>
+<h2 id="WhatapossNew"> What&apos;s New</h2><p>
+Release 4.00.1 is mostly a bugfix release.</p>
+<p>Some of the highlights in release 4.0.0 (July 2012) are:</p>
+<ul>
+ <li>The name the language is now officially &quot;OCaml&quot;, and this name is
+ used consistently in all the documentation and tool outputs.
+ </li>
+ <li>Generalized Algebraic Data Types (GADTs): this is a powerful
+ extension of the type system that provides great flexibility and
+ power to the programmer.
+ </li>
+ <li>A new and improved ARM back-end.
+ </li>
+ <li>Changes to first-class modules: type annotations can now be omitted
+ when packing and unpacking modules (and are inferred from context
+ whenever possible), and first-class modules can now be unpacked by
+ pattern-matching.
+ </li>
+ <li>Support for randomized hash tables to avoid denial-of-service
+ vulnerabilities.
+ </li>
+ <li>Installation of the compiler&apos;s internal libraries in
+ <code>+compiler-libs</code> for easier access by third-party programming tools.</li>
+</ul>
+
+<p>For more information, please consult the <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/notes/Changes'>comprehensive list of
+changes</a>.</p>
+<h2 id="Sourcedistribution"> <img src='../img/source.gif' alt='' />Source distribution</h2><ul>
+ <li><a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00.1.tar.gz'>Source
+ tarball</a>
+ (.tar.gz) for compilation under Unix (including Linux and MacOS X)
+ and Microsoft Windows (including Cygwin).
+ </li>
+ <li>Also available in
+ <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00.1.tar.bz2'>.tar.bz2</a>
+ format.
+ </li>
+ <li>You also have read-only <a href='svn.html'>SVN access</a> to the working
+ sources and to all previous public releases.</li>
+</ul>
+
+<p>The <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/notes/INSTALL'>INSTALL</a>
+file of the distribution provides detailed compilation and installation
+instruction.</p>
+<h2 id="PrecompiledbinariesforLinux"> <img src='../img/linux.gif' alt='' />Precompiled binaries for Linux</h2><ul>
+ <li><a href='http://packages.debian.org/ocaml'>Debian packages</a>.
+ </li>
+ <li><a href='https://admin.fedoraproject.org/pkgdb/acls/name/ocaml/'>Fedora
+ packages</a>.
+ </li>
+ <li><a href='http://packages.gentoo.org/packages/?category=dev-lang;name=ocaml'>Gentoo
+ packages</a>.</li>
+</ul>
+
+<h2 id="PrecompiledbinariesforMacOSX"> <img src='../img/macos.gif' alt='' />Precompiled binaries for MacOS X</h2><p>
+Binary package compiled on Mac OS 10.7.5 with XCode tools 4.4 (probably
+not compatible with earlier versions of Mac OS X):</p>
+<ul>
+ <li><a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00.1-intel.dmg'>for
+ Intel</a>
+ (4.00.1)</li>
+</ul>
+
+<h2 id="PrecompiledbinariesforMicrosoftWindows"> <img src='../img/windows.gif' alt='' />Precompiled binaries for Microsoft Windows</h2><p>
+Four ports of OCaml for Microsoft Windows are currently available. For
+additional information, please consult the list of <a href='http://caml.inria.fr/ocaml/portability.en.html'>portability
+issues</a> or the <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/notes/README.win32'>Windows
+release
+notes</a>.</p>
+<ul>
+ <li><a href='http://protz.github.com/ocaml-installer/'>Cygwin-based native Win32 port
+ (4.00.0)</a>. A self
+ installer. The interactive loop comes with a simple graphical user
+ interface. Some features require the Cygwin environment, which the
+ installer can fetch for you. However, the compilers are, and
+ generate true Win32 executables, which do not require Cygwin to run.
+ </li>
+ <li>Microsoft-based native Win32 port. No binary distribution available
+ yet; download the source distribution and compile it.
+ </li>
+ <li><a href='http://cygwin.com/'>Cygwin</a>-based port. Requires Cygwin. No
+ graphical user interface is provided. The compilers generate
+ executables that do require Cygwin. The precompiled binaries are
+ part of the Cygwin distribution; you can install them using the
+ Cygwin <code>setup</code> tool. Alternatively, download the source distribution
+ and compile it under Cygwin.
+ </li>
+ <li>Microsoft-based native Win64 port Same features as the
+ Microsoft-based native Win32 port, but generates 64-bit code. No
+ binary distribution available yet; download the source distribution
+ and compile it.</li>
+</ul>
+
+<h2 id="PrecompiledbinariesforSolaris"> Precompiled binaries for Solaris</h2><p>
+Available at <a href='http://sunfreeware.com/'>sunfreeware.com</a>.</p>
+<h2 id="AlternativeCompilers"> Alternative Compilers</h2><p>
+Additionally, the following projects allow you to compile OCaml code to
+targets traditionally associated with other languages:</p>
+<ul>
+ <li>The <a href='http://ocsigen.org/js_of_ocaml/'>js_of_ocaml project</a>, an
+ OCaml to Javascript compiler (stable)
+ </li>
+ <li>The <a href='http://cafesterol.x9c.fr/'>ocamljava project</a>, an OCaml to Java
+ compiler (experimental)</li>
+</ul>
+
+<h2 id="Userapossmanual"> <img src='../img/doc.gif' alt='' />User&apos;s manual</h2><p>
+The user&apos;s manual for OCaml can be:</p>
+<ul>
+ <li><a href='http://caml.inria.fr/pub/docs/manual-ocaml-4.00/index.html'>browsed
+ online</a>,
+ </li>
+ <li>downloaded as a single
+ <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00-refman.ps.gz'>PostScript</a>,
+ <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00-refman.pdf'>PDF</a>,
+ or <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00-refman.txt'>plain
+ text</a>
+ document,
+ </li>
+ <li>downloaded as a single
+ <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00-refman-html.tar.gz'>TAR</a>
+ or
+ <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00-refman-html.zip'>ZIP</a>
+ archive of HTML files,
+ </li>
+ <li>downloaded as a single
+ <a href='http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-4.00-refman.info.tar.gz'>tarball</a>
+ of Emacs <code>info</code> files.</li>
+</ul>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

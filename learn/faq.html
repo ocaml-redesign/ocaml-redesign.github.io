@@ -1,0 +1,610 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="FAQ"> FAQ</h1><p>
+See also <a href='http://stackoverflow.com/tags/ocaml/info'>Stack Overflow</a>,
+which is widely used by the OCaml community.</p>
+<ul>
+ <li><a href='#general'>General Questions</a>
+ </li>
+ <li><a href='#ocaml'>Core Language</a>
+ </li>
+ <li><a href='#module'>Module Language</a>
+ </li>
+ <li><a href='#tools'>Development Tools</a></li>
+</ul>
+
+<h2 id="CoreLanguage"> Core Language</h2><p>
+<hr/></p>
+<h3 id="Basictypes"> Basic types</h3><p>
+Is it possible to do computations with arbritrary precision arithmetics?</p>
+<p>OCaml and Caml Light both provide a library that handles exact
+arithmetic computation for rational numbers. The library is called <code>Num</code>
+in OCaml and <code>camlnum</code> in Caml Light.<br />.<code>m</code> array the of lines the all by shared physically and unique
+is <code>0 3 make.Array</code> by allocated is which line the why s&apos;That .array
+new the of element each in written is value this then ;computed is
+value initial the First, .phases two has array new a of allocation The</p>
+<pre><code>;;m  
+;;1 -&lt; )0(.)0(.m  
+;;)0 3 make.Array( 2 make.Array = m let  
+ocaml</code></pre>
+<p>:)entry previous also see( array new the of lines
+the between sharing physical unexpected some is there because right not
+is result the :bogus is arrays multidimensional define to way naive The
+.)vectors mathematical modelize they unidimensional, are arrays OCaml(
+themselves arrays are elements whose array an define to is way only The</p>
+<p>?arrays multidimensional define to How</p>
+<p>.)below entry
+the also see( others the modifies elements these of one modifying that
+implies vectors these of sharing the vectors, also are elements these if
+:vectors in stored elements to applies also effect sharing physical The</p>
+<pre><code>;;v  
+;;4 -&lt; )0(.w  
+;;v = w let  
+;;0 3 make.Array = v let  
+ocaml</code></pre>
+<p>:other
+the to visible be will array one on modification every array, same
+the to names two give you If .copying array implicit no are there OCaml
+In .missed you that arrays two of sharing physical the to due is This</p>
+<p>why know t&apos;don I and modified, is array My
+structures Data  ###</p>
+<pre><code>;;100 fact  
+;;))1 - n( fact( /* n int_of_num else )1 int_of_num( then 0 =&lt; n if    
+= n fact rec let  
+;;&quot;3/2&quot; string_of_num /+ &quot;3/1&quot; string_of_num = n let  
+;;&quot;3/2&quot; string_of_num  
+;;num_print printer_install#  
+;;)n num_of_string( &quot;s%&quot; ff fprintf = n ff num_print let  
+;;Format open  
+Num open  
+;;&quot;cma.nums&quot; load#  
+ocaml</code></pre>
+<p>.below given is OCaml under example An .used
+be can printer custom a toplevel, the in printing For .strings character
+or integers )small( from conversion using numbers big build You
+.<code>/+</code> thus is addition :<code>/</code> suffix the gets numbers big on Operations 
+<br />
+ The solution is to use the <code>make_matrix</code> primitive that builds the
+matrix with all elements equal to the initial value provided.
+Alternatively, write the program that allocates a new line for each line
+of your matrix. For instance:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> matrix n m init <span class='k'>=</span>
+    <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>make n (<span class='m'>Array</span><span class='o'>.</span>make m init) <span class='k'>in</span>
+    <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> n <span class='o'>-</span> 1 <span class='k'>do</span>
+      result<span class='o'>.</span>(i) <span class='o'>&#60;-</span> <span class='m'>Array</span><span class='o'>.</span>make m init
+    <span class='k'>done</span><span class='o'>;</span>
+    result
+</code></pre>
+<p>
+In the same vein, the <code>copy_vect</code> primitive gives strange results, when
+applied to matrices: you need to write a function that explicitly copies
+each line of the matrix at hand:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> copy_matrix m <span class='k'>=</span>
+    <span class='k'>let</span> l <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length m <span class='k'>in</span>
+    <span class='k'>if</span> l <span class='k'>=</span> 0 <span class='k'>then</span> m <span class='k'>else</span>
+      <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>make l m<span class='o'>.</span>(0) <span class='k'>in</span>
+      <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> l <span class='o'>-</span> 1 <span class='k'>do</span>
+        result<span class='o'>.</span>(i) <span class='o'>&#60;-</span> <span class='m'>Array</span><span class='o'>.</span>copy m<span class='o'>.</span>(i)
+      <span class='k'>done</span><span class='o'>;</span>
+      result
+</code></pre>
+<h3 id="Typesdefinitions"> Types definitions</h3><p>
+
+How to define an enumerated type?</p>
+<p>An enumerated type is a sum type with only constants. For instance, a
+type with 3 constants:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> color <span class='k'>=</span> Blue <span class='o'>|</span> White <span class='o'>|</span> Red<span class='o'>;;</span>
+  Blue<span class='o'>;;</span>
+</code></pre>
+<p>
+The names <code>Blue</code>, <code>White</code> and <code>Red</code> are the constructors of the <code>color</code>
+type. One can define functions on this type by pattern matching:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> string_of_color <span class='k'>=</span><span class='k'>function</span>
+    <span class='o'>|</span> Blue <span class='k'>-></span> <span class='s'>&#34;blue&#34;</span>
+    <span class='o'>|</span> White <span class='k'>-></span> <span class='s'>&#34;white&#34;</span>
+    <span class='o'>|</span> Red <span class='k'>-></span> <span class='s'>&#34;red&#34;</span>
+</code></pre>
+<p>
+How to share a label between two different record types?</p>
+<p>When you define two types sharing a label name, the last defined type
+hides the labels of the first type. For instance:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> point_3d <span class='k'>=</span> <span class='o'>/span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'>;</span> z <span class='o'>:</span> float<span class='o'</span><span class='o'>;;</span>
+  <span class='k'>type</span> point_2d <span class='k'>=</span> <span class='o'>/span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'</span><span class='o'>;;</span>
+  <span class='o'>/span>x <span class='k'>=</span> 10.<span class='o'>;</span> y <span class='k'>=</span> 20.<span class='o'>;</span> z <span class='k'>=</span> 30.<span class='o'</span><span class='o'>;;</span>
+</code></pre>
+<p>
+The simplest way to overcome this problem is simply ... to use different
+names! For instance</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> point3d <span class='k'>=</span> <span class='o'>/span>x3d <span class='o'>:</span> float<span class='o'>;</span> y3d <span class='o'>:</span> float<span class='o'>;</span> z3d <span class='o'>:</span> float<span class='o'</span><span class='o'>;;</span>
+  <span class='k'>type</span> point2d <span class='k'>=</span> <span class='o'>/span>x2d <span class='o'>:</span> float<span class='o'>;</span> y2d <span class='o'>:</span> float<span class='o'</span><span class='o'>;;</span>
+</code></pre>
+<p>
+With OCaml, one can propose two others solutions. First, it is possible
+to use modules to define the two types in different name spaces:</p>
+<pre><code class='ocaml'>  <span class='k'>module</span> D3 <span class='k'>=</span> <span class='k'>struct</span>
+    <span class='k'>type</span> point <span class='k'>=</span> <span class='o'>/span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'>;</span> z <span class='o'>:</span> float<span class='o'</span>
+  <span class='k'>end</span><span class='o'>;;</span>
+
+  <span class='k'>module</span> D2 <span class='k'>=</span> <span class='k'>struct</span>
+    <span class='k'>type</span> point <span class='k'>=</span> <span class='o'>/span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'</span>
+  <span class='k'>end</span><span class='o'>;;</span>
+</code></pre>
+<p>
+This way labels can be fully qualified as <code>D3.x</code> <code>D2.x</code>:</p>
+<pre><code class='ocaml'>  <span class='o'>/span><span class='m'>D3</span><span class='o'>.</span>x <span class='k'>=</span> 10.<span class='o'>;</span> <span class='m'>D3</span><span class='o'>.</span>y <span class='k'>=</span> 20.<span class='o'>;</span> <span class='m'>D3</span><span class='o'>.</span>z <span class='k'>=</span> 30.<span class='o'</span><span class='o'>;;</span>
+  <span class='o'>/span><span class='m'>D2</span><span class='o'>.</span>x <span class='k'>=</span> 10.<span class='o'>;</span> <span class='m'>D2</span><span class='o'>.</span>y <span class='k'>=</span> 20.<span class='o'</span><span class='o'>;;</span>
+</code></pre>
+<p>
+You can also use objects that provide overloading on method names:</p>
+<pre><code class='ocaml'>  <span class='k'>class</span> point_3d <span class='o'>~</span>x <span class='o'>~</span>y <span class='o'>~</span>z <span class='k'>=</span> object
+    <span class='k'>method</span> x <span class='o'>:</span> float <span class='k'>=</span> x
+    <span class='k'>method</span> y <span class='o'>:</span> float <span class='k'>=</span> y
+    <span class='k'>method</span> z <span class='o'>:</span> float <span class='k'>=</span> z
+  <span class='k'>end</span><span class='o'>;;</span>
+
+  <span class='k'>class</span> point_2d <span class='o'>~</span>x <span class='o'>~</span>y <span class='k'>=</span> object
+    <span class='k'>method</span> x <span class='o'>:</span> float <span class='k'>=</span> x
+    <span class='k'>method</span> y <span class='o'>:</span> float <span class='k'>=</span> y
+  <span class='k'>end</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Note that objects provide you more than overloading: you can define
+truly polymorphic functions, working on both <code>point_3d</code> and <code>point_2d</code>,
+and you can even coerce a <code>point_3d</code> to a <code>point_2d</code>.</p>
+<p>How to define two sum types that share constructor names?</p>
+<p>Generally speaking you cannot. As for all other names, you must use
+distinct name constructors. However, you can define the two types in two
+different name spaces, i.e. into two different modules. As for labels
+discussed above, you obtain constructors that can be qualified by their
+module names. With OCaml you can alternatively use polymorphic variants,
+i.e. constructors that are, in some sense, <em>predefined</em>, since they are
+not defined by a type definition. For instance:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> ids <span class='k'>=</span> <span class='o'>[</span> `Name <span class='o'>|</span> `Val <span class='o'>]</span><span class='o'>;;</span>
+  <span class='k'>type</span> person <span class='k'>=</span> <span class='o'>[</span> `Name <span class='k'>of</span> string <span class='o'>]</span><span class='o'>;;</span>
+  <span class='k'>let</span> f <span class='o'>:</span> person <span class='k'>-></span> string <span class='k'>=</span> <span class='k'>function</span> `Name s <span class='k'>-></span> s<span class='o'>;;</span>
+  <span class='k'>let</span> is_name <span class='o'>:</span> ids <span class='k'>-></span> bool <span class='k'>=</span> <span class='k'>function</span> `Name <span class='k'>-></span> <span class='o'>true</span> <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>false</span><span class='o'>;;</span>
+</code></pre>
+<h3 id="Functionsandprocedures"> Functions and procedures</h3><p>
+
+How to define a function?</p>
+<p>In OCaml, the syntax to define functions is close to the mathematical
+usage: the definition is introduced by the keyword <code>let</code>, followed by
+the name of the function and its arguments; then the formula that
+computes the image of the argument is written after an <code>=</code> sign.</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> successor (n) <span class='k'>=</span> n <span class='o'>+</span> 1<span class='o'>;;</span>
+</code></pre>
+<p>
+In fact, parens surrounding the argument may be omitted, so we generally
+write:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> successor n <span class='k'>=</span> n <span class='o'>+</span> 1<span class='o'>;;</span>
+</code></pre>
+<p>
+How to define a recursive function?</p>
+<p>You need to explicitly tell that you want to define a recursive
+function: use “let rec” instead of “let”. For instance:</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> fact n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> 1 <span class='k'>else</span> n <span class='o'>*</span> fact (n <span class='o'>-</span> 1)<span class='o'>;;</span>
+  <span class='k'>let rec</span> fib n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='o'>&#60;=</span> 1 <span class='k'>then</span> n <span class='k'>else</span> fib (n <span class='o'>-</span> 1) <span class='o'>+</span> fib (n <span class='o'>-</span> 2)<span class='o'>;;</span>
+</code></pre>
+<p>
+Functions may be mutually recursive:</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> odd n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='o'>true</span>
+    <span class='k'>else</span> <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>false</span> <span class='k'>else</span> even (n <span class='o'>-</span> 1)
+  <span class='k'>and</span> even n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='o'>false</span>
+    <span class='k'>else</span> <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>true</span> <span class='k'>else</span> odd (n <span class='o'>-</span> 1)<span class='o'>;;</span>
+</code></pre>
+<p>
+How to apply a function?</p>
+<p>Functions are applied as in mathematics: write the function&apos;s name,
+followed by its argument enclosed in parens: f (x). In practice, parens
+are omitted in case of constants or identifiers: we write <code>fib 2</code>
+instead of <code>fib (2)</code>, and <code>fact x</code> instead of <code>fact (x)</code>.<br />.result meaningful mathematically no have but ,)location
+memory some writing or terminal the on something printing instance
+for( <em>effect</em> an produce that commands are <em>procedures</em> that Recall</p>
+<p>?procedure a define to How</p>
+<p>.)application an
+not subtraction, a is it hence( <code>1 - f</code> to similar syntactically is that
+<code>1- f</code> <strong>not</strong> and <code>)1-( f</code> write must you <code>1-</code> to <code>f</code> apply to :number
+constant negative a is argument the when parens need you particular
+In .parentheses between argument this enclose must you identifier,
+an just than complex more is function a of argument the When 
+<br />
+ In OCaml, there is no special treatment of procedures: they are just
+considered as special cases of functions that return the special
+“meaningless” value <a href='donnees_de_base-eng.html#units'><code>()</code></a>. For
+instance, the <code>print_string</code> primitive that prints a character string on
+the terminal, just returns <code>()</code> as a way of indicating that its job has
+been properly completed.<br />.<code>unit &gt;-       unit</code>
+type has it :argument meaningful no gets terminal, the on newline
+a outputs that procedure, <code>newline_print</code> the instance, For .argument
+dummy as <code>)(</code> get argument, meaningful any need not do that Procedures 
+<br />
+ Procedures with argument are defined exactly as ordinary functions. For
+instance:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> message s <span class='k'>=</span> print_string s<span class='o'>;</span> print_newline()<span class='o'>;;</span>
+  message <span class='s'>&#34;Hello world!&#34;</span><span class='o'>;;</span>
+</code></pre>
+<p>
+How to define a procedure/function that takes no argument?</p>
+<p>Note that it is impossible to define a procedure without any argument at
+all: its definition would imply to execute it, and there would be no way
+to call it afterwards. In the following fragment <code>double_newline</code> is
+bound to <code>()</code>, and its further evaluation never produces carriage
+returns as may be erroneously expected by the user.</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> double_newline <span class='k'>=</span> print_newline()<span class='o'>;</span> print_newline()<span class='o'>;;</span>
+  double_newline<span class='o'>;;</span>
+</code></pre>
+<p>
+The correct definition and usage of this procedure is:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> double_newline () <span class='k'>=</span> print_newline()<span class='o'>;</span> print_newline()<span class='o'>;;</span>
+  double_newline<span class='o'>;;</span>
+  double_newline ()<span class='o'>;;</span>
+</code></pre>
+<p>
+How to define a function with more than one argument?</p>
+<p>Just write the list of successive arguments when defining the function.
+For instance:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> sum x y <span class='k'>=</span> x <span class='o'>+</span> y<span class='o'>;;</span>
+</code></pre>
+<p>
+then gives the actual arguments in the same order when applying the
+function:</p>
+<pre><code class='ocaml'>  sum 1 2<span class='o'>;;</span>
+</code></pre>
+<p>
+These functions are named “curried” functions, as opposed to functions
+with tuples as argument:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> sum' (x<span class='o'>,</span> y) <span class='k'>=</span> x <span class='o'>+</span> y<span class='o'>;;</span>
+  sum' (1<span class='o'>,</span> 2)<span class='o'>;;</span>
+</code></pre>
+<p>
+How to define a function that has several results?</p>
+<p>You can define a function that return a pair or a tuple:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> div_mod x y <span class='k'>=</span> (x <span class='o'>/</span> y<span class='o'>,</span> x <span class='k'>mod</span> y)<span class='o'>;;</span>
+  div_mod 15 7<span class='o'>;;</span>
+</code></pre>
+<p>
+What is an “anonymous function”?</p>
+<p>You may use functions that have no names: we call them functional values
+or anonymous functions. A functional value is introduced by the keyword
+<code>fun</code>, followed by its argument, then an arrow <code>-&gt;</code> and the function
+body. For instance:</p>
+<pre><code class='ocaml'>  <span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>+</span> 1<span class='o'>;;</span>
+  (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>+</span> 1) 2<span class='o'>;;</span>
+</code></pre>
+<p>
+What is the difference between <code>fun</code> and <code>function</code>?</p>
+<p>Functions are usually introduced by the keyword <code>fun</code>. Each parameter is
+introduced by its own <code>fun</code> construct. For instance, the construct:</p>
+<pre><code class='ocaml'>  <span class='k'>fun</span> x <span class='k'>-></span> <span class='k'>fun</span> y <span class='k'>-></span> <span class='o'>...</span>
+</code></pre>
+<p>
+defines a function with two parameters <code>x</code> and <code>y</code>. An equivalent but
+shorter form is:</p>
+<pre><code class='ocaml'>  <span class='k'>fun</span> x y <span class='k'>-></span> <span class='o'>...</span>
+</code></pre>
+<p>
+Functions that use pattern-matching are introduced by the keyword
+<code>function</code>. For example:</p>
+<pre><code class='ocaml'>  <span class='k'>function</span> None <span class='k'>-></span> <span class='o'>false</span> <span class='o'>|</span> Some <span class='o'>_</span> <span class='k'>-></span> <span class='o'>true</span>
+</code></pre>
+<p>
+My function is never applied</p>
+<p>This is probably due to a missing argument: since OCaml is a functional
+programming language, there is no error when you evaluate a function
+with missing arguments: in this case, a functional value is returned,
+but the function is evidently not applied. Example: if you evaluate
+<code>print_newline</code> without argument, there is no error, but nothing
+happens. The compiler issues a warning in case of a blatant misuse.</p>
+<pre><code class='ocaml'>  print_newline<span class='o'>;;</span>
+  print_newline ()<span class='o'>;;</span>
+</code></pre>
+<h3 id="Patternmatching"> Pattern matching</h3><p>
+
+How to do nested pattern matching?</p>
+<p>You imperatively need to enclose between parens a pattern matching which
+is written inside another pattern matching. In effect, the internal
+pattern matching “catches” all the pattern matching clauses that are
+written after it. For instance:</p>
+<pre><code class='ocaml'><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> 0 <span class='k'>-></span> <span class='k'>match</span> <span class='o'>...</span> <span class='k'>with</span> <span class='o'>|</span> a <span class='k'>-></span> <span class='o'>...</span> <span class='o'>|</span> b <span class='k'>-></span> <span class='o'>...</span>
+  <span class='o'>|</span> 1 <span class='k'>-></span> <span class='o'>...</span>
+  <span class='o'>|</span> 2 <span class='k'>-></span> <span class='o'>...</span>
+</code></pre>
+<p>
+is parsed as</p>
+<pre><code class='ocaml'><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> 0 <span class='k'>-></span>
+     <span class='k'>match</span> <span class='o'>...</span> <span class='k'>with</span>
+     <span class='o'>|</span> a <span class='k'>-></span> <span class='o'>...</span>
+     <span class='o'>|</span> b <span class='k'>-></span> <span class='o'>...</span>
+     <span class='o'>|</span> 1 <span class='k'>-></span> <span class='o'>...</span>
+     <span class='o'>|</span> 2 <span class='k'>-></span> <span class='o'>...</span>
+</code></pre>
+<p>
+This error may occur for every syntactic construct that involves pattern
+matching: <code>function</code>, <code>match       .. with</code> and <code>try ... with</code>. The
+usual trick is to enclose inner pattern matchings with <code>begin</code> and
+<code>end</code>. One write:</p>
+<pre><code class='ocaml'><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> 0 <span class='k'>-></span>
+     <span class='k'>begin</span> <span class='k'>match</span> <span class='o'>...</span> <span class='k'>with</span>
+     <span class='o'>|</span> a <span class='k'>-></span> <span class='o'>...</span>
+     <span class='o'>|</span> b <span class='k'>-></span> <span class='o'>...</span>
+     <span class='k'>end</span>
+  <span class='o'>|</span> 1 <span class='k'>-></span> <span class='o'>...</span>
+  <span class='o'>|</span> 2 <span class='k'>-></span> <span class='o'>...</span>
+</code></pre>
+<h3 id="Exceptions"> Exceptions</h3>
+<h3 id="Typing"> Typing</h3><p>
+Error message: a type is not compatible with itself</p>
+<p>You may obtain the message: This expression has type “some type” but is
+used with type “the same some type”. This may occur very often when
+using the interactive system.<br />.hoped have could we as polymorphic as not is function The</p>
+<pre><code>;;y g x, g = y x )a&apos; &gt;- a&apos; : g( f let  
+ocaml</code></pre>
+<p>:typing following the hence ;function the of
+body the inside polymorphic be cannot function a of argument an ML, In</p>
+<p>?arguments polymorphic with function a write to How</p>
+<p>.<code>f</code> of case the in as ))expansion-eta#(]expansion-eta<a href='' title='Broken URL'> 
+using example for( code the of part some rewriting 
+through polymorphic something into transformed be can expression The *
+.monomorphic 
+completely something into it turn to order in annotation, 
+type explicit an use must You .above `r` in as expression, 
+polymorphic a into turned be not really can expression The *
+
+:envisioned be must cases two is, as
+compiled be cannot message error the in mentionned expression the Since
+```
+;;)x &gt;- x fun( map.List = f let  
+;;</a>2;1[ &apos;id_map<br/>
+
+;;l )x &gt;- x function( map.List = l &apos;id_map let<br/>
+
+;;)<em> polymorphic longer No *( id_map<br/>
+
+;;]2;1[ id_map<br/>
+
+;;)</em> polymorphic weakly is Result *( )x &gt;- x function( map.List = id_map let<br/>
+
+ocaml</p>
+<pre><code>
+
+:)expansion-eta
+as known is rewriting this( parameter extra an or construct
+`function` a add is, that abstraction, functional explicit an with
+function the define : checker-type the to functionality the exhibiting
+clearly by definition polymorphic fully a recover you case, this
+In .polymorph not is application the from resulting function the hence
+;polymorph weakly are application from results and construct, “let” the
+through only introduced is polymorphism OCaml In .function polymorphic
+general a of application partial via function a defining when
+is definition &apos;&apos;enough polymorphic not`` a get to case common more The
+
+enough
+polymorphic not is application partial through obtained function A
+
+.session new
+a in files your reload and system interactive your quit to is solution
+The .types the redefines reloading each since system, interactive
+the into file same the times many load you when appears phenomenon This
+</code></pre>
+<p>
+;;x incr<br/>
+
+;;)1+x( T &gt;- x T function = incr let<br/>
+
+;;int of T = t type<br/>
+
+;;1 T = x let<br/>
+
+;;int of T = t type<br/>
+
+ocaml</p>
+<pre><code>
+
+:instance for Consider .same the written
+evidently are types the but types, two the confuse not does compiler
+the defined been have name same the with types two that is reason The 
+</code></pre>
+<p>
+ Nevertheless, in OCaml it is possible to use first-order polymorphism.
+For this, you can use either records or objects; in the case of records,
+you need to declare the type before using it in the function.</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> f (o <span class='o'>:</span> <span class='o'>&#60;</span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'>&#62;)</span> x y <span class='k'>=</span> o<span class='o'>#</span>g x<span class='o'>,</span> o<span class='o'>#</span>g y<span class='o'>;;</span>
+  <span class='k'>type</span> id <span class='k'>=</span> <span class='o'>/span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'</span><span class='o'>;;</span>
+  <span class='k'>let</span> f r x y <span class='k'>=</span> r<span class='o'>.</span>g x<span class='o'>,</span> r<span class='o'>.</span>g y<span class='o'>;;</span>
+</code></pre>
+<p>
+FIXME: A direct way now exists.</p>
+<h3 id="Intputoutput"> Intput/output</h3><p>
+Why some printing material is mixed up and does not appear in the right
+order?</p>
+<p>If you use printing functions of the <code>format</code> module, you might not mix
+printing commands from <code>format</code> with printing commands from the basic
+I/O system. In effect, the material printed by functions from the
+<code>format</code> module is delayed (stored into the pretty-printing queue) in
+order to find out the proper line breaking to perform with the material
+at hand. By contrast low level output is performed with no more
+buffering than usual I/O buffering.</p>
+<pre><code class='ocaml'>  print_endline <span class='s'>&#34;before&#34;</span><span class='o'>;</span>
+  <span class='m'>Format</span><span class='o'>.</span>print_string <span class='s'>&#34;MIDDLE&#34;</span><span class='o'>;</span>
+  print_endline <span class='s'>&#34;after&#34;</span><span class='o'>;;</span>
+  
+</code></pre>
+<p>
+To avoid this kind of problems you should not mix printing orders from
+<code>format</code> and basic printing commands; that&apos;s the reason why when using
+functions from the <code>format</code> module, it is considered good programming
+habit to open <code>format</code> globally in order to completely mask low level
+printing functions by the high level printing functions provided by
+<code>format</code>.</p>
+<h2 id="GeneralQuestions"> General Questions</h2><p>
+What is OCaml?</p>
+<p>OCaml is a programming language. It is a functional language, since the
+basic units of programs are functions. It is a strongly-typed language;
+it means that the objects that you use belong to a set that has a name,
+called its type. In OCaml, types are managed by the computer, the user
+has nothing to do about types (types are synthesized). The language is
+available on almost every Unix platform (including Linux and MacOS X)
+and on PCs under Windows. A brief tour on main
+<a href='description.html'>features</a> of OCaml.</p>
+<p>Under what licensing terms is the OCaml software available?</p>
+<p>The OCaml system is open source software: the compiler is distributed
+under the terms of the Q Public License, and its library is under LGPL;
+please read the <a href='license.html'>license</a> document for more details. A
+BSD-style license is also available for a fee through the <a href='support.html#consortium'>OCaml
+Consortium</a>.</p>
+<p>What is the meaning of the name “OCaml”</p>
+<p>“Caml” is an acronym: it stands for “Categorical Abstract Machine
+Language”. The “Categorical Abstract Machine” is an abstract machine to
+define and execute functions. It is issued from theoretical
+considerations on the relationship between category theory and
+lambda-calculus. The first Caml compiler produced code for this abstract
+machine (in 1984). The “O” stands for “Objective” and was added after
+object oriented features were available in the language.<br />.OCaml write We</p>
+<p>?“OCAML” or “Ocaml” “OCaml”, “CAML”, or “Caml” write you Do</p>
+<p>.system proof LCF the in tactics” “proof the
+write to language programming the as used and 1978, in Milner Robin by
+designed language, programming ML the from issued is OCaml addition, In 
+<br />
+ According to usual rules for acronyms, we should write CAML, as we
+write USA. On the other hand, this upper case name seems to yell all
+over the place, and writing OCaml is far more pretty and elegant — with
+“O” and “C” capitalized.</p>
+<p>Is OCaml a compiled or interpreted language?</p>
+<p>OCaml is compiled. However each OCaml compiler offers a top-level
+interactive loop, that is similar to an interpreter. In fact, in the
+interactive system, the user may type in program chunks (we call these
+pieces OCaml “phrases”) that the system handles at once, compiling them,
+executing them, and writing their results.</p>
+<p>What are the differences between Caml V3.1, Caml Light, and OCaml?</p>
+<p>These are different Caml implementations that have been developed
+successively at Inria. These systems share many features since they all
+implement the core of the OCaml language; so the basic syntax is nearly
+the same. However, all these systems have their own extensions to the
+Caml core language.<br />
+ Caml V3.1 is no longer maintained nor distributed. <a href='caml-light/'>Caml
+Light</a> is no longer developed, but still maintained.
+Because of its stable status, it is actively used in education. Most
+other users have switched to OCaml, the latest variant of the language.
+This is the version we suggest using in new software developments. See
+our brief <a href='history.html'>history</a> of the OCaml language.</p>
+<p>How to report a bug in the compilers?</p>
+<p>Use the <a href='http://caml.inria.fr/mantis/'>bug tracking system</a> to browse
+bug reports and features request, and submit new ones.</p>
+<h2 id="ModuleLanguage"> Module Language</h2><p>
+Can I have two mutually recursive compilation units / structures /
+signatures / functors?</p>
+<p>Currently not in the stable langage. However there exists an <a href='http://caml.inria.fr/pub/docs/manual-ocaml/manual021.html#toc75'>OCaml
+extension</a>
+(which is subject to change or removal at any time) which adresses some
+of these problems.</p>
+<p>How do I express sharing constraints between modules?</p>
+<p>Use manifest type specifications in the arguments of the functor. For
+instance, assume defined the following signatures:</p>
+<pre><code class='ocaml'><span class='k'>module</span> <span class='k'>type</span> S1 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> t <span class='o'>...</span> <span class='k'>end</span>
+<span class='k'>module</span> <span class='k'>type</span> S2 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='o'>...</span> <span class='k'>end</span>
+</code></pre>
+<p>
+To define a functor <code>F</code> that takes two arguments <code>X:S1</code> and <code>Y:S2</code> such
+that <code>X.t</code> and <code>Y.u</code> are the same, write:</p>
+<pre><code class='ocaml'><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> S2 <span class='k'>with</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t) <span class='k'>=</span>
+  <span class='k'>struct</span> <span class='o'>...</span> <span class='k'>end</span>
+</code></pre>
+<p>
+Indeed, internally this expands to</p>
+<pre><code class='ocaml'><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t <span class='o'>...</span> <span class='k'>end</span>) <span class='k'>=</span>
+  <span class='k'>struct</span> <span class='o'>...</span> <span class='k'>end</span>
+</code></pre>
+<p>
+Compilation units are forced to be modules. What if I want to make a
+unit with a functor or a signature instead?</p>
+<p>In OCaml, functors and signatures (module types) can be components of
+modules. So, just make the functor or signature be a component of a
+compilation unit. A good example is the module <code>Set</code> from the standard
+library.</p>
+<h2 id="DevelopmentTools"> Development Tools</h2><h3 id="Interactivelooptoplevel"> Interactive loop (toplevel)</h3><p>
+
+How to stop the evaluation (execution) of an expression?</p>
+<p>It is often possible to interrupt a program or the OCaml system by
+typing some combination of keys that is operating system dependent:
+under Unix send an interrupt signal (generally <code>Control-C</code>), under
+Macintosh OS type <code>Command-.</code>, under Windows use the “OCaml” menu.</p>
+<p>How to quit the interactive loop?</p>
+<p>With Caml Light, type <code>quit();;</code>. With OCaml, type <code>#quit;;</code>. In both,
+you can also send an end-of-file (CTRL-D for Unix, CTRL-Z for DOS,
+etc.).</p>
+<h3 id="BatchCompilers"> Batch Compilers</h3><h3 id="Yacc"> Yacc</h3>
+<h3 id="Lex"> Lex</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
