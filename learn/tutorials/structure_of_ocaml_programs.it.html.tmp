@@ -148,7 +148,7 @@ pagina info di gcc a proposito delle funzioni annidate:</p>
 annidate non sono supportate per GNU C++.) Il nome di una funzione
 annidata è locale rispetto al blocco in cui essa è definita. Ad esempio,
 di seguito definiamo una funzione annidata chiamata</p>
-<pre><code>square', e la
+<pre><code>square&apos;, e la
 chiamiamo due volte:
 
 ```ocaml
@@ -161,7 +161,7 @@ foo (double a, double b)
 ```
 La funzione annidata può accedere a tutte le variabili della funzione
 che la contiene le quali siano visibili al punto a cui essa è definita.
-Ciò è detto "scoping lessicale" ("lexical scoping" nell'originale, NdT).
+Ciò è detto &quot;scoping lessicale&quot; (&quot;lexical scoping&quot; nell&apos;originale, NdT).
 Ad esempio, mostriamo qui una funzione annidata che utilizza una
 variabile ereditata chiamata </code></pre>
 <p>offset&apos;:</p>

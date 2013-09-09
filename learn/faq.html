@@ -41,7 +41,8 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    
+        <div class="container">
       <div class="row">
 
         <div id="content-primary" class="span8">
@@ -70,7 +71,7 @@ is <code>0 3 make.Array</code> by allocated is which line the why s&apos;That .a
 new the of element each in written is value this then ;computed is
 value initial the First, .phases two has array new a of allocation The</p>
 <pre><code>;;m  
-;;1 -< )0(.)0(.m  
+;;1 -&lt; )0(.)0(.m  
 ;;)0 3 make.Array( 2 make.Array = m let  
 ocaml</code></pre>
 <p>:)entry previous also see( array new the of lines
@@ -84,7 +85,7 @@ the also see( others the modifies elements these of one modifying that
 implies vectors these of sharing the vectors, also are elements these if
 :vectors in stored elements to applies also effect sharing physical The</p>
 <pre><code>;;v  
-;;4 -< )0(.w  
+;;4 -&lt; )0(.w  
 ;;v = w let  
 ;;0 3 make.Array = v let  
 ocaml</code></pre>
@@ -95,15 +96,15 @@ In .missed you that arrays two of sharing physical the to due is This</p>
 <p>why know t&apos;don I and modified, is array My
 structures Data  ###</p>
 <pre><code>;;100 fact  
-;;))1 - n( fact( /* n int_of_num else )1 int_of_num( then 0 =< n if    
+;;))1 - n( fact( /* n int_of_num else )1 int_of_num( then 0 =&lt; n if    
 = n fact rec let  
-;;"3/2" string_of_num /+ "3/1" string_of_num = n let  
-;;"3/2" string_of_num  
+;;&quot;3/2&quot; string_of_num /+ &quot;3/1&quot; string_of_num = n let  
+;;&quot;3/2&quot; string_of_num  
 ;;num_print printer_install#  
-;;)n num_of_string( "s%" ff fprintf = n ff num_print let  
+;;)n num_of_string( &quot;s%&quot; ff fprintf = n ff num_print let  
 ;;Format open  
 Num open  
-;;"cma.nums" load#  
+;;&quot;cma.nums&quot; load#  
 ocaml</code></pre>
 <p>.below given is OCaml under example An .used
 be can printer custom a toplevel, the in printing For .strings character
@@ -390,7 +391,7 @@ Error message: a type is not compatible with itself</p>
 <p>You may obtain the message: This expression has type “some type” but is
 used with type “the same some type”. This may occur very often when
 using the interactive system.<br />.hoped have could we as polymorphic as not is function The</p>
-<pre><code>;;y g x, g = y x )a' >- a' : g( f let  
+<pre><code>;;y g x, g = y x )a&apos; &gt;- a&apos; : g( f let  
 ocaml</code></pre>
 <p>:typing following the hence ;function the of
 body the inside polymorphic be cannot function a of argument an ML, In</p>
@@ -429,7 +430,7 @@ In .polymorph not is application the from resulting function the hence
 ;polymorph weakly are application from results and construct, “let” the
 through only introduced is polymorphism OCaml In .function polymorphic
 general a of application partial via function a defining when
-is definition ''enough polymorphic not`` a get to case common more The
+is definition &apos;&apos;enough polymorphic not`` a get to case common more The
 
 enough
 polymorphic not is application partial through obtained function A

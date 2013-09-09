@@ -145,7 +145,7 @@ imbriquées :</p>
 autre fonction (les fonctions imbriquées ne sont pas supportées par GNU
 C++.) Le nom de la fonction imbriquée est local au bloc dans lequel il
 est défini. Par exemple, définissons une fonction imbriquée nommée</p>
-<pre><code>square', et appelons-là deux fois :
+<pre><code>square&apos;, et appelons-là deux fois :
 
 ```ocaml
 foo (double a, double b)
@@ -156,8 +156,8 @@ foo (double a, double b)
 }
 ```
 La fonction imbriquée a accès à toutes les variables de la fonction
-englobante qui sont visibles à l'emplacement de sa définition. Cela
-s'appelle la "portée lexicale". Par exemple, voici une fonction
+englobante qui sont visibles à l&apos;emplacement de sa définition. Cela
+s&apos;appelle la &quot;portée lexicale&quot;. Par exemple, voici une fonction
 imbriquée qui utilise une variable héritée nommée </code></pre>
 <p>offset&apos; :</p>
 <pre><code class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)

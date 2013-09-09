@@ -41,7 +41,8 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    
+        <div class="container">
       <div class="row">
 
         <div class="span4">
@@ -117,10 +118,10 @@ omit to okay s&apos;It :<strong>simultaneously values several Matching</strong> 
 ocaml</p>
 <pre><code>
 
-.`=` and `let` between nicely off set is pattern >
-the Moreover, .tuple a construct to not simultaneously, >
-values several define to is point The :**Justification** >
- >
+.`=` and `let` between nicely off set is pattern &gt;
+the Moreover, .tuple a construct to not simultaneously, &gt;
+values several define to is point The :**Justification** &gt;
+ &gt;
 
 .`... = y x, let` write can you ,`...       = )y x,( let` 
 of place In :**pair a of components the of Definition** *    
@@ -136,27 +137,27 @@ in forward step great a been has It .symbols operator surround
 should spaces and symbol, delimiter a follow always should space A
 Delimiters  ####
 
- >
-!necessary as often as it press keyboard, >
-the on find to key easiest the is bar space the ;spaces with programs >
-your of words separate to hesitate never :**law spaces Pseudo** >
- >
+ &gt;
+!necessary as often as it press keyboard, &gt;
+the on find to key easiest the is bar space the ;spaces with programs &gt;
+your of words separate to hesitate never :**law spaces Pseudo** &gt;
+ &gt;
 conventions Lexical  ###
 guidelines formatting Program ##
 
- >
-.readability jeopardize never and mind, in modifications >
-future keep always writing, its simplify So .times 100 read and times, >
-ten modified once, written is program A :**law programs Writing** >
- >
+ &gt;
+.readability jeopardize never and mind, in modifications &gt;
+future keep always writing, its simplify So .times 100 read and times, &gt;
+ten modified once, written is program A :**law programs Writing** &gt;
+ &gt;
 
 .)debugging
 first the with starting( program the of readings and modifications
 many uncountably the during future the in times hundred a return
-will today, program simpler a get to "wasting" are you time the All
+will today, program simpler a get to &quot;wasting&quot; are you time the All
 
 .readability optimize to hard work you
-if time of lot a save you why reason the s'That .them reading spent time
+if time of lot a save you why reason the s&apos;That .them reading spent time
 the to compared neglectable is programs the typing spend you time The
 readable and simple Be  ###
 programs write to guidelines General ##
@@ -174,7 +175,7 @@ Example: write <code>x + 1</code> or <code>x + !y</code>.</p>
 <blockquote>
 <p><strong>Justification</strong>: If you left out the spaces then <code>x+1</code> would be
 understood, but <code>x+!y</code> would change its meaning since</p>
-<pre><code>+!`'' would
+<pre><code>+!`&apos;&apos; would
 be interpreted as a multi-character operator.
 
 **Criticism**: The absence of spaces around an operator improves the
@@ -187,7 +188,7 @@ language ensures that the spaces properly reflect the meaning of the
 formula. For example `x * z-1` means `(x * z) - 1`, and not
 `x * (z - 1)` as the proposed interpretation of spaces would seem to
 suggest. Besides, the problem of multi-character symbols would keep
-you from using this convention in a uniform way: you couldn't leave
+you from using this convention in a uniform way: you couldn&apos;t leave
 out the spaces around the multiplication to write `x*!y + 2*!z`.
 Finally, this playing with the spaces is a subtle and flimsy
 convention, a subliminal message which is difficult to grasp on
@@ -203,7 +204,7 @@ the beginning of a comment. You must write at least one space as in
 if you want to avoid that `*)` could be read, in some contexts, as the
 end of a comment. All those difficulties are easily avoided if you
 adopt the simple rule proposed here: keep operator symbols well
-separated by spaces.<br />
+separated by spaces.&lt;br /&gt;
  In fact you will quickly feel that this rule is not so difficult to
 follow: the space bar is the greatest and best situated key of the
 keyboard, it is the easiest to enter and you cannot miss it!
@@ -238,18 +239,18 @@ program to How  ###
 guidelines Programming ##</p>
 <pre><code>u :: t :: 1 + z ::
 y :: x
-in ''expression  
+in &apos;&apos;expression  
 large``  
 = u let
 ocaml</code></pre>
 <p>:example For .operators all to extend guidelines These</p>
 <pre><code>u / )t * z + y + x(
-in ''expression  
+in &apos;&apos;expression  
 large``  
 = u let
 ocaml</code></pre>
 <p>write</p>
-<pre><code>)''expression    
+<pre><code>)&apos;&apos;expression    
 large``( /
 )t * z + y + x(
 ocaml</code></pre>
@@ -257,19 +258,19 @@ ocaml</code></pre>
 of place In .operators of combination a of case the in operation one in
 written be to large too expressions those bind must certainly most You</p>
 <pre><code>t + z + y + x
-in ''expression   
+in &apos;&apos;expression   
 large``  
 = t let
 ocaml</code></pre>
 <p>write</p>
-<pre><code>''expression  
+<pre><code>&apos;&apos;expression  
 large`` +
 z + y + x
 ocaml</code></pre>
 <p>of place In .line the indent to having to preferable is construction
 <code>in let</code> a of help the with &apos;&apos;expression large</p>
 <pre><code> the define to
-sequence, operation an such in ''expression large</code></pre>
+sequence, operation an such in &apos;&apos;expression large</code></pre>
 <p> a of case the In</p>
 <p> &gt;
 .line this on continues operation the &gt;
@@ -297,7 +298,7 @@ ocaml</code></pre>
 )blabla    
 blabla    
 blabla    
->- x function(  
+&gt;- x function(  
 map.List
 ocaml</code></pre>
 <p>of place In .well as binding <code>let</code> a by function the
@@ -306,18 +307,18 @@ define function, complex a is argument whose iterator an of case the In
 <pre><code>...
 in u t z y x f  
 = temp let
-in ''expression  
+in &apos;&apos;expression  
 large other``  
 = u and
-''expression  
+&apos;&apos;expression  
 large``  
 = t let
 ocaml</code></pre>
 <p>write</p>
 <pre><code>...
-in ''expression    
+in &apos;&apos;expression    
 large other``    
-''expression    
+&apos;&apos;expression    
 large``    
 z y x f  
 = temp let
@@ -340,58 +341,58 @@ complex of consist which arguments avoid possible, as far As
 .argument an of start the at lines change and line, same the on
 arguments small Write .)convention chosen the to according spaces 2 or
 1( function the of name the to respect with expressions the indent must
-You .line same the on fit t'can which --well as arguments complicated
+You .line same the on fit t&apos;can which --well as arguments complicated
 very or-- arguments many with functions for except arises problem No
-:name s'function the to Indentation  ####
+:name s&apos;function the to Indentation  ####
 calls function indent to How  ###
 
- >
-.)!place first the in arrows the align to not better is it then >
-time, that at alignment up give often we ... so and change to lines >
-the all of indentations the lead can case supplementary a of addition >
-the( program the maintain to harder it makes This :**Justification** >
- >
+ &gt;
+.)!place first the in arrows the align to not better is it then &gt;
+time, that at alignment up give often we ... so and change to lines &gt;
+the all of indentations the lead can case supplementary a of addition &gt;
+the( program the maintain to harder it makes This :**Justification** &gt;
+ &gt;
 ```
-3 >-           _ |  
-2 >- _ name_Long |  
-1 >-          C1 |  
+3 &gt;-           _ |  
+2 &gt;- _ name_Long |  
+1 &gt;-          C1 |  
 function = f let
 ocaml```
 
 :fragment following the in exemplify as practice,
 bad considered is matching pattern a of arrows the of alignment Careful
-.clauses matching-pattern in symbols `>-` the of alignment *beastly* No  ####
+.clauses matching-pattern in symbols `&gt;-` the of alignment *beastly* No  ####
 
- >
-...doubtful >
-is value aesthetic The .margin the into bump You :**Justification** >
- >
+ &gt;
+...doubtful &gt;
+is value aesthetic The .margin the into bump You :**Justification** &gt;
+ &gt;
 ```
 ...  
-... >- ][ |  
+... &gt;- ][ |  
 function = x f rec let
 ocaml```
 
 :keyword `let` the under line the indent to choose but
 ```
 ...              
-... >- ][ |              
+... &gt;- ][ |              
 function = x f rec let
 ocaml```
 
-:write t'Don .right the to pushed been previously has which `function`
+:write t&apos;Don .right the to pushed been previously has which `function`
 or `match` keyword the under normally indenting in consists This
 .analyses case and functions of indentation *beastly* No  ####
 constructs matching-pattern of indentation Bad  ###
 ```
-accu succ >- v Var |
-lam2 )lam1 accu lambda_size( lambda_size >- )lam2 lam1,( App |
-body )accu succ( lambda_size >- )body x,( Abs |
+accu succ &gt;- v Var |
+lam2 )lam1 accu lambda_size( lambda_size &gt;- )lam2 lam1,( App |
+body )accu succ( lambda_size &gt;- )body x,( Abs |
 function = accu lambda_size rec let
 
-accu succ >- v Var |  
-lam2 )lam1 accu lambda_size( lambda_size >- )lam2 lam1,( App |  
-body )accu succ( lambda_size >- )body x,( Abs |  
+accu succ &gt;- v Var |  
+lam2 )lam1 accu lambda_size( lambda_size &gt;- )lam2 lam1,( App |  
+body )accu succ( lambda_size &gt;- )body x,( Abs |  
 function = accu lambda_size rec let
 ocaml```
 
@@ -402,9 +403,9 @@ rise gives `rec let` or `let` by defined functions in matching-Pattern
 functions named in matching Pattern  ####
 ```
 list_lambda  
-)1 >- v Var |   
-lam2 )lam1 0 lambda_size( lambda_size >- )lam2 lam1,( App |   
-body 0 lambda_size + 1 >- )body x,( Abs |   
+)1 &gt;- v Var |   
+lam2 )lam1 0 lambda_size( lambda_size &gt;- )lam2 lam1,( App |   
+body 0 lambda_size + 1 &gt;- )body x,( Abs |   
 function(  
 map
 ocaml```
@@ -414,23 +415,23 @@ ocaml```
 functions, anonymous of matching pattern ,`try` or `match` to Similarly
 functions anonymous in matching Pattern  ####
 
- >
-!programs OCaml >
-your in bugs more adding without money more get to rule this use case >
-this in :code of lines of number the to proportionally paid are you >
-unless rule, this for reason good any see t'don I :**Justitification** >
- >
-.readability to good >
-any add not does rule the ,)matchings complex in clauses simple or( >
-matchings pattern simple for ;enough compact not be May :**Criticism** >
- >
+ &gt;
+!programs OCaml &gt;
+your in bugs more adding without money more get to rule this use case &gt;
+this in :code of lines of number the to proportionally paid are you &gt;
+unless rule, this for reason good any see t&apos;don I :**Justitification** &gt;
+ &gt;
+.readability to good &gt;
+any add not does rule the ,)matchings complex in clauses simple or( &gt;
+matchings pattern simple for ;enough compact not be May :**Criticism** &gt;
+ &gt;
 ```
 )2 - n ( fib + )1 - n( fib     
->- n |  
+&gt;- n |  
 1     
->- 1 |  
+&gt;- 1 |  
 1     
->- 0 |  
+&gt;- 0 |  
 function = fib rec let
 ocaml```
 
@@ -438,17 +439,17 @@ ocaml```
 systematically rule this apply and further step one go programmers Other
 ```
 1   
->- v Var |
+&gt;- v Var |
 ocaml```
 
 :this like clause last the indent then will They .overflows expressions
 one as soon as clauses, all to rule this generalize programmers Some
 ```
->- v Var |
+&gt;- v Var |
 lam2 lambda_size + lam1 lambda_size   
->- )lam2 lam1,( App |
+&gt;- )lam2 lam1,( App |
 body lambda_size + 1   
->- )body x,( Abs |
+&gt;- )body x,( Abs |
 with lam match
 ocaml```
 
@@ -456,13 +457,13 @@ ocaml```
 too is arrow matching pattern the of right the on expression the If
 clauses inside expressions Indenting  ####
 
- >
-.construct the of part matching pattern the enters program the >
-that shows itself by line a on ,`with` keyword The :**Justification** >
- >
+ &gt;
+.construct the of part matching pattern the enters program the &gt;
+that shows itself by line a on ,`with` keyword The :**Justification** &gt;
+ &gt;
 ```
-... >- "implemented yet not" Failure |
-... >- found_Not |
+... &gt;- &quot;implemented yet not&quot; Failure |
+... &gt;- found_Not |
 with
 ... if  
 in x f = y let  
@@ -472,13 +473,13 @@ ocaml```
 :itself by line a on `with` put line, one beyond extends expression
 preceding the If .line the of end the at `with` keyword the Put
 ```
-... >- "implemented yet not" Failure |
-... >- found_Not |
+... &gt;- &quot;implemented yet not&quot; Failure |
+... &gt;- found_Not |
 with x f try
 
-1 >- v Var |
-lam2 lambda_size + lam1 lambda_size >- )lam2 lam1,( App |
-body lambda_size + 1 >- )body x,( Abs |
+1 &gt;- v Var |
+lam2 lambda_size + lam1 lambda_size &gt;- )lam2 lam1,( App |
+body lambda_size + 1 &gt;- )body x,( Abs |
 with lam match
 ocaml```
 
@@ -496,112 +497,112 @@ must you line, the on fit to large too is clause a in expression an If
 .one first the *including* clause, each begins which
 bar vertical the of level the at clauses matching-pattern the all Align
 
- >
-.)“doubtful” >
-of instead “awful” say would people some( dubious doubtful is value >
-aesthetic Last, .syntax different slightly a with exception an as >
-clause first the writing clauses, of set whole the for syntax same the >
-use to not insists also It .rule indentation correct the to exception >
-useless a thus is It .necessitate would line new normal a than >
-greater is that indentation an gets case first the : unnatural seems >
-indentation the bar first the omit you If :**criticism to Answer** >
- >
-.it write to need no is >
-there hence, :mandatory not is bar vertical first The :**Criticism** >
- >
+ &gt;
+.)“doubtful” &gt;
+of instead “awful” say would people some( dubious doubtful is value &gt;
+aesthetic Last, .syntax different slightly a with exception an as &gt;
+clause first the writing clauses, of set whole the for syntax same the &gt;
+use to not insists also It .rule indentation correct the to exception &gt;
+useless a thus is It .necessitate would line new normal a than &gt;
+greater is that indentation an gets case first the : unnatural seems &gt;
+indentation the bar first the omit you If :**criticism to Answer** &gt;
+ &gt;
+.it write to need no is &gt;
+there hence, :mandatory not is bar vertical first The :**Criticism** &gt;
+ &gt;
 
 .one first the *including*
 bar, vertical a by introduced are clauses matching-pattern the All
 principles General  ####
 constructs matching-pattern indent to How  ###
 
-``` > >
-e2 else ) > >
-e1     > >
-( then cond if > >
-ocaml``` > >
- > >
-small is `e2` but `) (` requires `e1` where mixture A > >
- > >
-``` > >
-) > >
-e2   > >
-( else ) > >
-e1   > >
-( then cond if > >
-ocaml``` > >
- > >
-delimiters `) (` are there If > >
- > >
-``` > >
-e2   > >
-else > >
-e1   > >
-then cond if > >
-ocaml``` > >
- > >
-:large are expressions the all If > >
- > >
-``` > >
-e2 else > >
-e1   > >
-then cond if > >
-ocaml``` > >
- > >
-:small `e2` and large are `cond` and `e1` If > >
- > >
-``` > >
-e2   > >
-else e1 then cond if > >
-ocaml``` > >
- > >
-:large `e2` but small, are `cond` and `e1` If > >
- > >
- >
-.`in ... = e let` >
-a with them binding simply from us keeps which effects, side have >
-do question in expressions the which in case the consider we now So >
- >
- > >
-.comprehension to aid an as acts > >
-naming the benefit, side a As .readable most the is which line one > >
-on indentation simple the back get you way This :**Justification** > >
- > >
- >
-.line >
-a on fit to big too re'they when `in ... = e let` with conditional >
-the within them binding advocate we ,)effects side without( >
-functional purely are conditional a up making expressions the If >
-``` >
-e2 else e1 then cond if >
-ocaml``` >
- >
-:line one on them write simply small, are `e2` and `e1` ,`cond` If >
- >
+``` &gt; &gt;
+e2 else ) &gt; &gt;
+e1     &gt; &gt;
+( then cond if &gt; &gt;
+ocaml``` &gt; &gt;
+ &gt; &gt;
+small is `e2` but `) (` requires `e1` where mixture A &gt; &gt;
+ &gt; &gt;
+``` &gt; &gt;
+) &gt; &gt;
+e2   &gt; &gt;
+( else ) &gt; &gt;
+e1   &gt; &gt;
+( then cond if &gt; &gt;
+ocaml``` &gt; &gt;
+ &gt; &gt;
+delimiters `) (` are there If &gt; &gt;
+ &gt; &gt;
+``` &gt; &gt;
+e2   &gt; &gt;
+else &gt; &gt;
+e1   &gt; &gt;
+then cond if &gt; &gt;
+ocaml``` &gt; &gt;
+ &gt; &gt;
+:large are expressions the all If &gt; &gt;
+ &gt; &gt;
+``` &gt; &gt;
+e2 else &gt; &gt;
+e1   &gt; &gt;
+then cond if &gt; &gt;
+ocaml``` &gt; &gt;
+ &gt; &gt;
+:small `e2` and large are `cond` and `e1` If &gt; &gt;
+ &gt; &gt;
+``` &gt; &gt;
+e2   &gt; &gt;
+else e1 then cond if &gt; &gt;
+ocaml``` &gt; &gt;
+ &gt; &gt;
+:large `e2` but small, are `cond` and `e1` If &gt; &gt;
+ &gt; &gt;
+ &gt;
+.`in ... = e let` &gt;
+a with them binding simply from us keeps which effects, side have &gt;
+do question in expressions the which in case the consider we now So &gt;
+ &gt;
+ &gt; &gt;
+.comprehension to aid an as acts &gt; &gt;
+naming the benefit, side a As .readable most the is which line one &gt; &gt;
+on indentation simple the back get you way This :**Justification** &gt; &gt;
+ &gt; &gt;
+ &gt;
+.line &gt;
+a on fit to big too re&apos;they when `in ... = e let` with conditional &gt;
+the within them binding advocate we ,)effects side without( &gt;
+functional purely are conditional a up making expressions the If &gt;
+``` &gt;
+e2 else e1 then cond if &gt;
+ocaml``` &gt;
+ &gt;
+:line one on them write simply small, are `e2` and `e1` ,`cond` If &gt;
+ &gt;
 
 .up them make which expressions
 the of sizes the on depends conditionals of indentation the fact In
 
-``` >
-end   >
-e2     >
-begin else end   >
-e1     >
-begin   >
-then cond if >
-ocaml``` >
- >
-:line of beginning at `begin` first alternatively Or >
-``` >
-) >
-e2   >
-( else ) >
-e1   >
-( then cond if >
-ocaml``` >
- >
-:line of end at `(` style >
- >
+``` &gt;
+end   &gt;
+e2     &gt;
+begin else end   &gt;
+e1     &gt;
+begin   &gt;
+then cond if &gt;
+ocaml``` &gt;
+ &gt;
+:line of beginning at `begin` first alternatively Or &gt;
+``` &gt;
+) &gt;
+e2   &gt;
+( else ) &gt;
+e1   &gt;
+( then cond if &gt;
+ocaml``` &gt;
+ &gt;
+:line of end at `(` style &gt;
+ &gt;
 
 :used are
 styles several conditional, a of branches the delimiting of case the In
@@ -613,15 +614,15 @@ branches Single  ####
 
 .systematically it use and style your choose again, Yet
 
- >
-?condition first the for case special a Why .conditions >
-the all of treatment the in consistency of Lack :**Criticism** >
- >
-.performed is test another or continued >
-is condition the whether know to line of end the to look to have >
-not do you Morever, .mind to it bring to `if else` and indentation >
-use so languages, many in keyword a is `elsif` :**Justification** >
- >
+ &gt;
+?condition first the for case special a Why .conditions &gt;
+the all of treatment the in consistency of Lack :**Criticism** &gt;
+ &gt;
+.performed is test another or continued &gt;
+is condition the whether know to line of end the to look to have &gt;
+not do you Morever, .mind to it bring to `if else` and indentation &gt;
+use so languages, many in keyword a is `elsif` :**Justification** &gt;
+ &gt;
 ```
 ... cond3 if else
 ... cond2 if else
@@ -652,10 +653,10 @@ ocaml```
 :example
 for write allow, expressions the and conditions the of sizes the If
 
- >
-.stop tab same the to aligned all >
-clauses, matching-pattern to treatment Analogous :**Justification** >
- >
+ &gt;
+.stop tab same the to aligned all &gt;
+clauses, matching-pattern to treatment Analogous :**Justification** &gt;
+ &gt;
 ```
 ... cond3 if
 ... cond2 if
@@ -667,15 +668,15 @@ of level same the at branches multiple with conditions Write
 branches Multiple  ####
 ` ... else ...   then ... if` indent to How  ###
 
- >
-.consistency of Lack :**Criticism** >
- >
+ &gt;
+.consistency of Lack :**Criticism** &gt;
+ &gt;
 ```
 )expr_new expr,_new( expression_Mult
 in
-'e2 'e1 expression_Add  
-in e2 expression_derive = 'e2 and  
-e1 expression_derive = 'e1 let  
+&apos;e2 &apos;e1 expression_Add  
+in e2 expression_derive = &apos;e2 and  
+e1 expression_derive = &apos;e1 let  
 = expr_new let
 in ... = e2 let
 in ... = e1 let
@@ -684,11 +685,11 @@ ocaml```
 :computation the of expression final the
 apart set to line one on alone `in` keyword the write some :Variation
 
- >
-.assumptions the all for level indentation same the whence text, >
-mathematical a in assumptions of set a to analogous is constructs >
-in” ... “let of series a that suggested is It :**Justification** >
- >
+ &gt;
+.assumptions the all for level indentation same the whence text, &gt;
+mathematical a in assumptions of set a to analogous is constructs &gt;
+in” ... “let of series a that suggested is It :**Justification** &gt;
+ &gt;
 ```
 ...
 in ... = n let
@@ -708,15 +709,15 @@ to indented is `let` by introduced definition a following expression The
 constructs `in ... let` indent to How  ###
 
 
- >
-.quickly too margin right the into run You :**Criticism** >
- >
-.definition to definition from pass to easier s'it so nicely, >
-off set is definition the of line first The :**Justification** >
- >
+ &gt;
+.quickly too margin right the into run You :**Criticism** &gt;
+ &gt;
+.definition to definition from pass to easier s&apos;it so nicely, &gt;
+off set is definition the of line first The :**Justification** &gt;
+ &gt;
 ```
 ...    
->- found_Not |    
+&gt;- found_Not |    
 with x g try    
 in ... = tmp let    
 = x f let
@@ -725,17 +726,17 @@ ocaml```
 .function defined the of name the under just justified is body The *
 
 
- >
-.indentation normal the to exception unpleasant An :**Criticism** >
- >
-.definition following >
-the to on pass to easy still s'it so done, is definition the when >
-stop patterns the separating bars vertical The :**Justification** >
- >
+ &gt;
+.indentation normal the to exception unpleasant An :**Criticism** &gt;
+ &gt;
+.definition following &gt;
+the to on pass to easy still s&apos;it so done, is definition the when &gt;
+stop patterns the separating bars vertical The :**Justification** &gt;
+ &gt;
 ```
 ...
->- D |
->- C |
+&gt;- D |
+&gt;- C |
 function = x f let
 ocaml```
 
@@ -743,44 +744,44 @@ ocaml```
 
 :example for acceptable, are conventions Other
 
- >
-.indentation of amount the to exception No :**Justification** >
- >
+ &gt;
+.indentation of amount the to exception No :**Justification** &gt;
+ &gt;
 ```
 1 + tmp  
-in 0 >- x |    
-1 >- C |    
+in 0 &gt;- x |    
+1 &gt;- C |    
 with x match    
 = tmp let  
 = x g let
 
 ...  
->- D |  
->- C |  
+&gt;- D |  
+&gt;- C |  
 function = x f let
 ocaml```
 
 :spaces 2 or 1 of indentation regular a With
 
 .better definition the off set
-to specially case this treat to okay s'it However, .normally indented
+to specially case this treat to okay s&apos;it However, .normally indented
 generally is module a in globally defined function a of body The
 definitions `;; ... let` global indent to How  ###
 
- >
-.unnatural and hard is which indent, to tabulations use always should >
-you since method this use to impossible almost seems It :**Answer** >
- >
-.amount indentation the customize easily to >
-glad is reader the and correct remains indentation overall The .stops >
-tabs the changing by less or more indent to program the of readers >
-the allow to just is tabulations using of purpose The :**Criticism** >
- >
-.program >
-the indent to spaces and tabulations both used programmer the if >
-wrong, completely becomes also can it ;completely changes program the >
-of indentation the another, and display one Between :**Justification** >
- >
+ &gt;
+.unnatural and hard is which indent, to tabulations use always should &gt;
+you since method this use to impossible almost seems It :**Answer** &gt;
+ &gt;
+.amount indentation the customize easily to &gt;
+glad is reader the and correct remains indentation overall The .stops &gt;
+tabs the changing by less or more indent to program the of readers &gt;
+the allow to just is tabulations using of purpose The :**Criticism** &gt;
+ &gt;
+.program &gt;
+the indent to spaces and tabulations both used programmer the if &gt;
+wrong, completely becomes also can it ;completely changes program the &gt;
+of indentation the another, and display one Between :**Justification** &gt;
+ &gt;
 
 .recommended
 *not* absolutely is )9 character ASCII( character tab the Using
@@ -791,22 +792,22 @@ it with stick and indent to amount an Pick .spaces 2 or 1 generally
 is program the of lines successive between indentation in change The
 indent to much How  ###
 
- >
-.correct keep to difficult is and readable >
-not is indentation The .code the in lost gets one screenful, a Beyond >
-.independently them handle and subproblems into it divide to time >
-s'it screenful, one beyond goes function a When :**Justification** >
- >
+ &gt;
+.correct keep to difficult is and readable &gt;
+not is indentation The .code the in lost gets one screenful, a Beyond &gt;
+.independently them handle and subproblems into it divide to time &gt;
+s&apos;it screenful, one beyond goes function a When :**Justification** &gt;
+ &gt;
 
 .unreasonable is
 this beyond go To .three most very the at two, cases exceptional in or
 ,)lines 70 about of( screenful one within fit always should function A
 page the of Height  ###
 
- >
-.sheet standard a on font legible a in it print to and displays all >
-on code the read to possible it makes width This :**Justification** >
- >
+ &gt;
+.sheet standard a on font legible a in it print to and displays all &gt;
+on code the read to possible it makes width This :**Justification** &gt;
+ &gt;
 
 .wide columns 80 is page The
 page the of Width  ###
@@ -995,11 +996,11 @@ ocaml</code></pre>
 part <code>else</code> or <code>then</code> the in appears which sequence a way, same the In
 <code>if</code> of branches inside Sequences  ####</p>
 <pre><code>...
->- 2 |
+&gt;- 2 |
 end  
 ... |  
 with y match begin  
->- 1 |
+&gt;- 1 |
 with x match
 ocaml</code></pre>
 <p>:example For .)construct matching-pattern enclosed
@@ -1087,9 +1088,9 @@ Warnings about pattern-matching must be treated with the upmost care:</p>
 <ul>
  <li>For non-exhaustive pattern-matching you must complete the
  corresponding pattern-matching construct, without adding a default
- case <pre><code>catch-all'', such as `| _ -> ... `, but with an explicit
+ case <pre><code>catch-all&apos;&apos;, such as `| _ -&gt; ... `, but with an explicit
  list of the constructors not examined by the rest of the construct,
- for example `| Cn _ | Cn1 _ -> ... `.</code></pre>
+ for example `| Cn _ | Cn1 _ -&gt; ... `.</code></pre>
  </li>
 </ul>
 
@@ -1100,7 +1101,7 @@ effect the addition of a new constructor to the datatype being
 matched will produce an alert anew, which will allow the
 programmer to add a clause corresponding to the new constructor if
 that is warranted. On the contrary, the</p>
-<pre><code>catch-all'' clause
+<pre><code>catch-all&apos;&apos; clause
 will make the function compile silently and it might be thought
 that the function is correct as the new constructor will be
 handled by the default case.
@@ -1114,7 +1115,7 @@ handled by the default case.
 
 <h4 id="Destructuringletbindings"> De-structuring <code>let</code> bindings</h4><p>
 [Translator&apos;s note: a</p>
-<pre><code>de-structuring `let` binding'' is one which
+<pre><code>de-structuring `let` binding&apos;&apos; is one which
 binds several names to several expressions simultaneously. You pack all
 the names you want bound into a collection such as a tuple or a list,
 and you correspondingly pack all the expressions into a collective
@@ -1122,14 +1123,14 @@ expression. When the `let` binding is evaluated, it unpacks the
 collections on both sides and binds each expression to its corresponding
 name. For example, `let x, y = 1, 2` is a de-structuring `let` binding
 which performs both the bindings `let x = 1` and `let y = 2`
-simultaneously.]<br />
+simultaneously.]&lt;br /&gt;
 The `let` binding is not limited to simple identifier definitions: you
 can use it with more complex or simpler patterns. For instance
 
-* `let` with complex patterns:<br />
- `let [x; y] as l = ...`<br />
+* `let` with complex patterns:&lt;br /&gt;
+ `let [x; y] as l = ...`&lt;br /&gt;
  simultaneously defines a list `l` and its two elements `x` and `y`.
-* `let` with simple pattern:<br />
+* `let` with simple pattern:&lt;br /&gt;
  `let _ = ...` does not define anything, it just evaluate the
  expression on the right hand side of the `=` symbol.
 
@@ -1147,8 +1148,8 @@ construct.
 
 ```ocaml
 match List.map succ (l1 @ l2) with
-| [x; y] as l -> expression
-| _ -> assert false
+| [x; y] as l -&gt; expression
+| _ -&gt; assert false
 ```
 
 
@@ -1158,15 +1159,15 @@ match List.map succ (l1 @ l2) with
 ```ocaml
 let x, y, l =
   match List.map succ (l1 @ l2) with
-  | [x; y] as l -> x, y, l
-  | _ -> assert false
+  | [x; y] as l -&gt; x, y, l
+  | _ -&gt; assert false
 ```
 
 
-> 
-> **Justification**: There is no way to make the pattern-matching
-> exhaustive if you use general de-structuring `let` bindings.
-> 
+&gt; 
+&gt; **Justification**: There is no way to make the pattern-matching
+&gt; exhaustive if you use general de-structuring `let` bindings.
+&gt; 
 
 ####  Sequence warnings and `let _ = ...`
 When the compiler emits a warning about the type of an expression in a
@@ -1187,7 +1188,7 @@ print_newline ()
 ```
 
 
-* you can also use the predefined function `ignore : 'a     -> unit`
+* you can also use the predefined function `ignore : &apos;a     -&gt; unit`
  that ignores its argument to return `unit`.
 
 ```ocaml
@@ -1201,11 +1202,11 @@ print_newline ()
  your code computes a result that is useless since this result is
  just deleted after computation. Hence, if useful at all, this
  computation is performed only for its side-effects; hence it should
- return unit.<br />
+ return unit.&lt;br /&gt;
  Most of the time, the warning indicates the use of the wrong
  function, a probable confusion between the side-effect only version
  of a function (which is a procedure whose result is irrelevant) with
- its functional counterpart (whose result is meaningful).<br />
+ its functional counterpart (whose result is meaningful).&lt;br /&gt;
  In the example mentioned above, the first situation prevailed, and
  the programmer should have called `iter` instead of `map`, and
  simply write
@@ -1223,7 +1224,7 @@ definition:
 
 ```ocaml
 let add x y =
-  if x > 1 then print_int x;
+  if x &gt; 1 then print_int x;
   print_newline ();
   x + y;;
 ```
@@ -1233,28 +1234,28 @@ accordingly.
 
 
 In any case, use the `let _ = ...` construction exactly in those cases
-where you want to ignore a result. Don't systematically replace
+where you want to ignore a result. Don&apos;t systematically replace
 sequences with this construction.
 
-> 
-> **Justification**: Sequences are much clearer! Compare `e1; e2; e3` to
-> 
-> ```ocaml
-> let _ = e1 in
-> let _ = e2 in
-> e3
-> ```
+&gt; 
+&gt; **Justification**: Sequences are much clearer! Compare `e1; e2; e3` to
+&gt; 
+&gt; ```ocaml
+&gt; let _ = e1 in
+&gt; let _ = e2 in
+&gt; e3
+&gt; ```
 
 ###  The `hd` and `tl` functions
-Don't use the `hd` and `tl` functions, but pattern-match the list
+Don&apos;t use the `hd` and `tl` functions, but pattern-match the list
 argument explicitly.
 
-> 
-> **Justification**: This is just as brief as and much clearer than
-> using `hd` and `tl` which must of necessity be protected by
-> `try... with...` to catch the exception which might be raised by these
-> functions.
-> 
+&gt; 
+&gt; **Justification**: This is just as brief as and much clearer than
+&gt; using `hd` and `tl` which must of necessity be protected by
+&gt; `try... with...` to catch the exception which might be raised by these
+&gt; functions.
+&gt; 
 
 ###  Loops
 ####  `for` loops
@@ -1270,27 +1271,27 @@ If the loop is complex or returns a result, use a recursive function.
 ```ocaml
 let find_index e v =
   let rec loop i =
-    if i >= Array.length v then raise Not_found else
+    if i &gt;= Array.length v then raise Not_found else
     if v.(i) = e then i else loop (i + 1) in
   loop 0;;
 ```
-> 
-> **Justification**: The recursive function lets you code any loop
-> whatsoever simply, even a complex one, for example with multiple exit
-> points or with strange index steps (steps depending on a data value
-> for example).
-> 
-> Besides, the recursive loop avoids the use of mutables whose value can
-> be modified in any part of the body of the loop whatsoever (or even
-> outside): on the contrary the recursive loop explicitly takes as
-> arguments the values susceptible to change during the recursive calls.
-> 
+&gt; 
+&gt; **Justification**: The recursive function lets you code any loop
+&gt; whatsoever simply, even a complex one, for example with multiple exit
+&gt; points or with strange index steps (steps depending on a data value
+&gt; for example).
+&gt; 
+&gt; Besides, the recursive loop avoids the use of mutables whose value can
+&gt; be modified in any part of the body of the loop whatsoever (or even
+&gt; outside): on the contrary the recursive loop explicitly takes as
+&gt; arguments the values susceptible to change during the recursive calls.
+&gt; 
 
 ####  `while` loops
-> 
-> **While loops law**: Beware: usually a while loop is wrong, unless its
-> loop invariant has been explicitly written.
-> 
+&gt; 
+&gt; **While loops law**: Beware: usually a while loop is wrong, unless its
+&gt; loop invariant has been explicitly written.
+&gt; 
 
 The main use of the `while` loop is the infinite loop
 `while true do     ...`. You get out of it through an exception,
@@ -1299,22 +1300,22 @@ generally on termination of the program.
 Other `while` loops are hard to use, unless they come from canned
 programs from algorithms courses where they were proved.
 
-> 
-> **Justification**: `while` loops require one or more mutables in order
-> that the loop condition change value and the loop finally terminate.
-> To prove their correctness, you must therefore discover the loop
-> invariants, an interesting but difficult sport.
-> 
+&gt; 
+&gt; **Justification**: `while` loops require one or more mutables in order
+&gt; that the loop condition change value and the loop finally terminate.
+&gt; To prove their correctness, you must therefore discover the loop
+&gt; invariants, an interesting but difficult sport.
+&gt; 
 
 ###  Exceptions
-Don't be afraid to define your own exceptions in your programs, but on
+Don&apos;t be afraid to define your own exceptions in your programs, but on
 the other hand use as much as possible the exceptions predefined by the
 system. For example every search function which fails should raise the
 predefined exception `Not_found`. Be careful to handle the exceptions
 which may be raised by a function call with the help of a
 `try ... with`.
 
-Handling all exceptions by `try     ... with _ ->` is usually reserved
+Handling all exceptions by `try     ... with _ -&gt;` is usually reserved
 for the main function of the program. If you need to catch all
 exceptions to maintain an invariant of an algorithm, be careful to name
 the exception and re-raise it, after having reset the invariant.
@@ -1326,20 +1327,20 @@ and oc = open_out ... in
 try
   treatment ic oc;
   close_in ic; close_out oc
-with x -> close_in ic; close_out oc; raise x
+with x -&gt; close_in ic; close_out oc; raise x
 ```
-> 
-> **Justification**: `try ... with _     ->` silently catches all
-> exceptions, even those which have nothing to do with the computation
-> at hand (for example an interruption will be captured and the
-> computation will continue anyway!).
-> 
+&gt; 
+&gt; **Justification**: `try ... with _     -&gt;` silently catches all
+&gt; exceptions, even those which have nothing to do with the computation
+&gt; at hand (for example an interruption will be captured and the
+&gt; computation will continue anyway!).
+&gt; 
 
 ###  Data structures
 One of the great strengths of OCaml is the power of the data structures
 which can be defined and the simplicity of manipulating them. So you
-must take advantage of this to the fullest extent; don't hesitate to
-define your own data structures. In particular, don't systematically
+must take advantage of this to the fullest extent; don&apos;t hesitate to
+define your own data structures. In particular, don&apos;t systematically
 represent enumerations by whole numbers, nor enumerations with two cases
 by booleans. Examples:
 
@@ -1351,62 +1352,62 @@ type convexity =
 type type_of_definition =
    | Recursive | Non_recursive
 ```
-> 
-> **Justification**: A boolean value often prevents intuitive
-> understanding of the corresponding code. For example, if
-> `type_of_definition` is coded by a boolean, what does `true` signify?
-> A “normal” definition (that is, non-recursive) or a recursive
-> definition?
-> 
-> In the case of an enumerated type encode by an integer, it is very
-> difficult to limit the range of acceptable integers: one must define
-> construction functions that will ensure the mandatory invariants of
-> the program (and verify afterwards that no values has been built
-> directly), or add assertions in the program and guards in pattern
-> matchings. This is not good practice, when the definition of a sum
-> type elegantly solves this problem, with the additional benefit of
-> firing the full power of pattern matching and compiler's verifications
-> of exhaustiveness.
-> 
-> **Criticism**: For binary enumerations, one can systematically define
-> predicates whose names carry the semantics of the boolean that
-> implements the type. For instance, we can adopt the convention that a
-> predicate ends by the letter `p`. Then, in place of defining a new sum
-> type for `type_of_definition`, we will use a predicate function
-> `recursivep` that returns true if the definition is recursive.
-> 
-> **Answer**: This method is specific to binary enumeration and cannot
-> be easily extended; moreover it is not well suited to pattern
-> matching. For instance, for definitions encoded by
-> `| Let of bool * string * expression` a typical pattern matching would
-> look like:
-> 
-> ```ocaml
-> | Let (_, v, e) as def ->
->    if recursivep def then code_for_recursive_case
->    else code_for_non_recursive_case
-> ```
-> 
-> or, if `recursivep` can be applied to booleans:
-> 
-> ```ocaml
-> | Let (b, v, e) ->
->    if recursivep def then code_for_recursive_case
->    else code_for_non_recursive_case
-> ```
-> 
-> contrast with an explicit encoding:
-> 
-> ```ocaml
-> | Let (Recursive, v, e) -> code_for_recursive_case
-> | Let (Non_recursive, v, e) -> code_for_non_recursive_case
-> ```
-> 
-> The difference between the two programs is subtle and you may think
-> that this is just a matter of taste; however the explicit encoding is
-> definitively more robust to modifications and fits better with the
-> language.
-> 
+&gt; 
+&gt; **Justification**: A boolean value often prevents intuitive
+&gt; understanding of the corresponding code. For example, if
+&gt; `type_of_definition` is coded by a boolean, what does `true` signify?
+&gt; A “normal” definition (that is, non-recursive) or a recursive
+&gt; definition?
+&gt; 
+&gt; In the case of an enumerated type encode by an integer, it is very
+&gt; difficult to limit the range of acceptable integers: one must define
+&gt; construction functions that will ensure the mandatory invariants of
+&gt; the program (and verify afterwards that no values has been built
+&gt; directly), or add assertions in the program and guards in pattern
+&gt; matchings. This is not good practice, when the definition of a sum
+&gt; type elegantly solves this problem, with the additional benefit of
+&gt; firing the full power of pattern matching and compiler&apos;s verifications
+&gt; of exhaustiveness.
+&gt; 
+&gt; **Criticism**: For binary enumerations, one can systematically define
+&gt; predicates whose names carry the semantics of the boolean that
+&gt; implements the type. For instance, we can adopt the convention that a
+&gt; predicate ends by the letter `p`. Then, in place of defining a new sum
+&gt; type for `type_of_definition`, we will use a predicate function
+&gt; `recursivep` that returns true if the definition is recursive.
+&gt; 
+&gt; **Answer**: This method is specific to binary enumeration and cannot
+&gt; be easily extended; moreover it is not well suited to pattern
+&gt; matching. For instance, for definitions encoded by
+&gt; `| Let of bool * string * expression` a typical pattern matching would
+&gt; look like:
+&gt; 
+&gt; ```ocaml
+&gt; | Let (_, v, e) as def -&gt;
+&gt;    if recursivep def then code_for_recursive_case
+&gt;    else code_for_non_recursive_case
+&gt; ```
+&gt; 
+&gt; or, if `recursivep` can be applied to booleans:
+&gt; 
+&gt; ```ocaml
+&gt; | Let (b, v, e) -&gt;
+&gt;    if recursivep def then code_for_recursive_case
+&gt;    else code_for_non_recursive_case
+&gt; ```
+&gt; 
+&gt; contrast with an explicit encoding:
+&gt; 
+&gt; ```ocaml
+&gt; | Let (Recursive, v, e) -&gt; code_for_recursive_case
+&gt; | Let (Non_recursive, v, e) -&gt; code_for_non_recursive_case
+&gt; ```
+&gt; 
+&gt; The difference between the two programs is subtle and you may think
+&gt; that this is just a matter of taste; however the explicit encoding is
+&gt; definitively more robust to modifications and fits better with the
+&gt; language.
+&gt; 
 
 *A contrario*, it is not necessary to systematically define new types
 for boolean flags, when the interpretation of constructors `true` and
@@ -1424,14 +1425,14 @@ respect to the data to be represented.
 ###  When to use mutables
 Mutable values are useful and sometimes indispensable to simple and
 clear programming. Nevertheless, you must use them with discernment:
-OCaml's normal data structures are immutable. They are to be preferred
+OCaml&apos;s normal data structures are immutable. They are to be preferred
 for the clarity and safety of programming which they allow.
 
 ###  Iterators
-OCaml's iterators are a powerful and useful feature. However you should
+OCaml&apos;s iterators are a powerful and useful feature. However you should
 not overuse them, nor *a contrario* neglect them: they are provided to
 you by libraries and have every chance of being correct and
-well-thought-out by the author of the library. So it's useless to
+well-thought-out by the author of the library. So it&apos;s useless to
 reinvent them.
 
 So write
@@ -1443,8 +1444,8 @@ rather than:
 
 ```ocaml
 let rec square_elements = function
-  | [] -> []
-  | elem :: elements -> square elem :: square_elements elements
+  | [] -&gt; []
+  | elem :: elements -&gt; square elem :: square_elements elements
 ```
 On the other hand avoid writing:
 
@@ -1457,30 +1458,30 @@ even though you get:
 ```ocaml
   let iterator f x l =
     List.fold_right (List.fold_left f) [List.map x l] l;;
-  iterator (fun l x -> x :: l) (fun l -> List.rev l) [[1; 2; 3]]
+  iterator (fun l x -&gt; x :: l) (fun l -&gt; List.rev l) [[1; 2; 3]]
 ```
 In case of express need, you must be careful to add an explanatory
-comment: in my opinion it's absolutely necessary!
+comment: in my opinion it&apos;s absolutely necessary!
 
 ###  How to optimize programs
-> 
-> **Pseudo law of optimization**: No optimization *a priori*.<br />
->  No optimization *a posteriori* either.
-> 
+&gt; 
+&gt; **Pseudo law of optimization**: No optimization *a priori*.&lt;br /&gt;
+&gt;  No optimization *a posteriori* either.
+&gt; 
 
-Above all program simply and clearly. Don't start optimizing until the
+Above all program simply and clearly. Don&apos;t start optimizing until the
 program bottleneck has been identified (in general a few routines). Then
 optimization consists above all of changing *the complexity* of the
 algorithm used. This often happens through redefining the data
 structures being manipulated and completely rewriting the part of the
 program which poses a problem.
 
-> 
-> **Justification**: Clarity and correctness of programs take
-> precedence. Besides, in a substantial program, it is practically
-> impossible to identify *a priori* the parts of the program whose
-> efficiency is of prime importance.
-> 
+&gt; 
+&gt; **Justification**: Clarity and correctness of programs take
+&gt; precedence. Besides, in a substantial program, it is practically
+&gt; impossible to identify *a priori* the parts of the program whose
+&gt; efficiency is of prime importance.
+&gt; 
 
 ###  How to choose between classes and modules
 You should use OCaml classes when you need inheritance, that is,
@@ -1490,7 +1491,7 @@ You should use conventional data structures (in particular, variant
 types) when you need pattern-matching.
 
 You should modules when the data structures are fixed and their
-functionality is equally fixed or it's enough to add new functions in
+functionality is equally fixed or it&apos;s enough to add new functions in
 the programs which use them.
 
 ###  Clarity of OCaml code
@@ -1515,7 +1516,7 @@ symmetrical problematic behaviors: on the one hand, the </code></pre>
 <p>all
 imperative&apos;&apos; way (<em>systematic</em> usage of loops and assignment), and on
 the other hand the</p>
-<pre><code>purely functional'' way (*never* use loops nor
+<pre><code>purely functional&apos;&apos; way (*never* use loops nor
 assignments); the </code></pre>
 <p>100% object&apos;&apos; style will certainly appear in the
 next future, but (fortunately) it is too new to be discussed here.</p>
@@ -1684,7 +1685,7 @@ subsequent <code>ESC-/</code> proposes an alternate completion.</p>
 followed by <code> CTRL-X-` </code> is also used to find all occurrences of a
 certain string in a OCaml program. Instead of launching <code>make</code> to
 recompile, you launch the <code>grep</code> command; then all the</p>
-<pre><code class='error'>messages'' from `grep` are compatible with the </code></pre>
+<pre><code class='error'>messages&apos;&apos; from `grep` are compatible with the </code></pre>
 <p> CTRL-X-</p>
 <pre><code> `` usage
 which automatically takes you to the file and the place where the string
@@ -1694,7 +1695,7 @@ is found.
 Under Unix: use the line editor </code></pre>
 <p>ledit</p>
 <pre><code> which offers great editing
-capabilities ``à la emacs'' (including </code></pre>
+capabilities ``à la emacs&apos;&apos; (including </code></pre>
 <p>ESC-/</p>
 <pre><code>!), as well as a history
 mechanism which lets you retrieve previously typed commands and even
@@ -1721,7 +1722,7 @@ Users of the [Git](http://git-scm.com/) software version control system
 are never run out of good things to say about the productivity gains it
 brings. This system supports managing development by a team of
 programmers while imposing consistency among them, and also maintains a
-log of changes made to the software.<br />
+log of changes made to the software.&lt;br /&gt;
  Git also supports simultaneous development by several teams, possibly
 dispersed among several sites linked on the Net.
 
@@ -1750,8 +1751,8 @@ returned). Just use an accumulator for intermediate results, as in:
 ```ocaml
 let list_length l =
   let rec loop accu = function
-    | [] -> accu
-    | _ :: l -> loop (accu + 1) l in
+    | [] -&gt; accu
+    | _ :: l -&gt; loop (accu + 1) l in
   loop 0 l
 ```
 This way, you get a program that has the same computational properties

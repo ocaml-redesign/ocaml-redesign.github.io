@@ -142,7 +142,7 @@ about nested functions:</p>
 (Nested functions are not supported for GNU C++.) The nested function&apos;s
 name is local to the block where it is defined. For example, here we
 define a nested function named</p>
-<pre><code>square', and call it twice:
+<pre><code>square&apos;, and call it twice:
 
 ```ocaml
 foo (double a, double b)
@@ -154,7 +154,7 @@ foo (double a, double b)
 ```
 The nested function can access all the variables of the containing
 function that are visible at the point of its definition. This is called
-"lexical scoping". For example, here we show a nested function which
+&quot;lexical scoping&quot;. For example, here we show a nested function which
 uses an inherited variable named </code></pre>
 <p>offset&apos;:</p>
 <pre><code class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
