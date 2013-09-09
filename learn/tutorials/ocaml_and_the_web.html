@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="OCamlandtheWeb"> OCaml and the Web</h1><h2 id="AdvantagesandDisadvantages"> Advantages and Disadvantages</h2><p>
+
+Like any other language, OCaml can be used to write CGI programs. The
+advantages of using OCaml for CGI scripting are the same a using OCaml
+for programming. The disadvantages are the fact that few CGI libraries
+exist for the language. One that sticks out in my mind comes as part of
+the <a href='http://ocamlnet.sourceforge.net/' title='http://ocamlnet.sourceforge.net/'>OCamlNet
+library</a>.</p>
+<p>More to come...</p>
+<h2 id="OCamlasaScriptingLanguage"> OCaml as a Scripting Language</h2><p>
+It is almost trivial to set up OCaml scripting with Apache. The
+interactive top-level can be set up as a helper program and can
+therefore be used as an impromptu script interpreter.</p>
+<p>Exact details on this to come...</p>
+<p>It would not be hard to write a preprocessor in Camlp4 and build an true
+scripting engine (via a custom top level) in order to have OCaml
+function like a true scripting language, similar, albeit much more
+powerful than, to PHP. Code could be surrounded by special tags (maybe
+&quot;&#92;&lt;?caml&quot; and &quot;?&#92;&gt;&quot;) and anything not within those tags would be echoed
+unchanged. Any takers? :)</p>
+<p>Answer: It exists already, and it&apos;s called
+<a href='http://martin.jambon.free.fr/camlmix/' title='http://martin.jambon.free.fr/camlmix/'>Camlmix</a>
+:-) The latest version (1.3) allows one to compile such programs either
+as-is (the text is printed when the module is evaluated) or embedded
+into a <code>render</code> function that can be called by other modules.</p>
+<h2 id="CGIProgramming"> CGI Programming</h2><p>
+For more permanent &quot;deep-web&quot; content, or for actions that need to be
+executed with significant speed (i.e., performing complex calculations),
+scripting may not be the solution. Compilation of scripts into binary
+format (especially native code) can give a significant boost in speed.
+<a href='http://martin.jambon.free.fr/ocamlscript.html' title='http://martin.jambon.free.fr/ocamlscript.html'>Ocamlscript</a>
+allows one to write one-file scripts that would be transparently
+compiled, when needed, using the native code compiler. So you actually
+<strong>can</strong> have your cake and eat it too. <a href='http://martin.jambon.free.fr/ocamlscript.html' title='http://martin.jambon.free.fr/ocamlscript.html'>Ocamlscript version
+2</a>
+fully supports packages installed with <a href='http://www.ocaml-programming.de/packages/' title='http://www.ocaml-programming.de/packages/'>ocamlfind
+(Findlib)</a>,
+so that lots of fancy libraries could be loaded very easily, from the
+script.</p>
+<p><a href='ocaml_and_the_web/discussion.html' title='ocaml_and_the_web/discussion'>Discuss this
+page</a></p>
+<h2 id="WebServersandFrameworks"> Web Servers and Frameworks</h2><p>
+The <a href='http://www.pps.jussieu.fr/' title='http://www.pps.jussieu.fr/'>PPS Computer Science
+Laboratory</a> has
+created <a href='http://www.ocsigen.org/' title='http://www.ocsigen.org/'>Ocsigen</a>, a
+web server and framework written in and for OCaml. The scheme is
+functions registered to a url, with pattern matching allowed on GET
+arguments, among other neat features.</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

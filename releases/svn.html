@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="SubversionRepository"> Subversion Repository</h1><p>
+OCaml is developed using the Subversion (SVN) version control system.
+Public read-only access to our Subversion repository is available. It
+enables advanced users to track changes and bug-fixes in real-time,
+without having to wait for the next release.</p>
+<p>Bugs can be reported and followed on
+<a href='http://caml.inria.fr/mantis'>Mantis</a>.</p>
+<p>There is also a <a href='https://github.com/ocaml/ocaml'>read-only mirror on
+GitHub</a>, which is automatically
+synchronized with the official SVN repository on a regular basis.</p>
+<h2 id="Accessingtherepository"> Accessing the repository</h2><p>
+The address of the repository is <code>http://caml.inria.fr/svn</code>. To check
+out a local, working copy of the sources:</p>
+<pre><code class='ocaml'>svn checkout http<span class='o'>://</span>caml<span class='o'>.</span>inria<span class='o'>.</span>fr<span class='o'>/</span>svn<span class='o'>/</span>dir
+</code></pre>
+<p>
+where <em>dir</em> is the subdirectory of interest (see table below).</p>
+<p>To update a local working copy with our latest changes:</p>
+<pre><code class='ocaml'>svn update
+</code></pre>
+<p>
+If you are not familiar with Subversion commands, see the
+<a href='http://svnbook.red-bean.com/'>documentation.</a></p>
+<p>If you do not need a local copy of the sources but just wish to see
+changes and their history, you can also <a href='http://caml.inria.fr/cgi-bin/viewvc.cgi'>browse the repository via a Web
+interface.</a></p>
+<h2 id="Repositorystructure"> Repository structure</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Directory (<em>dir</em>)</th>
+<th align="left">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>ocaml/trunk</code></td>
+<td align="left">The development version of OCaml. It will become the next major release. Not very stable; use at your own risk.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>ocaml/version/</code><em>X</em><code>.</code><em>YY</em></td>
+<td align="left">The bug-fix branch for the major release number <em>X</em><code>.</code><em>YY</em> (e.g. <code>3.11</code>). Minor releases are culled from this branch. Only bug-fixes and minor extensions are performed in this branch, but not incompatible changes. Recommended for advanced users who wish to track bug fixes.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>ocaml/branches/</code></td>
+<td align="left">Various branches containing experiments or extensions to OCaml, e.g. <code>ocaml/branches/jocamltrunk</code> for JoCaml. Many of the experimental branches have been folded in the development sources. To explore the contents, use <code>svn list</code> or <a href="http://caml.inria.fr/cgi-bin/viewvc.cgi/ocaml/branches/">browse the repository</a></td>
+</tr>
+</tbody>
+</table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

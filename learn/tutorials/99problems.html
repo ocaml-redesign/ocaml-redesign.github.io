@@ -1,0 +1,1778 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div class="span4">
+          <nav id="nav-secondary">
+            <ul class="nav nav-list">
+              <li class="nav-header"><a href="#">Contents</a></li>
+<ul>
+ <li><a href='#Workingwithlists'> Working with lists</a>
+ </li>
+ <li><a href='#Arithmetic'> Arithmetic</a>
+ </li>
+ <li><a href='#LogicandCodes'> Logic and Codes</a>
+ </li>
+ <li><a href='#BinaryTrees'> Binary Trees</a>
+ </li>
+ <li><a href='#MultiwayTrees'> Multiway Trees</a>
+ </li>
+ <li><a href='#Graphs'> Graphs</a>
+ </li>
+ <li><a href='#MiscellaneousProblems'> Miscellaneous Problems</a>
+ </li>
+</ul>
+
+            </ul>
+          </nav>
+        </div>
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <p><strong>Your Help is Needed</strong><br />
+ Many of the solutions below have been written by <a href='https://github.com/VictorNicollet/99-Problems-OCaml'>Victor
+Nicollet</a>. Please
+contribute more solutions or improve the existing ones.</p>
+<h1 id="99ProblemssolvedinOCaml"> 99 Problems (solved) in OCaml</h1><p>
+This section is inspired by <a href='http://www.ic.unicamp.br/~meidanis/courses/mc336/2006s2/funcional/L-99_Ninety-Nine_Lisp_Problems.html'>Ninety-Nine Lisp
+Problems</a>
+which in turn was based on “<a href='https://sites.google.com/site/prologsite/prolog-problems/'>Prolog problem
+list</a>”. For
+each of these questions, some simple tests are shown—they may also serve
+to make the question clearer if needed. To work on these problems, we
+recommend you first <a href='../install.html'>install OCaml</a> or use it <a href='http://try.ocamlpro.com/'>inside
+your browser</a>. The source of the following
+problems is available on
+<a href='https://github.com/VictorNicollet/99-Problems-OCaml'>GitHub</a>.</p>
+<h2 id="Workingwithlists"> Working with lists</h2><p>
+Write a function <code>last : &apos;a list -&gt; &apos;a       option</code> that returns the
+last element of a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> last <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None
+    <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='k'>-></span> Some x
+    <span class='o'>|</span> <span class='o'>_</span> <span class='o'>::</span> t <span class='k'>-></span> last t
+
+  last <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> <span class='s'>&#34;c&#34;</span> <span class='o'>;</span> <span class='s'>&#34;d&#34;</span> <span class='o'>]</span> <span class='k'>=</span> Some <span class='s'>&#34;d&#34;</span><span class='o'>;;</span>
+  last <span class='o'>[</span><span class='o'>]</span> <span class='k'>=</span> None<span class='o'>;;</span>
+</code></pre>
+<p>
+Find the last but one (last and penultimate) elements of a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> last_two <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='o'>|</span> <span class='o'>[</span><span class='o'>_</span><span class='o'>]</span> <span class='k'>-></span> None
+    <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>;</span>y<span class='o'>]</span> <span class='k'>-></span> Some (x<span class='o'>,</span>y)
+    <span class='o'>|</span> <span class='o'>_::</span>t <span class='k'>-></span> last_two t
+
+  last_two <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> <span class='s'>&#34;c&#34;</span> <span class='o'>;</span> <span class='s'>&#34;d&#34;</span> <span class='o'>]</span> <span class='k'>=</span> Some (<span class='s'>&#34;c&#34;</span><span class='o'>,</span> <span class='s'>&#34;d&#34;</span>) <span class='o'>;;</span>
+  last_two <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>]</span> <span class='k'>=</span> None<span class='o'>;;</span>
+</code></pre>
+<p>
+Find the <code>k</code>&apos;th element of a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> at k <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None
+    <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='k'>if</span> k <span class='k'>=</span> 1 <span class='k'>then</span> Some h <span class='k'>else</span> at (k-1) t
+
+  at 3 <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span> <span class='o'>]</span> <span class='k'>=</span> Some <span class='s'>&#34;c&#34;</span> <span class='o'>;;</span>
+  at 3 <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>]</span> <span class='k'>=</span> None <span class='o'>;;</span>
+</code></pre>
+<p>
+Find the number of elements of a list.</p>
+<p>OCaml standard library has <code>List.length</code> but we ask that you reimplement
+it. Bonus for a <a href='http://en.wikipedia.org/wiki/Tail_call'>tail recursive</a>
+solution.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* This <span class='ic'>function</span> is tail<span class='ic'>-</span>recursive<span class='ic'>:</span> it uses a constant amount <span class='ic'>of</span></span>
+<span class='com2'>     stack memory regardless <span class='ic'>of</span> list size<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> length list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux n <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> n
+      <span class='o'>|</span> <span class='o'>_::</span>t <span class='k'>-></span> aux (n<span class='o'>+</span>1) t
+    <span class='k'>in</span> aux 0 list
+
+  length <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span> <span class='k'>=</span> 3<span class='o'>;;</span>
+  length <span class='o'>[</span><span class='o'>]</span> <span class='k'>=</span> 0<span class='o'>;;</span>
+</code></pre>
+<p>
+Reverse a list.</p>
+<p>OCaml standard library has <code>List.rev</code> but we ask that you reimplement
+it.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> rev list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> acc
+      <span class='o'>|</span> h<span class='o'>::</span>t <span class='k'>-></span> aux (h<span class='o'>::</span>acc) t <span class='k'>in</span>
+    aux <span class='o'>[</span><span class='o'>]</span> list
+
+  rev <span class='o'>[</span><span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;c&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Find out whether a list is a palindrome.</p>
+<p>HINT: a palindrome is its own reverse.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> is_palindrome list <span class='k'>=</span>
+    list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>rev list
+  <span class='com2'>(* One can use either the rev <span class='ic'>function</span> from the previous problem<span class='ic'>,</span> <span class='ic'>or</span> the</span>
+<span class='com2'>     built<span class='ic'>-</span><span class='ic'>in</span> <span class='ic'>List</span><span class='ic'>.</span>rev *)</span><!-- end comment -->
+
+  is_palindrome <span class='o'>[</span> <span class='s'>&#34;x&#34;</span> <span class='o'>;</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;m&#34;</span> <span class='o'>;</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;x&#34;</span> <span class='o'>]</span><span class='o'>;;</span>
+  not (is_palindrome <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>]</span>)<span class='o'>;;</span>
+</code></pre>
+<p>
+Flatten a nested list structure.</p>
+<pre><code class='ocaml'>  <span class='com2'>(* There is no nested list <span class='ic'>type</span> <span class='ic'>in</span> OCaml<span class='ic'>,</span> so we need <span class='ic'>to</span> define one</span>
+<span class='com2'>     first<span class='ic'>.</span> A node <span class='ic'>of</span> a nested list is either an element<span class='ic'>,</span> <span class='ic'>or</span> a list <span class='ic'>of</span></span>
+<span class='com2'>     nodes<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>type</span> 'a node <span class='k'>=</span>
+    <span class='o'>|</span> One <span class='k'>of</span> 'a
+    <span class='o'>|</span> Many <span class='k'>of</span> 'a node list
+</code></pre>
+<p>
+Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* This <span class='ic'>function</span> traverses the list<span class='ic'>,</span> prepending any encountered elements</span>
+<span class='com2'>    <span class='ic'>to</span> an accumulator<span class='ic'>,</span> which flattens the list <span class='ic'>in</span> inverse order<span class='ic'>.</span> It can</span>
+<span class='com2'>    <span class='ic'>then</span> be reversed <span class='ic'>to</span> obtain the actual flattened list<span class='ic'>.</span> *)</span><!-- end comment -->
+
+  <span class='k'>let</span> flatten list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> acc
+      <span class='o'>|</span> One x <span class='o'>::</span> t <span class='k'>-></span> aux (x <span class='o'>::</span> acc) t
+      <span class='o'>|</span> Many l <span class='o'>::</span> t <span class='k'>-></span> aux (aux acc l) t <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>rev (aux <span class='o'>[</span><span class='o'>]</span> list)
+
+  flatten <span class='o'>[</span> One <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> Many <span class='o'>[</span> One <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> Many <span class='o'>[</span> One <span class='s'>&#34;c&#34;</span> <span class='o'>;</span> One <span class='s'>&#34;d&#34;</span> <span class='o'>]</span> <span class='o'>;</span> One <span class='s'>&#34;e&#34;</span> <span class='o'>]</span> <span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>;</span> <span class='s'>&#34;b&#34;</span> <span class='o'>;</span> <span class='s'>&#34;c&#34;</span> <span class='o'>;</span> <span class='s'>&#34;d&#34;</span> <span class='o'>;</span> <span class='s'>&#34;e&#34;</span> <span class='o'>]</span>
+</code></pre>
+<p>
+Eliminate consecutive duplicates of list elements.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> compress <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> a <span class='o'>::</span> (b <span class='o'>::</span> <span class='o'>_</span> <span class='k'>as</span> t) <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> b <span class='k'>then</span> compress t <span class='k'>else</span> a <span class='o'>::</span> compress t
+    <span class='o'>|</span> smaller <span class='k'>-></span> smaller
+
+  compress <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Pack consecutive duplicates of list elements into sublists.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> pack list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux current acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>    <span class='com2'>(* Can only be reached <span class='ic'>if</span> original list is empty *)</span><!-- end comment -->
+      <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='k'>-></span> (x <span class='o'>::</span> current) <span class='o'>::</span> acc
+      <span class='o'>|</span> a <span class='o'>::</span> (b <span class='o'>::</span> <span class='o'>_</span> <span class='k'>as</span> t) <span class='k'>-></span>
+         <span class='k'>if</span> a <span class='k'>=</span> b <span class='k'>then</span> aux (a <span class='o'>::</span> current) acc t
+         <span class='k'>else</span> aux <span class='o'>[</span><span class='o'>]</span> ((a <span class='o'>::</span> current) <span class='o'>::</span> acc) t  <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>rev (aux <span class='o'>[</span><span class='o'>]</span> <span class='o'>[</span><span class='o'>]</span> list)
+
+  pack <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>]</span>
+</code></pre>
+<p>
+<a href='http://en.wikipedia.org/wiki/Run-length_encoding'>Run-length encoding</a>
+of a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> encode list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux count acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span> <span class='com2'>(* Can only be reached <span class='ic'>if</span> original list is empty *)</span><!-- end comment -->
+      <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='k'>-></span> (count<span class='o'>+</span>1<span class='o'>,</span> x) <span class='o'>::</span> acc
+      <span class='o'>|</span> a <span class='o'>::</span> (b <span class='o'>::</span> <span class='o'>_</span> <span class='k'>as</span> t) <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> b <span class='k'>then</span> aux (count <span class='o'>+</span> 1) acc t
+                              <span class='k'>else</span> aux 0 ((count<span class='o'>+</span>1<span class='o'>,</span>a) <span class='o'>::</span> acc) t   <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>rev (aux 0 <span class='o'>[</span><span class='o'>]</span> list)
+
+  encode <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span>4<span class='o'>,</span><span class='s'>&#34;a&#34;</span> <span class='o'>;</span> 1<span class='o'>,</span><span class='s'>&#34;b&#34;</span> <span class='o'>;</span> 2<span class='o'>,</span><span class='s'>&#34;c&#34;</span> <span class='o'>;</span> 2<span class='o'>,</span><span class='s'>&#34;a&#34;</span> <span class='o'>;</span> 1<span class='o'>,</span><span class='s'>&#34;d&#34;</span> <span class='o'>;</span> 4<span class='o'>,</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Modified run-length encoding.</p>
+<p>Modify the result of the previous problem in such a way that if an
+element has no duplicates it is simply copied into the result list. Only
+elements with duplicates are transferred as (N E) lists.</p>
+<p>Since OCaml lists are homogeneous, one needs to define a type to hold
+both single elements and sub-lists.</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a rle <span class='k'>=</span>
+    <span class='o'>|</span> One <span class='k'>of</span> 'a
+    <span class='o'>|</span> Many <span class='k'>of</span> (int <span class='o'>*</span> 'a)
+</code></pre>
+<p>
+Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> pack list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux current acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span> <span class='com2'>(* Can only be reached <span class='ic'>if</span> original list is empty *)</span><!-- end comment -->
+      <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='k'>-></span> (x <span class='o'>::</span> current) <span class='o'>::</span> acc
+      <span class='o'>|</span> a <span class='o'>::</span> (b <span class='o'>::</span> <span class='o'>_</span> <span class='k'>as</span> t) <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> b <span class='k'>then</span> aux (a <span class='o'>::</span> current) acc t
+                              <span class='k'>else</span> aux <span class='o'>[</span><span class='o'>]</span> ((a <span class='o'>::</span> current) <span class='o'>::</span> acc) t  <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>rev (aux <span class='o'>[</span><span class='o'>]</span> <span class='o'>[</span><span class='o'>]</span> list)
+  <span class='k'>let</span> encode list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='o'>::</span> t <span class='k'>-></span> aux t
+      <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='o'>::</span> t <span class='k'>-></span> One x <span class='o'>::</span> aux t
+      <span class='o'>|</span> (x <span class='o'>::</span> l) <span class='o'>::</span> t <span class='k'>-></span> Many (1 <span class='o'>+</span> <span class='m'>List</span><span class='o'>.</span>length l <span class='o'>,</span> x) <span class='o'>::</span> aux t  <span class='k'>in</span>
+    aux (pack list)
+
+  encode <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span>Many (4<span class='o'>,</span><span class='s'>&#34;a&#34;</span>)<span class='o'>;</span> One <span class='s'>&#34;b&#34;</span><span class='o'>;</span> Many (2<span class='o'>,</span><span class='s'>&#34;c&#34;</span>)<span class='o'>;</span> Many (2<span class='o'>,</span><span class='s'>&#34;a&#34;</span>)<span class='o'>;</span> One <span class='s'>&#34;d&#34;</span><span class='o'>;</span> Many (4<span class='o'>,</span><span class='s'>&#34;e&#34;</span>)<span class='o'>]</span>
+</code></pre>
+<p>
+Decode a run-length encoded list.</p>
+<p>Given a run-length code list generated as specified in the previous
+problem, construct its uncompressed version.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> decode list <span class='k'>=</span>
+    <span class='k'>let rec</span> many acc n x <span class='k'>=</span>
+      <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> acc <span class='k'>else</span> many (x <span class='o'>::</span> acc) (n-1) x <span class='k'>in</span>
+    <span class='k'>let rec</span> aux acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> acc
+      <span class='o'>|</span> One x <span class='o'>::</span> t <span class='k'>-></span> aux (x <span class='o'>::</span> acc) t
+      <span class='o'>|</span> Many (n<span class='o'>,</span>x) <span class='o'>::</span> t <span class='k'>-></span> aux (many acc n x) t  <span class='k'>in</span>
+    aux <span class='o'>[</span><span class='o'>]</span> (<span class='m'>List</span><span class='o'>.</span>rev list)
+
+  decode <span class='o'>[</span>Many (4<span class='o'>,</span><span class='s'>&#34;a&#34;</span>)<span class='o'>;</span> One <span class='s'>&#34;b&#34;</span><span class='o'>;</span> Many (2<span class='o'>,</span><span class='s'>&#34;c&#34;</span>)<span class='o'>;</span> Many (2<span class='o'>,</span><span class='s'>&#34;a&#34;</span>)<span class='o'>;</span> One <span class='s'>&#34;d&#34;</span><span class='o'>;</span> Many (4<span class='o'>,</span><span class='s'>&#34;e&#34;</span>)<span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Run-length encoding of a list (direct solution).</p>
+<p>Implement the so-called run-length encoding data compression method
+directly. I.e. don&apos;t explicitly create the sublists containing the
+duplicates, as in problem “<a href='#pack'>Pack consecutive duplicates of list elements
+into sublists</a>”, but only count them. As in problem “<a href='#modif-run-length'>Modified
+run-length encoding</a>”, simplify the result list by
+replacing the singleton lists (1 X) by X.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> encode list <span class='k'>=</span>
+    <span class='k'>let</span> rle count x <span class='k'>=</span> <span class='k'>if</span> count <span class='k'>=</span> 0 <span class='k'>then</span> One x <span class='k'>else</span> Many (count <span class='o'>+</span> 1<span class='o'>,</span> x) <span class='k'>in</span>
+    <span class='k'>let rec</span> aux count acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span> <span class='com2'>(* Can only be reached <span class='ic'>if</span> original list is empty *)</span><!-- end comment -->
+      <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='k'>-></span> rle count x <span class='o'>::</span> acc
+      <span class='o'>|</span> a <span class='o'>::</span> (b <span class='o'>::</span> <span class='o'>_</span> <span class='k'>as</span> t) <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> b <span class='k'>then</span> aux (count <span class='o'>+</span> 1) acc t
+                              <span class='k'>else</span> aux 0 (rle count a <span class='o'>::</span> acc) t   <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>rev (aux 0 <span class='o'>[</span><span class='o'>]</span> list)
+
+  encode <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span> <span class='k'>=</span>
+  <span class='o'>[</span>Many (4<span class='o'>,</span><span class='s'>&#34;a&#34;</span>)<span class='o'>;</span> One <span class='s'>&#34;b&#34;</span><span class='o'>;</span> Many (2<span class='o'>,</span><span class='s'>&#34;c&#34;</span>)<span class='o'>;</span> Many (2<span class='o'>,</span><span class='s'>&#34;a&#34;</span>)<span class='o'>;</span> One <span class='s'>&#34;d&#34;</span><span class='o'>;</span> Many (4<span class='o'>,</span><span class='s'>&#34;e&#34;</span>)<span class='o'>]</span>
+</code></pre>
+<p>
+Duplicate the elements of a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> duplicate <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> h <span class='o'>::</span> h <span class='o'>::</span> duplicate t
+
+  duplicate <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Replicate the elements of a list a given number of times.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> replicate list n <span class='k'>=</span>
+    <span class='k'>let rec</span> prepend n acc x <span class='k'>=</span>
+      <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> acc <span class='k'>else</span> prepend (n-1) (x <span class='o'>::</span> acc) x <span class='k'>in</span>
+    <span class='k'>let rec</span> aux acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> acc
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> aux (prepend n acc h) t  <span class='k'>in</span>
+    <span class='com2'>(* This could also be written <span class='ic'>as</span><span class='ic'>:</span></span>
+<span class='com2'>       <span class='ic'>List</span><span class='ic'>.</span>fold_left (prepend n) <span class='ic'>[</span><span class='ic'>]</span> (<span class='ic'>List</span><span class='ic'>.</span>rev list) *)</span><!-- end comment -->
+    aux <span class='o'>[</span><span class='o'>]</span> (<span class='m'>List</span><span class='o'>.</span>rev list)
+
+  replicate <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span> 3 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Drop every N&apos;th element from a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> drop list n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux i <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='k'>if</span> i <span class='k'>=</span> n <span class='k'>then</span> aux 1 t <span class='k'>else</span> h <span class='o'>::</span> aux (i<span class='o'>+</span>1) t  <span class='k'>in</span>
+    aux 1 list
+
+  drop <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>;</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>]</span> 3
+  <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Split a list into two parts; the length of the first part is given.</p>
+<p>If the length of the first part is longer than the entire list, then the
+first part is the list and the second part is empty.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> split list n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux i acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>rev acc<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>as</span> l <span class='k'>-></span> <span class='k'>if</span> i <span class='k'>=</span> 0 <span class='k'>then</span> <span class='m'>List</span><span class='o'>.</span>rev acc<span class='o'>,</span> l
+                       <span class='k'>else</span> aux (i-1) (h <span class='o'>::</span> acc) t  <span class='k'>in</span>
+    aux n <span class='o'>[</span><span class='o'>]</span> list
+
+  split <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>;</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>]</span> 3
+  <span class='k'>=</span> (<span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>,</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>;</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>]</span>)<span class='o'>;;</span>
+  split <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span> 5 <span class='k'>=</span> (<span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>)
+</code></pre>
+<p>
+Extract a slice from a list.</p>
+<p>Given two indices, <code>i</code> and <code>k</code>, the slice is the list containing the
+elements between the <code>i</code>&apos;th and <code>k</code>&apos;th element of the original list
+(both limits included). Start counting the elements with 0 (this is the
+way the <code>List</code> module numbers elements).</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> slice list i k <span class='k'>=</span>
+    <span class='k'>let rec</span> take n <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>else</span> h <span class='o'>::</span> take (n-1) t
+    <span class='k'>in</span>
+    <span class='k'>let rec</span> drop n <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>as</span> l <span class='k'>-></span> <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> l <span class='k'>else</span> drop (n-1) t
+    <span class='k'>in</span>
+    take (k <span class='o'>-</span> i <span class='o'>+</span> 1) (drop i list)
+
+  slice <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>;</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>]</span> 2 6 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Rotate a list N places to the left.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> split list n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux i acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>rev acc<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>as</span> l <span class='k'>-></span> <span class='k'>if</span> i <span class='k'>=</span> 0 <span class='k'>then</span> <span class='m'>List</span><span class='o'>.</span>rev acc<span class='o'>,</span> l
+                       <span class='k'>else</span> aux (i-1) (h <span class='o'>::</span> acc) t    <span class='k'>in</span>
+    aux n <span class='o'>[</span><span class='o'>]</span> list
+
+  <span class='k'>let</span> rotate list n <span class='k'>=</span>
+    <span class='k'>let</span> len <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>length list <span class='k'>in</span>
+    <span class='com2'>(* Compute a rotation value between 0 <span class='ic'>and</span> len-1 *)</span><!-- end comment -->
+    <span class='k'>let</span> n <span class='k'>=</span> <span class='k'>if</span> len <span class='k'>=</span> 0 <span class='k'>then</span> 0 <span class='k'>else</span> (n <span class='k'>mod</span> len <span class='o'>+</span> len) <span class='k'>mod</span> len <span class='k'>in</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> list
+    <span class='k'>else</span> <span class='k'>let</span> a<span class='o'>,</span> b <span class='k'>=</span> split list n <span class='k'>in</span> b <span class='o'>@</span> a
+
+  rotate <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>;</span> <span class='s'>&#34;f&#34;</span><span class='o'>;</span> <span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>]</span> 3
+  <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>;</span> <span class='s'>&#34;f&#34;</span><span class='o'>;</span> <span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;;</span>
+  rotate <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>;</span> <span class='s'>&#34;f&#34;</span><span class='o'>;</span> <span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>]</span> <span class='o'>(-</span>2)
+  <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>;</span> <span class='s'>&#34;f&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Remove the K&apos;th element from a list.</p>
+<p>The first element of the list is numbered 0, the second 1,...</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> remove_at n <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> t <span class='k'>else</span> h <span class='o'>::</span> remove_at (n-1) t
+
+  remove_at 1 <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Insert an element at a given position into a list.</p>
+<p>Start counting list elements with 0.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> insert_at x n <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>as</span> l <span class='k'>-></span> <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> x <span class='o'>::</span> l <span class='k'>else</span> h <span class='o'>::</span> insert_at x (n-1) t
+
+  insert_at <span class='s'>&#34;alfa&#34;</span> 1 <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span> <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;alfa&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Create a list containing all integers within a given range.</p>
+<p>If first argument is smaller than second, produce a list in decreasing
+order.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> range a b <span class='k'>=</span>
+    <span class='k'>let rec</span> aux a b <span class='k'>=</span>
+      <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>else</span> a <span class='o'>::</span> aux (a<span class='o'>+</span>1) b  <span class='k'>in</span>
+    <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='m'>List</span><span class='o'>.</span>rev (aux b a) <span class='k'>else</span> aux a b
+
+  range 4 9 <span class='k'>=</span> <span class='o'>[</span>4<span class='o'>;</span>5<span class='o'>;</span>6<span class='o'>;</span>7<span class='o'>;</span>8<span class='o'>;</span>9<span class='o'>]</span><span class='o'>;;</span>
+  range 9 4 <span class='k'>=</span> <span class='o'>[</span>9<span class='o'>;</span>8<span class='o'>;</span>7<span class='o'>;</span>6<span class='o'>;</span>5<span class='o'>;</span>4<span class='o'>]</span>
+</code></pre>
+<p>
+Extract a given number of randomly selected elements from a list.</p>
+<p>The selected items shall be returned in a list. We use the <code>Random</code>
+module but do not initialize it with <code>Random.self_init</code> for
+reproducibility.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> rand_select list n <span class='k'>=</span>
+    <span class='k'>let rec</span> extract acc n <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> raise Not_found
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> (h<span class='o'>,</span> acc <span class='o'>@</span> t) <span class='k'>else</span> extract (h<span class='o'>::</span>acc) (n-1) t
+    <span class='k'>in</span>
+    <span class='k'>let</span> extract_rand list len <span class='k'>=</span>
+      extract <span class='o'>[</span><span class='o'>]</span> (<span class='m'>Random</span><span class='o'>.</span>int len) list
+    <span class='k'>in</span>
+    <span class='k'>let rec</span> aux n acc list len <span class='k'>=</span>
+      <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> acc <span class='k'>else</span>
+        <span class='k'>let</span> picked<span class='o'>,</span> rest <span class='k'>=</span> extract_rand list len <span class='k'>in</span>
+        aux (n-1) (picked <span class='o'>::</span> acc) rest (len-1)
+    <span class='k'>in</span>
+    <span class='k'>let</span> len <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>length list <span class='k'>in</span>
+    aux (min n len) <span class='o'>[</span><span class='o'>]</span> list len
+
+  rand_select <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>;</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>]</span> 3
+</code></pre>
+<p>
+Lotto: Draw N different random numbers from the set 1..M.</p>
+<p>The selected numbers shall be returned in a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* <span class='ic'>[</span>range<span class='ic'>]</span> <span class='ic'>and</span> <span class='ic'>[</span>rand_select<span class='ic'>]</span> defined <span class='ic'>in</span> problems above *)</span><!-- end comment -->
+  <span class='k'>let</span> lotto_select n m <span class='k'>=</span> rand_select (range 1 m) n
+
+  lotto_select 6 49
+</code></pre>
+<p>
+Generate a random permutation of the elements of a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> permutation list <span class='k'>=</span>
+    <span class='k'>let rec</span> extract acc n <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> raise Not_found
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> (h<span class='o'>,</span> acc <span class='o'>@</span> t) <span class='k'>else</span> extract (h<span class='o'>::</span>acc) (n-1) t
+    <span class='k'>in</span>
+    <span class='k'>let</span> extract_rand list len <span class='k'>=</span>
+      extract <span class='o'>[</span><span class='o'>]</span> (<span class='m'>Random</span><span class='o'>.</span>int len) list
+    <span class='k'>in</span>
+    <span class='k'>let rec</span> aux acc list len <span class='k'>=</span>
+      <span class='k'>if</span> len <span class='k'>=</span> 0 <span class='k'>then</span> acc <span class='k'>else</span>
+        <span class='k'>let</span> picked<span class='o'>,</span> rest <span class='k'>=</span> extract_rand list len <span class='k'>in</span>
+        aux (picked <span class='o'>::</span> acc) rest (len-1)
+    <span class='k'>in</span>
+    aux <span class='o'>[</span><span class='o'>]</span> list (<span class='m'>List</span><span class='o'>.</span>length list)
+
+  permutation <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>;</span> <span class='s'>&#34;f&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Generate the combinations of K distinct objects chosen from the N
+elements of a list</p>
+<p>In how many ways can a committee of 3 be chosen from a group of 12
+people? We all know that there are C(12,3) = 220 possibilities (C(N,K)
+denotes the well-known binomial coefficients). For pure mathematicians,
+this result may be great. But we want to really generate all the
+possibilities in a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> extract k list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux k acc emit <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> acc
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span>
+        <span class='k'>if</span> k <span class='k'>=</span> 1 <span class='k'>then</span> aux k (emit <span class='o'>[</span>h<span class='o'>]</span> acc) emit t <span class='k'>else</span>
+          <span class='k'>let</span> new_emit x <span class='k'>=</span> emit (h <span class='o'>::</span> x) <span class='k'>in</span>
+          aux k (aux (k-1) acc new_emit t) emit t
+    <span class='k'>in</span>
+    <span class='k'>let</span> emit x acc <span class='k'>=</span> x <span class='o'>::</span> acc <span class='k'>in</span>
+    aux k <span class='o'>[</span><span class='o'>]</span> emit list
+
+  extract 2 <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>]</span>
+</code></pre>
+<p>
+Group the elements of a set into disjoint subsets.</p>
+<p>a) In how many ways can a group of 9 people work in 3 disjoint subgroups
+of 2, 3 and 4 persons? Write a function that generates all the
+possibilities and returns them in a list.</p>
+<p>b) Generalize the above function in a way that we can specify a list of
+group sizes and the function will return a list of groups.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* This implementation is less streamlined than the one<span class='ic'>-</span>extraction</span>
+<span class='com2'>     version<span class='ic'>,</span> because more work is <span class='ic'>done</span> on the lists after each transform</span>
+<span class='com2'>     <span class='ic'>to</span> prepend the actual items<span class='ic'>.</span> The <span class='ic'>end</span> result is cleaner <span class='ic'>in</span> terms <span class='ic'>of</span></span>
+<span class='com2'>     code<span class='ic'>,</span> though<span class='ic'>.</span> *)</span><!-- end comment -->
+
+  <span class='k'>let</span> group list sizes <span class='k'>=</span>
+    <span class='k'>let</span> initial <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> size <span class='k'>-></span> size<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>) sizes <span class='k'>in</span>
+    <span class='com2'>(* The core <span class='ic'>of</span> the <span class='ic'>function</span><span class='ic'>.</span> Prepend accepts a list <span class='ic'>of</span> groups<span class='ic'>,</span> each <span class='ic'>with</span></span>
+<span class='com2'>       the number <span class='ic'>of</span> items that should be added<span class='ic'>,</span> <span class='ic'>and</span> prepends the item <span class='ic'>to</span> every</span>
+<span class='com2'>       group that can support it<span class='ic'>,</span> thus turning <span class='ic'>[</span>1<span class='ic'>,</span>a <span class='ic'>;</span> 2<span class='ic'>,</span>b <span class='ic'>;</span> 0<span class='ic'>,</span>c<span class='ic'>]</span> into</span>
+<span class='com2'>       <span class='ic'>[</span> <span class='ic'>[</span>0<span class='ic'>,</span>x<span class='ic'>::</span>a <span class='ic'>;</span> 2<span class='ic'>,</span>b <span class='ic'>;</span> 0<span class='ic'>,</span>c <span class='ic'>]</span> <span class='ic'>;</span> <span class='ic'>[</span>1<span class='ic'>,</span>a <span class='ic'>;</span> 1<span class='ic'>,</span>x<span class='ic'>::</span>b <span class='ic'>;</span> 0<span class='ic'>,</span>c<span class='ic'>]</span> <span class='ic'>;</span> <span class='ic'>[</span> 1<span class='ic'>,</span>a <span class='ic'>;</span> 2<span class='ic'>,</span>b <span class='ic'>;</span> 0<span class='ic'>,</span>c <span class='ic'>]</span><span class='ic'>]</span></span>
+<span class='com2'></span>
+<span class='com2'>       Again<span class='ic'>,</span> <span class='ic'>in</span> the prolog language (<span class='ic'>for</span> which these questions are</span>
+<span class='com2'>       originally intended)<span class='ic'>,</span> this <span class='ic'>function</span> is a whole lot simpler<span class='ic'>.</span>  *)</span><!-- end comment -->
+    <span class='k'>let</span> prepend p list <span class='k'>=</span>
+      <span class='k'>let</span> emit l acc <span class='k'>=</span> l <span class='o'>::</span> acc <span class='k'>in</span>
+      <span class='k'>let rec</span> aux emit acc <span class='k'>=</span> <span class='k'>function</span>
+        <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> emit <span class='o'>[</span><span class='o'>]</span> acc
+        <span class='o'>|</span> (n<span class='o'>,</span>l) <span class='k'>as</span> h <span class='o'>::</span> t <span class='k'>-></span>
+           <span class='k'>let</span> acc <span class='k'>=</span> <span class='k'>if</span> n <span class='o'>&#62;</span> 0 <span class='k'>then</span> emit ((n-1<span class='o'>,</span> p<span class='o'>::</span>l) <span class='o'>::</span> t) acc <span class='k'>else</span> acc <span class='k'>in</span>
+           aux (<span class='k'>fun</span> l acc <span class='k'>-></span> emit (h <span class='o'>::</span> l) acc) acc t
+      <span class='k'>in</span>
+      aux emit <span class='o'>[</span><span class='o'>]</span> list
+    <span class='k'>in</span>
+    <span class='k'>let rec</span> aux <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span> initial <span class='o'>]</span>
+      <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>concat (<span class='m'>List</span><span class='o'>.</span>map (prepend h) (aux t))
+    <span class='k'>in</span>
+    <span class='k'>let</span> all <span class='k'>=</span> aux list <span class='k'>in</span>
+    <span class='com2'>(* Don't forget <span class='ic'>to</span> eliminate all group sets that have non<span class='ic'>-</span>full groups *)</span><!-- end comment -->
+    <span class='k'>let</span> complete <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>filter (<span class='m'>List</span><span class='o'>.</span>for_all (<span class='k'>fun</span> (x<span class='o'>,</span><span class='o'>_)</span> <span class='k'>-></span> x <span class='k'>=</span> 0)) all <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map (<span class='m'>List</span><span class='o'>.</span>map snd) complete
+
+  group <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span> <span class='o'>[</span>2<span class='o'>;</span>1<span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;b&#34;</span><span class='o'>]</span><span class='o'>]</span><span class='o'>]</span>
+</code></pre>
+<p>
+Sorting a list of lists according to length of sublists</p>
+<p>a) We suppose that a list contains elements that are lists themselves.
+The objective is to sort the elements of this list according to their
+length. E.g. short lists first, longer lists later, or vice versa.</p>
+<p>b) Again, we suppose that a list contains elements that are lists
+themselves. But this time the objective is to sort the elements of this
+list according to their <strong>length frequency</strong>; i.e., in the default,
+where sorting is done ascendingly, lists with rare lengths are placed
+first, others with a more frequent length come later.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* We might not be allowed <span class='ic'>to</span> use built<span class='ic'>-</span><span class='ic'>in</span> <span class='ic'>List</span><span class='ic'>.</span>sort<span class='ic'>,</span> so here's an</span>
+<span class='com2'>     eight<span class='ic'>-</span>line implementation <span class='ic'>of</span> insertion sort <span class='ic'>-</span> O(n²) time complexity<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let rec</span> insert cmp e <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span>e<span class='o'>]</span>
+    <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>as</span> l <span class='k'>-></span> <span class='k'>if</span> cmp e h <span class='o'>&#60;=</span> 0 <span class='k'>then</span> e <span class='o'>::</span> l <span class='k'>else</span> h <span class='o'>::</span> insert cmp e t
+
+  <span class='k'>let rec</span> sort cmp <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> insert cmp h (sort cmp t)
+
+  <span class='com2'>(* Sorting according <span class='ic'>to</span> length <span class='ic'>:</span> prepend length<span class='ic'>,</span> sort<span class='ic'>,</span> remove length *)</span><!-- end comment -->
+  <span class='k'>let</span> length_sort lists <span class='k'>=</span>
+    <span class='k'>let</span> lists <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> list <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>length list<span class='o'>,</span> list) lists <span class='k'>in</span>
+    <span class='k'>let</span> lists <span class='k'>=</span> sort (<span class='k'>fun</span> a b <span class='k'>-></span> compare (fst a) (fst b)) lists <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map snd lists
+  <span class='o'>;;</span>
+
+  <span class='com2'>(* Sorting according <span class='ic'>to</span> length frequency <span class='ic'>:</span> prepend frequency<span class='ic'>,</span> sort<span class='ic'>,</span></span>
+<span class='com2'>     remove frequency<span class='ic'>.</span> Frequencies are extracted by sorting lengths</span>
+<span class='com2'>     <span class='ic'>and</span> applying RLE <span class='ic'>to</span> count occurences <span class='ic'>of</span> each length (see problem</span>
+<span class='com2'>     <span class='ic'>&#34;Run-length encoding of a list.&#34;</span>) *)</span><!-- end comment -->
+  <span class='k'>let</span> rle list <span class='k'>=</span>
+    <span class='k'>let rec</span> aux count acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span> <span class='com2'>(* Can only be reached <span class='ic'>if</span> original list is empty *)</span><!-- end comment -->
+      <span class='o'>|</span> <span class='o'>[</span>x<span class='o'>]</span> <span class='k'>-></span> (x<span class='o'>,</span> count <span class='o'>+</span> 1) <span class='o'>::</span> acc
+      <span class='o'>|</span> a <span class='o'>::</span> (b <span class='o'>::</span> <span class='o'>_</span> <span class='k'>as</span> t) <span class='k'>-></span>
+         <span class='k'>if</span> a <span class='k'>=</span> b <span class='k'>then</span> aux (count <span class='o'>+</span> 1) acc t
+         <span class='k'>else</span> aux 0 ((a<span class='o'>,</span> count <span class='o'>+</span> 1) <span class='o'>::</span> acc) t <span class='k'>in</span>
+    aux 0 <span class='o'>[</span><span class='o'>]</span> list
+
+  <span class='k'>let</span> frequency_sort lists <span class='k'>=</span>
+    <span class='k'>let</span> lengths <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map <span class='m'>List</span><span class='o'>.</span>length lists <span class='k'>in</span>
+    <span class='k'>let</span> freq <span class='k'>=</span> rle (sort compare lengths) <span class='k'>in</span>
+    <span class='k'>let</span> by_freq <span class='k'>=</span>
+      <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> list <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>assoc (<span class='m'>List</span><span class='o'>.</span>length list) freq <span class='o'>,</span> list) lists <span class='k'>in</span>
+    <span class='k'>let</span> sorted <span class='k'>=</span> sort (<span class='k'>fun</span> a b <span class='k'>-></span> compare (fst a) (fst b)) by_freq <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map snd sorted
+
+  length_sort <span class='o'>[</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span>
+                <span class='o'>[</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>;</span><span class='s'>&#34;k&#34;</span><span class='o'>;</span><span class='s'>&#34;l&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;m&#34;</span><span class='o'>;</span><span class='s'>&#34;n&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;o&#34;</span><span class='o'>]</span> <span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;o&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;m&#34;</span><span class='o'>;</span> <span class='s'>&#34;n&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span> <span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span> <span class='s'>&#34;j&#34;</span><span class='o'>;</span> <span class='s'>&#34;k&#34;</span><span class='o'>;</span> <span class='s'>&#34;l&#34;</span><span class='o'>]</span><span class='o'>]</span> <span class='o'>;;</span>
+  frequency_sort <span class='o'>[</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span><span class='s'>&#34;h&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span><span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span>
+                   <span class='o'>[</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span><span class='s'>&#34;j&#34;</span><span class='o'>;</span><span class='s'>&#34;k&#34;</span><span class='o'>;</span><span class='s'>&#34;l&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;m&#34;</span><span class='o'>;</span><span class='s'>&#34;n&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;o&#34;</span><span class='o'>]</span> <span class='o'>]</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;i&#34;</span><span class='o'>;</span> <span class='s'>&#34;j&#34;</span><span class='o'>;</span> <span class='s'>&#34;k&#34;</span><span class='o'>;</span> <span class='s'>&#34;l&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;o&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;f&#34;</span><span class='o'>;</span> <span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#34;m&#34;</span><span class='o'>;</span> <span class='s'>&#34;n&#34;</span><span class='o'>]</span><span class='o'>]</span>
+</code></pre>
+<h2 id="Arithmetic"> Arithmetic</h2><p>
+
+Determine whether a given integer number is prime.</p>
+<p>Solution</p>
+<p>Recall that <code>d</code> divides <code>n</code> iff <code>n mod d =     0</code>. This is a naive
+solution. See the <a href='http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes'>Sieve of
+Eratosthenes</a> for a
+more clever one.</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> is_prime n <span class='k'>=</span>
+    <span class='k'>let</span> n <span class='k'>=</span> abs n <span class='k'>in</span>
+    <span class='k'>let rec</span> is_not_divisor d <span class='k'>=</span>
+      d <span class='o'>*</span> d <span class='o'>&#62;</span> n <span class='o'>||</span> (n <span class='k'>mod</span> d <span class='o'>&#60;&#62;</span> 0 <span class='o'>&#38;&#38;</span> is_not_divisor (d<span class='o'>+</span>1)) <span class='k'>in</span>
+    n <span class='o'>&#60;&#62;</span> 1 <span class='o'>&#38;&#38;</span> is_not_divisor 2
+
+  not(is_prime 1)<span class='o'>;;</span>
+  is_prime 7<span class='o'>;;</span>
+  not (is_prime 12)
+</code></pre>
+<p>
+Determine the greatest common divisor of two positive integer numbers.</p>
+<p>Use Euclid&apos;s algorithm.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> gcd a b <span class='k'>=</span>
+    <span class='k'>if</span> b <span class='k'>=</span> 0 <span class='k'>then</span> a <span class='k'>else</span> gcd b (a <span class='k'>mod</span> b)
+
+  gcd 13 27 <span class='k'>=</span> 1<span class='o'>;;</span>
+  gcd 20536 7826 <span class='k'>=</span> 2
+</code></pre>
+<p>
+Determine whether two positive integer numbers are coprime.</p>
+<p>Two numbers are coprime if their greatest common divisor equals 1.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* <span class='ic'>[</span>gcd<span class='ic'>]</span> is defined <span class='ic'>in</span> the previous question *)</span><!-- end comment -->
+  <span class='k'>let</span> coprime a b <span class='k'>=</span> gcd a b <span class='k'>=</span> 1
+
+  coprime 13 27<span class='o'>;;</span>
+  not (coprime 20536 7826)
+</code></pre>
+<p>
+Calculate Euler&apos;s totient function phi(m).</p>
+<p>Euler&apos;s so-called totient function φ(m) is defined as the number of
+positive integers r (1 ≤ r &#92;&lt; m) that are coprime to m. We let φ(1) = 1.</p>
+<p>Find out what the value of phi(m) is if m is a prime number. Euler&apos;s
+totient function plays an important role in one of the most widely used
+public key cryptography methods (RSA). In this exercise you should use
+the most primitive method to calculate this function (there are smarter
+ways that we shall discuss later).</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* <span class='ic'>[</span>coprime<span class='ic'>]</span> is defined <span class='ic'>in</span> the previous question *)</span><!-- end comment -->
+  <span class='k'>let</span> phi n <span class='k'>=</span>
+    <span class='k'>let rec</span> count_coprime acc d <span class='k'>=</span>
+      <span class='k'>if</span> d <span class='o'>&#60;</span> n <span class='k'>then</span>
+        count_coprime (<span class='k'>if</span> coprime n d <span class='k'>then</span> acc <span class='o'>+</span> 1 <span class='k'>else</span> acc) (d <span class='o'>+</span> 1)
+      <span class='k'>else</span> acc
+    <span class='k'>in</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> count_coprime 0 1
+
+  phi 10 <span class='k'>=</span> 4<span class='o'>;;</span>
+  phi 13 <span class='k'>=</span> 12
+</code></pre>
+<p>
+Determine the prime factors of a given positive integer.</p>
+<p>Construct a flat list containing the prime factors in ascending order.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* Recall that d divides n iff <span class='ic'>[</span>n <span class='ic'>mod</span> d <span class='ic'>=</span> 0<span class='ic'>]</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> factors n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux d n <span class='k'>=</span>
+      <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>else</span>
+        <span class='k'>if</span> n <span class='k'>mod</span> d <span class='k'>=</span> 0 <span class='k'>then</span> d <span class='o'>::</span> aux d (n <span class='o'>/</span> d) <span class='k'>else</span> aux (d<span class='o'>+</span>1) n
+    <span class='k'>in</span>
+    aux 2 n
+
+  factors 315 <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>;</span>3<span class='o'>;</span>5<span class='o'>;</span>7<span class='o'>]</span>
+</code></pre>
+<p>
+Determine the prime factors of a given positive integer (2).</p>
+<p>Construct a list containing the prime factors and their multiplicity.
+<em>Hint:</em> The problem is similar to problem <a href='#run-length-direct'>Run-length encoding of a list
+(direct solution)</a>.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> factors n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux d n <span class='k'>=</span>
+      <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>else</span>
+        <span class='k'>if</span> n <span class='k'>mod</span> d <span class='k'>=</span> 0 <span class='k'>then</span>
+          <span class='k'>match</span> aux d (n <span class='o'>/</span> d) <span class='k'>with</span>
+          <span class='o'>|</span> (h<span class='o'>,</span>n) <span class='o'>::</span> t <span class='k'>when</span> h <span class='k'>=</span> d <span class='k'>-></span> (h<span class='o'>,</span>n<span class='o'>+</span>1) <span class='o'>::</span> t
+          <span class='o'>|</span> l <span class='k'>-></span> (d<span class='o'>,</span>1) <span class='o'>::</span> l
+        <span class='k'>else</span> aux (d<span class='o'>+</span>1) n
+    <span class='k'>in</span>
+    aux 2 n
+
+  factors 315 <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>,</span>2 <span class='o'>;</span> 5<span class='o'>,</span>1 <span class='o'>;</span> 7<span class='o'>,</span>1<span class='o'>]</span>
+</code></pre>
+<p>
+Calculate Euler&apos;s totient function phi(m) (improved).</p>
+<p>See problem “<a href='#totient'>Calculate Euler&amp;apos;s totient function phi(m)</a>” for
+the definition of Euler&apos;s totient function. If the list of the prime
+factors of a number m is known in the form of the previous problem then
+the function phi(m) can be efficiently calculated as follows: Let
+<code>[(p1, m1); (p2, m2);   (p3, m3); ...]</code> be the list of prime factors
+(and their multiplicities) of a given number m. Then φ(m) can be
+calculated with the following formula:</p>
+<p>φ(m) = (p1 - 1) × p1<sup>m1&#92; -&#92; 1&lt;/sup&gt; × (p2 - 1) ×
+p2<sup>m2&#92; -&#92; 1&lt;/sup&gt; × (p3 - 1) × p3<sup>m3&#92; -&#92; 1&lt;/sup&gt; × ...</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* Naive power <span class='ic'>function</span><span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let rec</span> pow n p <span class='k'>=</span> <span class='k'>if</span> p <span class='o'>&#60;</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> n <span class='o'>*</span> pow n (p-1) <span class='o'>;;</span>
+  <span class='com2'>(* <span class='ic'>[</span>factors<span class='ic'>]</span> is defined <span class='ic'>in</span> the previous question<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> phi_improved n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux acc <span class='k'>=</span> <span class='k'>function</span>
+      <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> acc
+      <span class='o'>|</span> (p<span class='o'>,</span>m) <span class='o'>::</span> t <span class='k'>-></span> aux ((p <span class='o'>-</span> 1) <span class='o'>*</span> pow p (m <span class='o'>-</span> 1) <span class='o'>*</span> acc) t <span class='k'>in</span>
+    aux 1 (factors n)
+
+  phi_improved 10 <span class='k'>=</span> 4<span class='o'>;;</span>
+  phi_improved 13 <span class='k'>=</span> 12
+</code></pre>
+<p>
+Compare the two methods of calculating Euler&apos;s totient function.</p>
+<p>Use the solutions of problems “<a href='#totient'>Calculate Euler&amp;apos;s totient function
+phi(m)</a>” and “<a href='#totient-improved'>Calculate Euler&amp;apos;s totient function phi(m)
+(improved)</a>” to compare the algorithms. Take the
+number of logical inferences as a measure for efficiency. Try to
+calculate φ(10090) as an example.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* Naive <span class='ic'>[</span>timeit<span class='ic'>]</span> <span class='ic'>function</span><span class='ic'>.</span>  It requires the <span class='ic'>[</span>Unix<span class='ic'>]</span> <span class='ic'>module</span> <span class='ic'>to</span> be loaded<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> timeit f a <span class='k'>=</span>
+    <span class='k'>let</span> t0 <span class='k'>=</span> <span class='m'>Unix</span><span class='o'>.</span>gettimeofday() <span class='k'>in</span>
+    ignore(f a)<span class='o'>;</span>
+    <span class='k'>let</span> t1 <span class='k'>=</span> <span class='m'>Unix</span><span class='o'>.</span>gettimeofday() <span class='k'>in</span>
+    t1 <span class='o'>-.</span> t0
+
+  timeit phi 10090<span class='o'>;;</span>
+  timeit phi_improved 10090
+</code></pre>
+<p>
+A list of prime numbers.</p>
+<p>Given a range of integers by its lower and upper limit, construct a list
+of all prime numbers in that range.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> is_prime n <span class='k'>=</span>
+    <span class='k'>let</span> n <span class='k'>=</span> max n <span class='o'>(-</span>n) <span class='k'>in</span>
+    <span class='k'>let rec</span> is_not_divisor d <span class='k'>=</span>
+      d <span class='o'>*</span> d <span class='o'>&#62;</span> n <span class='o'>||</span> (n <span class='k'>mod</span> d <span class='o'>&#60;&#62;</span> 0 <span class='o'>&#38;&#38;</span> is_not_divisor (d<span class='o'>+</span>1)) <span class='k'>in</span>
+    is_not_divisor 2
+
+  <span class='k'>let rec</span> all_primes a b <span class='k'>=</span>
+    <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>else</span>
+      <span class='k'>let</span> rest <span class='k'>=</span> all_primes (a <span class='o'>+</span> 1) b <span class='k'>in</span>
+      <span class='k'>if</span> is_prime a <span class='k'>then</span> a <span class='o'>::</span> rest <span class='k'>else</span> rest
+
+  <span class='m'>List</span><span class='o'>.</span>length (all_primes 2 7920) <span class='k'>=</span> 1000
+</code></pre>
+<p>
+Goldbach&apos;s conjecture.</p>
+<p>Goldbach&apos;s conjecture says that every positive even number greater than
+2 is the sum of two prime numbers. Example: 28 = 5 + 23. It is one of
+the most famous facts in number theory that has not been proved to be
+correct in the general case. It has been <em>numerically confirmed</em> up to
+very large numbers. Write a function to find the two prime numbers that
+sum up to a given even integer.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* <span class='ic'>[</span>is_prime<span class='ic'>]</span> is defined <span class='ic'>in</span> the previous solution *)</span><!-- end comment -->
+  <span class='k'>let</span> goldbach n <span class='k'>=</span>
+    <span class='k'>let rec</span> aux d <span class='k'>=</span>
+      <span class='k'>if</span> is_prime d <span class='o'>&#38;&#38;</span> is_prime (n <span class='o'>-</span> d) <span class='k'>then</span> (d<span class='o'>,</span> n<span class='o'>-</span>d)
+      <span class='k'>else</span> aux (d<span class='o'>+</span>1) <span class='k'>in</span>
+    aux 2
+
+  goldbach 28 <span class='k'>=</span> (5<span class='o'>,</span>23)
+</code></pre>
+<p>
+A list of Goldbach compositions.</p>
+<p>Given a range of integers by its lower and upper limit, print a list of
+all even numbers and their Goldbach composition.</p>
+<p>In most cases, if an even number is written as the sum of two prime
+numbers, one of them is very small. Very rarely, the primes are both
+bigger than say 50. Try to find out how many such cases there are in the
+range 2..3000.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* <span class='ic'>[</span>goldbach<span class='ic'>]</span> is defined <span class='ic'>in</span> the previous question<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let rec</span> goldbach_list a b <span class='k'>=</span>
+    <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>else</span>
+      <span class='k'>if</span> a <span class='k'>mod</span> 2 <span class='k'>=</span> 1 <span class='k'>then</span> goldbach_list (a<span class='o'>+</span>1) b
+      <span class='k'>else</span> (a<span class='o'>,</span> goldbach a) <span class='o'>::</span> goldbach_list (a<span class='o'>+</span>2) b
+
+  <span class='k'>let</span> goldbach_limit a b lim <span class='k'>=</span>
+    <span class='m'>List</span><span class='o'>.</span>filter (<span class='k'>fun</span> <span class='o'>(_</span><span class='o'>,</span>(a<span class='o'>,</span>b)) <span class='k'>-></span> a <span class='o'>&#62;</span> lim <span class='o'>&#38;&#38;</span> b <span class='o'>&#62;</span> lim) (goldbach_list a b)
+
+  goldbach_list 9 20
+  <span class='k'>=</span> <span class='o'>[</span>(10<span class='o'>,</span> (3<span class='o'>,</span> 7))<span class='o'>;</span> (12<span class='o'>,</span> (5<span class='o'>,</span> 7))<span class='o'>;</span> (14<span class='o'>,</span> (3<span class='o'>,</span> 11))<span class='o'>;</span> (16<span class='o'>,</span> (3<span class='o'>,</span> 13))<span class='o'>;</span> (18<span class='o'>,</span> (5<span class='o'>,</span> 13))<span class='o'>;</span>
+     (20<span class='o'>,</span> (3<span class='o'>,</span> 17))<span class='o'>]</span><span class='o'>;;</span>
+  goldbach_limit 1 2000 50
+  <span class='k'>=</span> <span class='o'>[</span>(992<span class='o'>,</span> (73<span class='o'>,</span> 919))<span class='o'>;</span> (1382<span class='o'>,</span> (61<span class='o'>,</span> 1321))<span class='o'>;</span> (1856<span class='o'>,</span> (67<span class='o'>,</span> 1789))<span class='o'>;</span>
+     (1928<span class='o'>,</span> (61<span class='o'>,</span> 1867))<span class='o'>]</span>
+</code></pre>
+<h2 id="LogicandCodes"> Logic and Codes</h2><p>
+
+Let us define a small “language” for boolean expressions containing
+variables:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> bool_expr <span class='k'>=</span>
+    <span class='o'>|</span> Var <span class='k'>of</span> string
+    <span class='o'>|</span> Not <span class='k'>of</span> bool_expr
+    <span class='o'>|</span> And <span class='k'>of</span> bool_expr <span class='o'>*</span> bool_expr
+    <span class='o'>|</span> Or <span class='k'>of</span> bool_expr <span class='o'>*</span> bool_expr
+</code></pre>
+<p>
+A logical expression in two variables can then be written in prefix
+notation, as in the following example:</p>
+<pre><code class='ocaml'>  And(Or(Var <span class='s'>&#34;a&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;b&#34;</span>)<span class='o'>,</span> And(Var <span class='s'>&#34;a&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;b&#34;</span>))
+</code></pre>
+<p>
+Truth tables for logical expressions (2 variables).</p>
+<p>Define a function, <code>table2</code> which returns the truth table of a given
+logical expression in two variables (specified as arguments). The return
+value must be a list of triples containing
+<code>(value_of_a, balue_of_b,     value_of_expr)</code>.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> eval2 a val_a b val_b <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Var x <span class='k'>-></span> <span class='k'>if</span> x <span class='k'>=</span> a <span class='k'>then</span> val_a
+               <span class='k'>else</span> <span class='k'>if</span> x <span class='k'>=</span> b <span class='k'>then</span> val_b
+               <span class='k'>else</span> failwith <span class='s'>&#34;The expression contains an invalid variable&#34;</span>
+    <span class='o'>|</span> Not e <span class='k'>-></span> not(eval2 a val_a b val_b e)
+    <span class='o'>|</span> And(e1<span class='o'>,</span> e2) <span class='k'>-></span> eval2 a val_a b val_b e1 <span class='o'>&#38;&#38;</span> eval2 a val_a b val_b e2
+    <span class='o'>|</span> Or(e1<span class='o'>,</span> e2) <span class='k'>-></span> eval2 a val_a b val_b e1 <span class='o'>||</span> eval2 a val_a b val_b e2
+  <span class='k'>let</span> table2 a b expr <span class='k'>=</span>
+    <span class='o'>[</span>(<span class='o'>true</span><span class='o'>,</span>  <span class='o'>true</span><span class='o'>,</span>  eval2 a <span class='o'>true</span>  b <span class='o'>true</span>  expr)<span class='o'>;</span>
+     (<span class='o'>true</span><span class='o'>,</span>  <span class='o'>false</span><span class='o'>,</span> eval2 a <span class='o'>true</span>  b <span class='o'>false</span> expr)<span class='o'>;</span>
+     (<span class='o'>false</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>,</span>  eval2 a <span class='o'>false</span> b <span class='o'>true</span>  expr)<span class='o'>;</span>
+     (<span class='o'>false</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>,</span> eval2 a <span class='o'>false</span> b <span class='o'>false</span> expr) <span class='o'>]</span>
+
+  table2 <span class='s'>&#34;a&#34;</span> <span class='s'>&#34;b&#34;</span> (And(Var <span class='s'>&#34;a&#34;</span><span class='o'>,</span> Or(Var <span class='s'>&#34;a&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;b&#34;</span>)))
+  <span class='k'>=</span> <span class='o'>[</span>(<span class='o'>true</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>,</span> <span class='o'>true</span>)<span class='o'>;</span>
+     (<span class='o'>true</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>,</span> <span class='o'>true</span>)<span class='o'>;</span>
+     (<span class='o'>false</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>,</span> <span class='o'>false</span>)<span class='o'>;</span>
+     (<span class='o'>false</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>,</span> <span class='o'>false</span>) <span class='o'>]</span>
+</code></pre>
+<p>
+Truth tables for logical expressions.</p>
+<p>Generalize the previous problem in such a way that the logical
+expression may contain any number of logical variables. Define <code>table</code>
+in a way that <code>table variables     expr</code> returns the truth table for the
+expression <code>expr</code>, which contains the logical variables enumerated in
+<code>variables</code>.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* <span class='ic'>[</span>val_vars<span class='ic'>]</span> is an associative list containing the truth value <span class='ic'>of</span></span>
+<span class='com2'>     each variable<span class='ic'>.</span>  For efficiency<span class='ic'>,</span> a Map <span class='ic'>or</span> a Hashtlb should be preferred<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let rec</span> eval val_vars <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Var x <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>assoc x val_vars
+    <span class='o'>|</span> Not e <span class='k'>-></span> not(eval val_vars e)
+    <span class='o'>|</span> And(e1<span class='o'>,</span> e2) <span class='k'>-></span> eval val_vars e1 <span class='o'>&#38;&#38;</span> eval val_vars e2
+    <span class='o'>|</span> Or(e1<span class='o'>,</span> e2) <span class='k'>-></span> eval val_vars e1 <span class='o'>||</span> eval val_vars e2
+
+  <span class='com2'>(* Again<span class='ic'>,</span> this is an easy <span class='ic'>and</span> short implementation rather than an</span>
+<span class='com2'>     efficient one<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let rec</span> table_make val_vars vars expr <span class='k'>=</span>
+    <span class='k'>match</span> vars <span class='k'>with</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span>(<span class='m'>List</span><span class='o'>.</span>rev val_vars<span class='o'>,</span> eval val_vars expr)<span class='o'>]</span>
+    <span class='o'>|</span> v <span class='o'>::</span> tl <span class='k'>-></span>
+       table_make ((v<span class='o'>,</span> <span class='o'>true</span>) <span class='o'>::</span> val_vars) tl expr
+       <span class='o'>@</span> table_make ((v<span class='o'>,</span> <span class='o'>false</span>) <span class='o'>::</span> val_vars) tl expr
+
+  <span class='k'>let</span> table vars expr <span class='k'>=</span> table_make <span class='o'>[</span><span class='o'>]</span> vars expr
+
+  table <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>]</span> (And(Var <span class='s'>&#34;a&#34;</span><span class='o'>,</span> Or(Var <span class='s'>&#34;a&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;b&#34;</span>)))
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>]</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>]</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>,</span> <span class='o'>true</span><span class='o'>]</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>,</span> <span class='o'>false</span><span class='o'>]</span><span class='o'>,</span> <span class='o'>false</span> <span class='o'>]</span><span class='o'>;;</span>
+  <span class='k'>let</span> a <span class='k'>=</span> Var <span class='s'>&#34;a&#34;</span> <span class='k'>and</span> b <span class='k'>=</span> Var <span class='s'>&#34;b&#34;</span> <span class='k'>and</span> c <span class='k'>=</span> Var <span class='s'>&#34;c&#34;</span> <span class='k'>in</span>
+  table <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>]</span> (Or(And(a<span class='o'>,</span> Or(b<span class='o'>,</span>c))<span class='o'>,</span> Or(And(a<span class='o'>,</span>b)<span class='o'>,</span> And(a<span class='o'>,</span>c))))
+</code></pre>
+<p>
+Gray code.</p>
+<p>An n-bit Gray code is a sequence of n-bit strings constructed according
+to certain rules. For example,</p>
+<pre><code class='ocaml'>n <span class='k'>=</span> 1<span class='o'>:</span> C(1) <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;0&#39;</span><span class='o'>,</span><span class='s'>&#39;1&#39;</span><span class='o'>]</span><span class='o'>.</span>
+n <span class='k'>=</span> 2<span class='o'>:</span> C(2) <span class='k'>=</span> <span class='o'>[</span>'00<span class='s'>&#39;,&#39;</span>01<span class='s'>&#39;,&#39;</span>11<span class='s'>&#39;,&#39;</span>10'<span class='o'>]</span><span class='o'>.</span>
+n <span class='k'>=</span> 3<span class='o'>:</span> C(3) <span class='k'>=</span> <span class='o'>[</span>'000<span class='s'>&#39;,&#39;</span>001<span class='s'>&#39;,&#39;</span>011<span class='s'>&#39;,&#39;</span>010'<span class='o'>,</span>´110´<span class='o'>,</span>´111´<span class='o'>,</span>´101´<span class='o'>,</span>´100´<span class='o'>]</span><span class='o'>.</span>
+</code></pre>
+<p>
+Find out the construction rules and write a function with the following
+specification: <code>gray n</code> returns the <code>n</code>-bit Gray code.</p>
+<p>Solution</p>
+<pre><code class='ocaml'><span class='k'>let</span> prepend c s <span class='k'>=</span>
+  <span class='com2'>(* Prepend the char <span class='ic'>[</span>c<span class='ic'>]</span> <span class='ic'>to</span> the string <span class='ic'>[</span>s<span class='ic'>]</span><span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> s' <span class='k'>=</span> <span class='m'>String</span><span class='o'>.</span>create (<span class='m'>String</span><span class='o'>.</span>length s <span class='o'>+</span> 1) <span class='k'>in</span>
+  s'<span class='o'>.</span><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>&#60;-</span> c<span class='o'>;</span>
+  <span class='m'>String</span><span class='o'>.</span>blit s 0 s' 1 (<span class='m'>String</span><span class='o'>.</span>length s)<span class='o'>;</span>
+  s'
+
+<span class='k'>let rec</span> gray n <span class='k'>=</span>
+  <span class='k'>if</span> n <span class='o'>&#60;=</span> 1 <span class='k'>then</span> <span class='o'>[</span><span class='s'>&#34;0&#34;</span><span class='o'>;</span> <span class='s'>&#34;1&#34;</span><span class='o'>]</span>
+  <span class='k'>else</span> <span class='k'>let</span> g <span class='k'>=</span> gray (n <span class='o'>-</span> 1) <span class='k'>in</span>
+       <span class='m'>List</span><span class='o'>.</span>map (prepend <span class='s'>&#39;0&#39;</span>) g <span class='o'>@</span> <span class='m'>List</span><span class='o'>.</span>map (prepend <span class='s'>&#39;1&#39;</span>) g
+
+  gray 1 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;0&#34;</span><span class='o'>;</span> <span class='s'>&#34;1&#34;</span><span class='o'>]</span><span class='o'>;;</span>
+  gray 2 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;00&#34;</span><span class='o'>;</span> <span class='s'>&#34;01&#34;</span><span class='o'>;</span> <span class='s'>&#34;11&#34;</span><span class='o'>;</span> <span class='s'>&#34;10&#34;</span><span class='o'>]</span><span class='o'>;;</span>
+  gray 3 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;000&#34;</span><span class='o'>;</span> <span class='s'>&#34;001&#34;</span><span class='o'>;</span> <span class='s'>&#34;011&#34;</span><span class='o'>;</span> <span class='s'>&#34;010&#34;</span><span class='o'>;</span> <span class='s'>&#34;110&#34;</span><span class='o'>;</span> <span class='s'>&#34;111&#34;</span><span class='o'>;</span> <span class='s'>&#34;101&#34;</span><span class='o'>;</span> <span class='s'>&#34;100&#34;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Huffman code.</p>
+<p>First of all, consult a good book on discrete mathematics or algorithms
+for a detailed description of Huffman codes (you can start with the
+<a href='http://en.wikipedia.org/wiki/Huffman_coding'>Wikipedia page</a>)!</p>
+<p>We suppose a set of symbols with their frequencies, given as a list of
+<code>Fr(S,F)</code> terms. Example:
+<code>fs = [Fr(a,45); Fr(b,13); Fr(c,12); Fr(d,16); Fr(e,9);       Fr(f,5)]</code>.
+Our objective is to construct a list <code>Hc(S,C)</code> terms, where <code>C</code> is the
+Huffman code word for the symbol <code>S</code>. In our example, the result could
+be
+<code>hs = [Hc(a,&apos;0&apos;); Hc(b,&apos;101&apos;); Hc(c,&apos;100&apos;);       Hc(d,&apos;111&apos;); Hc(e,&apos;1101&apos;); hc(f,&apos;1100&apos;)]</code>
+[hc(a,&apos;01&apos;),...etc.]. The task shall be performed by the function
+<code>huffman</code> defined as follows: <code>huffman(fs)</code> returns the Huffman code
+table for the frequency table <code>fs</code></p>
+<p>Solution</p>
+<h2 id="BinaryTrees"> Binary Trees</h2><p>
+ <img src='https://sites.google.com/site/prologsite/_/rsrc/1264934442609/prolog-problems/4/p67.gif' alt='Binary
+tree' /></p>
+<p><em>A binary tree is either empty or it is composed of a root element and
+two successors, which are binary trees themselves.</em></p>
+<p>In OCaml, one can define a new type <code>binary_tree</code> that carries an
+arbitrary value of type <code>&apos;a</code> at each node.</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a binary_tree <span class='k'>=</span>
+    <span class='o'>|</span> Empty
+    <span class='o'>|</span> Node <span class='k'>of</span> 'a <span class='o'>*</span> 'a binary_tree <span class='o'>*</span> 'a binary_tree
+</code></pre>
+<p>
+An example of tree carrying <code>char</code> data is:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> example_tree <span class='k'>=</span>
+    Node(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;b&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;d&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Node(<span class='s'>&#39;e&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>,</span>
+         Node(<span class='s'>&#39;c&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Node(<span class='s'>&#39;f&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;g&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty)))
+</code></pre>
+<p>
+In OCaml, the strict type discipline <em>guarantees</em> that, if you get a
+value of type <code>binary_tree</code>, then it must have been created with the two
+constructors <code>Empty</code> and <code>Node</code>.</p>
+<p>Construct completely balanced binary trees</p>
+<p>In a completely balanced binary tree, the following property holds for
+every node: The number of nodes in its left subtree and the number of
+nodes in its right subtree are almost equal, which means their
+difference is not greater than one.</p>
+<p>Write a function <code>cbal_tree</code> to construct completely balanced binary
+trees for a given number of nodes. The function should generate all
+solutions via backtracking. Put the letter <code>&apos;x&apos;</code> as information into all
+nodes of the tree.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* Build all trees <span class='ic'>with</span> given <span class='ic'>[</span>left<span class='ic'>]</span> <span class='ic'>and</span> <span class='ic'>[</span>right<span class='ic'>]</span> subtrees<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> add_trees_with left right all <span class='k'>=</span>
+    <span class='k'>let</span> add_right_tree all l <span class='k'>=</span>
+      <span class='m'>List</span><span class='o'>.</span>fold_left (<span class='k'>fun</span> a r <span class='k'>-></span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> l<span class='o'>,</span> r) <span class='o'>::</span> a) all right <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>fold_left add_right_tree all left
+  
+  <span class='k'>let rec</span> cbal_tree n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='o'>[</span>Empty<span class='o'>]</span>
+    <span class='k'>else</span> <span class='k'>if</span> n <span class='k'>mod</span> 2 <span class='k'>=</span> 1 <span class='k'>then</span>
+      <span class='k'>let</span> t <span class='k'>=</span> cbal_tree (n <span class='o'>/</span> 2) <span class='k'>in</span>
+      add_trees_with t t <span class='o'>[</span><span class='o'>]</span>
+    <span class='k'>else</span> <span class='com2'>(* n even<span class='ic'>:</span> n-1 nodes <span class='ic'>for</span> the left <span class='ic'>&#38;</span> right subtrees altogether<span class='ic'>.</span> *)</span><!-- end comment -->
+      <span class='k'>let</span> t1 <span class='k'>=</span> cbal_tree (n <span class='o'>/</span> 2 <span class='o'>-</span> 1) <span class='k'>in</span>
+      <span class='k'>let</span> t2 <span class='k'>=</span> cbal_tree (n <span class='o'>/</span> 2) <span class='k'>in</span>
+      add_trees_with t1 t2 (add_trees_with t2 t1 <span class='o'>[</span><span class='o'>]</span>)
+
+  cbal_tree 4
+  <span class='k'>=</span> <span class='o'>[</span>Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span>
+          Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty))<span class='o'>;</span>
+     Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span>
+          Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)))<span class='o'>;</span>
+     Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty)<span class='o'>,</span>
+          Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>;</span>
+     Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>,</span>
+          Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>;</span> <span class='o'>]</span><span class='o'>;;</span>
+  <span class='m'>List</span><span class='o'>.</span>length(cbal_tree 40)
+</code></pre>
+<p>
+Symmetric binary trees</p>
+<p>Let us call a binary tree symmetric if you can draw a vertical line
+through the root node and then the right subtree is the mirror image of
+the left subtree. Write a function <code>is_symmetric</code> to check whether a
+given binary tree is symmetric.</p>
+<p>Hint: Write a function <code>is_mirror</code> first to check whether one tree is
+the mirror image of another. We are only interested in the structure,
+not in the contents of the nodes.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> is_mirror t1 t2 <span class='k'>=</span>
+    <span class='k'>match</span> t1<span class='o'>,</span> t2 <span class='k'>with</span>
+    <span class='o'>|</span> Empty<span class='o'>,</span> Empty <span class='k'>-></span> <span class='o'>true</span>
+    <span class='o'>|</span> Node<span class='o'>(_</span><span class='o'>,</span> l1<span class='o'>,</span> r1)<span class='o'>,</span> Node<span class='o'>(_</span><span class='o'>,</span> l2<span class='o'>,</span> r2) <span class='k'>-></span>
+       is_mirror l1 r2 <span class='o'>&#38;&#38;</span> is_mirror r1 l2
+    <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>false</span>
+
+  <span class='k'>let</span> is_symmetric <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Empty <span class='k'>-></span> <span class='o'>true</span>
+    <span class='o'>|</span> Node<span class='o'>(_</span><span class='o'>,</span> l<span class='o'>,</span> r) <span class='k'>-></span> is_mirror l r
+</code></pre>
+<p>
+Binary search trees (dictionaries)</p>
+<p>Construct a <a href='http://en.wikipedia.org/wiki/Binary_search_tree'>binary search
+tree</a> from a list of
+integer numbers.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> insert tree x <span class='k'>=</span> <span class='k'>match</span> tree <span class='k'>with</span>
+    <span class='o'>|</span> Empty <span class='k'>-></span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty)
+    <span class='o'>|</span> Node(y<span class='o'>,</span> l<span class='o'>,</span> r) <span class='k'>-></span>
+       <span class='k'>if</span> x <span class='k'>=</span> y <span class='k'>then</span> tree
+       <span class='k'>else</span> <span class='k'>if</span> x <span class='o'>&#60;</span> y <span class='k'>then</span> Node(y<span class='o'>,</span> insert l x<span class='o'>,</span> r)
+       <span class='k'>else</span> Node(y<span class='o'>,</span> l<span class='o'>,</span> insert r x)
+
+  <span class='k'>let</span> construct l <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left insert Empty l
+
+  construct <span class='o'>[</span>3<span class='o'>;</span>2<span class='o'>;</span>5<span class='o'>;</span>7<span class='o'>;</span>1<span class='o'>]</span>
+  <span class='k'>=</span> Node(3<span class='o'>,</span> Node(2<span class='o'>,</span> Node(1<span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty)<span class='o'>,</span>
+         Node(5<span class='o'>,</span> Empty<span class='o'>,</span> Node(7<span class='o'>,</span> Empty<span class='o'>,</span> Empty)))
+</code></pre>
+<p>
+Then use this function to test the solution of the previous problem.</p>
+<pre><code class='ocaml'>  is_symmetric(construct <span class='o'>[</span>5<span class='o'>;</span>3<span class='o'>;</span>18<span class='o'>;</span>1<span class='o'>;</span>4<span class='o'>;</span>12<span class='o'>;</span>21<span class='o'>]</span>)<span class='o'>;;</span>
+  not(is_symmetric(construct <span class='o'>[</span>3<span class='o'>;</span>2<span class='o'>;</span>5<span class='o'>;</span>7<span class='o'>;</span>4<span class='o'>]</span>))
+</code></pre>
+<p>
+Generate-and-test paradigm</p>
+<p>Apply the generate-and-test paradigm to construct all symmetric,
+completely balanced binary trees with a given number of nodes.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> sym_cbal_trees n <span class='k'>=</span>
+    <span class='m'>List</span><span class='o'>.</span>filter is_symmetric (cbal_tree n)
+
+  sym_cbal_trees 5
+  <span class='k'>=</span> <span class='o'>[</span>Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty)<span class='o'>,</span>
+               Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)))<span class='o'>;</span>
+     Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>,</span>
+               Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty)) <span class='o'>]</span>
+</code></pre>
+<p>
+How many such trees are there with 57 nodes? Investigate about how many
+solutions there are for a given number of nodes? What if the number is
+even? Write an appropriate function.</p>
+<pre><code class='ocaml'>  <span class='m'>List</span><span class='o'>.</span>length (sym_cbal_trees 57)<span class='o'>;;</span>
+  <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> n <span class='k'>-></span> n<span class='o'>,</span> <span class='m'>List</span><span class='o'>.</span>length(sym_cbal_trees n)) (range 10 20)
+  <span class='k'>=</span> <span class='o'>[</span>(10<span class='o'>,</span> 0)<span class='o'>;</span> (11<span class='o'>,</span> 4)<span class='o'>;</span> (12<span class='o'>,</span> 0)<span class='o'>;</span> (13<span class='o'>,</span> 4)<span class='o'>;</span> (14<span class='o'>,</span> 0)<span class='o'>;</span> (15<span class='o'>,</span> 1)<span class='o'>;</span>
+     (16<span class='o'>,</span> 0)<span class='o'>;</span> (17<span class='o'>,</span> 8)<span class='o'>;</span> (18<span class='o'>,</span> 0)<span class='o'>;</span> (19<span class='o'>,</span> 16)<span class='o'>;</span> (20<span class='o'>,</span> 0)<span class='o'>]</span>
+</code></pre>
+<p>
+Construct height-balanced binary trees</p>
+<p>In a height-balanced binary tree, the following property holds for every
+node: The height of its left subtree and the height of its right subtree
+are almost equal, which means their difference is not greater than one.</p>
+<p>Write a function <code>hbal_tree</code> to construct height-balanced binary trees
+for a given height. The function should generate all solutions via
+backtracking. Put the letter <code>&apos;x&apos;</code> as information into all nodes of the
+tree.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> hbal_tree n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='o'>[</span>Empty<span class='o'>]</span>
+    <span class='k'>else</span> <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>[</span>Node(<span class='s'>&#39;x&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>]</span>
+    <span class='k'>else</span>
+      <span class='com2'>(* <span class='ic'>[</span>add_trees_with left right trees<span class='ic'>]</span> is defined <span class='ic'>in</span> a question above<span class='ic'>.</span> *)</span><!-- end comment -->
+      <span class='k'>let</span> t1 <span class='k'>=</span> hbal_tree (n <span class='o'>-</span> 1)
+      <span class='k'>and</span> t2 <span class='k'>=</span> hbal_tree (n <span class='o'>-</span> 2) <span class='k'>in</span>
+      add_trees_with t1 t1 (add_trees_with t1 t2 (add_trees_with t2 t1 <span class='o'>[</span><span class='o'>]</span>))
+
+  <span class='k'>let</span> t <span class='k'>=</span> hbal_tree 3<span class='o'>;;</span>
+  <span class='k'>let</span> x <span class='k'>=</span> <span class='s'>&#39;x&#39;</span><span class='o'>;;</span>
+  <span class='m'>List</span><span class='o'>.</span>mem (Node(x<span class='o'>,</span> Node(x<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>,</span>
+                 Node(x<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty)))) t<span class='o'>;;</span>
+  <span class='m'>List</span><span class='o'>.</span>mem (Node(x<span class='o'>,</span> Node(x<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty))<span class='o'>,</span>
+                 Node(x<span class='o'>,</span> Node(x<span class='o'>,</span> Empty<span class='o'>,</span> Empty)<span class='o'>,</span> Empty))) t<span class='o'>;;</span>
+  <span class='m'>List</span><span class='o'>.</span>length t <span class='k'>=</span> 15
+</code></pre>
+<p>
+Construct height-balanced binary trees with a given number of nodes</p>
+<p>Consider a height-balanced binary tree of height <code>h</code>. What is the
+maximum number of nodes it can contain? Clearly, <em>maxN = 2<sup><code>h</code>&lt;/sup&gt;
+</em> 1
+<em>. However, what is the minimum number *minN</em>? This question is more
+difficult. Try to find a recursive statement and turn it into a function
+<code>minNodes</code> defined as follows: <code>minNodes h</code> returns the minimum number
+of nodes in a height-balanced binary tree of height <code>h</code>.</p>
+<p>Solution</p>
+<p>On the other hand, we might ask: what is the maximum height H a
+height-balanced binary tree with N nodes can have? <code>maxHeight n</code> returns
+the maximum height of a height-balanced binary tree with <code>n</code> nodes.</p>
+<p>Now, we can attack the main problem: construct all the height-balanced
+binary trees with a given nuber of nodes. <code>hbal_tree_nodes n</code> returns a
+list of all height-balanced binary tree with <code>n</code> nodes.</p>
+<p>Find out how many height-balanced trees exist for <code>n =       15</code>.</p>
+<pre><code class='ocaml'>  <span class='m'>List</span><span class='o'>.</span>length (hbal_tree_nodes 15)
+</code></pre>
+<p>
+Count the leaves of a binary tree</p>
+<p>A leaf is a node with no successors. Write a function <code>count_leaves</code> to
+count them.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> count_leaves <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Empty <span class='k'>-></span> 0
+    <span class='o'>|</span> Node<span class='o'>(_</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty) <span class='k'>-></span> 1
+    <span class='o'>|</span> Node<span class='o'>(_</span><span class='o'>,</span> l<span class='o'>,</span> r) <span class='k'>-></span> count_leaves l <span class='o'>+</span> count_leaves r
+
+  count_leaves Empty <span class='k'>=</span> 0<span class='o'>;;</span>
+  count_leaves example_tree <span class='k'>=</span> 3
+</code></pre>
+<p>
+Collect the leaves of a binary tree in a list</p>
+<p>A leaf is a node with no successors. Write a function <code>leaves</code> to
+collect them in a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> leaves <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Empty <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> Node(c<span class='o'>,</span> Empty<span class='o'>,</span> Empty) <span class='k'>-></span> <span class='o'>[</span>c<span class='o'>]</span>
+    <span class='o'>|</span> Node<span class='o'>(_</span><span class='o'>,</span> l<span class='o'>,</span> r) <span class='k'>-></span> leaves l <span class='o'>@</span> leaves r
+
+  leaves Empty <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
+  leaves example_tree <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>;</span> <span class='s'>&#39;g&#39;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Collect the internal nodes of a binary tree in a list</p>
+<p>An internal node of a binary tree has either one or two non-empty
+successors. Write a function <code>internals</code> to collect them in a list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> internals <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> Empty <span class='o'>|</span> Node<span class='o'>(_</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty) <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> Node(c<span class='o'>,</span> l<span class='o'>,</span> r) <span class='k'>-></span> internals l <span class='o'>@</span> (c <span class='o'>::</span> internals r)
+
+  internals (Node(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> Empty<span class='o'>,</span> Empty)) <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
+  internals example_tree <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Collect the nodes at a given level in a list.</p>
+<p>A node of a binary tree is at level N if the path from the root to the
+node has length N-1. The root node is at level 1. Write a function
+<code>at_level t l</code> to collect all nodes of the tree <code>t</code> at level <code>l</code> in a
+list.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> at_level t l <span class='k'>=</span> <span class='k'>match</span> t <span class='k'>with</span>
+    <span class='o'>|</span> Empty <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
+    <span class='o'>|</span> Node(c<span class='o'>,</span> left<span class='o'>,</span> right) <span class='k'>-></span>
+       <span class='k'>if</span> l <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>[</span>c<span class='o'>]</span>
+       <span class='k'>else</span> at_level left (l <span class='o'>-</span> 1) <span class='o'>@</span> at_level right (l <span class='o'>-</span> 1)
+
+  at_level example_tree 2 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>]</span><span class='o'>;;</span>
+  at_level example_tree 2 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>]</span><span class='o'>;;</span>
+  at_level example_tree 5 <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Using <code>at_level</code> it is easy to construct a function <code>levelorder</code> which
+creates the level-order sequence of the nodes. However, there are more
+efficient ways to do that.</p>
+<p>Construct a complete binary tree</p>
+<p>A <em>complete</em> binary tree with height H is defined as follows: The levels
+1,2,3,...,H-1 contain the maximum number of nodes (i.e 2<sup>i-1&lt;/sup&gt;
+at the level i, note that we start counting the levels from 1 at the
+root). In level H, which may contain less than the maximum possible
+number of nodes, all the nodes are &quot;left-adjusted&quot;. This means that in a
+levelorder tree traversal all internal nodes come first, the leaves come
+second, and empty successors (the nil&apos;s which are not really nodes!)
+come last.</p>
+<p>Particularly, complete binary trees are used as data structures (or
+addressing schemes) for heaps.</p>
+<p>We can assign an address number to each node in a complete binary tree
+by enumerating the nodes in levelorder, starting at the root with
+number 1. In doing so, we realize that for every node X with address A
+the following property holds: The address of X&apos;s left and right
+successors are 2<em>A and 2</em>A+1, respectively, supposed the successors do
+exist. This fact can be used to elegantly construct a complete binary
+tree structure. Write a function <code>is_complete_binary_tree</code> with the
+following specification: <code>is_complete_binary_tree n t</code> returns <code>true</code>
+iff <code>t</code> is a complete binary tree with <code>n</code> nodes.</p>
+<p>Solution</p>
+<p>Layout a binary tree (1)</p>
+<p>As a preparation for drawing the tree, a layout algorithm is required to
+determine the position of each node in a rectangular grid. Several
+layout methods are conceivable, one of them is shown in the illustration
+below.</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264933989828/prolog-problems/4/p64.gif' alt='grid' /></p>
+<p>In this layout strategy, the position of a node v is obtained by the
+following two rules:</p>
+<ul>
+ <li><em>x(v)</em> is equal to the position of the node v in the <em>inorder</em>
+ sequence;
+ </li>
+ <li><em>y(v)</em> is equal to the depth of the node <em>v</em> in the tree.</li>
+</ul>
+
+<p>In order to store the position of the nodes, we redefine the OCaml type
+representing a node (and its successors) as follows:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a pos_binary_tree <span class='k'>=</span>
+    <span class='o'>|</span> E <span class='com2'>(* represents the empty tree *)</span><!-- end comment -->
+    <span class='o'>|</span> N <span class='k'>of</span> 'a <span class='o'>*</span> int <span class='o'>*</span> int <span class='o'>*</span> 'a pos_binary_tree <span class='o'>*</span> 'a pos_binary_tree
+</code></pre>
+<p>
+<code>N(w,x,y,l,r)</code> represents a (non-empty) binary tree with root <code>w</code>
+&quot;positioned&quot; at <code>(x,y)</code>, and subtrees <code>l</code> and <code>r</code>. Write a function
+<code>layout_binary_tree</code> with the following specification:
+<code>layout_binary_tree t</code> returns the &quot;positioned&quot; binary tree obtained
+from the binary tree <code>t</code>.</p>
+<p>Solution</p>
+<p>Layout a binary tree (2)</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264934255598/prolog-problems/4/p65.gif' alt='' /></p>
+<p>An alternative layout method is depicted in the above illustration. Find
+out the rules and write the corresponding OCaml function.</p>
+<p>Hint: On a given level, the horizontal distance between neighboring
+nodes is constant.</p>
+<p>Solution</p>
+<p>Layout a binary tree (3)</p>
+<p>Yet another layout strategy is shown in the above illustration. The
+method yields a very compact layout while maintaining a certain symmetry
+in every node. Find out the rules and write the corresponding Prolog
+predicate.</p>
+<p>Hint: Consider the horizontal distance between a node and its successor
+nodes. How tight can you pack together two subtrees to construct the
+combined binary tree? This is a difficult problem. Don&apos;t give up too
+early!</p>
+<p>Solution</p>
+<p>Which layout do you like most?</p>
+<p>A string representation of binary trees</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264934442609/prolog-problems/4/p67.gif' alt='binary
+tree' /></p>
+<p>Somebody represents binary trees as strings of the following type (see
+example): <code>&quot;a(b(d,e),c(,f(g,)))&quot;</code>.</p>
+<ul>
+ <li>Write an OCaml function which generates this string representation,
+ if the tree is given as usual (as <code>Empty</code> or <code>Node(x,l,r)</code> term).
+ Then write a function which does this inverse; i.e. given the string
+ representation, construct the tree in the usual form. Finally,
+ combine the two predicates in a single function <code>tree_string</code> which
+ can be used in both directions.
+ </li>
+ <li>Write the same predicate <code>tree_string</code> using difference lists and a
+ single predicate <code>tree_dlist</code> which does the conversion between a
+ tree and a difference list in both directions.</li>
+</ul>
+
+<p>For simplicity, suppose the information in the nodes is a single letter
+and there are no spaces in the string.</p>
+<p>Solution</p>
+<p>Preorder and inorder sequences of binary trees</p>
+<p>We consider binary trees with nodes that are identified by single
+lower-case letters, as in the example of the previous problem.</p>
+<ol>
+ <li>Write functions <code>preorder</code> and <code>inorder</code> that construct the preorder
+ and inorder sequence of a given binary tree, respectively. The
+ results should be atoms, e.g. &apos;abdecfg&apos; for the preorder sequence of
+ the example in the previous problem.
+ </li>
+ <li>Can you use <code>preorder</code> from problem part 1. in the reverse
+ direction; i.e. given a preorder sequence, construct a corresponding
+ tree? If not, make the necessary arrangements.
+ </li>
+ <li>If both the preorder sequence and the inorder sequence of the nodes
+ of a binary tree are given, then the tree is determined
+ unambiguously. Write a function <code>pre_in_tree</code> that does the job.
+ </li>
+ <li>Solve problems 1. to 3. using difference lists. Cool! Use the
+ function <code>timeit</code> (defined in problem “<a href='#timeit'>Compare the two methods of
+ calculating Euler&amp;apos;s totient function.</a>”) to compare the
+ solutions.</li>
+</ol>
+
+<p>What happens if the same character appears in more than one node. Try
+for instance <code>pre_in_tree &quot;aba&quot; &quot;baa&quot;</code>.</p>
+<p>Solution</p>
+<p>Dotstring representation of binary trees</p>
+<p>We consider again binary trees with nodes that are identified by single
+lower-case letters, as in the example of problem “<a href='#tree-string'>A string
+representation of binary trees</a>”. Such a tree can be
+represented by the preorder sequence of its nodes in which dots (.) are
+inserted where an empty subtree (nil) is encountered during the tree
+traversal. For example, the tree shown in problem “<a href='#tree-string'>A string
+representation of binary trees</a>” is represented as
+&apos;abd..e..c.fg...&apos;. First, try to establish a syntax (BNF or syntax
+diagrams) and then write a function <code>tree_dotstring</code> which does the
+conversion in both directions. Use difference lists.</p>
+<p>Solution</p>
+<h2 id="MultiwayTrees"> Multiway Trees</h2><p>
+<img src='https://sites.google.com/site/prologsite/_/rsrc/1264946214751/prolog-problems/5/p70.gif' alt='multiway
+tree' /></p>
+<p><em>A multiway tree is composed of a root element and a (possibly empty)
+set of successors which are multiway trees themselves. A multiway tree
+is never empty. The set of successor trees is sometimes called a
+forest.</em></p>
+<p>To represent multiway trees, we will use the following type which is a
+direct translation of the definition:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a mult_tree <span class='k'>=</span> T <span class='k'>of</span> 'a <span class='o'>*</span> 'a mult_tree list
+</code></pre>
+<p>
+The example tree depicted opposite is therefore represented by the
+following OCaml expression:</p>
+<pre><code class='ocaml'>  T(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='o'>[</span>T(<span class='s'>&#39;f&#39;</span><span class='o'>,</span><span class='o'>[</span>T(<span class='s'>&#39;g&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>]</span>)<span class='o'>;</span> T(<span class='s'>&#39;c&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>;</span> T(<span class='s'>&#39;b&#39;</span><span class='o'>,</span><span class='o'>[</span>T(<span class='s'>&#39;d&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>;</span> T(<span class='s'>&#39;e&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>]</span>)<span class='o'>]</span>)
+</code></pre>
+<p>
+Count the nodes of a multiway tree</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> count_nodes (T<span class='o'>(_</span><span class='o'>,</span> sub)) <span class='k'>=</span>
+    <span class='m'>List</span><span class='o'>.</span>fold_left (<span class='k'>fun</span> n t <span class='k'>-></span> n <span class='o'>+</span> count_nodes t) 1 sub
+
+  count_nodes (T(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='o'>[</span>T(<span class='s'>&#39;f&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>) <span class='o'>]</span>)) <span class='k'>=</span> 2
+</code></pre>
+<p>
+<img src='https://sites.google.com/site/prologsite/_/rsrc/1264946214751/prolog-problems/5/p70.gif' alt='multiway
+tree' /></p>
+<p>Tree construction from a node string</p>
+<p>We suppose that the nodes of a multiway tree contain single characters.
+In the depth-first order sequence of its nodes, a special character <code>^</code>
+has been inserted whenever, during the tree traversal, the move is a
+backtrack to the previous level.</p>
+<p>By this rule, the tree in the figure opposite is represented as:
+<code>afg^^c^bd^e^^^</code>.</p>
+<p>Write functions <code>string_of_tree : char mult_tree -&gt; string</code> to construct
+the string representing the tree and
+<code>tree_of_string : string -&gt; char mult_tree</code> to construct the tree when
+the string is given.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* We could build the final string by string concatenation but this is</span>
+<span class='com2'>     expensive due <span class='ic'>to</span> the number <span class='ic'>of</span> operations<span class='ic'>.</span>  We use a buffer instead<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let rec</span> add_string_of_tree buf (T(c<span class='o'>,</span> sub)) <span class='k'>=</span>
+    <span class='m'>Buffer</span><span class='o'>.</span>add_char buf c<span class='o'>;</span>
+    <span class='m'>List</span><span class='o'>.</span>iter (add_string_of_tree buf) sub<span class='o'>;</span>
+    <span class='m'>Buffer</span><span class='o'>.</span>add_char buf <span class='s'>&#39;^&#39;</span>
+  <span class='k'>let</span> string_of_tree t <span class='k'>=</span>
+    <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 128 <span class='k'>in</span>
+    add_string_of_tree buf t<span class='o'>;</span>
+    <span class='m'>Buffer</span><span class='o'>.</span>contents buf<span class='o'>;;</span>
+  <span class='k'>let rec</span> tree_of_substring t s i len <span class='k'>=</span>
+    <span class='k'>if</span> i <span class='o'>&#62;=</span> len <span class='o'>||</span> s<span class='o'>.</span><span class='o'>[</span>i<span class='o'>]</span> <span class='k'>=</span> <span class='s'>&#39;^&#39;</span> <span class='k'>then</span> <span class='m'>List</span><span class='o'>.</span>rev t<span class='o'>,</span> i <span class='o'>+</span> 1
+    <span class='k'>else</span>
+      <span class='k'>let</span> sub<span class='o'>,</span> j <span class='k'>=</span> tree_of_substring <span class='o'>[</span><span class='o'>]</span> s (i<span class='o'>+</span>1) len <span class='k'>in</span>
+      tree_of_substring (T(s<span class='o'>.</span><span class='o'>[</span>i<span class='o'>]</span><span class='o'>,</span> sub) <span class='o'>::</span>t) s j len
+  <span class='k'>let</span> tree_of_string s <span class='k'>=</span>
+    <span class='k'>match</span> tree_of_substring <span class='o'>[</span><span class='o'>]</span> s 0 (<span class='m'>String</span><span class='o'>.</span>length s) <span class='k'>with</span>
+    <span class='o'>|</span> <span class='o'>[</span>t<span class='o'>]</span><span class='o'>,</span> <span class='o'>_</span> <span class='k'>-></span> t
+    <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> failwith <span class='s'>&#34;tree_of_string&#34;</span>
+
+  <span class='k'>let</span> t <span class='k'>=</span>
+    T(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='o'>[</span>T(<span class='s'>&#39;f&#39;</span><span class='o'>,</span><span class='o'>[</span>T(<span class='s'>&#39;g&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>]</span>)<span class='o'>;</span> T(<span class='s'>&#39;c&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>;</span> T(<span class='s'>&#39;b&#39;</span><span class='o'>,</span><span class='o'>[</span>T(<span class='s'>&#39;d&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>;</span> T(<span class='s'>&#39;e&#39;</span><span class='o'>,</span><span class='o'>[</span><span class='o'>]</span>)<span class='o'>]</span>)<span class='o'>]</span>)<span class='o'>;;</span>
+  string_of_tree t <span class='k'>=</span> <span class='s'>&#34;afg^^c^bd^e^^^&#34;</span><span class='o'>;;</span>
+  tree_of_string <span class='s'>&#34;afg^^c^bd^e^^^&#34;</span> <span class='k'>=</span> t<span class='o'>;;</span>
+</code></pre>
+<p>
+Determine the internal path length of a tree</p>
+<p>We define the internal path length of a multiway tree as the total sum
+of the path lengths from the root to all nodes of the tree. By this
+definition, the tree <code>t</code> in the figure of the previous problem has an
+internal path length of 9. Write a function <code>ipl tree</code> that returns the
+internal path length of <code>tree</code>.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> ipl_sub len (T<span class='o'>(_</span><span class='o'>,</span> sub)) <span class='k'>=</span>
+    <span class='com2'>(* <span class='ic'>[</span>len<span class='ic'>]</span> is the distance <span class='ic'>of</span> the current node <span class='ic'>to</span> the root<span class='ic'>.</span>  Add the</span>
+<span class='com2'>       distance <span class='ic'>of</span> all sub<span class='ic'>-</span>nodes<span class='ic'>.</span> *)</span><!-- end comment -->
+    <span class='m'>List</span><span class='o'>.</span>fold_left (<span class='k'>fun</span> sum t <span class='k'>-></span> sum <span class='o'>+</span> ipl_sub (len <span class='o'>+</span> 1) t) len sub
+  <span class='k'>let</span> ipl t <span class='k'>=</span> ipl_sub 0 t
+
+  ipl t <span class='k'>=</span> 9
+</code></pre>
+<p>
+Construct the bottom-up order sequence of the tree nodes</p>
+<p>Write a function <code>bottom_up t</code> which constructs the bottom-up sequence
+of the nodes of the multiway tree <code>t</code>.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> prepend_bottom_up (T(c<span class='o'>,</span> sub)) l <span class='k'>=</span>
+    <span class='m'>List</span><span class='o'>.</span>fold_right (<span class='k'>fun</span> t l <span class='k'>-></span> prepend_bottom_up t l) sub (c <span class='o'>::</span> l)
+  <span class='k'>let</span> bottom_up t <span class='k'>=</span> prepend_bottom_up t <span class='o'>[</span><span class='o'>]</span>
+
+  bottom_up (T(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='o'>[</span>T(<span class='s'>&#39;b&#39;</span><span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>)<span class='o'>]</span>)) <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;a&#39;</span><span class='o'>]</span><span class='o'>;;</span>
+  bottom_up t <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;g&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;a&#39;</span><span class='o'>]</span>
+</code></pre>
+<p>
+Lisp-like tree representation</p>
+<p>There is a particular notation for multiway trees in Lisp. The following
+pictures show how multiway tree structures are represented in Lisp.</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264946557086/prolog-problems/5/p73.png' alt='Lisp representation of multiway
+trees' /></p>
+<p>Note that in the &quot;lispy&quot; notation a node with successors (children) in
+the tree is always the first element in a list, followed by its
+children. The &quot;lispy&quot; representation of a multiway tree is a sequence of
+atoms and parentheses &apos;(&apos; and &apos;)&apos;. This is very close to the way trees
+are represented in OCaml, except that no constructor <code>T</code> is used. Write
+a function <code>lispy :       char mult_tree -&gt; string</code> that returns the
+lispy notation of the tree.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let rec</span> add_lispy buf <span class='k'>=</span> <span class='k'>function</span>
+    <span class='o'>|</span> T(c<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>) <span class='k'>-></span> <span class='m'>Buffer</span><span class='o'>.</span>add_char buf c
+    <span class='o'>|</span> T(c<span class='o'>,</span> sub) <span class='k'>-></span>
+       <span class='m'>Buffer</span><span class='o'>.</span>add_char buf <span class='s'>&#39;(&#39;</span><span class='o'>;</span>
+       <span class='m'>Buffer</span><span class='o'>.</span>add_char buf c<span class='o'>;</span>
+       <span class='m'>List</span><span class='o'>.</span>iter (<span class='k'>fun</span> t <span class='k'>-></span> <span class='m'>Buffer</span><span class='o'>.</span>add_char buf <span class='s'>&#39; &#39;</span><span class='o'>;</span> add_lispy buf t) sub<span class='o'>;</span>
+       <span class='m'>Buffer</span><span class='o'>.</span>add_char buf <span class='s'>&#39;)&#39;</span>
+  <span class='k'>let</span> lispy t <span class='k'>=</span>
+    <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 128 <span class='k'>in</span>
+    add_lispy buf t<span class='o'>;</span>
+    <span class='m'>Buffer</span><span class='o'>.</span>contents buf
+
+  lispy (T(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>)) <span class='k'>=</span> <span class='s'>&#34;a&#34;</span><span class='o'>;;</span>
+  lispy (T(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='o'>[</span>T(<span class='s'>&#39;b&#39;</span><span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span>)<span class='o'>]</span>)) <span class='k'>=</span> <span class='s'>&#34;(a b)&#34;</span><span class='o'>;;</span>
+  lispy t <span class='k'>=</span> <span class='s'>&#34;(a (f g) c (b d e))&#34;</span>
+</code></pre>
+<h2 id="Graphs"> Graphs</h2><p>
+
+<em>A graph is defined as a set of nodes and a set of edges, where each
+edge is a pair of different nodes.</em></p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264948248705/prolog-problems/6/graph1.gif' alt='A
+graph' /></p>
+<p>There are several ways to represent graphs in OCaml.</p>
+<ul>
+ <li>One method is to list all edges, an edge being a pair of nodes. In
+ this form, the graph depicted opposite is represented as the
+ following expression:</li>
+</ul>
+
+<pre><code class='ocaml'>      <span class='o'>[</span><span class='s'>&#39;h&#39;</span><span class='o'>,</span> <span class='s'>&#39;g&#39;</span><span class='o'>;</span>  <span class='s'>&#39;k&#39;</span><span class='o'>,</span> <span class='s'>&#39;f&#39;</span><span class='o'>;</span>  <span class='s'>&#39;f&#39;</span><span class='o'>,</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span>  <span class='s'>&#39;f&#39;</span><span class='o'>,</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span>  <span class='s'>&#39;c&#39;</span><span class='o'>,</span> <span class='s'>&#39;b&#39;</span><span class='o'>]</span>
+    
+</code></pre>
+<p>
+We call this <strong>edge-clause form</strong>. Obviously, isolated nodes cannot
+be represented.</p>
+<ul>
+ <li>Another method is to represent the whole graph as one data object.
+ According to the definition of the graph as a pair of two sets
+ (nodes and edges), we may use the following OCaml type:</li>
+</ul>
+
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a graph_term <span class='k'>=</span> <span class='o'>/span> nodes <span class='o'>:</span> 'a list<span class='o'>;</span>  edges <span class='o'>:</span> ('a <span class='o'>*</span> 'a) list <span class='o'</span>
+</code></pre>
+<p>
+Then, the above example graph is represented by:</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> example_graph <span class='k'>=</span>
+    <span class='o'>/span> nodes <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;g&#39;</span><span class='o'>;</span> <span class='s'>&#39;h&#39;</span><span class='o'>;</span> <span class='s'>&#39;k&#39;</span><span class='o'>]</span><span class='o'>;</span>
+      edges <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;h&#39;</span><span class='o'>,</span> <span class='s'>&#39;g&#39;</span><span class='o'>;</span>  <span class='s'>&#39;k&#39;</span><span class='o'>,</span> <span class='s'>&#39;f&#39;</span><span class='o'>;</span>  <span class='s'>&#39;f&#39;</span><span class='o'>,</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span>  <span class='s'>&#39;f&#39;</span><span class='o'>,</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span>  <span class='s'>&#39;c&#39;</span><span class='o'>,</span> <span class='s'>&#39;b&#39;</span><span class='o'>]</span> <span class='o'</span>
+</code></pre>
+<p>
+We call this <strong>graph-term form</strong>. Note, that the lists are kept
+sorted, they are really sets, without duplicated elements. Each edge
+appears only once in the edge list; i.e. an edge from a node x to
+another node y is represented as <code>(x,y)</code>, the couple <code>(y,x)</code> is not
+present. The <strong>graph-term form is our default representation.</strong> You
+may want to define a similar type using sets instead of lists.</p>
+<ul>
+ <li><p>A third representation method is to associate with each node the set
+ of nodes that are adjacent to that node. We call this the
+ <strong>adjacency-list form</strong>. In our example:</p>
+ </li>
+ <li><p>The representations we introduced so far well suited for automated
+ processing, but their syntax is not very user-friendly. Typing the
+ terms by hand is cumbersome and error-prone. We can define a more
+ compact and &quot;human-friendly&quot; notation as follows: A graph (with char
+ labelled nodes) is represented by a string of atoms and terms of the
+ type X-Y. The atoms stand for isolated nodes, the X-Y terms describe
+ edges. If an X appears as an endpoint of an edge, it is
+ automatically defined as a node. Our example could be written as:</p>
+ </li>
+</ul>
+
+<pre><code class='ocaml'>  <span class='s'>&#34;b-c f-c g-h d f-b k-f h-g&#34;</span>
+</code></pre>
+<p>
+We call this the <strong>human-friendly form</strong>. As the example shows, the
+list does not have to be sorted and may even contain the same edge
+multiple times. Notice the isolated node <code>d</code>.</p>
+<p>Conversions</p>
+<p>Write functions to convert between the different graph representations.
+With these functions, all representations are equivalent; i.e. for the
+following problems you can always pick freely the most convenient form.
+This problem is not particularly difficult, but it&apos;s a lot of work to
+deal with all the special cases.</p>
+<p>Solution</p>
+<p>Path from one node to another one</p>
+<p>Write a function <code>paths g a b</code> that returns all acyclic path <code>p</code> from
+node <code>a</code> to node <code>b ≠ a</code> in the graph <code>g</code>. The function should return
+the list of all paths via backtracking.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='com2'>(* The datastructures used here are far from the most efficient ones</span>
+<span class='com2'>     but allow <span class='ic'>for</span> a straightforward implementation<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='com2'>(* Returns all neighbors satisfying the condition<span class='ic'>.</span> *)</span><!-- end comment -->
+  <span class='k'>let</span> neighbors g a cond <span class='k'>=</span>
+    <span class='k'>let</span> edge l (b<span class='o'>,</span>c) <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>=</span> a <span class='o'>&#38;&#38;</span> cond c <span class='k'>then</span> c <span class='o'>::</span> l
+                       <span class='k'>else</span> <span class='k'>if</span> c <span class='k'>=</span> a <span class='o'>&#38;&#38;</span> cond b <span class='k'>then</span> b <span class='o'>::</span> l
+                       <span class='k'>else</span> l <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>fold_left edge <span class='o'>[</span><span class='o'>]</span> g<span class='o'>.</span>edges
+  <span class='k'>let rec</span> list_path g a to_b <span class='k'>=</span> <span class='k'>match</span> to_b <span class='k'>with</span>
+    <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='k'>assert</span> <span class='o'>false</span> <span class='com2'>(* <span class='ic'>[</span>to_b<span class='ic'>]</span> contains the path <span class='ic'>to</span> <span class='ic'>[</span>b<span class='ic'>]</span><span class='ic'>.</span> *)</span><!-- end comment -->
+    <span class='o'>|</span> a' <span class='o'>::</span> <span class='o'>_</span> <span class='k'>-></span>
+       <span class='k'>if</span> a' <span class='k'>=</span> a <span class='k'>then</span> <span class='o'>[</span>to_b<span class='o'>]</span>
+       <span class='k'>else</span>
+         <span class='k'>let</span> n <span class='k'>=</span> neighbors g a' (<span class='k'>fun</span> c <span class='k'>-></span> not(<span class='m'>List</span><span class='o'>.</span>mem c to_b)) <span class='k'>in</span>
+         <span class='m'>List</span><span class='o'>.</span>concat(<span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> c <span class='k'>-></span> list_path g a (c <span class='o'>::</span> to_b)) n)
+
+  <span class='k'>let</span> paths g a b <span class='k'>=</span>
+    <span class='k'>assert</span>(a <span class='o'>&#60;&#62;</span> b)<span class='o'>;</span>
+    list_path g a <span class='o'>[</span>b<span class='o'>]</span>
+
+  paths example_graph <span class='s'>&#39;f&#39;</span> <span class='s'>&#39;b&#39;</span> <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>]</span><span class='o'>]</span>
+</code></pre>
+<p>
+Cycle from a given node</p>
+<p>Write a functions <code>cycle g a</code> that returns a closed path (cycle) <code>p</code>
+starting at a given node <code>a</code> in the graph <code>g</code>. The predicate should
+return the list of all cycles via backtracking.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> cycles g a <span class='k'>=</span>
+    <span class='k'>let</span> n <span class='k'>=</span> neighbors g a (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>true</span>) <span class='k'>in</span>
+    <span class='k'>let</span> p <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>concat(<span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> c <span class='k'>-></span> list_path g a <span class='o'>[</span>c<span class='o'>]</span>) n) <span class='k'>in</span>
+    <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> p <span class='k'>-></span> p <span class='o'>@</span> <span class='o'>[</span>a<span class='o'>]</span>) p
+
+  cycles example_graph <span class='s'>&#39;f&#39;</span>
+  <span class='k'>=</span> <span class='o'>[</span><span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>]</span><span class='o'>;</span>
+     <span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>]</span><span class='o'>;</span> <span class='o'>[</span><span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;k&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>]</span><span class='o'>]</span>
+</code></pre>
+<p>
+Construct all spanning trees</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264949059996/prolog-problems/6/p83.gif' alt='Spanning tree
+graph' /></p>
+<p>Write a function <code>s_tree g</code> to construct (by backtracking) all <a href='http://en.wikipedia.org/wiki/Spanning_tree'>spanning
+trees</a> of a given graph <code>g</code>.
+With this predicate, find out how many spanning trees there are for the
+graph depicted to the left. The data of this example graph can be found
+in the test below. When you have a correct solution for the <code>s_tree</code>
+function, use it to define two other useful functions: <code>is_tree graph</code>
+and <code>is_connected       Graph</code>. Both are five-minutes tasks!</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> g <span class='k'>=</span> <span class='o'>/span> nodes <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;g&#39;</span><span class='o'>;</span> <span class='s'>&#39;h&#39;</span><span class='o'>]</span><span class='o'>;</span>
+            edges <span class='k'>=</span> <span class='o'>[</span>(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='s'>&#39;b&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='s'>&#39;d&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;b&#39;</span><span class='o'>,</span> <span class='s'>&#39;c&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;b&#39;</span><span class='o'>,</span> <span class='s'>&#39;e&#39;</span>)<span class='o'>;</span>
+                     (<span class='s'>&#39;c&#39;</span><span class='o'>,</span> <span class='s'>&#39;e&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;d&#39;</span><span class='o'>,</span> <span class='s'>&#39;e&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;d&#39;</span><span class='o'>,</span> <span class='s'>&#39;f&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;d&#39;</span><span class='o'>,</span> <span class='s'>&#39;g&#39;</span>)<span class='o'>;</span>
+                     (<span class='s'>&#39;e&#39;</span><span class='o'>,</span> <span class='s'>&#39;h&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;f&#39;</span><span class='o'>,</span> <span class='s'>&#39;g&#39;</span>)<span class='o'>;</span> (<span class='s'>&#39;g&#39;</span><span class='o'>,</span> <span class='s'>&#39;h&#39;</span>)<span class='o'>]</span> <span class='o'</span>
+</code></pre>
+<p>
+<img src='https://sites.google.com/site/prologsite/_/rsrc/1264949163407/prolog-problems/6/p84.gif' alt='Spanning tree
+graph' /></p>
+<p>Construct the minimal spanning tree</p>
+<p>Write a function <code>ms_tree graph</code> to construct the minimal spanning tree
+of a given labelled graph. A labelled graph will be represented as
+follows:</p>
+<pre><code class='ocaml'>  <span class='k'>type</span> ('a<span class='o'>,</span> 'b) labeled_graph <span class='k'>=</span> <span class='o'>/span> nodes <span class='o'>:</span> 'a list<span class='o'>;</span>
+                                  edges <span class='o'>:</span> ('a <span class='o'>*</span> 'a <span class='o'>*</span> 'b) list <span class='o'</span>
+</code></pre>
+<p>
+(Beware that from now on <code>nodes</code> and <code>edges</code> mask the previous fields of
+the same name.)</p>
+<p>Hint: Use the <a href='http://en.wikipedia.org/wiki/Prim%27s_algorithm'>algorithm of
+Prim</a>. A small
+modification of the solution of P83 does the trick. The data of the
+example graph to the right can be found below.</p>
+<p>Solution</p>
+<pre><code class='ocaml'>  <span class='k'>let</span> g <span class='k'>=</span> <span class='o'>/span> nodes <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>;</span> <span class='s'>&#39;f&#39;</span><span class='o'>;</span> <span class='s'>&#39;g&#39;</span><span class='o'>;</span> <span class='s'>&#39;h&#39;</span><span class='o'>]</span><span class='o'>;</span>
+            edges <span class='k'>=</span> <span class='o'>[</span>(<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='s'>&#39;b&#39;</span><span class='o'>,</span> 5)<span class='o'>;</span> (<span class='s'>&#39;a&#39;</span><span class='o'>,</span> <span class='s'>&#39;d&#39;</span><span class='o'>,</span> 3)<span class='o'>;</span> (<span class='s'>&#39;b&#39;</span><span class='o'>,</span> <span class='s'>&#39;c&#39;</span><span class='o'>,</span> 2)<span class='o'>;</span> (<span class='s'>&#39;b&#39;</span><span class='o'>,</span> <span class='s'>&#39;e&#39;</span><span class='o'>,</span> 4)<span class='o'>;</span>
+                     (<span class='s'>&#39;c&#39;</span><span class='o'>,</span> <span class='s'>&#39;e&#39;</span><span class='o'>,</span> 6)<span class='o'>;</span> (<span class='s'>&#39;d&#39;</span><span class='o'>,</span> <span class='s'>&#39;e&#39;</span><span class='o'>,</span> 7)<span class='o'>;</span> (<span class='s'>&#39;d&#39;</span><span class='o'>,</span> <span class='s'>&#39;f&#39;</span><span class='o'>,</span> 4)<span class='o'>;</span> (<span class='s'>&#39;d&#39;</span><span class='o'>,</span> <span class='s'>&#39;g&#39;</span><span class='o'>,</span> 3)<span class='o'>;</span>
+                     (<span class='s'>&#39;e&#39;</span><span class='o'>,</span> <span class='s'>&#39;h&#39;</span><span class='o'>,</span> 5)<span class='o'>;</span> (<span class='s'>&#39;f&#39;</span><span class='o'>,</span> <span class='s'>&#39;g&#39;</span><span class='o'>,</span> 4)<span class='o'>;</span> (<span class='s'>&#39;g&#39;</span><span class='o'>,</span> <span class='s'>&#39;h&#39;</span><span class='o'>,</span> 1)<span class='o'>]</span> <span class='o'</span>
+</code></pre>
+<p>
+Graph isomorphism</p>
+<p>Two graphs G1(N1,E1) and G2(N2,E2) are isomorphic if there is a
+bijection f: N1 → N2 such that for any nodes X,Y of N1, X and Y are
+adjacent if and only if f(X) and f(Y) are adjacent.</p>
+<p>Write a function that determines whether two graphs are isomorphic.
+Hint: Use an open-ended list to represent the function f.</p>
+<p>Solution</p>
+<p>Node degree and graph coloration</p>
+<ul>
+ <li>Write a function <code>degree graph node</code> that determines the degree of a
+ given node.
+ </li>
+ <li>Write a function that generates a list of all nodes of a graph
+ sorted according to decreasing degree.
+ </li>
+ <li>Use <a href='http://en.wikipedia.org/wiki/Graph_coloring#Greedy_coloring'>Welsh-Powell&amp;apos;s
+ algorithm</a>
+ to paint the nodes of a graph in such a way that adjacent nodes have
+ different colors.</li>
+</ul>
+
+<p>Solution</p>
+<p>Depth-first order graph traversal</p>
+<p>Write a function that generates a depth-first order graph traversal
+sequence. The starting point should be specified, and the output should
+be a list of nodes that are reachable from this starting point (in
+depth-first order).</p>
+<p>Solution</p>
+<p>Connected components</p>
+<p>Write a predicate that splits a graph into its <a href='http://en.wikipedia.org/wiki/Connected_component_%28graph_theory%29'>connected
+components</a>.</p>
+<p>Solution</p>
+<p>Bipartite graphs</p>
+<p>Write a predicate that finds out whether a given graph is
+<a href='http://en.wikipedia.org/wiki/Bipartite_graph'>bipartite</a>.</p>
+<p>Solution</p>
+<p>Generate K-regular simple graphs with N nodes</p>
+<p>In a <a href='http://en.wikipedia.org/wiki/K-regular_graph'>K-regular graph</a> all
+nodes have a degree of K; i.e. the number of edges incident in each node
+is K. How many (non-isomorphic!) 3-regular graphs with 6 nodes are
+there?</p>
+<p>See also the <a href='https://sites.google.com/site/prologsite/prolog-problems/6/solutions-6/p6_11.txt?attredirects=0&amp;d=1'>table of
+results</a>.</p>
+<p>Solution</p>
+<h2 id="MiscellaneousProblems"> Miscellaneous Problems</h2><p>
+Eight queens problem</p>
+<p>This is a classical problem in computer science. The objective is to
+place eight queens on a chessboard so that no two queens are attacking
+each other; i.e., no two queens are in the same row, the same column, or
+on the same diagonal.</p>
+<p>Hint: Represent the positions of the queens as a list of numbers 1..N.
+Example: <code>[4;2;7;3;6;8;5;1]</code> means that the queen in the first column is
+in row 4, the queen in the second column is in row 2, etc. Use the
+generate-and-test paradigm.</p>
+<p>Solution</p>
+<p>Knight&apos;s tour</p>
+<p>Another famous problem is this one: How can a knight jump on an N×N
+chessboard in such a way that it visits every square exactly once?</p>
+<p>Hints: Represent the squares by pairs of their coordinates <code>(x,y)</code>,
+where both <code>x</code> and <code>y</code> are integers between 1 and N. Define the function
+<code>jump n       (x,y)</code> that returns all coordinates <code>(u,v)</code> to which a
+knight can jump from <code>(x,y)</code> to on a <code>n</code>×<code>n</code> chessboard. And finally,
+represent the solution of our problem as a list knight positions (the
+knight&apos;s tour).</p>
+<p>Solution</p>
+<p>Von Koch&apos;s conjecture</p>
+<p>Several years ago I met a mathematician who was intrigued by a problem
+for which he didn&apos;t know a solution. His name was Von Koch, and I don&apos;t
+know whether the problem has been solved since.</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264955485190/prolog-problems/7/p92a.gif' alt='Tree
+numbering' /></p>
+<p>Anyway, the puzzle goes like this: Given a tree with N nodes (and hence
+N-1 edges). Find a way to enumerate the nodes from 1 to N and,
+accordingly, the edges from 1 to N-1 in such a way, that for each edge K
+the difference of its node numbers equals to K. The conjecture is that
+this is always possible.</p>
+<p>For small trees the problem is easy to solve by hand. However, for
+larger trees, and 14 is already very large, it is extremely difficult to
+find a solution. And remember, we don&apos;t know for sure whether there is
+always a solution!</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264955528417/prolog-problems/7/p92b.gif' alt='Larger
+tree' /></p>
+<p>Write a function that calculates a numbering scheme for a given tree.
+What is the solution for the larger tree pictured above?</p>
+<p>Solution</p>
+<p>An arithmetic puzzle</p>
+<p>Given a list of integer numbers, find a correct way of inserting
+arithmetic signs (operators) such that the result is a correct equation.
+Example: With the list of numbers <code>[2;3;5;7;11]</code> we can form the
+equations 2-3+5+7 = 11 or 2 = (3*5+7)/11 (and ten others!).</p>
+<p>Solution</p>
+<p>English number words</p>
+<p>On financial documents, like cheques, numbers must sometimes be written
+in full words. Example: 175 must be written as one-seven-five. Write a
+function <code>full_words</code> to print (non-negative) integer numbers in full
+words.</p>
+<p>Solution</p>
+<p>Syntax checker</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264955783053/prolog-problems/7/p96.gif' alt='Syntax
+graph' /></p>
+<p>In a certain programming language (Ada) identifiers are defined by the
+syntax diagram (railroad chart) opposite. Transform the syntax diagram
+into a system of syntax diagrams which do not contain loops; i.e. which
+are purely recursive. Using these modified diagrams, write a function
+<code>identifier : string -&gt; bool</code> that can check whether or not a given
+string is a legal identifier.</p>
+<p>Solution</p>
+<p>Sudoku</p>
+<p>Sudoku puzzles go like this:</p>
+<pre><code class='ocaml'>   Problem statement                 <span class='m'>Solution</span>
+
+    <span class='o'>.</span>  <span class='o'>.</span>  4 <span class='o'>|</span> 8  <span class='o'>.</span>  <span class='o'>.</span> <span class='o'>|</span> <span class='o'>.</span>  1  7      9  3  4 <span class='o'>|</span> 8  2  5 <span class='o'>|</span> 6  1  7
+            <span class='o'>|</span>         <span class='o'>|</span>                      <span class='o'>|</span>         <span class='o'>|</span>
+    6  7  <span class='o'>.</span> <span class='o'>|</span> 9  <span class='o'>.</span>  <span class='o'>.</span> <span class='o'>|</span> <span class='o'>.</span>  <span class='o'>.</span>  <span class='o'>.</span>      6  7  2 <span class='o'>|</span> 9  1  4 <span class='o'>|</span> 8  5  3
+            <span class='o'>|</span>         <span class='o'>|</span>                      <span class='o'>|</span>         <span class='o'>|</span>
+    5  <span class='o'>.</span>  8 <span class='o'>|</span> <span class='o'>.</span>  3  <span class='o'>.</span> <span class='o'>|</span> <span class='o'>.</span>  <span class='o'>.</span>  4      5  1  8 <span class='o'>|</span> 6  3  7 <span class='o'>|</span> 9  2  4
+    <span class='o'>--------+---------+--------</span>      <span class='o'>--------+---------+--------</span>
+    3  <span class='o'>.</span>  <span class='o'>.</span> <span class='o'>|</span> 7  4  <span class='o'>.</span> <span class='o'>|</span> 1  <span class='o'>.</span>  <span class='o'>.</span>      3  2  5 <span class='o'>|</span> 7  4  8 <span class='o'>|</span> 1  6  9
+            <span class='o'>|</span>         <span class='o'>|</span>                      <span class='o'>|</span>         <span class='o'>|</span>
+    <span class='o'>.</span>  6  9 <span class='o'>|</span> <span class='o'>.</span>  <span class='o'>.</span>  <span class='o'>.</span> <span class='o'>|</span> 7  8  <span class='o'>.</span>      4  6  9 <span class='o'>|</span> 1  5  3 <span class='o'>|</span> 7  8  2
+            <span class='o'>|</span>         <span class='o'>|</span>                      <span class='o'>|</span>         <span class='o'>|</span>
+    <span class='o'>.</span>  <span class='o'>.</span>  1 <span class='o'>|</span> <span class='o'>.</span>  6  9 <span class='o'>|</span> <span class='o'>.</span>  <span class='o'>.</span>  5      7  8  1 <span class='o'>|</span> 2  6  9 <span class='o'>|</span> 4  3  5
+    <span class='o'>--------+---------+--------</span>      <span class='o'>--------+---------+--------</span>
+    1  <span class='o'>.</span>  <span class='o'>.</span> <span class='o'>|</span> <span class='o'>.</span>  8  <span class='o'>.</span> <span class='o'>|</span> 3  <span class='o'>.</span>  6      1  9  7 <span class='o'>|</span> 5  8  2 <span class='o'>|</span> 3  4  6
+            <span class='o'>|</span>         <span class='o'>|</span>                      <span class='o'>|</span>         <span class='o'>|</span>
+    <span class='o'>.</span>  <span class='o'>.</span>  <span class='o'>.</span> <span class='o'>|</span> <span class='o'>.</span>  <span class='o'>.</span>  6 <span class='o'>|</span> <span class='o'>.</span>  9  1      8  5  3 <span class='o'>|</span> 4  7  6 <span class='o'>|</span> 2  9  1
+            <span class='o'>|</span>         <span class='o'>|</span>                      <span class='o'>|</span>         <span class='o'>|</span>
+    2  4  <span class='o'>.</span> <span class='o'>|</span> <span class='o'>.</span>  <span class='o'>.</span>  1 <span class='o'>|</span> 5  <span class='o'>.</span>  <span class='o'>.</span>      2  4  6 <span class='o'>|</span> 3  9  1 <span class='o'>|</span> 5  7  8
+</code></pre>
+<p>
+Every spot in the puzzle belongs to a (horizontal) row and a (vertical)
+column, as well as to one single 3x3 square (which we call &quot;square&quot; for
+short). At the beginning, some of the spots carry a single-digit number
+between 1 and 9. The problem is to fill the missing spots with digits in
+such a way that every number between 1 and 9 appears exactly once in
+each row, in each column, and in each square.</p>
+<p>Solution</p>
+<p>Nonograms</p>
+<p>Around 1994, a certain kind of puzzles was very popular in England. The
+&quot;Sunday Telegraph&quot; newspaper wrote: &quot;Nonograms are puzzles from Japan
+and are currently published each week only in The Sunday Telegraph.
+Simply use your logic and skill to complete the grid and reveal a
+picture or diagram.&quot; As an OCaml programmer, you are in a better
+situation: you can have your computer do the work!</p>
+<p>The puzzle goes like this: Essentially, each row and column of a
+rectangular bitmap is annotated with the respective lengths of its
+distinct strings of occupied cells. The person who solves the puzzle
+must complete the bitmap given only these lengths.</p>
+<pre><code class='ocaml'>          Problem statement<span class='o'>:</span>          Solution<span class='o'>:</span>
+
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 3         <span class='o'>|_|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|_|_|_|_|</span> 3
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 2 1       <span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|_|</span>X<span class='o'>|_|_|_|_|</span> 2 1
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 3 2       <span class='o'>|_|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|_|_|</span>X<span class='o'>|</span>X<span class='o'>|</span> 3 2
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 2 2       <span class='o'>|_|_|</span>X<span class='o'>|</span>X<span class='o'>|_|_|</span>X<span class='o'>|</span>X<span class='o'>|</span> 2 2
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 6         <span class='o'>|_|_|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span> 6
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 1 5       <span class='o'>|</span>X<span class='o'>|_|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|_|</span> 1 5
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 6         <span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|</span>X<span class='o'>|_|_|</span> 6
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 1         <span class='o'>|_|_|_|_|</span>X<span class='o'>|_|_|_|</span> 1
+          <span class='o'>|_|_|_|_|_|_|_|_|</span> 2         <span class='o'>|_|_|_|</span>X<span class='o'>|</span>X<span class='o'>|_|_|_|</span> 2
+           1 3 1 7 5 3 4 3             1 3 1 7 5 3 4 3
+           2 1 5 1                     2 1 5 1
+</code></pre>
+<p>
+For the example above, the problem can be stated as the two lists
+<code>[[3];[2;1];[3;2];[2;2];[6];[1;5];[6];[1];[2]]</code> and
+<code>[[1;2];[3;1];[1;5];[7;1];[5];[3];[4];[3]]</code> which give the &quot;solid&quot;
+lengths of the rows and columns, top-to-bottom and left-to-right,
+respectively. Published puzzles are larger than this example, e.g.
+25×20, and apparently always have unique solutions.</p>
+<p>Solution</p>
+<p>Crossword puzzle</p>
+<p>Given an empty (or almost empty) framework of a crossword puzzle and a
+set of words. The problem is to place the words into the framework.</p>
+<p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264956149766/prolog-problems/7/p99.gif' alt='puzzle' /></p>
+<p>The particular crossword puzzle is specified in a text file which first
+lists the words (one word per line) in an arbitrary order. Then, after
+an empty line, the crossword framework is defined. In this framework
+specification, an empty character location is represented by a dot (.).
+In order to make the solution easier, character locations can also
+contain predefined character values. The puzzle above is defined in the
+file
+<a href='https://sites.google.com/site/prologsite/prolog-problems/7/solutions-7/p7_09a.dat?attredirects=0&amp;d=1'>p7_09a.dat</a>,
+other examples are
+<a href='https://sites.google.com/site/prologsite/prolog-problems/7/solutions-7/p7_09b.dat?attredirects=0&amp;d=1'>p7_09b.dat</a>
+and
+<a href='https://sites.google.com/site/prologsite/prolog-problems/7/solutions-7/p7_09d.dat?attredirects=0&amp;d=1'>p7_09d.dat</a>.
+There is also an example of a puzzle
+(<a href='https://sites.google.com/site/prologsite/prolog-problems/7/solutions-7/p7_09c.dat?attredirects=0&amp;d=1'>p7_09c.dat</a>)
+which does not have a solution.</p>
+<p>Words are strings (character lists) of at least two characters. A
+horizontal or vertical sequence of character places in the crossword
+puzzle framework is called a site. Our problem is to find a compatible
+way of placing words onto sites.</p>
+<p><strong>Hints:</strong></p>
+<ol>
+ <li>The problem is not easy. You will need some time to thoroughly
+ understand it. So, don&apos;t give up too early! And remember that the
+ objective is a clean solution, not just a quick-and-dirty hack!
+ </li>
+ <li>For efficiency reasons it is important, at least for larger puzzles,
+ to sort the words and the sites in a particular order.</li>
+</ol>
+
+<p>Solution</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

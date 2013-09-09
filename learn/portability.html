@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform.html">Platform</a></li>
+              <li ><a href="/menu.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="Portability"> Portability</h1><h2 id="Supportedplatforms"> Supported platforms</h2><p>
+
+The bytecoded system currently runs on any POSIX-compliant operating
+system with an ANSI-compliant C compiler (and tries hard to accommodate
+deviations from POSIX and ANSI-C). It should run straight out of the box
+on all Unix and Unix-compatible systems, including Linux and MacOS X.
+(See below for MS Windows.) While not mandatory, it is recommended to
+use the GNU gcc compiler to compile the distribution.</p>
+<p>The native-code compiler currently supports the following
+processor/operating system combinations:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Processors</th>
+<th align="left">Operating systems</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Tier 1 platforms<br /> (actively used and maintained by the core Caml team):</td>
+</tr>
+<tr class="even">
+<td align="left">AMD64 (Intel and AMD x86 processors in 64-bit mode)</td>
+<td align="left">Linux, MacOS X</td>
+</tr>
+<tr class="odd">
+<td align="left">IA32 (Intel and AMD x86 processors in 32-bit mode)</td>
+<td align="left">Linux, FreeBSD, MacOS X, Microsoft Windows</td>
+</tr>
+<tr class="even">
+<td align="left">Power PC</td>
+<td align="left">Linux, Mac OS X</td>
+</tr>
+<tr class="odd">
+<td align="left">ARM</td>
+<td align="left">Linux</td>
+</tr>
+<tr class="even">
+<td align="left">Tier 2 platforms<br /> (maintained but less actively, with help from users):</td>
+</tr>
+<tr class="odd">
+<td align="left">AMD64</td>
+<td align="left">Microsoft Windows, FreeBSD, OpenBSD</td>
+</tr>
+<tr class="even">
+<td align="left">IA32</td>
+<td align="left">NetBSD, OpenBSD, Solaris 9</td>
+</tr>
+<tr class="odd">
+<td align="left">PowerPC</td>
+<td align="left">NetBSD</td>
+</tr>
+<tr class="even">
+<td align="left">SPARC</td>
+<td align="left">Solaris 9, Linux, NetBSD</td>
+</tr>
+</tbody>
+</table>
+<p>Other operating systems for the processors above have not been tested,
+but the compiler may work under other operating systems with little
+work.</p>
+<h2 id="PortsforMicrosoftWindows"> Ports for Microsoft Windows</h2><p>
+There are no less than four ports of Objective Caml for Microsoft
+Windows available:</p>
+<ul>
+ <li>a native Win32 port, built with the
+ <a href='http://sourceforge.net/projects/mingw/files/Automated%20MinGW%0A%20%20Installer/mingw-get-inst/'>MinGW</a>
+ development tools;
+ </li>
+ <li>a native Win32 port, built with the Microsoft development tools
+ (Microsoft Visual C++ and Microsoft Assembler);
+ </li>
+ <li>a port consisting of the Unix sources compiled under the
+ <a href='http://cygwin.com/'>Cygwin</a> Unix-like environment for Windows.
+ </li>
+ <li>a native Win64 (64-bit Windows) port, built with the Microsoft
+ development tools (Microsoft Visual C++ and Microsoft Assembler);</li>
+</ul>
+
+<p>Here is a summary of the main differences between these ports:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Native Microsoft</th>
+<th align="left">Native MinGW</th>
+<th align="left">Cygwin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Third-party software required<br /> - for base bytecode system<br /> - for <code>ocamlc -custom</code><br /> - for native-code generation</td>
+<td align="left"><br /> none<br /> MSVC<br /> MSVC + MASM</td>
+<td align="left"><br /> none<br /> Cygwin<br /> Cygwin</td>
+<td align="left"><br /> none<br /> Cygwin<br /> Cygwin</td>
+</tr>
+<tr class="even">
+<td align="left">Speed of bytecode interpreter</td>
+<td align="left">70 %</td>
+<td align="left">100 %</td>
+<td align="left">100 %</td>
+</tr>
+<tr class="odd">
+<td align="left">Debugger</td>
+<td align="left">partial</td>
+<td align="left">partial</td>
+<td align="left">full</td>
+</tr>
+<tr class="even">
+<td align="left">Libraries<br /> - Unix<br /> - Threads<br /> - Graphics</td>
+<td align="left"><br /> partial<br /> yes<br /> yes</td>
+<td align="left"><br /> partial<br /> yes<br /> yes</td>
+<td align="left"><br /> full<br /> yes<br /> no</td>
+</tr>
+<tr class="odd">
+<td align="left">Restrictions on generated executables</td>
+<td align="left">none</td>
+<td align="left">none</td>
+<td align="left">yes*</td>
+</tr>
+</tbody>
+</table>
+<ul>
+ <li>Cygwin-generated <code>.exe</code> files refer to a DLL that is distributed
+under the GPL. Thus, these <code>.exe</code> files can only be distributed under a
+license that is compatible with the GPL. Executables generated by MSVC
+or by MinGW have no such restrictions.</li>
+</ul>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
