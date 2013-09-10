@@ -104,7 +104,7 @@ type
 ocaml</code></pre>
 <p>:instance for pointers,
 explicit using )Pascal in or( C in defined is type data This .)simple
-be to lists integer( lists linked of example simple the examine s&apos;Let</p>
+be to lists integer( lists linked of example simple the examine s&#39;Let</p>
 <p>.effort and time of waste a normally is this
 but to, want you if references explicit with directly program can You
 <code>ref</code> type of values OCaml are pointers Explicit  ###</p>
@@ -176,10 +176,10 @@ assignments that are mandatory to implement the algorithm at hand.</p>
 <h3 id="Pointersandmutablefieldsorvectors"> Pointers and mutable fields or vectors</h3><p>
 Very often, pointers are used to implement physical modification of data
 structures. In OCaml programs this means using vectors or mutable fields
-in records. For this kind of use of pointers, the Pascal&apos;s instruction:
+in records. For this kind of use of pointers, the Pascal&#39;s instruction:
 <code>x^.label := val</code> (where <code>x</code> is a value of a record having a <code>label</code>
 field) corresponds to the OCaml construct <code>x.label &lt;- val</code> (where <code>x</code> is
-a value of a record having a <code>label</code> mutable field). The Pascal&apos;s <code>^</code>
+a value of a record having a <code>label</code> mutable field). The Pascal&#39;s <code>^</code>
 symbol simply disapears, since dereferencing is automatically handled by
 the OCaml compiler.</p>
 <p><strong>In conclusion:</strong> You can use explicit pointers in OCaml, exactly as in
@@ -193,8 +193,8 @@ location:</p>
 <pre><code class='ocaml'><span class='k'>type</span> 'a pointer <span class='k'>=</span> Null <span class='o'>|</span> Pointer <span class='k'>of</span> 'a ref
 </code></pre>
 <p>
-Explicit dereferencing (or reading the pointer&apos;s designated value) and
-pointer assignment (or writing to the pointer&apos;s designated memory
+Explicit dereferencing (or reading the pointer&#39;s designated value) and
+pointer assignment (or writing to the pointer&#39;s designated memory
 location) are easily defined. We define dereferencing as a prefix
 operator named <code>!^</code>, and assigment as the infix <code>^:=</code>.</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> ( <span class='o'>!^</span> ) <span class='k'>=</span> <span class='k'>function</span>
@@ -212,7 +212,7 @@ given value:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> new_pointer x <span class='k'>=</span> Pointer (ref x)<span class='o'>;;</span>
 </code></pre>
 <p>
-For instance, let&apos;s define and then assign a pointer to an integer:</p>
+For instance, let&#39;s define and then assign a pointer to an integer:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> p <span class='k'>=</span> new_pointer 0<span class='o'>;;</span>
   p <span class='o'>^:=</span> 1<span class='o'>;;</span>
   <span class='o'>!^</span>p<span class='o'>;;</span>

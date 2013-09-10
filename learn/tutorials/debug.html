@@ -255,7 +255,7 @@ Uncaught <span class='k'>exception</span><span class='o'>:</span> Not_found
 (ocd)
 </code></pre>
 <p>
-Self explanatory, is&apos;nt it? So, you want to step backward to set the
+Self explanatory, is&#39;nt it? So, you want to step backward to set the
 program counter before the time the exception is raised; hence type in
 <code>b</code> as <em>backstep</em>, and you get</p>
 <pre><code class='ocaml'>(ocd) b
@@ -289,7 +289,7 @@ char 221:</p>
                                   <span class='o'>^</span>
 </code></pre>
 <p>
-To sum up: if you&apos;re developping a program you can compile it with the
+To sum up: if you&#39;re developping a program you can compile it with the
 <code>-g</code> option, to be ready to debug the program if necessary. Hence, to
 find a spurious exception you just need to type <code>ocamldebug a.out</code>, then
 <code>r</code>, <code>b</code>, and <code>bt</code> gives you the backtrace.</p>
@@ -308,7 +308,7 @@ break <span class='o'>@</span> <span class='o'>[</span><span class='k'>module</s
 </code></pre>
 <h3 id="Settingbreakpoints"> Setting break points</h3><p>
 
-Let&apos;s set up a breakpoint and rerun the entire program from the
+Let&#39;s set up a breakpoint and rerun the entire program from the
 beginning (<code>(g)oto 0</code> then <code>(r)un</code>):</p>
 <pre><code class='ocaml'>(ocd) break <span class='o'>@</span>Uncaught 9
 Breakpoint 3 at 19112 <span class='o'>:</span> file Uncaught<span class='o'>,</span> line 9 column 34

@@ -70,12 +70,12 @@ The above code is efficient with memory, but it can be inconvenient in
 other ways. Since <code>input_line</code> only works with the <code>in_channel</code> type, it
 cannot be reused in cases where the text is already in memory. The
 <code>End_of_file</code> exception can be raised at any point during iteration, and
-it is the programmer&apos;s responsibility to ensure that the file is closed
+it is the programmer&#39;s responsibility to ensure that the file is closed
 appropriately. In fact, if there is any other exception in the above
 example, the file will not be closed at all. Altogether, there is a lot
 going on: channels, I/O, exceptions, and files.</p>
 <p>Streams offer an abstraction over one part of this process: reading
-items from a sequence. They don&apos;t assume anything about files or
+items from a sequence. They don&#39;t assume anything about files or
 channels, and they replace the <code>End_of_file</code> exception with a more
 structured approach to dealing with the end of input. Here is a function
 that builds a stream of lines from an input channel:</p>
@@ -87,12 +87,12 @@ that builds a stream of lines from an input channel:</p>
 <p>
 The &quot;Stream.from&quot; function builds a stream from a callback function.
 This function is passed the current stream count (starting with 0) as an
-argument and is expected to return an <code>&apos;a option</code>. If the option has a
+argument and is expected to return an <code>&#39;a option</code>. If the option has a
 value (<code>Some x</code>), that value will be the next item in the stream. If it
 has no value (<code>None</code>), this indicates that the stream is empty and no
 further reads will be attempted. Since the option is polymorphic,
 <code>Stream.from</code> can construct streams of any type. These streams have a
-type of <code>&apos;a Stream.t</code>.</p>
+type of <code>&#39;a Stream.t</code>.</p>
 <p>With this simple function, we can now easily construct line streams from
 any input channel:</p>
 <pre><code class='ocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span><span class='o'>;;</span>
@@ -202,7 +202,7 @@ from a stream. There is another way to work with streams that is often
 preferable: <code>Stream.peek</code> and <code>Stream.junk</code>. When used together, these
 functions allow you to see what the next item would be. This feature,
 known as &quot;look ahead&quot;, is very useful when writing parsers. Even if you
-don&apos;t need to look ahead, the peek/junk protocol may be nicer to work
+don&#39;t need to look ahead, the peek/junk protocol may be nicer to work
 with because it uses options instead of exceptions:</p>
 <pre><code class='ocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nworld&#34;</span><span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
@@ -257,7 +257,7 @@ are handled:</p>
  by recursively calling <code>para_lines</code>.</li>
 </ol>
 
-<p>Happily, we can rely on the OCaml compiler&apos;s exhaustiveness checking to
+<p>Happily, we can rely on the OCaml compiler&#39;s exhaustiveness checking to
 ensure that we are handling all possible cases.</p>
 <p>With this new tool, we can now work just as easily with paragraphs as we
 could before with lines:</p>
@@ -306,8 +306,8 @@ For example, here is a stream of leap years starting with 2000:</p>
 </code></pre>
 <p>
 We can use the <code>Stream.npeek</code> function to look ahead by more than one
-item. In this case, we&apos;ll peek at the next 30 items to make sure that
-the year 2100 is not a leap year (since it&apos;s divisible by 100 but not
+item. In this case, we&#39;ll peek at the next 30 items to make sure that
+the year 2100 is not a leap year (since it&#39;s divisible by 100 but not
 400!):</p>
 <pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 30 leap_years<span class='o'>;;</span>
 </code></pre>
@@ -364,7 +364,7 @@ Here is a simple <code>range</code> function that produces a sequence of integer
     <span class='m'>Stream</span><span class='o'>.</span>from next
 </code></pre>
 <p>
-This works just like Python&apos;s <code>xrange</code> built-in function, providing an
+This works just like Python&#39;s <code>xrange</code> built-in function, providing an
 easy way to produce an assortment of lazy integer sequences by
 specifying combinations of <code>start</code>, <code>stop</code>, or <code>step</code> values:</p>
 <pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>5 <span class='o'>~</span>stop<span class='o'>:</span>10 ())<span class='o'>;;</span>
@@ -509,7 +509,7 @@ which will cause these functions to hang.</p>
 </code></pre>
 <p>
 What if you want to convert arbitary data types to streams? Well, if the
-data type defines an <code>iter</code> function, and you don&apos;t mind using threads,
+data type defines an <code>iter</code> function, and you don&#39;t mind using threads,
 you can use a producer-consumer arrangement to invert control:</p>
 <pre><code class='ocaml'>  <span class='o'>#</span>directory <span class='s'>&#34;+threads&#34;</span><span class='o'>;;</span>
   <span class='o'>#</span>load <span class='s'>&#34;threads.cma&#34;</span><span class='o'>;;</span>
@@ -539,7 +539,7 @@ corresponding value:</p>
 </code></pre>
 <p>
 Some data types, like Hashtbl and Map, provide an <code>iter</code> function that
-iterates through key-value pairs. Here&apos;s a function for those, too:</p>
+iterates through key-value pairs. Here&#39;s a function for those, too:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> items iter coll <span class='k'>=</span>
     <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
     <span class='k'>let</span> producer () <span class='k'>=</span>

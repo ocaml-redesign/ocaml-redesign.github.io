@@ -84,7 +84,7 @@ programs—guidelines which reflect the consensus among veteran OCaml
 programmers. Nevertheless, all detailed notifications of possible errors
 or omissions will be noted with pleasure. To send your comments using
 <a href='https://github.com/ocaml/ocaml.org/issues?state=open'>GitHub issues</a>.
-<br />).arguments their from separated not are &apos;&apos;<code>.``` and &apos;&apos;</code>!</p>
+<br />).arguments their from separated not are &#39;&#39;<code>.``` and &#39;&#39;</code>!</p>
 <pre><code>symbols the :rule this to exceptions Obvious( .operators character-multi
 with confusion avoid will you but readable, more be formulas your will
 only not :spaces by separated well symbols operator keep to careful Be
@@ -114,7 +114,7 @@ with y x, match<br/></p>
 
 values several matching when tuples-n around parentheses<br/>
 
-omit to okay s&apos;It :<strong>simultaneously values several Matching</strong>   -
+omit to okay s&#39;It :<strong>simultaneously values several Matching</strong>   -
 ocaml</p>
 <pre><code>
 
@@ -157,7 +157,7 @@ many uncountably the during future the in times hundred a return
 will today, program simpler a get to &quot;wasting&quot; are you time the All
 
 .readability optimize to hard work you
-if time of lot a save you why reason the s&apos;That .them reading spent time
+if time of lot a save you why reason the s&#39;That .them reading spent time
 the to compared neglectable is programs the typing spend you time The
 readable and simple Be  ###
 programs write to guidelines General ##
@@ -175,7 +175,7 @@ Example: write <code>x + 1</code> or <code>x + !y</code>.</p>
 <blockquote>
 <p><strong>Justification</strong>: If you left out the spaces then <code>x+1</code> would be
 understood, but <code>x+!y</code> would change its meaning since</p>
-<pre><code>+!`&apos;&apos; would
+<pre><code>+!`&#39;&#39; would
 be interpreted as a multi-character operator.
 
 **Criticism**: The absence of spaces around an operator improves the
@@ -188,7 +188,7 @@ language ensures that the spaces properly reflect the meaning of the
 formula. For example `x * z-1` means `(x * z) - 1`, and not
 `x * (z - 1)` as the proposed interpretation of spaces would seem to
 suggest. Besides, the problem of multi-character symbols would keep
-you from using this convention in a uniform way: you couldn&apos;t leave
+you from using this convention in a uniform way: you couldn&#39;t leave
 out the spaces around the multiplication to write `x*!y + 2*!z`.
 Finally, this playing with the spaces is a subtle and flimsy
 convention, a subliminal message which is difficult to grasp on
@@ -212,7 +212,7 @@ keyboard, it is the easiest to enter and you cannot miss it!
 </blockquote>
 <h4 id="Howtowritelongcharacterstrings"> How to write long character strings</h4><p>
 Indent long character strings with the convention in force at that line
-plus an indication of string continuation at the end of each line (a <code>&#92;</code>
+plus an indication of string continuation at the end of each line (a <code>\</code>
 character at the end of the line that omits white spaces on the
 beginning of next line):</p>
 <pre><code class='ocaml'><span class='k'>let</span> universal_declaration <span class='k'>=</span>
@@ -222,7 +222,7 @@ beginning of next line):</p>
 </code></pre>
 <h2 id="Indentationofprograms"> Indentation of programs</h2>
 <blockquote>
-<p><strong>Landin&apos;s pseudo law</strong>: Treat the indentation of your programs as if
+<p><strong>Landin&#39;s pseudo law</strong>: Treat the indentation of your programs as if
 it determines the meaning of your programs.</p>
 </blockquote>
 <p>I would add to this law: carefully treat the indentation of programs
@@ -239,18 +239,18 @@ program to How  ###
 guidelines Programming ##</p>
 <pre><code>u :: t :: 1 + z ::
 y :: x
-in &apos;&apos;expression  
+in &#39;&#39;expression  
 large``  
 = u let
 ocaml</code></pre>
 <p>:example For .operators all to extend guidelines These</p>
 <pre><code>u / )t * z + y + x(
-in &apos;&apos;expression  
+in &#39;&#39;expression  
 large``  
 = u let
 ocaml</code></pre>
 <p>write</p>
-<pre><code>)&apos;&apos;expression    
+<pre><code>)&#39;&#39;expression    
 large``( /
 )t * z + y + x(
 ocaml</code></pre>
@@ -258,19 +258,19 @@ ocaml</code></pre>
 of place In .operators of combination a of case the in operation one in
 written be to large too expressions those bind must certainly most You</p>
 <pre><code>t + z + y + x
-in &apos;&apos;expression   
+in &#39;&#39;expression   
 large``  
 = t let
 ocaml</code></pre>
 <p>write</p>
-<pre><code>&apos;&apos;expression  
+<pre><code>&#39;&#39;expression  
 large`` +
 z + y + x
 ocaml</code></pre>
 <p>of place In .line the indent to having to preferable is construction
-<code>in let</code> a of help the with &apos;&apos;expression large</p>
+<code>in let</code> a of help the with &#39;&#39;expression large</p>
 <pre><code> the define to
-sequence, operation an such in &apos;&apos;expression large</code></pre>
+sequence, operation an such in &#39;&#39;expression large</code></pre>
 <p> a of case the In</p>
 <p> &gt;
 .line this on continues operation the &gt;
@@ -279,7 +279,7 @@ that clear is it line, the starts operator the When :<strong>Justification</stro
 <pre><code>u + t +
 z + y + x
 ocaml</code></pre>
-<p>:example For .operation the of rest the indent t&apos;don and
+<p>:example For .operation the of rest the indent t&#39;don and
 operator, the with line the next the start operator, same the to calls
 multiple of presence the in or arguments, complex takes operator an When
 operations indent to How  ###</p>
@@ -307,18 +307,18 @@ define function, complex a is argument whose iterator an of case the In
 <pre><code>...
 in u t z y x f  
 = temp let
-in &apos;&apos;expression  
+in &#39;&#39;expression  
 large other``  
 = u and
-&apos;&apos;expression  
+&#39;&#39;expression  
 large``  
 = t let
 ocaml</code></pre>
 <p>write</p>
 <pre><code>...
-in &apos;&apos;expression    
+in &#39;&#39;expression    
 large other``    
-&apos;&apos;expression    
+&#39;&#39;expression    
 large``    
 z y x f  
 = temp let
@@ -334,16 +334,16 @@ arguments the of evaluation the If :<strong>justification Additional</strong> &g
 the to given name the if ;problem indentation No :<strong>Justification</strong> &gt;
  &gt;</p>
 <p>.construction
-<code>let</code> a by argument &apos;&apos;large</p>
+<code>let</code> a by argument &#39;&#39;large</p>
 <pre><code> the define cases these in :expressions
 complex of consist which arguments avoid possible, as far As
 
 .argument an of start the at lines change and line, same the on
 arguments small Write .)convention chosen the to according spaces 2 or
 1( function the of name the to respect with expressions the indent must
-You .line same the on fit t&apos;can which --well as arguments complicated
+You .line same the on fit t&#39;can which --well as arguments complicated
 very or-- arguments many with functions for except arises problem No
-:name s&apos;function the to Indentation  ####
+:name s&#39;function the to Indentation  ####
 calls function indent to How  ###
 
  &gt;
@@ -380,7 +380,7 @@ ocaml```
 function = x f rec let
 ocaml```
 
-:write t&apos;Don .right the to pushed been previously has which `function`
+:write t&#39;Don .right the to pushed been previously has which `function`
 or `match` keyword the under normally indenting in consists This
 .analyses case and functions of indentation *beastly* No  ####
 constructs matching-pattern of indentation Bad  ###
@@ -419,7 +419,7 @@ functions anonymous in matching Pattern  ####
 !programs OCaml &gt;
 your in bugs more adding without money more get to rule this use case &gt;
 this in :code of lines of number the to proportionally paid are you &gt;
-unless rule, this for reason good any see t&apos;don I :**Justitification** &gt;
+unless rule, this for reason good any see t&#39;don I :**Justitification** &gt;
  &gt;
 .readability to good &gt;
 any add not does rule the ,)matchings complex in clauses simple or( &gt;
@@ -570,7 +570,7 @@ on indentation simple the back get you way This :**Justification** &gt; &gt;
  &gt; &gt;
  &gt;
 .line &gt;
-a on fit to big too re&apos;they when `in ... = e let` with conditional &gt;
+a on fit to big too re&#39;they when `in ... = e let` with conditional &gt;
 the within them binding advocate we ,)effects side without( &gt;
 functional purely are conditional a up making expressions the If &gt;
 ``` &gt;
@@ -674,9 +674,9 @@ branches Multiple  ####
 ```
 )expr_new expr,_new( expression_Mult
 in
-&apos;e2 &apos;e1 expression_Add  
-in e2 expression_derive = &apos;e2 and  
-e1 expression_derive = &apos;e1 let  
+&#39;e2 &#39;e1 expression_Add  
+in e2 expression_derive = &#39;e2 and  
+e1 expression_derive = &#39;e1 let  
 = expr_new let
 in ... = e2 let
 in ... = e1 let
@@ -712,7 +712,7 @@ constructs `in ... let` indent to How  ###
  &gt;
 .quickly too margin right the into run You :**Criticism** &gt;
  &gt;
-.definition to definition from pass to easier s&apos;it so nicely, &gt;
+.definition to definition from pass to easier s&#39;it so nicely, &gt;
 off set is definition the of line first The :**Justification** &gt;
  &gt;
 ```
@@ -730,7 +730,7 @@ ocaml```
 .indentation normal the to exception unpleasant An :**Criticism** &gt;
  &gt;
 .definition following &gt;
-the to on pass to easy still s&apos;it so done, is definition the when &gt;
+the to on pass to easy still s&#39;it so done, is definition the when &gt;
 stop patterns the separating bars vertical The :**Justification** &gt;
  &gt;
 ```
@@ -764,7 +764,7 @@ ocaml```
 :spaces 2 or 1 of indentation regular a With
 
 .better definition the off set
-to specially case this treat to okay s&apos;it However, .normally indented
+to specially case this treat to okay s&#39;it However, .normally indented
 generally is module a in globally defined function a of body The
 definitions `;; ... let` global indent to How  ###
 
@@ -796,7 +796,7 @@ indent to much How  ###
 .correct keep to difficult is and readable &gt;
 not is indentation The .code the in lost gets one screenful, a Beyond &gt;
 .independently them handle and subproblems into it divide to time &gt;
-s&apos;it screenful, one beyond goes function a When :**Justification** &gt;
+s&#39;it screenful, one beyond goes function a When :**Justification** &gt;
  &gt;
 
 .unreasonable is
@@ -841,13 +841,13 @@ occurrence of the bug in each copy of the code!</p>
 <p>Moreover, it is difficult to identify that the same set of 10 lines of
 code is repeated 20 times throughout the program. By contrast, if an
 auxiliary function defines those 10 lines, it is fairly easy to see and
-find where those lines are used: that&apos;s simply where the function is
+find where those lines are used: that&#39;s simply where the function is
 called. If code is copy-pasted all over the place then the program is
 more difficult to understand.</p>
 <p>In conclusion, copy-pasting code leads to programs that are more
 difficult to read and more difficult to maintain: it has to be banished.</p>
-<h3 id="Howtocommentprograms"> How to comment programs</h3><h4 id="Donaposthesitatetocommentwhenthereapossadifficulty"> Don&apos;t hesitate to comment when there&apos;s a difficulty</h4>
-<h4 id="Ifthereapossnodifficultythereapossnopointincommenting"> If there&apos;s no difficulty, there&apos;s no point in commenting</h4><h4 id="Avoidcommentsinthebodiesoffunctions"> Avoid comments in the bodies of functions</h4>
+<h3 id="Howtocommentprograms"> How to comment programs</h3><h4 id="Don39thesitatetocommentwhenthere39sadifficulty"> Don&#39;t hesitate to comment when there&#39;s a difficulty</h4>
+<h4 id="Ifthere39snodifficultythere39snopointincommenting"> If there&#39;s no difficulty, there&#39;s no point in commenting</h4><h4 id="Avoidcommentsinthebodiesoffunctions"> Avoid comments in the bodies of functions</h4>
 <h4 id="Preferonecommentatthebeginningofthefunction"> Prefer one comment at the beginning of the function...</h4><p>
 ...which explains how the algorithm that is used works. Once more, if
 there is no difficulty, there is no point in commenting.</p>
@@ -857,7 +857,7 @@ non-trivial information. The nocuous comment is evidently not of
 interest; it is a nuisance since it uselessly distracts the reader. It
 is often used to fulfill some strange criteria related to the so-called
 <em>software metrology</em>, for instance the ratio <em>number of comments</em> /
-<em>number of lines of code</em> that perfectly measures a ratio that I don&apos;t
+<em>number of lines of code</em> that perfectly measures a ratio that I don&#39;t
 know the theoretical or practical interpretation. Absolutely avoid
 nocuous comments.</p>
 <p>An example of what to avoid: the following comment uses technical words
@@ -881,9 +881,9 @@ information of interest;</p>
 </code></pre>
 <h4 id="Usageinmoduleinterface"> Usage in module interface</h4><p>
 
-The function&apos;s usage must appear in the interface of the module which
+The function&#39;s usage must appear in the interface of the module which
 exports it, not in the program which implements it. Choose comments as
-in the OCaml system&apos;s interface modules, which will subsequently allow
+in the OCaml system&#39;s interface modules, which will subsequently allow
 the documentation of the interface module to be extracted automatically
 if need be.</p>
 <h4 id="Useassertions"> Use assertions</h4><p>
@@ -897,7 +897,7 @@ are usefully verified by assertions.</p>
 </code></pre>
 <p>
 Note as well that an assertion is often preferable to a comment because
-it&apos;s more trustworthy: an assertion is forced to be pertinent because it
+it&#39;s more trustworthy: an assertion is forced to be pertinent because it
 is verified upon each execution, while a comment can quickly become
 obsolete and then becomes actually detrimental to the comprehension of
 the program.</p>
@@ -910,13 +910,13 @@ here, or to follow successive modifications of invariants that the
 function must maintain. Once more, if there is some difficulty
 commenting is mandatory, for each program line if necessary.</p>
 <h3 id="Howtochooseidentifiers"> How to choose identifiers</h3><p>
-It&apos;s hard to choose identifiers whose name evokes the meaning of the
+It&#39;s hard to choose identifiers whose name evokes the meaning of the
 corresponding portion of the program. This is why you must devote
 particular care to this, emphasizing clarity and regularity of
 nomenclature.</p>
-<h4 id="Donapostuseabbreviationsforglobalnames"> Don&apos;t use abbreviations for global names</h4><p>
+<h4 id="Don39tuseabbreviationsforglobalnames"> Don&#39;t use abbreviations for global names</h4><p>
 Global identifiers (including especially the names of functions) can be
-long, because it&apos;s important to understand what purpose they serve far
+long, because it&#39;s important to understand what purpose they serve far
 from their definition.</p>
 <h4 id="SeparatewordsbyunderscoresintofstringnotintOfString"> Separate words by underscores: (<code>int_of_string</code>, not <code>intOfString</code>)</h4><p>
 Case modifications are meaningful in OCaml: in effect capitalized words
@@ -1019,7 +1019,7 @@ as use programs, in constructs syntactic delimit to necessary is it When
 programs in constructs delimit to How  ###</p>
 <p>.<code>)x &amp;&amp; false( || true</code> means <code>x &amp;&amp; false || true</code>
 ,<code>)x * 2( + 1</code> means <code>x * 2 + 1</code> as just So, .multiplication to
-&apos;&apos;and<code> the and addition to analogous is operator &apos;&apos;or</code> boolean the
+&#39;&#39;and<code> the and addition to analogous is operator &#39;&#39;or</code> boolean the
 case, this in parens overuse to tendency a have mathematicians Although
 mathematics of those are operators boolean the of precedences relative The  ####</p>
 <p>.<code>)3 &gt; x( &amp;&amp; ))2 + x( &lt; )x f((</code>
@@ -1028,13 +1028,13 @@ means <code>2 + x &lt; x f</code> expression the )interpretation sensible
 other no( reasons type For .<code>)x g( &lt; )x f(</code> means <code>x g &lt; x f</code> why
 is This .apply rules preceding the so operators, infix are Comparisons
 operators boolean and Comparisons  ####</p>
-<p>.<code>)&apos;s ^ s( failwith</code> <em>not</em> ,<code>&apos;s ^ )s failwith(</code> means <code>&apos;s ^ s failwith</code>
+<p>.<code>)&#39;s ^ s( failwith</code> <em>not</em> ,<code>&#39;s ^ )s failwith(</code> means <code>&#39;s ^ s failwith</code>
 and ,<code>)x g( @ )x f(</code> means <code>x g @ x f</code> ,<code>)x g( :: )x f(</code> means
 <code>x g :: x f</code> :<strong>operators )infix( all to</strong> generalizes convention This
 <br />
-If you don&apos;t open <code>Format</code> you could miss the qualification of a
+If you don&#39;t open <code>Format</code> you could miss the qualification of a
 printing function, and this could be perfectly silent, since many
-<code>Format</code>&apos;s functions have a correspondent in the default environment
+<code>Format</code>&#39;s functions have a correspondent in the default environment
 (<code>Pervasives</code>). Mixing printing functions from <code>Format</code> and <code>Pervasives</code>
 leads to subtle bugs in the display, that are difficult to trace. For
 instance:</p>
@@ -1065,19 +1065,19 @@ qualify all the identifiers.</p>
 </blockquote>
 <p>In a program where type definitions are shared, it is good to gather
 these definitions into one or more module(s) without implementations
-(containing only types). Then it&apos;s acceptable to systematically open the
+(containing only types). Then it&#39;s acceptable to systematically open the
 module which exports the shared type definitions.</p>
 <h3 id="Patternmatching"> Pattern-matching</h3><h4 id="Neverbeafraidofoverusingpatternmatching"> Never be afraid of over-using pattern-matching!</h4>
 <h4 id="Ontheotherhandbecarefultoavoidnonexhaustivepatternmatchingconstructs"> On the other hand, be careful to avoid non-exhaustive pattern-matching constructs</h4><p>
 Complete them with care, without using a “catch-all” clause such as
-<code>| _ -&gt; ...</code> or <code>| x -&gt; ...</code> when it&apos;s possible to do without it (for
+<code>| _ -&gt; ...</code> or <code>| x -&gt; ...</code> when it&#39;s possible to do without it (for
 example when matching a concrete type defined within the program). See
 also the next section: compiler warnings.</p>
 <h3 id="Compilerwarnings"> Compiler warnings</h3><p>
 Compiler warnings are meant to prevent potential errors; this is why you
 absolutely must heed them and correct your programs if compiling them
 produces such warnings. Besides, programs whose compilation produces
-warnings have an odor of amateurism which certainly doesn&apos;t suit your
+warnings have an odor of amateurism which certainly doesn&#39;t suit your
 own work!</p>
 <h4 id="Patternmatchingwarnings"> Pattern-matching warnings</h4><p>
 Warnings about pattern-matching must be treated with the upmost care:</p>
@@ -1088,20 +1088,20 @@ Warnings about pattern-matching must be treated with the upmost care:</p>
 <ul>
  <li>For non-exhaustive pattern-matching you must complete the
  corresponding pattern-matching construct, without adding a default
- case <pre><code>catch-all&apos;&apos;, such as `| _ -&gt; ... `, but with an explicit
+ case <pre><code>catch-all&#39;&#39;, such as `| _ -&gt; ... `, but with an explicit
  list of the constructors not examined by the rest of the construct,
  for example `| Cn _ | Cn1 _ -&gt; ... `.</code></pre>
  </li>
 </ul>
 
 <blockquote>
-<p><strong>Justification</strong>: It&apos;s not really any more complicated to write
+<p><strong>Justification</strong>: It&#39;s not really any more complicated to write
 it this way, and this allows the program to evolve more safely. In
 effect the addition of a new constructor to the datatype being
 matched will produce an alert anew, which will allow the
 programmer to add a clause corresponding to the new constructor if
 that is warranted. On the contrary, the</p>
-<pre><code>catch-all&apos;&apos; clause
+<pre><code>catch-all&#39;&#39; clause
 will make the function compile silently and it might be thought
 that the function is correct as the new constructor will be
 handled by the default case.
@@ -1114,8 +1114,8 @@ handled by the default case.
 </ul>
 
 <h4 id="Destructuringletbindings"> De-structuring <code>let</code> bindings</h4><p>
-[Translator&apos;s note: a</p>
-<pre><code>de-structuring `let` binding&apos;&apos; is one which
+[Translator&#39;s note: a</p>
+<pre><code>de-structuring `let` binding&#39;&#39; is one which
 binds several names to several expressions simultaneously. You pack all
 the names you want bound into a collection such as a tuple or a list,
 and you correspondingly pack all the expressions into a collective
@@ -1188,7 +1188,7 @@ print_newline ()
 ```
 
 
-* you can also use the predefined function `ignore : &apos;a     -&gt; unit`
+* you can also use the predefined function `ignore : &#39;a     -&gt; unit`
  that ignores its argument to return `unit`.
 
 ```ocaml
@@ -1234,7 +1234,7 @@ accordingly.
 
 
 In any case, use the `let _ = ...` construction exactly in those cases
-where you want to ignore a result. Don&apos;t systematically replace
+where you want to ignore a result. Don&#39;t systematically replace
 sequences with this construction.
 
 &gt; 
@@ -1247,7 +1247,7 @@ sequences with this construction.
 &gt; ```
 
 ###  The `hd` and `tl` functions
-Don&apos;t use the `hd` and `tl` functions, but pattern-match the list
+Don&#39;t use the `hd` and `tl` functions, but pattern-match the list
 argument explicitly.
 
 &gt; 
@@ -1308,7 +1308,7 @@ programs from algorithms courses where they were proved.
 &gt; 
 
 ###  Exceptions
-Don&apos;t be afraid to define your own exceptions in your programs, but on
+Don&#39;t be afraid to define your own exceptions in your programs, but on
 the other hand use as much as possible the exceptions predefined by the
 system. For example every search function which fails should raise the
 predefined exception `Not_found`. Be careful to handle the exceptions
@@ -1339,8 +1339,8 @@ with x -&gt; close_in ic; close_out oc; raise x
 ###  Data structures
 One of the great strengths of OCaml is the power of the data structures
 which can be defined and the simplicity of manipulating them. So you
-must take advantage of this to the fullest extent; don&apos;t hesitate to
-define your own data structures. In particular, don&apos;t systematically
+must take advantage of this to the fullest extent; don&#39;t hesitate to
+define your own data structures. In particular, don&#39;t systematically
 represent enumerations by whole numbers, nor enumerations with two cases
 by booleans. Examples:
 
@@ -1366,7 +1366,7 @@ type type_of_definition =
 &gt; directly), or add assertions in the program and guards in pattern
 &gt; matchings. This is not good practice, when the definition of a sum
 &gt; type elegantly solves this problem, with the additional benefit of
-&gt; firing the full power of pattern matching and compiler&apos;s verifications
+&gt; firing the full power of pattern matching and compiler&#39;s verifications
 &gt; of exhaustiveness.
 &gt; 
 &gt; **Criticism**: For binary enumerations, one can systematically define
@@ -1425,14 +1425,14 @@ respect to the data to be represented.
 ###  When to use mutables
 Mutable values are useful and sometimes indispensable to simple and
 clear programming. Nevertheless, you must use them with discernment:
-OCaml&apos;s normal data structures are immutable. They are to be preferred
+OCaml&#39;s normal data structures are immutable. They are to be preferred
 for the clarity and safety of programming which they allow.
 
 ###  Iterators
-OCaml&apos;s iterators are a powerful and useful feature. However you should
+OCaml&#39;s iterators are a powerful and useful feature. However you should
 not overuse them, nor *a contrario* neglect them: they are provided to
 you by libraries and have every chance of being correct and
-well-thought-out by the author of the library. So it&apos;s useless to
+well-thought-out by the author of the library. So it&#39;s useless to
 reinvent them.
 
 So write
@@ -1461,7 +1461,7 @@ even though you get:
   iterator (fun l x -&gt; x :: l) (fun l -&gt; List.rev l) [[1; 2; 3]]
 ```
 In case of express need, you must be careful to add an explanatory
-comment: in my opinion it&apos;s absolutely necessary!
+comment: in my opinion it&#39;s absolutely necessary!
 
 ###  How to optimize programs
 &gt; 
@@ -1469,7 +1469,7 @@ comment: in my opinion it&apos;s absolutely necessary!
 &gt;  No optimization *a posteriori* either.
 &gt; 
 
-Above all program simply and clearly. Don&apos;t start optimizing until the
+Above all program simply and clearly. Don&#39;t start optimizing until the
 program bottleneck has been identified (in general a few routines). Then
 optimization consists above all of changing *the complexity* of the
 algorithm used. This often happens through redefining the data
@@ -1491,7 +1491,7 @@ You should use conventional data structures (in particular, variant
 types) when you need pattern-matching.
 
 You should modules when the data structures are fixed and their
-functionality is equally fixed or it&apos;s enough to add new functions in
+functionality is equally fixed or it&#39;s enough to add new functions in
 the programs which use them.
 
 ###  Clarity of OCaml code
@@ -1514,14 +1514,14 @@ easiest way the computation that implements the algorithm.
 Concerning programming styles, one can usually observe the two
 symmetrical problematic behaviors: on the one hand, the </code></pre>
 <p>all
-imperative&apos;&apos; way (<em>systematic</em> usage of loops and assignment), and on
+imperative&#39;&#39; way (<em>systematic</em> usage of loops and assignment), and on
 the other hand the</p>
-<pre><code>purely functional&apos;&apos; way (*never* use loops nor
+<pre><code>purely functional&#39;&#39; way (*never* use loops nor
 assignments); the </code></pre>
-<p>100% object&apos;&apos; style will certainly appear in the
+<p>100% object&#39;&#39; style will certainly appear in the
 next future, but (fortunately) it is too new to be discussed here.</p>
 <ul>
- <li><strong>The <code>Too much imperative&apos;&apos; danger</code></strong>:
+ <li><strong>The <code>Too much imperative&#39;&#39; danger</code></strong>:
   <ul>
    <li>It is a bad idea to use imperative style to code a function that
  is <em>naturally</em> recursive. For instance, to compute the length of
@@ -1629,9 +1629,9 @@ x <span class='o'>+</span> y
 
 <ul>
  <li>Misuse of iterators and higher-order functions (i.e. overuse or
- under-use them). For example it&apos;s better to use <code>List.map</code> or
+ under-use them). For example it&#39;s better to use <code>List.map</code> or
  <code>List.iter</code> than to write their equivalents in-line using specific
- recursive functions of your own. Even worse, you don&apos;t use
+ recursive functions of your own. Even worse, you don&#39;t use
  <code>List.map</code> or <code>List.iter</code> but write their equivalents in terms of
  <code>List.fold_right</code> and <code>List.fold_left</code>.</li>
 </ul>
@@ -1685,7 +1685,7 @@ subsequent <code>ESC-/</code> proposes an alternate completion.</p>
 followed by <code> CTRL-X-` </code> is also used to find all occurrences of a
 certain string in a OCaml program. Instead of launching <code>make</code> to
 recompile, you launch the <code>grep</code> command; then all the</p>
-<pre><code class='error'>messages&apos;&apos; from `grep` are compatible with the </code></pre>
+<pre><code class='error'>messages&#39;&#39; from `grep` are compatible with the </code></pre>
 <p> CTRL-X-</p>
 <pre><code> `` usage
 which automatically takes you to the file and the place where the string
@@ -1695,7 +1695,7 @@ is found.
 Under Unix: use the line editor </code></pre>
 <p>ledit</p>
 <pre><code> which offers great editing
-capabilities ``à la emacs&apos;&apos; (including </code></pre>
+capabilities ``à la emacs&#39;&#39; (including </code></pre>
 <p>ESC-/</p>
 <pre><code>!), as well as a history
 mechanism which lets you retrieve previously typed commands and even

@@ -21,20 +21,20 @@ same:</p>
 1 <span class='o'>::</span> 2 <span class='o'>::</span> 3 <span class='o'>::</span> <span class='o'>[</span><span class='o'>]</span>
 </code></pre>
 <p>
-Why do I mention the cons operator? Well, it&apos;s useful when we start
-doing <em>pattern matching</em> on lists, which I&apos;ll talk about below.</p>
+Why do I mention the cons operator? Well, it&#39;s useful when we start
+doing <em>pattern matching</em> on lists, which I&#39;ll talk about below.</p>
 <h3 id="Thetypeofalinkedlist"> The type of a linked list</h3><p>
 The type of a linked list of integers is <code>int list</code>, and in general the
 type of a linked list of <code>foo</code>s is <code>foo list</code>.</p>
 <p>This implies that all the elements of a linked list must have the same
-type. But the type can be polymorphic (ie. <code>&apos;a list</code>), which is really
+type. But the type can be polymorphic (ie. <code>&#39;a list</code>), which is really
 useful if you want to write generic functions which operate on &quot;lists of
-anything&quot;. (But note: <code>&apos;a list</code> doesn&apos;t mean that each individual
-element has a different type - you still can&apos;t use this to construct a
+anything&quot;. (But note: <code>&#39;a list</code> doesn&#39;t mean that each individual
+element has a different type - you still can&#39;t use this to construct a
 list containing, say, a mixture of ints and strings. It means that the
 type of the elements is anything, but all the same type of anything.)</p>
 <p>The <code>length</code> function defined as part of the OCaml <code>List</code> module is a
-good example of this. It doesn&apos;t matter if the list contains ints or
+good example of this. It doesn&#39;t matter if the list contains ints or
 strings or objects or small furry animals, the <code>List.length</code> function
 can still be called on it. The type of <code>List.length</code> is therefore:</p>
 <pre><code class='ocaml'><span class='m'>List</span><span class='o'>.</span>length <span class='o'>:</span> 'a list <span class='k'>-></span> int
@@ -52,11 +52,11 @@ laboriously.</p>
 <p>
 The simplest equivalent to this in OCaml is a <strong>tuple</strong> such as <code>(3, 4)</code>
 which has the type <code>int * int</code>. Unlike lists, tuples can contain
-elements of different types, so for example <code>(3, &quot;hello&quot;, &apos;x&apos;)</code> has type
+elements of different types, so for example <code>(3, &quot;hello&quot;, &#39;x&#39;)</code> has type
 <code>int * string * char</code>.</p>
 <p>A slightly more complex alternative way of writing a C struct is to use
 a <strong>record</strong>. Records, like C structs, allow you to name the elements.
-Tuples don&apos;t let you name the elements, but instead you have to remember
+Tuples don&#39;t let you name the elements, but instead you have to remember
 the order in which they appear. Here is the equivalent record for our C
 struct above:</p>
 <pre><code class='ocaml'><span class='k'>type</span> pair_of_ints <span class='k'>=</span> <span class='o'>{</span> a <span class='o'>:</span> int<span class='o'>;</span> b <span class='o'>:</span> int <span class='o'>}</span><span class='o'>;;</span>
@@ -75,9 +75,9 @@ objects of this type.</p>
 <span class='o'>{</span>a<span class='k'>=</span>3<span class='o'>}</span><span class='o'>;;</span>
 </code></pre>
 <p>
-So OCaml won&apos;t let you leave some fields in your structure undefined.</p>
+So OCaml won&#39;t let you leave some fields in your structure undefined.</p>
 <h2 id="Variantsqualifiedunionsandenums"> Variants (qualified unions and enums)</h2><p>
-A &quot;qualified union&quot; doesn&apos;t really exist in C, although there is support
+A &quot;qualified union&quot; doesn&#39;t really exist in C, although there is support
 in the gcc compiler for it. Here is the pattern which one commonly uses
 for a qualified union in C:</p>
 <pre><code class='ocaml'><span class='k'>struct</span> foo <span class='o'>{</span>
@@ -93,22 +93,22 @@ for a qualified union in C:</p>
 <span class='o'>}</span><span class='o'>;</span>
 </code></pre>
 <p>
-We&apos;ve all seen this I should think, and it&apos;s not a pretty sight. For a
-start it&apos;s not safe: the programmer might make a mistake and
+We&#39;ve all seen this I should think, and it&#39;s not a pretty sight. For a
+start it&#39;s not safe: the programmer might make a mistake and
 accidentally use, say, the <code>u.i</code> field when in fact a string was stored
-in the structure. Also the compiler can&apos;t easily check if all possible
+in the structure. Also the compiler can&#39;t easily check if all possible
 types have been examined in a switch statement (you can use an <code>enum</code>
 type instead to solve this particular problem). The programmer might
 forget to set the <code>type</code> field, which would result in all sorts of fun
-and games. Furthermore, it&apos;s cumbersome.</p>
+and games. Furthermore, it&#39;s cumbersome.</p>
 <p>Here is the elegant and concise equivalent in OCaml:</p>
 <pre><code class='ocaml'><span class='k'>type</span> foo <span class='k'>=</span> Nothing <span class='o'>|</span> Int <span class='k'>of</span> int <span class='o'>|</span> Pair <span class='k'>of</span> int <span class='o'>*</span> int <span class='o'>|</span> String <span class='k'>of</span> string
 </code></pre>
 <p>
-That&apos;s the type definition. First part of each <code>|</code> separated part is
+That&#39;s the type definition. First part of each <code>|</code> separated part is
 called the constructor. It can be called anything, as long as it starts
 with a capital letter. If the constructor can be used to define a value,
-it&apos;s followed by the <code>of type</code> part, where type always starts with a
+it&#39;s followed by the <code>of type</code> part, where type always starts with a
 lowercase letter. In the above example, Nothing is used as a constant
 and the other constructors are used with values.</p>
 <p>To actually <em>create</em> things of this type you would write:</p>
@@ -137,7 +137,7 @@ languages come into their own:</p>
 <pre><code class='ocaml'><span class='k'>type</span> binary_tree <span class='k'>=</span> Leaf <span class='k'>of</span> int <span class='o'>|</span> Tree <span class='k'>of</span> binary_tree <span class='o'>*</span> binary_tree
 </code></pre>
 <p>
-Here&apos;re some binary trees. For practice, try drawing them on paper.</p>
+Here&#39;re some binary trees. For practice, try drawing them on paper.</p>
 <pre><code class='ocaml'>Leaf 3
 Tree (Leaf 3<span class='o'>,</span> Leaf 4)
 Tree (Tree (Leaf 3<span class='o'>,</span> Leaf 4)<span class='o'>,</span> Leaf 5)
@@ -163,13 +163,13 @@ Leaf 3.0<span class='o'>;;</span>
 <p>
 Notice how the type name is backwards. Compare this to the type names
 for lists, eg. <code>int list</code> etc.</p>
-<p>In fact it is no coincidence that <code>&apos;a list</code> is written &quot;backwards&quot; in
+<p>In fact it is no coincidence that <code>&#39;a list</code> is written &quot;backwards&quot; in
 the same way. Lists are simply parameterized variant types with the
 following slightly strange definition:</p>
 <pre><code class='ocaml'>  <span class='k'>type</span> 'a list <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span> <span class='o'>|</span> <span class='o'>::</span> <span class='k'>of</span> 'a <span class='o'>*</span> 'a list   <span class='com2'>(* not real OCaml code *)</span><!-- end comment -->
 </code></pre>
 <p>
-Actually the definition above doesn&apos;t quite compile. Here&apos;s a
+Actually the definition above doesn&#39;t quite compile. Here&#39;s a
 pretty-much equivalent definition:</p>
 <pre><code class='ocaml'><span class='k'>type</span> 'a equiv_list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> 'a <span class='o'>*</span> 'a equiv_list<span class='o'>;;</span>
 Nil<span class='o'>;;</span>
@@ -179,7 +179,7 @@ Cons(1<span class='o'>,</span> Cons(2<span class='o'>,</span> Nil))<span class='
 <p>
 Recall earlier that we said lists could be written two ways, either with
 the simple syntactic sugar of <code>[1; 2; 3]</code> or more formally as
-<code>1 :: 2 :: 3 :: []</code>. If you look at the definition for <code>&apos;a list</code> above,
+<code>1 :: 2 :: 3 :: []</code>. If you look at the definition for <code>&#39;a list</code> above,
 you may be able to see the reason for the formal definition.</p>
 <h2 id="Listsstructuresandvariantssummary"> Lists, structures and variants - summary</h2><p>
 OCaml name Example type definition Example usage</p>
@@ -198,12 +198,12 @@ parameterized   <span class='k'>type</span> 'a my_list <span class='k'>=</span> 
 So one Really Cool Feature of functional languages is the ability to
 break apart data structures and do pattern matching on the data. This is
 again not really a &quot;functional&quot; feature - you could imagine some
-variation of C appearing which would let you do this, but it&apos;s a Cool
+variation of C appearing which would let you do this, but it&#39;s a Cool
 Feature nonetheless.</p>
-<p>Let&apos;s start with a real program requirement: I wish to represent simple
+<p>Let&#39;s start with a real program requirement: I wish to represent simple
 mathematical expressions like <code>n * (x + y)</code> and multiply them out
 symbolically to get <code>n * x + n * y</code>.</p>
-<p>Let&apos;s define a type for these expressions:</p>
+<p>Let&#39;s define a type for these expressions:</p>
 <pre><code class='ocaml'>  <span class='k'>type</span> expr <span class='k'>=</span> Plus <span class='k'>of</span> expr <span class='o'>*</span> expr          <span class='com2'>(* means a <span class='ic'>+</span> b *)</span><!-- end comment -->
               <span class='o'>|</span> Minus <span class='k'>of</span> expr <span class='o'>*</span> expr       <span class='com2'>(* means a <span class='ic'>-</span> b *)</span><!-- end comment -->
               <span class='o'>|</span> Times <span class='k'>of</span> expr <span class='o'>*</span> expr       <span class='com2'>(* means a <span class='ic'>*</span> b *)</span><!-- end comment -->
@@ -215,12 +215,12 @@ The expression <code>n * (x + y)</code> would be written:</p>
 <pre><code class='ocaml'>Times (Value <span class='s'>&#34;n&#34;</span><span class='o'>,</span> Plus (Value <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Value <span class='s'>&#34;y&#34;</span>))
 </code></pre>
 <p>
-Let&apos;s write a function which prints out
+Let&#39;s write a function which prints out
 <code>Times (Value &quot;n&quot;, Plus (Value &quot;x&quot;, Value &quot;y&quot;))</code> as something more like
-<code>n * (x + y)</code>. Actually, I&apos;m going to write two functions, one which
+<code>n * (x + y)</code>. Actually, I&#39;m going to write two functions, one which
 converts the expression to a pretty string, and one which prints it out
 (the reason is that I might want to write the same string to a file and
-I wouldn&apos;t want to repeat the whole of the function just for that).</p>
+I wouldn&#39;t want to repeat the whole of the function just for that).</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> to_string e <span class='k'>=</span>
     <span class='k'>match</span> e <span class='k'>with</span>
     <span class='o'>|</span> Plus (left<span class='o'>,</span> right)   <span class='k'>-></span> <span class='s'>&#34;(&#34;</span> <span class='o'>^</span> to_string left <span class='o'>^</span> <span class='s'>&#34; + &#34;</span> <span class='o'>^</span> to_string right <span class='o'>^</span> <span class='s'>&#34;)&#34;</span>
@@ -234,7 +234,7 @@ I wouldn&apos;t want to repeat the whole of the function just for that).</p>
 </code></pre>
 <p>
 (NB: The <code>^</code> operator concatenates strings.)</p>
-<p>Here&apos;s the print function in action:</p>
+<p>Here&#39;s the print function in action:</p>
 <pre><code class='ocaml'>print_expr (Times (Value <span class='s'>&#34;n&#34;</span><span class='o'>,</span> Plus (Value <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Value <span class='s'>&#34;y&#34;</span>)))
 </code></pre>
 <p>
@@ -275,14 +275,14 @@ side of this first pattern match, and convince yourself that it is the
 equivalent of <code>(e1 * e2) + (e1 * e3)</code>.</p>
 <p>The second pattern does the same thing, except for expressions of the
 form <code>(e1 + e2) * e3</code>.</p>
-<p>The remaining patterns don&apos;t change the form of the expression, but they
+<p>The remaining patterns don&#39;t change the form of the expression, but they
 crucially <em>do</em> call the <code>multiply_out</code> function recursively on their
 subexpressions. This ensures that all subexpressions within the
 expression get multiplied out too (if you only wanted to multiply out
 the very top level of an expression, then you could replace all the
 remaining patterns with a simple <code>e -&gt; e</code> rule).</p>
 <p>Can we do the reverse (ie. factorizing out common subexpressions)? We
-sure can! (But it&apos;s a bit more complicated). The following version only
+sure can! (But it&#39;s a bit more complicated). The following version only
 works for the top level expression. You could certainly extend it to
 cope with all levels of an expression and more complex cases:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> factorize e <span class='k'>=</span>
@@ -309,7 +309,7 @@ match only happens if the pattern matches <em>and</em> the condition in the
 <p>
 The second feature is the <code>=</code> operator which tests for &quot;structural
 equality&quot; between two expressions. That means it goes recursively into
-each expression checking they&apos;re exactly the same at all levels down.</p>
+each expression checking they&#39;re exactly the same at all levels down.</p>
 <p>OCaml is able to check at compile time that you have covered all
 possibilities in your patterns. I changed the type definition of
 <code>type expr</code> above by adding a <code>Product</code> variant:</p>

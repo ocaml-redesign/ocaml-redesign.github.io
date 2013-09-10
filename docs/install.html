@@ -104,7 +104,7 @@ to download and install OCaml libraries. You can also find more packages
 GODI is an independent distribution of OCaml and add-on software
 (covering both libraries and applications), running on multiple
 operating systems (Linux, MacOSX, Windows, and other). GODI compiles
-software from source, and allows it to adapt it to one&apos;s needs, using
+software from source, and allows it to adapt it to one&#39;s needs, using
 configuration options and even patches. GODI also supports binary
 releases as a user option.</p>
 <p>To get started, go to the <a href='http://godi.camlcity.org'>GODI website</a>,
@@ -182,7 +182,7 @@ wide range of packages available.</p>
 <pre><code class='ocaml'>        yum install ocaml
 </code></pre>
 <p>
-To install an OCaml library called &apos;<code>foo</code>&apos;, and any dependencies it
+To install an OCaml library called &#39;<code>foo</code>&#39;, and any dependencies it
 needs, you would do:</p>
 <pre><code class='ocaml'>        yum install ocaml<span class='o'>-</span>foo<span class='o'>-</span>devel
 </code></pre>
@@ -266,7 +266,7 @@ To install camlp4:</p>
 <pre><code class='ocaml'>        urpmi camlp4
 </code></pre>
 <p>
-To install an OCaml library called &apos;<code>foo</code>&apos;, and any dependencies it
+To install an OCaml library called &#39;<code>foo</code>&#39;, and any dependencies it
 needs, you would do:</p>
 <pre><code class='ocaml'>        urpmi ocaml<span class='o'>-</span>foo<span class='o'>-</span>devel
 </code></pre>
@@ -327,7 +327,7 @@ Install via MacPorts; Build via <a href='#godi'>GODI</a>; or build it manually f
 sources. For each of the four approaches, you will need to have at least
 the OS X developer tools installed — any other requirements will be
 discussed below.</p>
-<h3 id="Inriaapossbinarypackage"> Inria&apos;s binary package</h3><p>
+<h3 id="Inria39sbinarypackage"> Inria&#39;s binary package</h3><p>
 This is the easiest way to set up a basic OCaml installation for OS X.
 For 10.4 (Tiger), simply <a href='releases/'>download</a> Intel disk image, mount
 the disk image, double-click on the ocaml.pkg file contained within, and
@@ -342,7 +342,7 @@ application allowing for easy interaction with the OCaml toplevel
 environment.</p>
 <h3 id="Fink"> Fink</h3><p>
 <a href='http://fink.sourceforge.net/' title='Fink'>Fink</a> is the most prevalent
-package management system for OS X, and is based on Debian&apos;s package
+package management system for OS X, and is based on Debian&#39;s package
 management system. Fink can be installed by downloading and building the
 <a href='http://fink.sourceforge.net/download/srcdist.php?phpLang=en'>source
 release</a>
@@ -369,11 +369,11 @@ following packages:</p>
 other packages required to build the OCaml packages, but this will occur
 mostly automatically.</p>
 <h3 id="GodiOCamlLinkingAgainstFinkLibraries"> Godi OCaml Linking Against Fink Libraries</h3><p>
-This method uses <a href='#godi'>GODI</a>&apos;s version of OCaml and uses
+This method uses <a href='#godi'>GODI</a>&#39;s version of OCaml and uses
 <a href='http://fink.sourceforge.net/'>Fink</a> to provide any additional third
 party libraries that do not come with Mac OS X. This is done because the
 version of OCaml in Fink is older (3.08 in the unstable branch) than the
-one in Godi. Also, Godi&apos;s package management system will recompile any
+one in Godi. Also, Godi&#39;s package management system will recompile any
 packages when a dependent package is updated, ensuring that your OCaml
 build tree is always in good shape.</p>
 <p>There is the issue of knowing which Fink packages have to be installed
@@ -404,15 +404,15 @@ be used to download and build the following packages:</p>
 
 <h3 id="GodiOCamlLinkingAgainstMacPortsLibraries"> Godi OCaml Linking Against MacPorts Libraries</h3><p>
 Just like the Fink/Godi setup mentioned above, this method uses
-<a href='#godi'>GODI</a>&apos;s version of OCaml and uses
+<a href='#godi'>GODI</a>&#39;s version of OCaml and uses
 <a href='http://www.macports.org/'>MacPorts</a> to provide any additional third
 party libraries that do not come with Mac OS X. This way you can let
 GODI take care of your OCaml build tree, and let MacPorts take care of
 the native libraries, such as GTK2 and PCRE.</p>
 <h3 id="Buildingfromsources"> <a href='macosx-sources'>Building from sources</a></h3><p>
 Unfortunately, the packages available for both Fink and DarwinPorts
-don&apos;t yet include some of the more useful additions to the OCaml
-collection, such as Markus Mottl&apos;s PCRE-Ocaml library or Stolpmann&apos;s
+don&#39;t yet include some of the more useful additions to the OCaml
+collection, such as Markus Mottl&#39;s PCRE-Ocaml library or Stolpmann&#39;s
 findlib system. In order to get those packages, one must currently build
 them from source.</p>
 <p>The following packages are the most beneficial to install:</p>
@@ -450,7 +450,7 @@ however it gives useful features for developing applications:</p>
  </li>
  <li>add files to this target like you do for a C program
  </li>
- <li>modify the OCaml compiler or linker settings through the Xcode&apos;s
+ <li>modify the OCaml compiler or linker settings through the Xcode&#39;s
  build-in build setting GUI.
  </li>
  <li>adding a library in library build phase of a OCaml target
@@ -506,7 +506,7 @@ Once Fink is <a href='http://fink.sourceforge.net/doc/index.php?phpLang=en'>inst
 configured</a>,
 install the Tcl/Tk libraries with the command
 <code>fink install tcltk tcltk-dev     tcltk-shlibs</code> and wait for the build
-and install process to compete. Once this is done, OCaml&apos;s configure
+and install process to compete. Once this is done, OCaml&#39;s configure
 script should be able to locate the libraries and header files required
 to build labltk (provided fink is set up to install its packages in the
 /sw directory). Running the standard OCaml build will also build labltk.</p>
@@ -550,7 +550,7 @@ the OS X Developer tools. This can be done with the following command:</p>
 Where mac.r is a Rez source file. It is part of the
 <a href='http://www.fltk.org/'>FLTK</a> distribution. This will add the required
 resource fork to the hello application. The program can be run either by
-typing <code>hello</code> at the command line or by double-clicking the app&apos;s icon
+typing <code>hello</code> at the command line or by double-clicking the app&#39;s icon
 (note that if it is launched by double-clicking, hello will send its
 output to the OS X console rather than the terminal).</p>
 <p>Unfortunately, files with resource forks can present a problem in that
@@ -579,15 +579,15 @@ contents:</p>
 </code></pre>
 <p>
 The hello application can now be run from the command line by typing
-<code>open hello.app</code>, or by double-clicking on the app&apos;s icon (again, this
-will send hello.app&apos;s output to the console).</p>
+<code>open hello.app</code>, or by double-clicking on the app&#39;s icon (again, this
+will send hello.app&#39;s output to the console).</p>
 <h3 id="Tips"> Tips</h3><p>
 <strong>Documentation.</strong> To get quick access to the documentation of a module
 (whatever the editor you use) use
 <a href='http://quicksilver.blacktree.com/'>Quicksilver</a> to index the libref/
-directory of ocaml&apos;s documentation. Since ocamldoc generates the
+directory of ocaml&#39;s documentation. Since ocamldoc generates the
 documentation of a module M in a file M.html, you can access it by
-invoking Quicksilver, type an abbreviation of the module&apos;s name you want
+invoking Quicksilver, type an abbreviation of the module&#39;s name you want
 and hit return to get its html file loaded in your preferred browser.</p>
 <p><strong>Profiling.</strong> To profile native-code programs <em>do not</em> compile them
 with the option -p (this is unsupported) simply use Shark. Shark can be
@@ -600,8 +600,8 @@ Shark.app.</p>
 <pre><code class='ocaml'>        <span class='o'>&#62;</span> <span class='k'>open</span> <span class='o'>*.</span>mshark  
 </code></pre>
 <p>
-Note that if your executable doesn&apos;t run for long enough Shark won&apos;t be
-able to take any samples and won&apos;t report any statistics. More function
+Note that if your executable doesn&#39;t run for long enough Shark won&#39;t be
+able to take any samples and won&#39;t report any statistics. More function
 names will show up in the profiles if you compile with <code>-g</code>.</p>
 <h2 id="OasisDB"> Oasis-DB</h2><p>
 <img src='img/under_construction_icon.gif' alt='Under Construction' /></p>

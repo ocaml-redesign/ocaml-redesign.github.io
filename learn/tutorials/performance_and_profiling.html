@@ -54,22 +54,22 @@ the notion that everything has to be sacrificed for speed. In computer
 languages as in life, speed kills.&quot; — Mike Vanier</em></p>
 <h2 id="Speed"> Speed</h2><p>
 Why is OCaml fast? Indeed, step back and ask <em>is OCaml fast?</em> How can we
-make programs faster? In this chapter we&apos;ll look at what actually
+make programs faster? In this chapter we&#39;ll look at what actually
 happens when you compile your OCaml programs down to machine code. This
 will help in understanding why OCaml is not just a great language for
-programming, but is also a very fast language indeed. And it&apos;ll help you
-to help the compiler write better machine code for you. It&apos;s also (I
+programming, but is also a very fast language indeed. And it&#39;ll help you
+to help the compiler write better machine code for you. It&#39;s also (I
 believe anyway) a good thing for programmers to have some idea of what
 happens between you typing <code>ocamlopt</code> and getting a binary you can run.</p>
 <p>But you will need to know some assembler to get the most out of this
-section. Don&apos;t be afraid! I&apos;ll help you out by translating the assembler
+section. Don&#39;t be afraid! I&#39;ll help you out by translating the assembler
 into a C-like pseudocode (after all C is just a portable assembly
 language).</p>
 <h3 id="Basicsofassemblylanguage"> Basics of assembly language</h3><p>
 The examples I give in this chapter are all compiled on an x86 Linux
 machine. The x86 is, of course, a 32 bit machine, so an x86 &quot;word&quot; is 4
 bytes (= 32 bits) long. At this level OCaml deals mostly with word-sized
-objects, so you&apos;ll need to remember to multiply by four to get the size
+objects, so you&#39;ll need to remember to multiply by four to get the size
 in bytes.</p>
 <p>To refresh your memory, the x86 has only a small number of general
 purpose registers, each of which can store one word. The Linux assembler
@@ -85,7 +85,7 @@ So <code>movl %ebx, %eax</code> means &quot;copy the contents of register <code>
 register <code>%eax</code>&quot; (not the other way round).</p>
 <p>Almost all of the assembly language that we will look at is going to be
 dominated not by machine code instructions like <code>movl</code> but by what are
-known as &#92;&lt;dfn&#92;&gt;assembler directives&#92;&lt;/dfn&#92;&gt;. These directives begin
+known as \&lt;dfn\&gt;assembler directives\&lt;/dfn\&gt;. These directives begin
 with a . (period) and they literally <em>direct</em> the assembler to do
 something. Here are the common ones for the Linux assembler:</p>
 <p><strong>.text</strong></p>
@@ -155,8 +155,8 @@ Smallest__entry<span class='o'>:</span>
         ret
 </code></pre>
 <p>
-In C everything has to be inside a function. Think about how you can&apos;t
-just write <code>printf (&quot;hello, world&#92;n&quot;);</code> in C, but instead you have to
+In C everything has to be inside a function. Think about how you can&#39;t
+just write <code>printf (&quot;hello, world\n&quot;);</code> in C, but instead you have to
 put it inside <code>main () { ... }</code>. In OCaml you are allowed to have
 commands at the top level, not inside a function. But when we translate
 this into assembly language, where do we put those commands? There needs
@@ -166,9 +166,9 @@ this by taking the filename (<code>smallest.ml</code>), capitalizing it and addi
 <code>__entry</code>, thus making up a symbol called <code>Smallest__entry</code> to refer to
 the top level commands in this file.</p>
 <p>Now look at the code that OCaml has generated. The original code said
-<code>print_string &quot;hello, world&#92;n&quot;</code>, but OCaml has instead compiled the
-equivalent of <code>Pervasives.output_string stdout &quot;hello, world&#92;n&quot;</code>. Why?
-If you look into <code>pervasives.ml</code> you&apos;ll see why:</p>
+<code>print_string &quot;hello, world\n&quot;</code>, but OCaml has instead compiled the
+equivalent of <code>Pervasives.output_string stdout &quot;hello, world\n&quot;</code>. Why?
+If you look into <code>pervasives.ml</code> you&#39;ll see why:</p>
 <pre><code class='ocaml'><span class='k'>let</span> print_string s <span class='k'>=</span> output_string stdout s
 </code></pre>
 <p>
@@ -184,10 +184,10 @@ risk free, almost always leading to a small performance gain.</p>
 <p>What else can we notice about this? The calling convention seems to be
 that the first two arguments are passed in the <code>%eax</code> and <code>%ebx</code>
 registers respectively. Other arguments are probably passed on the
-stack, but we&apos;ll see about that later.</p>
+stack, but we&#39;ll see about that later.</p>
 <p>C programs have a simple convention for storing strings, known as
 <strong>ASCIIZ</strong>. This just means that the string is stored in ASCII, followed
-by a trailing NUL (<code>&#92;0</code>) character. OCaml stores strings in a different
+by a trailing NUL (<code>\0</code>) character. OCaml stores strings in a different
 way, as we can see from the data segment above. This string is stored
 like this:</p>
 <pre><code class='ocaml'>4 byte header<span class='o'>:</span> 4348
@@ -195,10 +195,10 @@ the string<span class='o'>:</span>    h e l l o <span class='o'>,</span> SP w o 
 padding<span class='o'>:</span>       <span class='o'>\</span>0 <span class='o'>\</span>0 <span class='o'>\</span>002
 </code></pre>
 <p>
-The format is unusual. It&apos;s documented in <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2002/08/e109df224ff0150b302033e2002dbf87.en.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2002/08/e109df224ff0150b302033e2002dbf87.en.html'>this posting on the OCaml
+The format is unusual. It&#39;s documented in <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2002/08/e109df224ff0150b302033e2002dbf87.en.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2002/08/e109df224ff0150b302033e2002dbf87.en.html'>this posting on the OCaml
 mailing
 list</a>.
-&#92;&lt;!-- (old: http://caml.inria.fr/archives/200208/msg00463.html) --&#92;&gt;</p>
+\&lt;!-- (old: http://caml.inria.fr/archives/200208/msg00463.html) --\&gt;</p>
 <p>Firstly the padding brings the total length of the string up to a whole
 number of words (4 words, 16 bytes in this example). The padding is
 carefully designed so that you can work out the actual length of the
@@ -206,7 +206,7 @@ string in bytes, provided that you know the total number of <em>words</em>
 allocated to the string. The encoding for this is unambiguous (which you
 can prove to yourself).</p>
 <p>One nice feature of having strings with an explicit length is that you
-can represent strings containing ASCII NUL (<code>&#92;0</code>) characters in them,
+can represent strings containing ASCII NUL (<code>\0</code>) characters in them,
 something which is difficult to do in C. However, the flip side is that
 you need to be aware of this if you pass an OCaml string to some C
 native code: if it contains ASCII NUL, then the C <code>str*</code> functions will
@@ -242,7 +242,7 @@ millisecond), compared to several seconds for starting up a reasonable
 Java program and a second or so for a Perl script.</p>
 <h3 id="Tailrecursion"> Tail recursion</h3><p>
 We mentioned in chapter 6 that OCaml can turn tail-recursive function
-calls into simple loops. Is this actually true? Let&apos;s look at what
+calls into simple loops. Is this actually true? Let&#39;s look at what
 simple tail recursion compiles to:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> loop () <span class='k'>=</span>
   print_string <span class='s'>&#34;I go on forever ...&#34;</span><span class='o'>;</span>
@@ -251,7 +251,7 @@ simple tail recursion compiles to:</p>
 <span class='k'>let</span> () <span class='k'>=</span> loop ()
 </code></pre>
 <p>
-The file is called <code>tail.ml</code>, so following OCaml&apos;s usual procedure for
+The file is called <code>tail.ml</code>, so following OCaml&#39;s usual procedure for
 naming functions, our function will be called <code>Tail__loop_nnn</code> (where
 <code>nnn</code> is some unique number which OCaml appends to distinguish
 identically named functions from one another).</p>
@@ -277,26 +277,26 @@ Tail__loop_56<span class='o'>:</span>
         jmp     <span class='o'>.</span>L100
 </code></pre>
 <p>
-So that&apos;s pretty conclusive. Calling <code>Tail__loop_56</code> will first print
+So that&#39;s pretty conclusive. Calling <code>Tail__loop_56</code> will first print
 the string, and then jump back to the top, then print the string, and
-jump back, and so on forever. It&apos;s a simple loop, <em>not</em> a recursive
-function call, so it doesn&apos;t use any stack space.</p>
+jump back, and so on forever. It&#39;s a simple loop, <em>not</em> a recursive
+function call, so it doesn&#39;t use any stack space.</p>
 <h3 id="DigressionWherearethetypes"> Digression: Where are the types?</h3><p>
-OCaml is statically typed as we&apos;ve said before on many occasions, so at
+OCaml is statically typed as we&#39;ve said before on many occasions, so at
 compile time, OCaml knows that the type of <code>loop</code> is <code>unit -&gt; unit</code>. It
-knows that the type of <code>&quot;hello, world&#92;n&quot;</code> is <code>string</code>. It doesn&apos;t make
+knows that the type of <code>&quot;hello, world\n&quot;</code> is <code>string</code>. It doesn&#39;t make
 any attempt to communicate this fact to the <code>output_string</code> function.
 <code>output_string</code> is expecting a <code>channel</code> and a <code>string</code> as arguments,
-and indeed that&apos;s what it gets. What would happen if we passed, say, an
+and indeed that&#39;s what it gets. What would happen if we passed, say, an
 <code>int</code> instead of a <code>string</code>?</p>
 <p>This is essentially an impossible condition. Because OCaml knows the
-types at compile time, it doesn&apos;t need to deal with types or check types
+types at compile time, it doesn&#39;t need to deal with types or check types
 at run time. There is no way, in pure OCaml, to &quot;trick&quot; the compiler
 into generating a call to <code>Pervasives.output_string stdout 1</code>. Such an
 error would be flagged at compile time, by type inference, and so could
 never be compiled.</p>
 <p>The upshot is that by the time we have compiled OCaml code to assembler
-type information mostly isn&apos;t required, certainly in the cases we&apos;ve
+type information mostly isn&#39;t required, certainly in the cases we&#39;ve
 looked at above where the type is fully known at compile time, and there
 is no polymorphism going on.</p>
 <p>Fully knowing all your types at compile time is a major performance win
@@ -306,11 +306,11 @@ an expensive operation because you need to find the concrete class that
 <code>obj</code> is an instance of, and then look up the method, and you need to do
 all of this potentially <em>every</em> time you call any method. Casting
 objects is another case where you need to do a considerable amount of
-work at run time in Java. None of this is allowed with OCaml&apos;s static
+work at run time in Java. None of this is allowed with OCaml&#39;s static
 types.</p>
 <h3 id="Polymorphictypes"> Polymorphic types</h3><p>
 As you might have guessed from the discussion above, polymorphism, which
-is where the compiler <em>doesn&apos;t</em> have a fully known type for a function
+is where the compiler <em>doesn&#39;t</em> have a fully known type for a function
 at compile time, might have an impact on performance. Suppose we require
 a function to work out the maximum of two integers. Our first attempt
 is:</p>
@@ -318,8 +318,8 @@ is:</p>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
 </code></pre>
 <p>
-Simple enough, but recall that the &#92;&gt; (greater than) operator in OCaml
-is polymorphic. It has type <code>&apos;a -&gt; &apos;a -&gt; bool</code>, and this means that the
+Simple enough, but recall that the \&gt; (greater than) operator in OCaml
+is polymorphic. It has type <code>&#39;a -&gt; &#39;a -&gt; bool</code>, and this means that the
 <code>max</code> function we defined above is going to be polymorphic:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> max a b <span class='k'>=</span>
     <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
@@ -370,10 +370,10 @@ Max__max_56<span class='o'>:</span>
         ret
 </code></pre>
 <p>
-Basically the &#92;&gt; operation is done by calling a C function from the
+Basically the \&gt; operation is done by calling a C function from the
 OCaml library. This is obviously not going to be very efficient, nothing
 like as efficient as if we could generate some quick inline assembly
-language for doing the &#92;&gt;.</p>
+language for doing the \&gt;.</p>
 <p>This is not a complete dead loss by any means. All we need to do is to
 hint to the OCaml compiler that the arguments are in fact integers. Then
 OCaml will generate a specialised version of <code>max</code> which only works on
@@ -406,7 +406,7 @@ Max_int__max_56<span class='o'>:</span>
         ret
 </code></pre>
 <p>
-That&apos;s just 5 lines of assembler, and is about as simple as you can make
+That&#39;s just 5 lines of assembler, and is about as simple as you can make
 it.</p>
 <p>What about this code:</p>
 <pre><code class='ocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
@@ -419,15 +419,15 @@ Is OCaml going to be smart enough to inline the <code>max</code> function and
 specialise it to work on integers? Disappointingly the answer is no.
 OCaml still has to generate the external <code>Max.max</code> symbol (because this
 is a module, and so that function might be called from outside the
-module), and it doesn&apos;t inline the function.</p>
-<p>Here&apos;s another variation:</p>
+module), and it doesn&#39;t inline the function.</p>
+<p>Here&#39;s another variation:</p>
 <pre><code class='ocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b <span class='k'>in</span>
 print_int (max 2 3)
 </code></pre>
 <p>
 Disappointingly although the definition of <code>max</code> in this code is local
-(it can&apos;t be called from outside the module), OCaml still doesn&apos;t
+(it can&#39;t be called from outside the module), OCaml still doesn&#39;t
 specialise the function.</p>
 <p>Lesson: if you have a function which is unintentionally polymorphic then
 you can help the compiler by specifying types for one or more of the
@@ -466,7 +466,7 @@ integer is unboxed (not allocated on the heap), but is instead passed
 directly to the function in the register <code>%eax</code>. This is fast. But
 secondly we see that the number being passed is 7, not 3.</p>
 <p>This is a consequence of the representation of integers in OCaml. The
-bottom bit of the integer is used as a tag - we&apos;ll see what for next.
+bottom bit of the integer is used as a tag - we&#39;ll see what for next.
 The top 31 bits are the actual integer. The binary representation of 7
 is 111, so the bottom tag bit is 1 and the top 31 bits form the number
 11 in binary = 3. To get from the OCaml representation to the integer,
@@ -481,11 +481,11 @@ OCaml carry around the tag bit.</p>
 <p>A bit of background about pointers is required to understand why the tag
 bit is really necessary, and why it is where it is.</p>
 <p>In the world of RISC chips like the Sparc, MIPS and Alpha, pointers have
-to be word-aligned. So on the older 32 bit Sparc, for example, it&apos;s not
-possible to create and use a pointer which isn&apos;t aligned to a multiple
+to be word-aligned. So on the older 32 bit Sparc, for example, it&#39;s not
+possible to create and use a pointer which isn&#39;t aligned to a multiple
 of 4 (bytes). Trying to use one generates a processor exception, which
 means basically your program segfaults. The reason for this is just to
-simplify memory access. It&apos;s just a lot simpler to design the memory
+simplify memory access. It&#39;s just a lot simpler to design the memory
 subsystem of a CPU if you only need to worry about word-aligned access.</p>
 <p>For historical reasons (because the x86 is derived from an 8 bit chip),
 the x86 has supported unaligned memory access, although if you align all
@@ -496,10 +496,10 @@ that the bottom bit of any pointer in OCaml will always be zero.</p>
 <p>So you can see that by looking at the bottom bit of a register, you can
 immediately tell if it stores a pointer (&quot;tag&quot; bit is zero), or an
 integer (tag bit set to one).</p>
-<p>Remember our polymorphic &#92;&gt; function which caused us so much trouble in
+<p>Remember our polymorphic \&gt; function which caused us so much trouble in
 the previous section? We looked at the assembler and found out that
 OCaml compiles a call to a C function called <code>greaterthan</code> whenever it
-sees the polymorphic form of &#92;&gt;. This function takes two arguments, in
+sees the polymorphic form of \&gt;. This function takes two arguments, in
 registers <code>%eax</code> and <code>%ebx</code>. But <code>greaterthan</code> can be called with
 integers, floats, strings, opaque objects ... How does it know what
 <code>%eax</code> and <code>%ebx</code> point to?</p>
@@ -525,7 +525,7 @@ integers, floats, strings, opaque objects ... How does it know what
  <li>etc.</li>
 </ul>
 
-<p>Note that because &#92;&gt; has type <code>&apos;a -&gt; &apos;a -&gt; bool</code>, both arguments must
+<p>Note that because \&gt; has type <code>&#39;a -&gt; &#39;a -&gt; bool</code>, both arguments must
 have the same type. The compiler should enforce this at compile time. I
 would assume that <code>greaterthan</code> probably contains code to sanity-check
 this at run time however.</p>
@@ -558,16 +558,16 @@ Color<span class='o'>:</span>                          00
 Tag<span class='o'>:</span>                            1111 1101 (Double_tag)
 </code></pre>
 <p>
-<code>string_of_float</code> isn&apos;t polymorphic, but suppose we have a polymorphic
-function <code>foo : &apos;a -&gt; unit</code> taking one polymorphic argument. If we call
+<code>string_of_float</code> isn&#39;t polymorphic, but suppose we have a polymorphic
+function <code>foo : &#39;a -&gt; unit</code> taking one polymorphic argument. If we call
 <code>foo</code> with <code>%eax</code> containing 7, then this is equivalent to <code>foo 3</code>,
 whereas if we call <code>foo</code> with <code>%eax</code> containing a pointer to <code>Float__1</code>
 above, then this is equivalent to <code>foo 3.0</code>.</p>
 <h3 id="Arrays"> Arrays</h3><p>
-I mentioned earlier that one of OCaml&apos;s targets was numerical computing.
+I mentioned earlier that one of OCaml&#39;s targets was numerical computing.
 Numerical computing does a lot of work on vectors and matrices, which
 are essentially arrays of floats. As a special hack to make this go
-faster, OCaml implements &#92;&lt;dfn&#92;&gt;arrays of unboxed floats&#92;&lt;/dfn&#92;&gt;. This
+faster, OCaml implements \&lt;dfn\&gt;arrays of unboxed floats\&lt;/dfn\&gt;. This
 means that in the special case where we have an object of type
 <code>float array</code> (array of floats), OCaml stores them the same way as in C:</p>
 <pre><code class='ocaml'>double array<span class='o'>[</span>10<span class='o'>]</span><span class='o'>;</span>
@@ -575,14 +575,14 @@ means that in the special case where we have an object of type
 <p>
 ... instead of having an array of pointers to ten separately allocated
 floats on the heap.</p>
-<p>Let&apos;s see this in practice:</p>
+<p>Let&#39;s see this in practice:</p>
 <pre><code class='ocaml'><span class='k'>let</span> a <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>create 10 0.0<span class='o'>;;</span>
 <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 9 <span class='k'>do</span>
   a<span class='o'>.</span>(i) <span class='o'>&#60;-</span> float_of_int i
 <span class='k'>done</span>
 </code></pre>
 <p>
-I&apos;m going to compile this code with the <code>-unsafe</code> option to remove
+I&#39;m going to compile this code with the <code>-unsafe</code> option to remove
 bounds checking (simplifying the code for our exposition here). The
 first line, which creates the array, is compiled to a simple C call:</p>
 <pre><code class='ocaml'>        pushl   <span class='o'>$</span>Arrayfloats__1     <span class='o'>;</span> Boxed float 0.0
@@ -628,7 +628,7 @@ array. It is:</p>
 The assembler syntax is rather complex, but the bracketed expression
 <code>-4(%ecx, %eax, 4)</code> means &quot;at the address <code>%ecx + 4*%eax - 4</code>&quot;. Recall
 that <code>%eax</code> is the OCaml representation of i, complete with tag bit, so
-it is essentially equal to <code>i*2+1</code>, so let&apos;s substitute that and
+it is essentially equal to <code>i*2+1</code>, so let&#39;s substitute that and
 multiply it out:</p>
 <pre><code class='ocaml'>  <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*%</span>eax <span class='o'>-</span> 4
 <span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*</span>(i<span class='o'>*</span>2<span class='o'>+</span>1) <span class='o'>-</span> 4
@@ -639,7 +639,7 @@ multiply it out:</p>
 (Each float in the array is 8 bytes long.)</p>
 <p>So arrays of floats are unboxed, as expected.</p>
 <h3 id="Partiallyappliedfunctionsandclosures"> Partially applied functions and closures</h3><p>
-How does OCaml compile functions which are only partially applied? Let&apos;s
+How does OCaml compile functions which are only partially applied? Let&#39;s
 compile this code:</p>
 <pre><code class='ocaml'><span class='m'>Array</span><span class='o'>.</span>map (<span class='o'>(+</span>) 2) <span class='o'>[</span><span class='o'>|</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>;</span> 4<span class='o'>;</span> 5 <span class='o'>|</span><span class='o'>]</span>
 </code></pre>
@@ -671,7 +671,7 @@ data word, ie. 4 bytes into the allocated memory block.</p>
 </code></pre>
 <p>
 The header word is 5120, which if you write it in binary means a block
-containing 5 words, with tag zero. The tag of zero means it&apos;s a
+containing 5 words, with tag zero. The tag of zero means it&#39;s a
 &quot;structured block&quot; a.k.a. an array. We also copy the numbers 1, 2, 3, 4
 and 5 to the appropriate places in the array. Notice the OCaml
 representation of integers is used. Because this is a structured block,
@@ -706,7 +706,7 @@ Closure__fun_58<span class='o'>:</span>
 <p>
 What does this function do? On the face of it, it adds the two
 arguments, and subtracts one. But remember that <code>%eax</code> and <code>%ebx</code> are in
-the OCaml representation for integers. Let&apos;s represent them as:</p>
+the OCaml representation for integers. Let&#39;s represent them as:</p>
 <ul>
  <li><code>%eax = 2 * a + 1</code>
  </li>
@@ -723,10 +723,10 @@ returns:</p>
 <p>
 In other words, this function returns the OCaml integer representation
 of the sum <code>a + b</code>. This function is <code>(+)</code>!</p>
-<p>(It&apos;s actually more subtle than this - to perform the mathematics
+<p>(It&#39;s actually more subtle than this - to perform the mathematics
 quickly, OCaml uses the x86 addressing hardware in a way that probably
-wasn&apos;t intended by the designers of the x86.)</p>
-<p>So back to our closure - we won&apos;t go into the details of the
+wasn&#39;t intended by the designers of the x86.)</p>
+<p>So back to our closure - we won&#39;t go into the details of the
 <code>caml_curry2</code> function, but just say that this closure is the argument
 <code>2</code> applied to the function <code>(+)</code>, waiting for a second argument. Just
 as expected.</p>
@@ -741,7 +741,7 @@ code:</p>
 
 <p>Calling <code>Array.map</code> in this way is undoubtedly slower than writing a
 loop over the array by hand. The overhead is mainly in the fact that the
-closure must be evaluated for each element of the array, and that isn&apos;t
+closure must be evaluated for each element of the array, and that isn&#39;t
 as fast as inlining the closure as a function (if this optimization were
 even possible). However, if you had a more substantial closure than just
 <code>((+) 2)</code>, the overhead would be reduced. The FP version also saves
@@ -782,12 +782,12 @@ Here is an example:</p>
 <p>
 The comments <code>(* nnn *)</code> are added by <code>ocamlprof</code>, showing how many
 times each part of the code was called.</p>
-<p>Profiling native code is done using your operating system&apos;s native
+<p>Profiling native code is done using your operating system&#39;s native
 support for profiling. In the case of Linux, we use <code>gprof</code>.</p>
-<p>To demonstrate native code profiling, I&apos;m going to calculate the first
+<p>To demonstrate native code profiling, I&#39;m going to calculate the first
 3000 primes using the Sieve of Eratosthenes (<a href='http://www.bagley.org/~doug/ocaml/Notes/lazy.shtml' title='http://www.bagley.org/~doug/ocaml/Notes/lazy.shtml'>original
 code</a>).
-This program uses streams and camlp4, techniques which we haven&apos;t
+This program uses streams and camlp4, techniques which we haven&#39;t
 covered in this tutorial.</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> filter p <span class='k'>=</span> parser
   <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>-></span> <span class='k'>if</span> p n <span class='k'>then</span> <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> filter p s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>else</span> <span class='o'>[</span><span class='o'>&#60;</span> filter p s <span class='o'>&#62;</span><span class='o'>]</span>
@@ -853,7 +853,7 @@ In summary here are some tips for getting the best performance out of
 your programs:</p>
 <ol>
  <li>Write your program as simply as possible. If it takes too long to
- run, profile it to find out where it&apos;s spending its time and
+ run, profile it to find out where it&#39;s spending its time and
  concentrate optimizations on just those areas.
  </li>
  <li>Check for unintentional polymorphism, and add type hints for the

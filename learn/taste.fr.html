@@ -47,7 +47,7 @@
 
         <div id="content-primary" class="span8">
           <div class="content">
-            <h1 id="UnecentainedelignesdaposOCaml"> Une centaine de lignes d&apos;OCaml</h1><p>
+            <h1 id="Unecentainedelignesd39OCaml"> Une centaine de lignes d&#39;OCaml</h1><p>
 <em>Sur cette page</em></p>
 <h2 id="Fonctionslmentaires"> Fonctions élémentaires</h2><p>
 Avec le système interactif, définissons la fonction <code>square</code> (carré) et
@@ -62,11 +62,11 @@ square 120<span class='o'>;;</span>
 </code></pre>
 <h2 id="Gestionautomatiquedelammoire"> Gestion automatique de la mémoire</h2><p>
 
-Toutes les opérations d&apos;allocation et de libération de la mémoire sont
+Toutes les opérations d&#39;allocation et de libération de la mémoire sont
 complètement automatiques. Par exemple, considérons les listes
 simplement chaînées.</p>
 <p>Les listes sont prédéfinies en OCaml. La liste vide est notée <code>[]</code>. Le
-constructeur d&apos;ajout d&apos;un élément à une liste est noté <code>::</code> (sous forme
+constructeur d&#39;ajout d&#39;un élément à une liste est noté <code>::</code> (sous forme
 infixe).</p>
 <pre><code class='ocaml'><span class='k'>let</span> l <span class='k'>=</span> 1 <span class='o'>::</span> 2 <span class='o'>::</span> 3 <span class='o'>::</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
@@ -74,7 +74,7 @@ infixe).</p>
 </code></pre>
 <h2 id="Polymorphismeletrideslistes"> Polymorphisme : le tri des listes</h2><p>
 
-Le tri par insertion est défini à l&apos;aide de deux fonctions récursives.</p>
+Le tri par insertion est défini à l&#39;aide de deux fonctions récursives.</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> sort <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
   <span class='o'>|</span> x <span class='o'>::</span> l <span class='k'>-></span> insert x (sort l)
@@ -85,8 +85,8 @@ Le tri par insertion est défini à l&apos;aide de deux fonctions récursives.</
 </code></pre>
 <p>
 On notera que le type des éléments de la liste reste non spécifié: il
-est représenté par une <em>variable de types</em> <code>&apos;a</code>. La fonction <code>sort</code> peut
-donc être appliquée aussi bien à une liste d&apos;entiers qu&apos;à une liste de
+est représenté par une <em>variable de types</em> <code>&#39;a</code>. La fonction <code>sort</code> peut
+donc être appliquée aussi bien à une liste d&#39;entiers qu&#39;à une liste de
 chaînes de caractères.</p>
 <pre><code class='ocaml'>sort <span class='o'>[</span>2<span class='o'>;</span> 1<span class='o'>;</span> 0<span class='o'>]</span><span class='o'>;;</span>
 sort <span class='o'>[</span><span class='s'>&#34;yes&#34;</span><span class='o'>;</span> <span class='s'>&#34;ok&#34;</span><span class='o'>;</span> <span class='s'>&#34;sure&#34;</span><span class='o'>;</span> <span class='s'>&#34;ya&#34;</span><span class='o'>;</span> <span class='s'>&#34;yep&#34;</span><span class='o'>]</span><span class='o'>;;</span>
@@ -94,8 +94,8 @@ sort <span class='o'>[</span><span class='s'>&#34;yes&#34;</span><span class='o'
 <h2 id="Programmationimprative"> Programmation impérative</h2><p>
 
 Représentons les polynômes des tableaux de coefficients entiers. Alors,
-pour ajouter deux polynômes, on alloue d&apos;abord le tableau résultat, puis
-on le remplit à l&apos;aide de deux boucles <code>for</code> successives.</p>
+pour ajouter deux polynômes, on alloue d&#39;abord le tableau résultat, puis
+on le remplit à l&#39;aide de deux boucles <code>for</code> successives.</p>
 <pre><code class='ocaml'><span class='k'>let</span> add_polynom p1 p2 <span class='k'>=</span>
   <span class='k'>let</span> n1 <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length p1
   <span class='k'>and</span> n2 <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length p2 <span class='k'>in</span>
@@ -110,7 +110,7 @@ OCaml offre des cellules mémoire modifiables appelées <em>références</em> :
 <code>ref init</code> renvoie une nouvelle cellule, dont le contenu initial est
 <code>init</code>, <code>!cell</code> renvoie le contenu actuel de <code>cell</code>, et
 <code>cell     :=       x</code> met dans <code>cell</code> la valeur <code>x</code>.</p>
-<p>On peut redéfinir <code>fact</code> à l&apos;aide d&apos;une référence et d&apos;une boucle <code>for</code>
+<p>On peut redéfinir <code>fact</code> à l&#39;aide d&#39;une référence et d&#39;une boucle <code>for</code>
 :</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> fact n <span class='k'>=</span>
     <span class='k'>let</span> result <span class='k'>=</span> ref 1 <span class='k'>in</span>
@@ -120,23 +120,23 @@ OCaml offre des cellules mémoire modifiables appelées <em>références</em> :
     <span class='o'>!</span>result<span class='o'>;;</span>
   fact 5<span class='o'>;;</span>
 </code></pre>
-<h2 id="Fonctionsdaposordresuprieur"> Fonctions d&apos;ordre supérieur</h2><p>
+<h2 id="Fonctionsd39ordresuprieur"> Fonctions d&#39;ordre supérieur</h2><p>
 
-Il n&apos;y a pas de restriction sur les fonctions, qui peuvent donc être
-passés en argument à d&apos;autres fonctions. Définissons une fonction
-<code>sigma</code> qui renvoie la somme des résultats de l&apos;application d&apos;une
-fonction <code>f</code> donnée aux éléments d&apos;une liste :</p>
+Il n&#39;y a pas de restriction sur les fonctions, qui peuvent donc être
+passés en argument à d&#39;autres fonctions. Définissons une fonction
+<code>sigma</code> qui renvoie la somme des résultats de l&#39;application d&#39;une
+fonction <code>f</code> donnée aux éléments d&#39;une liste :</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> sigma f <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> 0
     <span class='o'>|</span> x <span class='o'>::</span> l <span class='k'>-></span> f x <span class='o'>+</span> sigma f l
 </code></pre>
 <p>
-On peut définir des fonctions anonymes à l&apos;aide de la construction <code>fun</code>
+On peut définir des fonctions anonymes à l&#39;aide de la construction <code>fun</code>
 ou <code>function</code> :</p>
 <pre><code class='ocaml'>sigma (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>*</span> x) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 </code></pre>
 <p>
-Polymorphisme et fonctions d&apos;ordre supérieur permettent de définir la
+Polymorphisme et fonctions d&#39;ordre supérieur permettent de définir la
 composition de fonctions sous sa forme la plus générale :</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> compose f g <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> f (g x)<span class='o'>;;</span>
   <span class='k'>let</span> square_o_fact <span class='k'>=</span> compose square fact<span class='o'>;;</span>
@@ -151,7 +151,7 @@ fonction « puissance » :</p>
     <span class='k'>else</span> compose f (power f (n <span class='o'>-</span> 1))<span class='o'>;;</span>
 </code></pre>
 <p>
-La dérivée <code>n</code><sup>ième</sup> d&apos;une fonction peut alors se définir comme
+La dérivée <code>n</code><sup>ième</sup> d&#39;une fonction peut alors se définir comme
 en mathématiques en élevant la fonction dérivée à la puissance <code>n</code> :</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> derivative dx f <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> (f (x <span class='o'>+.</span> dx) <span class='o'>-.</span> f x) <span class='o'>/.</span> dx<span class='o'>;;</span>
   <span class='k'>let</span> sin<span class='s'>&#39;&#39;&#39;</span> <span class='k'>=</span> power (derivative 1e-5) 3 sin<span class='o'>;;</span>
@@ -161,7 +161,7 @@ en mathématiques en élevant la fonction dérivée à la puissance <code>n</cod
 
 Considérons des expressions symboliques simples comprenant des entiers,
 des variables, un opérateur de liaison <code>let</code>, et des opérateurs
-binaires. Ces expressions peuvent être définies à l&apos;aide d&apos;un nouveau
+binaires. Ces expressions peuvent être définies à l&#39;aide d&#39;un nouveau
 type de données, de la façon suivante :</p>
 <pre><code class='ocaml'>  <span class='k'>type</span> expression <span class='k'>=</span>
     <span class='o'>|</span> Num <span class='k'>of</span> int
@@ -170,7 +170,7 @@ type de données, de la façon suivante :</p>
     <span class='o'>|</span> Binop <span class='k'>of</span> string <span class='o'>*</span> expression <span class='o'>*</span> expression<span class='o'>;;</span>
 </code></pre>
 <p>
-L&apos;évaluation de ces expressions utilise un environnement qui à un
+L&#39;évaluation de ces expressions utilise un environnement qui à un
 identificateur associe une valeur, représenté par une liste de paires.</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> eval env <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> Num i <span class='k'>-></span> i
@@ -195,7 +195,7 @@ identificateur associe une valeur, représenté par une liste de paires.</p>
 <pre><code class='ocaml'>  eval <span class='o'>[</span><span class='o'>]</span> (Let (<span class='s'>&#34;x&#34;</span><span class='o'>,</span> Num 1<span class='o'>,</span> Binop (<span class='s'>&#34;+&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span>)))<span class='o'>;;</span>
 </code></pre>
 <p>
-L&apos;emploi du filtrage facilite la définition des fonctions opérant sur
+L&#39;emploi du filtrage facilite la définition des fonctions opérant sur
 des données symboliques, en donnant aux définitions de fonctions une
 forme similaire à celle des déclarations de types. Notez, en effet, la
 similitude entre la définition de la fonction <code>eval</code> et la définition du

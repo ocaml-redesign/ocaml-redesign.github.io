@@ -1,15 +1,15 @@
 <p>The Structure of OCaml Programs</p>
 <h1 id="TheStructureofOCamlPrograms"> The Structure of OCaml Programs</h1><h2 id="ThestructureofOCamlprograms"> The structure of OCaml programs</h2><p>
 
-Now we&apos;re going to take some time out to take a high-level look at some
+Now we&#39;re going to take some time out to take a high-level look at some
 real OCaml programs. I want to teach you about local and global
 definitions, when to use <code>;;</code> vs. <code>;</code>, modules, nested functions, and
-references. For this we&apos;re going to look at a lot of OCaml concepts
-which won&apos;t yet make sense because we haven&apos;t seen them before. Don&apos;t
+references. For this we&#39;re going to look at a lot of OCaml concepts
+which won&#39;t yet make sense because we haven&#39;t seen them before. Don&#39;t
 worry about the details for the moment. Concentrate instead on the
-overall shape of the programs and the features which I&apos;ll point out.</p>
+overall shape of the programs and the features which I&#39;ll point out.</p>
 <h3 id="Localquotvariablesquotreallylocalexpressions"> Local &quot;variables&quot; (<em>really</em> local expressions)</h3><p>
-Let&apos;s take the <code>average</code> function and add a local variable in C.
+Let&#39;s take the <code>average</code> function and add a local variable in C.
 (Compare it to the first definition we had above).</p>
 <pre><code class='ocaml'>double
 average (double a<span class='o'>,</span> double b)
@@ -19,7 +19,7 @@ average (double a<span class='o'>,</span> double b)
 <span class='o'>}</span>
 </code></pre>
 <p>
-Now let&apos;s do the same to our OCaml version:</p>
+Now let&#39;s do the same to our OCaml version:</p>
 <pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
   <span class='k'>let</span> sum <span class='k'>=</span> a <span class='o'>+.</span> b <span class='k'>in</span>
   sum <span class='o'>/.</span> 2.0<span class='o'>;;</span>
@@ -28,7 +28,7 @@ Now let&apos;s do the same to our OCaml version:</p>
 The standard phrase <code>let name = expression in</code> is used to define a named
 local expression, and <code>name</code> can then be used later on in the function
 instead of <code>expression</code>, till a <code>;;</code> which ends the block of code.
-Notice that we don&apos;t indent after the <code>in</code>. Just think of <code>let ... in</code>
+Notice that we don&#39;t indent after the <code>in</code>. Just think of <code>let ... in</code>
 as if it were a statement.</p>
 <p>Now comparing C local variables and these named local expressions is a
 sleight of hand. In fact they are somewhat different. The C variable
@@ -36,9 +36,9 @@ sleight of hand. In fact they are somewhat different. The C variable
 later in the function if you want, or even take the address of <code>sum</code>.
 This is NOT true for the OCaml version. In the OCaml version, <code>sum</code> is
 just a shorthand name for the expression <code>a +. b</code>. There is no way to
-assign to <code>sum</code> or change its value in any way. (We&apos;ll see how you can
+assign to <code>sum</code> or change its value in any way. (We&#39;ll see how you can
 do variables whose value changes in a minute).</p>
-<p>Here&apos;s another example to make this clearer. The following two code
+<p>Here&#39;s another example to make this clearer. The following two code
 snippets should return the same value (namely (a+b) +
 (a+b)<sup>2</sup>):</p>
 <pre><code class='ocaml'><span class='k'>let</span> f a b <span class='k'>=</span>
@@ -57,8 +57,8 @@ it is certainly easier to read. <code>x</code> in the second example is just
 shorthand for <code>a +. b</code>.</p>
 <h3 id="Globalquotvariablesquotreallyglobalexpressions"> Global &quot;variables&quot; (<em>really</em> global expressions)</h3><p>
 You can also define global names for things at the top level, and as
-with our local &quot;variables&quot; above, these aren&apos;t really variable at all,
-just shorthand names for things. Here&apos;s a real (but cut-down) example:</p>
+with our local &quot;variables&quot; above, these aren&#39;t really variable at all,
+just shorthand names for things. Here&#39;s a real (but cut-down) example:</p>
 <pre><code class='ocaml'><span class='k'>let</span> html <span class='k'>=</span>
   <span class='k'>let</span> content <span class='k'>=</span> read_whole_file file <span class='k'>in</span>
   <span class='m'>GHtml</span><span class='o'>.</span>html_from_string content
@@ -80,11 +80,11 @@ In this real piece of code, <code>html</code> is an HTML editing widget (an obje
 from the lablgtk library) which is created once at the beginning of the
 program by the first <code>let html =</code> statement. It is then referred to in
 several later functions.</p>
-<p>Note that the <code>html</code> name in the code snippet above shouldn&apos;t really be
+<p>Note that the <code>html</code> name in the code snippet above shouldn&#39;t really be
 compared to a real global variable as in C or other imperative
 languages. There is no space allocated to &quot;store&quot; the &quot;<code>html</code> pointer&quot;.
 Nor is it possible to assign anything to <code>html</code>, for example to reassign
-it to point to a different widget. In the next section we&apos;ll talk about
+it to point to a different widget. In the next section we&#39;ll talk about
 references, which are real variables.</p>
 <h3 id="Letbindings"> Let-bindings</h3><p>
 Any use of <code>let ...</code>, whether at the top level (globally) or within a
@@ -95,28 +95,28 @@ change throughout your program? You need to use a <strong>reference</strong>.
 References are very similar to pointers in C/C++. In Java, all variables
 which store objects are really references (pointers) to the objects. In
 Perl, references are references - the same thing as in OCaml.</p>
-<p>Here&apos;s how we create a reference to an <code>int</code> in OCaml:</p>
+<p>Here&#39;s how we create a reference to an <code>int</code> in OCaml:</p>
 <pre><code class='ocaml'>ref 0<span class='o'>;;</span>
 </code></pre>
 <p>
-Actually that statement wasn&apos;t really very useful. We created the
-reference and then, because we didn&apos;t name it, the garbage collector
+Actually that statement wasn&#39;t really very useful. We created the
+reference and then, because we didn&#39;t name it, the garbage collector
 came along and collected it immediately afterwards! (actually, it was
-probably thrown away at compile-time.) Let&apos;s name the reference:</p>
+probably thrown away at compile-time.) Let&#39;s name the reference:</p>
 <pre><code class='ocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0
 </code></pre>
 <p>
-This reference is currently storing a zero integer. Let&apos;s put something
+This reference is currently storing a zero integer. Let&#39;s put something
 else into it (assignment):</p>
 <pre><code class='ocaml'>my_ref <span class='o'>:=</span> 100
 </code></pre>
 <p>
-And let&apos;s find out what the reference contains now:</p>
+And let&#39;s find out what the reference contains now:</p>
 <pre><code class='ocaml'><span class='o'>!</span>my_ref
 </code></pre>
 <p>
 So the <code>:=</code> operator is used to assign to references, and the <code>!</code>
-operator dereferences to get out the contents. Here&apos;s a rough-and-ready
+operator dereferences to get out the contents. Here&#39;s a rough-and-ready
 comparison with C/C++:</p>
 <p>OCaml</p>
 <p>C/C++</p>
@@ -129,20 +129,20 @@ int a <span class='k'>=</span> 0<span class='o'>;</span> int <span class='o'>*</
 <span class='o'>*</span>my_ptr
 </code></pre>
 <p>
-References have their place, but you may find that you don&apos;t use
-references very often. Much more often you&apos;ll be using
+References have their place, but you may find that you don&#39;t use
+references very often. Much more often you&#39;ll be using
 <code>let name = expression in</code> to name local expressions in your function
 definitions.</p>
 <h3 id="Nestedfunctions"> Nested functions</h3><p>
-C doesn&apos;t really have a concept of nested functions. GCC supports nested
-functions for C programs but I don&apos;t know of any program which actually
-uses this extension. Anyway, here&apos;s what the gcc info page has to say
+C doesn&#39;t really have a concept of nested functions. GCC supports nested
+functions for C programs but I don&#39;t know of any program which actually
+uses this extension. Anyway, here&#39;s what the gcc info page has to say
 about nested functions:</p>
 <p>A &quot;nested function&quot; is a function defined inside another function.
-(Nested functions are not supported for GNU C++.) The nested function&apos;s
+(Nested functions are not supported for GNU C++.) The nested function&#39;s
 name is local to the block where it is defined. For example, here we
 define a nested function named</p>
-<pre><code>square&apos;, and call it twice:
+<pre><code>square&#39;, and call it twice:
 
 ```ocaml
 foo (double a, double b)
@@ -156,7 +156,7 @@ The nested function can access all the variables of the containing
 function that are visible at the point of its definition. This is called
 &quot;lexical scoping&quot;. For example, here we show a nested function which
 uses an inherited variable named </code></pre>
-<p>offset&apos;:</p>
+<p>offset&#39;:</p>
 <pre><code class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
 <span class='o'>{</span>
   int access (int <span class='o'>*</span>array<span class='o'>,</span> int index)
@@ -185,11 +185,11 @@ real code:</p>
       End_of_file <span class='k'>-></span> <span class='m'>Buffer</span><span class='o'>.</span>contents buf<span class='o'>;;</span>
 </code></pre>
 <p>
-Don&apos;t worry about what this code does - it contains many concepts which
-haven&apos;t been discussed in this tutorial yet. Concentrate instead on the
+Don&#39;t worry about what this code does - it contains many concepts which
+haven&#39;t been discussed in this tutorial yet. Concentrate instead on the
 central nested function called <code>loop</code> which takes just a unit argument.
 You can call <code>loop ()</code> from within the function <code>read_whole_channel</code>,
-but it&apos;s not defined outside this function. The nested function can
+but it&#39;s not defined outside this function. The nested function can
 access variables defined in the main function (here <code>loop</code> accesses the
 local names <code>buf</code> and <code>chan</code>).</p>
 <p>The form for nested functions is the same as for local named
@@ -202,7 +202,7 @@ OCaml comes with lots of fun and interesting modules (libraries of
 useful code). For example there are standard libraries for drawing
 graphics, interfacing with GUI widget sets, handling large numbers, data
 structures, and making POSIX system calls. These libraries are located
-in <code>/usr/lib/ocaml/VERSION/</code> (on Unix anyway). For these examples we&apos;re
+in <code>/usr/lib/ocaml/VERSION/</code> (on Unix anyway). For these examples we&#39;re
 going to concentrate on one quite simple module called <code>Graphics</code>.</p>
 <p>The <code>Graphics</code> module is installed into 5 files (on my system):</p>
 <pre><code class='ocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
@@ -212,7 +212,7 @@ going to concentrate on one quite simple module called <code>Graphics</code>.</p
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>mli
 </code></pre>
 <p>
-For the moment let&apos;s just concentrate on the file <code>graphics.mli</code>. This
+For the moment let&#39;s just concentrate on the file <code>graphics.mli</code>. This
 is a text file, so you can read it now. Notice first of all that the
 name is <code>graphics.mli</code> and not <code>Graphics.mli</code>. OCaml always capitalizes
 the first letter of the file name to get the module name. This can be
@@ -220,8 +220,8 @@ very confusing until you know about it!</p>
 <p>If we want to use the functions in <code>Graphics</code> there are two ways we can
 do it. Either at the start of our program we have the <code>open Graphics;;</code>
 declaration. Or we prefix all calls to the functions like this:
-<code>Graphics.open_graph</code>. <code>open</code> is a little bit like Java&apos;s <code>import</code>
-statement, and much more like Perl&apos;s <code>use</code> statement.</p>
+<code>Graphics.open_graph</code>. <code>open</code> is a little bit like Java&#39;s <code>import</code>
+statement, and much more like Perl&#39;s <code>use</code> statement.</p>
 <p>[Windows users: For this example to work interactively on Windows, you
 will need to create a custom toplevel. Issue the command
 <code>ocamlmktop -o ocaml-graphics graphics.cma</code> from the command line.]</p>
@@ -263,19 +263,19 @@ read_line ()<span class='o'>;;</span>
 read_line ()<span class='o'>;;</span>
 </code></pre>
 <p>
-Both of these examples make use of some features we haven&apos;t talked about
-yet: imperative-style for-loops, if-then-else and recursion. We&apos;ll talk
+Both of these examples make use of some features we haven&#39;t talked about
+yet: imperative-style for-loops, if-then-else and recursion. We&#39;ll talk
 about those later. Nevertheless you should look at these programs and
 try and find out (1) how they work, and (2) how type inference is
 helping you to eliminate bugs.</p>
 <h3 id="ThePervasivesmodule"> The <code>Pervasives</code> module</h3><p>
-There&apos;s one module that you never need to &quot;<code>open</code>&quot;. That is the
+There&#39;s one module that you never need to &quot;<code>open</code>&quot;. That is the
 <code>Pervasives</code> module (go and read <code>/usr/lib/ocaml/3.08/pervasives.mli</code>
 now). All of the symbols from the <code>Pervasives</code> module are automatically
 imported into every OCaml program.</p>
 <h3 id="Renamingmodules"> Renaming modules</h3><p>
 What happens if you want to use symbols in the <code>Graphics</code> module, but
-you don&apos;t want to import all of them and you can&apos;t be bothered to type
+you don&#39;t want to import all of them and you can&#39;t be bothered to type
 <code>Graphics</code> each time? Just rename it using this trick:</p>
 <pre><code class='ocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
 
@@ -285,10 +285,10 @@ read_line ()<span class='o'>;;</span>
 </code></pre>
 <p>
 Actually this is really useful when you want to import a nested module
-(modules can be nested inside one another), but you don&apos;t want to type
+(modules can be nested inside one another), but you don&#39;t want to type
 out the full path to the nested module name each time.</p>
 <h3 id="Usingandomittingand"> Using and omitting <code>;;</code> and <code>;</code></h3><p>
-Now we&apos;re going to look at a very important issue. When should you use
+Now we&#39;re going to look at a very important issue. When should you use
 <code>;;</code>, when should you use <code>;</code>, and when should you use none of these at
 all? This is a tricky issue until you &quot;get it&quot;, and it taxed the author
 for a long time while he was learning OCaml too.</p>
@@ -309,9 +309,9 @@ other kind of statement.</p>
 We have two top-level statements and a function definition (of a
 function called <code>iterate</code>). Each one is followed by <code>;;</code>.</p>
 <p>Rule #2 is that <em>sometimes</em> you can elide [omit] the <code>;;</code>. As a
-beginner you shouldn&apos;t worry about this - you should always put in the
-<code>;;</code> as directed by Rule #1. But since you&apos;ll also be reading a lot of
-other peoples&apos; code you&apos;ll need to know that sometimes we can elide
+beginner you shouldn&#39;t worry about this - you should always put in the
+<code>;;</code> as directed by Rule #1. But since you&#39;ll also be reading a lot of
+other peoples&#39; code you&#39;ll need to know that sometimes we can elide
 <code>;;</code>. The particular places where this is allowed are:</p>
 <ul>
  <li>Before the keyword <code>let</code>.
@@ -358,7 +358,7 @@ from <code>;;</code>. The single semicolon <code>;</code> is what is known as a 
 point</strong>, which is to say it has exactly the same purpose as the single
 semicolon in C, C++, Java and Perl. It means &quot;do the stuff before this
 point first, then do the stuff after this point when the first stuff has
-completed&quot;. Bet you didn&apos;t know that.</p>
+completed&quot;. Bet you didn&#39;t know that.</p>
 <p>Rule #3 is: Consider <code>let ... in</code> as a statement, and never put a
 single <code>;</code> after it.</p>
 <p>Rule #4 is: For all other statements within a block of code, follow
@@ -382,8 +382,8 @@ Brian Hurt writes to correct me on &quot;;&quot;</p>
 <p>The <code>;</code> is an operator, just like <code>+</code> is. Well, not quite just like
 <code>+</code> is, but conceptually the same. <code>+</code> has type <code>int -&gt; int -&gt; int</code> -
 it takes two ints and returns an int (the sum). <code>;</code> has type
-<code>unit -&gt; &apos;b -&gt; &apos;b</code> - it takes two values and simply returns the second
-one. Rather like C&apos;s <code>,</code> (comma) operator. You can write
+<code>unit -&gt; &#39;b -&gt; &#39;b</code> - it takes two values and simply returns the second
+one. Rather like C&#39;s <code>,</code> (comma) operator. You can write
 <code>a ; b ; c ; d</code> just as easily as you can write <code>a + b + c + d</code>.</p>
 <p>This is one of those &quot;mental leaps&quot; which is never spelled out very
 well - in OCaml, nearly everything is an expression. <code>if/then/else</code> is
@@ -396,12 +396,12 @@ thing):</p>
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> g z <span class='k'>=</span> <span class='k'>function</span> <span class='o'>true</span> <span class='k'>-></span> z <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> 0 <span class='k'>in</span> g y b)
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> <span class='o'>_</span> <span class='k'>=</span> y <span class='o'>+</span> 3 <span class='k'>in</span> ()<span class='o'>;</span> <span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
 </code></pre>
-<p>Note especially the last one - I&apos;m using <code>;</code> as an operator to &quot;join&quot;
+<p>Note especially the last one - I&#39;m using <code>;</code> as an operator to &quot;join&quot;
 two statements. All functions in OCaml can be expressed as:</p>
 <pre><code class='ocaml'> <span class='k'>let</span> name <span class='o'>[</span>parameters<span class='o'>]</span> <span class='k'>=</span> expression
 </code></pre>
-<p>OCaml&apos;s definition of what is an expression is just a little wider
-than C&apos;s. In fact, C has the concept of &quot;statements&quot;- but all of C&apos;s
+<p>OCaml&#39;s definition of what is an expression is just a little wider
+than C&#39;s. In fact, C has the concept of &quot;statements&quot;- but all of C&#39;s
 statements are just expressions in OCaml (combined with the <code>;</code>
 operator).</p>
 <p>The one place that <code>;</code> is different from <code>+</code> is that I can refer to
@@ -411,23 +411,23 @@ function, to sum a list of ints, like:</p>
 </code></pre>
 </blockquote>
 <h3 id="Puttingitalltogethersomerealcode"> Putting it all together: some real code</h3><p>
-In this section we&apos;re going to show some real code fragments from the
+In this section we&#39;re going to show some real code fragments from the
 lablgtk 1.2 library. (Lablgtk is the OCaml interface to the native Unix
 Gtk widget library). A word of warning: these fragments contain a lot of
-ideas which we haven&apos;t discussed yet. Don&apos;t look at the details, look
+ideas which we haven&#39;t discussed yet. Don&#39;t look at the details, look
 instead at the overall shape of the code, where the authors used <code>;;</code>,
 where they used <code>;</code> and where they used <code>open</code>, how they indented the
 code, how they used local and global named expressions.</p>
-<p>... However, I&apos;ll give you some clues so you don&apos;t get totally lost!</p>
+<p>... However, I&#39;ll give you some clues so you don&#39;t get totally lost!</p>
 <ul>
- <li><code>?foo</code> and <code>~foo</code> is OCaml&apos;s way of doing optional and named
+ <li><code>?foo</code> and <code>~foo</code> is OCaml&#39;s way of doing optional and named
  arguments to functions. There is no real parallel to this in
  C-derived languages, but Perl, Python and Smalltalk all have this
  concept that you can name the arguments in a function call, omit
  some of them, and supply the others in any order you like.
  </li>
  <li><code>foo#bar</code> is a method invocation (calling a method called <code>bar</code> on
- an object called <code>foo</code>). It&apos;s similar to <code>foo-&gt;bar</code> or <code>foo.bar</code> or
+ an object called <code>foo</code>). It&#39;s similar to <code>foo-&gt;bar</code> or <code>foo.bar</code> or
  <code>$foo-&gt;bar</code> in C++, Java or Perl respectively.</li>
 </ul>
 
@@ -471,11 +471,11 @@ Third snippet: The author imports all the symbols from the <code>GdkKeysyms</cod
 module. Now we have an unusual let-binding. <code>let _ = expression</code> means
 &quot;calculate the value of the expression (with all the side-effects that
 may entail), but throw away the result&quot;. In this case, &quot;calculate the
-value of the expression&quot; means to run <code>Main.main ()</code> which is Gtk&apos;s main
+value of the expression&quot; means to run <code>Main.main ()</code> which is Gtk&#39;s main
 loop, which has the side-effect of popping the window onto the screen
 and running the whole application. The &quot;result&quot; of <code>Main.main ()</code> is
-insignificant - probably a <code>unit</code> return value, but I haven&apos;t checked -
-and it doesn&apos;t get returned until the application finally exits.</p>
+insignificant - probably a <code>unit</code> return value, but I haven&#39;t checked -
+and it doesn&#39;t get returned until the application finally exits.</p>
 <p>Notice in this snippet how we have a long series of essentially
 procedural commands. This is really a classic imperative program.</p>
 <pre><code class='ocaml'><span class='com2'>(* Third snippet *)</span><!-- end comment -->

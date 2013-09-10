@@ -85,10 +85,10 @@
           <div class="content">
             
 <h1 id="UsingtheFormatmodule"> Using the Format module</h1><p>
-The <code>Format</code> module of Caml Light and OCaml&apos;s standard libraries
+The <code>Format</code> module of Caml Light and OCaml&#39;s standard libraries
 provides pretty-printing facilities to get a fancy display for printing
 routines. This module implements a “pretty-printing engine” that is
-intended to break lines in a nice way (let&apos;s say “automatically when it
+intended to break lines in a nice way (let&#39;s say “automatically when it
 is necessary”).</p>
 <h2 id="Principles"> Principles</h2><p>
 Line breaking is based on three concepts:</p>
@@ -344,7 +344,7 @@ When writing a pretty-printing routine, follow these simple rules:</p>
  </li>
  <li>Do not try to force spacing using explicit spaces in the character
  strings. For each space you want in the output emit a break hint
- (<code>print_space ()</code>), unless you explicitly don&apos;t want the line to be
+ (<code>print_space ()</code>), unless you explicitly don&#39;t want the line to be
  broken here. For instance, imagine you want to pretty print an OCaml
  definition, more precisely a <code>let rec ident =     expression</code> value
  definition. You will probably treat the first three spaces as
@@ -358,7 +358,7 @@ When writing a pretty-printing routine, follow these simple rules:</p>
  most of the time a space should be considered a break hint.
  </li>
  <li>Do not try to force new lines, let the pretty-printer do it for you:
- that&apos;s its only job. In particular, do not use <code>force_newline</code>: this
+ that&#39;s its only job. In particular, do not use <code>force_newline</code>: this
  procedure effectively leads to a newline, but it also as the
  unfortunate side effect to partially reinitialise the
  pretty-printing engine, so that the rest of the printing material is
@@ -460,8 +460,8 @@ general, since they can print on any formatter defined in the program
 (either printing to a file, or to <code>stdout</code>, to <code>stderr</code>, or even to a
 string). Furthermore, the pretty-printing functions are now
 compositional, since they may be used in conjunction with the special
-<code>%a</code> conversion, that prints a <code>fprintf</code> argument with a user&apos;s supplied
-function (these user&apos;s supplied functions also have a formatter as first
+<code>%a</code> conversion, that prints a <code>fprintf</code> argument with a user&#39;s supplied
+function (these user&#39;s supplied functions also have a formatter as first
 argument).</p>
 <p>Using <code>fprintf</code>, the lambda-terms printing routines can be written as
 follows:</p>

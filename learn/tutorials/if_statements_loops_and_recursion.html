@@ -55,16 +55,16 @@ OCaml has an if statement with two variations, and the obvious meaning:</p>
 <span class='k'>if</span> boolean<span class='o'>-</span>condition <span class='k'>then</span> expression <span class='k'>else</span> other<span class='o'>-</span>expression
 </code></pre>
 <p>
-Unlike in the conventional languages you&apos;ll be used to, if statements
-are really expressions. In other words, they&apos;re much more like
+Unlike in the conventional languages you&#39;ll be used to, if statements
+are really expressions. In other words, they&#39;re much more like
 <code>boolean-condition ? expression : other-expression</code> than like the if
 statements you may be used to.</p>
-<p>Here&apos;s a simple example of an <code>if</code> statement:</p>
+<p>Here&#39;s a simple example of an <code>if</code> statement:</p>
 <pre><code class='ocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
 </code></pre>
 <p>
-As a short aside, if you type this into the OCaml toplevel, you&apos;ll
+As a short aside, if you type this into the OCaml toplevel, you&#39;ll
 notice that OCaml decides that this function is polymorphic, with the
 following type:</p>
 <pre><code class='ocaml'>max <span class='o'>:</span> 'a <span class='k'>-></span> 'a <span class='k'>-></span> 'a
@@ -79,7 +79,7 @@ max <span class='s'>&#34;a&#34;</span> <span class='s'>&#34;b&#34;</span><span c
 This is because <code>&gt;</code> is in fact polymorphic. It works on any type, even
 objects (it does a binary comparison).</p>
 <p>[Note that the <code>Pervasives</code> module defines <code>min</code> and <code>max</code> for you.]</p>
-<p>Let&apos;s look a bit more closely at the <code>if</code> expression. Here&apos;s the <code>range</code>
+<p>Let&#39;s look a bit more closely at the <code>if</code> expression. Here&#39;s the <code>range</code>
 function which I showed you earlier without much explanation. You should
 be able to combine your knowledge of recursive functions, lists and if
 expressions to see what it does:</p>
@@ -88,16 +88,16 @@ expressions to see what it does:</p>
     <span class='k'>else</span> a <span class='o'>::</span> range (a<span class='o'>+</span>1) b
 </code></pre>
 <p>
-Let&apos;s examine some typical calls to this function. Let&apos;s start with the
+Let&#39;s examine some typical calls to this function. Let&#39;s start with the
 easy case of <code>a &gt; b</code>. A call to <code>range 11 10</code> returns <code>[]</code> (the empty
-list) and that&apos;s it.</p>
+list) and that&#39;s it.</p>
 <p>What about calling <code>range 10 10</code>? Since <code>10 &gt; 10</code> is false, the
-<code>else</code>-clause is evaluated, which is: <code>10 :: (range 11 10)</code> (I&apos;ve added
-the brackets to make the order of evaluation more clear). We&apos;ve just
+<code>else</code>-clause is evaluated, which is: <code>10 :: (range 11 10)</code> (I&#39;ve added
+the brackets to make the order of evaluation more clear). We&#39;ve just
 worked out that <code>range 11 10</code> = <code>[]</code>, so this is: <code>10 :: []</code>. Remember
 our formal description of lists and the <code>::</code> (cons) operator? <code>10 :: []</code>
 is just the same as <code>[ 10 ]</code>.</p>
-<p>Let&apos;s try <code>range 9 10</code>:</p>
+<p>Let&#39;s try <code>range 9 10</code>:</p>
 <pre><code class='ocaml'>range 9 10
 → 9 <span class='o'>::</span> (range 10 10)
 → 9 <span class='o'>::</span> <span class='o'>[</span> 10 <span class='o'>]</span>
@@ -106,9 +106,9 @@ is just the same as <code>[ 10 ]</code>.</p>
 <p>
 It should be fairly clear that <code>range 1 10</code> evaluates to
 <code>[ 1; 2; 3; 4; 5; 6; 7; 8; 9; 10 ]</code>.</p>
-<p>What we&apos;ve got here is a simple case of recursion. Functional
-programming can be said to prefer recursion over loops, but I&apos;m jumping
-ahead of myself. We&apos;ll discuss recursion more at the end of this
+<p>What we&#39;ve got here is a simple case of recursion. Functional
+programming can be said to prefer recursion over loops, but I&#39;m jumping
+ahead of myself. We&#39;ll discuss recursion more at the end of this
 chapter.</p>
 <p>Back, temporarily, to if statements. What does this function do?</p>
 <pre><code class='ocaml'><span class='k'>let</span> f x y <span class='k'>=</span>
@@ -135,25 +135,25 @@ pair of nested if expressions:</p>
   loop 0
 </code></pre>
 <p>
-Let&apos;s examine this function. Suppose the function is called with <code>f</code> =
+Let&#39;s examine this function. Suppose the function is called with <code>f</code> =
 12.34. Then <code>s</code> = &quot;12.34&quot;, and <code>l</code> = 5. We call <code>loop</code> the first time
 with <code>i</code> = 0.</p>
 <p><code>i</code> is not greater than or equal to <code>l</code>, and <code>s.[i]</code> (the
-<code>i</code><sup>th</sup> character in <code>s</code>) is not a period or <code>&apos;e&apos;</code>. So
+<code>i</code><sup>th</sup> character in <code>s</code>) is not a period or <code>&#39;e&#39;</code>. So
 <code>loop (i+1)</code> is called, ie. <code>loop 1</code>.</p>
 <p>We go through the same dance for <code>i</code> = 1, and end up calling <code>loop 2</code>.</p>
 <p>For <code>i</code> = 2, however, <code>s.[i]</code> is a period (refer to the original string,
 <code>s</code> = &quot;12.34&quot;). So this immediately returns <code>s</code>, and the function
 <code>string_of_float</code> returns &quot;12.34&quot;.</p>
-<p>What is <code>loop</code> doing? In fact it&apos;s checking whether the string returned
-from <code>format_float</code> contains a period (or <code>&apos;e&apos;</code>). Suppose that we called
+<p>What is <code>loop</code> doing? In fact it&#39;s checking whether the string returned
+from <code>format_float</code> contains a period (or <code>&#39;e&#39;</code>). Suppose that we called
 <code>string_of_float</code> with <code>12.0</code>. <code>format_float</code> would return the string
 &quot;12&quot;, but <code>string_of_float</code> must return &quot;12.&quot; or &quot;12.0&quot; (because
 floating point constants in OCaml must contain a period to differentiate
 them from integer constants). Hence the check.</p>
 <p>The strange use of recursion in this function is almost certainly for
-efficiency. OCaml supports for loops, so why didn&apos;t the authors use for
-loops? We&apos;ll see in the next section that OCaml&apos;s for loops are limited
+efficiency. OCaml supports for loops, so why didn&#39;t the authors use for
+loops? We&#39;ll see in the next section that OCaml&#39;s for loops are limited
 in a way which prevents them from being used in <code>string_of_float</code>. Here,
 however, is a more straightforward, but approximately twice as slow, way
 of writing <code>string_of_float</code>:</p>
@@ -244,7 +244,7 @@ do_next_job ()<span class='o'>;</span>
 ()
 </code></pre>
 <p>
-OCaml doesn&apos;t support the concept of breaking out of a <code>for</code> loop early</p>
+OCaml doesn&#39;t support the concept of breaking out of a <code>for</code> loop early</p>
 <ul>
  <li>i.e. it has no <code>break</code>, <code>continue</code> or <code>last</code> statements. (You <em>could</em>
 throw an exception and catch it outside, and this would run fast but
@@ -252,14 +252,14 @@ often looks clumsy.)</li>
 </ul>
 
 <p>The expression inside an OCaml for loop should evaluate to <code>unit</code>
-(otherwise you&apos;ll get a warning), and the for loop expression as a whole
+(otherwise you&#39;ll get a warning), and the for loop expression as a whole
 returns <code>unit</code>:</p>
 <pre><code class='ocaml'><span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> 10 <span class='k'>do</span> i <span class='k'>done</span><span class='o'>;;</span>
 </code></pre>
 <p>
 Functional programmers tend to use recursion instead of explicit loops,
-and regard <strong>for</strong> loops with suspicion since it can&apos;t return anything,
-hence OCaml&apos;s relatively powerless <strong>for</strong> loop. We talk about recursion
+and regard <strong>for</strong> loops with suspicion since it can&#39;t return anything,
+hence OCaml&#39;s relatively powerless <strong>for</strong> loop. We talk about recursion
 below.</p>
 <p><strong>While loops</strong> in OCaml are written:</p>
 <pre><code class='ocaml'><span class='k'>while</span> boolean<span class='o'>-</span>condition <span class='k'>do</span>
@@ -272,9 +272,9 @@ of a while loop, except by throwing an exception, and this means that
 while loops have fairly limited use. Again, remember that functional
 programmers like recursion, and so while loops are second-class citizens
 in the language.</p>
-<p>If you stop to consider while loops, you may see that they aren&apos;t really
+<p>If you stop to consider while loops, you may see that they aren&#39;t really
 any use at all, except in conjunction with our old friend references.
-Let&apos;s imagine that OCaml didn&apos;t have references for a moment:</p>
+Let&#39;s imagine that OCaml didn&#39;t have references for a moment:</p>
 <pre><code class='ocaml'><span class='k'>let</span> quit_loop <span class='k'>=</span> <span class='o'>false</span> <span class='k'>in</span>
 <span class='k'>while</span> not quit_loop <span class='k'>do</span>
   print_string <span class='s'>&#34;Have you had enough yet? (y/n) &#34;</span><span class='o'>;</span>
@@ -289,9 +289,9 @@ just makes <code>quit_loop</code> a shorthand for <code>false</code>. This means
 loop condition (shown in red) is always true, and the loop runs on
 forever!</p>
 <p>Luckily OCaml <em>does have</em> references, so we can write the code above if
-we want. Don&apos;t get confused and think that the <code>!</code> (exclamation mark)
-means &quot;not&quot; as in C/Java. It&apos;s used here to mean &quot;dereference the
-pointer&quot;, similar in fact to Forth. You&apos;re better off reading <code>!</code> as
+we want. Don&#39;t get confused and think that the <code>!</code> (exclamation mark)
+means &quot;not&quot; as in C/Java. It&#39;s used here to mean &quot;dereference the
+pointer&quot;, similar in fact to Forth. You&#39;re better off reading <code>!</code> as
 &quot;get&quot; or &quot;deref&quot;.</p>
 <pre><code class='ocaml'><span class='k'>let</span> quit_loop <span class='k'>=</span> ref <span class='o'>false</span> <span class='k'>in</span>
 <span class='k'>while</span> not <span class='o'>!</span>quit_loop <span class='k'>do</span>
@@ -303,12 +303,12 @@ pointer&quot;, similar in fact to Forth. You&apos;re better off reading <code>!<
 </code></pre>
 <h2 id="Loopingoverlists"> Looping over lists</h2><p>
 
-If you want to loop over a list, don&apos;t be an imperative programmer and
+If you want to loop over a list, don&#39;t be an imperative programmer and
 reach for your trusty six-shooter Mr. For Loop! OCaml has some better
 and faster ways to loop over lists, and they are all located in the
 <code>List</code> module. There are in fact dozens of good functions in <code>List</code>, but
-I&apos;ll only talk about the most useful ones here.</p>
-<p>First off, let&apos;s define a list for us to use:</p>
+I&#39;ll only talk about the most useful ones here.</p>
+<p>First off, let&#39;s define a list for us to use:</p>
 <pre><code class='ocaml'><span class='k'>let</span> my_list <span class='k'>=</span> <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>;</span> 4<span class='o'>;</span> 5<span class='o'>;</span> 6<span class='o'>;</span> 7<span class='o'>;</span> 8<span class='o'>;</span> 9<span class='o'>;</span> 10<span class='o'>]</span>
 </code></pre>
 <p>
@@ -323,7 +323,7 @@ If you want to call a function once on every element of the list, use
 time your cerebellum suggests you use a for loop.</p>
 <p>If you want to <em>transform</em> each element separately in the list - for
 example, doubling each element in the list - then use <code>List.map</code>. This
-function will be familiar to people who&apos;ve</p>
+function will be familiar to people who&#39;ve</p>
 <p>programmed in Perl before.</p>
 <pre><code class='ocaml'>  <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) 2) my_list
 </code></pre>
@@ -347,7 +347,7 @@ member):</p>
 of some of these functions, namely <code>iter2</code>, <code>map2</code>, <code>for_all2</code>,
 <code>exists2</code>.</p>
 <p>The <code>map</code> and <code>filter</code> functions operate on individual list elements in
-isolation. &#92;&lt;dfn&#92;&gt;Fold&#92;&lt;/dfn&#92;&gt; is a more unusual operation that is best
+isolation. \&lt;dfn\&gt;Fold\&lt;/dfn\&gt; is a more unusual operation that is best
 thought about as &quot;inserting an operator between each element of the
 list&quot;. Suppose I wanted to add all the numbers in my list together. In
 hand-waving terms what I want to do is insert a plus sign between the
@@ -359,16 +359,16 @@ The fold operation does this, although the exact details are a little
 bit more tricky. First of all, what happens if I try to fold an empty
 list? In the case of summing the list it would be nice if the answer was
 zero, instead of error. However if I was trying to find the product of
-the list, I&apos;d like the answer to be one instead. So I obviously have to
+the list, I&#39;d like the answer to be one instead. So I obviously have to
 provide some sort of &quot;default&quot; argument to my fold. The second issue
-doesn&apos;t arise with simple operators like <code>+</code> and <code>*</code>: what happens if
-the operator I&apos;m using isn&apos;t associative, ie. (a <em>op</em> b) <em>op</em> c not
+doesn&#39;t arise with simple operators like <code>+</code> and <code>*</code>: what happens if
+the operator I&#39;m using isn&#39;t associative, ie. (a <em>op</em> b) <em>op</em> c not
 equal to a <em>op</em> (b <em>op</em> c)? In that case it would matter if I started
 from the left hand end of the list and worked right, versus if I started
 from the right and worked left. For this reason there are two versions
 of fold, called <code>List.fold_left</code> (works left to right) and
 <code>List.fold_right</code> (works right to left, and is also less efficient).</p>
-<p>Let&apos;s use <code>List.fold_left</code> to define <code>sum</code> and <code>product</code> functions for
+<p>Let&#39;s use <code>List.fold_left</code> to define <code>sum</code> and <code>product</code> functions for
 integer lists:</p>
 <pre><code class='ocaml'><span class='k'>let</span> sum <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0<span class='o'>;;</span>
 <span class='k'>let</span> product <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>*</span> ) 1<span class='o'>;;</span>
@@ -376,13 +376,13 @@ sum my_list<span class='o'>;;</span>
 product my_list<span class='o'>;;</span>
 </code></pre>
 <p>
-That was easy! Notice that I&apos;ve accidentally come up with a way to do
+That was easy! Notice that I&#39;ve accidentally come up with a way to do
 mathematical factorials:</p>
 <pre><code class='ocaml'><span class='k'>let</span> fact n <span class='k'>=</span> product (range 1 n)<span class='o'>;;</span>
 fact 10<span class='o'>;;</span>
 </code></pre>
 <p>
-(Notice that this factorial function isn&apos;t very useful because it
+(Notice that this factorial function isn&#39;t very useful because it
 overflows the integers and gives wrong answers even for quite small
 values of <code>n</code>. A real factorial function would use the <code>Big_int</code>
 module.)</p>
@@ -400,9 +400,9 @@ functions in f.p. are the equivalent of loops in imperative programming.
 In functional languages loops are second-class citizens, whilest
 recursive functions get all the best support.</p>
 <p>Writing recursive functions requires a change in mindset from writing
-for loops and while loops. So what I&apos;ll give you in this section will be
+for loops and while loops. So what I&#39;ll give you in this section will be
 just an introduction and examples.</p>
-<p>In the first example we&apos;re going to read the whole of a file into memory
+<p>In the first example we&#39;re going to read the whole of a file into memory
 (into a long string). There are essentially three possible approaches to
 this:</p>
 <h3 id="Approach1"> Approach 1</h3><p>
@@ -418,12 +418,12 @@ A recursive loop, breaking out of the recursion again using an
 exception.</p>
 <ul>
  <li>  <ul>
-   <li>*We&apos;re going to introduce a few new concepts here. Our second two
+   <li>*We&#39;re going to introduce a few new concepts here. Our second two
 approaches will use the <code>Buffer</code> module - an expandable buffer which you
 can think of like a string onto which you can efficiently append more
-text at the end. We&apos;re also going to be catching the <code>End_of_file</code>
+text at the end. We&#39;re also going to be catching the <code>End_of_file</code>
 exception which the input functions throw when they reach the end of the
-input. Also we&apos;re going to use <code>Sys.argv.(1)</code> to get the first command
+input. Also we&#39;re going to use <code>Sys.argv.(1)</code> to get the first command
 line parameter.</li>
   </ul>
  </li>
@@ -448,7 +448,7 @@ line parameter.</li>
 </code></pre>
 <p>
 Approach 1 works but is not very satisfactory because <code>read_whole_chan</code>
-won&apos;t work on non-file channels like keyboard input or sockets. Approach
+won&#39;t work on non-file channels like keyboard input or sockets. Approach
 2 involves a while loop:</p>
 <pre><code class='ocaml'><span class='com2'>(* Read whole file<span class='ic'>:</span> Approach 2 *)</span><!-- end comment -->
 
@@ -476,8 +476,8 @@ won&apos;t work on non-file channels like keyboard input or sockets. Approach
 <p>
 The key to approach 2 is to look at the central while loop. Remember
 that I said the only way to break out of a while loop early was with an
-exception? This is exactly what we&apos;re doing here. Although I haven&apos;t
-covered exceptions yet, you probably won&apos;t have any trouble
+exception? This is exactly what we&#39;re doing here. Although I haven&#39;t
+covered exceptions yet, you probably won&#39;t have any trouble
 understanding the <code>End_of_file</code> exception thrown in the code above by
 <code>input_line</code> when it hits the end of the file. The buffer <code>buf</code>
 accumulates the contents of the file, and when we hit the end of the
@@ -490,7 +490,7 @@ inside a <code>try</code> matches the return type of each caught exception. In t
 case because <code>End_of_file</code> results in a <code>string</code>, the main body of the
 <code>try</code> must also &quot;return&quot; a string - even though because of the infinite
 while loop the string could never actually be returned.</p>
-<p>Here&apos;s our recursive version. Notice that it&apos;s <em>shorter</em> than approach
+<p>Here&#39;s our recursive version. Notice that it&#39;s <em>shorter</em> than approach
 2, but not so easy to understand for imperative programmers at least:</p>
 <pre><code class='ocaml'><span class='com2'>(* Read whole file<span class='ic'>:</span> Approach 3 *)</span><!-- end comment -->
 
@@ -525,13 +525,13 @@ tail recursion (discussed below) the compiler will turn the recursive
 <code>loop</code> function into a real while loop (!) which runs in constant stack
 space.</p>
 <p>In the next example we will show how recursion is great for constructing
-or examining certain types of data structures, particularly trees. Let&apos;s
+or examining certain types of data structures, particularly trees. Let&#39;s
 have a recursive type to represent files in a filesystem:</p>
 <pre><code class='ocaml'><span class='k'>type</span> filesystem <span class='k'>=</span> File <span class='k'>of</span> string <span class='o'>|</span> Directory <span class='k'>of</span> filesystem list
 </code></pre>
 <p>
 The <code>opendir</code> and <code>readdir</code> functions are used to open a directory and
-read elements from the directory. I&apos;m going to define a handy
+read elements from the directory. I&#39;m going to define a handy
 <code>readdir_no_ex</code> function which hides the annoying <code>End_of_file</code>
 exception that <code>readdir</code> throws when it reaches the end of the
 directory:</p>
@@ -549,7 +549,7 @@ null pointers.</p>
 <pre><code class='ocaml'>readdir_no_ex <span class='o'>:</span> dir_handle <span class='k'>-></span> string option
 </code></pre>
 <p>
-I&apos;m also going to define a simple recursive function which I can use to
+I&#39;m also going to define a simple recursive function which I can use to
 convert the <code>filesystem</code> type into a string for (eg) printing:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> string_of_filesystem fs <span class='k'>=</span>
   <span class='k'>match</span> fs <span class='k'>with</span>
@@ -564,9 +564,9 @@ Then the <code>fold_left (^) &quot;&quot;</code> concatenates the list together 
 string. Notice also the use of pattern matching. (The library defines a
 function called <code>String.concat</code> which is essentially equivalent to
 <code>fold_left (^) </code>, but implemented more efficiently).</p>
-<p>Now let&apos;s define a function to read a directory structure, recursively,
-and return a recursive <code>filesystem</code> data structure. I&apos;m going to show
-this function in steps, but I&apos;ll print out the entire function at the
+<p>Now let&#39;s define a function to read a directory structure, recursively,
+and return a recursive <code>filesystem</code> data structure. I&#39;m going to show
+this function in steps, but I&#39;ll print out the entire function at the
 end of this section. First the outline of the function:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> read_directory path <span class='k'>=</span>
   <span class='k'>let</span> dirh <span class='k'>=</span> opendir path <span class='k'>in</span>
@@ -584,7 +584,7 @@ type of <code>loop</code> will be:</p>
 <pre><code class='ocaml'>loop <span class='o'>:</span> unit <span class='k'>-></span> filesystem list
 </code></pre>
 <p>
-How do we define loop? Let&apos;s take it in steps again.</p>
+How do we define loop? Let&#39;s take it in steps again.</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> loop () <span class='k'>=</span>
   <span class='k'>let</span> filename <span class='k'>=</span> readdir_no_ex dirh <span class='k'>in</span>
   <span class='com2'>(* <span class='ic'>.....</span> *)</span><!-- end comment -->
@@ -607,13 +607,13 @@ nice pattern match:</p>
 </code></pre>
 <p>
 The <code>None</code> case is easy. Thinking recursively (!) if <code>loop</code> is called
-and we&apos;ve reached the end of the directory, <code>loop</code> needs to return a
-list of entries - and there&apos;s no entries - so it returns the empty list
+and we&#39;ve reached the end of the directory, <code>loop</code> needs to return a
+list of entries - and there&#39;s no entries - so it returns the empty list
 (<code>[]</code>).</p>
 <p>For <code>&quot;.&quot;</code> and <code>&quot;..&quot;</code> we just ignore the file and call <code>loop</code> again.</p>
 <p>What do we do when <code>loop</code> reads a real filename (the <code>Some filename</code>
-match below)? Let <code>pathname</code> be the full path to the file. We &apos;stat&apos; the
-file to see if it&apos;s really a directory. If it <em>is</em> a directory, we set
+match below)? Let <code>pathname</code> be the full path to the file. We &#39;stat&#39; the
+file to see if it&#39;s really a directory. If it <em>is</em> a directory, we set
 <code>this</code> by recursively calling <code>read_directory</code> which will return
 <code>Directory something</code>. Notice that the overall result of
 <code>read_directory</code> is <code>Directory (loop ())</code>. If the file is really a file
@@ -640,8 +640,8 @@ to which we prepend <code>this</code>.</p>
   Directory (loop ())
 </code></pre>
 <p>
-That&apos;s quite a complex bit of recursion, but although this is a made-up
-example, it&apos;s fairly typical of the complex patterns of recursion found
+That&#39;s quite a complex bit of recursion, but although this is a made-up
+example, it&#39;s fairly typical of the complex patterns of recursion found
 in real-world functional programs. The two important lessons to take
 away from this are:</p>
 <ul>
@@ -688,8 +688,8 @@ many follow-ups. (You can <a href='http://caml.inria.fr/pub/ml-archives/caml-lis
 thread</a>.)</p>
 <p>First of all there is a basic fault with <code>read_directory</code> directory
 which will cause it to fail if you try to run it on very large directory
-structures. I don&apos;t explicitly call <code>closedir</code> to close the directory
-handle. The garbage collector doesn&apos;t help, because in OCaml the garbage
+structures. I don&#39;t explicitly call <code>closedir</code> to close the directory
+handle. The garbage collector doesn&#39;t help, because in OCaml the garbage
 collector does <strong>not</strong> collect and close open file and directory
 handles.</p>
 <p>The fix is pretty trivial: add a call to <code>closedir</code> at the end of the
@@ -703,14 +703,14 @@ handles.</p>
 </code></pre>
 <p>
 Next up is the issue of <code>readdir</code> throwing an exception in a rather
-&quot;unexceptional&quot; situation, namely <code>End_of_file</code>. I don&apos;t agree that
+&quot;unexceptional&quot; situation, namely <code>End_of_file</code>. I don&#39;t agree that
 throwing an exception in this case is the right thing to do. In typical
 programs I want to never have to write a <code>try ... with</code> clause, because
-exceptions are supposed to mean &quot;something really bad happened which I&apos;m
+exceptions are supposed to mean &quot;something really bad happened which I&#39;m
 not prepared to deal with&quot;, like running out of disk space or memory.
 Throwing an exception as part of the routine running of a function
 (every program which uses <code>readdir</code> <em>has</em> to be prepared to handle
-<code>End_of_file</code>), that&apos;s not an exceptional situation.</p>
+<code>End_of_file</code>), that&#39;s not an exceptional situation.</p>
 <p>However, Eric Cooper came up with a way to write the function and check
 the exception, and this highlights another frequent technique used by
 functional programmers. Namely, passing an <strong>accumulator</strong> which
@@ -746,15 +746,15 @@ while loop is probably best) and have a reference to a list to store the
 ongoing accumulated result. Because <code>readdir</code> throws an exception, we
 have a simple way to break out of the while loop, <em>and</em> in the
 <code>with</code>-clause we can just return <code>!list</code> (dereference the reference to
-the list of entries we&apos;ve built up).</p>
+the list of entries we&#39;ve built up).</p>
 <p>It all works nicely, and proves that writing code imperatively is often
 best, <em>particularly</em> as in this case where
 <code>opendir ... readdir ... closedir</code> is essentially an imperative API,
-designed for C programmers. It&apos;s no surprise, therefore, that the
+designed for C programmers. It&#39;s no surprise, therefore, that the
 imperative solution is easier. OCaml, not being a <a href='http://www.elsewhere.org/jargon/html/entry/bondage-and-discipline-language.html' title='http://www.elsewhere.org/jargon/html/entry/bondage-and-discipline-language.html'>bondage and
 discipline
 language</a>,
-doesn&apos;t mind you using the imperative approach when it makes sense.</p>
+doesn&#39;t mind you using the imperative approach when it makes sense.</p>
 <p>Here is the outline of the imperative approach by Fabrice Le Fessant:</p>
 <pre><code class='ocaml'><span class='k'>let</span> list <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
 <span class='k'>let</span> dir <span class='k'>=</span> opendir <span class='s'>&#34;.......&#34;</span> <span class='k'>in</span>
@@ -777,33 +777,33 @@ Remember the basic recursion pattern for lists:</p>
 <p>
 The key here is actually the use of the match / base case / recursive
 case pattern. In this example - finding the maximum element in a list -
-we&apos;re going to have two base cases and one recursive case. But before I
-jump ahead to the code, let&apos;s just step back and think about the
+we&#39;re going to have two base cases and one recursive case. But before I
+jump ahead to the code, let&#39;s just step back and think about the
 problem. By thinking about the problem, the solution will appear &quot;as if
 by magic&quot; (I promise you :-)</p>
-<p>First of all, let&apos;s be clear that the maximum element of a list is just
+<p>First of all, let&#39;s be clear that the maximum element of a list is just
 the biggest one. eg. The maximum element of the list <code>[1; 2; 3; 4; 1]</code>
 is <code>4</code>.</p>
-<p>Are there any special cases? Yes there are. What&apos;s the maximum element
-of the empty list <code>[]</code>? There <em>isn&apos;t one</em>. If we are passed an empty
+<p>Are there any special cases? Yes there are. What&#39;s the maximum element
+of the empty list <code>[]</code>? There <em>isn&#39;t one</em>. If we are passed an empty
 list, we should throw an error.</p>
-<p>What&apos;s the maximum element of a single element list such as <code>[4]</code>?
-That&apos;s easy: it&apos;s just the element itself. So <code>list_max [4]</code> should
+<p>What&#39;s the maximum element of a single element list such as <code>[4]</code>?
+That&#39;s easy: it&#39;s just the element itself. So <code>list_max [4]</code> should
 return <code>4</code>, or in the general case, <code>list_max [x]</code> should return <code>x</code>.</p>
-<p>What&apos;s the maximum element of the general list <code>x :: remainder</code> (this is
+<p>What&#39;s the maximum element of the general list <code>x :: remainder</code> (this is
 the &quot;cons&quot; notation for the list, so <code>remainder</code> is the tail - also a
 list)?</p>
 <p>Think about this for a while. Suppose you know the maximum element of
-<code>remainder</code>, which is, say, <code>y</code>. What&apos;s the maximum element of
+<code>remainder</code>, which is, say, <code>y</code>. What&#39;s the maximum element of
 <code>x :: remainder</code>? It depends on whether <code>x &gt; y</code> or <code>x &lt;= y</code>. If <code>x</code> is
 bigger than <code>y</code>, then the overall maximum is <code>x</code>, whereas conversely if
 <code>x</code> is less than <code>y</code>, then the overall maximum is <code>y</code>.</p>
 <p>Does this really work? Consider <code>[1; 2; 3; 4; 1]</code> again. This is
 <code>1 :: [2; 3; 4; 1]</code>. Now the maximum element of the remainder,
-<code>[2; 3; 4; 1]</code>, is <code>4</code>. So now we&apos;re interested in <code>x = 1</code> and <code>y = 4</code>.
-That head element <code>x = 1</code> doesn&apos;t matter because <code>y = 4</code> is bigger, so
+<code>[2; 3; 4; 1]</code>, is <code>4</code>. So now we&#39;re interested in <code>x = 1</code> and <code>y = 4</code>.
+That head element <code>x = 1</code> doesn&#39;t matter because <code>y = 4</code> is bigger, so
 the overall maximum of the whole list is <code>y = 4</code>.</p>
-<p>Let&apos;s now code those rules above up, to get a working function:</p>
+<p>Let&#39;s now code those rules above up, to get a working function:</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> list_max xs <span class='k'>=</span>
     <span class='k'>match</span> xs <span class='k'>with</span>
     <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> failwith <span class='s'>&#34;list_max called on empty list&#34;</span>  <span class='com2'>(* empty list<span class='ic'>:</span> fail *)</span><!-- end comment -->
@@ -811,7 +811,7 @@ the overall maximum of the whole list is <code>y = 4</code>.</p>
     <span class='o'>|</span> x <span class='o'>::</span> remainder <span class='k'>-></span> max x (list_max remainder)    <span class='com2'>(* multiple element list<span class='ic'>:</span> recursive case *)</span><!-- end comment -->
 </code></pre>
 <p>
-I&apos;ve added comments so you can see how the rules / special cases we
+I&#39;ve added comments so you can see how the rules / special cases we
 decided upon above really correspond to lines of code.</p>
 <p>Does it work?</p>
 <pre><code class='ocaml'>list_max <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>;</span> 4<span class='o'>;</span> 1<span class='o'>]</span><span class='o'>;;</span>
@@ -825,19 +825,19 @@ imperative for-loop solution, and (b) much more closely tied to the
 problem specification. Functional programmers will tell you that this is
 because the functional style is much higher level than the imperative
 style, and therefore better and simpler. Whether you believe them is up
-to you. It&apos;s certainly true that it&apos;s much simpler to reason logically
+to you. It&#39;s certainly true that it&#39;s much simpler to reason logically
 about the functional version, which is useful if you wanted to formally
 prove that <code>list_max</code> is correct (&quot;correct&quot; being the mathematical way
 to say that a program is provably bug-free, useful for space shuttles,
 nuclear power plants and higher quality software in general).</p>
 <h3 id="Tailrecursion"> Tail recursion</h3><p>
-Let&apos;s look at the <code>range</code> function again for about the twentieth time:</p>
+Let&#39;s look at the <code>range</code> function again for about the twentieth time:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
   <span class='k'>else</span> a <span class='o'>::</span> range (a<span class='o'>+</span>1) b
 </code></pre>
 <p>
-I&apos;m going to rewrite it slightly to make something about the structure
+I&#39;m going to rewrite it slightly to make something about the structure
 of the program clearer (still the same function however):</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
@@ -846,7 +846,7 @@ of the program clearer (still the same function however):</p>
     a <span class='o'>::</span> result
 </code></pre>
 <p>
-Let&apos;s call it:</p>
+Let&#39;s call it:</p>
 <pre><code class='ocaml'><span class='m'>List</span><span class='o'>.</span>length (range 1 10)<span class='o'>;;</span>
 <span class='m'>List</span><span class='o'>.</span>length (range 1 1000000)<span class='o'>;;</span>
 </code></pre>
@@ -871,17 +871,17 @@ Because the recursive call to <code>loop ()</code> happens as the very last thin
 <code>loop</code> is tail-recursive and the compiler will turn the whole thing into
 a while loop.</p>
 <p>Unfortunately <code>range</code> is not tail-recursive, and the longer version
-above shows why. The recursive call to <code>range</code> doesn&apos;t happen as the
+above shows why. The recursive call to <code>range</code> doesn&#39;t happen as the
 very last thing. In fact the last thing to happen is the <code>::</code> (cons)
-operation. As a result, the compiler doesn&apos;t turn the recursion into a
+operation. As a result, the compiler doesn&#39;t turn the recursion into a
 while loop, and the function is not efficient in its use of stack space.</p>
-<p>Now recall we discussed in the addendum above Eric Cooper&apos;s
+<p>Now recall we discussed in the addendum above Eric Cooper&#39;s
 &quot;accumulator&quot; technique, and I said that this technique was widely used
-in functional programming. We will now see why this is the case. It&apos;s
+in functional programming. We will now see why this is the case. It&#39;s
 because it allows you to write functions such as <code>range</code> above in a
 tail-recursive manner, which means they will be efficient and work
 properly on large inputs.</p>
-<p>Let&apos;s plan our rewritten <code>range</code> function which will use an accumulator
+<p>Let&#39;s plan our rewritten <code>range</code> function which will use an accumulator
 argument to store the &quot;result so far&quot;:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> range2 a b accum <span class='k'>=</span>
   <span class='com2'>(* <span class='ic'>...</span> *)</span><!-- end comment -->
@@ -891,7 +891,7 @@ argument to store the &quot;result so far&quot;:</p>
 </code></pre>
 <p>
 (I could and probably should have used a nested function here.)</p>
-<p>The <code>accum</code> argument is going to accumulate the result. It&apos;s the &quot;result
+<p>The <code>accum</code> argument is going to accumulate the result. It&#39;s the &quot;result
 so far&quot;. We pass in the empty list (&quot;no result so far&quot;). The easy case
 is when <code>a &gt; b</code>:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> range2 a b accum <span class='k'>=</span>
@@ -900,7 +900,7 @@ is when <code>a &gt; b</code>:</p>
     <span class='com2'>(* <span class='ic'>...</span> *)</span><!-- end comment -->
 </code></pre>
 <p>
-If <code>a &gt; b</code> (ie. if we&apos;ve reached the end of the recursion), then stop
+If <code>a &gt; b</code> (ie. if we&#39;ve reached the end of the recursion), then stop
 and return the result (<code>accum</code>).</p>
 <p>Now the trick is to write the <code>else</code>-clause and make sure that the call
 to <code>range2</code> is the very last thing that we do, so the function is
@@ -910,12 +910,12 @@ tail-recursive:</p>
     <span class='k'>else</span> range2 (a<span class='o'>+</span>1) b (a <span class='o'>::</span> accum)
 </code></pre>
 <p>
-There&apos;s only one slight problem with this function: it constructs the
+There&#39;s only one slight problem with this function: it constructs the
 list backwards! However, this is easy to rectify by redefining range as:</p>
 <pre><code class='ocaml'> <span class='k'>let</span> range a b <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>rev (range2 a b <span class='o'>[</span><span class='o'>]</span>)<span class='o'>;;</span>
 </code></pre>
 <p>
-It works this time, although it&apos;s a bit slow to run because it really
+It works this time, although it&#39;s a bit slow to run because it really
 does have to construct a list with a million elements in it:</p>
 <pre><code class='ocaml'>  <span class='m'>List</span><span class='o'>.</span>length (range 1 1000000)
 </code></pre>
@@ -945,16 +945,16 @@ Previously we mentioned records in passing. These are like C <code>struct</code>
 <span class='o'>/span>a<span class='k'>=</span>3<span class='o'</span><span class='o'>;;</span>
 </code></pre>
 <p>
-One feature which I didn&apos;t cover: OCaml records can have mutable fields.
+One feature which I didn&#39;t cover: OCaml records can have mutable fields.
 Normally an expression like <code>{a = 3; b = 5}</code> is an immutable, constant
-object. However if the record has &#92;&lt;dfn&#92;&gt;mutable fields&#92;&lt;/dfn&#92;&gt;, then
+object. However if the record has \&lt;dfn\&gt;mutable fields\&lt;/dfn\&gt;, then
 there is a way to change those fields in the record. This is an
-imperative feature of OCaml, because functional languages don&apos;t normally
-allow mutable objects (or references or mutable arrays, which we&apos;ll look
+imperative feature of OCaml, because functional languages don&#39;t normally
+allow mutable objects (or references or mutable arrays, which we&#39;ll look
 at in a moment).</p>
 <p>Here is an object defined with a mutable field. This field is used to
 count how many times the object has been accessed. You could imagine
-this being used in a caching scheme to decide which objects you&apos;d evict
+this being used in a caching scheme to decide which objects you&#39;d evict
 from memory.</p>
 <pre><code class='ocaml'>  <span class='k'>type</span> name <span class='k'>=</span> <span class='o'>/span> name <span class='o'>:</span> string<span class='o'>;</span> <span class='k'>mutable</span> access_count <span class='o'>:</span> int <span class='o'</span>
 </code></pre>
@@ -968,10 +968,10 @@ increments the mutable <code>access_count</code> field:</p>
 <p>
 Notice a strange, and very non-functional feature of <code>print_name</code>: it
 modifies its <code>access_count</code> parameter. If you read chapter 5 closely,
-you&apos;ll see that this function is not &quot;pure&quot;. OCaml is a functional
+you&#39;ll see that this function is not &quot;pure&quot;. OCaml is a functional
 language, but not to the extent that it forces functional programming
 down your throat.</p>
-<p>Anyway, let&apos;s see <code>print_name</code> in action:</p>
+<p>Anyway, let&#39;s see <code>print_name</code> in action:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> n <span class='k'>=</span> <span class='o'>/span> name <span class='k'>=</span> <span class='s'>&#34;Richard Jones&#34;</span><span class='o'>;</span> access_count <span class='k'>=</span> 0 <span class='o'</span><span class='o'>;;</span>
   n<span class='o'>;;</span>
   print_name n<span class='o'>;;</span>
@@ -981,7 +981,7 @@ down your throat.</p>
 </code></pre>
 <p>
 Only fields explicitly marked as <code>mutable</code> can be assigned to using the
-<code>&lt;-</code> operator. If you try to assign to a non-mutable field, OCaml won&apos;t
+<code>&lt;-</code> operator. If you try to assign to a non-mutable field, OCaml won&#39;t
 let you:</p>
 <pre><code class='ocaml'>  n<span class='o'>.</span>name <span class='o'>&#60;-</span> <span class='s'>&#34;John Smith&#34;</span><span class='o'>;;</span>
 </code></pre>

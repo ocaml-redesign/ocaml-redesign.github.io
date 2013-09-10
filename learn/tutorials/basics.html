@@ -74,7 +74,7 @@ out regions of code very easily:</p>
 </code></pre>
 <h2 id="Callingfunctions"> Calling functions</h2><p>
 
-Let&apos;s say you&apos;ve written a function - we&apos;ll call it <code>repeated</code> - which
+Let&#39;s say you&#39;ve written a function - we&#39;ll call it <code>repeated</code> - which
 takes a string <code>s</code> and a number <code>n</code>, and returns a new string which
 contains original <code>s</code> repeated <code>n</code> times.</p>
 <p>In most C-derived languages a call to this function will look like this:</p>
@@ -92,13 +92,13 @@ is the same function call in OCaml:</p>
 Note — <strong>no</strong> brackets, and <strong>no</strong> comma between the arguments.</p>
 <p>The syntax <code>repeated (&quot;hello&quot;, 3)</code> <strong>is</strong> meaningful in OCaml. It means
 &quot;call the function <code>repeated</code> with ONE argument, that argument being a
-&apos;pair&apos; structure of two elements&quot;. Of course that would be a mistake,
+&#39;pair&#39; structure of two elements&quot;. Of course that would be a mistake,
 because the <code>repeated</code> function is expecting two arguments, not one, and
-the first argument should be a string, not a pair. But let&apos;s not worry
-about pairs (&quot;tuples&quot;) just yet. Instead, just remember that it&apos;s a
+the first argument should be a string, not a pair. But let&#39;s not worry
+about pairs (&quot;tuples&quot;) just yet. Instead, just remember that it&#39;s a
 mistake to put the brackets and commas in around function call
 arguments.</p>
-<p>Let&apos;s have another function - <code>prompt_string</code> - which takes a string to
+<p>Let&#39;s have another function - <code>prompt_string</code> - which takes a string to
 prompt and returns the string entered by the user. We want to pass this
 string into <code>repeated</code>. Here are the C and OCaml versions:</p>
 <pre><code class='ocaml'><span class='o'>/*</span> C code<span class='o'>:</span> <span class='o'>*/</span>
@@ -111,7 +111,7 @@ repeated (prompt_string <span class='s'>&#34;Name please: &#34;</span>) 3
 Take a careful look at the bracketing and the missing comma. In the
 OCaml version, the brackets enclose the first argument of repeated
 because that argument is the result of another function call. In general
-the rule is: &quot;bracket around the whole function call - don&apos;t put
+the rule is: &quot;bracket around the whole function call - don&#39;t put
 brackets around the arguments to a function call&quot;. Here are some more
 examples:</p>
 <pre><code class='ocaml'>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f has three arguments<span class='ic'>,</span> g has one argument *)</span><!-- end comment -->
@@ -124,30 +124,30 @@ This expression has <span class='k'>type</span> string <span class='o'>*</span> 
 
 You all know how to define a function (or static method, for Java-heads)
 in our existing languages. How do we do it in OCaml?</p>
-<p>The OCaml syntax is pleasantly concise. Here&apos;s a function which takes
+<p>The OCaml syntax is pleasantly concise. Here&#39;s a function which takes
 two floating point numbers and calculates the average:</p>
 <pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 </code></pre>
 <p>
 Type this into the OCaml &quot;toplevel&quot; (on Unix, type the command <code>ocaml</code>
-from the shell) and you&apos;ll see this:</p>
+from the shell) and you&#39;ll see this:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> average a b <span class='k'>=</span>
     (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 </code></pre>
 <p>
 If you look at the function definition closely, and also at what OCaml
-prints back at you, you&apos;ll have a number of questions:</p>
+prints back at you, you&#39;ll have a number of questions:</p>
 <ul>
- <li>What&apos;re all those extra periods doing there in the code?
+ <li>What&#39;re all those extra periods doing there in the code?
  </li>
  <li>What does all that stuff about <code>float -&gt; float -&gt; float</code> mean?</li>
 </ul>
 
-<p>I&apos;ll answer those questions in the next sections, but first I want to go
+<p>I&#39;ll answer those questions in the next sections, but first I want to go
 and define the same function in C (the Java definition would be fairly
 similar to C), and hopefully that should raise even more questions.
-Here&apos;s our C version of <code>average</code>:</p>
+Here&#39;s our C version of <code>average</code>:</p>
 <pre><code class='ocaml'>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>/span>
@@ -155,41 +155,41 @@ average (double a<span class='o'>,</span> double b)
 <span class='o'</span>
 </code></pre>
 <p>
-Now look at our much shorter OCaml definition above. Hopefully you&apos;ll be
+Now look at our much shorter OCaml definition above. Hopefully you&#39;ll be
 asking:</p>
 <ul>
- <li>Why don&apos;t we have to define the types of <code>a</code> and <code>b</code> in the OCaml
+ <li>Why don&#39;t we have to define the types of <code>a</code> and <code>b</code> in the OCaml
  version? How does OCaml know what the types are (indeed, <em>does</em>
  OCaml know what the types are, or is OCaml completely dynamically
  typed?).
  </li>
- <li>In C, the <code>2</code> is implicitly converted into a <code>double</code>, can&apos;t OCaml
+ <li>In C, the <code>2</code> is implicitly converted into a <code>double</code>, can&#39;t OCaml
  do the same thing?
  </li>
  <li>What is the OCaml way to write <code>return</code>?</li>
 </ul>
 
-<p>OK, let&apos;s get some answers.</p>
+<p>OK, let&#39;s get some answers.</p>
 <ul>
  <li>OCaml is a strongly <em>statically typed</em> language (in other words,
- there&apos;s nothing dynamic going on between int, float and string, as
+ there&#39;s nothing dynamic going on between int, float and string, as
  in Perl).
  </li>
- <li>OCaml uses <em>type inference</em> to work out the types, so you don&apos;t have
+ <li>OCaml uses <em>type inference</em> to work out the types, so you don&#39;t have
  to. If you use the OCaml toplevel as above, then OCaml will tell you
  its inferred type for your function.
  </li>
- <li>OCaml doesn&apos;t do any implicit casting. If you want a float, you have
+ <li>OCaml doesn&#39;t do any implicit casting. If you want a float, you have
  to write <code>2.0</code> because <code>2</code> is an integer. OCaml does <strong>no automatic
  conversion</strong> between int, float, string or any other type.
  </li>
  <li>As a side-effect of type inference in OCaml, functions (including
- operators) can&apos;t have overloaded definitions. OCaml defines <code>+</code> as
+ operators) can&#39;t have overloaded definitions. OCaml defines <code>+</code> as
  the <em>integer</em> addition function. To add floats, use <code>+.</code> (note the
  trailing period). Similarly, use <code>-.</code>, <code>*.</code>, <code>/.</code> for other float
  operations.
  </li>
- <li>OCaml doesn&apos;t have a <code>return</code> keyword - the last expression in a
+ <li>OCaml doesn&#39;t have a <code>return</code> keyword - the last expression in a
  function becomes the result of the function automatically.</li>
 </ul>
 
@@ -209,20 +209,20 @@ unit           Written <span class='k'>as</span> ()
 <p>
 OCaml uses one of the bits in an <code>int</code> internally in order to be able to
 automatically manage the memory use (garbage collection). This is why
-the basic <code>int</code> is 31 bits, not 32 bits (63 bits if you&apos;re using a 64
-bit platform). In practice this isn&apos;t an issue except in a few
-specialised cases. For example if you&apos;re counting things in a loop, then
+the basic <code>int</code> is 31 bits, not 32 bits (63 bits if you&#39;re using a 64
+bit platform). In practice this isn&#39;t an issue except in a few
+specialised cases. For example if you&#39;re counting things in a loop, then
 OCaml limits you to counting up to 1 billion instead of 2 billion. This
-isn&apos;t going to be a problem because if you&apos;re counting things close to
+isn&#39;t going to be a problem because if you&#39;re counting things close to
 this limit in any language, then you ought to be using bignums (the
 <code>Nat</code> and <code>Big_int</code> modules in OCaml). However if you need to do things
-such as processing 32 bit types (eg. you&apos;re writing crypto code or a
+such as processing 32 bit types (eg. you&#39;re writing crypto code or a
 network stack), OCaml provides a <code>nativeint</code> type which matches the
 native integer type for your platform.</p>
-<p>OCaml doesn&apos;t have a basic unsigned integer type, but you can get the
-same effect using <code>nativeint</code>. As far as I can tell OCaml doesn&apos;t have
+<p>OCaml doesn&#39;t have a basic unsigned integer type, but you can get the
+same effect using <code>nativeint</code>. As far as I can tell OCaml doesn&#39;t have
 single-precision floating point numbers at all.</p>
-<p>OCaml provides a <code>char</code> type which is used for characters, written <code>&apos;x&apos;</code>
+<p>OCaml provides a <code>char</code> type which is used for characters, written <code>&#39;x&#39;</code>
 for example. Unfortunately the <code>char</code> type does not support Unicode or
 UTF-8. This is a serious flaw in OCaml which should be fixed, but for
 the time being there are <a href='http://camomile.sourceforge.net/' title='http://camomile.sourceforge.net/'>comprehensive Unicode
@@ -230,17 +230,17 @@ libraries</a>
 which work around it.</p>
 <p>Strings are not just lists of characters. They have their own, more
 efficient internal representation.</p>
-<p>The <code>unit</code> type is sort of like <code>void</code> in C, but we&apos;ll talk about it
+<p>The <code>unit</code> type is sort of like <code>void</code> in C, but we&#39;ll talk about it
 more below.</p>
 <h2 id="Implicitvsexplicitcasts"> Implicit vs. explicit casts</h2><p>
 In C-derived languages ints get promoted to floats in certain
 circumstances. For example if you write <code>1 + 2.5</code> then the first
 argument (which is an integer) is promoted to a floating point number,
-and the result is also a floating point number. It&apos;s as if you had
+and the result is also a floating point number. It&#39;s as if you had
 written <code>((double) 1) + 2.5</code>, but all done implicitly.</p>
 <p>OCaml never does implicit casts like this. In OCaml, <code>1 + 2.5</code> is a type
 error. The <code>+</code> operator in OCaml requires two ints as arguments, and
-here we&apos;re giving it an int and a float, so it reports this error:</p>
+here we&#39;re giving it an int and a float, so it reports this error:</p>
 <pre><code class='ocaml'>1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -248,7 +248,7 @@ here we&apos;re giving it an int and a float, so it reports this error:</p>
 this means &quot;you put a float here, but I was expecting an int&quot;).</p>
 <p>To add two floats together you need to use a different operator, <code>+.</code>
 (note the trailing period).</p>
-<p>OCaml doesn&apos;t promote ints to floats automatically so this is also an
+<p>OCaml doesn&#39;t promote ints to floats automatically so this is also an
 error:</p>
 <pre><code class='ocaml'>1 <span class='o'>+.</span> 2.5
 </code></pre>
@@ -278,16 +278,16 @@ and you have a point, but there are at least two arguments in their
 favour. Firstly, OCaml needs this explicit casting to be able to do type
 inference (see below), and type inference is such a wonderful
 time-saving feature that it easily offsets the extra keyboarding of
-explicit casts. Secondly, if you&apos;ve spent time debugging C programs
-you&apos;ll know that (a) implicit casts cause errors which are hard to find,
-and (b) much of the time you&apos;re sitting there trying to work out where
+explicit casts. Secondly, if you&#39;ve spent time debugging C programs
+you&#39;ll know that (a) implicit casts cause errors which are hard to find,
+and (b) much of the time you&#39;re sitting there trying to work out where
 the implicit casts happen. Making the casts explicit helps you in
-debugging. Thirdly, some casts (particularly int &#92;&lt;-&#92;&gt; float) are
+debugging. Thirdly, some casts (particularly int \&lt;-\&gt; float) are
 actually very expensive operations. You do yourself no favours by hiding
 them.</p>
 <h2 id="Ordinaryfunctionsandrecursivefunctions"> Ordinary functions and recursive functions</h2><p>
-Unlike in C-derived languages, a function isn&apos;t recursive unless you
-explicitly say so by using <code>let rec</code> instead of just <code>let</code>. Here&apos;s an
+Unlike in C-derived languages, a function isn&#39;t recursive unless you
+explicitly say so by using <code>let rec</code> instead of just <code>let</code>. Here&#39;s an
 example of a recursive function:</p>
 <pre><code class='ocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
@@ -325,7 +325,7 @@ syntax for this. For a function <code>f</code> which takes arguments <code>arg1<
 </code></pre>
 <p>
 The arrow syntax looks strange now, but when we come to so-called
-&quot;currying&quot; later you&apos;ll see why it was chosen. For now I&apos;ll just give
+&quot;currying&quot; later you&#39;ll see why it was chosen. For now I&#39;ll just give
 you some examples.</p>
 <p>Our function <code>repeated</code> which takes a string and an integer and returns
 a string has type:</p>
@@ -349,22 +349,22 @@ OCaml equivalent of <code>fputc</code>:</p>
 <h3 id="Polymorphicfunctions"> Polymorphic functions</h3><p>
 
 Now for something a bit stranger. What about a function which takes
-<em>anything</em> as an argument? Here&apos;s a odd function which takes an
+<em>anything</em> as an argument? Here&#39;s a odd function which takes an
 argument, but just ignores it and always returns 3:</p>
 <pre><code class='ocaml'><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3
 </code></pre>
 <p>
 What is the type of this function? In OCaml we use a special placeholder
-to mean &quot;any type you fancy&quot;. It&apos;s a single quote character followed by
+to mean &quot;any type you fancy&quot;. It&#39;s a single quote character followed by
 a letter. The type of the above function would normally be written:</p>
 <pre><code class='ocaml'>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
 </code></pre>
 <p>
-where <code>&apos;a</code> really does mean any type. You can, for example, call this
+where <code>&#39;a</code> really does mean any type. You can, for example, call this
 function as <code>give_me_a_three &quot;foo&quot;</code> or <code>give_me_a_three 2.0</code> and both
 are quite valid expressions in OCaml.</p>
-<p>It won&apos;t be clear yet why polymorphic functions are useful, but they are
-very useful and very common, and so we&apos;ll discuss them later on. (Hint:
+<p>It won&#39;t be clear yet why polymorphic functions are useful, but they are
+very useful and very common, and so we&#39;ll discuss them later on. (Hint:
 polymorphism is kind of like templates in C++ or generics in Java 1.5).</p>
 <h2 id="Typeinference"> Type inference</h2><p>
 So the theme of this tutorial is that functional languages have many
@@ -372,11 +372,11 @@ Really Cool Features, and OCaml is a language which has all of these
 Really Cool Features stuffed into it at once, thus making it a very
 practical language for real programmers to use. But the odd thing is
 that most of these cool features have nothing to do with &quot;functional
-programming&quot; at all. In fact, I&apos;ve come to the first Really Cool
-Feature, and I still haven&apos;t talked about why functional programming is
-called &quot;functional&quot;. Anyway, here&apos;s the first Really Cool Feature: type
+programming&quot; at all. In fact, I&#39;ve come to the first Really Cool
+Feature, and I still haven&#39;t talked about why functional programming is
+called &quot;functional&quot;. Anyway, here&#39;s the first Really Cool Feature: type
 inference.</p>
-<p>Simply put: you don&apos;t need to declare the types of your functions and
+<p>Simply put: you don&#39;t need to declare the types of your functions and
 variables, because OCaml will just work them out for you.</p>
 <p>In addition OCaml goes on to check all your types match up (even across
 different files).</p>
@@ -384,7 +384,7 @@ different files).</p>
 backdoors into the type system allowing you to bypass this checking on
 the rare occasions that it is sensible to do this. Only gurus will
 probably need to bypass the type checking.</p>
-<p>Let&apos;s go back to the <code>average</code> function which we typed into the OCaml
+<p>Let&#39;s go back to the <code>average</code> function which we typed into the OCaml
 toplevel:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> average a b <span class='k'>=</span>
     (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0
@@ -403,7 +403,7 @@ the return value of the <code>average</code> function, so <code>average</code> m
 </code></pre>
 <p>
 Type inference is obviously easy for such a short program, but it works
-even for large programs, and it&apos;s a major time-saving feature because it
+even for large programs, and it&#39;s a major time-saving feature because it
 removes a whole class of errors which cause segfaults,
 <code>NullPointerException</code>s and <code>ClassCastException</code>s in other languages (or
 important but often ignored runtime warnings, as in Perl).</p>

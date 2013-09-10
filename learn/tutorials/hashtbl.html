@@ -58,15 +58,15 @@ create a hash table we could write:</p>
 The 123456 is the initial size of the hashtbl. This initial number is
 just your best guess as to the amount of data that you will be putting
 into the hash table. The hash table can grow if you under-estimate the
-size so don&apos;t worry about it too much. The type of my_hash is:</p>
+size so don&#39;t worry about it too much. The type of my_hash is:</p>
 <pre><code class='ocaml'><span class='k'>val</span> my_hash <span class='o'>:</span> ('_a<span class='o'>,</span> '_b) <span class='m'>Hashtbl</span><span class='o'>.</span>t <span class='k'>=</span> 
 </code></pre>
 <p>
-The &apos;_a and &apos;_b correspond to the key and value types, respectively.
+The &#39;_a and &#39;_b correspond to the key and value types, respectively.
 There are no concrete types (e.g., int or float * string) filled in in
 those slots because the type of the key and value are not yet
 determined. The underscore indicates that the key and data types, once
-chosen, will be fixed. In other words, you can&apos;t sometimes use a given
+chosen, will be fixed. In other words, you can&#39;t sometimes use a given
 hashtable with ints for keys, and then later use a string as a key in
 that same hashtable.</p>
 <p>Lets add some data to my_hash. Lets say I am working on a cross word
@@ -74,7 +74,7 @@ solving program and I want to find all words that start with a certain
 letter. First I need to enter the data into my_hash.</p>
 <p>Note that a hashtable is modified by in-place updates, so, unlike a map,
 another hash table is not created every time you change the table. Thus,
-the code &quot;let my_hash = Hashtbl.add my_hash ...&quot; wouldn&apos;t make any
+the code &quot;let my_hash = Hashtbl.add my_hash ...&quot; wouldn&#39;t make any
 sense. Instead, we would write something like this:</p>
 <pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;;</span>

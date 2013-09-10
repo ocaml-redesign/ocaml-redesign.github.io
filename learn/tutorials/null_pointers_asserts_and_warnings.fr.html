@@ -49,23 +49,23 @@
           <div class="content">
             <h1 id="Pointeursnulsassertsetwarnings"> Pointeurs nuls, asserts et warnings</h1><h2 id="Pointeursnuls"> Pointeurs nuls</h2><p>
 
-Supposons que votre site web dispose d&apos;un sondage, demandant à vos
-lecteurs leurs noms et leurs âges. Le problème, c&apos;est que pour une
+Supposons que votre site web dispose d&#39;un sondage, demandant à vos
+lecteurs leurs noms et leurs âges. Le problème, c&#39;est que pour une
 raison quelconque certains de vos lecteurs refusent de donner leur âge -
 ils refusent avec obstination de remplir ce champ. Que doit faire
-l&apos;administrateur de la base de données ?</p>
-<p>Supposons que l&apos;âge soit représenté par un entier (<code>int</code>), il y a deux
+l&#39;administrateur de la base de données ?</p>
+<p>Supposons que l&#39;âge soit représenté par un entier (<code>int</code>), il y a deux
 façons de régler le problème. La façon la plus commune (et la plus
-<em>incorrecte</em>) est d&apos;utiliser une valeur &quot;magique&quot; pour l&apos;âge pour
-signifier que cette information c&apos;est pas disponible. Si, par exemple,
-age = -1, alors l&apos;âge n&apos;a pas été saisi, sinon il a été saisi (même
-incorrectement !). Tout se passe bien jusqu&apos;au moment de calculer, par
-exemple, l&apos;âge moyen de votre audience. Si vous oubliez de traiter
-spécialement la valeur magique, vous allez conclure que l&apos;âge moyen de
+<em>incorrecte</em>) est d&#39;utiliser une valeur &quot;magique&quot; pour l&#39;âge pour
+signifier que cette information c&#39;est pas disponible. Si, par exemple,
+age = -1, alors l&#39;âge n&#39;a pas été saisi, sinon il a été saisi (même
+incorrectement !). Tout se passe bien jusqu&#39;au moment de calculer, par
+exemple, l&#39;âge moyen de votre audience. Si vous oubliez de traiter
+spécialement la valeur magique, vous allez conclure que l&#39;âge moyen de
 vos visiteurs est 7 ans et demi, supprimer tous les mots compliqués de
-votre site, et demander à votre graphiste d&apos;employer davantage les
+votre site, et demander à votre graphiste d&#39;employer davantage les
 couleurs primaires.</p>
-<p>L&apos;autre méthode, plus correcte, est de stocker les âges dans un champ de
+<p>L&#39;autre méthode, plus correcte, est de stocker les âges dans un champ de
 type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
 âges ressemblerait à :</p>
 <pre><code class='ocaml'>create table users
@@ -76,41 +76,41 @@ type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
 )<span class='o'>;</span>
 </code></pre>
 <p>
-Si l&apos;âge n&apos;est pas connu, c&apos;est la valeur spéciale SQL <code>NULL</code> qui est
+Si l&#39;âge n&#39;est pas connu, c&#39;est la valeur spéciale SQL <code>NULL</code> qui est
 enregistrée. SQL ne tient pas compte de ces entrées si on demande à
 calculer la moyenne des âges, etc.</p>
 <p>Les langages de programmation ont aussi leurs valeurs nulles, mais leur
-facilité d&apos;utilisation est variable. En Perl, n&apos;importe quel scalaire
+facilité d&#39;utilisation est variable. En Perl, n&#39;importe quel scalaire
 (nombre ou chaîne) peut prendre la valeur <code>undef</code> (la valeur nulle en
-Perl). C&apos;est la source de beaucoup d&apos;avertissements (warnings), souvent
+Perl). C&#39;est la source de beaucoup d&#39;avertissements (warnings), souvent
 ignorés par les programmeurs inexpérimentés, bien que ce soit souvent le
-signe d&apos;un problème réel. En Java, les références vers des objets
+signe d&#39;un problème réel. En Java, les références vers des objets
 peuvent prendre la valeur nulle, et il peut être judicieux dans notre
-cas de stocker les âges avec des <code>Integer</code>, et d&apos;admettre que les
+cas de stocker les âges avec des <code>Integer</code>, et d&#39;admettre que les
 références vers un âge puissent prendre la valeur <code>null</code>. En C les
 pointeurs peuvent, bien sûr, être nuls, mais pour utiliser cette
-fonctionalité avec un bête entier, il faut tout d&apos;abord l&apos;encapsuler
+fonctionalité avec un bête entier, il faut tout d&#39;abord l&#39;encapsuler
 dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</p>
 <p>OCaml propose une solution élégante pour les valeurs nulles, en
-utilisant un simple type variant polymorphique, défini (jusqu&apos;à
+utilisant un simple type variant polymorphique, défini (jusqu&#39;à
 récemment, dans le module <code>Pervasives</code>) comme :</p>
 <pre><code class='ocaml'><span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
 </code></pre>
 <p>
-Une &quot;valeur nulle&quot; s&apos;écrit <code>None</code>. Le type de age dans notre exemple (un
+Une &quot;valeur nulle&quot; s&#39;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
-l&apos;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> dans le chapitre
+l&#39;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> dans le chapitre
 précédent).</p>
 <pre><code class='ocaml'><span class='o'>#</span> Some 3<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int option <span class='k'>=</span> Some 3
 </code></pre>
 <p>
-Une liste d&apos;entiers optionels ?</p>
+Une liste d&#39;entiers optionels ?</p>
 <pre><code class='ocaml'><span class='o'>#</span> <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int option list <span class='k'>=</span> <span class='o'>[</span>None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None<span class='o'>]</span>
 </code></pre>
 <p>
-Et une liste optionelle d&apos;entiers ?</p>
+Et une liste optionelle d&#39;entiers ?</p>
 <pre><code class='ocaml'><span class='o'>#</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list option <span class='k'>=</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>
 </code></pre>
@@ -118,27 +118,27 @@ Et une liste optionelle d&apos;entiers ?</p>
 
 Perl se distingue par un riche ensemble de commandes pour déboguer les
 programmes et gérer les erreurs inattendues, en particulier la
-possibilité d&apos;imprimer l&apos;état de la pile d&apos;appels, de lever et de
-ratrapper des exceptions, etc. OCaml n&apos;est pas aussi bien doté en
+possibilité d&#39;imprimer l&#39;état de la pile d&#39;appels, de lever et de
+ratrapper des exceptions, etc. OCaml n&#39;est pas aussi bien doté en
 fonctionnalités de débogage - mieux que Java, à peu près équivalent au
-C, mais loin d&apos;égaler Perl. (Nous reparlerons des exceptions en détail
+C, mais loin d&#39;égaler Perl. (Nous reparlerons des exceptions en détail
 plus tard.)</p>
-<p>Tout d&apos;abord, les assertions. <code>assert</code> prend comme argument une
+<p>Tout d&#39;abord, les assertions. <code>assert</code> prend comme argument une
 expression booléenne, et lève une exception si elle est fausse. En
 supposant que vous ne rattrapiez pas cette exception (ce qui est
 recommandé, tout particulièrement pour les débutants), son effet sera de
-stopper le programme, et d&apos;afficher l&apos;emplacement (nom du fichier,
-numéro de ligne et de colonne) où l&apos;erreur est survenue. Par exemple :</p>
+stopper le programme, et d&#39;afficher l&#39;emplacement (nom du fichier,
+numéro de ligne et de colonne) où l&#39;erreur est survenue. Par exemple :</p>
 <pre><code class='ocaml'><span class='o'>#</span> <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)<span class='o'>;;</span>
 Exception<span class='o'>:</span> Assert_failure (<span class='s'>&#34;&#34;</span><span class='o'>,</span> 0<span class='o'>,</span> 30)<span class='o'>.</span>
 </code></pre>
 <p>
 (Bien entendu, cette exception ne sera pas levée sous Win32.)</p>
 <p>Vous pouvez utiliser <code>assert false</code> pour stopper votre programme dans
-les situations critiques, mais il est souvent préférable d&apos;utiliser...</p>
-<p><code>failwith &quot;message d&apos;erreur&quot;</code>, pour lever une exception <code>Failure</code>, qui
-elle aussi, à moins d&apos;être rattrappée, va stopper le programme et
-afficher le message d&apos;erreur fourni. <code>failwith</code> est souvent utilisé lors
+les situations critiques, mais il est souvent préférable d&#39;utiliser...</p>
+<p><code>failwith &quot;message d&#39;erreur&quot;</code>, pour lever une exception <code>Failure</code>, qui
+elle aussi, à moins d&#39;être rattrappée, va stopper le programme et
+afficher le message d&#39;erreur fourni. <code>failwith</code> est souvent utilisé lors
 du filtrage, comme dans cet exemple réel :</p>
 <pre><code class='ocaml'>  <span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
     <span class='s'>&#34;Unix&#34;</span> <span class='o'>|</span> <span class='s'>&#34;Cygwin&#34;</span> <span class='k'>-></span>   <span class='com2'>(* code omit *)</span><!-- end comment -->
@@ -147,10 +147,10 @@ du filtrage, comme dans cet exemple réel :</p>
   <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> failwith <span class='s'>&#34;Ce système n&#39;est pas supporté&#34;</span>
 </code></pre>
 <p>
-A noter l&apos;utilisation d&apos;un couple de fonctionnalités supplémentaires du
-système de filtrage. L&apos;union de motifs est utilisée pour reconnaître
+A noter l&#39;utilisation d&#39;un couple de fonctionnalités supplémentaires du
+système de filtrage. L&#39;union de motifs est utilisée pour reconnaître
 <code>&quot;Unix&quot;</code> ou <code>&quot;Cygwin&quot;</code>, et le motif spécial <code>_</code> pour reconnaître
-&quot;n&apos;importe quoi d&apos;autre&quot;.</p>
+&quot;n&#39;importe quoi d&#39;autre&quot;.</p>
 <p>Si vous voulez déboguer votre programme mais, comme moi, avez une
 aversion pour les débogueurs autres que gdb, vous voudrez sûrement faire
 afficher des avertissements par vos fonctions. Voici un exemple (notez
@@ -168,7 +168,7 @@ read_line ()<span class='o'>;;</span>
 </code></pre>
 <p>
 Si vous préférez le style <code>printf</code> du langage C, essayez plutôt le
-module <code>Printf</code> d&apos;OCaml :</p>
+module <code>Printf</code> d&#39;OCaml :</p>
 <pre><code class='ocaml'><span class='k'>open</span> Graphics<span class='o'>;;</span>
 <span class='o'>&#60;</span>em<span class='o'>&#62;</span><span class='k'>open</span> Printf<span class='o'>;;&#60;/</span>em<span class='o'>&#62;</span>
 

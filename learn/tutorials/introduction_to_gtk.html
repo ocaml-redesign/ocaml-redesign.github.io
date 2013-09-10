@@ -53,17 +53,17 @@
 writing graphical applications, and
 <a href='http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html' title='http://wwwfun.kurims.kyoto-u.ac.jp/soft/olabl/lablgtk.html'>lablgtk</a>
 is the OCaml interface for Gtk. Gtk and lablgtk are available for Unix
-and Windows platforms. In this tutorial I&apos;m going to concentrate on the
+and Windows platforms. In this tutorial I&#39;m going to concentrate on the
 older but more stable Gtk version 1.2. Gtk 2.x has some
-incompatibilities with Gtk 1.2, although mostly you won&apos;t notice the
+incompatibilities with Gtk 1.2, although mostly you won&#39;t notice the
 difference. On Windows, Gtk 1.2 has a non-native look and feel, but this
 is corrected in Gtk 2.x by the use of
 <a href='http://gtk-wimp.sourceforge.net/' title='http://gtk-wimp.sourceforge.net/'>Gtk-Wimp</a>
 (a Windows native theme for Gtk).</p>
 <p>Lablgtk makes ambitious use of advanced features of the OCaml type
-system. Make sure you&apos;re familiar with labelled and optional arguments
-and polymorphic variants (<a href='labels.html' title='labels'>labels</a>) or you won&apos;t
-have any idea what&apos;s going on in this chapter. As it is, even the author
+system. Make sure you&#39;re familiar with labelled and optional arguments
+and polymorphic variants (<a href='labels.html' title='labels'>labels</a>) or you won&#39;t
+have any idea what&#39;s going on in this chapter. As it is, even the author
 of this tutorial finds ploughing through the lablgtk source code pretty
 hard work!</p>
 <h3 id="Simplelablgtkprogram"> Simple lablgtk program</h3><p>
@@ -107,7 +107,7 @@ Save this to a file <code>simple.ml</code> and compile it like this:</p>
 <p>
 This is what you should see when you run it:</p>
 <p><img src='../img/simplee29b.gif' alt='Simple lablgtk program' /></p>
-<p>Let&apos;s analyse the program line by line to see what&apos;s going on.</p>
+<p>Let&#39;s analyse the program line by line to see what&#39;s going on.</p>
 <pre><code class='ocaml'><span class='k'>open</span> GMain
 <span class='k'>open</span> GdkKeysyms
 </code></pre>
@@ -124,18 +124,18 @@ definitions, in this case <code>_Q</code> for the Ctrl + Q key combination.</p>
 Firstly we create the toplevel window. Every Gtk program needs at least
 one. Notice three things: firstly <code>GWindow.window</code> is actually a helper
 function which creates a <code>window</code> object for you. For various reasons
-which we&apos;ll discuss in the intensive section at the end of this chapter,
-you shouldn&apos;t create lablgtk objects using <code>new classname arguments...</code>,
+which we&#39;ll discuss in the intensive section at the end of this chapter,
+you shouldn&#39;t create lablgtk objects using <code>new classname arguments...</code>,
 but instead use one of these helper functions. The helper functions are
 often named the same as the class which they create. Secondly lablgtk
 makes extensive use of the <code>~label</code> (labelled and optional arguments).
-You&apos;ll get used to this quickly. Thirdly see the apparently useless <code>()</code>
-(unit) argument to <code>GWindow.window</code>. It&apos;s actually not useless, but the
+You&#39;ll get used to this quickly. Thirdly see the apparently useless <code>()</code>
+(unit) argument to <code>GWindow.window</code>. It&#39;s actually not useless, but the
 only way for OCaml to tell the difference between a partial and full
 function application in the presence of optional arguments.</p>
-<p>A <code>vbox</code> is a vertical layout widget. It&apos;s a container which contains
-other widgets but isn&apos;t normally visible by itself. The <code>~packing</code>
-argument looks odd (indeed it is). It&apos;s just a shorthand way of writing:</p>
+<p>A <code>vbox</code> is a vertical layout widget. It&#39;s a container which contains
+other widgets but isn&#39;t normally visible by itself. The <code>~packing</code>
+argument looks odd (indeed it is). It&#39;s just a shorthand way of writing:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox () <span class='k'>in</span>
   window<span class='o'>#</span>add vbox<span class='o'>;</span>
 </code></pre>
@@ -146,7 +146,7 @@ bit shorter.</p>
 connecting a <em>signal</em> to a function. In this case the <code>destroy</code> signal,
 received by the window when someone presses the &quot;X&quot; in the corner, will
 cause a call to <code>Main.quit ()</code> (note extra unit arg).</p>
-<p>Creating the menubar and File -&#92;&gt; Quit button is straightforward enough.
+<p>Creating the menubar and File -\&gt; Quit button is straightforward enough.
 Notice the <code>accel_group</code> object which is used to keep track of
 accelerator buttons. The <code>menubar</code> is packed first into the <code>vbox</code>:</p>
 <pre><code class='ocaml'>  <span class='com2'>(* Menu bar *)</span><!-- end comment -->
@@ -189,7 +189,7 @@ tutorial</a>
 to find out more about Gtk. Lablgtk contains a pretty complete mapping
 of the Gtk+ API.</p>
 <h3 id="Graphwidget"> Graph widget</h3><p>
-Now we&apos;re going to get a little bit more adventurous and write our own
+Now we&#39;re going to get a little bit more adventurous and write our own
 widget. This is going to be a simple graph, with a scrollbar at the
 bottom allowing you to scroll left and right through the data. The graph
 itself is going to be drawn on a Gtk drawing area widget. The Gtk
@@ -197,7 +197,7 @@ drawing area is very simple, just an empty space in which you can
 execute your own drawing commands to draw lines, rectangles, text and so
 on.</p>
 <p>Before starting we need to think about the overall structure of our
-graph widget. I&apos;m going to have it be a vbox, with the drawing area in
+graph widget. I&#39;m going to have it be a vbox, with the drawing area in
 the top part, and the scrollbar in the bottom part. This is the overall
 structure of our class:</p>
 <pre><code class='ocaml'><span class='k'>class</span> graph <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show array <span class='k'>=</span>
@@ -219,12 +219,12 @@ graph<span class='o'>#</span>init<span class='o'>;</span>
 </code></pre>
 <p>
 Note the two-stage initialization process. This is actually an
-unfortunate hack. You&apos;ll see why it&apos;s necessary once we start to fill in
+unfortunate hack. You&#39;ll see why it&#39;s necessary once we start to fill in
 the code. Perhaps a reader can suggest a way around this?</p>
-<p>The <code>inherit widget vbox#as_widget</code> is interesting. You&apos;ll have to read
+<p>The <code>inherit widget vbox#as_widget</code> is interesting. You&#39;ll have to read
 the section below entited <em>Structure of lablgtk</em> to understand it fully,
 but basically it causes a graph to be a subclass of widget.</p>
-<p>Let&apos;s have a look at the initialization code in more detail.</p>
+<p>Let&#39;s have a look at the initialization code in more detail.</p>
 <pre><code class='ocaml'><span class='k'>class</span> graph <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show array <span class='k'>=</span>
   <span class='com2'>(* <span class='ic'>Constants</span><span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> page_size <span class='k'>=</span> 10 <span class='k'>in</span>            <span class='com2'>(* Number <span class='ic'>of</span> bars on <span class='ic'>&#34;page&#34;</span><span class='ic'>.</span> *)</span><!-- end comment -->
@@ -272,7 +272,7 @@ attach a signal to the adjustment so that when the scrollbar moves (ie.
 adjustment changes) we repaint the whole widget.) The private <code>repaint</code>
 method is where the action is, as it were. That method will actually be
 responsible for drawing the graph, axes, title and so on.</p>
-<p>We&apos;ll see that in just a moment, but let&apos;s concentrate on the simpler
+<p>We&#39;ll see that in just a moment, but let&#39;s concentrate on the simpler
 methods of the object first:</p>
 <pre><code class='ocaml'>  object (self)
     <span class='k'>inherit</span> widget vbox<span class='o'>#</span>as_widget
@@ -336,24 +336,24 @@ draws the graph in the drawing area:</p>
 Apart from the calculation of screen coordinates from graph coordinates,
 the <code>repaint</code> method is essentially very simple. The Gtk drawing area
 contains a <code>drawable</code> object, and we use methods on this object such as
-<code>drawable#line</code> plus some helper functions which I haven&apos;t reproduced
-here to draw in the drawing area. It&apos;s really just a matter of
+<code>drawable#line</code> plus some helper functions which I haven&#39;t reproduced
+here to draw in the drawing area. It&#39;s really just a matter of
 calculating what to draw, where. Notice how we freely access
 let-bindings made before <code>object (self)</code>, eg. <code>page_size</code>, <code>drawable</code>,
 <code>adjustment</code>. These let-bindings are available in any method in the
 object.</p>
-<p>The complete code for the graph is available in &#92;&lt;a
-href=&quot;graph.ml&quot;&#92;&gt;graph.ml&#92;&lt;/a&#92;&gt; and &#92;&lt;a href=&quot;test.ml&quot;&#92;&gt;test.ml&#92;&lt;/a&#92;&gt;.
+<p>The complete code for the graph is available in \&lt;a
+href=&quot;graph.ml&quot;\&gt;graph.ml\&lt;/a\&gt; and \&lt;a href=&quot;test.ml&quot;\&gt;test.ml\&lt;/a\&gt;.
 Compile it using:</p>
 <pre><code class='ocaml'>ocamlc <span class='o'>-</span>g <span class='o'>-</span>w s <span class='o'>-</span>I <span class='o'>+</span>lablgtk lablgtk<span class='o'>.</span>cma gtkInit<span class='o'>.</span>cmo graph<span class='o'>.</span>ml test<span class='o'>.</span>ml <span class='o'>-</span>o graphtest
 </code></pre>
 <p>
 Here is a screenshot:</p>
-<p>&#92;&lt;img src=&quot;graphtest.gif&quot; width=&quot;648&quot; height=&quot;508&quot; alt=&quot;Screenshot&quot;/&#92;&gt;</p>
+<p>\&lt;img src=&quot;graphtest.gif&quot; width=&quot;648&quot; height=&quot;508&quot; alt=&quot;Screenshot&quot;/\&gt;</p>
 <h3 id="Structureoflablgtk"> Structure of lablgtk</h3><p>
-The lablgtk library has two layers, which I&apos;m going to call the <em>module
+The lablgtk library has two layers, which I&#39;m going to call the <em>module
 layer</em> and the <em>object-oriented layer</em> (plus some ancillary library
-modules which we&apos;ll also talk about). The layers are arranged like this
+modules which we&#39;ll also talk about). The layers are arranged like this
 in relation to your code:</p>
 <table>
 <tbody>
@@ -378,13 +378,13 @@ the theory is indeed true for trivial programs. However for practical
 purposes you will need to understand how the library is built up from
 these layers (and why).</p>
 <h4 id="Gtkobjects"> Gtk objects</h4><p>
-We&apos;ll start with the peculiarities of Gtk itself. This library is
+We&#39;ll start with the peculiarities of Gtk itself. This library is
 written in C and uses macros and &quot;clever&quot; hacks to (a) present an OO-ish
 interface and (b) perform simple garbage collection through reference
 counting. Part of the reason why lablgtk uses quite a complex model is
 to cater for the implementation of Gtk itself.</p>
-<p>All &quot;objects&quot; in the Gtk library (I&apos;ll call them objects, but in reality
-they&apos;re C <code>struct</code>s) are &quot;derived&quot; from <code>GtkObject</code>. This means that an
+<p>All &quot;objects&quot; in the Gtk library (I&#39;ll call them objects, but in reality
+they&#39;re C <code>struct</code>s) are &quot;derived&quot; from <code>GtkObject</code>. This means that an
 object such as a button contains within its <code>struct</code> a
 <code>struct _GtkObject</code>. This &quot;base class&quot; contains, amongst other things, a
 reference count which is used to provide simple garbage collection.</p>
@@ -397,7 +397,7 @@ garbage collector. How does lablgtk unify the two?</p>
 <p>
 On the face of it, this is a <em>very</em> strange type definition. It defines
 a polymorphic type called <code>obj</code> (polymorphic because you can create,
-say, <code>int obj</code>, etc.). But it doesn&apos;t actually define a way of creating
+say, <code>int obj</code>, etc.). But it doesn&#39;t actually define a way of creating
 these objects! [Recall that a normal type definition might be something
 like this:</p>
 <pre><code class='ocaml'><span class='k'>type</span> 'a obj <span class='k'>=</span> Something <span class='k'>of</span> 'a
@@ -411,8 +411,8 @@ But our strange, bare definition just says:</p>
 <pre><code class='ocaml'><span class='k'>type</span> 'a obj<span class='o'>;;</span>
 </code></pre>
 <p>
-How do we create objects of this type? The answer is that we don&apos;t.
-Instances of type <code>&apos;a obj</code> are <code>GtkObject</code> structures (actually, more
+How do we create objects of this type? The answer is that we don&#39;t.
+Instances of type <code>&#39;a obj</code> are <code>GtkObject</code> structures (actually, more
 likely they are &quot;subclasses&quot; of <code>GtkObject</code>), and they are created by
 the C library. What precisely happens is that the C functions in the
 Gtk+ library are wrapped up by C functions which are called from OCaml.
@@ -426,8 +426,8 @@ ml_gtk_toggle_button_new (value unit)
 <p>
 <code>Val_GtkObject_sink</code> is a very complex little function which wraps up
 the <code>GtkObject</code> returned from the Gtk+ library function
-<code>gtk_toggle_button_new ()</code> in something that OCaml&apos;s garbage collector
-can understand. The same function also deals with Gtk&apos;s reference
+<code>gtk_toggle_button_new ()</code> in something that OCaml&#39;s garbage collector
+can understand. The same function also deals with Gtk&#39;s reference
 counting.</p>
 <pre><code class='ocaml'>static void ml_final_GtkObject_sink (value <span class='k'>val</span>) <span class='o'>/span>
   <span class='k'>if</span> (Field(<span class='k'>val</span><span class='o'>,</span>1))
@@ -445,7 +445,7 @@ value Val_GtkObject_sink (GtkObject <span class='other'>*</span>p) <span class='
 </code></pre>
 <p>
 OCaml code calls <code>ml_gtk_toggle_button_new</code> directly to create objects
-of type <code>&apos;a obj</code>. Module <code>GtkButton</code> is in lablgtk&apos;s module layer and it
+of type <code>&#39;a obj</code>. Module <code>GtkButton</code> is in lablgtk&#39;s module layer and it
 contains an inner module called <code>GtkButton.ToggleButton</code> containing a
 function defined as:</p>
 <pre><code class='ocaml'><span class='k'>module</span> ToggleButton <span class='k'>=</span> <span class='k'>struct</span>
@@ -468,8 +468,8 @@ You can call these functions directly to see what they return:</p>
 </code></pre>
 <p>
 Notice the return type: <code>toggle_button obj</code> (ie. a definite instance of
-the polymorphic type <code>&apos;a obj</code>). What is <code>toggle_button</code>? It&apos;s a type
-(think <code>&apos;a list</code> vs. <code>int list</code>) defined like this (in module <code>Gtk</code>):</p>
+the polymorphic type <code>&#39;a obj</code>). What is <code>toggle_button</code>? It&#39;s a type
+(think <code>&#39;a list</code> vs. <code>int list</code>) defined like this (in module <code>Gtk</code>):</p>
 <pre><code class='ocaml'><span class='k'>type</span> widget <span class='k'>=</span> <span class='o'>[</span>`base<span class='o'>|</span>`widget<span class='o'>]</span>
 <span class='k'>type</span> container <span class='k'>=</span> <span class='o'>[</span>widget<span class='o'>|</span>`container<span class='o'>]</span>
 <span class='k'>type</span> button <span class='k'>=</span> <span class='o'>[</span>container<span class='o'>|</span>`button<span class='o'>]</span>
@@ -480,15 +480,15 @@ Hence the full type written out is:</p>
 <pre><code class='ocaml'><span class='k'>type</span> toggle_button <span class='k'>=</span> <span class='o'>[</span>`base<span class='o'>|</span>`widget<span class='o'>|</span>`container<span class='o'>|</span>`button<span class='o'>|</span>`toggle<span class='o'>]</span>
 </code></pre>
 <p>
-(These are polymorphic variants - see &#92;&lt;a href=&quot;../ch7/&quot;&#92;&gt;Chapter
-7&#92;&lt;/a&#92;&gt; if you don&apos;t remember them).</p>
-<p>If you check the Gtk class hierarchy you&apos;ll see that the list of
+(These are polymorphic variants - see \&lt;a href=&quot;../ch7/&quot;\&gt;Chapter
+7\&lt;/a\&gt; if you don&#39;t remember them).</p>
+<p>If you check the Gtk class hierarchy you&#39;ll see that the list of
 variants closely (but not exactly) matches the classes. A Gtk toggle
 button is-a Gtk button, Gtk container is-a Gtk widget, etc.</p>
 <h4 id="Objectorientedlayer"> Object-oriented layer</h4><p>
-Now let&apos;s look at the object-oriented layer interface to the toggle
-button, so we can see how <code>&apos;a obj</code> comes into play. The <code>GButton</code> module
-defines a class for toggle buttons, but unusually you don&apos;t directly
+Now let&#39;s look at the object-oriented layer interface to the toggle
+button, so we can see how <code>&#39;a obj</code> comes into play. The <code>GButton</code> module
+defines a class for toggle buttons, but unusually you don&#39;t directly
 create instances of this class using <code>new toggle_button</code> (or similar).
 Instead a function is provided which generates instances for you. Here
 it is, simplified somewhat:</p>
@@ -545,9 +545,9 @@ underlying object (the <code>GtkObject</code> allocated in C) through the <code>
 member, and have <code>#destroy</code> and <code>#get_id</code> methods. All classes derived
 from <code>widget</code> have a public <code>#as_widget</code> method which returns the
 underlying object (sadly there is no equivalent for <code>gtkobj</code>, although
-this doesn&apos;t matter so much since almost all interesting classes are
+this doesn&#39;t matter so much since almost all interesting classes are
 widgets).</p>
-<p>Let&apos;s try the OO interface for toggle buttons:</p>
+<p>Let&#39;s try the OO interface for toggle buttons:</p>
 <pre><code class='ocaml'>          <span class='com2'>(* call the toggle_button <span class='ic'>function</span> *)</span><!-- end comment -->
 <span class='o'>#</span> <span class='k'>let</span> b <span class='k'>=</span> <span class='m'>GButton</span><span class='o'>.</span>toggle_button <span class='o'>~</span>label<span class='o'>:</span><span class='s'>&#34;Push me!&#34;</span> ()<span class='o'>;;</span>
           <span class='com2'>(* note<span class='ic'>:</span> returns object from toggle_button <span class='ic'>class</span> *)</span><!-- end comment -->
@@ -559,7 +559,7 @@ widgets).</p>
 <h4 id="Downcasts"> Downcasts</h4><p>
 
 Gtk is dynamically typed, and this means you can
-&#92;&lt;dfn&#92;&gt;downcast&#92;&lt;/dfn&#92;&gt;, for example, a widget into a toggle button. Gtk
+\&lt;dfn\&gt;downcast\&lt;/dfn\&gt;, for example, a widget into a toggle button. Gtk
 requires downcasting in some instances: for example you can pack widgets
 into containers, but if you try and retrieve them out of the container,
 all you get is a list of widgets. The original type of the widgets is
@@ -572,7 +572,7 @@ might not actually be a toggle button. Lablgtk allows downcasting, and
 provides another mechanism for casting which avoids the explicit
 downcast. Whichever way you do it, you may get a runtime exception if
 you cast to the wrong type.</p>
-<p>The simplest downcast is just to unwrap the <code>&apos;a obj</code> (<code>GtkObject</code>) from
+<p>The simplest downcast is just to unwrap the <code>&#39;a obj</code> (<code>GtkObject</code>) from
 one class and wrap it in another class. Here we take the children out of
 a table widget, which we happen to know are actually all vboxes, unwrap
 each one from the <code>widget</code> class and rewrap in a <code>GPack.box</code> class.
@@ -585,10 +585,10 @@ each one from the <code>widget</code> class and rewrap in a <code>GPack.box</cod
 </code></pre>
 <p>
 The terminology might be a little bit confusing here because the
-<code>#as_widget</code> method returns the internal <code>GtkObject</code> of type <code>&apos;a obj</code>.</p>
+<code>#as_widget</code> method returns the internal <code>GtkObject</code> of type <code>&#39;a obj</code>.</p>
 <p><code>GtkPack.Box.cast</code> does the actual unsafe downcast. Downcasts can always
 fail at runtime, and in the case above the <code>Cannot_cast</code> exception could
-be thrown. You should be prepared to deal with this - unfortunately it&apos;s
+be thrown. You should be prepared to deal with this - unfortunately it&#39;s
 a program bug which cannot be picked up at compile time.</p>
 <p>The other method for doing this avoids the explicit downcast, but can
 still throw an exception indicating a program bug at runtime. The
@@ -605,7 +605,7 @@ separately, and when we take them out try to match them up. We use the
 <span class='k'>end</span>
 </code></pre>
 <p>
-(The constraint essentially says that <code>&apos;a</code> must be a widget, or some
+(The constraint essentially says that <code>&#39;a</code> must be a widget, or some
 subclass of widget).</p>
 <p>Here is an example of using a memo. First we will create a top-level
 window, a container (vbox) to go inside this, and a button:</p>
@@ -617,7 +617,7 @@ window, a container (vbox) to go inside this, and a button:</p>
 <span class='k'>val</span> b <span class='o'>:</span> <span class='m'>GButton</span><span class='o'>.</span>button <span class='k'>=</span> <span class='o'>&#60;</span>obj<span class='o'>&#62;</span>
 </code></pre>
 <p>
-Before we pack the button into the container, let&apos;s create a memo to
+Before we pack the button into the container, let&#39;s create a memo to
 remember the real object. Notice how the type of the memo is refined as
 soon as the button is added:</p>
 <pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> m <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GUtil</span><span class='o'>.</span>memo ()<span class='o'>;;</span>
@@ -658,12 +658,12 @@ Exception<span class='o'>:</span> <span class='m'>Not_found</span><span class='o
 <h3 id="Structureoflablgtksummary"> Structure of lablgtk — summary</h3>
 <ul>
  <li><code>GtkObject</code>s allocated by the C library are wrapped up in opaque
- <code>&apos;a obj</code> abstract types.
+ <code>&#39;a obj</code> abstract types.
  </li>
  <li>The module layer is flat (not OO) but uses polymorphic variants to
  simulate a class hierarchy.
  </li>
- <li>The module layer handles Gtk&apos;s reference counting for you
+ <li>The module layer handles Gtk&#39;s reference counting for you
  transparently.
  </li>
  <li>Classes in the OO layer store the opaque <code>GtkObject</code> in a member
@@ -672,12 +672,12 @@ Exception<span class='o'>:</span> <span class='m'>Not_found</span><span class='o
  </li>
  <li>Helper functions are provided to create instances of classes.
  </li>
- <li>Lablgtk provides two ways to perform downcasting, but this doesn&apos;t
+ <li>Lablgtk provides two ways to perform downcasting, but this doesn&#39;t
  change the fact that downcasting is unsafe and can throw exceptions
  at runtime.</li>
 </ul>
 
-<p>&#92;&lt;a href=&quot;../ch13/&quot;&#92;&gt;Chapter 13&#92;&lt;/a&#92;&gt; continues with a discussion of
+<p>\&lt;a href=&quot;../ch13/&quot;\&gt;Chapter 13\&lt;/a\&gt; continues with a discussion of
 wrapping up external C libraries. We look at another way to wrap up Gtk.</p>
 
           </div>

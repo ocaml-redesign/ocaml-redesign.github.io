@@ -50,21 +50,21 @@
             <h1 id="GarbageCollection"> Garbage Collection</h1><h2 id="Garbagecollectionreferencecountingexplicitallocation"> Garbage collection, reference counting, explicit allocation</h2><p>
 
 As with all modern languages, OCaml provides a garbage collector so that
-you don&apos;t need to explicitly allocate and free memory as in C/C++.</p>
+you don&#39;t need to explicitly allocate and free memory as in C/C++.</p>
 <p>As JWZ writes in his <a href='http://www.jwz.org/doc/java.html' title='http://www.jwz.org/doc/java.html'>&quot;Java sucks&quot;
 rant</a>:</p>
-<p>*First the good stuff: Java doesn&apos;t have <code>free()</code>. I have to admit right
+<p>*First the good stuff: Java doesn&#39;t have <code>free()</code>. I have to admit right
 off that, after that, all else is gravy. That one point makes me able to
 forgive just about anything else, no matter how egregious. Given this
 one point, everything else in this document fades nearly to
 insignificance. **But...***</p>
 <p>The OCaml garbage collector is a modern hybrid generational/incremental
 collector which outperforms hand-allocation in most cases. Unlike the
-Java GC, which gives GCs a bad name, the OCaml GC doesn&apos;t allocate huge
+Java GC, which gives GCs a bad name, the OCaml GC doesn&#39;t allocate huge
 amounts of memory at start-up, nor does it appear to have arbitrary
 fixed limits that need to be overridden by hand.</p>
 <p>Why would garbage collection be faster than explicit memory allocation
-as in C? It&apos;s often assumed that calling <code>free</code> costs nothing. In fact
+as in C? It&#39;s often assumed that calling <code>free</code> costs nothing. In fact
 <code>free</code> is an expensive operation which involves navigating over the
 complex data structures used by the memory allocator. If your program
 calls <code>free</code> intermittently, then all of that code and data needs to be
@@ -77,15 +77,15 @@ per allocation is much reduced).</p>
 allocation easier, hence faster, and a smart GC can be written to
 interact well with the L1 and L2 caches.</p>
 <p>Of course none of this precludes writing a very fast hand-allocator, but
-it&apos;s considerably harder work than most programmers realise.</p>
-<p>OCaml&apos;s garbage collector has two heaps, the <strong>minor heap</strong> and the
+it&#39;s considerably harder work than most programmers realise.</p>
+<p>OCaml&#39;s garbage collector has two heaps, the <strong>minor heap</strong> and the
 <strong>major heap</strong>. This recognises a general principle: Most objects are
 small and allocated frequently and then immediately freed. These objects
 go into the minor heap first, which is GCed frequently. Only some
 objects are long lasting. These objects get promoted from the minor heap
 to the major heap after some time, and the major heap is only collected
 infrequently.</p>
-<p>The OCaml GC is synchronous. It doesn&apos;t run in a separate thread, and it
+<p>The OCaml GC is synchronous. It doesn&#39;t run in a separate thread, and it
 can only get called during an allocation request.</p>
 <h3 id="GCvsreferencecounting"> GC vs. reference counting</h3><p>
 Perl has a form of garbage collection, but it uses a simple scheme
@@ -117,17 +117,17 @@ closed).</p>
 <span class='m'>List</span><span class='o'>.</span>iter read_file files
 </code></pre>
 <p>
-Calls to <code>read_file</code> open the file but don&apos;t close it. Because OCaml
-uses a full garbage collector <code>chan</code> isn&apos;t collected until some time
+Calls to <code>read_file</code> open the file but don&#39;t close it. Because OCaml
+uses a full garbage collector <code>chan</code> isn&#39;t collected until some time
 later when the minor heap becomes full. In addition, <strong>OCaml will not
-close the channel when it collects the handle&apos;s memory</strong>. So this
+close the channel when it collects the handle&#39;s memory</strong>. So this
 program would eventually run out of file descriptors.</p>
 <p>You need to be aware of this when writing OCaml code which uses files or
 directories or any other heavyweight object with complex finalisation.</p>
 <p>To be fair to full garbage collection, I should mention the
 disadvantages of reference counting schemes:</p>
 <ul>
- <li>Each object needs to store a reference count. In other words there&apos;s
+ <li>Each object needs to store a reference count. In other words there&#39;s
  a word overhead for every object. Programs use more memory, and are
  consequently slower because they are more likely to fill up the
  cache or spill into swap.
@@ -138,10 +138,10 @@ disadvantages of reference counting schemes:</p>
  bloats the code size of compiled code.
  </li>
  <li>They cannot collect so-called circular, or self-referential
- structures. I&apos;ve programmed in many languages in many years and
- can&apos;t recall ever having created one of these.
+ structures. I&#39;ve programmed in many languages in many years and
+ can&#39;t recall ever having created one of these.
  </li>
- <li>Graph algorithms, of course, violate the previous assumption. Don&apos;t
+ <li>Graph algorithms, of course, violate the previous assumption. Don&#39;t
  try to implement the TSP in Perl!</li>
 </ul>
 
@@ -204,7 +204,7 @@ following code to the example above near the beginning:</p>
 <pre><code class='ocaml'><span class='m'>Gc</span><span class='o'>.</span>set <span class='o'>/span> (<span class='m'>Gc</span><span class='o'>.</span>get ()) <span class='k'>with</span> <span class='m'>Gc</span><span class='o'>.</span>verbose <span class='k'>=</span> 0x01 <span class='o'</span>
 </code></pre>
 <p>
-(We haven&apos;t seen the <code>{ expression with field = value }</code> form before,
+(We haven&#39;t seen the <code>{ expression with field = value }</code> form before,
 but it should be mostly obvious what it does). The above code anyway
 causes the GC to print a message at the start of every major collection.</p>
 <h2 id="FinalisationandtheWeakmodule"> Finalisation and the Weak module</h2><p>
@@ -214,8 +214,8 @@ object is about to be freed by the GC.</p>
 pointer</strong> is best defined by comparing it to a &quot;normal pointer&quot;. When we
 have an ordinary OCaml object, we reference that object through a name
 (eg. <code>let name = ... in</code>) or through another object. The garbage
-collector sees that we have a reference to that object and won&apos;t collect
-it. That&apos;s what you might call a &quot;normal pointer&quot;. If, however, you hold
+collector sees that we have a reference to that object and won&#39;t collect
+it. That&#39;s what you might call a &quot;normal pointer&quot;. If, however, you hold
 a weak pointer or weak reference to an object, then you hint to the
 garbage collector that it may collect the object at any time. (Not
 necessarily that it <em>will</em> collect the object). Some time later, when
@@ -223,7 +223,7 @@ you come to examine the object, you can either turn your weak pointer
 into a normal pointer, or else you can be informed that the GC did
 actually collect the object.</p>
 <p>Finalisation and weak pointers can be used together to implement an
-in-memory object database cache. Let&apos;s imagine that we have a very large
+in-memory object database cache. Let&#39;s imagine that we have a very large
 number of large user records in a file on disk. This is far too much
 data to be loaded into memory all at once, and anyway other programs
 might access the data on the disk, so we need to lock individual records
@@ -244,7 +244,7 @@ literally forgets about the record! Behind the scenes, finalisation is
 going to write the record back out to disk at some later point in time.</p>
 <p>The <code>sync_records</code> function can also be called by user programs. This
 function synchronises the disk copy and in-memory copies of all records.</p>
-<p>OCaml doesn&apos;t currently run finalisers at exit. However you can easily
+<p>OCaml doesn&#39;t currently run finalisers at exit. However you can easily
 force it to by adding the following command to your code. This command
 causes a full major GC cycle on exit:</p>
 <pre><code class='ocaml'>at_exit <span class='m'>Gc</span><span class='o'>.</span>full_major
@@ -256,8 +256,8 @@ than hand-rolling our own code is two-fold: Firstly the garbage
 collector has a global view of memory requirements for the whole
 program, and so is in a better position to decide when to shrink the
 cache. Secondly our code will be much simpler.</p>
-<p>For our example, we&apos;re going to use a very simple format for the file of
-users&apos; records. The file is just a list of user records, each user
+<p>For our example, we&#39;re going to use a very simple format for the file of
+users&#39; records. The file is just a list of user records, each user
 record having a fixed size of 256 bytes. Each user record has just two
 fields (padded with spaces if necessary), the name field (64 bytes) and
 the address field (192 bytes). Before a record can be loaded into
@@ -303,7 +303,7 @@ We also need a function to create new, empty in-memory <code>record</code> objec
     address <span class='k'>=</span> (<span class='m'>String</span><span class='o'>.</span>make addr_size <span class='s'>&#39; &#39;</span>) <span class='o'</span>
 </code></pre>
 <p>
-Because this is a really simple program, we&apos;re going to fix the number
+Because this is a really simple program, we&#39;re going to fix the number
 of records in advance:</p>
 <pre><code class='ocaml'><span class='com2'>(* Total number <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> nr_records <span class='k'>=</span> 10000
@@ -321,7 +321,7 @@ running the program.</p>
 <p>
 The <code>get_record</code> function is very short and basically composed of two
 halves. We grab the record from the cache. If the cache gives us <code>None</code>,
-then that either means that we haven&apos;t loaded this record from the cache
+then that either means that we haven&#39;t loaded this record from the cache
 yet, or else it has been written out to disk (finalised) and dropped
 from the cache. If the cache gives us <code>Some record</code> then we just return
 <code>record</code> (this promotes the weak pointer to the record to a normal
@@ -353,8 +353,8 @@ pointer).</p>
 The <code>sync_records</code> function is even easier. First of all it empties the
 cache by replacing all the weak pointers with <code>None</code>. This now means
 that the garbage collector <em>can</em> collect and finalise all of those
-records. But it doesn&apos;t necessarily mean that the GC <em>will</em> collect the
-records straightaway (in fact it&apos;s not likely that it will), so to force
+records. But it doesn&#39;t necessarily mean that the GC <em>will</em> collect the
+records straightaway (in fact it&#39;s not likely that it will), so to force
 the GC to collect the records immediately, we also invoke a major cycle:</p>
 <pre><code class='ocaml'><span class='com2'>(* Synchronise all records<span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> sync_records () <span class='k'>=</span>
@@ -362,7 +362,7 @@ the GC to collect the records immediately, we also invoke a major cycle:</p>
   <span class='m'>Gc</span><span class='o'>.</span>full_major ()
 </code></pre>
 <p>
-Finally we have some test code. I won&apos;t reproduce the test code, but you
+Finally we have some test code. I won&#39;t reproduce the test code, but you
 can download the complete program and test code
 <a href='_file/objcache.ml'>objcache.ml</a>, and compile it with:</p>
 <pre><code class='ocaml'>ocamlc <span class='o'>-</span>w s unix<span class='o'>.</span>cma objcache<span class='o'>.</span>ml <span class='o'>-</span>o objcache

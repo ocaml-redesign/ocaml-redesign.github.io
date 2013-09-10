@@ -52,8 +52,8 @@
 
 In OCaml, every piece of code is wrapped into a module. Optionally, a
 module itself can be a submodule of another module, pretty much like
-directories in a file system-but we don&apos;t do this very often.</p>
-<p>When you write a program let&apos;s say using two files <code>amodule.ml</code> and
+directories in a file system-but we don&#39;t do this very often.</p>
+<p>When you write a program let&#39;s say using two files <code>amodule.ml</code> and
 <code>bmodule.ml</code>, each of these files automatically defines a module named
 <code>Amodule</code> and a module named <code>Bmodule</code> that provide whatever you put
 into the files.</p>
@@ -65,7 +65,7 @@ And here is what we have in <code>bmodule.ml</code>:</p>
 <pre><code class='ocaml'><span class='m'>Amodule</span><span class='o'>.</span>hello ()
 </code></pre>
 <p>
-Usually files are compiled one by one, let&apos;s do it:</p>
+Usually files are compiled one by one, let&#39;s do it:</p>
 <pre><code class='ocaml'>ocamlopt <span class='o'>-</span>c amodule<span class='o'>.</span>ml
 ocamlopt <span class='o'>-</span>c bmodule<span class='o'>.</span>ml
 ocamlopt <span class='o'>-</span>o hello amodule<span class='o'>.</span>cmx bmodule<span class='o'>.</span>cmx
@@ -95,7 +95,7 @@ write it like:</p>
 <p>
 Anyway, using <code>open</code> or not is a matter of personal taste. Some modules
 provide names that are used in many other modules. This is the case of
-the <code>List</code> module for instance. Usually we don&apos;t do <code>open List</code>. Other
+the <code>List</code> module for instance. Usually we don&#39;t do <code>open List</code>. Other
 modules like <code>Printf</code> provide names that are normally not subject to
 conflicts, such as <code>printf</code>. In order to avoid writing <code>Printf.printf</code>
 all over the place, it often makes sense to place one <code>open Printf</code> at
@@ -110,14 +110,14 @@ the beginning of the file.</p>
 A module can provide a certain number of things (functions, types,
 submodules, ...) to the rest of the program that is using it. If nothing
 special is done, everything which is defined in a module will be
-accessible from outside. That&apos;s often fine in small personal programs,
+accessible from outside. That&#39;s often fine in small personal programs,
 but there are many situations where it is better that a module only
 provides what it is meant to provide, not any of the auxilliary
 functions and types that are used internally.</p>
 <p>For this we have to define a module interface, which will act as a mask
-over the module&apos;s implementation. Just like a module derives from a .ml
+over the module&#39;s implementation. Just like a module derives from a .ml
 file, the corresponding module interface or signature derives from a
-.mli file. It contains a list of values with their type, and more. Let&apos;s
+.mli file. It contains a list of values with their type, and more. Let&#39;s
 rewrite our <code>amodule.ml</code> file:</p>
 <pre><code class='ocaml'><span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello&#34;</span>
 <span class='k'>let</span> hello () <span class='k'>=</span> print_endline message
@@ -128,8 +128,8 @@ As it is, <code>Amodule</code> has the following interface:</p>
 <span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 </code></pre>
 <p>
-Let&apos;s assume that accessing the <code>message</code> value directly is none of the
-others modules&apos; business. We want to hide it by defining a restricted
+Let&#39;s assume that accessing the <code>message</code> value directly is none of the
+others modules&#39; business. We want to hide it by defining a restricted
 interface. This is our <code>amodule.mli</code> file:</p>
 <pre><code class='ocaml'><span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 <span class='com2'>(** displays a greeting message *)</span><!-- end comment -->
@@ -152,7 +152,7 @@ exported by placing their name and their type in a .mli file, e.g.</p>
 <pre><code class='ocaml'><span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 </code></pre>
 <p>
-But modules often define new types. Let&apos;s define a simple record type
+But modules often define new types. Let&#39;s define a simple record type
 that would represent a date:</p>
 <pre><code class='ocaml'><span class='k'>type</span> date <span class='k'>=</span> <span class='o'>/span> day <span class='o'>:</span> int<span class='o'>;</span>
               month <span class='o'>:</span> int<span class='o'>;</span>
@@ -176,8 +176,8 @@ file:</p>
 </code></pre>
 <p>
 Now, users of the module can manipulate objects of type <code>date</code>, but they
-can&apos;t access the record fields directly. They must use the functions
-that the module provides. Let&apos;s assume the module provides three
+can&#39;t access the record fields directly. They must use the functions
+that the module provides. Let&#39;s assume the module provides three
 functions, one for creating a date, one for computing the difference
 between two dates, and one that returns the date in years:</p>
 <pre><code class='ocaml'><span class='k'>type</span> date
@@ -201,7 +201,7 @@ implementation named <code>Example</code>. Its module signature is automatically
 derived and is the broadest possible, or can be restricted by writing an
 <code>example.mli</code> file.</p>
 <p>That said, a given module can also be defined explicitely from within a
-file. That makes it a submodule of the current module. Let&apos;s consider
+file. That makes it a submodule of the current module. Let&#39;s consider
 this <code>example.ml</code> file:</p>
 <pre><code class='ocaml'><span class='k'>module</span> Hello <span class='k'>=</span> <span class='k'>struct</span>
   <span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello&#34;</span>
@@ -222,7 +222,7 @@ We can write:</p>
 <h3 id="Submoduleinterface"> Submodule interface</h3><p>
 
 We can also restrict the interface of a given submodule. It is called a
-module type. Let&apos;s do it in our <code>example.ml</code> file:</p>
+module type. Let&#39;s do it in our <code>example.ml</code> file:</p>
 <pre><code class='ocaml'><span class='k'>module</span> Hello <span class='o'>:</span> <span class='k'>sig</span>
  <span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 <span class='k'>end</span> <span class='k'>=</span> 
@@ -257,7 +257,7 @@ module interfaces.</p>
 utility becomes apparent with functors. This is the next section.</p>
 <h2 id="Functors"> Functors</h2><p>
 Functors are probably one of the most complex features of OCaml, but you
-don&apos;t have to use them extensively to be a successful OCaml programmer.
+don&#39;t have to use them extensively to be a successful OCaml programmer.
 Actually, you may never have to define a functor yourself, but you will
 surely encounter them in the standard library. They are the only way of
 using the Set and Map modules, but using them is not so difficult.</p>
@@ -334,7 +334,7 @@ Otherwise, there is online documentation for most libraries or you can
 use <code>ocamlbrowser</code> which comes with labltk (Tk graphical user interface
 for OCaml).</p>
 <h3 id="Moduleinclusion"> Module inclusion</h3><p>
-Let&apos;s say we feel that a function is missing from the standard <code>List</code>
+Let&#39;s say we feel that a function is missing from the standard <code>List</code>
 module, but we really want it as if it were part of it. In an
 <code>extensions.ml</code> file, we can achieve this effect by using the <code>include</code>
 directive:</p>

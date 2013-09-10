@@ -3,14 +3,14 @@
 OCaml is an object-oriented, imperative, functional programming language
 :-) It mixes all these paradigms and lets you use the most appropriate
 (or most familiar) programming paradigm for the task at hand. In this
-chapter I&apos;m going to look at object-oriented programming in OCaml, but
-I&apos;m also going to talk about why you might or might not want to write
+chapter I&#39;m going to look at object-oriented programming in OCaml, but
+I&#39;m also going to talk about why you might or might not want to write
 object-oriented programs.</p>
 <p>The classic noddy example used in text books to demonstrate
 object-oriented programming is the stack class. This is a pretty
-terrible example in many ways, but I&apos;m going to use it here to show the
+terrible example in many ways, but I&#39;m going to use it here to show the
 basics of writing object-oriented OCaml.</p>
-<p>Here&apos;s some basic code to provide a stack of integers. The class is
+<p>Here&#39;s some basic code to provide a stack of integers. The class is
 implemented using a linked list.</p>
 <pre><code class='ocaml'>  <span class='k'>class</span> stack_of_ints <span class='k'>=</span>
     object (self)
@@ -35,14 +35,14 @@ called <code>the_list</code>. This is the underlying linked list. We initialize
 this (each time a <code>stack_of_ints</code> object is created) using a bit of code
 that you may not be familiar with. The expression <code>( [] : int list )</code>
 means &quot;an empty list, of type <code>int list</code>&quot;. Recall that the simple empty
-list <code>[]</code> has type <code>&apos;a list</code>, meaning a list of any type. However we
+list <code>[]</code> has type <code>&#39;a list</code>, meaning a list of any type. However we
 want a stack of <code>int</code>, not anything else, and so in this case we want to
-tell the type inference engine that this list isn&apos;t the general &quot;list of
+tell the type inference engine that this list isn&#39;t the general &quot;list of
 anything&quot; but is in fact the narrower &quot;list of <code>int</code>&quot;. The syntax
 <code>( expression : type )</code> means <code>expression</code> which is in fact of type
-<code>type</code>. This <em>isn&apos;t</em> a general type cast, because you can&apos;t use it to
+<code>type</code>. This <em>isn&#39;t</em> a general type cast, because you can&#39;t use it to
 overrule the type inference engine, only to narrow a general type to
-make it more specific. So you can&apos;t write, for example, <code>( 1 : float )</code>:</p>
+make it more specific. So you can&#39;t write, for example, <code>( 1 : float )</code>:</p>
 <pre><code class='ocaml'>(1 <span class='o'>:</span> float)<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -50,17 +50,17 @@ Type safety is preserved. Back to the example ...</p>
 <p>This class has four simple methods. <code>push</code> pushes an integer onto the
 stack. <code>pop</code> pops the top integer off the stack and returns it. Notice
 the <code>&lt;-</code> assignment operator used for updating our mutable instance
-variable. It&apos;s the same <code>&lt;-</code> assignment operator which is used for
+variable. It&#39;s the same <code>&lt;-</code> assignment operator which is used for
 updating mutable fields in records.</p>
 <p><code>peek</code> returns the top of the stack (ie. head of the list) without
 affecting the stack, while <code>size</code> returns the number of elements in the
 stack (ie. the length of the list).</p>
-<p>Let&apos;s write some code to test stacks of ints. First let&apos;s create a new
+<p>Let&#39;s write some code to test stacks of ints. First let&#39;s create a new
 object. We use the familiar <code>new</code> operator:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints
 </code></pre>
 <p>
-Now we&apos;ll push and pop some elements off the stack:</p>
+Now we&#39;ll push and pop some elements off the stack:</p>
 <pre><code class='ocaml'>  <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> 10 <span class='k'>do</span>
     s<span class='o'>#</span>push i
   <span class='k'>done</span><span class='o'>;;</span>
@@ -84,7 +84,7 @@ from callers.</p>
 A stack of integers is good, but what about a stack that can store any
 type? (Not a single stack that can store a mixture of types, but
 multiple stacks each storing objects of any single type). As with
-<code>&apos;a list</code>, we can define <code>&apos;a stack</code>:</p>
+<code>&#39;a list</code>, we can define <code>&#39;a stack</code>:</p>
 <pre><code class='ocaml'>  <span class='k'>class</span> <span class='o'>[</span>'a<span class='o'>]</span> stack <span class='k'>=</span>
     object (self)
       <span class='k'>val</span> <span class='k'>mutable</span> list <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> 'a list )    <span class='com2'>(* instance variable *)</span><!-- end comment -->
@@ -101,9 +101,9 @@ multiple stacks each storing objects of any single type). As with
     <span class='k'>end</span>
 </code></pre>
 <p>
-The <code>class [&apos;a] stack</code> doesn&apos;t really define just one class, but a whole
+The <code>class [&#39;a] stack</code> doesn&#39;t really define just one class, but a whole
 &quot;class of classes&quot;, one for every possible type (ie. an infinitely large
-number of classes!) Let&apos;s try and use our <code>&apos;a stack</code> class. In this
+number of classes!) Let&#39;s try and use our <code>&#39;a stack</code> class. In this
 instance we create a stack and push a floating point number onto the
 stack. Notice the type of the stack:</p>
 <pre><code class='ocaml'><span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack<span class='o'>;;</span>
@@ -112,12 +112,12 @@ s<span class='o'>;;</span>
 </code></pre>
 <p>
 This stack is now a <code>float stack</code>, and only floating point numbers may
-be pushed and popped from this stack. (For an explanation of the <code>&apos;_a</code>
+be pushed and popped from this stack. (For an explanation of the <code>&#39;_a</code>
 notation, see the <a href='http://caml.inria.fr/FAQ/FAQ_EXPERT-eng.html' title='http://caml.inria.fr/FAQ/FAQ_EXPERT-eng.html'>OCaml expert
 FAQ</a>
 ; link replaced by <a href='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html' title='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html'>OCaml expert
 FAQ</a>).
-Let&apos;s demonstrate the type-safety of our new <code>float stack</code>:</p>
+Let&#39;s demonstrate the type-safety of our new <code>float stack</code>:</p>
 <pre><code class='ocaml'>s<span class='o'>#</span>push 3.0<span class='o'>;;</span>
 s<span class='o'>#</span>pop<span class='o'>;;</span>
 s<span class='o'>#</span>pop<span class='o'>;;</span>
@@ -133,13 +133,13 @@ stack. Our first attempt is this one:</p>
 </code></pre>
 <p>
 Notice the type of <code>drain_stack</code>. Cleverly - perhaps <em>too</em> cleverly -
-OCaml&apos;s type inference engine has worked out that <code>drain_stack</code> works on
+OCaml&#39;s type inference engine has worked out that <code>drain_stack</code> works on
 <em>any</em> object which has <code>pop</code> and <code>size</code> methods! So if we defined
 another, entirely separate class which happened to contain <code>pop</code> and
 <code>size</code> methods with suitable type signatures, then we might accidentally
 call <code>drain_stack</code> on objects of that other type.</p>
 <p>We can force OCaml to be more specific and only allow <code>drain_stack</code> to
-be called on <code>&apos;a stack</code>s by narrowing the type of the <code>s</code> argument, like
+be called on <code>&#39;a stack</code>s by narrowing the type of the <code>s</code> argument, like
 this:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> drain_stack (s <span class='o'>:</span> 'a stack) <span class='k'>=</span>
     <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
@@ -148,13 +148,13 @@ this:</p>
 </code></pre>
 <h3 id="Inheritancevirtualclassesinitializers"> Inheritance, virtual classes, initializers</h3><p>
 
-I&apos;ve noticed programmers in Java tend to overuse inheritance, possibly
-because it&apos;s the only reasonable way of extending code in that language.
+I&#39;ve noticed programmers in Java tend to overuse inheritance, possibly
+because it&#39;s the only reasonable way of extending code in that language.
 A much better and more general way to extend code is usually to use
-hooks (cf. Apache&apos;s module API). Nevertheless in certain narrow areas
+hooks (cf. Apache&#39;s module API). Nevertheless in certain narrow areas
 inheritance can be useful, and the most important of these is in writing
 GUI widget libraries.</p>
-<p>Let&apos;s consider an imaginary OCaml widget library similar to Java&apos;s
+<p>Let&#39;s consider an imaginary OCaml widget library similar to Java&#39;s
 Swing. We will define buttons and labels with the following class
 hierarchy:</p>
 <pre><code class='ocaml'>widget  (superclass <span class='k'>for</span> all widgets)
@@ -180,8 +180,8 @@ widget. This was my first attempt:</p>
 </code></pre>
 <p>
 Oops! I forgot that OCaml cannot infer the type of <code>name</code> so will assume
-that it is <code>&apos;a</code>. But that defines a polymorphic class, and I didn&apos;t
-declare the class as polymorphic (<code>class [&apos;a] widget</code>). I need to narrow
+that it is <code>&#39;a</code>. But that defines a polymorphic class, and I didn&#39;t
+declare the class as polymorphic (<code>class [&#39;a] widget</code>). I need to narrow
 the type of <code>name</code> like this:</p>
 <pre><code class='ocaml'>  <span class='k'>class</span> <span class='k'>virtual</span> widget (name <span class='o'>:</span> string) <span class='k'>=</span>
     object (self)
@@ -204,7 +204,7 @@ to a constructor in, eg., Java:</p>
 <span class='o'>}</span>
 </code></pre>
 <p>
-In OCaml a constructor constructs the whole class, it&apos;s not just a
+In OCaml a constructor constructs the whole class, it&#39;s not just a
 specially named function, so we write the arguments as if they are
 arguments to the class:</p>
 <pre><code class='ocaml'><span class='k'>class</span> foo arg1 arg2 <span class='o'>...</span> <span class='k'>=</span>
@@ -212,9 +212,9 @@ arguments to the class:</p>
 <p>
 Secondly the class contains a virtual method, and thus the whole class
 is marked as virtual. The virtual method is our <code>repaint</code> method. We
-need to tell OCaml it&apos;s virtual (<code>method virtual</code>), <em>and</em> we need to
-tell OCaml the type of the method. Because the method doesn&apos;t contain
-any code, OCaml can&apos;t use type inference to automatically work out the
+need to tell OCaml it&#39;s virtual (<code>method virtual</code>), <em>and</em> we need to
+tell OCaml the type of the method. Because the method doesn&#39;t contain
+any code, OCaml can&#39;t use type inference to automatically work out the
 type for you, so you need to tell it the type. In this case the method
 just returns <code>unit</code>. If your class contains any virtual methods (even
 just inherited ones) then you need to specify the whole class as virtual
@@ -242,7 +242,7 @@ widgets. Here is my simple implementation for <code>container</code>:</p>
 <p>
 Notes:</p>
 <ol>
- <li>The <code>container</code> class is marked as virtual. It doesn&apos;t contain any
+ <li>The <code>container</code> class is marked as virtual. It doesn&#39;t contain any
  virtual methods, but in this case I just want to prevent people
  creating containers directly.
  </li>
@@ -259,8 +259,8 @@ Notes:</p>
  </li>
  <li>The list of widgets returned by <code>get_widgets</code> cannot be modified by
  code outside the class. The reason for this is somewhat subtle, but
- basically comes down to the fact that OCaml&apos;s linked lists are
- immutable. Let&apos;s imagine that someone wrote this code:</li>
+ basically comes down to the fact that OCaml&#39;s linked lists are
+ immutable. Let&#39;s imagine that someone wrote this code:</li>
 </ol>
 
 <!-- --><pre><code class='ocaml'><span class='k'>let</span> list <span class='k'>=</span> container<span class='o'>#</span>get_widgets <span class='k'>in</span>
@@ -269,7 +269,7 @@ x <span class='o'>::</span> list
 <p>
 
 Would this modify the private internal representation of my <code>container</code>
-class, by prepending <code>x</code> to the list of widgets? No it wouldn&apos;t. The
+class, by prepending <code>x</code> to the list of widgets? No it wouldn&#39;t. The
 private variable <code>widgets</code> would be unaffected by this or any other
 change attempted by the outside code. This means, for example, that you
 could change the internal representation to use an array at some later
@@ -324,7 +324,7 @@ Notes:</p>
  has type <code>(unit -&gt; unit) option</code>. Reread the previous chapter if you
  are unsure about this.
  </li>
- <li>Notice a strange thing about the <code>callback</code> variable. It&apos;s defined
+ <li>Notice a strange thing about the <code>callback</code> variable. It&#39;s defined
  as an argument to the class, but any method can see and use it. In
  other words, the variable is supplied when the object is
  constructed, but persists over the lifetime of the object.
@@ -334,7 +334,7 @@ Notes:</p>
  current state of the button.</li>
 </ol>
 
-<p>Before defining our <code>label</code> class, let&apos;s play with the <code>button</code> class in
+<p>Before defining our <code>label</code> class, let&#39;s play with the <code>button</code> class in
 the OCaml toplevel:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='o'>~</span>callback<span class='o'>:</span>(<span class='k'>fun</span> () <span class='k'>-></span> print_endline <span class='s'>&#34;Ouch!&#34;</span>) <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
 b<span class='o'>#</span>repaint<span class='o'>;;</span>
@@ -343,7 +343,7 @@ b<span class='o'>#</span>repaint<span class='o'>;;</span>
   b<span class='o'>#</span>release<span class='o'>;;</span>
 </code></pre>
 <p>
-Here&apos;s our comparatively trivial <code>label</code> class:</p>
+Here&#39;s our comparatively trivial <code>label</code> class:</p>
 <pre><code class='ocaml'>  <span class='k'>class</span> label name text <span class='k'>=</span>
     object (self)
       <span class='k'>inherit</span> widget name
@@ -352,7 +352,7 @@ Here&apos;s our comparatively trivial <code>label</code> class:</p>
     <span class='k'>end</span><span class='o'>;;</span>
 </code></pre>
 <p>
-Let&apos;s create a label which says &quot;Press me!&quot; and add it to the button:</p>
+Let&#39;s create a label which says &quot;Press me!&quot; and add it to the button:</p>
 <pre><code class='ocaml'><span class='k'>let</span> l <span class='k'>=</span> <span class='k'>new</span> label <span class='s'>&#34;label&#34;</span> <span class='s'>&#34;Press me!&#34;</span><span class='o'>;;</span>
 b<span class='o'>#</span>add l<span class='o'>;;</span>
 b<span class='o'>#</span>repaint<span class='o'>;;</span>
@@ -366,11 +366,11 @@ In all the examples above we defined classes using the general pattern:</p>
   <span class='k'>end</span><span class='o'>;;</span>
 </code></pre>
 <p>
-I didn&apos;t explain the reference to <code>self</code>. In fact this names the object,
+I didn&#39;t explain the reference to <code>self</code>. In fact this names the object,
 allowing you to call methods in the same class or pass the object to
-functions outside the class. In other words, it&apos;s exactly the same as
+functions outside the class. In other words, it&#39;s exactly the same as
 <code>this</code> in C++/Java and <code>$self</code> in Perl. You may completely omit the
-<code>(self)</code> part if you don&apos;t need to refer to yourself - indeed in all the
+<code>(self)</code> part if you don&#39;t need to refer to yourself - indeed in all the
 examples above we could have done exactly that. However, I would advise
 you to leave it in there because you never know when you might modify
 the class and require the reference to <code>self</code>. There is no penalty for
@@ -383,13 +383,13 @@ having it.</p>
 
 I created a button <code>b</code> and a label <code>l</code> and I tried to create a list
 containing both, but I got an error. Yet <code>b</code> and <code>l</code> are both <code>widget</code>s,
-so why can&apos;t I put them into the same list? Perhaps OCaml can&apos;t guess
-that I want a <code>widget list</code>? Let&apos;s try telling it:</p>
+so why can&#39;t I put them into the same list? Perhaps OCaml can&#39;t guess
+that I want a <code>widget list</code>? Let&#39;s try telling it:</p>
 <pre><code class='ocaml'><span class='k'>let</span> wl <span class='k'>=</span> (<span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> widget list)<span class='o'>;;</span>
 <span class='k'>let</span> wl <span class='k'>=</span> b <span class='o'>::</span> wl<span class='o'>;;</span>
 </code></pre>
 <p>
-It turns out that OCaml doesn&apos;t coerce subclasses to the type of the
+It turns out that OCaml doesn&#39;t coerce subclasses to the type of the
 superclass by default, but you can tell it to by using the <code>:&gt;</code>
 (coercion) operator:</p>
 <pre><code class='ocaml'><span class='k'>let</span> wl <span class='k'>=</span> (b <span class='o'>:&#62;</span> widget) <span class='o'>::</span> wl<span class='o'>;;</span>
@@ -411,20 +411,20 @@ in fact a <code>label</code>, not a <code>button</code>.</p>
 <p>The problem of coercing from a superclass to a subclass will be familiar
 to Java programmers. In Java the container types contain <code>Object</code>s, and
 when you extract an object from a container you must cast it back to its
-original type. This can cause runtime <code>ClassCastException</code>s. OCaml&apos;s
+original type. This can cause runtime <code>ClassCastException</code>s. OCaml&#39;s
 strong type system has the specific goal of eliminating runtime type
 errors, and this is why this sort of coercion is not permitted.</p>
 <p>Polymorphism and functional programming should remove most of the need
-to coerce from superclasses to subclasses. Java&apos;s container classes
+to coerce from superclasses to subclasses. Java&#39;s container classes
 store <code>Object</code>s because Java (at time of writing) lacks generics
 (&quot;templates&quot; in C++ or polymorphism in OCaml). This is a fault in the
 Java language - a pretty fundamental fault in fact - which will
-hopefully be fixed in Java 1.5. In OCaml it&apos;s so simple to define
-polymorphic types like <code>&apos;a list</code> or <code>&apos;a stack</code> that Java-like
-programming just wouldn&apos;t be required. Having said that, if you do
-extensive OO programming in OCaml then I&apos;m pretty sure you&apos;ll come up
+hopefully be fixed in Java 1.5. In OCaml it&#39;s so simple to define
+polymorphic types like <code>&#39;a list</code> or <code>&#39;a stack</code> that Java-like
+programming just wouldn&#39;t be required. Having said that, if you do
+extensive OO programming in OCaml then I&#39;m pretty sure you&#39;ll come up
 with a case where this type of coercion would actually be darned useful.
-Perhaps for this reason it&apos;s enough to say that you might try
+Perhaps for this reason it&#39;s enough to say that you might try
 implementing solutions functionally first, and in an OO style only in
 the few problem domains where it really makes sense.</p>
 <p>[Yamagata Yoriyuki writes that type-safe downcasts are possible.
@@ -489,7 +489,7 @@ but each solution has its own advantages:</p>
  <li><strong>speed</strong>: slightly faster field access in records
  </li>
  <li><strong>field names</strong>: it is inconvenient to manipulate records of
- different types when some fields are named identically but it&apos;s not
+ different types when some fields are named identically but it&#39;s not
  a problem with objects
  </li>
  <li><strong>subtyping</strong>: it is impossible to coerce the type of a record to a

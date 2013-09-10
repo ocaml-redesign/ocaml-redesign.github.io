@@ -64,22 +64,22 @@
             <p>Null Pointers, Asserts and Warnings</p>
 <h1 id="NullPointersAssertsandWarnings"> Null Pointers, Asserts and Warnings</h1><h2 id="Nullpointers"> Null pointers</h2><p>
 
-So you&apos;ve got a survey on your website which asks your readers for their
+So you&#39;ve got a survey on your website which asks your readers for their
 names and ages. Only problem is that for some reason a few of your
-readers don&apos;t want to give you their age - they stubbornly refuse to
-fill that field in. What&apos;s a poor database administrator to do?</p>
+readers don&#39;t want to give you their age - they stubbornly refuse to
+fill that field in. What&#39;s a poor database administrator to do?</p>
 <p>Assume that the age is represented by an <code>int</code>, there are two possible
 ways to solve this problem. The most common one (and the most <em>wrong</em>
 one) is to assume some sort of &quot;special&quot; value for the age which means
-that the age information wasn&apos;t collected. So if, say, age = -1 then the
-data wasn&apos;t collected, otherwise the data was collected (even if it&apos;s
+that the age information wasn&#39;t collected. So if, say, age = -1 then the
+data wasn&#39;t collected, otherwise the data was collected (even if it&#39;s
 not valid!). This method kind of works until you start, for example,
 calculating the mean age of visitors to your website. Since you forgot
 to take into account your special value, you conclude that the mean age
 of visitors is 7½ years old, and you employ web designers to remove all
 the long words and use primary colours everywhere.</p>
 <p>The other, correct method is to store the age in a field which has type
-&quot;int or null&quot;. Here&apos;s a SQL table for storing ages:</p>
+&quot;int or null&quot;. Here&#39;s a SQL table for storing ages:</p>
 <pre><code class='ocaml'>create table users
 (
   userid serial<span class='o'>,</span>
@@ -88,18 +88,18 @@ the long words and use primary colours everywhere.</p>
 )<span class='o'>;</span>
 </code></pre>
 <p>
-If the age data isn&apos;t collected, then it goes into the database as a
+If the age data isn&#39;t collected, then it goes into the database as a
 special SQL <code>NULL</code> value. SQL ignores this automatically when you ask it
 to compute averages and so on.</p>
 <p>Programming languages also support nulls, although they may be easier to
 use in some than in others. In Perl, any scalar (ie. number or string)
-can be <code>undef</code> (Perl&apos;s way of saying null). This is a cause of many
+can be <code>undef</code> (Perl&#39;s way of saying null). This is a cause of many
 warnings which are often ignored by inexperienced programmers, even
 though they probably represent serious errors. In Java, any reference to
 an object can also be null, so it might make sense in Java to store the
 age as an <code>Integer</code> and allow references to the age to be <code>null</code>. In C
 pointers can, of course, be null, but if you wanted a simple integer to
-be null, you&apos;d have to first box it up into an object allocated by
+be null, you&#39;d have to first box it up into an object allocated by
 <code>malloc</code> on the heap.</p>
 <p>OCaml has an elegant solution to the problem of nulls, using a simple
 polymorphic variant type defined (in <code>Pervasives</code>) as:</p>
@@ -123,23 +123,23 @@ And what about an optional list of ints?</p>
 
 One great feature of Perl is the rich set of commands for debugging
 programs and handling unexpected errors, including the ability to print
-stack traces, throw and catch exceptions and the like. OCaml doesn&apos;t
+stack traces, throw and catch exceptions and the like. OCaml doesn&#39;t
 have quite such a rich set of debugging commands - better than Java,
-about the same as C, not nearly as good as Perl. (We&apos;ll talk about
+about the same as C, not nearly as good as Perl. (We&#39;ll talk about
 exceptions in more detail later on.)</p>
 <p>First of all, <code>assert</code> takes an expression as an argument and throws an
-exception. Assuming that you don&apos;t catch this exception (it&apos;s probably
+exception. Assuming that you don&#39;t catch this exception (it&#39;s probably
 unwise to catch this exception, particularly for beginners), this
 results in the program stopping and printing out the source file and
 line number where the error occurred. An example:</p>
 <pre><code class='ocaml'>  <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)
 </code></pre>
 <p>
-(Running this on Win32, of course, won&apos;t throw an error).</p>
+(Running this on Win32, of course, won&#39;t throw an error).</p>
 <p>You can also just call <code>assert false</code> to stop your program if things
-just aren&apos;t going well, but you&apos;re probably better to use ...</p>
+just aren&#39;t going well, but you&#39;re probably better to use ...</p>
 <p><code>failwith &quot;error message&quot;</code> throws a <code>Failure</code> exception, which again
-assuming you don&apos;t try to catch it, will stop the program with the given
+assuming you don&#39;t try to catch it, will stop the program with the given
 error message. <code>failwith</code> is often used during pattern matching, like
 this real example:</p>
 <pre><code class='ocaml'><span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
@@ -153,8 +153,8 @@ Note a couple of extra pattern matching features in this example too. A
 so-called &quot;range pattern&quot; is used to match either <code>&quot;Unix&quot;</code> or
 <code>&quot;Cygwin&quot;</code>, and the special <code>_</code> pattern which matches &quot;anything else&quot;.</p>
 <p>If you want to debug your program, but, like me, you have an aversion to
-debuggers which aren&apos;t gdb, then you&apos;ll probably want to print out a
-warning some way through your function. Here&apos;s an example:</p>
+debuggers which aren&#39;t gdb, then you&#39;ll probably want to print out a
+warning some way through your function. Here&#39;s an example:</p>
 <pre><code class='ocaml'><span class='k'>open</span> Graphics
 
 <span class='k'>let</span> () <span class='k'>=</span>
@@ -168,7 +168,7 @@ warning some way through your function. Here&apos;s an example:</p>
   read_line ()
 </code></pre>
 <p>
-If you prefer C-style <code>printf</code>&apos;s then try using OCaml&apos;s <code>Printf</code> module
+If you prefer C-style <code>printf</code>&#39;s then try using OCaml&#39;s <code>Printf</code> module
 instead:</p>
 <pre><code class='ocaml'><span class='k'>open</span> Graphics
 <span class='k'>open</span> Printf

@@ -49,7 +49,7 @@
           <div class="content">
             <h1 id="CompilingOCamlprojects"> Compiling OCaml projects</h1><p>
 This tutorial describes the base compilation commands provided with
-OCaml. It is useful to learn these commands to understand OCaml&apos;s
+OCaml. It is useful to learn these commands to understand OCaml&#39;s
 compilation model. However, eventually you will want to use a build tool
 that automatically calls these commands internally. See <a href='../dev_tools.html#compilation_tools'>Compilation
 Tools</a> for more information on the
@@ -69,9 +69,9 @@ to take advantage of the
 system, which provides the <code>ocamlfind</code> command.</p>
 <h3 id="ocamlcandocamlopt"> <code>ocamlc</code> and <code>ocamlopt</code></h3><p>
 <code>ocamlc</code> is the bytecode compiler, and <code>ocamlopt</code> is the native code
-compiler. If you don&apos;t know which one to use, use <code>ocamlopt</code> since it
+compiler. If you don&#39;t know which one to use, use <code>ocamlopt</code> since it
 provides standalone executables that are normally faster than bytecode.</p>
-<p>Let&apos;s assume that your program <code>progprog</code> has two source files,
+<p>Let&#39;s assume that your program <code>progprog</code> has two source files,
 <code>module1.ml</code> and <code>module2.ml</code>. We will compile them to native code,
 using <code>ocamlopt</code>. For now, we also assume that they do not use any other
 library than the standard library, which is automatically loaded. You
@@ -79,20 +79,20 @@ can compile the program in one single step:</p>
 <pre><code class='ocaml'>ocamlopt <span class='o'>-</span>o progprog module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
 </code></pre>
 <p>
-That&apos;s it. The compiler produced an executable named <code>progprog</code> or
+That&#39;s it. The compiler produced an executable named <code>progprog</code> or
 <code>progprog.exe</code>. If you are wondering how to write a program in multiple
-files, see our <a href='modules.html' title='Modules'>Modules</a> tutorial. Don&apos;t forget
+files, see our <a href='modules.html' title='Modules'>Modules</a> tutorial. Don&#39;t forget
 that the order of the source files matters, and that <code>module1.ml</code> cannot
 depend on things that are defined in <code>module2.ml</code>, unless <code>module2.ml</code>
 comes earlier on the command line.</p>
-<p>Let&apos;s use libraries other than the standard library. The OCaml
+<p>Let&#39;s use libraries other than the standard library. The OCaml
 distribution is shipped with the standard library, plus several other
 libraries that you can use as well. There is also a large number of
 third-party libraries, for a wide range of applications, from networking
 to 3D graphics. You must understand the following:</p>
 <ol>
  <li>The OCaml compilers know where the standard library is and uses it
- systematically (try: <code>ocamlc -where</code>). You don&apos;t have to worry much
+ systematically (try: <code>ocamlc -where</code>). You don&#39;t have to worry much
  about it.
  </li>
  <li>The other libraries that ship with the OCaml distribution from Inria
@@ -129,8 +129,8 @@ installation-dependent, we will use ocamlfind instead.</p>
 Using <code>ocamlfind</code> is highly recommended for compiling any program or
 library that uses third-party OCaml libraries. Library authors
 themselves should make their library installable with <code>ocamlfind</code> as
-well. If they don&apos;t, you may have to do it yourself, which is not very
-difficult, but hopefully you won&apos;t have to. OK, let&apos;s assume that all
+well. If they don&#39;t, you may have to do it yourself, which is not very
+difficult, but hopefully you won&#39;t have to. OK, let&#39;s assume that all
 the libraries you want to use have been installed properly with
 ocamlfind.</p>
 <p>You can see which packages and subpackages are available in your system
@@ -141,7 +141,7 @@ by typing:</p>
 This shows the list of package names, with their version ID.</p>
 <p>For our example using LablGL and OCamlSDL, we are going to use the
 following packages: lablGL, sdl, sdl.sdlimage, sdl.sdlmixer, sdl.sdlttf.
-The bigarray package is needed by the sdl package, but we don&apos;t need to
+The bigarray package is needed by the sdl package, but we don&#39;t need to
 worry about that since <code>ocamlfind</code> knows it.</p>
 <p>The command for compiling our program will be:</p>
 <pre><code class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>

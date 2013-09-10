@@ -117,7 +117,7 @@ or:</p>
 <pre><code class='ocaml'><span class='k'>let</span> x <span class='k'>=</span> ref (None <span class='o'>:</span> string option)
 </code></pre>
 <p>
-Data of type <code>&apos;_a</code> may be allowed temporarily, for instance during a
+Data of type <code>&#39;_a</code> may be allowed temporarily, for instance during a
 toplevel session. It means that the given object has an unknown type,
 but it cannot be any type: it is not polymorphic data. In the toplevel,
 our example gives these results:</p>
@@ -147,7 +147,7 @@ situation:</p>
     <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>false</span><span class='o'>;;</span>
 </code></pre>
 <p>
-Obviously, the programmer had a misconception of what OCaml&apos;s pattern
+Obviously, the programmer had a misconception of what OCaml&#39;s pattern
 matching is about. Remember the following:</p>
 <ul>
  <li>the tree of cases is traversed linearly, from left to right. There
@@ -168,9 +168,9 @@ test_member 1 (0<span class='o'>,</span> 1)<span class='o'>;;</span>
 </code></pre>
 <h3 id="Thispatternmatchingisnotexhaustive"> This pattern-matching is not exhaustive</h3><p>
 
-OCaml&apos;s pattern matching can check whether a set of patterns is
+OCaml&#39;s pattern matching can check whether a set of patterns is
 exhaustive or not, based on the <em>type</em> only. So in the following
-example, the compiler doesn&apos;t know what range of ints the &quot;mod&quot; operator
+example, the compiler doesn&#39;t know what range of ints the &quot;mod&quot; operator
 would return:</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> is_even x <span class='k'>=</span>
     <span class='k'>match</span> x <span class='k'>mod</span> 2 <span class='k'>with</span>

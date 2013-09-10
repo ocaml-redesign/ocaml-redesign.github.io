@@ -53,7 +53,7 @@ standard library provides.</p>
 <p>Official documentation for the modules of interest:
 <a href='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html' title='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html'>Pervasives</a>,
 <a href='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Printf.html' title='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Printf.html'>Printf</a>.</p>
-<p>The standard library doesn&apos;t provide functions that directly read a file
+<p>The standard library doesn&#39;t provide functions that directly read a file
 into a string or save a string into a file. Such functions can be found
 in third-party libraries such as
 <a href='http://ocaml-lib.sourceforge.net/' title='http://ocaml-lib.sourceforge.net/'>Extlib</a>.
@@ -109,11 +109,11 @@ read. Occasionally, you may want to skip to a particular position in the
 file, or restart reading from the beginning. This is possible for
 channels that point to regular files, use <code>seek_in</code> or <code>seek_out</code>.</p>
 <h3 id="Gotchas"> Gotchas</h3><ul>
- <li>Don&apos;t forget to flush your <code>out_channel</code>s if you want to actually
+ <li>Don&#39;t forget to flush your <code>out_channel</code>s if you want to actually
  write something. This is particularly important if you are writing
  to non-files such as the standard output (<code>stdout</code>) or a socket.
  </li>
- <li>Don&apos;t forget to close any unused channel, because operating systems
+ <li>Don&#39;t forget to close any unused channel, because operating systems
  have a limit on the number of files that can be opened
  simultaneously. You must catch any exception that would occur during
  the file manipulation, close the corresponding channel, and re-raise
@@ -126,7 +126,7 @@ channels that point to regular files, use <code>seek_in</code> or <code>seek_out
  type errors. If you want to be sure that you are using the <code>stdout</code>
  channel and not the <code>stdout</code> file descriptor, you can prepend it
  with the module name where it comes from: <code>Pervasives.stdout</code>. <em>Note
- that most things that don&apos;t seem to belong to any module actually
+ that most things that don&#39;t seem to belong to any module actually
  belong to the <code>Pervasives</code> module, which is automatically opened.</em>
  </li>
  <li><code>open_out</code> and <code>open_out_bin</code> truncate the given file if it already

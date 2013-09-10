@@ -87,7 +87,7 @@ your browser</a>. The source of the following
 problems is available on
 <a href='https://github.com/VictorNicollet/99-Problems-OCaml'>GitHub</a>.</p>
 <h2 id="Workingwithlists"> Working with lists</h2><p>
-Write a function <code>last : &apos;a list -&gt; &apos;a       option</code> that returns the
+Write a function <code>last : &#39;a list -&gt; &#39;a       option</code> that returns the
 last element of a list.</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> last <span class='k'>=</span> <span class='k'>function</span>
@@ -110,7 +110,7 @@ Find the last but one (last and penultimate) elements of a list.</p>
   last_two <span class='o'>[</span> <span class='s'>&#34;a&#34;</span> <span class='o'>]</span> <span class='k'>=</span> None<span class='o'>;;</span>
 </code></pre>
 <p>
-Find the <code>k</code>&apos;th element of a list.</p>
+Find the <code>k</code>&#39;th element of a list.</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> at k <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None
@@ -278,7 +278,7 @@ problem, construct its uncompressed version.</p>
 <p>
 Run-length encoding of a list (direct solution).</p>
 <p>Implement the so-called run-length encoding data compression method
-directly. I.e. don&apos;t explicitly create the sublists containing the
+directly. I.e. don&#39;t explicitly create the sublists containing the
 duplicates, as in problem “<a href='#pack'>Pack consecutive duplicates of list elements
 into sublists</a>”, but only count them. As in problem “<a href='#modif-run-length'>Modified
 run-length encoding</a>”, simplify the result list by
@@ -321,7 +321,7 @@ Replicate the elements of a list a given number of times.</p>
   replicate <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span> 3 <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;a&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;b&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>;</span><span class='s'>&#34;c&#34;</span><span class='o'>]</span>
 </code></pre>
 <p>
-Drop every N&apos;th element from a list.</p>
+Drop every N&#39;th element from a list.</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='k'>let</span> drop list n <span class='k'>=</span>
     <span class='k'>let rec</span> aux i <span class='k'>=</span> <span class='k'>function</span>
@@ -351,7 +351,7 @@ first part is the list and the second part is empty.</p>
 <p>
 Extract a slice from a list.</p>
 <p>Given two indices, <code>i</code> and <code>k</code>, the slice is the list containing the
-elements between the <code>i</code>&apos;th and <code>k</code>&apos;th element of the original list
+elements between the <code>i</code>&#39;th and <code>k</code>&#39;th element of the original list
 (both limits included). Start counting the elements with 0 (this is the
 way the <code>List</code> module numbers elements).</p>
 <p>Solution</p>
@@ -391,7 +391,7 @@ Rotate a list N places to the left.</p>
   <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;g&#34;</span><span class='o'>;</span> <span class='s'>&#34;h&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;b&#34;</span><span class='o'>;</span> <span class='s'>&#34;c&#34;</span><span class='o'>;</span> <span class='s'>&#34;d&#34;</span><span class='o'>;</span> <span class='s'>&#34;e&#34;</span><span class='o'>;</span> <span class='s'>&#34;f&#34;</span><span class='o'>]</span>
 </code></pre>
 <p>
-Remove the K&apos;th element from a list.</p>
+Remove the K&#39;th element from a list.</p>
 <p>The first element of the list is numbered 0, the second 1,...</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> remove_at n <span class='k'>=</span> <span class='k'>function</span>
@@ -624,7 +624,7 @@ more clever one.</p>
 </code></pre>
 <p>
 Determine the greatest common divisor of two positive integer numbers.</p>
-<p>Use Euclid&apos;s algorithm.</p>
+<p>Use Euclid&#39;s algorithm.</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> gcd a b <span class='k'>=</span>
     <span class='k'>if</span> b <span class='k'>=</span> 0 <span class='k'>then</span> a <span class='k'>else</span> gcd b (a <span class='k'>mod</span> b)
@@ -643,10 +643,10 @@ Determine whether two positive integer numbers are coprime.</p>
   not (coprime 20536 7826)
 </code></pre>
 <p>
-Calculate Euler&apos;s totient function phi(m).</p>
-<p>Euler&apos;s so-called totient function φ(m) is defined as the number of
-positive integers r (1 ≤ r &#92;&lt; m) that are coprime to m. We let φ(1) = 1.</p>
-<p>Find out what the value of phi(m) is if m is a prime number. Euler&apos;s
+Calculate Euler&#39;s totient function phi(m).</p>
+<p>Euler&#39;s so-called totient function φ(m) is defined as the number of
+positive integers r (1 ≤ r \&lt; m) that are coprime to m. We let φ(1) = 1.</p>
+<p>Find out what the value of phi(m) is if m is a prime number. Euler&#39;s
 totient function plays an important role in one of the most widely used
 public key cryptography methods (RSA). In this exercise you should use
 the most primitive method to calculate this function (there are smarter
@@ -698,16 +698,16 @@ Determine the prime factors of a given positive integer (2).</p>
   factors 315 <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>,</span>2 <span class='o'>;</span> 5<span class='o'>,</span>1 <span class='o'>;</span> 7<span class='o'>,</span>1<span class='o'>]</span>
 </code></pre>
 <p>
-Calculate Euler&apos;s totient function phi(m) (improved).</p>
+Calculate Euler&#39;s totient function phi(m) (improved).</p>
 <p>See problem “<a href='#totient'>Calculate Euler&amp;apos;s totient function phi(m)</a>” for
-the definition of Euler&apos;s totient function. If the list of the prime
+the definition of Euler&#39;s totient function. If the list of the prime
 factors of a number m is known in the form of the previous problem then
 the function phi(m) can be efficiently calculated as follows: Let
 <code>[(p1, m1); (p2, m2);   (p3, m3); ...]</code> be the list of prime factors
 (and their multiplicities) of a given number m. Then φ(m) can be
 calculated with the following formula:</p>
-<p>φ(m) = (p1 - 1) × p1<sup>m1&#92; -&#92; 1&lt;/sup&gt; × (p2 - 1) ×
-p2<sup>m2&#92; -&#92; 1&lt;/sup&gt; × (p3 - 1) × p3<sup>m3&#92; -&#92; 1&lt;/sup&gt; × ...</p>
+<p>φ(m) = (p1 - 1) × p1<sup>m1\ -\ 1&lt;/sup&gt; × (p2 - 1) ×
+p2<sup>m2\ -\ 1&lt;/sup&gt; × (p3 - 1) × p3<sup>m3\ -\ 1&lt;/sup&gt; × ...</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='com2'>(* Naive power <span class='ic'>function</span><span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let rec</span> pow n p <span class='k'>=</span> <span class='k'>if</span> p <span class='o'>&#60;</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> n <span class='o'>*</span> pow n (p-1) <span class='o'>;;</span>
@@ -722,7 +722,7 @@ p2<sup>m2&#92; -&#92; 1&lt;/sup&gt; × (p3 - 1) × p3<sup>m3&#92; -&#92; 1&lt;/s
   phi_improved 13 <span class='k'>=</span> 12
 </code></pre>
 <p>
-Compare the two methods of calculating Euler&apos;s totient function.</p>
+Compare the two methods of calculating Euler&#39;s totient function.</p>
 <p>Use the solutions of problems “<a href='#totient'>Calculate Euler&amp;apos;s totient function
 phi(m)</a>” and “<a href='#totient-improved'>Calculate Euler&amp;apos;s totient function phi(m)
 (improved)</a>” to compare the algorithms. Take the
@@ -758,8 +758,8 @@ of all prime numbers in that range.</p>
   <span class='m'>List</span><span class='o'>.</span>length (all_primes 2 7920) <span class='k'>=</span> 1000
 </code></pre>
 <p>
-Goldbach&apos;s conjecture.</p>
-<p>Goldbach&apos;s conjecture says that every positive even number greater than
+Goldbach&#39;s conjecture.</p>
+<p>Goldbach&#39;s conjecture says that every positive even number greater than
 2 is the sum of two prime numbers. Example: 28 = 5 + 23. It is one of
 the most famous facts in number theory that has not been proved to be
 correct in the general case. It has been <em>numerically confirmed</em> up to
@@ -915,8 +915,8 @@ for a detailed description of Huffman codes (you can start with the
 Our objective is to construct a list <code>Hc(S,C)</code> terms, where <code>C</code> is the
 Huffman code word for the symbol <code>S</code>. In our example, the result could
 be
-<code>hs = [Hc(a,&apos;0&apos;); Hc(b,&apos;101&apos;); Hc(c,&apos;100&apos;);       Hc(d,&apos;111&apos;); Hc(e,&apos;1101&apos;); hc(f,&apos;1100&apos;)]</code>
-[hc(a,&apos;01&apos;),...etc.]. The task shall be performed by the function
+<code>hs = [Hc(a,&#39;0&#39;); Hc(b,&#39;101&#39;); Hc(c,&#39;100&#39;);       Hc(d,&#39;111&#39;); Hc(e,&#39;1101&#39;); hc(f,&#39;1100&#39;)]</code>
+[hc(a,&#39;01&#39;),...etc.]. The task shall be performed by the function
 <code>huffman</code> defined as follows: <code>huffman(fs)</code> returns the Huffman code
 table for the frequency table <code>fs</code></p>
 <p>Solution</p>
@@ -926,7 +926,7 @@ tree' /></p>
 <p><em>A binary tree is either empty or it is composed of a root element and
 two successors, which are binary trees themselves.</em></p>
 <p>In OCaml, one can define a new type <code>binary_tree</code> that carries an
-arbitrary value of type <code>&apos;a</code> at each node.</p>
+arbitrary value of type <code>&#39;a</code> at each node.</p>
 <pre><code class='ocaml'>  <span class='k'>type</span> 'a binary_tree <span class='k'>=</span>
     <span class='o'>|</span> Empty
     <span class='o'>|</span> Node <span class='k'>of</span> 'a <span class='o'>*</span> 'a binary_tree <span class='o'>*</span> 'a binary_tree
@@ -948,7 +948,7 @@ nodes in its right subtree are almost equal, which means their
 difference is not greater than one.</p>
 <p>Write a function <code>cbal_tree</code> to construct completely balanced binary
 trees for a given number of nodes. The function should generate all
-solutions via backtracking. Put the letter <code>&apos;x&apos;</code> as information into all
+solutions via backtracking. Put the letter <code>&#39;x&#39;</code> as information into all
 nodes of the tree.</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='com2'>(* Build all trees <span class='ic'>with</span> given <span class='ic'>[</span>left<span class='ic'>]</span> <span class='ic'>and</span> <span class='ic'>[</span>right<span class='ic'>]</span> subtrees<span class='ic'>.</span> *)</span><!-- end comment -->
@@ -1053,7 +1053,7 @@ node: The height of its left subtree and the height of its right subtree
 are almost equal, which means their difference is not greater than one.</p>
 <p>Write a function <code>hbal_tree</code> to construct height-balanced binary trees
 for a given height. The function should generate all solutions via
-backtracking. Put the letter <code>&apos;x&apos;</code> as information into all nodes of the
+backtracking. Put the letter <code>&#39;x&#39;</code> as information into all nodes of the
 tree.</p>
 <p>Solution</p>
 <pre><code class='ocaml'>  <span class='k'>let rec</span> hbal_tree n <span class='k'>=</span>
@@ -1158,14 +1158,14 @@ at the level i, note that we start counting the levels from 1 at the
 root). In level H, which may contain less than the maximum possible
 number of nodes, all the nodes are &quot;left-adjusted&quot;. This means that in a
 levelorder tree traversal all internal nodes come first, the leaves come
-second, and empty successors (the nil&apos;s which are not really nodes!)
+second, and empty successors (the nil&#39;s which are not really nodes!)
 come last.</p>
 <p>Particularly, complete binary trees are used as data structures (or
 addressing schemes) for heaps.</p>
 <p>We can assign an address number to each node in a complete binary tree
 by enumerating the nodes in levelorder, starting at the root with
 number 1. In doing so, we realize that for every node X with address A
-the following property holds: The address of X&apos;s left and right
+the following property holds: The address of X&#39;s left and right
 successors are 2<em>A and 2</em>A+1, respectively, supposed the successors do
 exist. This fact can be used to elegantly construct a complete binary
 tree structure. Write a function <code>is_complete_binary_tree</code> with the
@@ -1214,7 +1214,7 @@ in every node. Find out the rules and write the corresponding Prolog
 predicate.</p>
 <p>Hint: Consider the horizontal distance between a node and its successor
 nodes. How tight can you pack together two subtrees to construct the
-combined binary tree? This is a difficult problem. Don&apos;t give up too
+combined binary tree? This is a difficult problem. Don&#39;t give up too
 early!</p>
 <p>Solution</p>
 <p>Which layout do you like most?</p>
@@ -1245,7 +1245,7 @@ lower-case letters, as in the example of the previous problem.</p>
 <ol>
  <li>Write functions <code>preorder</code> and <code>inorder</code> that construct the preorder
  and inorder sequence of a given binary tree, respectively. The
- results should be atoms, e.g. &apos;abdecfg&apos; for the preorder sequence of
+ results should be atoms, e.g. &#39;abdecfg&#39; for the preorder sequence of
  the example in the previous problem.
  </li>
  <li>Can you use <code>preorder</code> from problem part 1. in the reverse
@@ -1273,7 +1273,7 @@ represented by the preorder sequence of its nodes in which dots (.) are
 inserted where an empty subtree (nil) is encountered during the tree
 traversal. For example, the tree shown in problem “<a href='#tree-string'>A string
 representation of binary trees</a>” is represented as
-&apos;abd..e..c.fg...&apos;. First, try to establish a syntax (BNF or syntax
+&#39;abd..e..c.fg...&#39;. First, try to establish a syntax (BNF or syntax
 diagrams) and then write a function <code>tree_dotstring</code> which does the
 conversion in both directions. Use difference lists.</p>
 <p>Solution</p>
@@ -1378,7 +1378,7 @@ trees' /></p>
 <p>Note that in the &quot;lispy&quot; notation a node with successors (children) in
 the tree is always the first element in a list, followed by its
 children. The &quot;lispy&quot; representation of a multiway tree is a sequence of
-atoms and parentheses &apos;(&apos; and &apos;)&apos;. This is very close to the way trees
+atoms and parentheses &#39;(&#39; and &#39;)&#39;. This is very close to the way trees
 are represented in OCaml, except that no constructor <code>T</code> is used. Write
 a function <code>lispy :       char mult_tree -&gt; string</code> that returns the
 lispy notation of the tree.</p>
@@ -1465,7 +1465,7 @@ multiple times. Notice the isolated node <code>d</code>.</p>
 <p>Write functions to convert between the different graph representations.
 With these functions, all representations are equivalent; i.e. for the
 following problems you can always pick freely the most convenient form.
-This problem is not particularly difficult, but it&apos;s a lot of work to
+This problem is not particularly difficult, but it&#39;s a lot of work to
 deal with all the special cases.</p>
 <p>Solution</p>
 <p>Path from one node to another one</p>
@@ -1606,7 +1606,7 @@ Example: <code>[4;2;7;3;6;8;5;1]</code> means that the queen in the first column
 in row 4, the queen in the second column is in row 2, etc. Use the
 generate-and-test paradigm.</p>
 <p>Solution</p>
-<p>Knight&apos;s tour</p>
+<p>Knight&#39;s tour</p>
 <p>Another famous problem is this one: How can a knight jump on an N×N
 chessboard in such a way that it visits every square exactly once?</p>
 <p>Hints: Represent the squares by pairs of their coordinates <code>(x,y)</code>,
@@ -1614,11 +1614,11 @@ where both <code>x</code> and <code>y</code> are integers between 1 and N. Defin
 <code>jump n       (x,y)</code> that returns all coordinates <code>(u,v)</code> to which a
 knight can jump from <code>(x,y)</code> to on a <code>n</code>×<code>n</code> chessboard. And finally,
 represent the solution of our problem as a list knight positions (the
-knight&apos;s tour).</p>
+knight&#39;s tour).</p>
 <p>Solution</p>
-<p>Von Koch&apos;s conjecture</p>
+<p>Von Koch&#39;s conjecture</p>
 <p>Several years ago I met a mathematician who was intrigued by a problem
-for which he didn&apos;t know a solution. His name was Von Koch, and I don&apos;t
+for which he didn&#39;t know a solution. His name was Von Koch, and I don&#39;t
 know whether the problem has been solved since.</p>
 <p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264955485190/prolog-problems/7/p92a.gif' alt='Tree
 numbering' /></p>
@@ -1629,7 +1629,7 @@ the difference of its node numbers equals to K. The conjecture is that
 this is always possible.</p>
 <p>For small trees the problem is easy to solve by hand. However, for
 larger trees, and 14 is already very large, it is extremely difficult to
-find a solution. And remember, we don&apos;t know for sure whether there is
+find a solution. And remember, we don&#39;t know for sure whether there is
 always a solution!</p>
 <p><img src='https://sites.google.com/site/prologsite/_/rsrc/1264955528417/prolog-problems/7/p92b.gif' alt='Larger
 tree' /></p>
@@ -1747,7 +1747,7 @@ way of placing words onto sites.</p>
 <p><strong>Hints:</strong></p>
 <ol>
  <li>The problem is not easy. You will need some time to thoroughly
- understand it. So, don&apos;t give up too early! And remember that the
+ understand it. So, don&#39;t give up too early! And remember that the
  objective is a clean solution, not just a quick-and-dirty hack!
  </li>
  <li>For efficiency reasons it is important, at least for larger puzzles,
