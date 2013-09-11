@@ -58,17 +58,17 @@ functional way. In the example below I am going to do a mapping from
 strings to strings. However it is possible to do mappings with all
 different types of data.</p>
 <p>To create a Map I can do:</p>
-<pre><code class='ocaml'><script>mlbe77de6299712caec75103f569553df9 = 'module MyUsers = Map.Make(String);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>module</span> MyUsers <span class='k'>=</span> <span class='m'>Map</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
-</code></pre>
+<pre><code class='ocaml'><span class='k'>module</span> MyUsers <span class='k'>=</span> <span class='m'>Map</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
+<script>mlbe77de6299712caec75103f569553df9 = 'module MyUsers = Map.Make(String);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Ok, we have created the module. Now, lets start putting something into
 it. Where do we start? Well, lets try an empty module to begin with:</p>
-<pre><code class='ocaml'><script>ml37702ff591e304c0e56c60e1559c5ab8 = 'let m = MyUsers.empty;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>empty<span class='o'>;;</span>
-</code></pre>
+<pre><code class='ocaml'><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>empty<span class='o'>;;</span>
+<script>ml37702ff591e304c0e56c60e1559c5ab8 = 'let m = MyUsers.empty;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Hummm. An empty module is kind of boring, so lets add some data.</p>
-<pre><code class='ocaml'><script>ml8a3960b2bdad5702253051617b558d10 = 'let m = MyUsers.add &#34;fred&#34; &#34;sugarplums&#34; m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;fred&#34;</span> <span class='s'>&#34;sugarplums&#34;</span> m<span class='o'>;;</span>
-</code></pre>
+<pre><code class='ocaml'><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;fred&#34;</span> <span class='s'>&#34;sugarplums&#34;</span> m<span class='o'>;;</span>
+<script>ml8a3960b2bdad5702253051617b558d10 = 'let m = MyUsers.add &#34;fred&#34; &#34;sugarplums&#34; m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 We have now added &quot;fred&quot; and his password of &quot;sugarplums&quot; to our module.
 There is a fairly important point to make here. Once we have added the
@@ -77,28 +77,28 @@ This means our mapping in our module MyUsers is from strings to strings.
 If we want a mapping from strings to integers or a mapping from integers
 to whatever we will have to create a different mapping.</p>
 <p>Lets add in some additional data just for kicks.</p>
-<pre><code class='ocaml'><script>ml6495449879bd7e2528b065f12906eda0 = 'let m = MyUsers.add &#34;tom&#34; &#34;ilovelucy&#34; m;;\nlet m = MyUsers.add &#34;mark&#34; &#34;ocamlrules&#34; m;;\nlet m = MyUsers.add &#34;pete&#34; &#34;linux&#34; m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;tom&#34;</span> <span class='s'>&#34;ilovelucy&#34;</span> m<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;tom&#34;</span> <span class='s'>&#34;ilovelucy&#34;</span> m<span class='o'>;;</span>
 <span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;mark&#34;</span> <span class='s'>&#34;ocamlrules&#34;</span> m<span class='o'>;;</span>
 <span class='k'>let</span> m <span class='k'>=</span> <span class='m'>MyUsers</span><span class='o'>.</span>add <span class='s'>&#34;pete&#34;</span> <span class='s'>&#34;linux&#34;</span> m<span class='o'>;;</span>
-</code></pre>
+<script>ml6495449879bd7e2528b065f12906eda0 = 'let m = MyUsers.add &#34;tom&#34; &#34;ilovelucy&#34; m;;\nlet m = MyUsers.add &#34;mark&#34; &#34;ocamlrules&#34; m;;\nlet m = MyUsers.add &#34;pete&#34; &#34;linux&#34; m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Now that we have some data inside of our Map module, wouldn&#39;t it be nice
 to be able to view that data at some point? Lets begin by creating a
 simple print function.</p>
-<pre><code class='ocaml'><script>mld6a944c4fc62bbfc934e85ca6d99eccd = 'let print_users key password = print_string(key ^ &#34; &#34; ^ password ^ &#34;\n&#34;);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> print_users key password <span class='k'>=</span> print_string(key <span class='o'>^</span> <span class='s'>&#34; &#34;</span> <span class='o'>^</span> password <span class='o'>^</span> <span class='s'>&#34;\n&#34;</span>)<span class='o'>;;</span>
-</code></pre>
+<pre><code class='ocaml'><span class='k'>let</span> print_users key password <span class='k'>=</span> print_string(key <span class='o'>^</span> <span class='s'>&#34; &#34;</span> <span class='o'>^</span> password <span class='o'>^</span> <span class='s'>&#34;\n&#34;</span>)<span class='o'>;;</span>
+<script>mld6a944c4fc62bbfc934e85ca6d99eccd = 'let print_users key password = print_string(key ^ &#34; &#34; ^ password ^ &#34;\n&#34;);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 We have here a function that will take two strings, a key and a pasword,
 and print them out nicely, including a new line character at the end.
 All we need to do is to have this function applied to our mapping. Here
 is what that would look like.</p>
-<pre><code class='ocaml'><script>mlb352d0a77f9071b8da97a53bedd6cf16 = 'MyUsers.iter print_users m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='m'>MyUsers</span><span class='o'>.</span>iter print_users m<span class='o'>;;</span>
-</code></pre>
+<pre><code class='ocaml'><span class='m'>MyUsers</span><span class='o'>.</span>iter print_users m<span class='o'>;;</span>
+<script>mlb352d0a77f9071b8da97a53bedd6cf16 = 'MyUsers.iter print_users m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 The reason we put our data into a mapping however is probably so we can
 quickly find the data. Lets actually show how to do a find.</p>
-<pre><code class='ocaml'><script>ml1e61a8300912cfbba8bec13db29c274a = 'MyUsers.find &#34;fred&#34; m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='m'>MyUsers</span><span class='o'>.</span>find <span class='s'>&#34;fred&#34;</span> m<span class='o'>;;</span>
-</code></pre>
+<pre><code class='ocaml'><span class='m'>MyUsers</span><span class='o'>.</span>find <span class='s'>&#34;fred&#34;</span> m<span class='o'>;;</span>
+<script>ml1e61a8300912cfbba8bec13db29c274a = 'MyUsers.find &#34;fred&#34; m;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 This should quickly and efficienty return Fred&#39;s password: &quot;sugarplums&quot;.</p>
 

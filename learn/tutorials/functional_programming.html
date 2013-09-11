@@ -72,9 +72,9 @@ anyhow.</p>
 <strong>functional language</strong>, <strong>functions</strong> are first-class citizens.</p>
 <p>Lot of words there that don&#39;t really make much sense. So let&#39;s have an
 example:</p>
-<pre><code class='ocaml'><script>mla8cabe2197307f28ff8c69134300e153 = '  let double x = x * 2 in\n  List.map double [ 1; 2; 3 ]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> double x <span class='k'>=</span> x <span class='o'>*</span> 2 <span class='k'>in</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> double x <span class='k'>=</span> x <span class='o'>*</span> 2 <span class='k'>in</span>
   <span class='m'>List</span><span class='o'>.</span>map double <span class='o'>[</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3 <span class='o'>]</span>
-</code></pre>
+<script>mla8cabe2197307f28ff8c69134300e153 = '  let double x = x * 2 in\n  List.map double [ 1; 2; 3 ]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 In this example, I&#39;ve first defined a nested function called <code>double</code>
 which takes an argument <code>x</code> and returns <code>x * 2</code>. Then <code>map</code> calls
@@ -95,16 +95,16 @@ in which they were defined. In particular, a closure can reference
 variables which were available at the point of its definition. Let&#39;s
 generalise the function above so that now we can take any list of
 integers and multiply each element by an arbitrary value <code>n</code>:</p>
-<pre><code class='ocaml'><script>ml3076322c6c3377108700e30cc011d228 = '  let multiply n list =\n    let f x =\n      n * x in\n    List.map f list\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> multiply n list <span class='k'>=</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> multiply n list <span class='k'>=</span>
     <span class='k'>let</span> f x <span class='k'>=</span>
       n <span class='o'>*</span> x <span class='k'>in</span>
     <span class='m'>List</span><span class='o'>.</span>map f list
-</code></pre>
+<script>ml3076322c6c3377108700e30cc011d228 = '  let multiply n list =\n    let f x =\n      n * x in\n    List.map f list\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Hence:</p>
-<pre><code class='ocaml'><script>ml5e07863247966149713837867cacd831 = 'multiply 2 [1; 2; 3];;\nmultiply 5 [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>multiply 2 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'>multiply 2 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 multiply 5 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
-</code></pre>
+<script>ml5e07863247966149713837867cacd831 = 'multiply 2 [1; 2; 3];;\nmultiply 5 [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 The important point to note about the <code>multiply</code> function is the nested
 function <code>f</code>. This is a closure. Look at how <code>f</code> uses the value of <code>n</code>
@@ -122,7 +122,7 @@ always has access back to its parental environment, and to <code>n</code>.</p>
 <p>Here&#39;s a real example from lablgtk. This is actually a method on a class
 (we haven&#39;t talked about classes and objects yet, but just think of it
 as a function definition for now).</p>
-<pre><code class='ocaml'><script>ml4d42cd6a2cda78a8d6270dc9e4b4e352 = 'class html_skel obj = object (self)\n  ...\n  ...\n  method save_to_channel chan =\n    let receiver_fn content =\n      output_string chan content;\n      true in\n    save obj receiver_fn\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>class</span> html_skel obj <span class='k'>=</span> object (self)
+<pre><code class='ocaml'><span class='k'>class</span> html_skel obj <span class='k'>=</span> object (self)
   <span class='o'>...</span>
   <span class='o'>...</span>
   <span class='k'>method</span> save_to_channel chan <span class='k'>=</span>
@@ -130,7 +130,7 @@ as a function definition for now).</p>
       output_string chan content<span class='o'>;</span>
       <span class='o'>true</span> <span class='k'>in</span>
     save obj receiver_fn
-</code></pre>
+<script>ml4d42cd6a2cda78a8d6270dc9e4b4e352 = 'class html_skel obj = object (self)\n  ...\n  ...\n  method save_to_channel chan =\n    let receiver_fn content =\n      output_string chan content;\n      true in\n    save obj receiver_fn\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 First of all you need to know that the <code>save</code> function called at the end
 of the method takes as its second argument a function (<code>receiver_fn</code>).
@@ -140,9 +140,9 @@ that it&#39;s trying to save.</p>
 alright because it keeps a reference to <code>chan</code> from its environment.</p>
 <h3 id="Partialfunctionapplicationsandcurrying"> Partial function applications and currying</h3><p>
 Let&#39;s define a plus function which just adds two integers:</p>
-<pre><code class='ocaml'><script>ml87e54193bb67630fee2636ee409d38ec = '  let plus a b =\n    a + b\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> plus a b <span class='k'>=</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> plus a b <span class='k'>=</span>
     a <span class='o'>+</span> b
-</code></pre>
+<script>ml87e54193bb67630fee2636ee409d38ec = '  let plus a b =\n    a + b\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Some questions for people asleep at the back of the class.</p>
 <ol>
@@ -155,48 +155,48 @@ Some questions for people asleep at the back of the class.</p>
 
 <p>Question 1 is easy. <code>plus</code> is a function, it takes two arguments which
 are integers and it returns an integer. We write its type like this:</p>
-<pre><code class='ocaml'><script>ml13c70a014ddeae7b1d140bdeb681c586 = '  plus : int -&#62; int -&#62; int\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
-</code></pre>
+<pre><code class='ocaml'>  plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+<script>ml13c70a014ddeae7b1d140bdeb681c586 = '  plus : int -&#62; int -&#62; int\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Question 2 is even easier. <code>plus 2 3</code> is a number, the integer <code>5</code>. We
 write its value and type like this:</p>
-<pre><code class='ocaml'><script>mld0eb8c16b936f38b60d31aae86d28bb1 = '  5 : int\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  5 <span class='o'>:</span> int
-</code></pre>
+<pre><code class='ocaml'>  5 <span class='o'>:</span> int
+<script>mld0eb8c16b936f38b60d31aae86d28bb1 = '  5 : int\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 But what about question 3? It looks like <code>plus 2</code> is a mistake, a bug.
 In fact, however, it isn&#39;t. If we type this into the OCaml toplevel, it
 tells us:</p>
-<pre><code class='ocaml'><script>ml49e2296045fd004b9cca6b7d78d0500d = '  plus 2\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  plus 2
-</code></pre>
+<pre><code class='ocaml'>  plus 2
+<script>ml49e2296045fd004b9cca6b7d78d0500d = '  plus 2\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 This isn&#39;t an error. It&#39;s telling us that <code>plus 2</code> is in fact a
 <em>function</em>, which takes an <code>int</code> and returns an <code>int</code>. What sort of
 function is this? We experiment by first of all giving this mysterious
 function a name (<code>f</code>), and then trying it out on a few integers to see
 what it does:</p>
-<pre><code class='ocaml'><script>ml482bcb892564f24f96f44a9d8f4a074d = 'let f = plus 2;;\nf 10;;\nf 15;;\nf 99;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
 f 10<span class='o'>;;</span>
 f 15<span class='o'>;;</span>
 f 99<span class='o'>;;</span>
-</code></pre>
+<script>ml482bcb892564f24f96f44a9d8f4a074d = 'let f = plus 2;;\nf 10;;\nf 15;;\nf 99;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 In engineering this is sufficient <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>proof by
 example</a>
 for us to state that <code>plus 2</code> is the function which adds 2 to things.</p>
 <p>Going back to the original definition, let&#39;s &quot;fill in&quot; the first
 argument (<code>a</code>) setting it to 2 to get:</p>
-<pre><code class='ocaml'><script>ml46d7a4cd7c41cbc2145da37e928245ba = 'let plus 2 b =       (* This is not real OCaml code! *)\n  2 + b\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> plus 2 b <span class='k'>=</span>       <span class='com2'>(* This is not real OCaml code<span class='ic'>!</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><span class='k'>let</span> plus 2 b <span class='k'>=</span>       <span class='com2'>(* This is not real OCaml code<span class='ic'>!</span> *)</span><!-- end comment -->
   2 <span class='o'>+</span> b
-</code></pre>
+<script>ml46d7a4cd7c41cbc2145da37e928245ba = 'let plus 2 b =       (* This is not real OCaml code! *)\n  2 + b\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 You can kind of see, I hope, why <code>plus 2</code> is the function which adds 2
 to things.</p>
 <p>Looking at the types of these expressions we may be able to see some
 rationale for the strange -\&gt; arrow notation used for function types:</p>
-<pre><code class='ocaml'><script>ml5a7a6cc68fb48706826808aec48ea851 = '    plus : int -&#62; int -&#62; int\n  plus 2 : int -&#62; int\nplus 2 3 : int\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>    plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+<pre><code class='ocaml'>    plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
   plus 2 <span class='o'>:</span> int <span class='k'>-></span> int
 plus 2 3 <span class='o'>:</span> int
-</code></pre>
+<script>ml5a7a6cc68fb48706826808aec48ea851 = '    plus : int -&#62; int -&#62; int\n  plus 2 : int -&#62; int\nplus 2 3 : int\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 This process is called <strong>currying</strong> (or perhaps it&#39;s called
 <strong>uncurrying</strong>, I never was really sure which was which). It is called
@@ -208,45 +208,45 @@ information about currying if it interests you by <a href='http://www.google.com
 Google</a>.</p>
 <p>Remember our <code>double</code> and <code>multiply</code> functions from earlier on?
 <code>multiply</code> was defined as this:</p>
-<pre><code class='ocaml'><script>ml3076322c6c3377108700e30cc011d228 = '  let multiply n list =\n    let f x =\n      n * x in\n    List.map f list\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> multiply n list <span class='k'>=</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> multiply n list <span class='k'>=</span>
     <span class='k'>let</span> f x <span class='k'>=</span>
       n <span class='o'>*</span> x <span class='k'>in</span>
     <span class='m'>List</span><span class='o'>.</span>map f list
-</code></pre>
+<script>ml3076322c6c3377108700e30cc011d228 = '  let multiply n list =\n    let f x =\n      n * x in\n    List.map f list\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 We can now define <code>double</code>, <code>triple</code> &amp;c functions very easily just like
 this:</p>
-<pre><code class='ocaml'><script>mla2c8abfab2eb1614734eb0f45440fb11 = 'let double = multiply 2;;\nlet triple = multiply 3;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
 <span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
-</code></pre>
+<script>mla2c8abfab2eb1614734eb0f45440fb11 = 'let double = multiply 2;;\nlet triple = multiply 3;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 They really are functions, look:</p>
-<pre><code class='ocaml'><script>mlbf10f5f8a7b81cb8a52cb74f0cc845e4 = 'double [1; 2; 3];;\ntriple [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'>double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
-</code></pre>
+<script>mlbf10f5f8a7b81cb8a52cb74f0cc845e4 = 'double [1; 2; 3];;\ntriple [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 You can also use partial application directly (without the intermediate
 <code>f</code> function) like this:</p>
-<pre><code class='ocaml'><script>mlc39d86dac44333252bdb0dda2000a55d = 'let multiply n = List.map (( * ) n);;\nlet double = multiply 2;;\nlet triple = multiply 3;;\ndouble [1; 2; 3];;\ntriple [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> multiply n <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) n)<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> multiply n <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) n)<span class='o'>;;</span>
 <span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
 <span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
 double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
-</code></pre>
+<script>mlc39d86dac44333252bdb0dda2000a55d = 'let multiply n = List.map (( * ) n);;\nlet double = multiply 2;;\nlet triple = multiply 3;;\ndouble [1; 2; 3];;\ntriple [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 In the example above, <code>((*) n)</code> is the partial application of the <code>(*)</code>
 (times) function. Note the extra spaces needed so that OCaml doesn&#39;t
 think <code>(*</code> starts a comment.</p>
 <p>You can put infix operators into brackets to make functions. Here&#39;s an
 identical definition of the <code>plus</code> function as before:</p>
-<pre><code class='ocaml'><script>ml6e23555b581c83067fd1271395d59eea = 'let plus = ( + );;\nplus 2 3;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> plus <span class='k'>=</span> ( <span class='o'>+</span> )<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> plus <span class='k'>=</span> ( <span class='o'>+</span> )<span class='o'>;;</span>
 plus 2 3<span class='o'>;;</span>
-</code></pre>
+<script>ml6e23555b581c83067fd1271395d59eea = 'let plus = ( + );;\nplus 2 3;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Here&#39;s some more currying fun:</p>
-<pre><code class='ocaml'><script>ml2c5d859ddd0ff173814ebe6c6c1a3a12 = 'List.map (plus 2) [1; 2; 3];;\nlet list_of_functions = List.map plus [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='m'>List</span><span class='o'>.</span>map (plus 2) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><span class='m'>List</span><span class='o'>.</span>map (plus 2) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>let</span> list_of_functions <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map plus <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
-</code></pre>
+<script>ml2c5d859ddd0ff173814ebe6c6c1a3a12 = 'List.map (plus 2) [1; 2; 3];;\nlet list_of_functions = List.map plus [1; 2; 3];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <h3 id="Whatisfunctionalprogramminggoodfor"> What is functional programming good for?</h3><p>
 
 Functional programming, like any good programming technique, is a useful
@@ -280,11 +280,11 @@ functions is sometimes useful.</p>
 advantage is that if a function is pure, then if it is called several
 times with the same arguments, the compiler only needs to actually call
 the function once. A good example in C is:</p>
-<pre><code class='ocaml'><script>ml87b3d61f93d69c922c1b098f5da80c77 = 'for (i = 0; i &#60; strlen (s); ++i)\n  {\n    // Do something which doesn&#39;t affect s.\n  }\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> strlen (s)<span class='o'>;</span> <span class='o'>++</span>i)
+<pre><code class='ocaml'><span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> strlen (s)<span class='o'>;</span> <span class='o'>++</span>i)
   <span class='o'>{</span>
     <span class='o'>//</span> Do something which doesn't affect s<span class='o'>.</span>
   <span class='o'>}</span>
-</code></pre>
+<script>ml87b3d61f93d69c922c1b098f5da80c77 = 'for (i = 0; i &#60; strlen (s); ++i)\n  {\n    // Do something which doesn&#39;t affect s.\n  }\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 If naively compiled, this loop is O(n<sup>2</sup>) because <code>strlen (s)</code>
 is called each time and <code>strlen</code> needs to iterate over the whole of <code>s</code>.
@@ -306,9 +306,9 @@ lazy style of programming where it is needed.</p>
 and the results are then passed to the function. For example in a strict
 language, the call <code>give_me_a_three (1/0)</code> is always going to result in
 a divide-by-zero error:</p>
-<pre><code class='ocaml'><script>ml677c04ddae9b9a8318c6eb669747562b = 'let give_me_a_three _ = 3;;\ngive_me_a_three (1/0);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> give_me_a_three <span class='o'>_</span> <span class='k'>=</span> 3<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> give_me_a_three <span class='o'>_</span> <span class='k'>=</span> 3<span class='o'>;;</span>
 give_me_a_three (1<span class='o'>/</span>0)<span class='o'>;;</span>
-</code></pre>
+<script>ml677c04ddae9b9a8318c6eb669747562b = 'let give_me_a_three _ = 3;;\ngive_me_a_three (1/0);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 If you&#39;ve programmed in any conventional language, this is just how
 things work, and you&#39;d be surprised that things could work any other
@@ -326,18 +326,18 @@ first 10 elements).</p>
 <p>OCaml is a strict language, but has a <code>Lazy</code> module that lets you write
 lazy expressions. Here&#39;s an example. First we create a lazy expression
 for <code>1/0</code>:</p>
-<pre><code class='ocaml'><script>ml44ac878369ea6e381ecfa9d1dd9bf2a1 = 'let lazy_expr = lazy (1/0)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> lazy_expr <span class='k'>=</span> <span class='k'>lazy</span> (1<span class='o'>/</span>0)
-</code></pre>
+<pre><code class='ocaml'><span class='k'>let</span> lazy_expr <span class='k'>=</span> <span class='k'>lazy</span> (1<span class='o'>/</span>0)
+<script>ml44ac878369ea6e381ecfa9d1dd9bf2a1 = 'let lazy_expr = lazy (1/0)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 Notice the type of this lazy expression is <code>int lazy_t</code>.</p>
 <p>Because <code>give_me_a_three</code> takes <code>&#39;a</code> (any type) we can pass this lazy
 expression into the function:</p>
-<pre><code class='ocaml'><script>mla47bc3a29a93d2f9c314197de32ded0e = 'give_me_a_three lazy_expr\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>give_me_a_three lazy_expr
-</code></pre>
+<pre><code class='ocaml'>give_me_a_three lazy_expr
+<script>mla47bc3a29a93d2f9c314197de32ded0e = 'give_me_a_three lazy_expr\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 To evaluate a lazy expression, you must use the <code>Lazy.force</code> function:</p>
-<pre><code class='ocaml'><script>ml10478b332460332640bc8c9eabfbba45 = 'Lazy.force lazy_expr\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='m'>Lazy</span><span class='o'>.</span>force lazy_expr
-</code></pre>
+<pre><code class='ocaml'><span class='m'>Lazy</span><span class='o'>.</span>force lazy_expr
+<script>ml10478b332460332640bc8c9eabfbba45 = 'Lazy.force lazy_expr\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <h3 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h3><p>
 
 One term which you&#39;ll hear a lot when discussing functional languages is
@@ -348,7 +348,7 @@ you&#39;ve used C, C++ or Java before (in Perl, everything is boxed).</p>
 been allocated on the heap using <code>malloc</code> in C (or equivalently <code>new</code> in
 C++), and/or is referred to through a pointer. Take a look at this
 example C program:</p>
-<pre><code class='ocaml'><script>ml753365902f62436c040f154d5c2e6446 = '#include &#60;stdio.h&#62;\n\nvoid\nprintit (int *ptr)\n{\n  printf (&#34;the number is %d\n&#34;, *ptr);\n}\n\nvoid\nmain ()\n{\n  int a = 3;\n  int *p = &#38;a;\n\n  printit (p);\n}\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
+<pre><code class='ocaml'><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
 
 void
 printit (int <span class='o'>*</span>ptr)
@@ -364,7 +364,7 @@ main ()
 
   printit (p)<span class='o'>;</span>
 <span class='o'>}</span>
-</code></pre>
+<script>ml753365902f62436c040f154d5c2e6446 = '#include &#60;stdio.h&#62;\n\nvoid\nprintit (int *ptr)\n{\n  printf (&#34;the number is %d\n&#34;, *ptr);\n}\n\nvoid\nmain ()\n{\n  int a = 3;\n  int *p = &#38;a;\n\n  printit (p);\n}\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
 <p>
 The variable <code>a</code> is allocated on the stack, and is quite definitely
 unboxed.</p>
