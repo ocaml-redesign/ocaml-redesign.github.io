@@ -61,7 +61,7 @@ array. It is obtained using the <code>Array.length</code> function.</p>
 <h2 id="Simpleexample"> Simple example</h2><p>
 The following program displays the arguments with their position in
 <code>Sys.argv</code>:</p>
-<pre><code class='ocaml'><script>ml5c774a0aefae31b7816650d99caea288 = 'open Printf\n\nlet () =\n  for i = 0 to Array.length Sys.argv - 1 do\n    printf &#34;[%i] %s\n&#34; i Sys.argv.(i)\n  done\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>open</span> Printf
+<pre><code class='ocaml'><script>ml5c774a0aefae31b7816650d99caea288 = 'open Printf\n\nlet () =\n  for i = 0 to Array.length Sys.argv - 1 do\n    printf &#34;[%i] %s\n&#34; i Sys.argv.(i)\n  done\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>open</span> Printf
 
 <span class='k'>let</span> () <span class='k'>=</span>
   <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> <span class='m'>Array</span><span class='o'>.</span>length <span class='m'>Sys</span><span class='o'>.</span>argv <span class='o'>-</span> 1 <span class='k'>do</span>
@@ -71,7 +71,7 @@ The following program displays the arguments with their position in
 <p>
 If you save the program above as <code>args.ml</code>, and run
 <code>ocaml args.ml arg1 arg2 arg3</code>, here is what you get:</p>
-<pre><code class='ocaml'><script>mla3dcce2086fee733f9ef6fbb92e1fa90 = '[0] args.ml\n[1] arg1\n[2] arg2\n[3] arg3\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
+<pre><code class='ocaml'><script>mla3dcce2086fee733f9ef6fbb92e1fa90 = '[0] args.ml\n[1] arg1\n[2] arg2\n[3] arg3\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
 <span class='o'>[</span>1<span class='o'>]</span> arg1
 <span class='o'>[</span>2<span class='o'>]</span> arg2
 <span class='o'>[</span>3<span class='o'>]</span> arg3
@@ -81,7 +81,7 @@ Note that <code>ocaml</code> launched a subprocess that actually runs the progra
 where argv is <code>args.ml arg1 arg2 arg3</code>. You can also compile your
 program using <code>ocamlopt -o args args.ml</code>, and then run
 <code>./args arg1 arg2 arg3</code> and you will get:</p>
-<pre><code class='ocaml'><script>ml8e7213153af428dc55ceb33bcbb610ab = '[0] ./args\n[1] arg1\n[2] arg2\n[3] arg3\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
+<pre><code class='ocaml'><script>ml8e7213153af428dc55ceb33bcbb610ab = '[0] ./args\n[1] arg1\n[2] arg2\n[3] arg3\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
 <span class='o'>[</span>1<span class='o'>]</span> arg1
 <span class='o'>[</span>2<span class='o'>]</span> arg2
 <span class='o'>[</span>3<span class='o'>]</span> arg3

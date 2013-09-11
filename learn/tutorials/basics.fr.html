@@ -50,7 +50,7 @@
             <h1 id="Notionsdebase"> Notions de base</h1><h2 id="Commentaires"> Commentaires</h2><p>
 
 Les commentaires OCaml sont délimités par <code>(*</code> et <code>*)</code>, comme ceci:</p>
-<pre><code class='ocaml'><script>ml5847c45426ec9270528f6831519321bf = '(* Ceci est une ligne de commentaire. *)\n\n(* Ceci est\n * un commentaire\n * multi-ligne.\n *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(* Ceci est une ligne de commentaire<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml5847c45426ec9270528f6831519321bf = '(* Ceci est une ligne de commentaire. *)\n\n(* Ceci est\n * un commentaire\n * multi-ligne.\n *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(* Ceci est une ligne de commentaire<span class='ic'>.</span> *)</span><!-- end comment -->
 
 <span class='com2'>(* Ceci est</span>
 <span class='com2'> <span class='ic'>*</span> un commentaire</span>
@@ -66,7 +66,7 @@ ligne comme <code># ...</code> en Perl ou <code>// ...</code> en C99/C++/Java. L
 l&#39;équipe d&#39;OCaml d&#39;ajouter ça dans les versions à venir.</p>
 <p>OCaml prend en compte les commentaires imbriqués, ce qui permet
 facilement de mettre des portions de code en commentaire:</p>
-<pre><code class='ocaml'><script>ml9e5cb279be3d87e293b35a3d2a19456e = '(* Ce code n&#39;est pas au point...\n\n(* Test de primalité. *)\nlet is_prime n =\n  (* pense-bête: demander ça aux mailing lists *) XXX;;\n\n*)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(* Ce code n'est pas au point<span class='ic'>...</span></span>
+<pre><code class='ocaml'><script>ml9e5cb279be3d87e293b35a3d2a19456e = '(* Ce code n&#39;est pas au point...\n\n(* Test de primalité. *)\nlet is_prime n =\n  (* pense-bête: demander ça aux mailing lists *) XXX;;\n\n*)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(* Ce code n'est pas au point<span class='ic'>...</span></span>
 <span class='com2'></span>
 <span class='com2'><span class='other'>(* Test de primalité<span class='other'>.</span> *)</span></span>
 <span class='com2'><span class='ic'>let</span> is_prime n <span class='ic'>=</span></span>
@@ -81,7 +81,7 @@ en argument une chaîne de caractères <code>s</code> et un nombre <code>n</code
 nouvelle chaîne de caractères qui contient l&#39;originale répétée <code>n</code> fois.</p>
 <p>Dans la plupart des languages dérivés du C, un appel de fonction
 ressemble à ça :</p>
-<pre><code class='ocaml'><script>ml25114356e69709b1cd1bbd1216c96eac = 'repeated (&#34;hello&#34;, 3)  /* c&#39;est du code C */\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> c'est du code C <span class='o'>*/</span>
+<pre><code class='ocaml'><script>ml25114356e69709b1cd1bbd1216c96eac = 'repeated (&#34;hello&#34;, 3)  /* c&#39;est du code C */\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> c'est du code C <span class='o'>*/</span>
 </code></pre>
 <p>
 Ca veut dire « appelle la fonction <code>repeated</code> avec deux arguments, le
@@ -90,7 +90,7 @@ premier étant la chaîne de caractères hello et le second étant le nombre
 <p>OCaml, tout comme d&#39;autres langages fonctionnels, écrit et parenthèse
 différemment les appels de fonctions, ce qui entraîne bien des erreurs
 au début. Voici le même appel de fonction en OCaml :</p>
-<pre><code class='ocaml'><script>ml43dea9d8fa87a1fc550fc1afa925b724 = 'repeated &#34;hello&#34; 3  (* c&#39;est du code OCaml *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* c'est du code OCaml *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml43dea9d8fa87a1fc550fc1afa925b724 = 'repeated &#34;hello&#34; 3  (* c&#39;est du code OCaml *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* c'est du code OCaml *)</span><!-- end comment -->
 </code></pre>
 <p>
 Notez-bien : <strong>pas</strong> de parenthèses, et <strong>pas</strong> de virgule entre les
@@ -110,7 +110,7 @@ fonctions.</p>
 qui demande à l&#39;utilisateur de taper quelque chose et renvoie la chaîne
 de caractère ainsi entrée. Nous voulons passer cette chaîne de
 caractères à la fonction <code>repeated</code>. Voici les versions C et OCaml :</p>
-<pre><code class='ocaml'><script>mlc999f0eae017b0f2214795524bdd9444 = '/* code C: */\nrepeated (get_string_from_user (&#34;Veuillez entrer une chaîne de caractères.&#34;), 3)\n\n(* code OCaml: *)\nrepeated (get_string_from_user &#34;Veuillez entrer une chaîne de caractères.&#34;) 3\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>/*</span> code C<span class='o'>:</span> <span class='o'>*/</span>
+<pre><code class='ocaml'><script>mlc999f0eae017b0f2214795524bdd9444 = '/* code C: */\nrepeated (get_string_from_user (&#34;Veuillez entrer une chaîne de caractères.&#34;), 3)\n\n(* code OCaml: *)\nrepeated (get_string_from_user &#34;Veuillez entrer une chaîne de caractères.&#34;) 3\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>/*</span> code C<span class='o'>:</span> <span class='o'>*/</span>
 repeated (get_string_from_user (<span class='s'>&#34;Veuillez entrer une chaîne de caractères.&#34;</span>)<span class='o'>,</span> 3)
 
 <span class='com2'>(* code OCaml<span class='ic'>:</span> *)</span><!-- end comment -->
@@ -121,7 +121,7 @@ Soyez attentif au parenthésage et à l&#39;absence de virgules. En général la
 règle est la suivante : « mettez des parenthèses autour de tout l&#39;appel
 de fonction - ne mettez pas de parenthèses autour des arguments passés à
 une fonction ». Voici quelques exemples supplémentaires :</p>
-<pre><code class='ocaml'><script>ml1ecc147af7ee3b550715de6fac209315 = 'f 5 (g &#34;hello&#34;) 3    (* f a 3 arguments, g a un argument *)\nf (g 3 4)            (* f a un argument, g a 2 arguments *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml va repérer l&#39;erreur *)\nThis expression has type string * int but is here used with type string\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f a 3 arguments<span class='ic'>,</span> g a un argument *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml1ecc147af7ee3b550715de6fac209315 = 'f 5 (g &#34;hello&#34;) 3    (* f a 3 arguments, g a un argument *)\nf (g 3 4)            (* f a un argument, g a 2 arguments *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml va repérer l&#39;erreur *)\nThis expression has type string * int but is here used with type string\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f a 3 arguments<span class='ic'>,</span> g a un argument *)</span><!-- end comment -->
 f (g 3 4)            <span class='com2'>(* f a un argument<span class='ic'>,</span> g a 2 arguments *)</span><!-- end comment -->
 
 <span class='o'>#</span> repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)<span class='o'>;;</span>     <span class='com2'>(* OCaml va repérer l'erreur *)</span><!-- end comment -->
@@ -134,13 +134,13 @@ statique, pour ceux qui pensent en Java) dans d&#39;autres langages. Comment
 fait-on ça en OCaml ?</p>
 <p>La syntaxe d&#39;OCaml est agréablement concise. Voici une fonction qui
 prend deux nombres flottants et calcule leur moyenne :</p>
-<pre><code class='ocaml'><script>ml9b4200c801e15cdae50455152cd742b8 = 'let average a b =\n  (a +. b) /. 2.0;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml9b4200c801e15cdae50455152cd742b8 = 'let average a b =\n  (a +. b) /. 2.0;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 </code></pre>
 <p>
 Tapez ceci dans le « toplevel » OCaml (sous Unix, tapez <code>ocaml</code> depuis
 le shell) et voici ce que vous verrez :</p>
-<pre><code class='ocaml'><script>mlec6e840476beeafa6e39badb58876d6b = '# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlec6e840476beeafa6e39badb58876d6b = '# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <span class='k'>val</span> average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 </code></pre>
@@ -159,7 +159,7 @@ mais commençons plutôt par définir la même fonction en C (la version
 Java serait très semblable à la version C), et normalement ça devrait
 soulever encore plus d&#39;interrogations. Voici notre version C de
 <code>average</code>:</p>
-<pre><code class='ocaml'><script>ml915ff3a7f3827153c806b4ebdb53ab28 = 'double\naverage (double a, double b)\n{\n  return (a + b) / 2;\n}\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>double
+<pre><code class='ocaml'><script>ml915ff3a7f3827153c806b4ebdb53ab28 = 'double\naverage (double a, double b)\n{\n  return (a + b) / 2;\n}\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>{</span>
   return (a <span class='o'>+</span> b) <span class='o'>/</span> 2<span class='o'>;</span>
@@ -207,7 +207,7 @@ devriez vous demander :</p>
 chapitres qui suivent.</p>
 <h2 id="Typesdebase"> Types de base</h2><p>
 En OCaml les types de base sont:</p>
-<pre><code class='ocaml'><script>mla69a36f43fe7dfefa84fcfb002a8e489 = 'Type OCaml     Intervalle de définition\n\nint            Entier avec signe 31 bits (environ +/- 1 milliard) avec processeurs 32 bits\n               ou bien 63 bits avec processeurs 64 bits\nfloat          Nombre à virgule flottante double-précision IEEE, équivalent au type double du C\nbool           Un booléen, noté true (vrai) ou false (faux)\nchar           Un caractère à 8 bits\nstring         Une chaîne de caractères à 8 bits\nunit           Valeur unique notée ()\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>Type OCaml     Intervalle de définition
+<pre><code class='ocaml'><script>mla69a36f43fe7dfefa84fcfb002a8e489 = 'Type OCaml     Intervalle de définition\n\nint            Entier avec signe 31 bits (environ +/- 1 milliard) avec processeurs 32 bits\n               ou bien 63 bits avec processeurs 64 bits\nfloat          Nombre à virgule flottante double-précision IEEE, équivalent au type double du C\nbool           Un booléen, noté true (vrai) ou false (faux)\nchar           Un caractère à 8 bits\nstring         Une chaîne de caractères à 8 bits\nunit           Valeur unique notée ()\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>Type OCaml     Intervalle de définition
 
 int            Entier avec signe 31 bits (environ <span class='o'>+/-</span> 1 milliard) avec processeurs 32 bits
                ou bien 63 bits avec processeurs 64 bits
@@ -257,7 +257,7 @@ aviez écrit <code>((double) 1) + 2.5</code>, mais cela s&#39;est fait implicite
 En OCaml, <code>1 + 2.5</code> est une erreur de type. L&#39;opérateur <code>+</code> en OCaml
 requiert deux arguments entiers, et si on lui donne un int et un float,
 il indique cette erreur :</p>
-<pre><code class='ocaml'><script>ml439d798e5a28b0c07b72eb344be9999c = '# 1 + 2.5;;\n      ^^^\nThis expression has type float but is here used with type int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> 1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml439d798e5a28b0c07b72eb344be9999c = '# 1 + 2.5;;\n      ^^^\nThis expression has type float but is here used with type int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>#</span> 1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
       <span class='o'>^^^</span>
 This expression has <span class='k'>type</span> float but is here used <span class='k'>with</span> <span class='k'>type</span> int
 </code></pre>
@@ -267,7 +267,7 @@ Cela signifie &quot;ceci est un float, mais ici j&#39;attendais un int&quot;.</p
 (notez le point qui suit le plus).</p>
 <p>OCaml ne convertit pas les ints en floats automatiquement, donc le code
 suivant est également incorrect :</p>
-<pre><code class='ocaml'><script>mla00123b708a44840f810743ce2fdf7f9 = '# 1 +. 2.5;;\n  ^\nThis expression has type int but is here used with type float\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> 1 <span class='o'>+.</span> 2.5<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mla00123b708a44840f810743ce2fdf7f9 = '# 1 +. 2.5;;\n  ^\nThis expression has type int but is here used with type float\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>#</span> 1 <span class='o'>+.</span> 2.5<span class='o'>;;</span>
   <span class='o'>^</span>
 This expression has <span class='k'>type</span> int but is here used <span class='k'>with</span> <span class='k'>type</span> float
 </code></pre>
@@ -276,7 +276,7 @@ Dans ce cas OCaml se plaint du premier argument.</p>
 <p>Comment faire alors si on veut vraiment ajouter un int à un float ?
 (Supposons qu&#39;ils soient stockés dans des variables appelées <code>i</code> et
 <code>f</code>). En OCaml la conversion doit être explicite :</p>
-<pre><code class='ocaml'><script>ml5519124a8adf36e921c5a51636f74220 = 'float_of_int i +. f;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>float_of_int i <span class='o'>+.</span> f<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml5519124a8adf36e921c5a51636f74220 = 'float_of_int i +. f;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>float_of_int i <span class='o'>+.</span> f<span class='o'>;;</span>
 </code></pre>
 <p>
 <code>float_of_int</code> est une fonction qui prend un <code>int</code> et renvoie un
@@ -287,7 +287,7 @@ ainsi de suite, et elle font essentiellement ce qu&#39;on attend d&#39;elles.</p
 particulièrement courante, la fonction <code>float_of_int</code> a également un
 autre nom, plus court : l&#39;exemple ci-dessus aurait pu simplement être
 écrit</p>
-<pre><code class='ocaml'><script>mlb14008224b3bde881f33ffe309e1b7f2 = 'float i +. f;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>float i <span class='o'>+.</span> f<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlb14008224b3bde881f33ffe309e1b7f2 = 'float i +. f;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>float i <span class='o'>+.</span> f<span class='o'>;;</span>
 </code></pre>
 <p>
 (Remarquez bien que contrairement au C, en OCaml il est parfaitement
@@ -311,7 +311,7 @@ ne vous rapporte pas grand-chose de les cacher.</p>
 Contrairement au langage C et ses dérivés, une fonction en OCaml n&#39;est
 récursive que si vous le précisez en utilisant <code>let rec</code> au lieu de
 seulement <code>let</code>. Voici un exemple de fonction récursive :</p>
-<pre><code class='ocaml'><script>ml8d3b976ae4bdccad81461a92776a0723 = 'let rec range a b =\n  if a &#62; b then []\n  else a :: range (a+1) b\n  ;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let rec</span> range a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml8d3b976ae4bdccad81461a92776a0723 = 'let rec range a b =\n  if a &#62; b then []\n  else a :: range (a+1) b\n  ;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let rec</span> range a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
   <span class='k'>else</span> a <span class='o'>::</span> range (a<span class='o'>+</span>1) b
   <span class='o'>;;</span>
@@ -334,7 +334,7 @@ pense être le type de vos fonctions, donc il vous faut connaître la
 syntax qu&#39;il utilise. Pour une fonction <code>f</code> qui prend comme arguments
 <code>arg1</code>, <code>arg2</code>, ... <code>argn</code>, et retourne quelque chose de type <code>rettype</code>,
 le compilateur affichera :</p>
-<pre><code class='ocaml'><script>mlc91dce8991cf606a9ab5f8017212d389 = 'f : arg1 -&#62; arg2 -&#62; ... -&#62; argn -&#62; rettype\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
+<pre><code class='ocaml'><script>mlc91dce8991cf606a9ab5f8017212d389 = 'f : arg1 -&#62; arg2 -&#62; ... -&#62; argn -&#62; rettype\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
 </code></pre>
 <p>
 Cette syntaxe avec des flèches peut vous paraître étrange pour
@@ -343,37 +343,37 @@ verrez pourquoi ça a été choisi comme ça. Pour le moment, voici
 simplement quelques exemples.</p>
 <p>Notre fonction <code>repeated</code> qui prend une chaîne de caractères et un
 entier et renvoie une chaîne de caractères a le type suivant :</p>
-<pre><code class='ocaml'><script>ml1f953ac359f879a8f8a127576c9767cf = 'repeated : string -&#62; int -&#62; string\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
+<pre><code class='ocaml'><script>ml1f953ac359f879a8f8a127576c9767cf = 'repeated : string -&#62; int -&#62; string\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
 </code></pre>
 <p>
 Notre fonction <code>average</code> qui prend deux flottants et renvoie un flottant
 a le type suivant :</p>
-<pre><code class='ocaml'><script>ml7ca97bbd3afd1a7619a5cfeb8003efcd = 'average : float -&#62; float -&#62; float\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+<pre><code class='ocaml'><script>ml7ca97bbd3afd1a7619a5cfeb8003efcd = 'average : float -&#62; float -&#62; float\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
 </code></pre>
 <p>
 La fonction de conversion OCaml standard <code>int_of_char</code> a le type suivant
 :</p>
-<pre><code class='ocaml'><script>mlec4d6cef975ef06a69744e1c503b249b = 'int_of_char : char -&#62; int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
+<pre><code class='ocaml'><script>mlec4d6cef975ef06a69744e1c503b249b = 'int_of_char : char -&#62; int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
 </code></pre>
 <p>
 Si une fonction ne renvoie rien (<code>void</code> pour les programmeurs C et
 Java), on écrit qu&#39;elle renvoie le type <code>unit</code>. Voici par exemple
 l&#39;équivalent OCaml de <code>fputc</code> :</p>
-<pre><code class='ocaml'><script>ml022005f0c3b6aa427ca4f7f415ac6c0e = 'output_char : out_channel -&#62; char -&#62; unit\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
+<pre><code class='ocaml'><script>ml022005f0c3b6aa427ca4f7f415ac6c0e = 'output_char : out_channel -&#62; char -&#62; unit\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
 </code></pre>
 <h3 id="Fonctionspolymorphes"> Fonctions polymorphes</h3><p>
 
 Voyons maintenant quelqu&#39;un d&#39;un peu plus étrange. Que pensez-vous d&#39;une
 fonction qui prend <em>n&#39;importe quoi</em> comme argument ? Voici une fonction
 bizarre qui prend un argument, l&#39;ignore et renvoie toujours 3 :</p>
-<pre><code class='ocaml'><script>ml73ec459e07ee6e8b8e3017b229cdf10e = 'let give_me_a_three x = 3;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml73ec459e07ee6e8b8e3017b229cdf10e = 'let give_me_a_three x = 3;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3<span class='o'>;;</span>
 </code></pre>
 <p>
 Quel est le type de cette fonction ? En OCaml on utilise une notation
 spéciale pour dire « le type que vous voulez ». C&#39;est un caractères
 apostrophe suivi d&#39;une lettre. Le type de la fonction ci-dessus s&#39;écrit
 donc normalement comme ceci :</p>
-<pre><code class='ocaml'><script>ml987a949589157ee12d3522b6f9bf48c8 = 'give_me_a_three : &#39;a -&#62; int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
+<pre><code class='ocaml'><script>ml987a949589157ee12d3522b6f9bf48c8 = 'give_me_a_three : &#39;a -&#62; int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
 </code></pre>
 <p>
 où <code>&#39;a</code> est mis pour n&#39;importe quel type. Vous pouvez par exemple
@@ -403,7 +403,7 @@ a probablement que les gourous qui auront éventuellement besoin de
 pratiquer ce genre de sport.</p>
 <p>Retournons maintenant à la fonction <code>average</code> que nous avions tapé ainsi
 dans le toplevel :</p>
-<pre><code class='ocaml'><script>mlec6e840476beeafa6e39badb58876d6b = '# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlec6e840476beeafa6e39badb58876d6b = '# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <span class='k'>val</span> average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 </code></pre>
@@ -419,7 +419,7 @@ type <code>float</code>.</p>
 valeur de retour de la fonction <code>average</code>. Donc <code>average</code> doit renvoyer
 un <code>float</code>. En conclusion, le type de <code>average</code> correspond à la
 signature suivante :</p>
-<pre><code class='ocaml'><script>ml7ca97bbd3afd1a7619a5cfeb8003efcd = 'average : float -&#62; float -&#62; float\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+<pre><code class='ocaml'><script>ml7ca97bbd3afd1a7619a5cfeb8003efcd = 'average : float -&#62; float -&#62; float\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
 </code></pre>
 <p>
 L&#39;inférence de types est bien sûr assez simple pour un programme aussi
