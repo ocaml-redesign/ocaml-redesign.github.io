@@ -92,7 +92,7 @@ This note quickly presents two techniques to debug OCaml programs:</p>
 <h2 id="Tracingfunctionscallsinthetoplevel"> Tracing functions calls in the toplevel</h2><p>
 The simplest way to debug programs in the toplevel is to follow the
 function calls, by “tracing” the faulty function:</p>
-<pre><code class='ocaml'><script>val ml6b52ead9551f3ddd62dfa5d83326f19c = '  let rec fib x = if x &#60;= 1 then 1 else fib (x - 1) + fib (x - 2);;&#10;# #trace fib;;&#10;fib is now traced.&#10;# fib 3;;&#10;fib &#60;-- 3&#10;fib &#60;-- 1&#10;fib --&#62; 1&#10;fib &#60;-- 2&#10;fib &#60;-- 0&#10;fib --&#62; 1&#10;fib &#60;-- 1&#10;fib --&#62; 1&#10;fib --&#62; 2&#10;fib --&#62; 3&#10;- : int = 3&#10;# #untrace fib;;&#10;fib is no longer traced.&#10;';</script>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml6b52ead9551f3ddd62dfa5d83326f19c = '  let rec fib x = if x &#60;= 1 then 1 else fib (x - 1) + fib (x - 2);;&#10;# #trace fib;;&#10;fib is now traced.&#10;# fib 3;;&#10;fib &#60;-- 3&#10;fib &#60;-- 1&#10;fib --&#62; 1&#10;fib &#60;-- 2&#10;fib &#60;-- 0&#10;fib --&#62; 1&#10;fib &#60;-- 1&#10;fib --&#62; 1&#10;fib --&#62; 2&#10;fib --&#62; 3&#10;- : int = 3&#10;# #untrace fib;;&#10;fib is no longer traced.&#10;';</script>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
 <span class='o'>#</span> <span class='o'>#</span>trace fib<span class='o'>;;</span>
 fib is now traced<span class='o'>.</span>
 <span class='o'>#</span> fib 3<span class='o'>;;</span>
@@ -115,7 +115,7 @@ fib is no longer traced<span class='o'>.</span>
 A difficulty with polymorphic functions is that the output of the trace
 system is not very informative in case of polymorphic arguments and/or
 results. Consider a sorting algorithm (say bubble sort):</p>
-<pre><code class='ocaml'><script>val ml96a3423010cece730c4338f59b62a05d = '  let exchange i j v =&#10;    let aux = v.(i) in&#10;    v.(i) &#60;- v.(j); v.(j) &#60;- aux;;&#10;  &#10;  let one_pass_vect fin v =&#10;    for j = 1 to fin do&#10;      if v.(j - 1) &#62; v.(j) then exchange (j - 1) j v&#10;    done;;&#10;  &#10;  let bubble_sort_vect v =&#10;    for i = Array.length v - 1 downto 0 do&#10;    one_pass_vect i v&#10;  done;;&#10;&#10;  let q = [| 18; 3; 1 |];;&#10;&#10;# #trace one_pass_vect;;&#10;one_pass_vect is now traced.&#10;# bubble_sort_vect q;;&#10;one_pass_vect &#60;-- 2&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 1&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 0&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]&#10;one_pass_vect* --&#62; ()&#10;- : unit = ()&#10;';</script>  <span class='k'>let</span> exchange i j v <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml96a3423010cece730c4338f59b62a05d = '  let exchange i j v =&#10;    let aux = v.(i) in&#10;    v.(i) &#60;- v.(j); v.(j) &#60;- aux;;&#10;  &#10;  let one_pass_vect fin v =&#10;    for j = 1 to fin do&#10;      if v.(j - 1) &#62; v.(j) then exchange (j - 1) j v&#10;    done;;&#10;  &#10;  let bubble_sort_vect v =&#10;    for i = Array.length v - 1 downto 0 do&#10;    one_pass_vect i v&#10;  done;;&#10;&#10;  let q = [| 18; 3; 1 |];;&#10;&#10;# #trace one_pass_vect;;&#10;one_pass_vect is now traced.&#10;# bubble_sort_vect q;;&#10;one_pass_vect &#60;-- 2&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 1&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 0&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]&#10;one_pass_vect* --&#62; ()&#10;- : unit = ()&#10;';</script>  <span class='k'>let</span> exchange i j v <span class='k'>=</span>
     <span class='k'>let</span> aux <span class='k'>=</span> v<span class='o'>.</span>(i) <span class='k'>in</span>
     v<span class='o'>.</span>(i) <span class='o'>&#60;-</span> v<span class='o'>.</span>(j)<span class='o'>;</span> v<span class='o'>.</span>(j) <span class='o'>&#60;-</span> aux<span class='o'>;;</span>
   
@@ -161,7 +161,7 @@ corrected, you just have to suppress the type constraint to revert to a
 polymorphic version of the function. For our sorting routine, a single
 type constraint on the argument of the <code>exchange</code> function warranties a
 monomorphic typing, that allows a proper trace of function calls:</p>
-<pre><code class='ocaml'><script>val mle3c6cfee70c2eb31cf14ef9fc78c76ec = '# let exchange i j (v : int vect) =&#10;    [...]&#10;exchange : int -&#62; int -&#62; int vect -&#62; unit = &#60;fun&#62;&#10;    [...]&#10;one_pass_vect : int -&#62; int vect -&#62; unit = &#60;fun&#62;&#10;    [...]&#10;bubble_sort_vect : int vect -&#62; unit = &#60;fun&#62;&#10;# #trace one_pass_vect;;&#10;one_pass_vect is now traced.&#10;# let q = [| 18; 3; 1 |];;&#10;q : int vect = [|18; 3; 1|]&#10;# bubble_sort_vect q;;&#10;one_pass_vect &#60;-- 2&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|18; 3; 1|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 1&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|3; 1; 18|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 0&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|1; 3; 18|]&#10;one_pass_vect* --&#62; ()&#10;- : unit = ()&#10;';</script><span class='o'>#</span> <span class='k'>let</span> exchange i j (v <span class='o'>:</span> int vect) <span class='k'>=</span>
+<pre><code class='ocaml'><script>mle3c6cfee70c2eb31cf14ef9fc78c76ec = '# let exchange i j (v : int vect) =&#10;    [...]&#10;exchange : int -&#62; int -&#62; int vect -&#62; unit = &#60;fun&#62;&#10;    [...]&#10;one_pass_vect : int -&#62; int vect -&#62; unit = &#60;fun&#62;&#10;    [...]&#10;bubble_sort_vect : int vect -&#62; unit = &#60;fun&#62;&#10;# #trace one_pass_vect;;&#10;one_pass_vect is now traced.&#10;# let q = [| 18; 3; 1 |];;&#10;q : int vect = [|18; 3; 1|]&#10;# bubble_sort_vect q;;&#10;one_pass_vect &#60;-- 2&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|18; 3; 1|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 1&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|3; 1; 18|]&#10;one_pass_vect* --&#62; ()&#10;one_pass_vect &#60;-- 0&#10;one_pass_vect --&#62; &#60;fun&#62;&#10;one_pass_vect* &#60;-- [|1; 3; 18|]&#10;one_pass_vect* --&#62; ()&#10;- : unit = ()&#10;';</script><span class='o'>#</span> <span class='k'>let</span> exchange i j (v <span class='o'>:</span> int vect) <span class='k'>=</span>
     <span class='o'>[</span><span class='o'>...</span><span class='o'>]</span>
 exchange <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int vect <span class='k'>-></span> unit <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
     <span class='o'>[</span><span class='o'>...</span><span class='o'>]</span>
@@ -216,7 +216,7 @@ native Windows ports of OCaml (but it runs under the Cygwin port.</p>
 <h3 id="Launchingthedebugger"> Launching the debugger</h3><p>
 Consider the following obviously wrong program written in the file
 <code>uncaught.ml</code>:</p>
-<pre><code class='ocaml'><script>val ml7cec6ab7a52300ffc0c3d775b4672291 = '(* file uncaught.ml *)&#10;let l = ref [];;&#10;let find_address name = List.assoc name !l;;&#10;let add_address name address = l := (name, address) :: ! l;;&#10;add_address &#34;IRIA&#34; &#34;Rocquencourt&#34;;;&#10;print_string (find_address &#34;INRIA&#34;); print_newline ();;&#10;';</script><span class='com2'>(* file uncaught<span class='ic'>.</span>ml *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml7cec6ab7a52300ffc0c3d775b4672291 = '(* file uncaught.ml *)&#10;let l = ref [];;&#10;let find_address name = List.assoc name !l;;&#10;let add_address name address = l := (name, address) :: ! l;;&#10;add_address &#34;IRIA&#34; &#34;Rocquencourt&#34;;;&#10;print_string (find_address &#34;INRIA&#34;); print_newline ();;&#10;';</script><span class='com2'>(* file uncaught<span class='ic'>.</span>ml *)</span><!-- end comment -->
 <span class='k'>let</span> l <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>let</span> find_address name <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>assoc name <span class='o'>!</span>l<span class='o'>;;</span>
 <span class='k'>let</span> add_address name address <span class='k'>=</span> l <span class='o'>:=</span> (name<span class='o'>,</span> address) <span class='o'>::</span> <span class='o'>!</span> l<span class='o'>;;</span>
@@ -231,23 +231,23 @@ can proceed as follows:</p>
  <li>we compile the program in debug mode:<br /></li>
 </ol>
 
-<pre><code class='ocaml'><script>val ml912334278196c864807fe0e8289c32b4 = 'ocamlc -g uncaught.ml&#10;';</script>ocamlc <span class='o'>-</span>g uncaught<span class='o'>.</span>ml
+<pre><code class='ocaml'><script>ml912334278196c864807fe0e8289c32b4 = 'ocamlc -g uncaught.ml&#10;';</script>ocamlc <span class='o'>-</span>g uncaught<span class='o'>.</span>ml
 </code></pre>
 <ol>
  <li>we launch the debugger:</li>
 </ol>
 
-<pre><code class='ocaml'><script>val mlba2b65be0d3ff8228911462cac61fc85 = 'ocamldebug a.out&#10;';</script>ocamldebug a<span class='o'>.</span>out
+<pre><code class='ocaml'><script>mlba2b65be0d3ff8228911462cac61fc85 = 'ocamldebug a.out&#10;';</script>ocamldebug a<span class='o'>.</span>out
 </code></pre>
 <p>Then the debugger answers with a banner and a prompt:</p>
-<pre><code class='ocaml'><script>val ml7c36e34619117eb32533b53faae2b69f = '        OCaml Debugger version 4.00.1&#10;&#10;(ocd)&#10;';</script>        OCaml Debugger version 4.00<span class='o'>.</span>1
+<pre><code class='ocaml'><script>ml7c36e34619117eb32533b53faae2b69f = '        OCaml Debugger version 4.00.1&#10;&#10;(ocd)&#10;';</script>        OCaml Debugger version 4.00<span class='o'>.</span>1
 
 (ocd)
 </code></pre>
 <h3 id="Findingthecauseofaspuriousexception"> Finding the cause of a spurious exception</h3><p>
 
 Type <code>r</code> (for <em>run</em>); you get</p>
-<pre><code class='ocaml'><script>val ml4a0881bb0604eba626a60b219792849e = '(ocd) r&#10;Loading program... done.&#10;Time : 12&#10;Program end.&#10;Uncaught exception: Not_found&#10;(ocd)&#10;';</script>(ocd) r
+<pre><code class='ocaml'><script>ml4a0881bb0604eba626a60b219792849e = '(ocd) r&#10;Loading program... done.&#10;Time : 12&#10;Program end.&#10;Uncaught exception: Not_found&#10;(ocd)&#10;';</script>(ocd) r
 Loading program<span class='o'>...</span> <span class='k'>done</span><span class='o'>.</span>
 Time <span class='o'>:</span> 12
 Program <span class='k'>end</span><span class='o'>.</span>
@@ -258,7 +258,7 @@ Uncaught <span class='k'>exception</span><span class='o'>:</span> Not_found
 Self explanatory, is&#39;nt it? So, you want to step backward to set the
 program counter before the time the exception is raised; hence type in
 <code>b</code> as <em>backstep</em>, and you get</p>
-<pre><code class='ocaml'><script>val ml321f5d4412a0c60c09b9c1b55609535c = '(ocd) b&#10;Time : 11 - pc : 15500 - module List&#10;143     [] -&#62; &#60;|b|&#62;raise Not_found&#10;';</script>(ocd) b
+<pre><code class='ocaml'><script>ml321f5d4412a0c60c09b9c1b55609535c = '(ocd) b&#10;Time : 11 - pc : 15500 - module List&#10;143     [] -&#62; &#60;|b|&#62;raise Not_found&#10;';</script>(ocd) b
 Time <span class='o'>:</span> 11 <span class='o'>-</span> pc <span class='o'>:</span> 15500 <span class='o'>-</span> <span class='k'>module</span> List
 143     <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>&#60;|</span>b<span class='o'>|&#62;</span>raise Not_found
 </code></pre>
@@ -270,14 +270,14 @@ expression (as witnessed by the <code>&lt;|b|&gt;</code> mark).</p>
 <p>But, as you know, you want the debugger to tell you which procedure
 calls the one from <code>List</code>, and also who calls the procedure that calls
 the one from <code>List</code>; hence, you want a backtrace of the execution stack:</p>
-<pre><code class='ocaml'><script>val mlea2797a036c21f48808c60d7329071be = '(ocd) bt&#10;#0  Pc : 15500  List char 3562&#10;#1  Pc : 19128  Uncaught char 221&#10;';</script>(ocd) bt
+<pre><code class='ocaml'><script>mlea2797a036c21f48808c60d7329071be = '(ocd) bt&#10;#0  Pc : 15500  List char 3562&#10;#1  Pc : 19128  Uncaught char 221&#10;';</script>(ocd) bt
 <span class='o'>#</span>0  Pc <span class='o'>:</span> 15500  List char 3562
 <span class='o'>#</span>1  Pc <span class='o'>:</span> 19128  Uncaught char 221
 </code></pre>
 <p>
 So the last function called is from module <code>List</code> at character 3562,
 that is :</p>
-<pre><code class='ocaml'><script>val ml2685e01bff7b59258735fc568a384d9e = 'let rec assoc x = function&#10;    [] -&#62; raise Not_found&#10;          ^&#10;  | (a,b)::l -&#62; if a = x then b else assoc x l&#10;';</script><span class='k'>let rec</span> assoc x <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>ml2685e01bff7b59258735fc568a384d9e = 'let rec assoc x = function&#10;    [] -&#62; raise Not_found&#10;          ^&#10;  | (a,b)::l -&#62; if a = x then b else assoc x l&#10;';</script><span class='k'>let rec</span> assoc x <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> raise Not_found
           <span class='o'>^</span>
   <span class='o'>|</span> (a<span class='o'>,</span>b)<span class='o'>::</span>l <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> x <span class='k'>then</span> b <span class='k'>else</span> assoc x l
@@ -285,7 +285,7 @@ that is :</p>
 <p>
 The function that calls it is in module <code>Uncaught</code>, file <code>uncaught.ml</code>
 char 221:</p>
-<pre><code class='ocaml'><script>val ml7411b075ca1a389a831cc0a263729a2c = 'print_string (find_address &#34;INRIA&#34;); print_newline ();;&#10;                                  ^&#10;';</script>print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml7411b075ca1a389a831cc0a263729a2c = 'print_string (find_address &#34;INRIA&#34;); print_newline ();;&#10;                                  ^&#10;';</script>print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
                                   <span class='o'>^</span>
 </code></pre>
 <p>
@@ -296,7 +296,7 @@ find a spurious exception you just need to type <code>ocamldebug a.out</code>, t
 <h3 id="Gettinghelpandinfointhedebugger"> Getting help and info in the debugger</h3><p>
 To get more info about the current status of the debugger you can ask it
 directly at the toplevel prompt of the debugger; for instance:</p>
-<pre><code class='ocaml'><script>val ml79d191d0da2d3541a007ddced9bdbe9a = '(ocd) info breakpoints&#10;No breakpoint.&#10;&#10;(ocd) help break&#10;  1      15396  in List, character 3539&#10;break : Set breakpoint at specified line or function.&#10;Syntax: break function-name&#10;break @ [module] linenum&#10;break @ [module] # characternum&#10;';</script>(ocd) info breakpoints
+<pre><code class='ocaml'><script>ml79d191d0da2d3541a007ddced9bdbe9a = '(ocd) info breakpoints&#10;No breakpoint.&#10;&#10;(ocd) help break&#10;  1      15396  in List, character 3539&#10;break : Set breakpoint at specified line or function.&#10;Syntax: break function-name&#10;break @ [module] linenum&#10;break @ [module] # characternum&#10;';</script>(ocd) info breakpoints
 No breakpoint<span class='o'>.</span>
 
 (ocd) help break
@@ -310,7 +310,7 @@ break <span class='o'>@</span> <span class='o'>[</span><span class='k'>module</s
 
 Let&#39;s set up a breakpoint and rerun the entire program from the
 beginning (<code>(g)oto 0</code> then <code>(r)un</code>):</p>
-<pre><code class='ocaml'><script>val ml915c919784878053079f7cf1333946b2 = '(ocd) break @Uncaught 9&#10;Breakpoint 3 at 19112 : file Uncaught, line 9 column 34&#10;&#10;(ocd) g 0&#10;Time : 0&#10;Beginning of program.&#10;&#10;(ocd) r&#10;Time : 6 - pc : 19112 - module Uncaught&#10;Breakpoint : 1&#10;9 add &#34;IRIA&#34; &#34;Rocquencourt&#34;&#60;|a|&#62;;;&#10;';</script>(ocd) break <span class='o'>@</span>Uncaught 9
+<pre><code class='ocaml'><script>ml915c919784878053079f7cf1333946b2 = '(ocd) break @Uncaught 9&#10;Breakpoint 3 at 19112 : file Uncaught, line 9 column 34&#10;&#10;(ocd) g 0&#10;Time : 0&#10;Beginning of program.&#10;&#10;(ocd) r&#10;Time : 6 - pc : 19112 - module Uncaught&#10;Breakpoint : 1&#10;9 add &#34;IRIA&#34; &#34;Rocquencourt&#34;&#60;|a|&#62;;;&#10;';</script>(ocd) break <span class='o'>@</span>Uncaught 9
 Breakpoint 3 at 19112 <span class='o'>:</span> file Uncaught<span class='o'>,</span> line 9 column 34
 
 (ocd) g 0
@@ -325,7 +325,7 @@ Breakpoint <span class='o'>:</span> 1
 <p>
 Then, we can step and find what happens when <code>find_address</code> is about to
 be called</p>
-<pre><code class='ocaml'><script>val ml4468c47de16f1b56a4da90c028a7860b = '(ocd) s&#10;Time : 7 - pc : 19012 - module Uncaught&#10;5 let find_address name = &#60;|b|&#62;List.assoc name !l;;&#10;&#10;(ocd) p name&#10;name : string = &#34;INRIA&#34;&#10;&#10;(ocd) p !l&#10;$1 : (string * string) list = [&#34;IRIA&#34;, &#34;Rocquencourt&#34;]&#10;(ocd)&#10;';</script>(ocd) s
+<pre><code class='ocaml'><script>ml4468c47de16f1b56a4da90c028a7860b = '(ocd) s&#10;Time : 7 - pc : 19012 - module Uncaught&#10;5 let find_address name = &#60;|b|&#62;List.assoc name !l;;&#10;&#10;(ocd) p name&#10;name : string = &#34;INRIA&#34;&#10;&#10;(ocd) p !l&#10;$1 : (string * string) list = [&#34;IRIA&#34;, &#34;Rocquencourt&#34;]&#10;(ocd)&#10;';</script>(ocd) s
 Time <span class='o'>:</span> 7 <span class='o'>-</span> pc <span class='o'>:</span> 19012 <span class='o'>-</span> <span class='k'>module</span> Uncaught
 5 <span class='k'>let</span> find_address name <span class='k'>=</span> <span class='o'>&#60;|</span>b<span class='o'>|&#62;</span><span class='m'>List</span><span class='o'>.</span>assoc name <span class='o'>!</span>l<span class='o'>;;</span>
 

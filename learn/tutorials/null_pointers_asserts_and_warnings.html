@@ -80,7 +80,7 @@ of visitors is 7½ years old, and you employ web designers to remove all
 the long words and use primary colours everywhere.</p>
 <p>The other, correct method is to store the age in a field which has type
 &quot;int or null&quot;. Here&#39;s a SQL table for storing ages:</p>
-<pre><code class='ocaml'><script>val mlda36ba417a9334fec043358bf5266e36 = 'create table users&#10;(&#10;  userid serial,&#10;  name text not null,&#10;  age int             -- may be null&#10;);&#10;';</script>create table users
+<pre><code class='ocaml'><script>mlda36ba417a9334fec043358bf5266e36 = 'create table users&#10;(&#10;  userid serial,&#10;  name text not null,&#10;  age int             -- may be null&#10;);&#10;';</script>create table users
 (
   userid serial<span class='o'>,</span>
   name text not null<span class='o'>,</span>
@@ -103,21 +103,21 @@ be null, you&#39;d have to first box it up into an object allocated by
 <code>malloc</code> on the heap.</p>
 <p>OCaml has an elegant solution to the problem of nulls, using a simple
 polymorphic variant type defined (in <code>Pervasives</code>) as:</p>
-<pre><code class='ocaml'><script>val ml5277519b3ecea98fc7caed24bd7f4add = '  type &#39;a option = None | Some of &#39;a&#10;';</script>  <span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
+<pre><code class='ocaml'><script>ml5277519b3ecea98fc7caed24bd7f4add = '  type &#39;a option = None | Some of &#39;a&#10;';</script>  <span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
 </code></pre>
 <p>
 A &quot;null pointer&quot; is written <code>None</code>. The type of age in our example above
 (an <code>int</code> which can be null) is <code>int option</code> [remember: backwards like
 <code>int list</code> and <code>int binary_tree</code>].</p>
-<pre><code class='ocaml'><script>val ml2b63acad14f818f8574d67b17c62d78c = '  Some 3&#10;';</script>  Some 3
+<pre><code class='ocaml'><script>ml2b63acad14f818f8574d67b17c62d78c = '  Some 3&#10;';</script>  Some 3
 </code></pre>
 <p>
 What about a list of optional ints?</p>
-<pre><code class='ocaml'><script>val mlc5f043889ef2a1366d594e435cdf2b2f = '  [ None; Some 3; Some 6; None ]&#10;';</script>  <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span>
+<pre><code class='ocaml'><script>mlc5f043889ef2a1366d594e435cdf2b2f = '  [ None; Some 3; Some 6; None ]&#10;';</script>  <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span>
 </code></pre>
 <p>
 And what about an optional list of ints?</p>
-<pre><code class='ocaml'><script>val ml243ee6711eb24a0dfcfa23a8df3c9e72 = '  Some [1; 2; 3]&#10;';</script>  Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>
+<pre><code class='ocaml'><script>ml243ee6711eb24a0dfcfa23a8df3c9e72 = '  Some [1; 2; 3]&#10;';</script>  Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>
 </code></pre>
 <h2 id="Assertwarningsfatalerrorsandprintingtostderr"> Assert, warnings, fatal errors, and printing to stderr</h2><p>
 
@@ -132,7 +132,7 @@ exception. Assuming that you don&#39;t catch this exception (it&#39;s probably
 unwise to catch this exception, particularly for beginners), this
 results in the program stopping and printing out the source file and
 line number where the error occurred. An example:</p>
-<pre><code class='ocaml'><script>val mlc676c3104f64752ff21b57ab9795d363 = '  assert (Sys.os_type = &#34;Win32&#34;)&#10;';</script>  <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)
+<pre><code class='ocaml'><script>mlc676c3104f64752ff21b57ab9795d363 = '  assert (Sys.os_type = &#34;Win32&#34;)&#10;';</script>  <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)
 </code></pre>
 <p>
 (Running this on Win32, of course, won&#39;t throw an error).</p>
@@ -142,7 +142,7 @@ just aren&#39;t going well, but you&#39;re probably better to use ...</p>
 assuming you don&#39;t try to catch it, will stop the program with the given
 error message. <code>failwith</code> is often used during pattern matching, like
 this real example:</p>
-<pre><code class='ocaml'><script>val ml4de2f8cec4e85cbab088854a6394ce4c = 'match Sys.os_type with&#10;| &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omitted *)&#10;| &#34;Win32&#34; -&#62;             (* code omitted *)&#10;| &#34;MacOS&#34; -&#62;             (* code omitted *)&#10;| _ -&#62; failwith &#34;this system is not supported&#34;&#10;';</script><span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
+<pre><code class='ocaml'><script>ml4de2f8cec4e85cbab088854a6394ce4c = 'match Sys.os_type with&#10;| &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omitted *)&#10;| &#34;Win32&#34; -&#62;             (* code omitted *)&#10;| &#34;MacOS&#34; -&#62;             (* code omitted *)&#10;| _ -&#62; failwith &#34;this system is not supported&#34;&#10;';</script><span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
 <span class='o'>|</span> <span class='s'>&#34;Unix&#34;</span> <span class='o'>|</span> <span class='s'>&#34;Cygwin&#34;</span> <span class='k'>-></span>   <span class='com2'>(* code omitted *)</span><!-- end comment -->
 <span class='o'>|</span> <span class='s'>&#34;Win32&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omitted *)</span><!-- end comment -->
 <span class='o'>|</span> <span class='s'>&#34;MacOS&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omitted *)</span><!-- end comment -->
@@ -155,7 +155,7 @@ so-called &quot;range pattern&quot; is used to match either <code>&quot;Unix&quo
 <p>If you want to debug your program, but, like me, you have an aversion to
 debuggers which aren&#39;t gdb, then you&#39;ll probably want to print out a
 warning some way through your function. Here&#39;s an example:</p>
-<pre><code class='ocaml'><script>val mld9caa3d01ea1d1bd6b8f99852eb9286e = 'open Graphics&#10;&#10;let () =&#10;  open_graph &#34; 640x480&#34;;&#10;  for i = 12 downto 1 do&#10;    let radius = i * 20 in&#10;    prerr_endline (&#34;radius is &#34; ^ string_of_int radius);&#10;    set_color (if i mod 2 = 0 then red else yellow);&#10;    fill_circle 320 240 radius&#10;  done;&#10;  read_line ()&#10;';</script><span class='k'>open</span> Graphics
+<pre><code class='ocaml'><script>mld9caa3d01ea1d1bd6b8f99852eb9286e = 'open Graphics&#10;&#10;let () =&#10;  open_graph &#34; 640x480&#34;;&#10;  for i = 12 downto 1 do&#10;    let radius = i * 20 in&#10;    prerr_endline (&#34;radius is &#34; ^ string_of_int radius);&#10;    set_color (if i mod 2 = 0 then red else yellow);&#10;    fill_circle 320 240 radius&#10;  done;&#10;  read_line ()&#10;';</script><span class='k'>open</span> Graphics
 
 <span class='k'>let</span> () <span class='k'>=</span>
   open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;</span>
@@ -170,7 +170,7 @@ warning some way through your function. Here&#39;s an example:</p>
 <p>
 If you prefer C-style <code>printf</code>&#39;s then try using OCaml&#39;s <code>Printf</code> module
 instead:</p>
-<pre><code class='ocaml'><script>val ml450802ca896fcac02c409f0921a2514c = 'open Graphics&#10;open Printf&#10;&#10;let () =&#10;  open_graph &#34; 640x480&#34;;&#10;  for i = 12 downto 1 do&#10;    let radius = i * 20 in&#10;    eprintf &#34;radius is %d\n&#34; radius;&#10;    set_color (if i mod 2 = 0 then red else yellow);&#10;    fill_circle 320 240 radius&#10;  done;&#10;  read_line ()&#10;&#10;';</script><span class='k'>open</span> Graphics
+<pre><code class='ocaml'><script>ml450802ca896fcac02c409f0921a2514c = 'open Graphics&#10;open Printf&#10;&#10;let () =&#10;  open_graph &#34; 640x480&#34;;&#10;  for i = 12 downto 1 do&#10;    let radius = i * 20 in&#10;    eprintf &#34;radius is %d\n&#34; radius;&#10;    set_color (if i mod 2 = 0 then red else yellow);&#10;    fill_circle 320 240 radius&#10;  done;&#10;  read_line ()&#10;&#10;';</script><span class='k'>open</span> Graphics
 <span class='k'>open</span> Printf
 
 <span class='k'>let</span> () <span class='k'>=</span>

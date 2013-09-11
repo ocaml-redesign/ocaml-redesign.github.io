@@ -60,7 +60,7 @@ rileverò.</p>
 <h3 id="quotVariabiliquotlocaliinrealtespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3><p>
 Prendiamo la funzione <code>average</code> ed aggiungiamovi una variabile locale in
 C. (Confrontatela con la prima definizione che ne avevamo sopra).</p>
-<pre><code class='ocaml'><script>val mld9c0b5244e56de408dd9912a1fb481c1 = 'double&#10;average (double a, double b)&#10;{&#10;  double sum = a + b;&#10;  return sum / 2;&#10;}&#10;';</script>double
+<pre><code class='ocaml'><script>mld9c0b5244e56de408dd9912a1fb481c1 = 'double&#10;average (double a, double b)&#10;{&#10;  double sum = a + b;&#10;  return sum / 2;&#10;}&#10;';</script>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>{</span>
   double sum <span class='k'>=</span> a <span class='o'>+</span> b<span class='o'>;</span>
@@ -69,7 +69,7 @@ average (double a<span class='o'>,</span> double b)
 </code></pre>
 <p>
 Faccia ora lo stesso con la nostra versione in OCaml:</p>
-<pre><code class='ocaml'><script>val mle7b8a5bd99161b8f6a5f55eca9b1b61d = 'let average a b =&#10;  let sum = a +. b in&#10;  sum /. 2.0;;&#10;';</script><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>mle7b8a5bd99161b8f6a5f55eca9b1b61d = 'let average a b =&#10;  let sum = a +. b in&#10;  sum /. 2.0;;&#10;';</script><span class='k'>let</span> average a b <span class='k'>=</span>
   <span class='k'>let</span> sum <span class='k'>=</span> a <span class='o'>+.</span> b <span class='k'>in</span>
   sum <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 </code></pre>
@@ -112,7 +112,7 @@ Potete anche definire nomi globali per cose al livello superiore, e come
 le nostre &quot;variabili&quot; locali sopra queste non sono affatto realmente
 variabili, ma soltanto nomi abbreviati per queste cose. Ecco un esempio
 reale (ma ridotto):</p>
-<pre><code class='ocaml'><script>val ml2bd72982fd44231139908b8e7954b43e = 'let html =&#10;  let content = read_whole_file file in&#10;  GHtml.html_from_string content&#10;  ;;&#10;&#10;let menu_bold () =&#10;  match bold_button#active with&#10;    true -&#62; html#set_font_style ~enable:[`BOLD] ()&#10;  | false -&#62; html#set_font_style ~disable:[`BOLD] ()&#10;  ;;&#10;&#10;let main () =&#10;  (* codice omesso *)&#10;  factory#add_item &#34;Cut&#34; ~key:_X ~callback: html#cut&#10;  ;;&#10;';</script><span class='k'>let</span> html <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml2bd72982fd44231139908b8e7954b43e = 'let html =&#10;  let content = read_whole_file file in&#10;  GHtml.html_from_string content&#10;  ;;&#10;&#10;let menu_bold () =&#10;  match bold_button#active with&#10;    true -&#62; html#set_font_style ~enable:[`BOLD] ()&#10;  | false -&#62; html#set_font_style ~disable:[`BOLD] ()&#10;  ;;&#10;&#10;let main () =&#10;  (* codice omesso *)&#10;  factory#add_item &#34;Cut&#34; ~key:_X ~callback: html#cut&#10;  ;;&#10;';</script><span class='k'>let</span> html <span class='k'>=</span>
   <span class='k'>let</span> content <span class='k'>=</span> read_whole_file file <span class='k'>in</span>
   <span class='m'>GHtml</span><span class='o'>.</span>html_from_string content
   <span class='o'>;;</span>
@@ -152,7 +152,7 @@ ai puntatori in C/C++. In Java, tutte le variabili che immagazzinano
 oggetti sono in realtà riferiment (puntatori) agli oggetti. In Perl, i
 riferimenti sono riferimenti - la medesima cosa che sono in OCaml.</p>
 <p>Ecco come creiamo un riferimento ad un <code>int</code> in OCaml:</p>
-<pre><code class='ocaml'><script>val ml01ea4b6c6ad116533b3a2a32f107f5fc = 'ref 0;;&#10;';</script>ref 0<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml01ea4b6c6ad116533b3a2a32f107f5fc = 'ref 0;;&#10;';</script>ref 0<span class='o'>;;</span>
 </code></pre>
 <p>
 In realtà tale istruzione non era veramente molto utile. Abbiamo creato
@@ -160,23 +160,23 @@ il riferimento e quindi, poiché che non gli abbiamo dato un nome, il
 garbage collector è arrivato e l&#39;ha raccolto immediatamente dopo! (in
 realtà, è stato probabilmente gettato via durante la compilazione.)
 Diamo un nome al riferimento:</p>
-<pre><code class='ocaml'><script>val ml2a25fc9a3e9613ab7482618b7c23b7ec = 'let my_ref = ref 0;;&#10;';</script><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml2a25fc9a3e9613ab7482618b7c23b7ec = 'let my_ref = ref 0;;&#10;';</script><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
 </code></pre>
 <p>
 Questo riferimento sta attualmente immagazzinando un intero pari a zero.
 Mettiamoci dentro qualcosa d&#39;altro (assegnamento):</p>
-<pre><code class='ocaml'><script>val ml4c28e0ca368d7960c92b306cd6216b77 = 'my_ref := 100;;&#10;';</script>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml4c28e0ca368d7960c92b306cd6216b77 = 'my_ref := 100;;&#10;';</script>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
 </code></pre>
 <p>
 E troviamo che cosa contiene ora il riferimento:</p>
-<pre><code class='ocaml'><script>val ml268edc45f79387af51fb74249e091575 = '# !my_ref;;&#10;- : int = 100&#10;';</script><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml268edc45f79387af51fb74249e091575 = '# !my_ref;;&#10;- : int = 100&#10;';</script><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 100
 </code></pre>
 <p>
 Quindi l&#39;operatore <code>:=</code> è utilizzato per fare assegnamenti a
 riferimenti, e l&#39;operatore <code>!</code> dereferenzia per ottenere i contenuti.
 Ecco un pronto ed approssimativo confronto con C/C++:</p>
-<pre><code class='ocaml'><script>val ml7804bc5b6a3f975f7d113b6927d03e76 = 'OCaml                   C/C++&#10;&#10;let my_ref = ref 0;;    int a = 0; int *my_ptr = &#38;a;&#10;my_ref := 100;;         *my_ptr = 100;&#10;!my_ref                 *my_ptr&#10;';</script>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
+<pre><code class='ocaml'><script>ml7804bc5b6a3f975f7d113b6927d03e76 = 'OCaml                   C/C++&#10;&#10;let my_ref = ref 0;;    int a = 0; int *my_ptr = &#38;a;&#10;my_ref := 100;;         *my_ptr = 100;&#10;!my_ref                 *my_ptr&#10;';</script>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
 
 <span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>    int a <span class='k'>=</span> 0<span class='o'>;</span> int <span class='o'>*</span>my_ptr <span class='k'>=</span> <span class='o'>&#38;</span>a<span class='o'>;</span>
 my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>         <span class='o'>*</span>my_ptr <span class='k'>=</span> 100<span class='o'>;</span>
@@ -214,7 +214,7 @@ Ciò è detto &quot;scoping lessicale&quot; (&quot;lexical scoping&quot; nell&#3
 Ad esempio, mostriamo qui una funzione annidata che utilizza una
 variabile ereditata chiamata </code></pre>
 <p>offset&#39;:</p>
-<pre><code class='ocaml'><script>val mlbe290664f7d3c72bb3e00e373660d47b = 'bar (int *array, int offset, int size)&#10;{&#10;  int access (int *array, int index)&#10;    { return array[index + offset]; }&#10;  int i;&#10;  /* ... */&#10;  for (i = 0; i &#60; size; i++)&#10;    /* ... */ access (array, i) /* ... */&#10;}&#10;';</script>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
+<pre><code class='ocaml'><script>mlbe290664f7d3c72bb3e00e373660d47b = 'bar (int *array, int offset, int size)&#10;{&#10;  int access (int *array, int index)&#10;    { return array[index + offset]; }&#10;  int i;&#10;  /* ... */&#10;  for (i = 0; i &#60; size; i++)&#10;    /* ... */ access (array, i) /* ... */&#10;}&#10;';</script>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
 <span class='o'>{</span>
   int access (int <span class='o'>*</span>array<span class='o'>,</span> int index)
     <span class='o'>{</span> return array<span class='o'>[</span>index <span class='o'>+</span> offset<span class='o'>]</span><span class='o'>;</span> <span class='o'>}</span>
@@ -228,7 +228,7 @@ variabile ereditata chiamata </code></pre>
 Afferrate l&#39;idea. Le funzioni annidate sono tuttavia molto utili e molto
 diffusamente utilizzate in OCaml. Ecco un esempio di funzione annidata
 proveniente da codice reale:</p>
-<pre><code class='ocaml'><script>val mldf3cfaff5d3f8382a4152258f253a50e = 'let read_whole_channel chan =&#10;  let buf = Buffer.create 4096 in&#10;  let rec loop () =&#10;    let newline = input_line chan in&#10;    Buffer.add_string buf newline;&#10;    Buffer.add_char buf &#39;\n&#39;;&#10;    loop ()&#10;  in&#10;  try&#10;    loop ()&#10;  with&#10;    End_of_file -&#62; Buffer.contents buf;;&#10;';</script><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
+<pre><code class='ocaml'><script>mldf3cfaff5d3f8382a4152258f253a50e = 'let read_whole_channel chan =&#10;  let buf = Buffer.create 4096 in&#10;  let rec loop () =&#10;    let newline = input_line chan in&#10;    Buffer.add_string buf newline;&#10;    Buffer.add_char buf &#39;\n&#39;;&#10;    loop ()&#10;  in&#10;  try&#10;    loop ()&#10;  with&#10;    End_of_file -&#62; Buffer.contents buf;;&#10;';</script><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
   <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 4096 <span class='k'>in</span>
   <span class='k'>let rec</span> loop () <span class='k'>=</span>
     <span class='k'>let</span> newline <span class='k'>=</span> input_line chan <span class='k'>in</span>
@@ -264,7 +264,7 @@ chiamate di sistema POSIX. Tali librerie sono collocate in
 <code>/usr/lib/ocaml/VERSIONE/</code> (negli Unix comunque). Per questi esempi ci
 concentreremo su un modulo piuttosto semplice chiamato <code>Graphics</code>.</p>
 <p>Il modulo <code>Graphics</code> è installato in 5 file (sul mio sistema):</p>
-<pre><code class='ocaml'><script>val mlfde383a84d1424fa97e6f5f8da5c615f = '/usr/lib/ocaml/3.08/graphics.a&#10;/usr/lib/ocaml/3.08/graphics.cma&#10;/usr/lib/ocaml/3.08/graphics.cmi&#10;/usr/lib/ocaml/3.08/graphics.cmxa&#10;/usr/lib/ocaml/3.08/graphics.mli&#10;';</script><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
+<pre><code class='ocaml'><script>mlfde383a84d1424fa97e6f5f8da5c615f = '/usr/lib/ocaml/3.08/graphics.a&#10;/usr/lib/ocaml/3.08/graphics.cma&#10;/usr/lib/ocaml/3.08/graphics.cmi&#10;/usr/lib/ocaml/3.08/graphics.cmxa&#10;/usr/lib/ocaml/3.08/graphics.mli&#10;';</script><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cma
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmi
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmxa
@@ -285,7 +285,7 @@ poco come l&#39;istruzione <code>import</code> di Java, e molto più come l&#39;
 <p>Un paio di esempi dovrebbero rendere chiaro quanto detto. (I due esempi
 disegnano cose diverse - provateli). Si noti che il primo esempio chiama
 <code>open_graph</code> ed il secondo <code>Graphics.open_graph</code>.</p>
-<pre><code class='ocaml'><script>val mlc4050e07b10c335478dcf83ea6c4765c = '(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)&#10;&#10;open Graphics;;&#10;&#10;open_graph &#34; 640x480&#34;;;&#10;for i = 12 downto 1 do&#10;  let radius = i * 20 in&#10;  set_color (if (i mod 2) = 0 then red else yellow);&#10;  fill_circle 320 240 radius&#10;done;;&#10;read_line ();;&#10;&#10;(* Per compilare questo esempio: ocamlc graphics.cma grtest2.ml -o grtest2 *)&#10;&#10;Random.self_init ();;&#10;Graphics.open_graph &#34; 640x480&#34;;;&#10;&#10;let rec iterate r x_init i =&#10;        if i == 1 then x_init&#10;        else&#10;                let x = iterate r x_init (i-1) in&#10;                r *. x *. (1.0 -. x);;&#10;&#10;for x = 0 to 640 do&#10;        let r = 4.0 *. (float_of_int x) /. 640.0 in&#10;        for i = 0 to 39 do&#10;                let x_init = Random.float 1.0 in&#10;                let x_final = iterate r x_init 500 in&#10;                let y = int_of_float (x_final *. 480.) in&#10;                Graphics.plot x y&#10;        done&#10;done;;&#10;&#10;read_line ();;&#10;';</script><span class='com2'>(* Per compilare questo esempio<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mlc4050e07b10c335478dcf83ea6c4765c = '(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)&#10;&#10;open Graphics;;&#10;&#10;open_graph &#34; 640x480&#34;;;&#10;for i = 12 downto 1 do&#10;  let radius = i * 20 in&#10;  set_color (if (i mod 2) = 0 then red else yellow);&#10;  fill_circle 320 240 radius&#10;done;;&#10;read_line ();;&#10;&#10;(* Per compilare questo esempio: ocamlc graphics.cma grtest2.ml -o grtest2 *)&#10;&#10;Random.self_init ();;&#10;Graphics.open_graph &#34; 640x480&#34;;;&#10;&#10;let rec iterate r x_init i =&#10;        if i == 1 then x_init&#10;        else&#10;                let x = iterate r x_init (i-1) in&#10;                r *. x *. (1.0 -. x);;&#10;&#10;for x = 0 to 640 do&#10;        let r = 4.0 *. (float_of_int x) /. 640.0 in&#10;        for i = 0 to 39 do&#10;                let x_init = Random.float 1.0 in&#10;                let x_final = iterate r x_init 500 in&#10;                let y = int_of_float (x_final *. 480.) in&#10;                Graphics.plot x y&#10;        done&#10;done;;&#10;&#10;read_line ();;&#10;';</script><span class='com2'>(* Per compilare questo esempio<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
 
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
@@ -336,7 +336,7 @@ OCaml.</p>
 Che cosa succede se volete utilizzare i simboli del modulo <code>Graphics</code>,
 ma non volete importarli tutti e non sopportate il fastidio di digitare
 <code>Graphics</code> ogni volta? Semplicemente rinominatelo usando questo trucco:</p>
-<pre><code class='ocaml'><script>val ml989e08c577015d25ca16f55ccc1d13da = 'module Gr = Graphics;;&#10;&#10;Gr.open_graph &#34; 640x480&#34;;;&#10;Gr.fill_circle 320 240 240;;&#10;read_line ();;&#10;';</script><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml989e08c577015d25ca16f55ccc1d13da = 'module Gr = Graphics;;&#10;&#10;Gr.open_graph &#34; 640x480&#34;;;&#10;Gr.fill_circle 320 240 240;;&#10;read_line ();;&#10;';</script><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
 
 <span class='m'>Gr</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='m'>Gr</span><span class='o'>.</span>fill_circle 320 240 240<span class='o'>;;</span>
@@ -356,7 +356,7 @@ imparando OCaml.</p>
 altto livello del vostro codice, e <em>mai</em> all&#39;interno di definizioni di
 funzioni o di qualunque altro tipo di istruzione.</p>
 <p>Osservate una sezione dal secondo esempio su &quot;graphics&quot; sopra:</p>
-<pre><code class='ocaml'><script>val mla993e34b55bcc0034541145648f0663b = 'Random.self_init ();;&#10;Graphics.open_graph &#34; 640x480&#34;;;&#10;&#10;let rec iterate r x_init i =&#10;        if i == 1 then x_init&#10;        else&#10;                let x = iterate r x_init (i-1) in&#10;                r *. x *. (1.0 -. x);;&#10;';</script><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mla993e34b55bcc0034541145648f0663b = 'Random.self_init ();;&#10;Graphics.open_graph &#34; 640x480&#34;;;&#10;&#10;let rec iterate r x_init i =&#10;        if i == 1 then x_init&#10;        else&#10;                let x = iterate r x_init (i-1) in&#10;                r *. x *. (1.0 -. x);;&#10;';</script><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
 <span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 
 <span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
@@ -390,7 +390,7 @@ sono:</p>
 </ul>
 
 <p>Ecco del codice funzionante con <code>;;</code> eliso ovunque possibile:</p>
-<pre><code class='ocaml'><script>val ml146a100fb8555a5f80f764fde8bd5a24 = 'open Random                   (* ;; *)&#10;open Graphics;;&#10;&#10;self_init ();;&#10;open_graph &#34; 640x480&#34;         (* ;; *)&#10;&#10;let rec iterate r x_init i =&#10;        if i == 1 then x_init&#10;        else&#10;                let x = iterate r x_init (i-1) in&#10;                r *. x *. (1.0 -. x);;&#10;&#10;for x = 0 to 640 do&#10;        let r = 4.0 *. (float_of_int x) /. 640.0 in&#10;        for i = 0 to 39 do&#10;                let x_init = Random.float 1.0 in&#10;                let x_final = iterate r x_init 500 in&#10;                let y = int_of_float (x_final *. 480.) in&#10;                Graphics.plot x y&#10;        done&#10;done;;&#10;&#10;read_line ()                  (* ;; *)&#10;';</script><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml146a100fb8555a5f80f764fde8bd5a24 = 'open Random                   (* ;; *)&#10;open Graphics;;&#10;&#10;self_init ();;&#10;open_graph &#34; 640x480&#34;         (* ;; *)&#10;&#10;let rec iterate r x_init i =&#10;        if i == 1 then x_init&#10;        else&#10;                let x = iterate r x_init (i-1) in&#10;                r *. x *. (1.0 -. x);;&#10;&#10;for x = 0 to 640 do&#10;        let r = 4.0 *. (float_of_int x) /. 640.0 in&#10;        for i = 0 to 39 do&#10;                let x_init = Random.float 1.0 in&#10;                let x_final = iterate r x_init 500 in&#10;                let y = int_of_float (x_final *. 480.) in&#10;                Graphics.plot x y&#10;        done&#10;done;;&#10;&#10;read_line ()                  (* ;; *)&#10;';</script><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 self_init ()<span class='o'>;;</span>
@@ -429,7 +429,7 @@ di codice, falle seguire da un singolo <code>;</code>, <em>eccetto</em> per l&#3
 fondo.</p>
 <p>Il ciclo for interno nel nostro esempio sopra è una buona dimostrazione.
 Notate che in questo codice non usiamo mai un singolo <code>;</code>:</p>
-<pre><code class='ocaml'><script>val ml643413e3cc411b027d0f3a50cf2c92f5 = '        for i = 0 to 39 do&#10;                let x_init = Random.float 1.0 in&#10;                let x_final = iterate r x_init 500 in&#10;                let y = int_of_float (x_final *. 480.) in&#10;                Graphics.plot x y&#10;        done&#10;';</script>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
+<pre><code class='ocaml'><script>ml643413e3cc411b027d0f3a50cf2c92f5 = '        for i = 0 to 39 do&#10;                let x_init = Random.float 1.0 in&#10;                let x_final = iterate r x_init 500 in&#10;                let y = int_of_float (x_final *. 480.) in&#10;                Graphics.plot x y&#10;        done&#10;';</script>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
                 <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
                 <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
                 <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
@@ -453,7 +453,7 @@ bene - in OCaml, pressoché ogni cosa è un&#39;espressione. <code>if/then/else<
 un&#39;espressione. <code>a ; b</code> è un&#39;espressione. <code>match foo with ...</code> è un
 espressione. Il codice che segue è perfettamente legale (e tutto fa la
 medesima cosa):</p>
-<pre><code class='ocaml'><script>val ml40098f2a2ff3a7271063e44c9b66181e = 'let f x b y = if b then x+y else x+0&#10;&#10;let f x b y = x + (if b then y else 0)&#10;&#10;let f x b y = x + (match b with true -&#62; y | false -&#62; 0)&#10;&#10;let f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)&#10;&#10;let f x b y = x + (let _ = y + 3 in (); if b then y else 0)&#10;';</script><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
+<pre><code class='ocaml'><script>ml40098f2a2ff3a7271063e44c9b66181e = 'let f x b y = if b then x+y else x+0&#10;&#10;let f x b y = x + (if b then y else 0)&#10;&#10;let f x b y = x + (match b with true -&#62; y | false -&#62; 0)&#10;&#10;let f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)&#10;&#10;let f x b y = x + (let _ = y + 3 in (); if b then y else 0)&#10;';</script><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
 
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
 
@@ -466,7 +466,7 @@ medesima cosa):</p>
 <p>
 Si noti in special modo la prima - uso <code>;</code> come operatore per &quot;unire&quot;
 due istruzioni. Tutte le funzioni in OCaml possono essere espresse come:</p>
-<pre><code class='ocaml'><script>val ml2cc0bf644dd5c679a11667fdc9607dbb = 'let nome [parametri] = espressione&#10;';</script><span class='k'>let</span> nome <span class='o'>[</span>parametri<span class='o'>]</span> <span class='k'>=</span> espressione
+<pre><code class='ocaml'><script>ml2cc0bf644dd5c679a11667fdc9607dbb = 'let nome [parametri] = espressione&#10;';</script><span class='k'>let</span> nome <span class='o'>[</span>parametri<span class='o'>]</span> <span class='k'>=</span> espressione
 </code></pre>
 <p>
 La definizione di OCaml di che cos&#39;è un&#39;espressione è soltanto un po&#39;
@@ -476,7 +476,7 @@ ma tutte le istruzioni di C sono in OCaml semplicemente espressioni
 <p>L&#39;unico punto in cui <code>;</code> differisce da <code>+</code> è che posso fare riferimento
 a <code>+</code> semplicemente come ad una funzione. Ad esempio, posso definire una
 funzione <code>sum_list</code>, per sommare una lista di int, come segue:</p>
-<pre><code class='ocaml'><script>val ml27e25ebff4965461eeb239e3f0e5b489 = 'let sum_list = List.fold_left ( + ) 0&#10;';</script><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
+<pre><code class='ocaml'><script>ml27e25ebff4965461eeb239e3f0e5b489 = 'let sum_list = List.fold_left ( + ) 0&#10;';</script><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
 </code></pre>
 <h3 id="Metteretuttoinsiemedelcodicereale"> Mettere tutto insieme: del codice reale</h3><p>
 
@@ -508,7 +508,7 @@ espressioni con nomi locali e globali.</p>
 All&#39;interno di questa funzione definisce un&#39;espressione con nome
 chiamata <code>sel</code> usando un&#39;istruzione <code>let sel = ... in</code> su due righe.
 Quindi chiama diversi metodi su <code>sel</code>.</p>
-<pre><code class='ocaml'><script>val mla323f7a3456ea3c3302b7aefbd2a386a = '(* Primo frammento *)&#10;&#10;open StdLabels&#10;open GMain&#10;&#10;let file_dialog ~title ~callback ?filename () =&#10;  let sel =&#10;    GWindow.file_selection ~title ~modal:true ?filename () in&#10;  sel#cancel_button#connect#clicked ~callback:sel#destroy;&#10;  sel#ok_button#connect#clicked ~callback:do_ok;&#10;  sel#show ()&#10;';</script><span class='com2'>(* Primo frammento *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mla323f7a3456ea3c3302b7aefbd2a386a = '(* Primo frammento *)&#10;&#10;open StdLabels&#10;open GMain&#10;&#10;let file_dialog ~title ~callback ?filename () =&#10;  let sel =&#10;    GWindow.file_selection ~title ~modal:true ?filename () in&#10;  sel#cancel_button#connect#clicked ~callback:sel#destroy;&#10;  sel#ok_button#connect#clicked ~callback:do_ok;&#10;  sel#show ()&#10;';</script><span class='com2'>(* Primo frammento *)</span><!-- end comment -->
 
 <span class='k'>open</span> StdLabels
 <span class='k'>open</span> GMain
@@ -524,7 +524,7 @@ Quindi chiama diversi metodi su <code>sel</code>.</p>
 Secondo frammento: Solo una lunga lista di nomi globali al livello
 superiore. Notate che l&#39;autore ha eliso ogni singolo <code>;;</code> grazie alla
 regola n° 2.</p>
-<pre><code class='ocaml'><script>val ml69f44b1156a7e8a512c25ec172967b7e = '(* Secondo frammento *)&#10;&#10;let window = GWindow.window ~width:500 ~height:300 ~title:&#34;editor&#34; ()&#10;let vbox = GPack.vbox ~packing:window#add ()&#10;&#10;let menubar = GMenu.menu_bar ~packing:vbox#pack ()&#10;let factory = new GMenu.factory menubar&#10;let accel_group = factory#accel_group&#10;let file_menu = factory#add_submenu &#34;File&#34;&#10;let edit_menu = factory#add_submenu &#34;Edit&#34;&#10;&#10;let hbox = GPack.hbox ~packing:vbox#add ()&#10;let editor = new editor ~packing:hbox#add ()&#10;let scrollbar = GRange.scrollbar `VERTICAL ~packing:hbox#pack ()&#10;';</script><span class='com2'>(* Secondo frammento *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml69f44b1156a7e8a512c25ec172967b7e = '(* Secondo frammento *)&#10;&#10;let window = GWindow.window ~width:500 ~height:300 ~title:&#34;editor&#34; ()&#10;let vbox = GPack.vbox ~packing:window#add ()&#10;&#10;let menubar = GMenu.menu_bar ~packing:vbox#pack ()&#10;let factory = new GMenu.factory menubar&#10;let accel_group = factory#accel_group&#10;let file_menu = factory#add_submenu &#34;File&#34;&#10;let edit_menu = factory#add_submenu &#34;Edit&#34;&#10;&#10;let hbox = GPack.hbox ~packing:vbox#add ()&#10;let editor = new editor ~packing:hbox#add ()&#10;let scrollbar = GRange.scrollbar `VERTICAL ~packing:hbox#pack ()&#10;';</script><span class='com2'>(* Secondo frammento *)</span><!-- end comment -->
 
 <span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>500 <span class='o'>~</span>height<span class='o'>:</span>300 <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;editor&#34;</span> ()
 <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>window<span class='o'>#</span>add ()
@@ -553,7 +553,7 @@ probabilmente un valore di ritorno <code>unit</code>, ma non ho verificato - e n
 <p>Notate che in questo frammento abbiamo una lunga serie di comandi
 essenzialmente procedurali. Questo è in realtà un classico programma
 imperativo.</p>
-<pre><code class='ocaml'><script>val ml772c58ca9063206aed6e059a0cdcb55e = '(* Terzo frammento *)&#10;&#10;open GdkKeysyms&#10;&#10;let _ =&#10;  window#connect#destroy ~callback:Main.quit;&#10;  let factory = new GMenu.factory file_menu ~accel_group in&#10;  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;&#10;  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;&#10;  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;&#10;  factory#add_separator ();&#10;  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;&#10;  let factory = new GMenu.factory edit_menu ~accel_group in&#10;  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;&#10;  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;&#10;  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;&#10;  factory#add_separator ();&#10;  factory#add_check_item &#34;Word wrap&#34; ~active:false&#10;    ~callback:editor#text#set_word_wrap;&#10;  factory#add_check_item &#34;Read only&#34; ~active:false&#10;    ~callback:(fun b -&#62; editor#text#set_editable (not b));&#10;  window#add_accel_group accel_group;&#10;  editor#text#event#connect#button_press&#10;    ~callback:(fun ev -&#62;&#10;&#10;      let button = GdkEvent.Button.button ev in&#10;      if button = 3 then begin&#10;        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true&#10;      end else false);&#10;  editor#text#set_vadjustment scrollbar#adjustment;&#10;  window#show ();&#10;  Main.main ()&#10;&#10;';</script><span class='com2'>(* Terzo frammento *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml772c58ca9063206aed6e059a0cdcb55e = '(* Terzo frammento *)&#10;&#10;open GdkKeysyms&#10;&#10;let _ =&#10;  window#connect#destroy ~callback:Main.quit;&#10;  let factory = new GMenu.factory file_menu ~accel_group in&#10;  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;&#10;  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;&#10;  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;&#10;  factory#add_separator ();&#10;  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;&#10;  let factory = new GMenu.factory edit_menu ~accel_group in&#10;  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;&#10;  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;&#10;  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;&#10;  factory#add_separator ();&#10;  factory#add_check_item &#34;Word wrap&#34; ~active:false&#10;    ~callback:editor#text#set_word_wrap;&#10;  factory#add_check_item &#34;Read only&#34; ~active:false&#10;    ~callback:(fun b -&#62; editor#text#set_editable (not b));&#10;  window#add_accel_group accel_group;&#10;  editor#text#event#connect#button_press&#10;    ~callback:(fun ev -&#62;&#10;&#10;      let button = GdkEvent.Button.button ev in&#10;      if button = 3 then begin&#10;        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true&#10;      end else false);&#10;  editor#text#set_vadjustment scrollbar#adjustment;&#10;  window#show ();&#10;  Main.main ()&#10;&#10;';</script><span class='com2'>(* Terzo frammento *)</span><!-- end comment -->
 
 <span class='k'>open</span> GdkKeysyms
 

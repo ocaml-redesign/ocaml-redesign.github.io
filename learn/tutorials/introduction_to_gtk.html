@@ -69,7 +69,7 @@ hard work!</p>
 <h3 id="Simplelablgtkprogram"> Simple lablgtk program</h3><p>
 Actually, not so simple. This program has a menu with a &quot;quit&quot; option,
 and a button in the main area which you can press:</p>
-<pre><code class='ocaml'><script>val ml50bd91a97df89360a64f1c7da221250a = 'open GMain&#10;open GdkKeysyms&#10;&#10;let main () =&#10;  let window = GWindow.window ~width:320 ~height:240&#10;                 ~title:&#34;Simple lablgtk program&#34; () in&#10;  let vbox = GPack.vbox ~packing:window#add () in&#10;  window#connect#destroy ~callback:Main.quit;&#10;&#10;  (* Menu bar *)&#10;  let menubar = GMenu.menu_bar ~packing:vbox#pack () in&#10;  let factory = new GMenu.factory menubar in&#10;  let accel_group = factory#accel_group in&#10;  let file_menu = factory#add_submenu &#34;File&#34; in&#10;&#10;  (* File menu *)&#10;  let factory = new GMenu.factory file_menu ~accel_group in&#10;  factory#add_item &#34;Quit&#34; ~key:_Q ~callback: Main.quit;&#10;&#10;  (* Button *)&#10;  let button = GButton.button ~label:&#34;Push me!&#34;&#10;                 ~packing:vbox#add () in&#10;  button#connect#clicked ~callback: (fun () -&#62; prerr_endline &#34;Ouch!&#34;);&#10;&#10;  (* Display the windows and enter Gtk+ main loop *)&#10;  window#add_accel_group accel_group;&#10;  window#show ();&#10;  Main.main ()&#10;&#10;let () = main ()&#10;';</script><span class='k'>open</span> GMain
+<pre><code class='ocaml'><script>ml50bd91a97df89360a64f1c7da221250a = 'open GMain&#10;open GdkKeysyms&#10;&#10;let main () =&#10;  let window = GWindow.window ~width:320 ~height:240&#10;                 ~title:&#34;Simple lablgtk program&#34; () in&#10;  let vbox = GPack.vbox ~packing:window#add () in&#10;  window#connect#destroy ~callback:Main.quit;&#10;&#10;  (* Menu bar *)&#10;  let menubar = GMenu.menu_bar ~packing:vbox#pack () in&#10;  let factory = new GMenu.factory menubar in&#10;  let accel_group = factory#accel_group in&#10;  let file_menu = factory#add_submenu &#34;File&#34; in&#10;&#10;  (* File menu *)&#10;  let factory = new GMenu.factory file_menu ~accel_group in&#10;  factory#add_item &#34;Quit&#34; ~key:_Q ~callback: Main.quit;&#10;&#10;  (* Button *)&#10;  let button = GButton.button ~label:&#34;Push me!&#34;&#10;                 ~packing:vbox#add () in&#10;  button#connect#clicked ~callback: (fun () -&#62; prerr_endline &#34;Ouch!&#34;);&#10;&#10;  (* Display the windows and enter Gtk+ main loop *)&#10;  window#add_accel_group accel_group;&#10;  window#show ();&#10;  Main.main ()&#10;&#10;let () = main ()&#10;';</script><span class='k'>open</span> GMain
 <span class='k'>open</span> GdkKeysyms
 
 <span class='k'>let</span> main () <span class='k'>=</span>
@@ -102,20 +102,20 @@ and a button in the main area which you can press:</p>
 </code></pre>
 <p>
 Save this to a file <code>simple.ml</code> and compile it like this:</p>
-<pre><code class='ocaml'><script>val ml148782b5a19d03ffdbbf70c55e79ac74 = 'ocamlc -g -w s -I +lablgtk lablgtk.cma gtkInit.cmo simple.ml -o simple&#10;';</script>ocamlc <span class='o'>-</span>g <span class='o'>-</span>w s <span class='o'>-</span>I <span class='o'>+</span>lablgtk lablgtk<span class='o'>.</span>cma gtkInit<span class='o'>.</span>cmo simple<span class='o'>.</span>ml <span class='o'>-</span>o simple
+<pre><code class='ocaml'><script>ml148782b5a19d03ffdbbf70c55e79ac74 = 'ocamlc -g -w s -I +lablgtk lablgtk.cma gtkInit.cmo simple.ml -o simple&#10;';</script>ocamlc <span class='o'>-</span>g <span class='o'>-</span>w s <span class='o'>-</span>I <span class='o'>+</span>lablgtk lablgtk<span class='o'>.</span>cma gtkInit<span class='o'>.</span>cmo simple<span class='o'>.</span>ml <span class='o'>-</span>o simple
 </code></pre>
 <p>
 This is what you should see when you run it:</p>
 <p><img src='../img/simplee29b.gif' alt='Simple lablgtk program' /></p>
 <p>Let&#39;s analyse the program line by line to see what&#39;s going on.</p>
-<pre><code class='ocaml'><script>val ml035ab4649518f848ccdf318823f863d2 = 'open GMain&#10;open GdkKeysyms&#10;';</script><span class='k'>open</span> GMain
+<pre><code class='ocaml'><script>ml035ab4649518f848ccdf318823f863d2 = 'open GMain&#10;open GdkKeysyms&#10;';</script><span class='k'>open</span> GMain
 <span class='k'>open</span> GdkKeysyms
 </code></pre>
 <p>
 <code>GMain</code> provides useful functions like the Gtk main loop, so I find it a
 good idea to always open this module. <code>GdkKeysyms</code> provides some key
 definitions, in this case <code>_Q</code> for the Ctrl + Q key combination.</p>
-<pre><code class='ocaml'><script>val mledb908eda2585d3786a3bd367434cff4 = '  let window = GWindow.window ~width:320 ~height:240&#10;                 ~title:&#34;Simple lablgtk program&#34; () in&#10;  let vbox = GPack.vbox ~packing:window#add () in&#10;  window#connect#destroy ~callback:Main.quit;&#10;';</script>  <span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>320 <span class='o'>~</span>height<span class='o'>:</span>240
+<pre><code class='ocaml'><script>mledb908eda2585d3786a3bd367434cff4 = '  let window = GWindow.window ~width:320 ~height:240&#10;                 ~title:&#34;Simple lablgtk program&#34; () in&#10;  let vbox = GPack.vbox ~packing:window#add () in&#10;  window#connect#destroy ~callback:Main.quit;&#10;';</script>  <span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>320 <span class='o'>~</span>height<span class='o'>:</span>240
                  <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;Simple lablgtk program&#34;</span> () <span class='k'>in</span>
   <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>window<span class='o'>#</span>add () <span class='k'>in</span>
   window<span class='o'>#</span>connect<span class='o'>#</span>destroy <span class='o'>~</span>callback<span class='o'>:</span><span class='m'>Main</span><span class='o'>.</span>quit<span class='o'>;</span>
@@ -136,7 +136,7 @@ function application in the presence of optional arguments.</p>
 <p>A <code>vbox</code> is a vertical layout widget. It&#39;s a container which contains
 other widgets but isn&#39;t normally visible by itself. The <code>~packing</code>
 argument looks odd (indeed it is). It&#39;s just a shorthand way of writing:</p>
-<pre><code class='ocaml'><script>val ml63fae5da21a1ac6cc0554afc285c45f4 = '  let vbox = GPack.vbox () in&#10;  window#add vbox;&#10;';</script>  <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox () <span class='k'>in</span>
+<pre><code class='ocaml'><script>ml63fae5da21a1ac6cc0554afc285c45f4 = '  let vbox = GPack.vbox () in&#10;  window#add vbox;&#10;';</script>  <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox () <span class='k'>in</span>
   window<span class='o'>#</span>add vbox<span class='o'>;</span>
 </code></pre>
 <p>
@@ -149,7 +149,7 @@ cause a call to <code>Main.quit ()</code> (note extra unit arg).</p>
 <p>Creating the menubar and File -\&gt; Quit button is straightforward enough.
 Notice the <code>accel_group</code> object which is used to keep track of
 accelerator buttons. The <code>menubar</code> is packed first into the <code>vbox</code>:</p>
-<pre><code class='ocaml'><script>val mle5e3ae0cb0261fc70d17d6a87aa21a55 = '  (* Menu bar *)&#10;  let menubar = GMenu.menu_bar ~packing:vbox#pack () in&#10;  let factory = new GMenu.factory menubar in&#10;  let accel_group = factory#accel_group in&#10;  let file_menu = factory#add_submenu &#34;File&#34; in&#10;&#10;  (* File menu *)&#10;  let factory = new GMenu.factory file_menu ~accel_group in&#10;  factory#add_item &#34;Quit&#34; ~key:_Q ~callback: Main.quit;&#10;';</script>  <span class='com2'>(* Menu bar *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mle5e3ae0cb0261fc70d17d6a87aa21a55 = '  (* Menu bar *)&#10;  let menubar = GMenu.menu_bar ~packing:vbox#pack () in&#10;  let factory = new GMenu.factory menubar in&#10;  let accel_group = factory#accel_group in&#10;  let file_menu = factory#add_submenu &#34;File&#34; in&#10;&#10;  (* File menu *)&#10;  let factory = new GMenu.factory file_menu ~accel_group in&#10;  factory#add_item &#34;Quit&#34; ~key:_Q ~callback: Main.quit;&#10;';</script>  <span class='com2'>(* Menu bar *)</span><!-- end comment -->
   <span class='k'>let</span> menubar <span class='k'>=</span> <span class='m'>GMenu</span><span class='o'>.</span>menu_bar <span class='o'>~</span>packing<span class='o'>:</span>vbox<span class='o'>#</span>pack () <span class='k'>in</span>
   <span class='k'>let</span> factory <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GMenu</span><span class='o'>.</span>factory menubar <span class='k'>in</span>
   <span class='k'>let</span> accel_group <span class='k'>=</span> factory<span class='o'>#</span>accel_group <span class='k'>in</span>
@@ -162,14 +162,14 @@ accelerator buttons. The <code>menubar</code> is packed first into the <code>vbo
 <p>
 Next up we create the button and pack it in the <code>vbox</code>. Notice the
 <code>clicked</code> signal which is connected to an anonymous function:</p>
-<pre><code class='ocaml'><script>val mlb5e67a2d92934ab41734ed025f4743fe = '  (* Button *)&#10;  let button = GButton.button ~label:&#34;Push me!&#34;&#10;                 ~packing:vbox#add () in&#10;  button#connect#clicked ~callback: (fun () -&#62; prerr_endline &#34;Ouch!&#34;);&#10;';</script>  <span class='com2'>(* Button *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mlb5e67a2d92934ab41734ed025f4743fe = '  (* Button *)&#10;  let button = GButton.button ~label:&#34;Push me!&#34;&#10;                 ~packing:vbox#add () in&#10;  button#connect#clicked ~callback: (fun () -&#62; prerr_endline &#34;Ouch!&#34;);&#10;';</script>  <span class='com2'>(* Button *)</span><!-- end comment -->
   <span class='k'>let</span> button <span class='k'>=</span> <span class='m'>GButton</span><span class='o'>.</span>button <span class='o'>~</span>label<span class='o'>:</span><span class='s'>&#34;Push me!&#34;</span>
                  <span class='o'>~</span>packing<span class='o'>:</span>vbox<span class='o'>#</span>add () <span class='k'>in</span>
   button<span class='o'>#</span>connect<span class='o'>#</span>clicked <span class='o'>~</span>callback<span class='o'>:</span> (<span class='k'>fun</span> () <span class='k'>-></span> prerr_endline <span class='s'>&#34;Ouch!&#34;</span>)<span class='o'>;</span>
 </code></pre>
 <p>
 This line just causes the accelerator keys (eg. Ctrl Q) to work:</p>
-<pre><code class='ocaml'><script>val mlc78f83f13814f95eb0976c6a19cd6a4d = '  window#add_accel_group accel_group;&#10;';</script>  window<span class='o'>#</span>add_accel_group accel_group<span class='o'>;</span>
+<pre><code class='ocaml'><script>mlc78f83f13814f95eb0976c6a19cd6a4d = '  window#add_accel_group accel_group;&#10;';</script>  window<span class='o'>#</span>add_accel_group accel_group<span class='o'>;</span>
 </code></pre>
 <p>
 Finally two lines which are essential. All Gtk widgets must be &quot;shown&quot;
@@ -179,7 +179,7 @@ Thus we need to call <code>window#show ()</code> explicitly. <code>Main.main ()<
 Gtk main loop - the bit which runs and handles events. Gtk is event
 driven so everything else happens in a callback as a result of some
 signal received.</p>
-<pre><code class='ocaml'><script>val ml1f6c9711c43ab6e937a13f876e0d69ac = '  window#show ();&#10;  Main.main ()&#10;';</script>  window<span class='o'>#</span>show ()<span class='o'>;</span>
+<pre><code class='ocaml'><script>ml1f6c9711c43ab6e937a13f876e0d69ac = '  window#show ();&#10;  Main.main ()&#10;';</script>  window<span class='o'>#</span>show ()<span class='o'>;</span>
   <span class='m'>Main</span><span class='o'>.</span>main ()
 </code></pre>
 <h3 id="Gtktutorial"> Gtk tutorial</h3><p>
@@ -200,7 +200,7 @@ on.</p>
 graph widget. I&#39;m going to have it be a vbox, with the drawing area in
 the top part, and the scrollbar in the bottom part. This is the overall
 structure of our class:</p>
-<pre><code class='ocaml'><script>val ml027ecd574bef82e8d8a84c26797c7749 = 'class graph ?width ?height ?packing ?show array =&#10;  (* The initialization code will go here. *)&#10;&#10;  object (self)&#10;    inherit widget vbox#as_widget&#10;&#10;    (* Methods will go here. *)&#10;&#10;    method init =&#10;      (* Further initialization will go here. *)&#10;  end&#10;';</script><span class='k'>class</span> graph <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show array <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml027ecd574bef82e8d8a84c26797c7749 = 'class graph ?width ?height ?packing ?show array =&#10;  (* The initialization code will go here. *)&#10;&#10;  object (self)&#10;    inherit widget vbox#as_widget&#10;&#10;    (* Methods will go here. *)&#10;&#10;    method init =&#10;      (* Further initialization will go here. *)&#10;  end&#10;';</script><span class='k'>class</span> graph <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show array <span class='k'>=</span>
   <span class='com2'>(* The initialization code will go here<span class='ic'>.</span> *)</span><!-- end comment -->
 
   object (self)
@@ -214,7 +214,7 @@ structure of our class:</p>
 </code></pre>
 <p>
 To create a widget you will do:</p>
-<pre><code class='ocaml'><script>val mlabc689f761f274b5dbff673e51dd55c8 = 'let graph = new graph in&#10;graph#init;&#10;';</script><span class='k'>let</span> graph <span class='k'>=</span> <span class='k'>new</span> graph <span class='k'>in</span>
+<pre><code class='ocaml'><script>mlabc689f761f274b5dbff673e51dd55c8 = 'let graph = new graph in&#10;graph#init;&#10;';</script><span class='k'>let</span> graph <span class='k'>=</span> <span class='k'>new</span> graph <span class='k'>in</span>
 graph<span class='o'>#</span>init<span class='o'>;</span>
 </code></pre>
 <p>
@@ -225,7 +225,7 @@ the code. Perhaps a reader can suggest a way around this?</p>
 the section below entited <em>Structure of lablgtk</em> to understand it fully,
 but basically it causes a graph to be a subclass of widget.</p>
 <p>Let&#39;s have a look at the initialization code in more detail.</p>
-<pre><code class='ocaml'><script>val ml266f853b0f2d1afe1720240181827222 = 'class graph ?width ?height ?packing ?show array =&#10;  (* Constants. *)&#10;  let page_size = 10 in            (* Number of bars on &#34;page&#34;. *)&#10;  let max_y = 10 in                (* Maximum on Y scale. *)&#10;&#10;  (* Number of data points. *)&#10;  let array_size = Array.length array in&#10;&#10;  (* Create the containing vbox. *)&#10;  let vbox = GPack.vbox ?width ?height ?packing ?show () in&#10;&#10;  (* Create the drawing area. *)&#10;  let da = GMisc.drawing_area ~packing:vbox#add () in&#10;  let drawable = lazy (new GDraw.drawable da#misc#window) in&#10;&#10;  (* Create the scrollbar. *)&#10;  let adjustment = GData.adjustment&#10;                     ~lower:0. ~upper:(float_of_int (array_size-1))&#10;                     ~step_incr:1. ~page_incr:(float_of_int page_size) () in&#10;  let scrollbar =&#10;    GRange.scrollbar `HORIZONTAL ~adjustment ~packing:vbox#pack () in&#10;&#10;  object (self)&#10;    inherit widget vbox#as_widget&#10;&#10;    (* Methods will go here. *)&#10;&#10;    method private repaint () =&#10;      (* Repaint the widget. See below. *)&#10;&#10;    method init =&#10;      da#event#connect#expose&#10;        ~callback:(fun _ -&#62; self#repaint (); false);&#10;      adjustment#connect#value_changed&#10;        ~callback:(fun _ -&#62; self#repaint ())&#10;&#10;  end&#10;';</script><span class='k'>class</span> graph <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show array <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml266f853b0f2d1afe1720240181827222 = 'class graph ?width ?height ?packing ?show array =&#10;  (* Constants. *)&#10;  let page_size = 10 in            (* Number of bars on &#34;page&#34;. *)&#10;  let max_y = 10 in                (* Maximum on Y scale. *)&#10;&#10;  (* Number of data points. *)&#10;  let array_size = Array.length array in&#10;&#10;  (* Create the containing vbox. *)&#10;  let vbox = GPack.vbox ?width ?height ?packing ?show () in&#10;&#10;  (* Create the drawing area. *)&#10;  let da = GMisc.drawing_area ~packing:vbox#add () in&#10;  let drawable = lazy (new GDraw.drawable da#misc#window) in&#10;&#10;  (* Create the scrollbar. *)&#10;  let adjustment = GData.adjustment&#10;                     ~lower:0. ~upper:(float_of_int (array_size-1))&#10;                     ~step_incr:1. ~page_incr:(float_of_int page_size) () in&#10;  let scrollbar =&#10;    GRange.scrollbar `HORIZONTAL ~adjustment ~packing:vbox#pack () in&#10;&#10;  object (self)&#10;    inherit widget vbox#as_widget&#10;&#10;    (* Methods will go here. *)&#10;&#10;    method private repaint () =&#10;      (* Repaint the widget. See below. *)&#10;&#10;    method init =&#10;      da#event#connect#expose&#10;        ~callback:(fun _ -&#62; self#repaint (); false);&#10;      adjustment#connect#value_changed&#10;        ~callback:(fun _ -&#62; self#repaint ())&#10;&#10;  end&#10;';</script><span class='k'>class</span> graph <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show array <span class='k'>=</span>
   <span class='com2'>(* <span class='ic'>Constants</span><span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> page_size <span class='k'>=</span> 10 <span class='k'>in</span>            <span class='com2'>(* Number <span class='ic'>of</span> bars on <span class='ic'>&#34;page&#34;</span><span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> max_y <span class='k'>=</span> 10 <span class='k'>in</span>                <span class='com2'>(* Maximum on Y scale<span class='ic'>.</span> *)</span><!-- end comment -->
@@ -274,7 +274,7 @@ method is where the action is, as it were. That method will actually be
 responsible for drawing the graph, axes, title and so on.</p>
 <p>We&#39;ll see that in just a moment, but let&#39;s concentrate on the simpler
 methods of the object first:</p>
-<pre><code class='ocaml'><script>val mlc830da979c84331e3f682ffb41f08192 = '  object (self)&#10;    inherit widget vbox#as_widget&#10;&#10;    (* The title of the graph. *)&#10;    val mutable title = &#34;no title&#34;&#10;    method set_title t = title &#60;- t&#10;    method title = title&#10;&#10;    (* ... *)&#10;  end&#10;';</script>  object (self)
+<pre><code class='ocaml'><script>mlc830da979c84331e3f682ffb41f08192 = '  object (self)&#10;    inherit widget vbox#as_widget&#10;&#10;    (* The title of the graph. *)&#10;    val mutable title = &#34;no title&#34;&#10;    method set_title t = title &#60;- t&#10;    method title = title&#10;&#10;    (* ... *)&#10;  end&#10;';</script>  object (self)
     <span class='k'>inherit</span> widget vbox<span class='o'>#</span>as_widget
 
     <span class='com2'>(* The title <span class='ic'>of</span> the graph<span class='ic'>.</span> *)</span><!-- end comment -->
@@ -290,7 +290,7 @@ The object is going to contain a mutable member, the title, and two
 methods to <code>set_title</code> and get <code>title</code>.</p>
 <p>Now we come to the repaint method, which is the guts of the widget. This
 draws the graph in the drawing area:</p>
-<pre><code class='ocaml'><script>val ml12788e8cdd4b70a96420c6c8ef3e2265 = '    (* Repaint the widget. *)&#10;    method private repaint () =&#10;      let drawable = Lazy.force drawable in&#10;      let (width, height) = drawable#size in&#10;      drawable#set_background `WHITE;&#10;      drawable#set_foreground `WHITE;&#10;      drawable#rectangle ~x:0 ~y:0 ~width ~height ~filled:true ();&#10;      drawable#set_foreground `BLACK;&#10;&#10;      (* Draw the title. *)&#10;      draw_text drawable font `Centre (width/2, 20) title;&#10;&#10;      (* Draw the axes. *)&#10;      drawable#line ~x:40 ~y:(height-40) ~x:(width-40) ~y:(height-40);&#10;      drawable#line ~x:40 ~y:(height-40) ~x:40 ~y:40;&#10;&#10;      (* Which part of the data to display? first .. first+page_size-1 *)&#10;      let first_bar = int_of_float adjustment#value in&#10;      let data = Array.sub array first_bar page_size in&#10;      let bar_width = (width - 80) / page_size in&#10;&#10;      (* Compute function mapping graph (x, y) to screen coordinates. *)&#10;      let map (x,y) =&#10;        (40 + x * bar_width, height-40 - y * (height-80) / max_y)  in&#10;&#10;      (* Draw the axes scales. *)&#10;      draw_text drawable font `Right (40, height-40) &#34;0&#34;;&#10;      draw_text drawable font `Right (40, 40) (string_of_int max_y);&#10;      for i = 0 to page_size-1 do&#10;        let x = 40 + i * bar_width + bar_width/2 in&#10;        let y = height-35 in&#10;        let v = first_bar + i in&#10;        draw_text drawable font `Centre (x, y) (string_of_int v)&#10;      done;&#10;&#10;      (* Draw the data. *)&#10;      for i = 0 to page_size-1 do&#10;        let (ll_x,ll_y) = map (i, data.(i)) in&#10;        let (tr_x,tr_y) = map (i+1, 0) in&#10;        draw_rectangle drawable &#34;red&#34; (ll_x, ll_y) (tr_x, tr_y)&#10;      done&#10;';</script>    <span class='com2'>(* Repaint the widget<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml12788e8cdd4b70a96420c6c8ef3e2265 = '    (* Repaint the widget. *)&#10;    method private repaint () =&#10;      let drawable = Lazy.force drawable in&#10;      let (width, height) = drawable#size in&#10;      drawable#set_background `WHITE;&#10;      drawable#set_foreground `WHITE;&#10;      drawable#rectangle ~x:0 ~y:0 ~width ~height ~filled:true ();&#10;      drawable#set_foreground `BLACK;&#10;&#10;      (* Draw the title. *)&#10;      draw_text drawable font `Centre (width/2, 20) title;&#10;&#10;      (* Draw the axes. *)&#10;      drawable#line ~x:40 ~y:(height-40) ~x:(width-40) ~y:(height-40);&#10;      drawable#line ~x:40 ~y:(height-40) ~x:40 ~y:40;&#10;&#10;      (* Which part of the data to display? first .. first+page_size-1 *)&#10;      let first_bar = int_of_float adjustment#value in&#10;      let data = Array.sub array first_bar page_size in&#10;      let bar_width = (width - 80) / page_size in&#10;&#10;      (* Compute function mapping graph (x, y) to screen coordinates. *)&#10;      let map (x,y) =&#10;        (40 + x * bar_width, height-40 - y * (height-80) / max_y)  in&#10;&#10;      (* Draw the axes scales. *)&#10;      draw_text drawable font `Right (40, height-40) &#34;0&#34;;&#10;      draw_text drawable font `Right (40, 40) (string_of_int max_y);&#10;      for i = 0 to page_size-1 do&#10;        let x = 40 + i * bar_width + bar_width/2 in&#10;        let y = height-35 in&#10;        let v = first_bar + i in&#10;        draw_text drawable font `Centre (x, y) (string_of_int v)&#10;      done;&#10;&#10;      (* Draw the data. *)&#10;      for i = 0 to page_size-1 do&#10;        let (ll_x,ll_y) = map (i, data.(i)) in&#10;        let (tr_x,tr_y) = map (i+1, 0) in&#10;        draw_rectangle drawable &#34;red&#34; (ll_x, ll_y) (tr_x, tr_y)&#10;      done&#10;';</script>    <span class='com2'>(* Repaint the widget<span class='ic'>.</span> *)</span><!-- end comment -->
     <span class='k'>method</span> <span class='k'>private</span> repaint () <span class='k'>=</span>
       <span class='k'>let</span> drawable <span class='k'>=</span> <span class='m'>Lazy</span><span class='o'>.</span>force drawable <span class='k'>in</span>
       <span class='k'>let</span> (width<span class='o'>,</span> height) <span class='k'>=</span> drawable<span class='o'>#</span>size <span class='k'>in</span>
@@ -345,7 +345,7 @@ object.</p>
 <p>The complete code for the graph is available in \&lt;a
 href=&quot;graph.ml&quot;\&gt;graph.ml\&lt;/a\&gt; and \&lt;a href=&quot;test.ml&quot;\&gt;test.ml\&lt;/a\&gt;.
 Compile it using:</p>
-<pre><code class='ocaml'><script>val ml37dbdf05de8ee222b165d48a245b8d56 = 'ocamlc -g -w s -I +lablgtk lablgtk.cma gtkInit.cmo graph.ml test.ml -o graphtest&#10;';</script>ocamlc <span class='o'>-</span>g <span class='o'>-</span>w s <span class='o'>-</span>I <span class='o'>+</span>lablgtk lablgtk<span class='o'>.</span>cma gtkInit<span class='o'>.</span>cmo graph<span class='o'>.</span>ml test<span class='o'>.</span>ml <span class='o'>-</span>o graphtest
+<pre><code class='ocaml'><script>ml37dbdf05de8ee222b165d48a245b8d56 = 'ocamlc -g -w s -I +lablgtk lablgtk.cma gtkInit.cmo graph.ml test.ml -o graphtest&#10;';</script>ocamlc <span class='o'>-</span>g <span class='o'>-</span>w s <span class='o'>-</span>I <span class='o'>+</span>lablgtk lablgtk<span class='o'>.</span>cma gtkInit<span class='o'>.</span>cmo graph<span class='o'>.</span>ml test<span class='o'>.</span>ml <span class='o'>-</span>o graphtest
 </code></pre>
 <p>
 Here is a screenshot:</p>
@@ -392,7 +392,7 @@ reference count which is used to provide simple garbage collection.</p>
 programmers. OCaml has other mechanisms for OO and contains an advanced
 garbage collector. How does lablgtk unify the two?</p>
 <p>Lablgtk starts with this type definition (in module <code>Gtk</code>):</p>
-<pre><code class='ocaml'><script>val ml9059372339c531c60f7927ef97ca1c0a = 'type &#39;a obj;;&#10;';</script><span class='k'>type</span> 'a obj<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml9059372339c531c60f7927ef97ca1c0a = 'type &#39;a obj;;&#10;';</script><span class='k'>type</span> 'a obj<span class='o'>;;</span>
 </code></pre>
 <p>
 On the face of it, this is a <em>very</em> strange type definition. It defines
@@ -400,15 +400,15 @@ a polymorphic type called <code>obj</code> (polymorphic because you can create,
 say, <code>int obj</code>, etc.). But it doesn&#39;t actually define a way of creating
 these objects! [Recall that a normal type definition might be something
 like this:</p>
-<pre><code class='ocaml'><script>val ml59f63f4dde499ec099756f6e76bbca28 = 'type &#39;a obj = Something of &#39;a&#10;';</script><span class='k'>type</span> 'a obj <span class='k'>=</span> Something <span class='k'>of</span> 'a
+<pre><code class='ocaml'><script>ml59f63f4dde499ec099756f6e76bbca28 = 'type &#39;a obj = Something of &#39;a&#10;';</script><span class='k'>type</span> 'a obj <span class='k'>=</span> Something <span class='k'>of</span> 'a
 </code></pre>
 <p>
 which gives you a very definite way to create, say, an <code>int obj</code>:</p>
-<pre><code class='ocaml'><script>val ml29b77b513052867ee6b87f5bae1723f3 = 'Something 1&#10;';</script>Something 1
+<pre><code class='ocaml'><script>ml29b77b513052867ee6b87f5bae1723f3 = 'Something 1&#10;';</script>Something 1
 </code></pre>
 <p>
 But our strange, bare definition just says:</p>
-<pre><code class='ocaml'><script>val ml9059372339c531c60f7927ef97ca1c0a = 'type &#39;a obj;;&#10;';</script><span class='k'>type</span> 'a obj<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml9059372339c531c60f7927ef97ca1c0a = 'type &#39;a obj;;&#10;';</script><span class='k'>type</span> 'a obj<span class='o'>;;</span>
 </code></pre>
 <p>
 How do we create objects of this type? The answer is that we don&#39;t.
@@ -417,7 +417,7 @@ likely they are &quot;subclasses&quot; of <code>GtkObject</code>), and they are 
 the C library. What precisely happens is that the C functions in the
 Gtk+ library are wrapped up by C functions which are called from OCaml.
 These functions look like this:</p>
-<pre><code class='ocaml'><script>val mld9d2ad4cf8bcc26d3d1b442680d9c141 = 'CAMLprim value&#10;ml_gtk_toggle_button_new (value unit)&#10;{&#10;  return Val_GtkObject_sink ((GtkObject *) gtk_toggle_button_new ());&#10;}&#10;';</script>CAMLprim value
+<pre><code class='ocaml'><script>mld9d2ad4cf8bcc26d3d1b442680d9c141 = 'CAMLprim value&#10;ml_gtk_toggle_button_new (value unit)&#10;{&#10;  return Val_GtkObject_sink ((GtkObject *) gtk_toggle_button_new ());&#10;}&#10;';</script>CAMLprim value
 ml_gtk_toggle_button_new (value unit)
 <span class='o'>{</span>
   return Val_GtkObject_sink ((GtkObject *)</span> gtk_toggle_button_new ())<span class='other'>;</span>
@@ -429,7 +429,7 @@ the <code>GtkObject</code> returned from the Gtk+ library function
 <code>gtk_toggle_button_new ()</code> in something that OCaml&#39;s garbage collector
 can understand. The same function also deals with Gtk&#39;s reference
 counting.</p>
-<pre><code class='ocaml'><script>val ml284f1e09acb097b44a5224e3fe9993b9 = 'static void ml_final_GtkObject_sink (value val) {&#10;  if (Field(val,1))&#10;    gtk_object_unref ((GtkObject*)Field(val,1));&#10;}&#10;&#10;value Val_GtkObject_sink (GtkObject *p) {&#10;  value ret;&#10;  if (!p) ml_raise_null_pointer ();&#10;  ret = alloc_final (2, ml_final_GtkObject_sink, 20, 1000);&#10;  initialize (&#38;Field(ret,1), (value) p);&#10;  gtk_object_ref_and_sink(p);&#10;  return ret;&#10;}&#10;';</script>static void ml_final_GtkObject_sink (value <span class='k'>val</span>) <span class='o'>{</span>
+<pre><code class='ocaml'><script>ml284f1e09acb097b44a5224e3fe9993b9 = 'static void ml_final_GtkObject_sink (value val) {&#10;  if (Field(val,1))&#10;    gtk_object_unref ((GtkObject*)Field(val,1));&#10;}&#10;&#10;value Val_GtkObject_sink (GtkObject *p) {&#10;  value ret;&#10;  if (!p) ml_raise_null_pointer ();&#10;  ret = alloc_final (2, ml_final_GtkObject_sink, 20, 1000);&#10;  initialize (&#38;Field(ret,1), (value) p);&#10;  gtk_object_ref_and_sink(p);&#10;  return ret;&#10;}&#10;';</script>static void ml_final_GtkObject_sink (value <span class='k'>val</span>) <span class='o'>{</span>
   <span class='k'>if</span> (Field(<span class='k'>val</span><span class='o'>,</span>1))
     gtk_object_unref ((GtkObject*)</span>Field(<span class='other'>val</span><span class='other'>,</span>1))<span class='other'>;</span>
 <span class='other'>}</span>
@@ -448,7 +448,7 @@ OCaml code calls <code>ml_gtk_toggle_button_new</code> directly to create object
 of type <code>&#39;a obj</code>. Module <code>GtkButton</code> is in lablgtk&#39;s module layer and it
 contains an inner module called <code>GtkButton.ToggleButton</code> containing a
 function defined as:</p>
-<pre><code class='ocaml'><script>val mlf39bc1c2656291b52d337f9e16f6a568 = 'module ToggleButton = struct&#10;  external toggle_button_create : unit -&#62; toggle_button obj&#10;      = &#34;ml_gtk_toggle_button_new&#34;&#10;  external toggle_button_create_with_label : string -&#62; toggle_button obj&#10;      = &#34;ml_gtk_toggle_button_new_with_label&#34;&#10;  let create_toggle ?label () =&#10;    match label with&#10;    | None -&#62; toggle_button_create ()&#10;    | Some label -&#62; toggle_button_create_with_label label&#10;end&#10;';</script><span class='k'>module</span> ToggleButton <span class='k'>=</span> <span class='k'>struct</span>
+<pre><code class='ocaml'><script>mlf39bc1c2656291b52d337f9e16f6a568 = 'module ToggleButton = struct&#10;  external toggle_button_create : unit -&#62; toggle_button obj&#10;      = &#34;ml_gtk_toggle_button_new&#34;&#10;  external toggle_button_create_with_label : string -&#62; toggle_button obj&#10;      = &#34;ml_gtk_toggle_button_new_with_label&#34;&#10;  let create_toggle ?label () =&#10;    match label with&#10;    | None -&#62; toggle_button_create ()&#10;    | Some label -&#62; toggle_button_create_with_label label&#10;end&#10;';</script><span class='k'>module</span> ToggleButton <span class='k'>=</span> <span class='k'>struct</span>
   <span class='k'>external</span> toggle_button_create <span class='o'>:</span> unit <span class='k'>-></span> toggle_button obj
       <span class='k'>=</span> <span class='s'>&#34;ml_gtk_toggle_button_new&#34;</span>
   <span class='k'>external</span> toggle_button_create_with_label <span class='o'>:</span> string <span class='k'>-></span> toggle_button obj
@@ -461,7 +461,7 @@ function defined as:</p>
 </code></pre>
 <p>
 You can call these functions directly to see what they return:</p>
-<pre><code class='ocaml'><script>val ml710b3adb5104b9abf4186e626e66ccd3 = '# GtkButton.ToggleButton.toggle_button_create ();;&#10;- : Gtk.toggle_button Gtk.obj = &#60;abstr&#62;&#10;# GtkButton.ToggleButton.create_toggle ~label:&#34;Push me!&#34; ();;&#10;- : Gtk.toggle_button Gtk.obj = &#60;abstr&#62;&#10;';</script><span class='o'>#</span> <span class='m'>GtkButton</span><span class='o'>.</span><span class='m'>ToggleButton</span><span class='o'>.</span>toggle_button_create ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml710b3adb5104b9abf4186e626e66ccd3 = '# GtkButton.ToggleButton.toggle_button_create ();;&#10;- : Gtk.toggle_button Gtk.obj = &#60;abstr&#62;&#10;# GtkButton.ToggleButton.create_toggle ~label:&#34;Push me!&#34; ();;&#10;- : Gtk.toggle_button Gtk.obj = &#60;abstr&#62;&#10;';</script><span class='o'>#</span> <span class='m'>GtkButton</span><span class='o'>.</span><span class='m'>ToggleButton</span><span class='o'>.</span>toggle_button_create ()<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> <span class='m'>Gtk</span><span class='o'>.</span>toggle_button <span class='m'>Gtk</span><span class='o'>.</span>obj <span class='k'>=</span> <span class='o'>&#60;</span>abstr<span class='o'>&#62;</span>
 <span class='o'>#</span> <span class='m'>GtkButton</span><span class='o'>.</span><span class='m'>ToggleButton</span><span class='o'>.</span>create_toggle <span class='o'>~</span>label<span class='o'>:</span><span class='s'>&#34;Push me!&#34;</span> ()<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> <span class='m'>Gtk</span><span class='o'>.</span>toggle_button <span class='m'>Gtk</span><span class='o'>.</span>obj <span class='k'>=</span> <span class='o'>&#60;</span>abstr<span class='o'>&#62;</span>
@@ -470,14 +470,14 @@ You can call these functions directly to see what they return:</p>
 Notice the return type: <code>toggle_button obj</code> (ie. a definite instance of
 the polymorphic type <code>&#39;a obj</code>). What is <code>toggle_button</code>? It&#39;s a type
 (think <code>&#39;a list</code> vs. <code>int list</code>) defined like this (in module <code>Gtk</code>):</p>
-<pre><code class='ocaml'><script>val ml68db3ca83299f75a34c9a0a3940479a2 = 'type widget = [`base|`widget]&#10;type container = [widget|`container]&#10;type button = [container|`button]&#10;type toggle_button = [button|`toggle]&#10;';</script><span class='k'>type</span> widget <span class='k'>=</span> <span class='o'>[</span>`base<span class='o'>|</span>`widget<span class='o'>]</span>
+<pre><code class='ocaml'><script>ml68db3ca83299f75a34c9a0a3940479a2 = 'type widget = [`base|`widget]&#10;type container = [widget|`container]&#10;type button = [container|`button]&#10;type toggle_button = [button|`toggle]&#10;';</script><span class='k'>type</span> widget <span class='k'>=</span> <span class='o'>[</span>`base<span class='o'>|</span>`widget<span class='o'>]</span>
 <span class='k'>type</span> container <span class='k'>=</span> <span class='o'>[</span>widget<span class='o'>|</span>`container<span class='o'>]</span>
 <span class='k'>type</span> button <span class='k'>=</span> <span class='o'>[</span>container<span class='o'>|</span>`button<span class='o'>]</span>
 <span class='k'>type</span> toggle_button <span class='k'>=</span> <span class='o'>[</span>button<span class='o'>|</span>`toggle<span class='o'>]</span>
 </code></pre>
 <p>
 Hence the full type written out is:</p>
-<pre><code class='ocaml'><script>val mlbbba46e073cf884cbb78aa0f3a9e375b = 'type toggle_button = [`base|`widget|`container|`button|`toggle]&#10;';</script><span class='k'>type</span> toggle_button <span class='k'>=</span> <span class='o'>[</span>`base<span class='o'>|</span>`widget<span class='o'>|</span>`container<span class='o'>|</span>`button<span class='o'>|</span>`toggle<span class='o'>]</span>
+<pre><code class='ocaml'><script>mlbbba46e073cf884cbb78aa0f3a9e375b = 'type toggle_button = [`base|`widget|`container|`button|`toggle]&#10;';</script><span class='k'>type</span> toggle_button <span class='k'>=</span> <span class='o'>[</span>`base<span class='o'>|</span>`widget<span class='o'>|</span>`container<span class='o'>|</span>`button<span class='o'>|</span>`toggle<span class='o'>]</span>
 </code></pre>
 <p>
 (These are polymorphic variants - see \&lt;a href=&quot;../ch7/&quot;\&gt;Chapter
@@ -492,7 +492,7 @@ defines a class for toggle buttons, but unusually you don&#39;t directly
 create instances of this class using <code>new toggle_button</code> (or similar).
 Instead a function is provided which generates instances for you. Here
 it is, simplified somewhat:</p>
-<pre><code class='ocaml'><script>val mlfa066b6ea4b703df570a9462ee2d1ca4 = 'let toggle_button ?label ?border_width ?width ?height () =&#10;  let w = ToggleButton.create_toggle ?label () in&#10;  Container.set w ?border_width ?width ?height;&#10;  new toggle_button w&#10;';</script><span class='k'>let</span> toggle_button <span class='o'>?</span>label <span class='o'>?</span>border_width <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlfa066b6ea4b703df570a9462ee2d1ca4 = 'let toggle_button ?label ?border_width ?width ?height () =&#10;  let w = ToggleButton.create_toggle ?label () in&#10;  Container.set w ?border_width ?width ?height;&#10;  new toggle_button w&#10;';</script><span class='k'>let</span> toggle_button <span class='o'>?</span>label <span class='o'>?</span>border_width <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
   <span class='k'>let</span> w <span class='k'>=</span> <span class='m'>ToggleButton</span><span class='o'>.</span>create_toggle <span class='o'>?</span>label () <span class='k'>in</span>
   <span class='m'>Container</span><span class='o'>.</span>set w <span class='o'>?</span>border_width <span class='o'>?</span>width <span class='o'>?</span>height<span class='o'>;</span>
   <span class='k'>new</span> toggle_button w
@@ -505,7 +505,7 @@ the actual <code>GtkObject</code> allocated by the C library.</p>
 <code>Container.set</code> to set some properties in the base class. Here is where
 the polymorphic variants become interesting. What is the type of
 <code>Container.set</code>?</p>
-<pre><code class='ocaml'><script>val ml062e22dd3bac2a023655ba19f93b19ea = '# GtkBase.Container.set;;&#10;- : ?border_width:int -&#62;&#10;    ?width:int -&#62; ?height:int -&#62; [&#62; `container | `widget] Gtk.obj -&#62; unit&#10;= &#60;fun&#62;&#10;';</script><span class='o'>#</span> <span class='m'>GtkBase</span><span class='o'>.</span><span class='m'>Container</span><span class='o'>.</span>set<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml062e22dd3bac2a023655ba19f93b19ea = '# GtkBase.Container.set;;&#10;- : ?border_width:int -&#62;&#10;    ?width:int -&#62; ?height:int -&#62; [&#62; `container | `widget] Gtk.obj -&#62; unit&#10;= &#60;fun&#62;&#10;';</script><span class='o'>#</span> <span class='m'>GtkBase</span><span class='o'>.</span><span class='m'>Container</span><span class='o'>.</span>set<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> <span class='o'>?</span>border_width<span class='o'>:</span>int <span class='k'>-></span>
     <span class='o'>?</span>width<span class='o'>:</span>int <span class='k'>-></span> <span class='o'>?</span>height<span class='o'>:</span>int <span class='k'>-></span> <span class='o'>[</span><span class='o'>&#62;</span> `container <span class='o'>|</span> `widget<span class='o'>]</span> <span class='m'>Gtk</span><span class='o'>.</span>obj <span class='k'>-></span> unit
 <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
@@ -523,7 +523,7 @@ compatible with the call to <code>Container.set</code>, expecting
 <p>Finally our function actually creates the class, passing the widget <code>w</code>
 as the parameter to the class. The class is defined like this
 (simplified):</p>
-<pre><code class='ocaml'><script>val mlf1f287742d703283563a8dee21782338 = 'class toggle_button w = object&#10;  inherit button w&#10;  method connect = new toggle_button_signals obj&#10;  method active = ToggleButton.get_active obj&#10;  method set_active = ToggleButton.set_active obj&#10;  method set_draw_indicator = ToggleButton.set_mode obj&#10;end&#10;';</script><span class='k'>class</span> toggle_button w <span class='k'>=</span> object
+<pre><code class='ocaml'><script>mlf1f287742d703283563a8dee21782338 = 'class toggle_button w = object&#10;  inherit button w&#10;  method connect = new toggle_button_signals obj&#10;  method active = ToggleButton.get_active obj&#10;  method set_active = ToggleButton.set_active obj&#10;  method set_draw_indicator = ToggleButton.set_mode obj&#10;end&#10;';</script><span class='k'>class</span> toggle_button w <span class='k'>=</span> object
   <span class='k'>inherit</span> button w
   <span class='k'>method</span> connect <span class='k'>=</span> <span class='k'>new</span> toggle_button_signals obj
   <span class='k'>method</span> active <span class='k'>=</span> <span class='m'>ToggleButton</span><span class='o'>.</span>get_active obj
@@ -533,7 +533,7 @@ as the parameter to the class. The class is defined like this
 </code></pre>
 <p>
 The base class for all objects is <code>GObj.gtkobj</code> defined as:</p>
-<pre><code class='ocaml'><script>val mlbf4a30191b622ae7944bb4cfaaca760f = 'class gtkobj w = object&#10;  val obj = w&#10;  method destroy () = Object.destroy w&#10;  method get_id = Object.get_id w&#10;end&#10;';</script><span class='k'>class</span> gtkobj w <span class='k'>=</span> object
+<pre><code class='ocaml'><script>mlbf4a30191b622ae7944bb4cfaaca760f = 'class gtkobj w = object&#10;  val obj = w&#10;  method destroy () = Object.destroy w&#10;  method get_id = Object.get_id w&#10;end&#10;';</script><span class='k'>class</span> gtkobj w <span class='k'>=</span> object
   <span class='k'>val</span> obj <span class='k'>=</span> w
   <span class='k'>method</span> destroy () <span class='k'>=</span> <span class='m'>Object</span><span class='o'>.</span>destroy w
   <span class='k'>method</span> get_id <span class='k'>=</span> <span class='m'>Object</span><span class='o'>.</span>get_id w
@@ -548,7 +548,7 @@ underlying object (sadly there is no equivalent for <code>gtkobj</code>, althoug
 this doesn&#39;t matter so much since almost all interesting classes are
 widgets).</p>
 <p>Let&#39;s try the OO interface for toggle buttons:</p>
-<pre><code class='ocaml'><script>val ml78dd71b3e0ad85945931e33e81d70062 = '          (* call the toggle_button function *)&#10;# let b = GButton.toggle_button ~label:&#34;Push me!&#34; ();;&#10;          (* note: returns object from toggle_button class *)&#10;val b : GButton.toggle_button = &#60;obj&#62;&#10;# b#as_widget;;&#10;          (* note: returns a widget obj == [`base|`widget] obj *)&#10;- : Gtk.widget Gtk.obj = &#60;abstr&#62;&#10;';</script>          <span class='com2'>(* call the toggle_button <span class='ic'>function</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml78dd71b3e0ad85945931e33e81d70062 = '          (* call the toggle_button function *)&#10;# let b = GButton.toggle_button ~label:&#34;Push me!&#34; ();;&#10;          (* note: returns object from toggle_button class *)&#10;val b : GButton.toggle_button = &#60;obj&#62;&#10;# b#as_widget;;&#10;          (* note: returns a widget obj == [`base|`widget] obj *)&#10;- : Gtk.widget Gtk.obj = &#60;abstr&#62;&#10;';</script>          <span class='com2'>(* call the toggle_button <span class='ic'>function</span> *)</span><!-- end comment -->
 <span class='o'>#</span> <span class='k'>let</span> b <span class='k'>=</span> <span class='m'>GButton</span><span class='o'>.</span>toggle_button <span class='o'>~</span>label<span class='o'>:</span><span class='s'>&#34;Push me!&#34;</span> ()<span class='o'>;;</span>
           <span class='com2'>(* note<span class='ic'>:</span> returns object from toggle_button <span class='ic'>class</span> *)</span><!-- end comment -->
 <span class='k'>val</span> b <span class='o'>:</span> <span class='m'>GButton</span><span class='o'>.</span>toggle_button <span class='k'>=</span> <span class='o'>&#60;</span>obj<span class='o'>&#62;</span>
@@ -577,7 +577,7 @@ one class and wrap it in another class. Here we take the children out of
 a table widget, which we happen to know are actually all vboxes, unwrap
 each one from the <code>widget</code> class and rewrap in a <code>GPack.box</code> class.
 (Example due to Jacques Garrigue.)</p>
-<pre><code class='ocaml'><script>val ml0e0ebe3f2e7f0725ecb95be9d7729585 = 'let vbox_of_widget widget =&#10;  let obj = GtkPack.Box.cast widget#as_widget in&#10;  new GPack.box obj&#10;&#10;let vboxes = List.iter vbox_of_widget table#children&#10;';</script><span class='k'>let</span> vbox_of_widget widget <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml0e0ebe3f2e7f0725ecb95be9d7729585 = 'let vbox_of_widget widget =&#10;  let obj = GtkPack.Box.cast widget#as_widget in&#10;  new GPack.box obj&#10;&#10;let vboxes = List.iter vbox_of_widget table#children&#10;';</script><span class='k'>let</span> vbox_of_widget widget <span class='k'>=</span>
   <span class='k'>let</span> obj <span class='k'>=</span> <span class='m'>GtkPack</span><span class='o'>.</span><span class='m'>Box</span><span class='o'>.</span>cast widget<span class='o'>#</span>as_widget <span class='k'>in</span>
   <span class='k'>new</span> <span class='m'>GPack</span><span class='o'>.</span>box obj
 
@@ -595,7 +595,7 @@ still throw an exception indicating a program bug at runtime. The
 strategy here is to remember what objects we put into the container
 separately, and when we take them out try to match them up. We use the
 <code>GUtil.memo</code> class for this:</p>
-<pre><code class='ocaml'><script>val ml03eb6d234632caa4b86701143d356dc9 = 'class [&#39;a] memo () = object&#10;  constraint &#39;a = #widget&#10;  val tbl = Hashtbl.create 7&#10;  method add (obj : &#39;a) =&#10;    Hashtbl.add tbl obj#get_id obj&#10;  method find (obj : widget) = Hashtbl.find tbl obj#get_id&#10;  method remove (obj : widget) = Hashtbl.remove tbl obj#get_id&#10;end&#10;';</script><span class='k'>class</span> <span class='o'>[</span>'a<span class='o'>]</span> memo () <span class='k'>=</span> object
+<pre><code class='ocaml'><script>ml03eb6d234632caa4b86701143d356dc9 = 'class [&#39;a] memo () = object&#10;  constraint &#39;a = #widget&#10;  val tbl = Hashtbl.create 7&#10;  method add (obj : &#39;a) =&#10;    Hashtbl.add tbl obj#get_id obj&#10;  method find (obj : widget) = Hashtbl.find tbl obj#get_id&#10;  method remove (obj : widget) = Hashtbl.remove tbl obj#get_id&#10;end&#10;';</script><span class='k'>class</span> <span class='o'>[</span>'a<span class='o'>]</span> memo () <span class='k'>=</span> object
   <span class='k'>constraint</span> 'a <span class='k'>=</span> <span class='o'>#</span>widget
   <span class='k'>val</span> tbl <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 7
   <span class='k'>method</span> add (obj <span class='o'>:</span> 'a) <span class='k'>=</span>
@@ -609,7 +609,7 @@ separately, and when we take them out try to match them up. We use the
 subclass of widget).</p>
 <p>Here is an example of using a memo. First we will create a top-level
 window, a container (vbox) to go inside this, and a button:</p>
-<pre><code class='ocaml'><script>val mlb59422bae2be7496ea7be5bd9cadb119 = '# let w = GWindow.window ();;&#10;val w : GWindow.window = &#60;obj&#62;&#10;# let c = GPack.vbox ~packing:w#add ();;&#10;val c : GPack.box = &#60;obj&#62;&#10;# let b = GButton.button ~label:&#34;Push me!&#34; ();;&#10;val b : GButton.button = &#60;obj&#62;&#10;';</script><span class='o'>#</span> <span class='k'>let</span> w <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlb59422bae2be7496ea7be5bd9cadb119 = '# let w = GWindow.window ();;&#10;val w : GWindow.window = &#60;obj&#62;&#10;# let c = GPack.vbox ~packing:w#add ();;&#10;val c : GPack.box = &#60;obj&#62;&#10;# let b = GButton.button ~label:&#34;Push me!&#34; ();;&#10;val b : GButton.button = &#60;obj&#62;&#10;';</script><span class='o'>#</span> <span class='k'>let</span> w <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window ()<span class='o'>;;</span>
 <span class='k'>val</span> w <span class='o'>:</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='k'>=</span> <span class='o'>&#60;</span>obj<span class='o'>&#62;</span>
 <span class='o'>#</span> <span class='k'>let</span> c <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>w<span class='o'>#</span>add ()<span class='o'>;;</span>
 <span class='k'>val</span> c <span class='o'>:</span> <span class='m'>GPack</span><span class='o'>.</span>box <span class='k'>=</span> <span class='o'>&#60;</span>obj<span class='o'>&#62;</span>
@@ -620,7 +620,7 @@ window, a container (vbox) to go inside this, and a button:</p>
 Before we pack the button into the container, let&#39;s create a memo to
 remember the real object. Notice how the type of the memo is refined as
 soon as the button is added:</p>
-<pre><code class='ocaml'><script>val ml00a22ed4cac2478c4dc925fac4db780c = '# let m = new GUtil.memo ();;&#10;val m : _#GObj.widget GUtil.memo = &#60;obj&#62;&#10;# m#add b;;&#10;- : unit = ()&#10;# m;;&#10;- : GButton.button GUtil.memo = &#60;obj&#62;&#10;';</script><span class='o'>#</span> <span class='k'>let</span> m <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GUtil</span><span class='o'>.</span>memo ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml00a22ed4cac2478c4dc925fac4db780c = '# let m = new GUtil.memo ();;&#10;val m : _#GObj.widget GUtil.memo = &#60;obj&#62;&#10;# m#add b;;&#10;- : unit = ()&#10;# m;;&#10;- : GButton.button GUtil.memo = &#60;obj&#62;&#10;';</script><span class='o'>#</span> <span class='k'>let</span> m <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GUtil</span><span class='o'>.</span>memo ()<span class='o'>;;</span>
 <span class='k'>val</span> m <span class='o'>:</span> <span class='o'>_</span><span class='o'>#</span><span class='m'>GObj</span><span class='o'>.</span>widget <span class='m'>GUtil</span><span class='o'>.</span>memo <span class='k'>=</span> <span class='o'>&#60;</span>obj<span class='o'>&#62;</span>
 <span class='o'>#</span> m<span class='o'>#</span>add b<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
@@ -630,25 +630,25 @@ soon as the button is added:</p>
 <p>
 Now we can add the button to the container, remembering to upcast it to
 a widget first of course:</p>
-<pre><code class='ocaml'><script>val ml2d8bfd8d2d28c7c8922c478355ac91e3 = '# c#add (b :&#62; GObj.widget);;&#10;- : unit = ()&#10;';</script><span class='o'>#</span> c<span class='o'>#</span>add (b <span class='o'>:&#62;</span> <span class='m'>GObj</span><span class='o'>.</span>widget)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml2d8bfd8d2d28c7c8922c478355ac91e3 = '# c#add (b :&#62; GObj.widget);;&#10;- : unit = ()&#10;';</script><span class='o'>#</span> c<span class='o'>#</span>add (b <span class='o'>:&#62;</span> <span class='m'>GObj</span><span class='o'>.</span>widget)<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
 </code></pre>
 <p>
 The method <code>#children</code> returns a list of widgets. Not much use to us:</p>
-<pre><code class='ocaml'><script>val ml837adecc0a092dc14fe7643c59dd4a0f = '# c#children;;&#10;- : GObj.widget list = [&#60;obj&#62;]&#10;';</script><span class='o'>#</span> c<span class='o'>#</span>children<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml837adecc0a092dc14fe7643c59dd4a0f = '# c#children;;&#10;- : GObj.widget list = [&#60;obj&#62;]&#10;';</script><span class='o'>#</span> c<span class='o'>#</span>children<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> <span class='m'>GObj</span><span class='o'>.</span>widget list <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span>obj<span class='o'>&#62;</span><span class='o'>]</span>
 </code></pre>
 <p>
 But we can use our memo to map these widgets to the original button
 objects:</p>
-<pre><code class='ocaml'><script>val ml9f0369e059025a0349289825beee8a86 = '# List.map (fun w -&#62; m#find w) c#children;;&#10;- : GButton.button list = [&#60;obj&#62;]&#10;';</script><span class='o'>#</span> <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> w <span class='k'>-></span> m<span class='o'>#</span>find w) c<span class='o'>#</span>children<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml9f0369e059025a0349289825beee8a86 = '# List.map (fun w -&#62; m#find w) c#children;;&#10;- : GButton.button list = [&#60;obj&#62;]&#10;';</script><span class='o'>#</span> <span class='m'>List</span><span class='o'>.</span>map (<span class='k'>fun</span> w <span class='k'>-></span> m<span class='o'>#</span>find w) c<span class='o'>#</span>children<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> <span class='m'>GButton</span><span class='o'>.</span>button list <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span>obj<span class='o'>&#62;</span><span class='o'>]</span>
 </code></pre>
 <p>
 Remember that this is still dynamic casting, and so unsafe. In this case
 the memo will throw a <code>Not_found</code> exception if the widget cannot be
 mapped:</p>
-<pre><code class='ocaml'><script>val mlf0226ea56335669fef157f367e1b697d = '# let b2 = GButton.button ~label:&#34;Don&#39;t push me!&#34; ();;&#10;val b2 : GButton.button = &#60;obj&#62;&#10;# c#add (b2 :&#62; GObj.widget);;&#10;- : unit = ()&#10;# List.map (fun w -&#62; m#find w) c#children;;&#10;Exception: Not_found.&#10;';</script><span class='o'>#</span> <span class='k'>let</span> b2 <span class='k'>=</span> <span class='m'>GButton</span><span class='o'>.</span>button <span class='o'>~</span>label<span class='o'>:</span><span class='s'>&#34;Don&#39;t push me!&#34;</span> ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf0226ea56335669fef157f367e1b697d = '# let b2 = GButton.button ~label:&#34;Don&#39;t push me!&#34; ();;&#10;val b2 : GButton.button = &#60;obj&#62;&#10;# c#add (b2 :&#62; GObj.widget);;&#10;- : unit = ()&#10;# List.map (fun w -&#62; m#find w) c#children;;&#10;Exception: Not_found.&#10;';</script><span class='o'>#</span> <span class='k'>let</span> b2 <span class='k'>=</span> <span class='m'>GButton</span><span class='o'>.</span>button <span class='o'>~</span>label<span class='o'>:</span><span class='s'>&#34;Don&#39;t push me!&#34;</span> ()<span class='o'>;;</span>
 <span class='k'>val</span> b2 <span class='o'>:</span> <span class='m'>GButton</span><span class='o'>.</span>button <span class='k'>=</span> <span class='o'>&#60;</span>obj<span class='o'>&#62;</span>
 <span class='o'>#</span> c<span class='o'>#</span>add (b2 <span class='o'>:&#62;</span> <span class='m'>GObj</span><span class='o'>.</span>widget)<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
