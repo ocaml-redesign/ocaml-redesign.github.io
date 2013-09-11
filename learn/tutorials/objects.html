@@ -1,1 +1,633 @@
 <!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+        <div id="content-primary" class="span8">
+          <div class="content">
+            <h1 id="Objects"> Objects</h1><h2 id="Objectsandclasses"> Objects and classes</h2><p>
+
+OCaml is an object-oriented, imperative, functional programming language
+:-) It mixes all these paradigms and lets you use the most appropriate
+(or most familiar) programming paradigm for the task at hand. In this
+chapter I&#39;m going to look at object-oriented programming in OCaml, but
+I&#39;m also going to talk about why you might or might not want to write
+object-oriented programs.</p>
+<p>The classic noddy example used in text books to demonstrate
+object-oriented programming is the stack class. This is a pretty
+terrible example in many ways, but I&#39;m going to use it here to show the
+basics of writing object-oriented OCaml.</p>
+<p>Here&#39;s some basic code to provide a stack of integers. The class is
+implemented using a linked list.</p>
+<pre><code class='ocaml'><script>val ml63bd91125872d957fc645626e14056a3 = '  class stack_of_ints =&#10;    object (self)&#10;      val mutable the_list = ( [] : int list )   (* instance variable *)&#10;      method push x =                        (* push method *)&#10;        the_list &#60;- x :: the_list&#10;      method pop =                           (* pop method *)&#10;        let result = List.hd the_list in&#10;        the_list &#60;- List.tl the_list;&#10;        result&#10;      method peek =                          (* peek method *)&#10;        List.hd the_list&#10;      method size =                          (* size method *)&#10;        List.length the_list&#10;    end&#10;';</script>  <span class='k'>class</span> stack_of_ints <span class='k'>=</span>
+    object (self)
+      <span class='k'>val</span> <span class='k'>mutable</span> the_list <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> int list )   <span class='com2'>(* instance variable *)</span><!-- end comment -->
+      <span class='k'>method</span> push x <span class='k'>=</span>                        <span class='com2'>(* push <span class='ic'>method</span> *)</span><!-- end comment -->
+        the_list <span class='o'>&#60;-</span> x <span class='o'>::</span> the_list
+      <span class='k'>method</span> pop <span class='k'>=</span>                           <span class='com2'>(* pop <span class='ic'>method</span> *)</span><!-- end comment -->
+        <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>hd the_list <span class='k'>in</span>
+        the_list <span class='o'>&#60;-</span> <span class='m'>List</span><span class='o'>.</span>tl the_list<span class='o'>;</span>
+        result
+      <span class='k'>method</span> peek <span class='k'>=</span>                          <span class='com2'>(* peek <span class='ic'>method</span> *)</span><!-- end comment -->
+        <span class='m'>List</span><span class='o'>.</span>hd the_list
+      <span class='k'>method</span> size <span class='k'>=</span>                          <span class='com2'>(* size <span class='ic'>method</span> *)</span><!-- end comment -->
+        <span class='m'>List</span><span class='o'>.</span>length the_list
+    <span class='k'>end</span>
+</code></pre>
+<p>
+The basic pattern <code>class name = object (self) ... end</code> defines a class
+called <code>name</code>.</p>
+<p>The class has one instance variable, which is mutable (not constant),
+called <code>the_list</code>. This is the underlying linked list. We initialize
+this (each time a <code>stack_of_ints</code> object is created) using a bit of code
+that you may not be familiar with. The expression <code>( [] : int list )</code>
+means &quot;an empty list, of type <code>int list</code>&quot;. Recall that the simple empty
+list <code>[]</code> has type <code>&#39;a list</code>, meaning a list of any type. However we
+want a stack of <code>int</code>, not anything else, and so in this case we want to
+tell the type inference engine that this list isn&#39;t the general &quot;list of
+anything&quot; but is in fact the narrower &quot;list of <code>int</code>&quot;. The syntax
+<code>( expression : type )</code> means <code>expression</code> which is in fact of type
+<code>type</code>. This <em>isn&#39;t</em> a general type cast, because you can&#39;t use it to
+overrule the type inference engine, only to narrow a general type to
+make it more specific. So you can&#39;t write, for example, <code>( 1 : float )</code>:</p>
+<pre><code class='ocaml'><script>val ml11b534b9f01b0786571449ef3d2ec2e3 = '(1 : float);;&#10;';</script>(1 <span class='o'>:</span> float)<span class='o'>;;</span>
+</code></pre>
+<p>
+Type safety is preserved. Back to the example ...</p>
+<p>This class has four simple methods. <code>push</code> pushes an integer onto the
+stack. <code>pop</code> pops the top integer off the stack and returns it. Notice
+the <code>&lt;-</code> assignment operator used for updating our mutable instance
+variable. It&#39;s the same <code>&lt;-</code> assignment operator which is used for
+updating mutable fields in records.</p>
+<p><code>peek</code> returns the top of the stack (ie. head of the list) without
+affecting the stack, while <code>size</code> returns the number of elements in the
+stack (ie. the length of the list).</p>
+<p>Let&#39;s write some code to test stacks of ints. First let&#39;s create a new
+object. We use the familiar <code>new</code> operator:</p>
+<pre><code class='ocaml'><script>val mla269d607da939c1a92e658df13cc9ff8 = '  let s = new stack_of_ints&#10;';</script>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints
+</code></pre>
+<p>
+Now we&#39;ll push and pop some elements off the stack:</p>
+<pre><code class='ocaml'><script>val ml7e86777f50ba4f5cb99f7240a283efca = '  for i = 1 to 10 do&#10;    s#push i&#10;  done;;&#10;  while s#size &#62; 0 do&#10;    Printf.printf &#34;Popped %d off the stack.\n&#34; s#pop&#10;  done;;&#10;';</script>  <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> 10 <span class='k'>do</span>
+    s<span class='o'>#</span>push i
+  <span class='k'>done</span><span class='o'>;;</span>
+  <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
+    <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;Popped %d off the stack.\n&#34;</span> s<span class='o'>#</span>pop
+  <span class='k'>done</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Notice the syntax. <code>object#method</code> means call <code>method</code> on <code>object</code>. This
+is the same as <code>object.method</code> or <code>object-&gt;method</code> that you will be
+familiar with in imperative languages.</p>
+<p>In the OCaml toplevel we can examine the types of objects and methods in
+more detail:</p>
+<pre><code class='ocaml'><script>val mlbea5e95a445ce304749da26db398f7dc = '  let s = new stack_of_ints;;&#10;  s#push;;&#10;';</script>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints<span class='o'>;;</span>
+  s<span class='o'>#</span>push<span class='o'>;;</span>
+</code></pre>
+<p>
+<code>s</code> is an opaque object. The implementation (ie. the list) is hidden
+from callers.</p>
+<h3 id="Polymorphicclasses"> Polymorphic classes</h3><p>
+A stack of integers is good, but what about a stack that can store any
+type? (Not a single stack that can store a mixture of types, but
+multiple stacks each storing objects of any single type). As with
+<code>&#39;a list</code>, we can define <code>&#39;a stack</code>:</p>
+<pre><code class='ocaml'><script>val ml04e189789d20e0f9d1dc851d991324b1 = '  class [&#39;a] stack =&#10;    object (self)&#10;      val mutable list = ( [] : &#39;a list )    (* instance variable *)&#10;      method push x =                        (* push method *)&#10;        list &#60;- x :: list&#10;      method pop =                           (* pop method *)&#10;        let result = List.hd list in&#10;        list &#60;- List.tl list;&#10;        result&#10;      method peek =                          (* peek method *)&#10;        List.hd list&#10;      method size =                          (* size method *)&#10;        List.length list&#10;    end&#10;';</script>  <span class='k'>class</span> <span class='o'>[</span>'a<span class='o'>]</span> stack <span class='k'>=</span>
+    object (self)
+      <span class='k'>val</span> <span class='k'>mutable</span> list <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> 'a list )    <span class='com2'>(* instance variable *)</span><!-- end comment -->
+      <span class='k'>method</span> push x <span class='k'>=</span>                        <span class='com2'>(* push <span class='ic'>method</span> *)</span><!-- end comment -->
+        list <span class='o'>&#60;-</span> x <span class='o'>::</span> list
+      <span class='k'>method</span> pop <span class='k'>=</span>                           <span class='com2'>(* pop <span class='ic'>method</span> *)</span><!-- end comment -->
+        <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>hd list <span class='k'>in</span>
+        list <span class='o'>&#60;-</span> <span class='m'>List</span><span class='o'>.</span>tl list<span class='o'>;</span>
+        result
+      <span class='k'>method</span> peek <span class='k'>=</span>                          <span class='com2'>(* peek <span class='ic'>method</span> *)</span><!-- end comment -->
+        <span class='m'>List</span><span class='o'>.</span>hd list
+      <span class='k'>method</span> size <span class='k'>=</span>                          <span class='com2'>(* size <span class='ic'>method</span> *)</span><!-- end comment -->
+        <span class='m'>List</span><span class='o'>.</span>length list
+    <span class='k'>end</span>
+</code></pre>
+<p>
+The <code>class [&#39;a] stack</code> doesn&#39;t really define just one class, but a whole
+&quot;class of classes&quot;, one for every possible type (ie. an infinitely large
+number of classes!) Let&#39;s try and use our <code>&#39;a stack</code> class. In this
+instance we create a stack and push a floating point number onto the
+stack. Notice the type of the stack:</p>
+<pre><code class='ocaml'><script>val mld202a0c169e15168901e3533acbec54c = 'let s = new stack;;&#10;s#push 1.0;;&#10;s;;&#10;';</script><span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack<span class='o'>;;</span>
+s<span class='o'>#</span>push 1.0<span class='o'>;;</span>
+s<span class='o'>;;</span>
+</code></pre>
+<p>
+This stack is now a <code>float stack</code>, and only floating point numbers may
+be pushed and popped from this stack. (For an explanation of the <code>&#39;_a</code>
+notation, see the <a href='http://caml.inria.fr/FAQ/FAQ_EXPERT-eng.html' title='http://caml.inria.fr/FAQ/FAQ_EXPERT-eng.html'>OCaml expert
+FAQ</a>
+; link replaced by <a href='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html' title='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html'>OCaml expert
+FAQ</a>).
+Let&#39;s demonstrate the type-safety of our new <code>float stack</code>:</p>
+<pre><code class='ocaml'><script>val ml75b08dddebf80e0ebdd2980baab0c7de = 's#push 3.0;;&#10;s#pop;;&#10;s#pop;;&#10;s#push &#34;a string&#34;;;&#10;';</script>s<span class='o'>#</span>push 3.0<span class='o'>;;</span>
+s<span class='o'>#</span>pop<span class='o'>;;</span>
+s<span class='o'>#</span>pop<span class='o'>;;</span>
+s<span class='o'>#</span>push <span class='s'>&#34;a string&#34;</span><span class='o'>;;</span>
+</code></pre>
+<p>
+We can define polymorphic functions which can operate on any type of
+stack. Our first attempt is this one:</p>
+<pre><code class='ocaml'><script>val ml231f7f194b2aed839da1b0c348aeba6d = '  let drain_stack s =&#10;    while s#size &#62; 0 do&#10;      ignore (s#pop)&#10;    done&#10;';</script>  <span class='k'>let</span> drain_stack s <span class='k'>=</span>
+    <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
+      ignore (s<span class='o'>#</span>pop)
+    <span class='k'>done</span>
+</code></pre>
+<p>
+Notice the type of <code>drain_stack</code>. Cleverly - perhaps <em>too</em> cleverly -
+OCaml&#39;s type inference engine has worked out that <code>drain_stack</code> works on
+<em>any</em> object which has <code>pop</code> and <code>size</code> methods! So if we defined
+another, entirely separate class which happened to contain <code>pop</code> and
+<code>size</code> methods with suitable type signatures, then we might accidentally
+call <code>drain_stack</code> on objects of that other type.</p>
+<p>We can force OCaml to be more specific and only allow <code>drain_stack</code> to
+be called on <code>&#39;a stack</code>s by narrowing the type of the <code>s</code> argument, like
+this:</p>
+<pre><code class='ocaml'><script>val mlc0dd8d66d9be4a99982c9dcfb83e0f03 = '  let drain_stack (s : &#39;a stack) =&#10;    while s#size &#62; 0 do&#10;      ignore (s#pop)&#10;    done&#10;';</script>  <span class='k'>let</span> drain_stack (s <span class='o'>:</span> 'a stack) <span class='k'>=</span>
+    <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
+      ignore (s<span class='o'>#</span>pop)
+    <span class='k'>done</span>
+</code></pre>
+<h3 id="Inheritancevirtualclassesinitializers"> Inheritance, virtual classes, initializers</h3><p>
+
+I&#39;ve noticed programmers in Java tend to overuse inheritance, possibly
+because it&#39;s the only reasonable way of extending code in that language.
+A much better and more general way to extend code is usually to use
+hooks (cf. Apache&#39;s module API). Nevertheless in certain narrow areas
+inheritance can be useful, and the most important of these is in writing
+GUI widget libraries.</p>
+<p>Let&#39;s consider an imaginary OCaml widget library similar to Java&#39;s
+Swing. We will define buttons and labels with the following class
+hierarchy:</p>
+<pre><code class='ocaml'><script>val ml57f6eb40b5bc27afc1817c2844f68995 = 'widget  (superclass for all widgets)&#10;  |&#10;  +----&#62; container  (any widget that can contain other widgets)&#10;  |        |&#10;  |        +----&#62; button&#10;  |&#10;  +-------------&#62; label&#10;';</script>widget  (superclass <span class='k'>for</span> all widgets)
+  <span class='o'>|</span>
+  <span class='o'>+----&#62;</span> container  (any widget that can contain other widgets)
+  <span class='o'>|</span>        <span class='o'>|</span>
+  <span class='o'>|</span>        <span class='o'>+----&#62;</span> button
+  <span class='o'>|</span>
+  <span class='o'>+-------------&#62;</span> label
+</code></pre>
+<p>
+(Notice that a <code>button</code> is a <code>container</code> because it can contain either a
+label or an image, depending on what is displayed on the button).</p>
+<p><code>widget</code> is the virtual superclass for all widgets. I want every widget
+to have a name (just a string) which is constant over the life of that
+widget. This was my first attempt:</p>
+<pre><code class='ocaml'><script>val mleab4b8320332292bce3d0b788af184f9 = '  class virtual widget name =&#10;    object (self)&#10;      method get_name =&#10;        name&#10;      method virtual repaint : unit&#10;    end&#10;';</script>  <span class='k'>class</span> <span class='k'>virtual</span> widget name <span class='k'>=</span>
+    object (self)
+      <span class='k'>method</span> get_name <span class='k'>=</span>
+        name
+      <span class='k'>method</span> <span class='k'>virtual</span> repaint <span class='o'>:</span> unit
+    <span class='k'>end</span>
+</code></pre>
+<p>
+Oops! I forgot that OCaml cannot infer the type of <code>name</code> so will assume
+that it is <code>&#39;a</code>. But that defines a polymorphic class, and I didn&#39;t
+declare the class as polymorphic (<code>class [&#39;a] widget</code>). I need to narrow
+the type of <code>name</code> like this:</p>
+<pre><code class='ocaml'><script>val ml8b74145284f47d0cb915eee54a3ced97 = '  class virtual widget (name : string) =&#10;    object (self)&#10;      method get_name =&#10;        name&#10;      method virtual repaint : unit&#10;    end&#10;';</script>  <span class='k'>class</span> <span class='k'>virtual</span> widget (name <span class='o'>:</span> string) <span class='k'>=</span>
+    object (self)
+      <span class='k'>method</span> get_name <span class='k'>=</span>
+        name
+      <span class='k'>method</span> <span class='k'>virtual</span> repaint <span class='o'>:</span> unit
+    <span class='k'>end</span>
+</code></pre>
+<p>
+Now there are several new things going on in this code. Firstly the
+class contains an <strong>initializer</strong>. This is an argument to the class
+(<code>name</code>) which you can think of as exactly the equivalent of an argument
+to a constructor in, eg., Java:</p>
+<pre><code class='ocaml'><script>val ml0f94de649cf8ca68b993d1fe0b147fe8 = 'public class Widget&#10;{&#10;  public Widget (String name)&#10;  {&#10;    ...&#10;  }&#10;}&#10;';</script>public <span class='k'>class</span> Widget
+<span class='o'>{</span>
+  public Widget (String name)
+  <span class='o'>{</span>
+    <span class='o'>...</span>
+  <span class='o'>}</span>
+<span class='o'>}</span>
+</code></pre>
+<p>
+In OCaml a constructor constructs the whole class, it&#39;s not just a
+specially named function, so we write the arguments as if they are
+arguments to the class:</p>
+<pre><code class='ocaml'><script>val ml4dd3b4d6e16a5149be9e9630d48184b8 = 'class foo arg1 arg2 ... =&#10;';</script><span class='k'>class</span> foo arg1 arg2 <span class='o'>...</span> <span class='k'>=</span>
+</code></pre>
+<p>
+Secondly the class contains a virtual method, and thus the whole class
+is marked as virtual. The virtual method is our <code>repaint</code> method. We
+need to tell OCaml it&#39;s virtual (<code>method virtual</code>), <em>and</em> we need to
+tell OCaml the type of the method. Because the method doesn&#39;t contain
+any code, OCaml can&#39;t use type inference to automatically work out the
+type for you, so you need to tell it the type. In this case the method
+just returns <code>unit</code>. If your class contains any virtual methods (even
+just inherited ones) then you need to specify the whole class as virtual
+by using <code>class virtual ...</code>.</p>
+<p>As in C++ and Java, virtual classes cannot be directly instantiated
+using <code>new</code>:</p>
+<pre><code class='ocaml'><script>val ml3561c080b94e17cc6d0ef735918316dd = 'let w = new widget &#34;my widget&#34;&#10;';</script><span class='k'>let</span> w <span class='k'>=</span> <span class='k'>new</span> widget <span class='s'>&#34;my widget&#34;</span>
+</code></pre>
+<p>
+Now my <code>container</code> class is more interesting. It must inherit from
+<code>widget</code> and have the mechanics for storing the list of contained
+widgets. Here is my simple implementation for <code>container</code>:</p>
+<pre><code class='ocaml'><script>val ml4ef8a7a1ae3ba8da22303ea2a4d0e502 = '  class virtual container name =&#10;    object (self)&#10;      inherit widget name&#10;      val mutable widgets = ( [] : widget list )&#10;      method add w =&#10;        widgets &#60;- w :: widgets&#10;      method get_widgets =&#10;        widgets&#10;      method repaint =&#10;        List.iter (fun w -&#62; w#repaint) widgets&#10;    end&#10;';</script>  <span class='k'>class</span> <span class='k'>virtual</span> container name <span class='k'>=</span>
+    object (self)
+      <span class='k'>inherit</span> widget name
+      <span class='k'>val</span> <span class='k'>mutable</span> widgets <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> widget list )
+      <span class='k'>method</span> add w <span class='k'>=</span>
+        widgets <span class='o'>&#60;-</span> w <span class='o'>::</span> widgets
+      <span class='k'>method</span> get_widgets <span class='k'>=</span>
+        widgets
+      <span class='k'>method</span> repaint <span class='k'>=</span>
+        <span class='m'>List</span><span class='o'>.</span>iter (<span class='k'>fun</span> w <span class='k'>-></span> w<span class='o'>#</span>repaint) widgets
+    <span class='k'>end</span>
+</code></pre>
+<p>
+Notes:</p>
+<ol>
+ <li>The <code>container</code> class is marked as virtual. It doesn&#39;t contain any
+ virtual methods, but in this case I just want to prevent people
+ creating containers directly.
+ </li>
+ <li>The <code>container</code> class has a <code>name</code> argument which is passed directly
+ up when constructing the <code>widget</code>.
+ </li>
+ <li><code>inherit widget name</code> means that the <code>container</code> inherits from
+ <code>widget</code>, and it passes the <code>name</code> argument to the constructor for
+ <code>widget</code>.
+ </li>
+ <li>My <code>container</code> contains a mutable list of widgets and methods to
+ <code>add</code> a widget to this list and <code>get_widgets</code> (return the list of
+ widgets).
+ </li>
+ <li>The list of widgets returned by <code>get_widgets</code> cannot be modified by
+ code outside the class. The reason for this is somewhat subtle, but
+ basically comes down to the fact that OCaml&#39;s linked lists are
+ immutable. Let&#39;s imagine that someone wrote this code:</li>
+</ol>
+
+<!-- --><pre><code class='ocaml'><script>val ml76a8ac6d4aea15f3fb185506a8c876ad = 'let list = container#get_widgets in&#10;x :: list&#10;';</script><span class='k'>let</span> list <span class='k'>=</span> container<span class='o'>#</span>get_widgets <span class='k'>in</span>
+x <span class='o'>::</span> list
+</code></pre>
+<p>
+
+Would this modify the private internal representation of my <code>container</code>
+class, by prepending <code>x</code> to the list of widgets? No it wouldn&#39;t. The
+private variable <code>widgets</code> would be unaffected by this or any other
+change attempted by the outside code. This means, for example, that you
+could change the internal representation to use an array at some later
+date, and no code outside the class would need to be changed.</p>
+<p>Last, but not least, we have implemented the previously virtual
+<code>repaint</code> function so that <code>container#repaint</code> will repaint all of the
+contained widgets. Notice I use <code>List.iter</code> to iterate over the list,
+and I also use a probably unfamiliar anonymous function expression:</p>
+<pre><code class='ocaml'><script>val ml49ce6c72d80ac3da9c6d806003ff7e54 = '(fun w -&#62; w#repaint)&#10;';</script>(<span class='k'>fun</span> w <span class='k'>-></span> w<span class='o'>#</span>repaint)
+</code></pre>
+<p>
+which defines an anonymous function with one argument <code>w</code> that just
+calls <code>w#repaint</code> (the <code>repaint</code> method on widget <code>w</code>).</p>
+<p>In this instance our <code>button</code> class is simple (rather unrealistically
+simple in fact, but nevermind that):</p>
+<pre><code class='ocaml'><script>val ml333b919062410f83440d8af2d20edd33 = '  type button_state = Released | Pressed;;&#10;&#10;  class button ?callback name =&#10;    object (self)&#10;      inherit container name as super&#10;      val mutable state = Released&#10;      method press =&#10;        state &#60;- Pressed;&#10;        match callback with&#10;        | None -&#62; ()&#10;        | Some f -&#62; f ()&#10;      method release =&#10;        state &#60;- Released&#10;      method repaint =&#10;        super#repaint;&#10;        print_endline (&#34;Button being repainted, state is &#34; ^&#10;                       (match state with&#10;                        | Pressed -&#62; &#34;Pressed&#34;&#10;                        | Released -&#62; &#34;Released&#34;))&#10;    end&#10;';</script>  <span class='k'>type</span> button_state <span class='k'>=</span> Released <span class='o'>|</span> Pressed<span class='o'>;;</span>
+
+  <span class='k'>class</span> button <span class='o'>?</span>callback name <span class='k'>=</span>
+    object (self)
+      <span class='k'>inherit</span> container name <span class='k'>as</span> super
+      <span class='k'>val</span> <span class='k'>mutable</span> state <span class='k'>=</span> Released
+      <span class='k'>method</span> press <span class='k'>=</span>
+        state <span class='o'>&#60;-</span> Pressed<span class='o'>;</span>
+        <span class='k'>match</span> callback <span class='k'>with</span>
+        <span class='o'>|</span> None <span class='k'>-></span> ()
+        <span class='o'>|</span> Some f <span class='k'>-></span> f ()
+      <span class='k'>method</span> release <span class='k'>=</span>
+        state <span class='o'>&#60;-</span> Released
+      <span class='k'>method</span> repaint <span class='k'>=</span>
+        super<span class='o'>#</span>repaint<span class='o'>;</span>
+        print_endline (<span class='s'>&#34;Button being repainted, state is &#34;</span> <span class='o'>^</span>
+                       (<span class='k'>match</span> state <span class='k'>with</span>
+                        <span class='o'>|</span> Pressed <span class='k'>-></span> <span class='s'>&#34;Pressed&#34;</span>
+                        <span class='o'>|</span> Released <span class='k'>-></span> <span class='s'>&#34;Released&#34;</span>))
+    <span class='k'>end</span>
+</code></pre>
+<p>
+Notes:</p>
+<ol>
+ <li>This function has an optional argument (see the previous chapter)
+ which is used to pass in the optional callback function. The
+ callback is called when the button is pressed.
+ </li>
+ <li>The expression <code>inherit container name as super</code> names the
+ superclass <code>super</code>. I use this in the <code>repaint</code> method:
+ <code>super#repaint</code>. This expressly calls the superclass method.
+ </li>
+ <li>Pressing the button (calling <code>button#press</code> in this rather
+ simplistic code) sets the state of the button to <code>Pressed</code> and calls
+ the callback function, if one was defined. Notice that the
+ <code>callback</code> variable is either <code>None</code> or <code>Some f</code>, in other words it
+ has type <code>(unit -&gt; unit) option</code>. Reread the previous chapter if you
+ are unsure about this.
+ </li>
+ <li>Notice a strange thing about the <code>callback</code> variable. It&#39;s defined
+ as an argument to the class, but any method can see and use it. In
+ other words, the variable is supplied when the object is
+ constructed, but persists over the lifetime of the object.
+ </li>
+ <li>The <code>repaint</code> method has been implemented. It calls the superclass
+ (to repaint the container), then repaints the button, displaying the
+ current state of the button.</li>
+</ol>
+
+<p>Before defining our <code>label</code> class, let&#39;s play with the <code>button</code> class in
+the OCaml toplevel:</p>
+<pre><code class='ocaml'><script>val mlf5c64fcd8a9f1b78f26ce9bcfab29251 = '  let b = new button ~callback:(fun () -&#62; print_endline &#34;Ouch!&#34;) &#34;button&#34;;;&#10;b#repaint;;&#10;  b#press;;&#10;  b#repaint;;&#10;  b#release;;&#10;';</script>  <span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='o'>~</span>callback<span class='o'>:</span>(<span class='k'>fun</span> () <span class='k'>-></span> print_endline <span class='s'>&#34;Ouch!&#34;</span>) <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
+b<span class='o'>#</span>repaint<span class='o'>;;</span>
+  b<span class='o'>#</span>press<span class='o'>;;</span>
+  b<span class='o'>#</span>repaint<span class='o'>;;</span>
+  b<span class='o'>#</span>release<span class='o'>;;</span>
+</code></pre>
+<p>
+Here&#39;s our comparatively trivial <code>label</code> class:</p>
+<pre><code class='ocaml'><script>val ml5d1f4248bd395b537b68ebe9f3aeb75d = '  class label name text =&#10;    object (self)&#10;      inherit widget name&#10;      method repaint =&#10;        print_endline (&#34;Label: &#34; ^ text)&#10;    end;;&#10;';</script>  <span class='k'>class</span> label name text <span class='k'>=</span>
+    object (self)
+      <span class='k'>inherit</span> widget name
+      <span class='k'>method</span> repaint <span class='k'>=</span>
+        print_endline (<span class='s'>&#34;Label: &#34;</span> <span class='o'>^</span> text)
+    <span class='k'>end</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Let&#39;s create a label which says &quot;Press me!&quot; and add it to the button:</p>
+<pre><code class='ocaml'><script>val ml0a72f343704dcc5aa3710a3d51cc9324 = 'let l = new label &#34;label&#34; &#34;Press me!&#34;;;&#10;b#add l;;&#10;b#repaint;;&#10;';</script><span class='k'>let</span> l <span class='k'>=</span> <span class='k'>new</span> label <span class='s'>&#34;label&#34;</span> <span class='s'>&#34;Press me!&#34;</span><span class='o'>;;</span>
+b<span class='o'>#</span>add l<span class='o'>;;</span>
+b<span class='o'>#</span>repaint<span class='o'>;;</span>
+</code></pre>
+<h3 id="Anoteaboutself"> A note about <code>self</code></h3><p>
+
+In all the examples above we defined classes using the general pattern:</p>
+<pre><code class='ocaml'><script>val ml84249ec81ca5fcf10651d11207285550 = 'class name =&#10;  object (self)&#10;    (* ... *)&#10;  end;;&#10;';</script><span class='k'>class</span> name <span class='k'>=</span>
+  object (self)
+    <span class='com2'>(* <span class='ic'>...</span> *)</span><!-- end comment -->
+  <span class='k'>end</span><span class='o'>;;</span>
+</code></pre>
+<p>
+I didn&#39;t explain the reference to <code>self</code>. In fact this names the object,
+allowing you to call methods in the same class or pass the object to
+functions outside the class. In other words, it&#39;s exactly the same as
+<code>this</code> in C++/Java and <code>$self</code> in Perl. You may completely omit the
+<code>(self)</code> part if you don&#39;t need to refer to yourself - indeed in all the
+examples above we could have done exactly that. However, I would advise
+you to leave it in there because you never know when you might modify
+the class and require the reference to <code>self</code>. There is no penalty for
+having it.</p>
+<h3 id="Inheritanceandcoercions"> Inheritance and coercions</h3><pre><code class='ocaml'><script>val ml65234e46d6d2a7daafd408afedea8680 = 'let b = new button &#34;button&#34;;;&#10;let l = new label &#34;label&#34; &#34;Press me!&#34;;;&#10;[b; l];;&#10;';</script><span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
+<span class='k'>let</span> l <span class='k'>=</span> <span class='k'>new</span> label <span class='s'>&#34;label&#34;</span> <span class='s'>&#34;Press me!&#34;</span><span class='o'>;;</span>
+<span class='o'>[</span>b<span class='o'>;</span> l<span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+
+I created a button <code>b</code> and a label <code>l</code> and I tried to create a list
+containing both, but I got an error. Yet <code>b</code> and <code>l</code> are both <code>widget</code>s,
+so why can&#39;t I put them into the same list? Perhaps OCaml can&#39;t guess
+that I want a <code>widget list</code>? Let&#39;s try telling it:</p>
+<pre><code class='ocaml'><script>val mlbd65b6cdaf8089258665c469e001057d = 'let wl = ([] : widget list);;&#10;let wl = b :: wl;;&#10;';</script><span class='k'>let</span> wl <span class='k'>=</span> (<span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> widget list)<span class='o'>;;</span>
+<span class='k'>let</span> wl <span class='k'>=</span> b <span class='o'>::</span> wl<span class='o'>;;</span>
+</code></pre>
+<p>
+It turns out that OCaml doesn&#39;t coerce subclasses to the type of the
+superclass by default, but you can tell it to by using the <code>:&gt;</code>
+(coercion) operator:</p>
+<pre><code class='ocaml'><script>val mlc9f5403913ea9939007bbc407e2067a2 = 'let wl = (b :&#62; widget) :: wl;;&#10;let wl = (l :&#62; widget) :: wl;;&#10;';</script><span class='k'>let</span> wl <span class='k'>=</span> (b <span class='o'>:&#62;</span> widget) <span class='o'>::</span> wl<span class='o'>;;</span>
+<span class='k'>let</span> wl <span class='k'>=</span> (l <span class='o'>:&#62;</span> widget) <span class='o'>::</span> wl<span class='o'>;;</span>
+</code></pre>
+<p>
+The expression <code>(b :&gt; widget)</code> means &quot;coerce the button <code>b</code> to have type
+<code>widget</code>&quot;. Type-safety is preserved because it is possible to tell
+completely at compile time whether the coercion will succeed.</p>
+<p>Actually, coercions are somewhat more subtle than described above, and
+so I urge you to read the manual to find out the full details.</p>
+<p>The <code>container#add</code> method defined above is actually incorrect, and
+fails if you try to add widgets of different types into a <code>container</code>. A
+coercion would fix this.</p>
+<p>Is it possible to coerce from a superclass (eg. <code>widget</code>) to a subclass
+(eg. <code>button</code>)? The answer, perhaps surprisingly, is NO! Coercing in
+this direction is <em>unsafe</em>. You might try to coerce a <code>widget</code> which is
+in fact a <code>label</code>, not a <code>button</code>.</p>
+<p>The problem of coercing from a superclass to a subclass will be familiar
+to Java programmers. In Java the container types contain <code>Object</code>s, and
+when you extract an object from a container you must cast it back to its
+original type. This can cause runtime <code>ClassCastException</code>s. OCaml&#39;s
+strong type system has the specific goal of eliminating runtime type
+errors, and this is why this sort of coercion is not permitted.</p>
+<p>Polymorphism and functional programming should remove most of the need
+to coerce from superclasses to subclasses. Java&#39;s container classes
+store <code>Object</code>s because Java (at time of writing) lacks generics
+(&quot;templates&quot; in C++ or polymorphism in OCaml). This is a fault in the
+Java language - a pretty fundamental fault in fact - which will
+hopefully be fixed in Java 1.5. In OCaml it&#39;s so simple to define
+polymorphic types like <code>&#39;a list</code> or <code>&#39;a stack</code> that Java-like
+programming just wouldn&#39;t be required. Having said that, if you do
+extensive OO programming in OCaml then I&#39;m pretty sure you&#39;ll come up
+with a case where this type of coercion would actually be darned useful.
+Perhaps for this reason it&#39;s enough to say that you might try
+implementing solutions functionally first, and in an OO style only in
+the few problem domains where it really makes sense.</p>
+<p>[Yamagata Yoriyuki writes that type-safe downcasts are possible.
+Advanced users should see:
+<a href='http://caml.inria.fr/pub/ml-archives/caml-list/2002/05/a6520926c4eac029206a31d6aa22f967.fr.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2002/05/a6520926c4eac029206a31d6aa22f967.fr.html'>http://caml.inria.fr/pub/ml-archives/caml-list/2002/05/a6520926c4eac029206a31d6aa22f967.fr.html</a>
+, that leads to
+<a href='http://remi.vanicat.free.fr/ocaml/hweak/' title='http://remi.vanicat.free.fr/ocaml/hweak/'>hweak</a>
+(old: http://caml.inria.fr/archives/200205/msg00397.html]</p>
+<h3 id="TheOomoduleandcomparingobjects"> The <code>Oo</code> module and comparing objects</h3><p>
+The <code>Oo</code> module contains a few useful functions for OO programming.</p>
+<p><code>Oo.copy</code> makes a shallow copy of an object. <code>Oo.id object</code> returns a
+unique identifying number for each object (a unique number across all
+classes).</p>
+<p><code>=</code> and <code>&lt;&gt;</code> can be used to compare objects for <em>physical</em> equality (an
+object and its copy are not physically identical). You can also use <code>&lt;</code>
+etc. which provides an ordering of objects based apparently on their
+IDs.</p>
+<h2 id="Objectswithoutclass"> Objects without class</h2><p>
+Here we examine how to use objects pretty much like records, without
+necessarily using classes.</p>
+<h3 id="Immediateobjectsandobjecttypes"> Immediate objects and object types</h3><p>
+Objects can be used instead of records, and have some nice properties
+that can make them preferrable to records in some cases. We saw that the
+canonical way of creating objects is to first define a class, and use
+this class to create individual objects. This can be cumbersome in some
+situations since class definitions are more than a type definition and
+cannot be defined recursively with types. However, objects have a type
+that is very analog to a record type, and it can be used in type
+definitions. In addition, objects can be created without a class. They
+are called <em>immediate objects</em>. Here is the definition of an immediate
+object:</p>
+<pre><code class='ocaml'><script>val mla73c01cf0f8ef59fa2431ed73507175a = '  let o =&#10;    object &#10;      val mutable n = 0 &#10;      method incr = n &#60;- n + 1&#10;      method get = n          &#10;    end&#10;';</script>  <span class='k'>let</span> o <span class='k'>=</span>
+    object 
+      <span class='k'>val</span> <span class='k'>mutable</span> n <span class='k'>=</span> 0 
+      <span class='k'>method</span> incr <span class='k'>=</span> n <span class='o'>&#60;-</span> n <span class='o'>+</span> 1
+      <span class='k'>method</span> get <span class='k'>=</span> n          
+    <span class='k'>end</span>
+</code></pre>
+<p>
+This object has a type, which is defined by its public methods only.
+Values are not visible and neither are private methods (not shown).
+Unlike records, such a type does not need to be predefined explicitely,
+but doing so can make things clearer. We can do it like this:</p>
+<pre><code class='ocaml'><script>val ml5fd7c905300859179a64eac70a880275 = '  type counter = &#60; get : int;  incr : unit &#62;&#10;';</script>  <span class='k'>type</span> counter <span class='k'>=</span> <span class='o'>&#60;</span> get <span class='o'>:</span> int<span class='o'>;</span>  incr <span class='o'>:</span> unit <span class='o'>&#62;</span>
+</code></pre>
+<p>
+Compare with an equivalent record type definition:</p>
+<pre><code class='ocaml'><script>val ml8a33ed8df5b7645e965946f29b82c2ec = '  type counter_r = { get : unit -&#62; int;&#10;                     incr : unit -&#62; unit }&#10;';</script>  <span class='k'>type</span> counter_r <span class='k'>=</span> <span class='o'>{</span> get <span class='o'>:</span> unit <span class='k'>-></span> int<span class='o'>;</span>
+                     incr <span class='o'>:</span> unit <span class='k'>-></span> unit <span class='o'>}</span>
+</code></pre>
+<p>
+The implementation of a record working like our object would be:</p>
+<pre><code class='ocaml'><script>val mle2a9623dcc43d3bb4b70654c99febd18 = '  let r =&#10;    let n = ref 0 in&#10;    { get = (fun () -&#62; !n);&#10;      incr = (fun () -&#62; incr n) }&#10;';</script>  <span class='k'>let</span> r <span class='k'>=</span>
+    <span class='k'>let</span> n <span class='k'>=</span> ref 0 <span class='k'>in</span>
+    <span class='o'>{</span> get <span class='k'>=</span> (<span class='k'>fun</span> () <span class='k'>-></span> <span class='o'>!</span>n)<span class='o'>;</span>
+      incr <span class='k'>=</span> (<span class='k'>fun</span> () <span class='k'>-></span> incr n) <span class='o'>}</span>
+</code></pre>
+<p>
+In terms of functionality, both the object and the record are similar,
+but each solution has its own advantages:</p>
+<ul>
+ <li><strong>speed</strong>: slightly faster field access in records
+ </li>
+ <li><strong>field names</strong>: it is inconvenient to manipulate records of
+ different types when some fields are named identically but it&#39;s not
+ a problem with objects
+ </li>
+ <li><strong>subtyping</strong>: it is impossible to coerce the type of a record to a
+ type with less fields. That is however possible with objects, so
+ objects of different kinds that share some methods can be mixed in a
+ data structure where only their common methods are visible (see next
+ section)
+ </li>
+ <li><strong>type definitions</strong>: there is no need to define an object type in
+ advance, so it lightens the dependency contraints between modules</li>
+</ul>
+
+<h3 id="Classtypesvsjusttypes"> Class types vs. just types</h3><p>
+Beware of the confusion between <em>class types</em> and object <em>types</em>. A
+<em>class type</em> is not a data <em>type</em>, normally referred to as <em>type</em> in the
+OCaml jargon. An object <em>type</em> is a kind of data <em>type</em>, just like a
+record type or a tuple.</p>
+<p>When a class is defined, both a <em>class type</em> and an object <em>type</em> of the
+same name are defined:</p>
+<pre><code class='ocaml'><script>val ml7b282d6855f8ea44b7d8b397fa799c3c = '  class t =      &#10;    object&#10;      val x = 0&#10;      method get = x&#10;   end&#10;';</script>  <span class='k'>class</span> t <span class='k'>=</span>      
+    object
+      <span class='k'>val</span> x <span class='k'>=</span> 0
+      <span class='k'>method</span> get <span class='k'>=</span> x
+   <span class='k'>end</span>
+</code></pre>
+<p>
+<code>object val x : int method get : int end</code> is a class type.</p>
+<p>In this example, <code>t</code> is also the type of objects that this class would
+create. Objects that derive from different classes or no class at all
+(immediate objects) can be mixed together as long as they have the same
+type:</p>
+<pre><code class='ocaml'><script>val ml51eccf70061fdca83f30d81a5bec24c8 = 'let x = object method get = 123 end;;&#10;let l = [ new t; x ];;&#10;';</script><span class='k'>let</span> x <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 123 <span class='k'>end</span><span class='o'>;;</span>
+<span class='k'>let</span> l <span class='k'>=</span> <span class='o'>[</span> <span class='k'>new</span> t<span class='o'>;</span> x <span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<p>
+Mixing objects that share a common subtype can be done, but requires
+explicit type coercion using the <code>:&gt;</code> operator:</p>
+<pre><code class='ocaml'><script>val ml18ac6b2ef818160f5a261f1906c8cff3 = 'let x = object method get = 123 end;;&#10;let y = object method get = 80 method special = &#34;hello&#34; end;;&#10;let l = [ x; y ];;&#10;let l = [ x; (y :&#62; t) ];;&#10;';</script><span class='k'>let</span> x <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 123 <span class='k'>end</span><span class='o'>;;</span>
+<span class='k'>let</span> y <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 80 <span class='k'>method</span> special <span class='k'>=</span> <span class='s'>&#34;hello&#34;</span> <span class='k'>end</span><span class='o'>;;</span>
+<span class='k'>let</span> l <span class='k'>=</span> <span class='o'>[</span> x<span class='o'>;</span> y <span class='o'>]</span><span class='o'>;;</span>
+<span class='k'>let</span> l <span class='k'>=</span> <span class='o'>[</span> x<span class='o'>;</span> (y <span class='o'>:&#62;</span> t) <span class='o'>]</span><span class='o'>;;</span>
+</code></pre>
+<h2 id="Moreobjects"> More objects</h2><p>
+
+The OCaml manual, chapter 3, contains the canonical reference for
+objects and classes. Amongst the things which I have not covered here,
+but which are covered in the manual, are:</p>
+<ul>
+ <li>private methods
+ </li>
+ <li>complex constructors
+ </li>
+ <li>interfaces
+ </li>
+ <li>multiple inheritance
+ </li>
+ <li>polymorphic methods
+ </li>
+ <li>more detail about coercions
+ </li>
+ <li>functional objects
+ </li>
+ <li>more detail about cloning objects
+ </li>
+ <li>mutually recursive classes
+ </li>
+ <li>binary methods
+ </li>
+ <li>friends</li>
+</ul>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -58,15 +58,15 @@ directories in a file system-but we don&#39;t do this very often.</p>
 <code>Amodule</code> and a module named <code>Bmodule</code> that provide whatever you put
 into the files.</p>
 <p>Here is the code that we have in our file <code>amodule.ml</code>:</p>
-<pre><code class='ocaml'><span class='k'>let</span> hello () <span class='k'>=</span> print_endline <span class='s'>&#34;Hello&#34;</span>
+<pre><code class='ocaml'><script>val ml49ae2bd819d2999fac021925a8482597 = 'let hello () = print_endline &#34;Hello&#34;&#10;';</script><span class='k'>let</span> hello () <span class='k'>=</span> print_endline <span class='s'>&#34;Hello&#34;</span>
 </code></pre>
 <p>
 And here is what we have in <code>bmodule.ml</code>:</p>
-<pre><code class='ocaml'><span class='m'>Amodule</span><span class='o'>.</span>hello ()
+<pre><code class='ocaml'><script>val mlfc6df0373626b75c5bd4b5c15b3c7e0a = 'Amodule.hello ()&#10;';</script><span class='m'>Amodule</span><span class='o'>.</span>hello ()
 </code></pre>
 <p>
 Usually files are compiled one by one, let&#39;s do it:</p>
-<pre><code class='ocaml'>ocamlopt <span class='o'>-</span>c amodule<span class='o'>.</span>ml
+<pre><code class='ocaml'><script>val ml637d52db0dafbbde94d02c4988a413e6 = 'ocamlopt -c amodule.ml&#10;ocamlopt -c bmodule.ml&#10;ocamlopt -o hello amodule.cmx bmodule.cmx&#10;';</script>ocamlopt <span class='o'>-</span>c amodule<span class='o'>.</span>ml
 ocamlopt <span class='o'>-</span>c bmodule<span class='o'>.</span>ml
 ocamlopt <span class='o'>-</span>o hello amodule<span class='o'>.</span>cmx bmodule<span class='o'>.</span>cmx
 </code></pre>
@@ -82,13 +82,13 @@ the <code>List</code> module.</p>
 <p>OK, if you are using a given module heavily, you may want to make its
 contents directly accessible. For this, we use the <code>open</code> directive. In
 our example, <code>bmodule.ml</code> could have been written:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Amodule<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml1db7a1bb4a7e73f8b3c38eb7dba11a61 = 'open Amodule;;&#10;hello ();;&#10;';</script><span class='k'>open</span> Amodule<span class='o'>;;</span>
 hello ()<span class='o'>;;</span>
 </code></pre>
 <p>
 As a side note, people tend to avoid the ugly &quot;;;&quot;, so it more common to
 write it like:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Amodule
+<pre><code class='ocaml'><script>val ml5ee41eac14adb1594e7e80ef0047f221 = 'open Amodule&#10;let () =&#10;  hello ()&#10;';</script><span class='k'>open</span> Amodule
 <span class='k'>let</span> () <span class='k'>=</span>
   hello ()
 </code></pre>
@@ -101,7 +101,7 @@ conflicts, such as <code>printf</code>. In order to avoid writing <code>Printf.p
 all over the place, it often makes sense to place one <code>open Printf</code> at
 the beginning of the file.</p>
 <p>There is a short example illustrating what we just mentioned:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Printf
+<pre><code class='ocaml'><script>val ml2a27f50431c6c20d9b20624f1eb18817 = 'open Printf&#10;let my_data = [ &#34;a&#34;; &#34;beautiful&#34;; &#34;day&#34; ]&#10;let () = List.iter (fun s -&#62; printf &#34;%s\n&#34; s) my_data&#10;';</script><span class='k'>open</span> Printf
 <span class='k'>let</span> my_data <span class='k'>=</span> <span class='o'>[</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;beautiful&#34;</span><span class='o'>;</span> <span class='s'>&#34;day&#34;</span> <span class='o'>]</span>
 <span class='k'>let</span> () <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>iter (<span class='k'>fun</span> s <span class='k'>-></span> printf <span class='s'>&#34;%s\n&#34;</span> s) my_data
 </code></pre>
@@ -119,19 +119,19 @@ over the module&#39;s implementation. Just like a module derives from a .ml
 file, the corresponding module interface or signature derives from a
 .mli file. It contains a list of values with their type, and more. Let&#39;s
 rewrite our <code>amodule.ml</code> file:</p>
-<pre><code class='ocaml'><span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello&#34;</span>
+<pre><code class='ocaml'><script>val mld8ce3ff7ec2cd85682803ca172609d28 = 'let message = &#34;Hello&#34;&#10;let hello () = print_endline message&#10;';</script><span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello&#34;</span>
 <span class='k'>let</span> hello () <span class='k'>=</span> print_endline message
 </code></pre>
 <p>
 As it is, <code>Amodule</code> has the following interface:</p>
-<pre><code class='ocaml'><span class='k'>val</span> message <span class='o'>:</span> string
+<pre><code class='ocaml'><script>val ml50a3eaaee8cc5ae75373eb6cca25165d = 'val message : string&#10;val hello : unit -&#62; unit&#10;';</script><span class='k'>val</span> message <span class='o'>:</span> string
 <span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 </code></pre>
 <p>
 Let&#39;s assume that accessing the <code>message</code> value directly is none of the
 others modules&#39; business. We want to hide it by defining a restricted
 interface. This is our <code>amodule.mli</code> file:</p>
-<pre><code class='ocaml'><span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
+<pre><code class='ocaml'><script>val ml8928d44b156dee212d883479dc530d58 = 'val hello : unit -&#62; unit&#10;(** displays a greeting message *)&#10;';</script><span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 <span class='com2'>(** displays a greeting message *)</span><!-- end comment -->
 </code></pre>
 <p>
@@ -141,7 +141,7 @@ supported by
 <p>.mli files must be compiled just before the matching .ml files. They are
 compiled using <code>ocamlc</code>, even if .ml files are compiled to native code
 using <code>ocamlopt</code>:</p>
-<pre><code class='ocaml'>ocamlc <span class='o'>-</span>c amodule<span class='o'>.</span>mli
+<pre><code class='ocaml'><script>val mlf6f8ce1174868cd16a921ac4d21db797 = 'ocamlc -c amodule.mli&#10;ocamlopt -c amodule.ml&#10;...&#10;';</script>ocamlc <span class='o'>-</span>c amodule<span class='o'>.</span>mli
 ocamlopt <span class='o'>-</span>c amodule<span class='o'>.</span>ml
 <span class='o'>...</span>
 </code></pre>
@@ -149,14 +149,14 @@ ocamlopt <span class='o'>-</span>c amodule<span class='o'>.</span>ml
 
 What about type definitions? We saw that values such as functions can be
 exported by placing their name and their type in a .mli file, e.g.</p>
-<pre><code class='ocaml'><span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
+<pre><code class='ocaml'><script>val ml8ff7fbd7b36c8810e991382533d2fa6b = 'val hello : unit -&#62; unit&#10;';</script><span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 </code></pre>
 <p>
 But modules often define new types. Let&#39;s define a simple record type
 that would represent a date:</p>
-<pre><code class='ocaml'><span class='k'>type</span> date <span class='k'>=</span> <span class='o'>/span> day <span class='o'>:</span> int<span class='o'>;</span>
+<pre><code class='ocaml'><script>val mlaef186cbf93d56e6cf7f2d790b18b6fd = 'type date = { day : int;&#10;              month : int;&#10;              year : int }&#10;';</script><span class='k'>type</span> date <span class='k'>=</span> <span class='o'>{</span> day <span class='o'>:</span> int<span class='o'>;</span>
               month <span class='o'>:</span> int<span class='o'>;</span>
-              year <span class='o'>:</span> int <span class='o'</span>
+              year <span class='o'>:</span> int <span class='o'>}</span>
 </code></pre>
 <p>
 There are not two, but four options when it comes to writing the .mli
@@ -172,7 +172,7 @@ file:</p>
 </ol>
 
 <p>In case 3, it would be the following code:</p>
-<pre><code class='ocaml'><span class='k'>type</span> date
+<pre><code class='ocaml'><script>val ml1cbe21f6b5806f700395843633e7cbd1 = 'type date&#10;';</script><span class='k'>type</span> date
 </code></pre>
 <p>
 Now, users of the module can manipulate objects of type <code>date</code>, but they
@@ -180,7 +180,7 @@ can&#39;t access the record fields directly. They must use the functions
 that the module provides. Let&#39;s assume the module provides three
 functions, one for creating a date, one for computing the difference
 between two dates, and one that returns the date in years:</p>
-<pre><code class='ocaml'><span class='k'>type</span> date
+<pre><code class='ocaml'><script>val ml0b5304c6cf644df537dec1be64e2bfda = 'type date&#10;val create : ?days:int -&#62; ?months:int -&#62; ?years:int -&#62; unit -&#62; date&#10;val sub : date -&#62; date -&#62; date&#10;val years : date -&#62; float&#10;';</script><span class='k'>type</span> date
 <span class='k'>val</span> create <span class='o'>:</span> <span class='o'>?</span>days<span class='o'>:</span>int <span class='k'>-></span> <span class='o'>?</span>months<span class='o'>:</span>int <span class='k'>-></span> <span class='o'>?</span>years<span class='o'>:</span>int <span class='k'>-></span> unit <span class='k'>-></span> date
 <span class='k'>val</span> sub <span class='o'>:</span> date <span class='k'>-></span> date <span class='k'>-></span> date
 <span class='k'>val</span> years <span class='o'>:</span> date <span class='k'>-></span> float
@@ -203,7 +203,7 @@ derived and is the broadest possible, or can be restricted by writing an
 <p>That said, a given module can also be defined explicitely from within a
 file. That makes it a submodule of the current module. Let&#39;s consider
 this <code>example.ml</code> file:</p>
-<pre><code class='ocaml'><span class='k'>module</span> Hello <span class='k'>=</span> <span class='k'>struct</span>
+<pre><code class='ocaml'><script>val mlda59d5227ad24adfd52b77aca84fa295 = 'module Hello = struct&#10;  let message = &#34;Hello&#34;&#10;  let hello () = print_endline message&#10;end&#10;let goodbye () = print_endline &#34;Goodbye&#34;&#10;let hello_goodbye () =&#10;  Hello.hello ();&#10;  goodbye ()&#10;';</script><span class='k'>module</span> Hello <span class='k'>=</span> <span class='k'>struct</span>
   <span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello&#34;</span>
   <span class='k'>let</span> hello () <span class='k'>=</span> print_endline message
 <span class='k'>end</span>
@@ -215,7 +215,7 @@ this <code>example.ml</code> file:</p>
 <p>
 From another file, it is clear that we now have two levels of modules.
 We can write:</p>
-<pre><code class='ocaml'><span class='k'>let</span> () <span class='k'>=</span>
+<pre><code class='ocaml'><script>val mle84e18002b4157fd624a8ede9ebdbc20 = 'let () =&#10;  Example.Hello.hello ();&#10;  Example.goodbye ()&#10;';</script><span class='k'>let</span> () <span class='k'>=</span>
   <span class='m'>Example</span><span class='o'>.</span><span class='m'>Hello</span><span class='o'>.</span>hello ()<span class='o'>;</span>
   <span class='m'>Example</span><span class='o'>.</span>goodbye ()
 </code></pre>
@@ -223,7 +223,7 @@ We can write:</p>
 
 We can also restrict the interface of a given submodule. It is called a
 module type. Let&#39;s do it in our <code>example.ml</code> file:</p>
-<pre><code class='ocaml'><span class='k'>module</span> Hello <span class='o'>:</span> <span class='k'>sig</span>
+<pre><code class='ocaml'><script>val mlf40c6372a8276d02e04d31e8b0390d56 = 'module Hello : sig&#10; val hello : unit -&#62; unit&#10;end = &#10;struct&#10;  let message = &#34;Hello&#34;&#10;  let hello () = print_endline message&#10;end&#10;&#10;(* At this point, Hello.message is not accessible anymore. *)&#10;let goodbye () = print_endline &#34;Goodbye&#34;&#10;let hello_goodbye () =&#10;  Hello.hello ();&#10;  goodbye ()&#10;';</script><span class='k'>module</span> Hello <span class='o'>:</span> <span class='k'>sig</span>
  <span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 <span class='k'>end</span> <span class='k'>=</span> 
 <span class='k'>struct</span>
@@ -242,7 +242,7 @@ The definition of the <code>Hello</code> module above is the equivalent of a
 <code>hello.mli</code>/<code>hello.ml</code> pair of files. Writing all of that in one block
 of code is not elegant, so in general we prefer to define the module
 signature separately:</p>
-<pre><code class='ocaml'><span class='k'>module</span> <span class='k'>type</span> Hello_type <span class='k'>=</span> <span class='k'>sig</span>
+<pre><code class='ocaml'><script>val ml408c2917884f779be104da1c28924e8a = 'module type Hello_type = sig&#10; val hello : unit -&#62; unit&#10;end&#10;&#10;module Hello : Hello_type = struct&#10;  ...&#10;end&#10;';</script><span class='k'>module</span> <span class='k'>type</span> Hello_type <span class='k'>=</span> <span class='k'>sig</span>
  <span class='k'>val</span> hello <span class='o'>:</span> unit <span class='k'>-></span> unit
 <span class='k'>end</span>
 
@@ -282,7 +282,7 @@ the comparison function given as <code>compare</code>. The point of the functor 
 to ensure that the same comparison function will always be used, even if
 the programmer makes a mistake.</p>
 <p>For example, if we want to use sets of ints, we would use do this:</p>
-<pre><code class='ocaml'><span class='k'>module</span> Int_set <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make (<span class='k'>struct</span>
+<pre><code class='ocaml'><script>val ml3d80a3dcccf43da9f4303aab4bf128b1 = 'module Int_set = Set.Make (struct&#10;                             type t = int&#10;                             let compare = compare&#10;                           end)&#10;';</script><span class='k'>module</span> Int_set <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make (<span class='k'>struct</span>
                              <span class='k'>type</span> t <span class='k'>=</span> int
                              <span class='k'>let</span> compare <span class='k'>=</span> compare
                            <span class='k'>end</span>)
@@ -292,13 +292,13 @@ For sets of strings, it is even easier because the standard library
 provides a <code>String</code> module with a type <code>t</code> and a function <code>compare</code>. If
 you were following carefully, by now you must have guessed how to create
 a module for the manipulation of sets of strings:</p>
-<pre><code class='ocaml'><span class='k'>module</span> String_set <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make (String)
+<pre><code class='ocaml'><script>val ml724c32103948ef699e0e7b2993e3da1f = 'module String_set = Set.Make (String)&#10;';</script><span class='k'>module</span> String_set <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make (String)
 </code></pre>
 <p>
 (the parentheses are necessary)</p>
 <h3 id="Howtodefineafunctor"> How to define a functor?</h3><p>
 A functor with one argument can be defined like this:</p>
-<pre><code class='ocaml'><span class='k'>module</span> F (X <span class='o'>:</span> X_type) <span class='k'>=</span> <span class='k'>struct</span>
+<pre><code class='ocaml'><script>val mlcca07c9b5f23d158e447a12b19052015 = 'module F (X : X_type) = struct&#10; ...&#10;end&#10;';</script><span class='k'>module</span> F (X <span class='o'>:</span> X_type) <span class='k'>=</span> <span class='k'>struct</span>
  <span class='o'>...</span>
 <span class='k'>end</span>
 </code></pre>
@@ -307,14 +307,14 @@ where <code>X</code> is the module that will be passed as argument, and <code>X_
 its signature, which is mandatory.</p>
 <p>The signature of the returned module itself can be constrained, using
 this syntax:</p>
-<pre><code class='ocaml'><span class='k'>module</span> F (X <span class='o'>:</span> X_type) <span class='o'>:</span> Y_type <span class='k'>=</span>
+<pre><code class='ocaml'><script>val mlc428f3406419386ce131b39040cb0931 = 'module F (X : X_type) : Y_type =&#10;struct&#10;  ...&#10;end&#10;';</script><span class='k'>module</span> F (X <span class='o'>:</span> X_type) <span class='o'>:</span> Y_type <span class='k'>=</span>
 <span class='k'>struct</span>
   <span class='o'>...</span>
 <span class='k'>end</span>
 </code></pre>
 <p>
 or by specifying this in the .mli file:</p>
-<pre><code class='ocaml'><span class='k'>module</span> F (X <span class='o'>:</span> X_type) <span class='o'>:</span> Y_type
+<pre><code class='ocaml'><script>val mlf45e361534b8228472f83186d84dc64a = 'module F (X : X_type) : Y_type&#10;';</script><span class='k'>module</span> F (X <span class='o'>:</span> X_type) <span class='o'>:</span> Y_type
 </code></pre>
 <p>
 Overall, the syntax of functors is hard to grasp. The best may be to
@@ -327,7 +327,7 @@ to the source code of the functor.</p>
 
 In the <code>ocaml</code> toplevel, the following trick allows to visualize the
 contents of an existing module, such as <code>List</code>:</p>
-<pre><code class='ocaml'><span class='k'>module</span> M <span class='k'>=</span> List<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml6f84cf2bffe1eb1014f12e7befc64526 = 'module M = List;;&#10;';</script><span class='k'>module</span> M <span class='k'>=</span> List<span class='o'>;;</span>
 </code></pre>
 <p>
 Otherwise, there is online documentation for most libraries or you can
@@ -338,7 +338,7 @@ Let&#39;s say we feel that a function is missing from the standard <code>List</c
 module, but we really want it as if it were part of it. In an
 <code>extensions.ml</code> file, we can achieve this effect by using the <code>include</code>
 directive:</p>
-<pre><code class='ocaml'><span class='k'>module</span> List <span class='k'>=</span> <span class='k'>struct</span>
+<pre><code class='ocaml'><script>val ml6e46865028d8339d3405a4ef03a15cba = 'module List = struct&#10;  include List&#10;  let rec optmap f = function&#10;    | [] -&#62; []&#10;    | hd :: tl -&#62;&#10;       match f hd with&#10;       | None -&#62; optmap f tl&#10;       | Some x -&#62; x :: optmap f tl&#10;end&#10;';</script><span class='k'>module</span> List <span class='k'>=</span> <span class='k'>struct</span>
   <span class='k'>include</span> List
   <span class='k'>let rec</span> optmap f <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
@@ -353,7 +353,7 @@ It creates a module <code>Extensions.List</code> that has everything the standar
 <code>List</code> module has, plus a new <code>optmap</code> function. From another file, all
 we have to do to override the default <code>List</code> module is <code>open Extensions</code>
 at the beginning of the .ml file:</p>
-<pre><code class='ocaml'><span class='k'>open</span> <span class='m'>Extensions</span>
+<pre><code class='ocaml'><script>val mldf91e091f328743fb767508514badeb0 = 'open Extensions&#10;...&#10;List.optmap ...&#10;&#10;';</script><span class='k'>open</span> <span class='m'>Extensions</span>
 <span class='o'>.</span><span class='o'>..</span>
 <span class='m'>List</span><span class='o'>.</span>optmap <span class='o'>...</span>
 

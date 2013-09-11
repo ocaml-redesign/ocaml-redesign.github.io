@@ -52,14 +52,14 @@
 
 The Hashtbl module implements an efficient, mutable lookup table. To
 create a hash table we could write:</p>
-<pre><code class='ocaml'><span class='k'>let</span> my_hash <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 123456<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml23ed9994134f0726ef86eec526a07af5 = 'let my_hash = Hashtbl.create 123456;;&#10;';</script><span class='k'>let</span> my_hash <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 123456<span class='o'>;;</span>
 </code></pre>
 <p>
 The 123456 is the initial size of the hashtbl. This initial number is
 just your best guess as to the amount of data that you will be putting
 into the hash table. The hash table can grow if you under-estimate the
 size so don&#39;t worry about it too much. The type of my_hash is:</p>
-<pre><code class='ocaml'><span class='k'>val</span> my_hash <span class='o'>:</span> ('_a<span class='o'>,</span> '_b) <span class='m'>Hashtbl</span><span class='o'>.</span>t <span class='k'>=</span> 
+<pre><code class='ocaml'><script>val mle32ac4bc45784622ff978735a9fc2638 = 'val my_hash : (&#39;_a, &#39;_b) Hashtbl.t = &#10;';</script><span class='k'>val</span> my_hash <span class='o'>:</span> ('_a<span class='o'>,</span> '_b) <span class='m'>Hashtbl</span><span class='o'>.</span>t <span class='k'>=</span> 
 </code></pre>
 <p>
 The &#39;_a and &#39;_b correspond to the key and value types, respectively.
@@ -76,7 +76,7 @@ letter. First I need to enter the data into my_hash.</p>
 another hash table is not created every time you change the table. Thus,
 the code &quot;let my_hash = Hashtbl.add my_hash ...&quot; wouldn&#39;t make any
 sense. Instead, we would write something like this:</p>
-<pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>val mlc51bd4e35864a85c12a0e4aed3616d50 = 'Hashtbl.add my_hash &#34;h&#34; &#34;hello&#34;;;&#10;Hashtbl.add my_hash &#34;h&#34; &#34;hi&#34;;;&#10;Hashtbl.add my_hash &#34;h&#34; &#34;hug&#34;;;&#10;Hashtbl.add my_hash &#34;h&#34; &#34;hard&#34;;;&#10;Hashtbl.add my_hash &#34;w&#34; &#34;wimp&#34;;;&#10;Hashtbl.add my_hash &#34;w&#34; &#34;world&#34;;;&#10;Hashtbl.add my_hash &#34;w&#34; &#34;wine&#34;;;&#10;';</script><span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hug&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hard&#34;</span><span class='o'>;;</span>
@@ -88,23 +88,23 @@ sense. Instead, we would write something like this:</p>
 If we want to find one element in my_hash that has an &quot;h&quot; in it then we
 would write. Notice how it only returns just one element? That element
 was the last one entered in with the value of &quot;h&quot;.</p>
-<pre><code class='ocaml'> 
+<pre><code class='ocaml'><script>val ml76686e8f9b95b88e6c32a9f3a8c01abf = ' &#10;Hashtbl.find my_hash &#34;h&#34;;;&#10;';</script> 
 <span class='m'>Hashtbl</span><span class='o'>.</span>find my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
 </code></pre>
 <p>
 What we probably want is all the elements that start with &quot;h&quot;. To do
 this we want to find all of them. What better name for this then
 &quot;find_all&quot;?</p>
-<pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>find_all my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml39d85f0c7d9d9855eb65cfcc54ea914f = 'Hashtbl.find_all my_hash &#34;h&#34;;;&#10;';</script><span class='m'>Hashtbl</span><span class='o'>.</span>find_all my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
 </code></pre>
 <p>
 returns</p>
-<pre><code class='ocaml'><span class='o'>[</span><span class='s'>&#34;hard&#34;</span><span class='o'>;</span> <span class='s'>&#34;hug&#34;</span><span class='o'>;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>]</span>
+<pre><code class='ocaml'><script>val ml7c3b923a2e7549b1d802fd24db5a55af = '[&#34;hard&#34;; &#34;hug&#34;; &#34;hi&#34;; &#34;hello&#34;]&#10;';</script><span class='o'>[</span><span class='s'>&#34;hard&#34;</span><span class='o'>;</span> <span class='s'>&#34;hug&#34;</span><span class='o'>;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>]</span>
 </code></pre>
 <p>
 To find out if there is an entry in the my_hash for a letter we would
 do:</p>
-<pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>mem my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml2f4bdef21b097e69b7ea5d8abd538e83 = 'Hashtbl.mem my_hash &#34;h&#34;;;&#10;&#10;';</script><span class='m'>Hashtbl</span><span class='o'>.</span>mem my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
 
 </code></pre>
 

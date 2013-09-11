@@ -51,7 +51,7 @@
 <h1 id="TheBasics"> The Basics</h1><h2 id="Comments"> Comments</h2><p>
 
 OCaml comments are delimited by <code>(*</code> and <code>*)</code>, like this:</p>
-<pre><code class='ocaml'><span class='com2'>(* This is a single<span class='ic'>-</span>line comment<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>val mld8495c69758feb19c136232e70063b37 = '(* This is a single-line comment. *)&#10;&#10;(* This is a&#10; * multi-line&#10; * comment.&#10; *)&#10;';</script><span class='com2'>(* This is a single<span class='ic'>-</span>line comment<span class='ic'>.</span> *)</span><!-- end comment -->
 
 <span class='com2'>(* This is a</span>
 <span class='com2'> <span class='ic'>*</span> multi<span class='ic'>-</span>line</span>
@@ -64,7 +64,7 @@ In other words, the commenting convention is very similar to original C
 <code># ...</code> in Perl or <code>// ...</code> in C99/C++/Java).</p>
 <p>OCaml counts nested <code>(* ... *)</code> blocks, and this allows you to comment
 out regions of code very easily:</p>
-<pre><code class='ocaml'><span class='com2'>(* This code is broken <span class='ic'>...</span></span>
+<pre><code class='ocaml'><script>val mlb8131ecba2712ae2104f6d4891c12061 = '(* This code is broken ...&#10;&#10;(* Primality test. *)&#10;let is_prime n =&#10;  (* note to self: ask about this on the mailing lists *) XXX;;&#10;&#10;*)&#10;';</script><span class='com2'>(* This code is broken <span class='ic'>...</span></span>
 <span class='com2'></span>
 <span class='com2'><span class='other'>(* Primality test<span class='other'>.</span> *)</span></span>
 <span class='com2'><span class='ic'>let</span> is_prime n <span class='ic'>=</span></span>
@@ -78,7 +78,7 @@ Let&#39;s say you&#39;ve written a function - we&#39;ll call it <code>repeated</
 takes a string <code>s</code> and a number <code>n</code>, and returns a new string which
 contains original <code>s</code> repeated <code>n</code> times.</p>
 <p>In most C-derived languages a call to this function will look like this:</p>
-<pre><code class='ocaml'>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> this is C code <span class='o'>*/</span>
+<pre><code class='ocaml'><script>val mlfc326084f5eab13b62563e232a95c82e = 'repeated (&#34;hello&#34;, 3)  /* this is C code */&#10;';</script>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> this is C code <span class='o'>*/</span>
 </code></pre>
 <p>
 This means &quot;call the function <code>repeated</code> with two arguments, first
@@ -86,7 +86,7 @@ argument the string hello and second argument the number 3&quot;.</p>
 <p>OCaml, in common with other functional languages, writes and brackets
 function calls differently, and this is the cause of many mistakes. Here
 is the same function call in OCaml:</p>
-<pre><code class='ocaml'>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* this is OCaml code *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>val ml4d4b6fe9d10a1d3b709f54d1a09fe59b = 'repeated &#34;hello&#34; 3  (* this is OCaml code *)&#10;';</script>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* this is OCaml code *)</span><!-- end comment -->
 </code></pre>
 <p>
 Note — <strong>no</strong> brackets, and <strong>no</strong> comma between the arguments.</p>
@@ -101,7 +101,7 @@ arguments.</p>
 <p>Let&#39;s have another function - <code>prompt_string</code> - which takes a string to
 prompt and returns the string entered by the user. We want to pass this
 string into <code>repeated</code>. Here are the C and OCaml versions:</p>
-<pre><code class='ocaml'><span class='o'>/*</span> C code<span class='o'>:</span> <span class='o'>*/</span>
+<pre><code class='ocaml'><script>val ml222b086ee561200dcc203a99e0fa4550 = '/* C code: */&#10;repeated (prompt_string (&#34;Name please: &#34;), 3)&#10;&#10;(* OCaml code: *)&#10;repeated (prompt_string &#34;Name please: &#34;) 3&#10;';</script><span class='o'>/*</span> C code<span class='o'>:</span> <span class='o'>*/</span>
 repeated (prompt_string (<span class='s'>&#34;Name please: &#34;</span>)<span class='o'>,</span> 3)
 
 <span class='com2'>(* OCaml code<span class='ic'>:</span> *)</span><!-- end comment -->
@@ -114,7 +114,7 @@ because that argument is the result of another function call. In general
 the rule is: &quot;bracket around the whole function call - don&#39;t put
 brackets around the arguments to a function call&quot;. Here are some more
 examples:</p>
-<pre><code class='ocaml'>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f has three arguments<span class='ic'>,</span> g has one argument *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>val mlbbb2f390049eb665ceef46f86d576b6c = 'f 5 (g &#34;hello&#34;) 3    (* f has three arguments, g has one argument *)&#10;f (g 3 4)            (* f has one argument, g has two arguments *)&#10;&#10;# repeated (&#34;hello&#34;, 3);;     (* OCaml will spot the mistake *)&#10;This expression has type string * int but is here used with type string&#10;';</script>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f has three arguments<span class='ic'>,</span> g has one argument *)</span><!-- end comment -->
 f (g 3 4)            <span class='com2'>(* f has one argument<span class='ic'>,</span> g has two arguments *)</span><!-- end comment -->
 
 <span class='o'>#</span> repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)<span class='o'>;;</span>     <span class='com2'>(* OCaml will spot the mistake *)</span><!-- end comment -->
@@ -126,13 +126,13 @@ You all know how to define a function (or static method, for Java-heads)
 in our existing languages. How do we do it in OCaml?</p>
 <p>The OCaml syntax is pleasantly concise. Here&#39;s a function which takes
 two floating point numbers and calculates the average:</p>
-<pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>val ml9b4200c801e15cdae50455152cd742b8 = 'let average a b =&#10;  (a +. b) /. 2.0;;&#10;';</script><span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 </code></pre>
 <p>
 Type this into the OCaml &quot;toplevel&quot; (on Unix, type the command <code>ocaml</code>
 from the shell) and you&#39;ll see this:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>val mlf731a422af551fc161da1d4176d35ee9 = '  let average a b =&#10;    (a +. b) /. 2.0;;&#10;';</script>  <span class='k'>let</span> average a b <span class='k'>=</span>
     (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -148,11 +148,11 @@ prints back at you, you&#39;ll have a number of questions:</p>
 and define the same function in C (the Java definition would be fairly
 similar to C), and hopefully that should raise even more questions.
 Here&#39;s our C version of <code>average</code>:</p>
-<pre><code class='ocaml'>double
+<pre><code class='ocaml'><script>val ml915ff3a7f3827153c806b4ebdb53ab28 = 'double&#10;average (double a, double b)&#10;{&#10;  return (a + b) / 2;&#10;}&#10;';</script>double
 average (double a<span class='o'>,</span> double b)
-<span class='o'>/span>
+<span class='o'>{</span>
   return (a <span class='o'>+</span> b) <span class='o'>/</span> 2<span class='o'>;</span>
-<span class='o'</span>
+<span class='o'>}</span>
 </code></pre>
 <p>
 Now look at our much shorter OCaml definition above. Hopefully you&#39;ll be
@@ -196,7 +196,7 @@ asking:</p>
 <p>We will present more details in the following sections and chapters.</p>
 <h2 id="Basictypes"> Basic types</h2><p>
 The basic types in OCaml are:</p>
-<pre><code class='ocaml'>OCaml <span class='k'>type</span>     Range
+<pre><code class='ocaml'><script>val ml5e75e3fb85f3e779190027b0cb7d4b9a = 'OCaml type     Range&#10;&#10;int            31-bit signed int (roughly +/- 1 billion) on 32-bit processors,&#10;               or 63-bit signed int on 64-bit processors&#10;float          IEEE double-precision floating point, equivalent to C&#39;s double&#10;bool           A boolean, written either true or false&#10;char           An 8-bit character&#10;string         A string&#10;unit           Written as ()&#10;';</script>OCaml <span class='k'>type</span>     Range
 
 int            31<span class='o'>-</span>bit signed int (roughly <span class='o'>+/-</span> 1 billion) on 32<span class='o'>-</span>bit processors<span class='o'>,</span>
                <span class='k'>or</span> 63<span class='o'>-</span>bit signed int on 64<span class='o'>-</span>bit processors
@@ -241,7 +241,7 @@ written <code>((double) 1) + 2.5</code>, but all done implicitly.</p>
 <p>OCaml never does implicit casts like this. In OCaml, <code>1 + 2.5</code> is a type
 error. The <code>+</code> operator in OCaml requires two ints as arguments, and
 here we&#39;re giving it an int and a float, so it reports this error:</p>
-<pre><code class='ocaml'>1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml268ff86c0c3b252f591724c5aeb60fc2 = '1 + 2.5;;&#10;';</script>1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
 </code></pre>
 <p>
 (In the &quot;translated from the French&quot; language of OCaml error messages
@@ -250,14 +250,14 @@ this means &quot;you put a float here, but I was expecting an int&quot;).</p>
 (note the trailing period).</p>
 <p>OCaml doesn&#39;t promote ints to floats automatically so this is also an
 error:</p>
-<pre><code class='ocaml'>1 <span class='o'>+.</span> 2.5
+<pre><code class='ocaml'><script>val mlc5d220e2c7e5f4ec43ba06092b2e02b8 = '1 +. 2.5&#10;';</script>1 <span class='o'>+.</span> 2.5
 </code></pre>
 <p>
 Here OCaml is now complaining about the first argument.</p>
 <p>What if you actually want to add an integer and a floating point number
 together? (Say they are stored as <code>i</code> and <code>f</code>). In OCaml you need to
 explicitly cast:</p>
-<pre><code class='ocaml'> (float_of_int i) <span class='o'>+.</span> f
+<pre><code class='ocaml'><script>val ml1669451f54fa33215877eda4edf5e560 = ' (float_of_int i) +. f&#10;';</script> (float_of_int i) <span class='o'>+.</span> f
 </code></pre>
 <p>
 <code>float_of_int</code> is a function which takes an <code>int</code> and returns a <code>float</code>.
@@ -267,7 +267,7 @@ and they mostly do what you expect.</p>
 <p>Since converting an <code>int</code> to a <code>float</code> is a particularly common
 operation, the <code>float_of_int</code> function has a shorter alias: the above
 example could simply have been written</p>
-<pre><code class='ocaml'>float i <span class='o'>+.</span> f
+<pre><code class='ocaml'><script>val ml53577c358854616d171820c774738606 = 'float i +. f&#10;';</script>float i <span class='o'>+.</span> f
 </code></pre>
 <p>
 (Note that unlike C, it is perfectly valid in OCaml for a type and a
@@ -289,7 +289,7 @@ them.</p>
 Unlike in C-derived languages, a function isn&#39;t recursive unless you
 explicitly say so by using <code>let rec</code> instead of just <code>let</code>. Here&#39;s an
 example of a recursive function:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>val mlacdb34964640ec88edf2ad19c2adc5cc = 'let rec range a b =&#10;  if a &#62; b then []&#10;  else a :: range (a+1) b&#10;';</script><span class='k'>let rec</span> range a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
   <span class='k'>else</span> a <span class='o'>::</span> range (a<span class='o'>+</span>1) b
 </code></pre>
@@ -301,7 +301,7 @@ then the call to <code>range</code> would have tried to look for an existing
 (previously defined) function called <code>range</code>, not the
 currently-being-defined function. Using <code>let</code> (without <code>rec</code>) allows you
 to re-define a value in terms of the previous definition. For example:</p>
-<pre><code class='ocaml'><span class='k'>let</span> positive_sum a b <span class='k'>=</span> 
+<pre><code class='ocaml'><script>val ml1d84ce5d52f182fa021835d23752e779 = 'let positive_sum a b = &#10;  let a = max a 0&#10;  and b = max b 0 in&#10;  a + b&#10;';</script><span class='k'>let</span> positive_sum a b <span class='k'>=</span> 
   <span class='k'>let</span> a <span class='k'>=</span> max a 0
   <span class='k'>and</span> b <span class='k'>=</span> max b 0 <span class='k'>in</span>
   a <span class='o'>+</span> b
@@ -321,7 +321,7 @@ write down the type of your functions. However, OCaml often prints out
 what it thinks are the types of your functions, so you need to know the
 syntax for this. For a function <code>f</code> which takes arguments <code>arg1</code>,
 <code>arg2</code>, ... <code>argn</code>, and returns type <code>rettype</code>, the compiler will print:</p>
-<pre><code class='ocaml'>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
+<pre><code class='ocaml'><script>val mlc91dce8991cf606a9ab5f8017212d389 = 'f : arg1 -&#62; arg2 -&#62; ... -&#62; argn -&#62; rettype&#10;';</script>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
 </code></pre>
 <p>
 The arrow syntax looks strange now, but when we come to so-called
@@ -329,35 +329,35 @@ The arrow syntax looks strange now, but when we come to so-called
 you some examples.</p>
 <p>Our function <code>repeated</code> which takes a string and an integer and returns
 a string has type:</p>
-<pre><code class='ocaml'>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
+<pre><code class='ocaml'><script>val ml1f953ac359f879a8f8a127576c9767cf = 'repeated : string -&#62; int -&#62; string&#10;';</script>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
 </code></pre>
 <p>
 Our function <code>average</code> which takes two floats and returns a float has
 type:</p>
-<pre><code class='ocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+<pre><code class='ocaml'><script>val ml7ca97bbd3afd1a7619a5cfeb8003efcd = 'average : float -&#62; float -&#62; float&#10;';</script>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
 </code></pre>
 <p>
 The OCaml standard <code>int_of_char</code> casting function:</p>
-<pre><code class='ocaml'>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
+<pre><code class='ocaml'><script>val mlec4d6cef975ef06a69744e1c503b249b = 'int_of_char : char -&#62; int&#10;';</script>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
 </code></pre>
 <p>
 If a function returns nothing (<code>void</code> for C and Java programmers), then
 we write that it returns the <code>unit</code> type. Here, for instance, is the
 OCaml equivalent of <code>fputc</code>:</p>
-<pre><code class='ocaml'>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
+<pre><code class='ocaml'><script>val ml022005f0c3b6aa427ca4f7f415ac6c0e = 'output_char : out_channel -&#62; char -&#62; unit&#10;';</script>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
 </code></pre>
 <h3 id="Polymorphicfunctions"> Polymorphic functions</h3><p>
 
 Now for something a bit stranger. What about a function which takes
 <em>anything</em> as an argument? Here&#39;s a odd function which takes an
 argument, but just ignores it and always returns 3:</p>
-<pre><code class='ocaml'><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3
+<pre><code class='ocaml'><script>val ml5ef2317efc288c4565b06241519aff42 = 'let give_me_a_three x = 3&#10;';</script><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3
 </code></pre>
 <p>
 What is the type of this function? In OCaml we use a special placeholder
 to mean &quot;any type you fancy&quot;. It&#39;s a single quote character followed by
 a letter. The type of the above function would normally be written:</p>
-<pre><code class='ocaml'>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
+<pre><code class='ocaml'><script>val ml987a949589157ee12d3522b6f9bf48c8 = 'give_me_a_three : &#39;a -&#62; int&#10;';</script>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
 </code></pre>
 <p>
 where <code>&#39;a</code> really does mean any type. You can, for example, call this
@@ -386,7 +386,7 @@ the rare occasions that it is sensible to do this. Only gurus will
 probably need to bypass the type checking.</p>
 <p>Let&#39;s go back to the <code>average</code> function which we typed into the OCaml
 toplevel:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>val ml71844981d0626ab696f8dd10f7ac4d67 = '  let average a b =&#10;    (a +. b) /. 2.0&#10;';</script>  <span class='k'>let</span> average a b <span class='k'>=</span>
     (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0
 </code></pre>
 <p>
@@ -399,7 +399,7 @@ and <code>b</code> must both also have type <code>float</code>.</p>
 <p>Secondly, the <code>/.</code> function returns a <code>float</code>, and this is the same as
 the return value of the <code>average</code> function, so <code>average</code> must return a
 <code>float</code>. The conclusion is that <code>average</code> has this type signature:</p>
-<pre><code class='ocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+<pre><code class='ocaml'><script>val ml7ca97bbd3afd1a7619a5cfeb8003efcd = 'average : float -&#62; float -&#62; float&#10;';</script>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
 </code></pre>
 <p>
 Type inference is obviously easy for such a short program, but it works

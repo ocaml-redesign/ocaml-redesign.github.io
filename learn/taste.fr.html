@@ -53,7 +53,7 @@
 Avec le système interactif, définissons la fonction <code>square</code> (carré) et
 la fonction factorielle dans sa version récursive. Puis, appliquons ces
 fonctions à quelques valeurs choisies :</p>
-<pre><code class='ocaml'><span class='k'>let</span> square x <span class='k'>=</span> x <span class='o'>*</span> x<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml6b390305ad7df8de3309c2f08292861b = 'let square x = x * x;;&#10;  square 3;;&#10;  let rec fact x =&#10;    if x &#60;= 1 then 1 else x * fact (x - 1);;&#10;fact 5;;&#10;square 120;;&#10;';</script><span class='k'>let</span> square x <span class='k'>=</span> x <span class='o'>*</span> x<span class='o'>;;</span>
   square 3<span class='o'>;;</span>
   <span class='k'>let rec</span> fact x <span class='k'>=</span>
     <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> x <span class='o'>*</span> fact (x <span class='o'>-</span> 1)<span class='o'>;;</span>
@@ -68,14 +68,14 @@ simplement chaînées.</p>
 <p>Les listes sont prédéfinies en OCaml. La liste vide est notée <code>[]</code>. Le
 constructeur d&#39;ajout d&#39;un élément à une liste est noté <code>::</code> (sous forme
 infixe).</p>
-<pre><code class='ocaml'><span class='k'>let</span> l <span class='k'>=</span> 1 <span class='o'>::</span> 2 <span class='o'>::</span> 3 <span class='o'>::</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml594e1cdbd72605086ccae2f1456476ca = 'let l = 1 :: 2 :: 3 :: [];;&#10;[1; 2; 3];;&#10;5 :: l;;&#10;';</script><span class='k'>let</span> l <span class='k'>=</span> 1 <span class='o'>::</span> 2 <span class='o'>::</span> 3 <span class='o'>::</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 5 <span class='o'>::</span> l<span class='o'>;;</span>
 </code></pre>
 <h2 id="Polymorphismeletrideslistes"> Polymorphisme : le tri des listes</h2><p>
 
 Le tri par insertion est défini à l&#39;aide de deux fonctions récursives.</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> sort <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>val ml45d070152e649f3de36a1a4b7d9e7581 = 'let rec sort = function&#10;  | [] -&#62; []&#10;  | x :: l -&#62; insert x (sort l)&#10;and insert elem = function&#10;  | [] -&#62; [elem]&#10;  | x :: l -&#62; if elem &#60; x then elem :: x :: l&#10;              else x :: insert elem l;;&#10;';</script><span class='k'>let rec</span> sort <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
   <span class='o'>|</span> x <span class='o'>::</span> l <span class='k'>-></span> insert x (sort l)
 <span class='k'>and</span> insert elem <span class='k'>=</span> <span class='k'>function</span>
@@ -88,7 +88,7 @@ On notera que le type des éléments de la liste reste non spécifié: il
 est représenté par une <em>variable de types</em> <code>&#39;a</code>. La fonction <code>sort</code> peut
 donc être appliquée aussi bien à une liste d&#39;entiers qu&#39;à une liste de
 chaînes de caractères.</p>
-<pre><code class='ocaml'>sort <span class='o'>[</span>2<span class='o'>;</span> 1<span class='o'>;</span> 0<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>val mle712693437457baafd6b3667c12e9a4d = 'sort [2; 1; 0];;&#10;sort [&#34;yes&#34;; &#34;ok&#34;; &#34;sure&#34;; &#34;ya&#34;; &#34;yep&#34;];;&#10;';</script>sort <span class='o'>[</span>2<span class='o'>;</span> 1<span class='o'>;</span> 0<span class='o'>]</span><span class='o'>;;</span>
 sort <span class='o'>[</span><span class='s'>&#34;yes&#34;</span><span class='o'>;</span> <span class='s'>&#34;ok&#34;</span><span class='o'>;</span> <span class='s'>&#34;sure&#34;</span><span class='o'>;</span> <span class='s'>&#34;ya&#34;</span><span class='o'>;</span> <span class='s'>&#34;yep&#34;</span><span class='o'>]</span><span class='o'>;;</span>
 </code></pre>
 <h2 id="Programmationimprative"> Programmation impérative</h2><p>
@@ -96,7 +96,7 @@ sort <span class='o'>[</span><span class='s'>&#34;yes&#34;</span><span class='o'
 Représentons les polynômes des tableaux de coefficients entiers. Alors,
 pour ajouter deux polynômes, on alloue d&#39;abord le tableau résultat, puis
 on le remplit à l&#39;aide de deux boucles <code>for</code> successives.</p>
-<pre><code class='ocaml'><span class='k'>let</span> add_polynom p1 p2 <span class='k'>=</span>
+<pre><code class='ocaml'><script>val mld76ef41143b0fa7db11786f990bdf90e = 'let add_polynom p1 p2 =&#10;  let n1 = Array.length p1&#10;  and n2 = Array.length p2 in&#10;  let result = Array.create (max n1 n2) 0 in&#10;  for i = 0 to n1 - 1 do result.(i) &#60;- p1.(i) done;&#10;  for i = 0 to n2 - 1 do result.(i) &#60;- result.(i) + p2.(i) done;&#10;  result;;&#10;add_polynom [| 1; 2 |] [| 1; 2; 3 |];;&#10;';</script><span class='k'>let</span> add_polynom p1 p2 <span class='k'>=</span>
   <span class='k'>let</span> n1 <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length p1
   <span class='k'>and</span> n2 <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length p2 <span class='k'>in</span>
   <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>create (max n1 n2) 0 <span class='k'>in</span>
@@ -112,7 +112,7 @@ OCaml offre des cellules mémoire modifiables appelées <em>références</em> :
 <code>cell     :=       x</code> met dans <code>cell</code> la valeur <code>x</code>.</p>
 <p>On peut redéfinir <code>fact</code> à l&#39;aide d&#39;une référence et d&#39;une boucle <code>for</code>
 :</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> fact n <span class='k'>=</span>
+<pre><code class='ocaml'><script>val ml6a36187c28f57c71a171a9457c3ff0a9 = '  let fact n =&#10;    let result = ref 1 in&#10;    for i = 2 to n do&#10;      result := i * !result&#10;    done;&#10;    !result;;&#10;  fact 5;;&#10;';</script>  <span class='k'>let</span> fact n <span class='k'>=</span>
     <span class='k'>let</span> result <span class='k'>=</span> ref 1 <span class='k'>in</span>
     <span class='k'>for</span> i <span class='k'>=</span> 2 <span class='k'>to</span> n <span class='k'>do</span>
       result <span class='o'>:=</span> i <span class='o'>*</span> <span class='o'>!</span>result
@@ -126,19 +126,19 @@ Il n&#39;y a pas de restriction sur les fonctions, qui peuvent donc être
 passés en argument à d&#39;autres fonctions. Définissons une fonction
 <code>sigma</code> qui renvoie la somme des résultats de l&#39;application d&#39;une
 fonction <code>f</code> donnée aux éléments d&#39;une liste :</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> sigma f <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>val ml4bcf47ddf210d6cda7d7a438c1beb985 = '  let rec sigma f = function&#10;    | [] -&#62; 0&#10;    | x :: l -&#62; f x + sigma f l&#10;';</script>  <span class='k'>let rec</span> sigma f <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> 0
     <span class='o'>|</span> x <span class='o'>::</span> l <span class='k'>-></span> f x <span class='o'>+</span> sigma f l
 </code></pre>
 <p>
 On peut définir des fonctions anonymes à l&#39;aide de la construction <code>fun</code>
 ou <code>function</code> :</p>
-<pre><code class='ocaml'>sigma (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>*</span> x) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>val mla4fc677ab7d84d36cb68a318ffec0bfa = 'sigma (fun x -&#62; x * x) [1; 2; 3];;&#10;';</script>sigma (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>*</span> x) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 </code></pre>
 <p>
 Polymorphisme et fonctions d&#39;ordre supérieur permettent de définir la
 composition de fonctions sous sa forme la plus générale :</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> compose f g <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> f (g x)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val mlb6d04543c82063ba6a1822adb53adc5a = '  let compose f g = fun x -&#62; f (g x);;&#10;  let square_o_fact = compose square fact;;&#10;  square_o_fact 5;;&#10;';</script>  <span class='k'>let</span> compose f g <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> f (g x)<span class='o'>;;</span>
   <span class='k'>let</span> square_o_fact <span class='k'>=</span> compose square fact<span class='o'>;;</span>
   square_o_fact 5<span class='o'>;;</span>
 </code></pre>
@@ -146,14 +146,14 @@ composition de fonctions sous sa forme la plus générale :</p>
 
 La puissance des fonctions ne peut pas être mieux illustrée que par la
 fonction « puissance » :</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> power f n <span class='k'>=</span> 
+<pre><code class='ocaml'><script>val mlf7708904724018686dd5ea5cd604e44d = '  let rec power f n = &#10;    if n = 0 then fun x -&#62; x &#10;    else compose f (power f (n - 1));;&#10;';</script>  <span class='k'>let rec</span> power f n <span class='k'>=</span> 
     <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='k'>fun</span> x <span class='k'>-></span> x 
     <span class='k'>else</span> compose f (power f (n <span class='o'>-</span> 1))<span class='o'>;;</span>
 </code></pre>
 <p>
 La dérivée <code>n</code><sup>ième</sup> d&#39;une fonction peut alors se définir comme
 en mathématiques en élevant la fonction dérivée à la puissance <code>n</code> :</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> derivative dx f <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> (f (x <span class='o'>+.</span> dx) <span class='o'>-.</span> f x) <span class='o'>/.</span> dx<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val mle2461934ea54a2378d41617d8fa55d68 = '  let derivative dx f = fun x -&#62; (f (x +. dx) -. f x) /. dx;;&#10;  let sin&#39;&#39;&#39; = power (derivative 1e-5) 3 sin;;&#10;  let pi = 4.0 *. atan 1.0 in sin&#39;&#39;&#39; pi;;&#10;';</script>  <span class='k'>let</span> derivative dx f <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> (f (x <span class='o'>+.</span> dx) <span class='o'>-.</span> f x) <span class='o'>/.</span> dx<span class='o'>;;</span>
   <span class='k'>let</span> sin<span class='s'>&#39;&#39;&#39;</span> <span class='k'>=</span> power (derivative 1e-5) 3 sin<span class='o'>;;</span>
   <span class='k'>let</span> pi <span class='k'>=</span> 4.0 <span class='o'>*.</span> atan 1.0 <span class='k'>in</span> sin<span class='s'>&#39;&#39;&#39;</span> pi<span class='o'>;;</span>
 </code></pre>
@@ -163,7 +163,7 @@ Considérons des expressions symboliques simples comprenant des entiers,
 des variables, un opérateur de liaison <code>let</code>, et des opérateurs
 binaires. Ces expressions peuvent être définies à l&#39;aide d&#39;un nouveau
 type de données, de la façon suivante :</p>
-<pre><code class='ocaml'>  <span class='k'>type</span> expression <span class='k'>=</span>
+<pre><code class='ocaml'><script>val ml83b631e7a7a7485825f3d8b51b560b55 = '  type expression =&#10;    | Num of int&#10;    | Var of string&#10;    | Let of string * expression * expression&#10;    | Binop of string * expression * expression;;&#10;';</script>  <span class='k'>type</span> expression <span class='k'>=</span>
     <span class='o'>|</span> Num <span class='k'>of</span> int
     <span class='o'>|</span> Var <span class='k'>of</span> string
     <span class='o'>|</span> Let <span class='k'>of</span> string <span class='o'>*</span> expression <span class='o'>*</span> expression
@@ -172,7 +172,7 @@ type de données, de la façon suivante :</p>
 <p>
 L&#39;évaluation de ces expressions utilise un environnement qui à un
 identificateur associe une valeur, représenté par une liste de paires.</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> eval env <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>val ml46bfab19c8451ce7b1e9e1554b8e2ad6 = '  let rec eval env = function&#10;    | Num i -&#62; i&#10;    | Var x -&#62; List.assoc x env&#10;    | Let (x, e1, in_e2) -&#62;&#10;       let val_x = eval env e1 in&#10;       eval ((x, val_x) :: env) in_e2&#10;    | Binop (op, e1, e2) -&#62;&#10;       let v1 = eval env e1 in&#10;       let v2 = eval env e2 in&#10;       eval_op op v1 v2&#10;  and eval_op op v1 v2 =&#10;    match op with&#10;    | &#34;+&#34; -&#62; v1 + v2&#10;    | &#34;-&#34; -&#62; v1 - v2&#10;    | &#34;*&#34; -&#62; v1 * v2&#10;    | &#34;/&#34; -&#62; v1 / v2&#10;    | _ -&#62; failwith (&#34;Unknown operator: &#34; ^ op);;&#10;';</script>  <span class='k'>let rec</span> eval env <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> Num i <span class='k'>-></span> i
     <span class='o'>|</span> Var x <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>assoc x env
     <span class='o'>|</span> Let (x<span class='o'>,</span> e1<span class='o'>,</span> in_e2) <span class='k'>-></span>
@@ -192,7 +192,7 @@ identificateur associe une valeur, représenté par une liste de paires.</p>
 </code></pre>
 <p>
 Évaluons par exemple la phrase <code>let x =   1 in x + x</code> :</p>
-<pre><code class='ocaml'>  eval <span class='o'>[</span><span class='o'>]</span> (Let (<span class='s'>&#34;x&#34;</span><span class='o'>,</span> Num 1<span class='o'>,</span> Binop (<span class='s'>&#34;+&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span>)))<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val ml1306ac7b40b00b491f0f17136fe3d361 = '  eval [] (Let (&#34;x&#34;, Num 1, Binop (&#34;+&#34;, Var &#34;x&#34;, Var &#34;x&#34;)));;&#10;';</script>  eval <span class='o'>[</span><span class='o'>]</span> (Let (<span class='s'>&#34;x&#34;</span><span class='o'>,</span> Num 1<span class='o'>,</span> Binop (<span class='s'>&#34;+&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span>)))<span class='o'>;;</span>
 </code></pre>
 <p>
 L&#39;emploi du filtrage facilite la définition des fonctions opérant sur
@@ -203,7 +203,7 @@ type <code>expression</code>.</p>
 <h2 id="Tracedesfonctions"> Trace des fonctions</h2><p>
 Pour terminer, voici le moyen le plus élémentaire pour espionner les
 fonctions :</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>val mla424b85dd877967dbc1400ac79315c4c = '  let rec fib x = if x &#60;= 1 then 1 else fib (x - 1) + fib (x - 2);;&#10;# #trace fib;;&#10;fib is now traced.&#10;# fib 3;;&#10;fib &#60;-- 3&#10;fib &#60;-- 1&#10;fib --&#62; 1&#10;fib &#60;-- 2&#10;fib &#60;-- 0&#10;fib --&#62; 1&#10;fib &#60;-- 1&#10;fib --&#62; 1&#10;fib --&#62; 2&#10;fib --&#62; 3&#10;- : int = 3&#10;&#10;';</script>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
 <span class='o'>#</span> <span class='o'>#</span>trace fib<span class='o'>;;</span>
 fib is now traced<span class='o'>.</span>
 <span class='o'>#</span> fib 3<span class='o'>;;</span>

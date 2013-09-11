@@ -49,7 +49,7 @@
           <div class="content">
             <h1 id="Camlp4310staticfunctorexample"> Camlp4 3.10: static functor example</h1><p>
 static_functor_example.ml</p>
-<pre><code class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
+<pre><code class='ocaml'><script>val mla7495121066cae4d104711229ede14df = 'type t1 = A | B&#10;type t2 = Foo of string * t1&#10;open Camlp4.PreCast&#10;module Lexer = struct&#10;  ... if you need a different lexer ...&#10;end&#10;module Gram = MakeGram(Lexer)&#10;let foo = Gram.Entry.mk &#34;foo&#34;&#10;let foo = Gram.Entry.mk &#34;foo&#34;&#10;EXTEND Gram&#10;  GLOBAL: foo;&#10;  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];&#10;  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];&#10;END;;&#10;Gram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)&#10;DELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END&#10;&#10;';</script><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
 <span class='k'>type</span> t2 <span class='k'>=</span> Foo <span class='k'>of</span> string <span class='o'>*</span> t1
 <span class='k'>open</span> <span class='m'>Camlp4</span><span class='o'>.</span>PreCast
 <span class='k'>module</span> Lexer <span class='k'>=</span> <span class='k'>struct</span>
