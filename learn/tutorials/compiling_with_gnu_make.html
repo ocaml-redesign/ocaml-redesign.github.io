@@ -55,7 +55,7 @@ complex OCaml projects.</p>
 <p>For a basic OCaml program or library that doesn&#39;t use any library
 besides the standard library, just copy OCamlMakefile to the current
 directory and create the following Makefile:</p>
-<pre><code class='ocaml'><script>mlff0e4011fab8bffa581c85e2714cbe26 = 'RESULT = myprogram\nSOURCES = \\n  mymodule1.mli mymodule1.ml \\n  myparser.mli myparser.mly mylexer.mll mymodule2.ml \\n  mymainprogram.ml\n\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>RESULT <span class='k'>=</span> myprogram
+<pre><code class='ocaml'><script>mlff0e4011fab8bffa581c85e2714cbe26 = 'RESULT = myprogram\nSOURCES = \\n  mymodule1.mli mymodule1.ml \\n  myparser.mli myparser.mly mylexer.mll mymodule2.ml \\n  mymainprogram.ml\n\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>RESULT <span class='k'>=</span> myprogram
 SOURCES <span class='k'>=</span> <span class='o'>\</span>
   mymodule1<span class='o'>.</span>mli mymodule1<span class='o'>.</span>ml <span class='o'>\</span>
   myparser<span class='o'>.</span>mli myparser<span class='o'>.</span>mly mylexer<span class='o'>.</span>mll mymodule2<span class='o'>.</span>ml <span class='o'>\</span>
@@ -72,7 +72,7 @@ in the example.</p>
 <p>The included OCamlMakefile provides a variety of targets. For details
 please refer to the documentation of OCamlMakefile, but here are the
 main ones:</p>
-<pre><code class='ocaml'><script>ml7c40a7be0c94b62af772f10ee9fc6280 = 'nc     make a native code executable\nbc     make a bytecode executable\nncl    make a native code library\nbcl    make a bytecode library\nlibinstall    install library with ocamlfind\nlibuninstall  uninstall library with ocamlfind\ntop    make a custom toplevel from all your modules\nclean  remove everything that matches one of the files that could have been\n       automatically created by OCamlMakefile\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>nc     make a native code executable
+<pre><code class='ocaml'><script>ml7c40a7be0c94b62af772f10ee9fc6280 = 'nc     make a native code executable\nbc     make a bytecode executable\nncl    make a native code library\nbcl    make a bytecode library\nlibinstall    install library with ocamlfind\nlibuninstall  uninstall library with ocamlfind\ntop    make a custom toplevel from all your modules\nclean  remove everything that matches one of the files that could have been\n       automatically created by OCamlMakefile\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>nc     make a native code executable
 bc     make a bytecode executable
 ncl    make a native code library
 bcl    make a bytecode library
@@ -93,13 +93,13 @@ situation.</p>
 by setting the LIBS and INCDIRS variable. LIBS is the list of the name
 of the library files (xxx.cma or xxx.cmxa) without the .cma or .cmxa
 extension:</p>
-<pre><code class='ocaml'><script>ml9c8ac489e7ad13e99e64b890177ef2c1 = 'LIBS = str unix\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>LIBS <span class='k'>=</span> str unix
+<pre><code class='ocaml'><script>ml9c8ac489e7ad13e99e64b890177ef2c1 = 'LIBS = str unix\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>LIBS <span class='k'>=</span> str unix
 </code></pre>
 <p>
 If you use non-standard libraries that are not installed in the same
 directory as the standard library, the INCDIRS variable must contain the
 list of these directories:</p>
-<pre><code class='ocaml'><script>ml4bfdadf70389bd2bc632ab9c05d17ebf = 'INCDIRS = /path/to/somelibdirectory/\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>INCDIRS <span class='k'>=</span> <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>somelibdirectory<span class='o'>/</span>
+<pre><code class='ocaml'><script>ml4bfdadf70389bd2bc632ab9c05d17ebf = 'INCDIRS = /path/to/somelibdirectory/\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>INCDIRS <span class='k'>=</span> <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>somelibdirectory<span class='o'>/</span>
 </code></pre>
 <p>
 Usually this requires some preliminary configuration as it is
@@ -108,12 +108,12 @@ from one installation to another. An exception is when using standard
 directories which are not included in the search path by default such as
 /path/to/stdlib/camlp4. In this case, this should be enough and
 portable:</p>
-<pre><code class='ocaml'><script>ml1f5acb3a31f5ff9a0b655171aa39868e = 'INCDIRS = +camlp4\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>INCDIRS <span class='k'>=</span> <span class='o'>+</span>camlp4
+<pre><code class='ocaml'><script>ml1f5acb3a31f5ff9a0b655171aa39868e = 'INCDIRS = +camlp4\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>INCDIRS <span class='k'>=</span> <span class='o'>+</span>camlp4
 </code></pre>
 <p>
 OK, but we prefer libraries that are installed with ocamlfind. To use
 them with OCamlMakefile, the PACKS variable must be set:</p>
-<pre><code class='ocaml'><script>ml232fdc800bdc523e60d6e3a597c01e5b = 'PACKS = netstring num\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>PACKS <span class='k'>=</span> netstring num
+<pre><code class='ocaml'><script>ml232fdc800bdc523e60d6e3a597c01e5b = 'PACKS = netstring num\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>PACKS <span class='k'>=</span> netstring num
 </code></pre>
 <p>
 Note that libraries that not part of the standard library but are
@@ -125,22 +125,22 @@ pcre) is automatically loaded.</p>
 extensions, which are bytecode units that are loaded by the
 preprocessor. With OCamlMakefile, a preprocessor to be used can be
 defined in the first line of the file:</p>
-<pre><code class='ocaml'><script>ml5588c2a1791938335dc4afa25cedf53d = '(*pp ...\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(*pp <span class='ic'>...</span></span>
+<pre><code class='ocaml'><script>ml5588c2a1791938335dc4afa25cedf53d = '(*pp ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(*pp <span class='ic'>...</span></span>
 <span class='com2'></span></code></pre>
 <p>
 So it could be something like:</p>
-<pre><code class='ocaml'><script>ml371e98ea8d15e757c5abd7705a9799ce = '(*pp camlp4o -I /path/to/pa_infix pa_infix.cmo *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(*pp camlp4o <span class='ic'>-</span>I <span class='ic'>/</span>path<span class='ic'>/</span><span class='ic'>to</span><span class='ic'>/</span>pa_infix pa_infix<span class='ic'>.</span>cmo *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml371e98ea8d15e757c5abd7705a9799ce = '(*pp camlp4o -I /path/to/pa_infix pa_infix.cmo *)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(*pp camlp4o <span class='ic'>-</span>I <span class='ic'>/</span>path<span class='ic'>/</span><span class='ic'>to</span><span class='ic'>/</span>pa_infix pa_infix<span class='ic'>.</span>cmo *)</span><!-- end comment -->
 </code></pre>
 <p>
 Well, this form is not very convenient, so we will use the same
 preprocessor for each file and store its value in the PP variable of the
 Makefile:</p>
-<pre><code class='ocaml'><script>ml872741accb05335053fa3ab4d0b66d10 = 'PP = camlp4o -I /path/to/pa_infix pa_infix.cmo\nexport PP\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>PP <span class='k'>=</span> camlp4o <span class='o'>-</span>I <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>pa_infix pa_infix<span class='o'>.</span>cmo
+<pre><code class='ocaml'><script>ml872741accb05335053fa3ab4d0b66d10 = 'PP = camlp4o -I /path/to/pa_infix pa_infix.cmo\nexport PP\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>PP <span class='k'>=</span> camlp4o <span class='o'>-</span>I <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>pa_infix pa_infix<span class='o'>.</span>cmo
 export PP
 </code></pre>
 <p>
 So each OCaml file will start with:</p>
-<pre><code class='ocaml'><script>mlb5a5619e491be16a1b27c411de0cb45e = '(*pp $PP *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mlb5a5619e491be16a1b27c411de0cb45e = '(*pp $PP *)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
 </code></pre>
 <p>
 This way of defining the preprocessor is still not satisfying: we would
@@ -150,7 +150,7 @@ script</a>.
 Every package which we use will listed as usual in the PACKS variable,
 and camlp4find will call ocamlfind to know which syntax extensions to
 load:</p>
-<pre><code class='ocaml'><script>ml53b5c9cdbbb13bb3fd9545bed9a235f8 = 'PACKS = unix micmatch_pcre \\n   pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg\nPP = camlp4find $(PACKS)\nexport PP\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>PACKS <span class='k'>=</span> unix micmatch_pcre <span class='o'>\</span>
+<pre><code class='ocaml'><script>ml53b5c9cdbbb13bb3fd9545bed9a235f8 = 'PACKS = unix micmatch_pcre \\n   pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg\nPP = camlp4find $(PACKS)\nexport PP\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>PACKS <span class='k'>=</span> unix micmatch_pcre <span class='o'>\</span>
    pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg
 PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
 export PP
@@ -176,7 +176,7 @@ export PP
 
 <p>Full example using ocamllex and the unix and micmatch_pcre libraries.
 The Makefile file would be:</p>
-<pre><code class='ocaml'><script>ml486e2860ed9f078d701d719ff9b4a880 = 'RESULT = myprogram\nSOURCES = mymodule1.mll mymodule2.mli mymodule2.ml mymainmodule.ml\nPACKS = unix micmatch_pcre\nPP = camlp4find $(PACKS)\nexport PP\nCREATE_LIB = yes # ???\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>RESULT <span class='k'>=</span> myprogram
+<pre><code class='ocaml'><script>ml486e2860ed9f078d701d719ff9b4a880 = 'RESULT = myprogram\nSOURCES = mymodule1.mll mymodule2.mli mymodule2.ml mymainmodule.ml\nPACKS = unix micmatch_pcre\nPP = camlp4find $(PACKS)\nexport PP\nCREATE_LIB = yes # ???\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>RESULT <span class='k'>=</span> myprogram
 SOURCES <span class='k'>=</span> mymodule1<span class='o'>.</span>mll mymodule2<span class='o'>.</span>mli mymodule2<span class='o'>.</span>ml mymainmodule<span class='o'>.</span>ml
 PACKS <span class='k'>=</span> unix micmatch_pcre
 PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
@@ -187,7 +187,7 @@ OCAMLMAKEFILE <span class='k'>=</span> OCamlMakefile
 </code></pre>
 <p>
 And each .ml or .mli file starts with:</p>
-<pre><code class='ocaml'><script>ml53a9dcb7534162b674d2adc82514a528 = '(*pp $PP *)\n\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>ml53a9dcb7534162b674d2adc82514a528 = '(*pp $PP *)\n\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
 
 </code></pre>
 

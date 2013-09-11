@@ -215,7 +215,7 @@ Indent long character strings with the convention in force at that line
 plus an indication of string continuation at the end of each line (a <code>\</code>
 character at the end of the line that omits white spaces on the
 beginning of next line):</p>
-<pre><code class='ocaml'><script>mld533012d72e513c4b044391e9a981421 = 'let universal_declaration =\n  &#34;-1- Programs are born and remain free and equal under the law;\n\\n   distinctions can only be based on the common good.&#34; in\n  ...\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> universal_declaration <span class='k'>=</span>
+<pre><code class='ocaml'><script>mld533012d72e513c4b044391e9a981421 = 'let universal_declaration =\n  &#34;-1- Programs are born and remain free and equal under the law;\n\\n   distinctions can only be based on the common good.&#34; in\n  ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> universal_declaration <span class='k'>=</span>
   <span class='s'>&#34;-1- Programs are born and remain free and equal under the law;\n\
    distinctions can only be based on the common good.&#34;</span> <span class='k'>in</span>
   <span class='o'>...</span>
@@ -863,7 +863,7 @@ nocuous comments.</p>
 <p>An example of what to avoid: the following comment uses technical words
 and is thus masquerade into a real comment when it has no additional
 information of interest;</p>
-<pre><code class='ocaml'><script>ml7c79a3dc68031e871b4aa9ed7bc71e6f = '(*\n  Function print_lambda:\n  print a lambda-expression given as argument.\n\n  Arguments: lam, any lambda-expression.\n  Returns: nothing.\n\n  Remark: print_lambda can only be used for its side effect.\n*)\nlet rec print_lambda lam =\n  match lam with\n  | Var s -&#62; printf &#34;%s&#34; s\n  | Abs l -&#62; printf &#34;\\ %a&#34; print_lambda l\n  | App (l1, l2) -&#62;\n     printf &#34;(%a %a)&#34; print_lambda l1 print_lambda l2\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='com2'>(*</span>
+<pre><code class='ocaml'><script>ml7c79a3dc68031e871b4aa9ed7bc71e6f = '(*\n  Function print_lambda:\n  print a lambda-expression given as argument.\n\n  Arguments: lam, any lambda-expression.\n  Returns: nothing.\n\n  Remark: print_lambda can only be used for its side effect.\n*)\nlet rec print_lambda lam =\n  match lam with\n  | Var s -&#62; printf &#34;%s&#34; s\n  | Abs l -&#62; printf &#34;\\ %a&#34; print_lambda l\n  | App (l1, l2) -&#62;\n     printf &#34;(%a %a)&#34; print_lambda l1 print_lambda l2\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(*</span>
 <span class='com2'>  Function print_lambda<span class='ic'>:</span></span>
 <span class='com2'>  print a lambda<span class='ic'>-</span>expression given <span class='ic'>as</span> argument<span class='ic'>.</span></span>
 <span class='com2'></span>
@@ -891,7 +891,7 @@ Use assertions as much as possible: they let you avoid verbose comments,
 while allowing a useful verification upon execution.</p>
 <p>For example, the conditions for the arguments of a function to be valid
 are usefully verified by assertions.</p>
-<pre><code class='ocaml'><script>mlbe19a7d3d9716c25335c1bbf26d6b63e = 'let f x =\n  assert (x &#62;= 0);\n  ...\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> f x <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlbe19a7d3d9716c25335c1bbf26d6b63e = 'let f x =\n  assert (x &#62;= 0);\n  ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> f x <span class='k'>=</span>
   <span class='k'>assert</span> (x <span class='o'>&#62;=</span> 0)<span class='o'>;</span>
   <span class='o'>...</span>
 </code></pre>
@@ -935,7 +935,7 @@ This augments regularity of style. Avoid using identifiers whose
 appearance can lead to confusion such as <code>l</code> or <code>O</code>, easy to confuse
 with <code>1</code> and <code>0</code>.</p>
 <p>Example:</p>
-<pre><code class='ocaml'><script>mld20f2f6ef0bb58de53fa4a5b39c5f1f6 = 'let add_expression expr1 expr2 = ...\nlet print_expression expr = ...\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> add_expression expr1 expr2 <span class='k'>=</span> <span class='o'>...</span>
+<pre><code class='ocaml'><script>mld20f2f6ef0bb58de53fa4a5b39c5f1f6 = 'let add_expression expr1 expr2 = ...\nlet print_expression expr = ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> add_expression expr1 expr2 <span class='k'>=</span> <span class='o'>...</span>
 <span class='k'>let</span> print_expression expr <span class='k'>=</span> <span class='o'>...</span>
 </code></pre>
 <p>
@@ -1038,7 +1038,7 @@ printing function, and this could be perfectly silent, since many
 (<code>Pervasives</code>). Mixing printing functions from <code>Format</code> and <code>Pervasives</code>
 leads to subtle bugs in the display, that are difficult to trace. For
 instance:</p>
-<pre><code class='ocaml'><script>ml71f1bf03fdc659a459a3a02f697e3ee8 = 'let f () =\n  Format.print_string &#34;Hello World!&#34;; print_newline ()\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> f () <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml71f1bf03fdc659a459a3a02f697e3ee8 = 'let f () =\n  Format.print_string &#34;Hello World!&#34;; print_newline ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> f () <span class='k'>=</span>
   <span class='m'>Format</span><span class='o'>.</span>print_string <span class='s'>&#34;Hello World!&#34;</span><span class='o'>;</span> print_newline ()
 </code></pre>
 <p>
@@ -1054,7 +1054,7 @@ still open), while a spurious carriage return appeared on the screen!</p>
 <p>For the same reason, open large libraries such as the one with
 arbitrary-precision integers so as not to burden the program which uses
 them.</p>
-<pre><code class='ocaml'><script>ml032a164e4ff984d8bd1af3dfac87c4d8 = 'open Num\n\nlet rec fib n =\n  if n &#60;= 2 then Int 1 else fib (n - 1) +/ fib (n - 2)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>open</span> Num
+<pre><code class='ocaml'><script>ml032a164e4ff984d8bd1af3dfac87c4d8 = 'open Num\n\nlet rec fib n =\n  if n &#60;= 2 then Int 1 else fib (n - 1) +/ fib (n - 2)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>open</span> Num
 
 <span class='k'>let rec</span> fib n <span class='k'>=</span>
   <span class='k'>if</span> n <span class='o'>&#60;=</span> 2 <span class='k'>then</span> Int 1 <span class='k'>else</span> fib (n <span class='o'>-</span> 1) <span class='o'>+/</span> fib (n <span class='o'>-</span> 2)
@@ -1530,7 +1530,7 @@ next future, but (fortunately) it is too new to be discussed here.</p>
  </li>
 </ul>
 
-<pre><code class='ocaml'><script>ml075d557116f5b1c455b00938cdac366c = 'let list_length l =\n  let l = ref l in\n  let res = ref 0 in\n  while !l &#60;&#62; [] do\n    incr res; l := List.tl !l\n  done;\n  !res;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> list_length l <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml075d557116f5b1c455b00938cdac366c = 'let list_length l =\n  let l = ref l in\n  let res = ref 0 in\n  while !l &#60;&#62; [] do\n    incr res; l := List.tl !l\n  done;\n  !res;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> list_length l <span class='k'>=</span>
   <span class='k'>let</span> l <span class='k'>=</span> ref l <span class='k'>in</span>
   <span class='k'>let</span> res <span class='k'>=</span> ref 0 <span class='k'>in</span>
   <span class='k'>while</span> <span class='o'>!</span>l <span class='o'>&#60;&#62;</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>do</span>
@@ -1541,14 +1541,14 @@ next future, but (fortunately) it is too new to be discussed here.</p>
 <p>
 in place of the following recursive function, so simple and
 clear:</p>
-<pre><code class='ocaml'><script>mle141f1e7600693cb943f51b0deef6963 = 'let rec list_length = function\n  | [] -&#62; 0\n  | _ :: l -&#62; 1 + list_length l\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let rec</span> list_length <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>mle141f1e7600693cb943f51b0deef6963 = 'let rec list_length = function\n  | [] -&#62; 0\n  | _ :: l -&#62; 1 + list_length l\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let rec</span> list_length <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> 0
   <span class='o'>|</span> <span class='o'>_</span> <span class='o'>::</span> l <span class='k'>-></span> 1 <span class='o'>+</span> list_length l
 </code></pre>
 <p>
 (For those that would contest the equivalence of those two
 versions, see the <a href='#equivalenceprogrammes'>note below</a>).</p>
-<pre><code class='ocaml'><script>mlcce3fea4e268f2b1a3ffcdd3b3b0fdca = '-   Another common “over imperative error” in the imperative world\n    is not to systematically choose the simple `for` loop to iter on\n    the element of a vector, but instead to use a complex `while`\n    loop, with one or two references (too many useless assignments,\n    too many opportunity for errors).\n-   This category of programmer consider that the `mutable` keyword\n    in the record type definitions should be implicit.\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='o'>-</span>   Another common “over imperative error” <span class='k'>in</span> the imperative world
+<pre><code class='ocaml'><script>mlcce3fea4e268f2b1a3ffcdd3b3b0fdca = '-   Another common “over imperative error” in the imperative world\n    is not to systematically choose the simple `for` loop to iter on\n    the element of a vector, but instead to use a complex `while`\n    loop, with one or two references (too many useless assignments,\n    too many opportunity for errors).\n-   This category of programmer consider that the `mutable` keyword\n    in the record type definitions should be implicit.\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>-</span>   Another common “over imperative error” <span class='k'>in</span> the imperative world
     is not <span class='k'>to</span> systematically choose the simple `<span class='k'>for</span>` loop <span class='k'>to</span> iter on
     the element <span class='k'>of</span> a vector<span class='o'>,</span> but instead <span class='k'>to</span> use a complex `<span class='k'>while</span>`
     loop<span class='o'>,</span> <span class='k'>with</span> one <span class='k'>or</span> two references (too many useless assignments<span class='o'>,</span>
@@ -1589,12 +1589,12 @@ unreadable program.</p>
  <li>Use useless (hence nocive for readability) <code>if then else</code>, as in</li>
 </ul>
 
-<pre><code class='ocaml'><script>mla6d60d0f5bb83535c64e508369ca5ca9 = 'let flush_ps () =\n  if not !psused then psused := true\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> flush_ps () <span class='k'>=</span>
+<pre><code class='ocaml'><script>mla6d60d0f5bb83535c64e508369ca5ca9 = 'let flush_ps () =\n  if not !psused then psused := true\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> flush_ps () <span class='k'>=</span>
   <span class='k'>if</span> not <span class='o'>!</span>psused <span class='k'>then</span> psused <span class='o'>:=</span> <span class='o'>true</span>
 </code></pre>
 <p>
 or (more subtle)</p>
-<pre><code class='ocaml'><script>mlda177231c0e36a9674a1e29b432b8d0a = 'let sync b =\n  if !last_is_dvi &#60;&#62; b then last_is_dvi := b\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> sync b <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlda177231c0e36a9674a1e29b432b8d0a = 'let sync b =\n  if !last_is_dvi &#60;&#62; b then last_is_dvi := b\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> sync b <span class='k'>=</span>
   <span class='k'>if</span> <span class='o'>!</span>last_is_dvi <span class='o'>&#60;&#62;</span> b <span class='k'>then</span> last_is_dvi <span class='o'>:=</span> b
 </code></pre>
 <ul>
@@ -1603,12 +1603,12 @@ or (more subtle)</p>
  write<br /></li>
 </ul>
 
-<pre><code class='ocaml'><script>mlcf771795e4e0deecd62aa015b5a033ce = '(fun x y -&#62; x + y)\n   e1 e2\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>(<span class='k'>fun</span> x y <span class='k'>-></span> x <span class='o'>+</span> y)
+<pre><code class='ocaml'><script>mlcf771795e4e0deecd62aa015b5a033ce = '(fun x y -&#62; x + y)\n   e1 e2\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>(<span class='k'>fun</span> x y <span class='k'>-></span> x <span class='o'>+</span> y)
    e1 e2
 </code></pre>
 <p>
 instead of simply writing</p>
-<pre><code class='ocaml'><script>mlab29d8b7560bc2a52b02a2528126c757 = 'let x = e1\nand y = e2 in\nx + y\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span><span class='k'>let</span> x <span class='k'>=</span> e1
+<pre><code class='ocaml'><script>mlab29d8b7560bc2a52b02a2528126c757 = 'let x = e1\nand y = e2 in\nx + y\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> x <span class='k'>=</span> e1
 <span class='k'>and</span> y <span class='k'>=</span> e2 <span class='k'>in</span>
 x <span class='o'>+</span> y
 </code></pre>
@@ -1641,7 +1641,7 @@ x <span class='o'>+</span> y
  of these methods. For example:</li>
 </ul>
 
-<pre><code class='ocaml'><script>ml4b47b0c981c97a3045347db5f7345d3d = '(fun u -&#62; print_string &#34;world&#34;; print_string u)\n  (let temp = print_string &#34;Hello&#34;; &#34;!&#34; in\n   ((fun x -&#62; print_string x; flush stdout) &#34; &#34;;\n    temp));;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[try]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[copy]</span><span style='position:relative;top:-1em;' onclick='alert("not yet implemented")'>[github]</span>(<span class='k'>fun</span> u <span class='k'>-></span> print_string <span class='s'>&#34;world&#34;</span><span class='o'>;</span> print_string u)
+<pre><code class='ocaml'><script>ml4b47b0c981c97a3045347db5f7345d3d = '(fun u -&#62; print_string &#34;world&#34;; print_string u)\n  (let temp = print_string &#34;Hello&#34;; &#34;!&#34; in\n   ((fun x -&#62; print_string x; flush stdout) &#34; &#34;;\n    temp));;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>(<span class='k'>fun</span> u <span class='k'>-></span> print_string <span class='s'>&#34;world&#34;</span><span class='o'>;</span> print_string u)
   (<span class='k'>let</span> temp <span class='k'>=</span> print_string <span class='s'>&#34;Hello&#34;</span><span class='o'>;</span> <span class='s'>&#34;!&#34;</span> <span class='k'>in</span>
    ((<span class='k'>fun</span> x <span class='k'>-></span> print_string x<span class='o'>;</span> flush stdout) <span class='s'>&#34; &#34;</span><span class='o'>;</span>
     temp))<span class='o'>;;</span>
