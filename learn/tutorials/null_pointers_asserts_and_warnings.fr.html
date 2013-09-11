@@ -68,7 +68,7 @@ couleurs primaires.</p>
 <p>L&#39;autre méthode, plus correcte, est de stocker les âges dans un champ de
 type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
 âges ressemblerait à :</p>
-<pre><code class='ocaml'><script>mlda36ba417a9334fec043358bf5266e36 = 'create table users&#10;(&#10;  userid serial,&#10;  name text not null,&#10;  age int             -- may be null&#10;);&#10;';</script>create table users
+<pre><code class='ocaml'><script>mlda36ba417a9334fec043358bf5266e36 = 'create table users\n(\n  userid serial,\n  name text not null,\n  age int             -- may be null\n);\n';</script>create table users
 (
   userid serial<span class='o'>,</span>
   name text not null<span class='o'>,</span>
@@ -94,24 +94,24 @@ dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</
 <p>OCaml propose une solution élégante pour les valeurs nulles, en
 utilisant un simple type variant polymorphique, défini (jusqu&#39;à
 récemment, dans le module <code>Pervasives</code>) comme :</p>
-<pre><code class='ocaml'><script>mlaa912a4f6680345f78f66907131bc48f = 'type &#39;a option = None | Some of &#39;a&#10;';</script><span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
+<pre><code class='ocaml'><script>mlaa912a4f6680345f78f66907131bc48f = 'type &#39;a option = None | Some of &#39;a\n';</script><span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
 </code></pre>
 <p>
 Une &quot;valeur nulle&quot; s&#39;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
 l&#39;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> dans le chapitre
 précédent).</p>
-<pre><code class='ocaml'><script>ml2d4190b451f22d97d17cd16ac50a2630 = '# Some 3;;&#10;- : int option = Some 3&#10;';</script><span class='o'>#</span> Some 3<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml2d4190b451f22d97d17cd16ac50a2630 = '# Some 3;;\n- : int option = Some 3\n';</script><span class='o'>#</span> Some 3<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int option <span class='k'>=</span> Some 3
 </code></pre>
 <p>
 Une liste d&#39;entiers optionels ?</p>
-<pre><code class='ocaml'><script>ml857003cf885c0c289aed85bfc3eab67b = '# [ None; Some 3; Some 6; None ];;&#10;- : int option list = [None; Some 3; Some 6; None]&#10;';</script><span class='o'>#</span> <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml857003cf885c0c289aed85bfc3eab67b = '# [ None; Some 3; Some 6; None ];;\n- : int option list = [None; Some 3; Some 6; None]\n';</script><span class='o'>#</span> <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int option list <span class='k'>=</span> <span class='o'>[</span>None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None<span class='o'>]</span>
 </code></pre>
 <p>
 Et une liste optionelle d&#39;entiers ?</p>
-<pre><code class='ocaml'><script>mlc80242816dce878dd6fe309549b80f97 = '# Some [1; 2; 3];;&#10;- : int list option = Some [1; 2; 3]&#10;';</script><span class='o'>#</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlc80242816dce878dd6fe309549b80f97 = '# Some [1; 2; 3];;\n- : int list option = Some [1; 2; 3]\n';</script><span class='o'>#</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list option <span class='k'>=</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>
 </code></pre>
 <h2 id="Assertionsavertissementserreursfatalesetcritureversstderr"> Assertions, avertissements, erreurs fatales, et écriture vers stderr</h2><p>
@@ -129,7 +129,7 @@ supposant que vous ne rattrapiez pas cette exception (ce qui est
 recommandé, tout particulièrement pour les débutants), son effet sera de
 stopper le programme, et d&#39;afficher l&#39;emplacement (nom du fichier,
 numéro de ligne et de colonne) où l&#39;erreur est survenue. Par exemple :</p>
-<pre><code class='ocaml'><script>ml9ff9b68c8ba929945777871566c7a5c4 = '# assert (Sys.os_type = &#34;Win32&#34;);;&#10;Exception: Assert_failure (&#34;&#34;, 0, 30).&#10;';</script><span class='o'>#</span> <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml9ff9b68c8ba929945777871566c7a5c4 = '# assert (Sys.os_type = &#34;Win32&#34;);;\nException: Assert_failure (&#34;&#34;, 0, 30).\n';</script><span class='o'>#</span> <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)<span class='o'>;;</span>
 Exception<span class='o'>:</span> Assert_failure (<span class='s'>&#34;&#34;</span><span class='o'>,</span> 0<span class='o'>,</span> 30)<span class='o'>.</span>
 </code></pre>
 <p>
@@ -140,7 +140,7 @@ les situations critiques, mais il est souvent préférable d&#39;utiliser...</p>
 elle aussi, à moins d&#39;être rattrappée, va stopper le programme et
 afficher le message d&#39;erreur fourni. <code>failwith</code> est souvent utilisé lors
 du filtrage, comme dans cet exemple réel :</p>
-<pre><code class='ocaml'><script>ml45de7cd688db17f825d7a5e8404c5fec = '  match Sys.os_type with&#10;    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)&#10;  | &#34;Win32&#34; -&#62;             (* code omit *)&#10;  | &#34;MacOS&#34; -&#62;             (* code omit *)&#10;  | _ -&#62; failwith &#34;Ce système n&#39;est pas supporté&#34;&#10;';</script>  <span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
+<pre><code class='ocaml'><script>ml45de7cd688db17f825d7a5e8404c5fec = '  match Sys.os_type with\n    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)\n  | &#34;Win32&#34; -&#62;             (* code omit *)\n  | &#34;MacOS&#34; -&#62;             (* code omit *)\n  | _ -&#62; failwith &#34;Ce système n&#39;est pas supporté&#34;\n';</script>  <span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
     <span class='s'>&#34;Unix&#34;</span> <span class='o'>|</span> <span class='s'>&#34;Cygwin&#34;</span> <span class='k'>-></span>   <span class='com2'>(* code omit *)</span><!-- end comment -->
   <span class='o'>|</span> <span class='s'>&#34;Win32&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omit *)</span><!-- end comment -->
   <span class='o'>|</span> <span class='s'>&#34;MacOS&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omit *)</span><!-- end comment -->
@@ -155,7 +155,7 @@ système de filtrage. L&#39;union de motifs est utilisée pour reconnaître
 aversion pour les débogueurs autres que gdb, vous voudrez sûrement faire
 afficher des avertissements par vos fonctions. Voici un exemple (notez
 le code surligné) :</p>
-<pre><code class='ocaml'><script>ml42cfb9b7a9b464641a2578519921f0a8 = 'open Graphics;;&#10;&#10;open_graph &#34; 640x480&#34;;;&#10;for i = 12 downto 1 do&#10;  let radius = i * 20 in&#10;  &#60;em&#62;prerr_endline (&#34;radius is &#34; ^ (string_of_int radius));&#60;/em&#62;&#10;  set_color (if (i mod 2) = 0 then red else yellow);&#10;  fill_circle 320 240 radius&#10;done;;&#10;read_line ();;&#10;';</script><span class='k'>open</span> Graphics<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml42cfb9b7a9b464641a2578519921f0a8 = 'open Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;prerr_endline (&#34;radius is &#34; ^ (string_of_int radius));&#60;/em&#62;\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n';</script><span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='k'>for</span> i <span class='k'>=</span> 12 <span class='k'>downto</span> 1 <span class='k'>do</span>
@@ -169,7 +169,7 @@ read_line ()<span class='o'>;;</span>
 <p>
 Si vous préférez le style <code>printf</code> du langage C, essayez plutôt le
 module <code>Printf</code> d&#39;OCaml :</p>
-<pre><code class='ocaml'><script>mleddded6885be11942502b7fbd03f6ffb = 'open Graphics;;&#10;&#60;em&#62;open Printf;;&#60;/em&#62;&#10;&#10;open_graph &#34; 640x480&#34;;;&#10;for i = 12 downto 1 do&#10;  let radius = i * 20 in&#10;  &#60;em&#62;eprintf &#34;radius is %d\n&#34; radius;&#60;/em&#62;&#10;&#10;  set_color (if (i mod 2) = 0 then red else yellow);&#10;  fill_circle 320 240 radius&#10;done;;&#10;read_line ();;&#10;&#10;';</script><span class='k'>open</span> Graphics<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mleddded6885be11942502b7fbd03f6ffb = 'open Graphics;;\n&#60;em&#62;open Printf;;&#60;/em&#62;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;eprintf &#34;radius is %d\n&#34; radius;&#60;/em&#62;\n\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n';</script><span class='k'>open</span> Graphics<span class='o'>;;</span>
 <span class='o'>&#60;</span>em<span class='o'>&#62;</span><span class='k'>open</span> Printf<span class='o'>;;&#60;/</span>em<span class='o'>&#62;</span>
 
 open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>

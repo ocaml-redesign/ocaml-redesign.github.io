@@ -115,7 +115,7 @@ or integers )small( from conversion using numbers big build You
 matrix with all elements equal to the initial value provided.
 Alternatively, write the program that allocates a new line for each line
 of your matrix. For instance:</p>
-<pre><code class='ocaml'><script>mlbc530dd5b11eeab8d5af76b276fdf9c7 = '  let matrix n m init =&#10;    let result = Array.make n (Array.make m init) in&#10;    for i = 1 to n - 1 do&#10;      result.(i) &#60;- Array.make m init&#10;    done;&#10;    result&#10;';</script>  <span class='k'>let</span> matrix n m init <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlbc530dd5b11eeab8d5af76b276fdf9c7 = '  let matrix n m init =\n    let result = Array.make n (Array.make m init) in\n    for i = 1 to n - 1 do\n      result.(i) &#60;- Array.make m init\n    done;\n    result\n';</script>  <span class='k'>let</span> matrix n m init <span class='k'>=</span>
     <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>make n (<span class='m'>Array</span><span class='o'>.</span>make m init) <span class='k'>in</span>
     <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> n <span class='o'>-</span> 1 <span class='k'>do</span>
       result<span class='o'>.</span>(i) <span class='o'>&#60;-</span> <span class='m'>Array</span><span class='o'>.</span>make m init
@@ -126,7 +126,7 @@ of your matrix. For instance:</p>
 In the same vein, the <code>copy_vect</code> primitive gives strange results, when
 applied to matrices: you need to write a function that explicitly copies
 each line of the matrix at hand:</p>
-<pre><code class='ocaml'><script>ml3a29a3ff38a659f78adcaff7d89784a7 = '  let copy_matrix m =&#10;    let l = Array.length m in&#10;    if l = 0 then m else&#10;      let result = Array.make l m.(0) in&#10;      for i = 0 to l - 1 do&#10;        result.(i) &#60;- Array.copy m.(i)&#10;      done;&#10;      result&#10;';</script>  <span class='k'>let</span> copy_matrix m <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml3a29a3ff38a659f78adcaff7d89784a7 = '  let copy_matrix m =\n    let l = Array.length m in\n    if l = 0 then m else\n      let result = Array.make l m.(0) in\n      for i = 0 to l - 1 do\n        result.(i) &#60;- Array.copy m.(i)\n      done;\n      result\n';</script>  <span class='k'>let</span> copy_matrix m <span class='k'>=</span>
     <span class='k'>let</span> l <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length m <span class='k'>in</span>
     <span class='k'>if</span> l <span class='k'>=</span> 0 <span class='k'>then</span> m <span class='k'>else</span>
       <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>make l m<span class='o'>.</span>(0) <span class='k'>in</span>
@@ -140,13 +140,13 @@ each line of the matrix at hand:</p>
 How to define an enumerated type?</p>
 <p>An enumerated type is a sum type with only constants. For instance, a
 type with 3 constants:</p>
-<pre><code class='ocaml'><script>mld743be3827fcf70cf863e827ca5a49f8 = '  type color = Blue | White | Red;;&#10;  Blue;;&#10;';</script>  <span class='k'>type</span> color <span class='k'>=</span> Blue <span class='o'>|</span> White <span class='o'>|</span> Red<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld743be3827fcf70cf863e827ca5a49f8 = '  type color = Blue | White | Red;;\n  Blue;;\n';</script>  <span class='k'>type</span> color <span class='k'>=</span> Blue <span class='o'>|</span> White <span class='o'>|</span> Red<span class='o'>;;</span>
   Blue<span class='o'>;;</span>
 </code></pre>
 <p>
 The names <code>Blue</code>, <code>White</code> and <code>Red</code> are the constructors of the <code>color</code>
 type. One can define functions on this type by pattern matching:</p>
-<pre><code class='ocaml'><script>ml17c819cee37115693c75bcf90bbfa4a1 = '  let string_of_color =function&#10;    | Blue -&#62; &#34;blue&#34;&#10;    | White -&#62; &#34;white&#34;&#10;    | Red -&#62; &#34;red&#34;&#10;';</script>  <span class='k'>let</span> string_of_color <span class='k'>=</span><span class='k'>function</span>
+<pre><code class='ocaml'><script>ml17c819cee37115693c75bcf90bbfa4a1 = '  let string_of_color =function\n    | Blue -&#62; &#34;blue&#34;\n    | White -&#62; &#34;white&#34;\n    | Red -&#62; &#34;red&#34;\n';</script>  <span class='k'>let</span> string_of_color <span class='k'>=</span><span class='k'>function</span>
     <span class='o'>|</span> Blue <span class='k'>-></span> <span class='s'>&#34;blue&#34;</span>
     <span class='o'>|</span> White <span class='k'>-></span> <span class='s'>&#34;white&#34;</span>
     <span class='o'>|</span> Red <span class='k'>-></span> <span class='s'>&#34;red&#34;</span>
@@ -155,20 +155,20 @@ type. One can define functions on this type by pattern matching:</p>
 How to share a label between two different record types?</p>
 <p>When you define two types sharing a label name, the last defined type
 hides the labels of the first type. For instance:</p>
-<pre><code class='ocaml'><script>ml0d4b9c2ec1c5a639b02af15434a28c40 = '  type point_3d = {x : float; y : float; z : float};;&#10;  type point_2d = {x : float; y : float};;&#10;  {x = 10.; y = 20.; z = 30.};;&#10;';</script>  <span class='k'>type</span> point_3d <span class='k'>=</span> <span class='o'>{</span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'>;</span> z <span class='o'>:</span> float<span class='o'>}</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml0d4b9c2ec1c5a639b02af15434a28c40 = '  type point_3d = {x : float; y : float; z : float};;\n  type point_2d = {x : float; y : float};;\n  {x = 10.; y = 20.; z = 30.};;\n';</script>  <span class='k'>type</span> point_3d <span class='k'>=</span> <span class='o'>{</span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'>;</span> z <span class='o'>:</span> float<span class='o'>}</span><span class='o'>;;</span>
   <span class='k'>type</span> point_2d <span class='k'>=</span> <span class='o'>{</span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'>}</span><span class='o'>;;</span>
   <span class='o'>{</span>x <span class='k'>=</span> 10.<span class='o'>;</span> y <span class='k'>=</span> 20.<span class='o'>;</span> z <span class='k'>=</span> 30.<span class='o'>}</span><span class='o'>;;</span>
 </code></pre>
 <p>
 The simplest way to overcome this problem is simply ... to use different
 names! For instance</p>
-<pre><code class='ocaml'><script>mlb22a119d295f5443e4fb268be2f79b62 = '  type point3d = {x3d : float; y3d : float; z3d : float};;&#10;  type point2d = {x2d : float; y2d : float};;&#10;';</script>  <span class='k'>type</span> point3d <span class='k'>=</span> <span class='o'>{</span>x3d <span class='o'>:</span> float<span class='o'>;</span> y3d <span class='o'>:</span> float<span class='o'>;</span> z3d <span class='o'>:</span> float<span class='o'>}</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlb22a119d295f5443e4fb268be2f79b62 = '  type point3d = {x3d : float; y3d : float; z3d : float};;\n  type point2d = {x2d : float; y2d : float};;\n';</script>  <span class='k'>type</span> point3d <span class='k'>=</span> <span class='o'>{</span>x3d <span class='o'>:</span> float<span class='o'>;</span> y3d <span class='o'>:</span> float<span class='o'>;</span> z3d <span class='o'>:</span> float<span class='o'>}</span><span class='o'>;;</span>
   <span class='k'>type</span> point2d <span class='k'>=</span> <span class='o'>{</span>x2d <span class='o'>:</span> float<span class='o'>;</span> y2d <span class='o'>:</span> float<span class='o'>}</span><span class='o'>;;</span>
 </code></pre>
 <p>
 With OCaml, one can propose two others solutions. First, it is possible
 to use modules to define the two types in different name spaces:</p>
-<pre><code class='ocaml'><script>mle6201788c4f9cd844527473a3fbfaf32 = '  module D3 = struct&#10;    type point = {x : float; y : float; z : float}&#10;  end;;&#10;&#10;  module D2 = struct&#10;    type point = {x : float; y : float}&#10;  end;;&#10;';</script>  <span class='k'>module</span> D3 <span class='k'>=</span> <span class='k'>struct</span>
+<pre><code class='ocaml'><script>mle6201788c4f9cd844527473a3fbfaf32 = '  module D3 = struct\n    type point = {x : float; y : float; z : float}\n  end;;\n\n  module D2 = struct\n    type point = {x : float; y : float}\n  end;;\n';</script>  <span class='k'>module</span> D3 <span class='k'>=</span> <span class='k'>struct</span>
     <span class='k'>type</span> point <span class='k'>=</span> <span class='o'>{</span>x <span class='o'>:</span> float<span class='o'>;</span> y <span class='o'>:</span> float<span class='o'>;</span> z <span class='o'>:</span> float<span class='o'>}</span>
   <span class='k'>end</span><span class='o'>;;</span>
 
@@ -178,12 +178,12 @@ to use modules to define the two types in different name spaces:</p>
 </code></pre>
 <p>
 This way labels can be fully qualified as <code>D3.x</code> <code>D2.x</code>:</p>
-<pre><code class='ocaml'><script>ml439af70f5320d49fe09c3052e3cbd11a = '  {D3.x = 10.; D3.y = 20.; D3.z = 30.};;&#10;  {D2.x = 10.; D2.y = 20.};;&#10;';</script>  <span class='o'>{</span><span class='m'>D3</span><span class='o'>.</span>x <span class='k'>=</span> 10.<span class='o'>;</span> <span class='m'>D3</span><span class='o'>.</span>y <span class='k'>=</span> 20.<span class='o'>;</span> <span class='m'>D3</span><span class='o'>.</span>z <span class='k'>=</span> 30.<span class='o'>}</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml439af70f5320d49fe09c3052e3cbd11a = '  {D3.x = 10.; D3.y = 20.; D3.z = 30.};;\n  {D2.x = 10.; D2.y = 20.};;\n';</script>  <span class='o'>{</span><span class='m'>D3</span><span class='o'>.</span>x <span class='k'>=</span> 10.<span class='o'>;</span> <span class='m'>D3</span><span class='o'>.</span>y <span class='k'>=</span> 20.<span class='o'>;</span> <span class='m'>D3</span><span class='o'>.</span>z <span class='k'>=</span> 30.<span class='o'>}</span><span class='o'>;;</span>
   <span class='o'>{</span><span class='m'>D2</span><span class='o'>.</span>x <span class='k'>=</span> 10.<span class='o'>;</span> <span class='m'>D2</span><span class='o'>.</span>y <span class='k'>=</span> 20.<span class='o'>}</span><span class='o'>;;</span>
 </code></pre>
 <p>
 You can also use objects that provide overloading on method names:</p>
-<pre><code class='ocaml'><script>mleb4bcc61cd8741a6cd0481d98720e085 = '  class point_3d ~x ~y ~z = object&#10;    method x : float = x&#10;    method y : float = y&#10;    method z : float = z&#10;  end;;&#10;&#10;  class point_2d ~x ~y = object&#10;    method x : float = x&#10;    method y : float = y&#10;  end;;&#10;';</script>  <span class='k'>class</span> point_3d <span class='o'>~</span>x <span class='o'>~</span>y <span class='o'>~</span>z <span class='k'>=</span> object
+<pre><code class='ocaml'><script>mleb4bcc61cd8741a6cd0481d98720e085 = '  class point_3d ~x ~y ~z = object\n    method x : float = x\n    method y : float = y\n    method z : float = z\n  end;;\n\n  class point_2d ~x ~y = object\n    method x : float = x\n    method y : float = y\n  end;;\n';</script>  <span class='k'>class</span> point_3d <span class='o'>~</span>x <span class='o'>~</span>y <span class='o'>~</span>z <span class='k'>=</span> object
     <span class='k'>method</span> x <span class='o'>:</span> float <span class='k'>=</span> x
     <span class='k'>method</span> y <span class='o'>:</span> float <span class='k'>=</span> y
     <span class='k'>method</span> z <span class='o'>:</span> float <span class='k'>=</span> z
@@ -206,7 +206,7 @@ discussed above, you obtain constructors that can be qualified by their
 module names. With OCaml you can alternatively use polymorphic variants,
 i.e. constructors that are, in some sense, <em>predefined</em>, since they are
 not defined by a type definition. For instance:</p>
-<pre><code class='ocaml'><script>ml6866de42129a69e8c3218a3a3f0e4462 = '  type ids = [ `Name | `Val ];;&#10;  type person = [ `Name of string ];;&#10;  let f : person -&#62; string = function `Name s -&#62; s;;&#10;  let is_name : ids -&#62; bool = function `Name -&#62; true | _ -&#62; false;;&#10;';</script>  <span class='k'>type</span> ids <span class='k'>=</span> <span class='o'>[</span> `Name <span class='o'>|</span> `Val <span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml6866de42129a69e8c3218a3a3f0e4462 = '  type ids = [ `Name | `Val ];;\n  type person = [ `Name of string ];;\n  let f : person -&#62; string = function `Name s -&#62; s;;\n  let is_name : ids -&#62; bool = function `Name -&#62; true | _ -&#62; false;;\n';</script>  <span class='k'>type</span> ids <span class='k'>=</span> <span class='o'>[</span> `Name <span class='o'>|</span> `Val <span class='o'>]</span><span class='o'>;;</span>
   <span class='k'>type</span> person <span class='k'>=</span> <span class='o'>[</span> `Name <span class='k'>of</span> string <span class='o'>]</span><span class='o'>;;</span>
   <span class='k'>let</span> f <span class='o'>:</span> person <span class='k'>-></span> string <span class='k'>=</span> <span class='k'>function</span> `Name s <span class='k'>-></span> s<span class='o'>;;</span>
   <span class='k'>let</span> is_name <span class='o'>:</span> ids <span class='k'>-></span> bool <span class='k'>=</span> <span class='k'>function</span> `Name <span class='k'>-></span> <span class='o'>true</span> <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>false</span><span class='o'>;;</span>
@@ -218,25 +218,25 @@ How to define a function?</p>
 usage: the definition is introduced by the keyword <code>let</code>, followed by
 the name of the function and its arguments; then the formula that
 computes the image of the argument is written after an <code>=</code> sign.</p>
-<pre><code class='ocaml'><script>ml30dd1cbb016d25eceef1a7f2aef1e44f = '  let successor (n) = n + 1;;&#10;';</script>  <span class='k'>let</span> successor (n) <span class='k'>=</span> n <span class='o'>+</span> 1<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml30dd1cbb016d25eceef1a7f2aef1e44f = '  let successor (n) = n + 1;;\n';</script>  <span class='k'>let</span> successor (n) <span class='k'>=</span> n <span class='o'>+</span> 1<span class='o'>;;</span>
 </code></pre>
 <p>
 In fact, parens surrounding the argument may be omitted, so we generally
 write:</p>
-<pre><code class='ocaml'><script>ml0885afdc5028233764751f1e682a1e47 = '  let successor n = n + 1;;&#10;';</script>  <span class='k'>let</span> successor n <span class='k'>=</span> n <span class='o'>+</span> 1<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml0885afdc5028233764751f1e682a1e47 = '  let successor n = n + 1;;\n';</script>  <span class='k'>let</span> successor n <span class='k'>=</span> n <span class='o'>+</span> 1<span class='o'>;;</span>
 </code></pre>
 <p>
 How to define a recursive function?</p>
 <p>You need to explicitly tell that you want to define a recursive
 function: use “let rec” instead of “let”. For instance:</p>
-<pre><code class='ocaml'><script>ml3c404cb69f1e51ff5feb43b773b311c8 = '  let rec fact n =&#10;    if n = 0 then 1 else n * fact (n - 1);;&#10;  let rec fib n =&#10;    if n &#60;= 1 then n else fib (n - 1) + fib (n - 2);;&#10;';</script>  <span class='k'>let rec</span> fact n <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml3c404cb69f1e51ff5feb43b773b311c8 = '  let rec fact n =\n    if n = 0 then 1 else n * fact (n - 1);;\n  let rec fib n =\n    if n &#60;= 1 then n else fib (n - 1) + fib (n - 2);;\n';</script>  <span class='k'>let rec</span> fact n <span class='k'>=</span>
     <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> 1 <span class='k'>else</span> n <span class='o'>*</span> fact (n <span class='o'>-</span> 1)<span class='o'>;;</span>
   <span class='k'>let rec</span> fib n <span class='k'>=</span>
     <span class='k'>if</span> n <span class='o'>&#60;=</span> 1 <span class='k'>then</span> n <span class='k'>else</span> fib (n <span class='o'>-</span> 1) <span class='o'>+</span> fib (n <span class='o'>-</span> 2)<span class='o'>;;</span>
 </code></pre>
 <p>
 Functions may be mutually recursive:</p>
-<pre><code class='ocaml'><script>ml251fe8bb85654dfedfbc05b4d3adccbd = '  let rec odd n =&#10;    if n = 0 then true&#10;    else if n = 1 then false else even (n - 1)&#10;  and even n =&#10;    if n = 0 then false&#10;    else if n = 1 then true else odd (n - 1);;&#10;';</script>  <span class='k'>let rec</span> odd n <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml251fe8bb85654dfedfbc05b4d3adccbd = '  let rec odd n =\n    if n = 0 then true\n    else if n = 1 then false else even (n - 1)\n  and even n =\n    if n = 0 then false\n    else if n = 1 then true else odd (n - 1);;\n';</script>  <span class='k'>let rec</span> odd n <span class='k'>=</span>
     <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='o'>true</span>
     <span class='k'>else</span> <span class='k'>if</span> n <span class='k'>=</span> 1 <span class='k'>then</span> <span class='o'>false</span> <span class='k'>else</span> even (n <span class='o'>-</span> 1)
   <span class='k'>and</span> even n <span class='k'>=</span>
@@ -271,7 +271,7 @@ dummy as <code>)(</code> get argument, meaningful any need not do that Procedure
 <br />
  Procedures with argument are defined exactly as ordinary functions. For
 instance:</p>
-<pre><code class='ocaml'><script>ml4454379efb2bbf5dfcbc699bfdc8365b = '  let message s = print_string s; print_newline();;&#10;  message &#34;Hello world!&#34;;;&#10;';</script>  <span class='k'>let</span> message s <span class='k'>=</span> print_string s<span class='o'>;</span> print_newline()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml4454379efb2bbf5dfcbc699bfdc8365b = '  let message s = print_string s; print_newline();;\n  message &#34;Hello world!&#34;;;\n';</script>  <span class='k'>let</span> message s <span class='k'>=</span> print_string s<span class='o'>;</span> print_newline()<span class='o'>;;</span>
   message <span class='s'>&#34;Hello world!&#34;</span><span class='o'>;;</span>
 </code></pre>
 <p>
@@ -281,12 +281,12 @@ all: its definition would imply to execute it, and there would be no way
 to call it afterwards. In the following fragment <code>double_newline</code> is
 bound to <code>()</code>, and its further evaluation never produces carriage
 returns as may be erroneously expected by the user.</p>
-<pre><code class='ocaml'><script>ml3194a4c8d7450f54413fcd9518fabf0f = '  let double_newline = print_newline(); print_newline();;&#10;  double_newline;;&#10;';</script>  <span class='k'>let</span> double_newline <span class='k'>=</span> print_newline()<span class='o'>;</span> print_newline()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml3194a4c8d7450f54413fcd9518fabf0f = '  let double_newline = print_newline(); print_newline();;\n  double_newline;;\n';</script>  <span class='k'>let</span> double_newline <span class='k'>=</span> print_newline()<span class='o'>;</span> print_newline()<span class='o'>;;</span>
   double_newline<span class='o'>;;</span>
 </code></pre>
 <p>
 The correct definition and usage of this procedure is:</p>
-<pre><code class='ocaml'><script>ml0ba1d6d6e0289c096beccb67aa45a1e2 = '  let double_newline () = print_newline(); print_newline();;&#10;  double_newline;;&#10;  double_newline ();;&#10;';</script>  <span class='k'>let</span> double_newline () <span class='k'>=</span> print_newline()<span class='o'>;</span> print_newline()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml0ba1d6d6e0289c096beccb67aa45a1e2 = '  let double_newline () = print_newline(); print_newline();;\n  double_newline;;\n  double_newline ();;\n';</script>  <span class='k'>let</span> double_newline () <span class='k'>=</span> print_newline()<span class='o'>;</span> print_newline()<span class='o'>;;</span>
   double_newline<span class='o'>;;</span>
   double_newline ()<span class='o'>;;</span>
 </code></pre>
@@ -294,23 +294,23 @@ The correct definition and usage of this procedure is:</p>
 How to define a function with more than one argument?</p>
 <p>Just write the list of successive arguments when defining the function.
 For instance:</p>
-<pre><code class='ocaml'><script>ml7aa103e353f677cffb39d8320ada752e = '  let sum x y = x + y;;&#10;';</script>  <span class='k'>let</span> sum x y <span class='k'>=</span> x <span class='o'>+</span> y<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml7aa103e353f677cffb39d8320ada752e = '  let sum x y = x + y;;\n';</script>  <span class='k'>let</span> sum x y <span class='k'>=</span> x <span class='o'>+</span> y<span class='o'>;;</span>
 </code></pre>
 <p>
 then gives the actual arguments in the same order when applying the
 function:</p>
-<pre><code class='ocaml'><script>mlf1eda0e3fc49ececa1ba1c229287d43a = '  sum 1 2;;&#10;';</script>  sum 1 2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf1eda0e3fc49ececa1ba1c229287d43a = '  sum 1 2;;\n';</script>  sum 1 2<span class='o'>;;</span>
 </code></pre>
 <p>
 These functions are named “curried” functions, as opposed to functions
 with tuples as argument:</p>
-<pre><code class='ocaml'><script>ml3e3854c894f8f7362e7ee13c04cd4104 = '  let sum&#39; (x, y) = x + y;;&#10;  sum&#39; (1, 2);;&#10;';</script>  <span class='k'>let</span> sum' (x<span class='o'>,</span> y) <span class='k'>=</span> x <span class='o'>+</span> y<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml3e3854c894f8f7362e7ee13c04cd4104 = '  let sum&#39; (x, y) = x + y;;\n  sum&#39; (1, 2);;\n';</script>  <span class='k'>let</span> sum' (x<span class='o'>,</span> y) <span class='k'>=</span> x <span class='o'>+</span> y<span class='o'>;;</span>
   sum' (1<span class='o'>,</span> 2)<span class='o'>;;</span>
 </code></pre>
 <p>
 How to define a function that has several results?</p>
 <p>You can define a function that return a pair or a tuple:</p>
-<pre><code class='ocaml'><script>ml66815260ce1acf3ed02bc197c7f7c024 = '  let div_mod x y = (x / y, x mod y);;&#10;  div_mod 15 7;;&#10;';</script>  <span class='k'>let</span> div_mod x y <span class='k'>=</span> (x <span class='o'>/</span> y<span class='o'>,</span> x <span class='k'>mod</span> y)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml66815260ce1acf3ed02bc197c7f7c024 = '  let div_mod x y = (x / y, x mod y);;\n  div_mod 15 7;;\n';</script>  <span class='k'>let</span> div_mod x y <span class='k'>=</span> (x <span class='o'>/</span> y<span class='o'>,</span> x <span class='k'>mod</span> y)<span class='o'>;;</span>
   div_mod 15 7<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -319,24 +319,24 @@ What is an “anonymous function”?</p>
 or anonymous functions. A functional value is introduced by the keyword
 <code>fun</code>, followed by its argument, then an arrow <code>-&gt;</code> and the function
 body. For instance:</p>
-<pre><code class='ocaml'><script>ml768e17e3a2b21757682bcc3eb227db1b = '  fun x -&#62; x + 1;;&#10;  (fun x -&#62; x + 1) 2;;&#10;';</script>  <span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>+</span> 1<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml768e17e3a2b21757682bcc3eb227db1b = '  fun x -&#62; x + 1;;\n  (fun x -&#62; x + 1) 2;;\n';</script>  <span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>+</span> 1<span class='o'>;;</span>
   (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>+</span> 1) 2<span class='o'>;;</span>
 </code></pre>
 <p>
 What is the difference between <code>fun</code> and <code>function</code>?</p>
 <p>Functions are usually introduced by the keyword <code>fun</code>. Each parameter is
 introduced by its own <code>fun</code> construct. For instance, the construct:</p>
-<pre><code class='ocaml'><script>ml470617fdf7e22faadb718d992b22f6e5 = '  fun x -&#62; fun y -&#62; ...&#10;';</script>  <span class='k'>fun</span> x <span class='k'>-></span> <span class='k'>fun</span> y <span class='k'>-></span> <span class='o'>...</span>
+<pre><code class='ocaml'><script>ml470617fdf7e22faadb718d992b22f6e5 = '  fun x -&#62; fun y -&#62; ...\n';</script>  <span class='k'>fun</span> x <span class='k'>-></span> <span class='k'>fun</span> y <span class='k'>-></span> <span class='o'>...</span>
 </code></pre>
 <p>
 defines a function with two parameters <code>x</code> and <code>y</code>. An equivalent but
 shorter form is:</p>
-<pre><code class='ocaml'><script>mlab271f7e05adf037a382a419c1e4b9d7 = '  fun x y -&#62; ...&#10;';</script>  <span class='k'>fun</span> x y <span class='k'>-></span> <span class='o'>...</span>
+<pre><code class='ocaml'><script>mlab271f7e05adf037a382a419c1e4b9d7 = '  fun x y -&#62; ...\n';</script>  <span class='k'>fun</span> x y <span class='k'>-></span> <span class='o'>...</span>
 </code></pre>
 <p>
 Functions that use pattern-matching are introduced by the keyword
 <code>function</code>. For example:</p>
-<pre><code class='ocaml'><script>mlf8f9e8bfd40419366ee3eb4dfab2dc7a = '  function None -&#62; false | Some _ -&#62; true&#10;';</script>  <span class='k'>function</span> None <span class='k'>-></span> <span class='o'>false</span> <span class='o'>|</span> Some <span class='o'>_</span> <span class='k'>-></span> <span class='o'>true</span>
+<pre><code class='ocaml'><script>mlf8f9e8bfd40419366ee3eb4dfab2dc7a = '  function None -&#62; false | Some _ -&#62; true\n';</script>  <span class='k'>function</span> None <span class='k'>-></span> <span class='o'>false</span> <span class='o'>|</span> Some <span class='o'>_</span> <span class='k'>-></span> <span class='o'>true</span>
 </code></pre>
 <p>
 My function is never applied</p>
@@ -346,7 +346,7 @@ with missing arguments: in this case, a functional value is returned,
 but the function is evidently not applied. Example: if you evaluate
 <code>print_newline</code> without argument, there is no error, but nothing
 happens. The compiler issues a warning in case of a blatant misuse.</p>
-<pre><code class='ocaml'><script>mlc2505d288823cf7382d683f0856a0b7f = '  print_newline;;&#10;  print_newline ();;&#10;';</script>  print_newline<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlc2505d288823cf7382d683f0856a0b7f = '  print_newline;;\n  print_newline ();;\n';</script>  print_newline<span class='o'>;;</span>
   print_newline ()<span class='o'>;;</span>
 </code></pre>
 <h3 id="Patternmatching"> Pattern matching</h3><p>
@@ -356,14 +356,14 @@ How to do nested pattern matching?</p>
 is written inside another pattern matching. In effect, the internal
 pattern matching “catches” all the pattern matching clauses that are
 written after it. For instance:</p>
-<pre><code class='ocaml'><script>ml47a3ca3aa5d4e9e87b414fc2216652d4 = 'let f = function&#10;  | 0 -&#62; match ... with | a -&#62; ... | b -&#62; ...&#10;  | 1 -&#62; ...&#10;  | 2 -&#62; ...&#10;';</script><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>ml47a3ca3aa5d4e9e87b414fc2216652d4 = 'let f = function\n  | 0 -&#62; match ... with | a -&#62; ... | b -&#62; ...\n  | 1 -&#62; ...\n  | 2 -&#62; ...\n';</script><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> 0 <span class='k'>-></span> <span class='k'>match</span> <span class='o'>...</span> <span class='k'>with</span> <span class='o'>|</span> a <span class='k'>-></span> <span class='o'>...</span> <span class='o'>|</span> b <span class='k'>-></span> <span class='o'>...</span>
   <span class='o'>|</span> 1 <span class='k'>-></span> <span class='o'>...</span>
   <span class='o'>|</span> 2 <span class='k'>-></span> <span class='o'>...</span>
 </code></pre>
 <p>
 is parsed as</p>
-<pre><code class='ocaml'><script>ml93bf949dcf6960a5cabb25a9c9d19de2 = 'let f = function&#10;  | 0 -&#62;&#10;     match ... with&#10;     | a -&#62; ...&#10;     | b -&#62; ...&#10;     | 1 -&#62; ...&#10;     | 2 -&#62; ...&#10;';</script><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>ml93bf949dcf6960a5cabb25a9c9d19de2 = 'let f = function\n  | 0 -&#62;\n     match ... with\n     | a -&#62; ...\n     | b -&#62; ...\n     | 1 -&#62; ...\n     | 2 -&#62; ...\n';</script><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> 0 <span class='k'>-></span>
      <span class='k'>match</span> <span class='o'>...</span> <span class='k'>with</span>
      <span class='o'>|</span> a <span class='k'>-></span> <span class='o'>...</span>
@@ -376,7 +376,7 @@ This error may occur for every syntactic construct that involves pattern
 matching: <code>function</code>, <code>match       .. with</code> and <code>try ... with</code>. The
 usual trick is to enclose inner pattern matchings with <code>begin</code> and
 <code>end</code>. One write:</p>
-<pre><code class='ocaml'><script>ml67da4e403e6e34a5841f5ec02fbdb24b = 'let f = function&#10;  | 0 -&#62;&#10;     begin match ... with&#10;     | a -&#62; ...&#10;     | b -&#62; ...&#10;     end&#10;  | 1 -&#62; ...&#10;  | 2 -&#62; ...&#10;';</script><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'><script>ml67da4e403e6e34a5841f5ec02fbdb24b = 'let f = function\n  | 0 -&#62;\n     begin match ... with\n     | a -&#62; ...\n     | b -&#62; ...\n     end\n  | 1 -&#62; ...\n  | 2 -&#62; ...\n';</script><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> 0 <span class='k'>-></span>
      <span class='k'>begin</span> <span class='k'>match</span> <span class='o'>...</span> <span class='k'>with</span>
      <span class='o'>|</span> a <span class='k'>-></span> <span class='o'>...</span>
@@ -462,7 +462,7 @@ the defined been have name same the with types two that is reason The
  Nevertheless, in OCaml it is possible to use first-order polymorphism.
 For this, you can use either records or objects; in the case of records,
 you need to declare the type before using it in the function.</p>
-<pre><code class='ocaml'><script>mlf188b8c84801ba88ac5a0d31023a6950 = '  let f (o : &#60; g : &#39;a. &#39;a -&#62; &#39;a &#62;) x y = o#g x, o#g y;;&#10;  type id = { g : &#39;a. &#39;a -&#62; &#39;a };;&#10;  let f r x y = r.g x, r.g y;;&#10;';</script>  <span class='k'>let</span> f (o <span class='o'>:</span> <span class='o'>&#60;</span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'>&#62;)</span> x y <span class='k'>=</span> o<span class='o'>#</span>g x<span class='o'>,</span> o<span class='o'>#</span>g y<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf188b8c84801ba88ac5a0d31023a6950 = '  let f (o : &#60; g : &#39;a. &#39;a -&#62; &#39;a &#62;) x y = o#g x, o#g y;;\n  type id = { g : &#39;a. &#39;a -&#62; &#39;a };;\n  let f r x y = r.g x, r.g y;;\n';</script>  <span class='k'>let</span> f (o <span class='o'>:</span> <span class='o'>&#60;</span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'>&#62;)</span> x y <span class='k'>=</span> o<span class='o'>#</span>g x<span class='o'>,</span> o<span class='o'>#</span>g y<span class='o'>;;</span>
   <span class='k'>type</span> id <span class='k'>=</span> <span class='o'>{</span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'>}</span><span class='o'>;;</span>
   <span class='k'>let</span> f r x y <span class='k'>=</span> r<span class='o'>.</span>g x<span class='o'>,</span> r<span class='o'>.</span>g y<span class='o'>;;</span>
 </code></pre>
@@ -478,7 +478,7 @@ I/O system. In effect, the material printed by functions from the
 order to find out the proper line breaking to perform with the material
 at hand. By contrast low level output is performed with no more
 buffering than usual I/O buffering.</p>
-<pre><code class='ocaml'><script>mlb484494db80af166d43a6d1d46226bf9 = '  print_endline &#34;before&#34;;&#10;  Format.print_string &#34;MIDDLE&#34;;&#10;  print_endline &#34;after&#34;;;&#10;  &#10;';</script>  print_endline <span class='s'>&#34;before&#34;</span><span class='o'>;</span>
+<pre><code class='ocaml'><script>mlb484494db80af166d43a6d1d46226bf9 = '  print_endline &#34;before&#34;;\n  Format.print_string &#34;MIDDLE&#34;;\n  print_endline &#34;after&#34;;;\n  \n';</script>  print_endline <span class='s'>&#34;before&#34;</span><span class='o'>;</span>
   <span class='m'>Format</span><span class='o'>.</span>print_string <span class='s'>&#34;MIDDLE&#34;</span><span class='o'>;</span>
   print_endline <span class='s'>&#34;after&#34;</span><span class='o'>;;</span>
   
@@ -554,18 +554,18 @@ of these problems.</p>
 <p>How do I express sharing constraints between modules?</p>
 <p>Use manifest type specifications in the arguments of the functor. For
 instance, assume defined the following signatures:</p>
-<pre><code class='ocaml'><script>mlb9200b78f0b63f56a9783cd87bc907c6 = 'module type S1 = sig ... type t ... end&#10;module type S2 = sig ... type u ... end&#10;';</script><span class='k'>module</span> <span class='k'>type</span> S1 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> t <span class='o'>...</span> <span class='k'>end</span>
+<pre><code class='ocaml'><script>mlb9200b78f0b63f56a9783cd87bc907c6 = 'module type S1 = sig ... type t ... end\nmodule type S2 = sig ... type u ... end\n';</script><span class='k'>module</span> <span class='k'>type</span> S1 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> t <span class='o'>...</span> <span class='k'>end</span>
 <span class='k'>module</span> <span class='k'>type</span> S2 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='o'>...</span> <span class='k'>end</span>
 </code></pre>
 <p>
 To define a functor <code>F</code> that takes two arguments <code>X:S1</code> and <code>Y:S2</code> such
 that <code>X.t</code> and <code>Y.u</code> are the same, write:</p>
-<pre><code class='ocaml'><script>ml73d71bea07c2772ef0506da6fb56152f = 'module F (X: S1) (Y: S2 with type u = X.t) =&#10;  struct ... end&#10;';</script><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> S2 <span class='k'>with</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t) <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml73d71bea07c2772ef0506da6fb56152f = 'module F (X: S1) (Y: S2 with type u = X.t) =\n  struct ... end\n';</script><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> S2 <span class='k'>with</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t) <span class='k'>=</span>
   <span class='k'>struct</span> <span class='o'>...</span> <span class='k'>end</span>
 </code></pre>
 <p>
 Indeed, internally this expands to</p>
-<pre><code class='ocaml'><script>mlbb7066d2369204d7d0ab497752c18011 = 'module F (X: S1) (Y: sig ... type u = X.t ... end) =&#10;  struct ... end&#10;';</script><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t <span class='o'>...</span> <span class='k'>end</span>) <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlbb7066d2369204d7d0ab497752c18011 = 'module F (X: S1) (Y: sig ... type u = X.t ... end) =\n  struct ... end\n';</script><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t <span class='o'>...</span> <span class='k'>end</span>) <span class='k'>=</span>
   <span class='k'>struct</span> <span class='o'>...</span> <span class='k'>end</span>
 </code></pre>
 <p>
