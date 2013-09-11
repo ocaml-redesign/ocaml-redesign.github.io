@@ -61,7 +61,7 @@ terrible example in many ways, but I&#39;m going to use it here to show the
 basics of writing object-oriented OCaml.</p>
 <p>Here&#39;s some basic code to provide a stack of integers. The class is
 implemented using a linked list.</p>
-<pre><code class='ocaml'><script>ml63bd91125872d957fc645626e14056a3 = '  class stack_of_ints =\n    object (self)\n      val mutable the_list = ( [] : int list )   (* instance variable *)\n      method push x =                        (* push method *)\n        the_list &#60;- x :: the_list\n      method pop =                           (* pop method *)\n        let result = List.hd the_list in\n        the_list &#60;- List.tl the_list;\n        result\n      method peek =                          (* peek method *)\n        List.hd the_list\n      method size =                          (* size method *)\n        List.length the_list\n    end\n';</script>  <span class='k'>class</span> stack_of_ints <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml63bd91125872d957fc645626e14056a3 = '  class stack_of_ints =\n    object (self)\n      val mutable the_list = ( [] : int list )   (* instance variable *)\n      method push x =                        (* push method *)\n        the_list &#60;- x :: the_list\n      method pop =                           (* pop method *)\n        let result = List.hd the_list in\n        the_list &#60;- List.tl the_list;\n        result\n      method peek =                          (* peek method *)\n        List.hd the_list\n      method size =                          (* size method *)\n        List.length the_list\n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> stack_of_ints <span class='k'>=</span>
     object (self)
       <span class='k'>val</span> <span class='k'>mutable</span> the_list <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> int list )   <span class='com2'>(* instance variable *)</span><!-- end comment -->
       <span class='k'>method</span> push x <span class='k'>=</span>                        <span class='com2'>(* push <span class='ic'>method</span> *)</span><!-- end comment -->
@@ -92,7 +92,7 @@ anything&quot; but is in fact the narrower &quot;list of <code>int</code>&quot;.
 <code>type</code>. This <em>isn&#39;t</em> a general type cast, because you can&#39;t use it to
 overrule the type inference engine, only to narrow a general type to
 make it more specific. So you can&#39;t write, for example, <code>( 1 : float )</code>:</p>
-<pre><code class='ocaml'><script>ml11b534b9f01b0786571449ef3d2ec2e3 = '(1 : float);;\n';</script>(1 <span class='o'>:</span> float)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml11b534b9f01b0786571449ef3d2ec2e3 = '(1 : float);;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>(1 <span class='o'>:</span> float)<span class='o'>;;</span>
 </code></pre>
 <p>
 Type safety is preserved. Back to the example ...</p>
@@ -106,11 +106,11 @@ affecting the stack, while <code>size</code> returns the number of elements in t
 stack (ie. the length of the list).</p>
 <p>Let&#39;s write some code to test stacks of ints. First let&#39;s create a new
 object. We use the familiar <code>new</code> operator:</p>
-<pre><code class='ocaml'><script>mla269d607da939c1a92e658df13cc9ff8 = '  let s = new stack_of_ints\n';</script>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints
+<pre><code class='ocaml'><script>mla269d607da939c1a92e658df13cc9ff8 = '  let s = new stack_of_ints\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints
 </code></pre>
 <p>
 Now we&#39;ll push and pop some elements off the stack:</p>
-<pre><code class='ocaml'><script>ml7e86777f50ba4f5cb99f7240a283efca = '  for i = 1 to 10 do\n    s#push i\n  done;;\n  while s#size &#62; 0 do\n    Printf.printf &#34;Popped %d off the stack.\n&#34; s#pop\n  done;;\n';</script>  <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> 10 <span class='k'>do</span>
+<pre><code class='ocaml'><script>ml7e86777f50ba4f5cb99f7240a283efca = '  for i = 1 to 10 do\n    s#push i\n  done;;\n  while s#size &#62; 0 do\n    Printf.printf &#34;Popped %d off the stack.\n&#34; s#pop\n  done;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> 10 <span class='k'>do</span>
     s<span class='o'>#</span>push i
   <span class='k'>done</span><span class='o'>;;</span>
   <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
@@ -123,7 +123,7 @@ is the same as <code>object.method</code> or <code>object-&gt;method</code> that
 familiar with in imperative languages.</p>
 <p>In the OCaml toplevel we can examine the types of objects and methods in
 more detail:</p>
-<pre><code class='ocaml'><script>mlbea5e95a445ce304749da26db398f7dc = '  let s = new stack_of_ints;;\n  s#push;;\n';</script>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlbea5e95a445ce304749da26db398f7dc = '  let s = new stack_of_ints;;\n  s#push;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack_of_ints<span class='o'>;;</span>
   s<span class='o'>#</span>push<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -134,7 +134,7 @@ A stack of integers is good, but what about a stack that can store any
 type? (Not a single stack that can store a mixture of types, but
 multiple stacks each storing objects of any single type). As with
 <code>&#39;a list</code>, we can define <code>&#39;a stack</code>:</p>
-<pre><code class='ocaml'><script>ml04e189789d20e0f9d1dc851d991324b1 = '  class [&#39;a] stack =\n    object (self)\n      val mutable list = ( [] : &#39;a list )    (* instance variable *)\n      method push x =                        (* push method *)\n        list &#60;- x :: list\n      method pop =                           (* pop method *)\n        let result = List.hd list in\n        list &#60;- List.tl list;\n        result\n      method peek =                          (* peek method *)\n        List.hd list\n      method size =                          (* size method *)\n        List.length list\n    end\n';</script>  <span class='k'>class</span> <span class='o'>[</span>'a<span class='o'>]</span> stack <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml04e189789d20e0f9d1dc851d991324b1 = '  class [&#39;a] stack =\n    object (self)\n      val mutable list = ( [] : &#39;a list )    (* instance variable *)\n      method push x =                        (* push method *)\n        list &#60;- x :: list\n      method pop =                           (* pop method *)\n        let result = List.hd list in\n        list &#60;- List.tl list;\n        result\n      method peek =                          (* peek method *)\n        List.hd list\n      method size =                          (* size method *)\n        List.length list\n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> <span class='o'>[</span>'a<span class='o'>]</span> stack <span class='k'>=</span>
     object (self)
       <span class='k'>val</span> <span class='k'>mutable</span> list <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> 'a list )    <span class='com2'>(* instance variable *)</span><!-- end comment -->
       <span class='k'>method</span> push x <span class='k'>=</span>                        <span class='com2'>(* push <span class='ic'>method</span> *)</span><!-- end comment -->
@@ -155,7 +155,7 @@ The <code>class [&#39;a] stack</code> doesn&#39;t really define just one class, 
 number of classes!) Let&#39;s try and use our <code>&#39;a stack</code> class. In this
 instance we create a stack and push a floating point number onto the
 stack. Notice the type of the stack:</p>
-<pre><code class='ocaml'><script>mld202a0c169e15168901e3533acbec54c = 'let s = new stack;;\ns#push 1.0;;\ns;;\n';</script><span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld202a0c169e15168901e3533acbec54c = 'let s = new stack;;\ns#push 1.0;;\ns;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> s <span class='k'>=</span> <span class='k'>new</span> stack<span class='o'>;;</span>
 s<span class='o'>#</span>push 1.0<span class='o'>;;</span>
 s<span class='o'>;;</span>
 </code></pre>
@@ -167,7 +167,7 @@ FAQ</a>
 ; link replaced by <a href='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html' title='http://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html'>OCaml expert
 FAQ</a>).
 Let&#39;s demonstrate the type-safety of our new <code>float stack</code>:</p>
-<pre><code class='ocaml'><script>ml75b08dddebf80e0ebdd2980baab0c7de = 's#push 3.0;;\ns#pop;;\ns#pop;;\ns#push &#34;a string&#34;;;\n';</script>s<span class='o'>#</span>push 3.0<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml75b08dddebf80e0ebdd2980baab0c7de = 's#push 3.0;;\ns#pop;;\ns#pop;;\ns#push &#34;a string&#34;;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>s<span class='o'>#</span>push 3.0<span class='o'>;;</span>
 s<span class='o'>#</span>pop<span class='o'>;;</span>
 s<span class='o'>#</span>pop<span class='o'>;;</span>
 s<span class='o'>#</span>push <span class='s'>&#34;a string&#34;</span><span class='o'>;;</span>
@@ -175,7 +175,7 @@ s<span class='o'>#</span>push <span class='s'>&#34;a string&#34;</span><span cla
 <p>
 We can define polymorphic functions which can operate on any type of
 stack. Our first attempt is this one:</p>
-<pre><code class='ocaml'><script>ml231f7f194b2aed839da1b0c348aeba6d = '  let drain_stack s =\n    while s#size &#62; 0 do\n      ignore (s#pop)\n    done\n';</script>  <span class='k'>let</span> drain_stack s <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml231f7f194b2aed839da1b0c348aeba6d = '  let drain_stack s =\n    while s#size &#62; 0 do\n      ignore (s#pop)\n    done\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> drain_stack s <span class='k'>=</span>
     <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
       ignore (s<span class='o'>#</span>pop)
     <span class='k'>done</span>
@@ -190,7 +190,7 @@ call <code>drain_stack</code> on objects of that other type.</p>
 <p>We can force OCaml to be more specific and only allow <code>drain_stack</code> to
 be called on <code>&#39;a stack</code>s by narrowing the type of the <code>s</code> argument, like
 this:</p>
-<pre><code class='ocaml'><script>mlc0dd8d66d9be4a99982c9dcfb83e0f03 = '  let drain_stack (s : &#39;a stack) =\n    while s#size &#62; 0 do\n      ignore (s#pop)\n    done\n';</script>  <span class='k'>let</span> drain_stack (s <span class='o'>:</span> 'a stack) <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlc0dd8d66d9be4a99982c9dcfb83e0f03 = '  let drain_stack (s : &#39;a stack) =\n    while s#size &#62; 0 do\n      ignore (s#pop)\n    done\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> drain_stack (s <span class='o'>:</span> 'a stack) <span class='k'>=</span>
     <span class='k'>while</span> s<span class='o'>#</span>size <span class='o'>&#62;</span> 0 <span class='k'>do</span>
       ignore (s<span class='o'>#</span>pop)
     <span class='k'>done</span>
@@ -206,7 +206,7 @@ GUI widget libraries.</p>
 <p>Let&#39;s consider an imaginary OCaml widget library similar to Java&#39;s
 Swing. We will define buttons and labels with the following class
 hierarchy:</p>
-<pre><code class='ocaml'><script>ml57f6eb40b5bc27afc1817c2844f68995 = 'widget  (superclass for all widgets)\n  |\n  +----&#62; container  (any widget that can contain other widgets)\n  |        |\n  |        +----&#62; button\n  |\n  +-------------&#62; label\n';</script>widget  (superclass <span class='k'>for</span> all widgets)
+<pre><code class='ocaml'><script>ml57f6eb40b5bc27afc1817c2844f68995 = 'widget  (superclass for all widgets)\n  |\n  +----&#62; container  (any widget that can contain other widgets)\n  |        |\n  |        +----&#62; button\n  |\n  +-------------&#62; label\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>widget  (superclass <span class='k'>for</span> all widgets)
   <span class='o'>|</span>
   <span class='o'>+----&#62;</span> container  (any widget that can contain other widgets)
   <span class='o'>|</span>        <span class='o'>|</span>
@@ -220,7 +220,7 @@ label or an image, depending on what is displayed on the button).</p>
 <p><code>widget</code> is the virtual superclass for all widgets. I want every widget
 to have a name (just a string) which is constant over the life of that
 widget. This was my first attempt:</p>
-<pre><code class='ocaml'><script>mleab4b8320332292bce3d0b788af184f9 = '  class virtual widget name =\n    object (self)\n      method get_name =\n        name\n      method virtual repaint : unit\n    end\n';</script>  <span class='k'>class</span> <span class='k'>virtual</span> widget name <span class='k'>=</span>
+<pre><code class='ocaml'><script>mleab4b8320332292bce3d0b788af184f9 = '  class virtual widget name =\n    object (self)\n      method get_name =\n        name\n      method virtual repaint : unit\n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> <span class='k'>virtual</span> widget name <span class='k'>=</span>
     object (self)
       <span class='k'>method</span> get_name <span class='k'>=</span>
         name
@@ -232,7 +232,7 @@ Oops! I forgot that OCaml cannot infer the type of <code>name</code> so will ass
 that it is <code>&#39;a</code>. But that defines a polymorphic class, and I didn&#39;t
 declare the class as polymorphic (<code>class [&#39;a] widget</code>). I need to narrow
 the type of <code>name</code> like this:</p>
-<pre><code class='ocaml'><script>ml8b74145284f47d0cb915eee54a3ced97 = '  class virtual widget (name : string) =\n    object (self)\n      method get_name =\n        name\n      method virtual repaint : unit\n    end\n';</script>  <span class='k'>class</span> <span class='k'>virtual</span> widget (name <span class='o'>:</span> string) <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml8b74145284f47d0cb915eee54a3ced97 = '  class virtual widget (name : string) =\n    object (self)\n      method get_name =\n        name\n      method virtual repaint : unit\n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> <span class='k'>virtual</span> widget (name <span class='o'>:</span> string) <span class='k'>=</span>
     object (self)
       <span class='k'>method</span> get_name <span class='k'>=</span>
         name
@@ -244,7 +244,7 @@ Now there are several new things going on in this code. Firstly the
 class contains an <strong>initializer</strong>. This is an argument to the class
 (<code>name</code>) which you can think of as exactly the equivalent of an argument
 to a constructor in, eg., Java:</p>
-<pre><code class='ocaml'><script>ml0f94de649cf8ca68b993d1fe0b147fe8 = 'public class Widget\n{\n  public Widget (String name)\n  {\n    ...\n  }\n}\n';</script>public <span class='k'>class</span> Widget
+<pre><code class='ocaml'><script>ml0f94de649cf8ca68b993d1fe0b147fe8 = 'public class Widget\n{\n  public Widget (String name)\n  {\n    ...\n  }\n}\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>public <span class='k'>class</span> Widget
 <span class='o'>{</span>
   public Widget (String name)
   <span class='o'>{</span>
@@ -256,7 +256,7 @@ to a constructor in, eg., Java:</p>
 In OCaml a constructor constructs the whole class, it&#39;s not just a
 specially named function, so we write the arguments as if they are
 arguments to the class:</p>
-<pre><code class='ocaml'><script>ml4dd3b4d6e16a5149be9e9630d48184b8 = 'class foo arg1 arg2 ... =\n';</script><span class='k'>class</span> foo arg1 arg2 <span class='o'>...</span> <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml4dd3b4d6e16a5149be9e9630d48184b8 = 'class foo arg1 arg2 ... =\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>class</span> foo arg1 arg2 <span class='o'>...</span> <span class='k'>=</span>
 </code></pre>
 <p>
 Secondly the class contains a virtual method, and thus the whole class
@@ -270,13 +270,13 @@ just inherited ones) then you need to specify the whole class as virtual
 by using <code>class virtual ...</code>.</p>
 <p>As in C++ and Java, virtual classes cannot be directly instantiated
 using <code>new</code>:</p>
-<pre><code class='ocaml'><script>ml3561c080b94e17cc6d0ef735918316dd = 'let w = new widget &#34;my widget&#34;\n';</script><span class='k'>let</span> w <span class='k'>=</span> <span class='k'>new</span> widget <span class='s'>&#34;my widget&#34;</span>
+<pre><code class='ocaml'><script>ml3561c080b94e17cc6d0ef735918316dd = 'let w = new widget &#34;my widget&#34;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> w <span class='k'>=</span> <span class='k'>new</span> widget <span class='s'>&#34;my widget&#34;</span>
 </code></pre>
 <p>
 Now my <code>container</code> class is more interesting. It must inherit from
 <code>widget</code> and have the mechanics for storing the list of contained
 widgets. Here is my simple implementation for <code>container</code>:</p>
-<pre><code class='ocaml'><script>ml4ef8a7a1ae3ba8da22303ea2a4d0e502 = '  class virtual container name =\n    object (self)\n      inherit widget name\n      val mutable widgets = ( [] : widget list )\n      method add w =\n        widgets &#60;- w :: widgets\n      method get_widgets =\n        widgets\n      method repaint =\n        List.iter (fun w -&#62; w#repaint) widgets\n    end\n';</script>  <span class='k'>class</span> <span class='k'>virtual</span> container name <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml4ef8a7a1ae3ba8da22303ea2a4d0e502 = '  class virtual container name =\n    object (self)\n      inherit widget name\n      val mutable widgets = ( [] : widget list )\n      method add w =\n        widgets &#60;- w :: widgets\n      method get_widgets =\n        widgets\n      method repaint =\n        List.iter (fun w -&#62; w#repaint) widgets\n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> <span class='k'>virtual</span> container name <span class='k'>=</span>
     object (self)
       <span class='k'>inherit</span> widget name
       <span class='k'>val</span> <span class='k'>mutable</span> widgets <span class='k'>=</span> ( <span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> widget list )
@@ -312,7 +312,7 @@ Notes:</p>
  immutable. Let&#39;s imagine that someone wrote this code:</li>
 </ol>
 
-<!-- --><pre><code class='ocaml'><script>ml76a8ac6d4aea15f3fb185506a8c876ad = 'let list = container#get_widgets in\nx :: list\n';</script><span class='k'>let</span> list <span class='k'>=</span> container<span class='o'>#</span>get_widgets <span class='k'>in</span>
+<!-- --><pre><code class='ocaml'><script>ml76a8ac6d4aea15f3fb185506a8c876ad = 'let list = container#get_widgets in\nx :: list\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> list <span class='k'>=</span> container<span class='o'>#</span>get_widgets <span class='k'>in</span>
 x <span class='o'>::</span> list
 </code></pre>
 <p>
@@ -327,14 +327,14 @@ date, and no code outside the class would need to be changed.</p>
 <code>repaint</code> function so that <code>container#repaint</code> will repaint all of the
 contained widgets. Notice I use <code>List.iter</code> to iterate over the list,
 and I also use a probably unfamiliar anonymous function expression:</p>
-<pre><code class='ocaml'><script>ml49ce6c72d80ac3da9c6d806003ff7e54 = '(fun w -&#62; w#repaint)\n';</script>(<span class='k'>fun</span> w <span class='k'>-></span> w<span class='o'>#</span>repaint)
+<pre><code class='ocaml'><script>ml49ce6c72d80ac3da9c6d806003ff7e54 = '(fun w -&#62; w#repaint)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>(<span class='k'>fun</span> w <span class='k'>-></span> w<span class='o'>#</span>repaint)
 </code></pre>
 <p>
 which defines an anonymous function with one argument <code>w</code> that just
 calls <code>w#repaint</code> (the <code>repaint</code> method on widget <code>w</code>).</p>
 <p>In this instance our <code>button</code> class is simple (rather unrealistically
 simple in fact, but nevermind that):</p>
-<pre><code class='ocaml'><script>ml333b919062410f83440d8af2d20edd33 = '  type button_state = Released | Pressed;;\n\n  class button ?callback name =\n    object (self)\n      inherit container name as super\n      val mutable state = Released\n      method press =\n        state &#60;- Pressed;\n        match callback with\n        | None -&#62; ()\n        | Some f -&#62; f ()\n      method release =\n        state &#60;- Released\n      method repaint =\n        super#repaint;\n        print_endline (&#34;Button being repainted, state is &#34; ^\n                       (match state with\n                        | Pressed -&#62; &#34;Pressed&#34;\n                        | Released -&#62; &#34;Released&#34;))\n    end\n';</script>  <span class='k'>type</span> button_state <span class='k'>=</span> Released <span class='o'>|</span> Pressed<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml333b919062410f83440d8af2d20edd33 = '  type button_state = Released | Pressed;;\n\n  class button ?callback name =\n    object (self)\n      inherit container name as super\n      val mutable state = Released\n      method press =\n        state &#60;- Pressed;\n        match callback with\n        | None -&#62; ()\n        | Some f -&#62; f ()\n      method release =\n        state &#60;- Released\n      method repaint =\n        super#repaint;\n        print_endline (&#34;Button being repainted, state is &#34; ^\n                       (match state with\n                        | Pressed -&#62; &#34;Pressed&#34;\n                        | Released -&#62; &#34;Released&#34;))\n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>type</span> button_state <span class='k'>=</span> Released <span class='o'>|</span> Pressed<span class='o'>;;</span>
 
   <span class='k'>class</span> button <span class='o'>?</span>callback name <span class='k'>=</span>
     object (self)
@@ -385,7 +385,7 @@ Notes:</p>
 
 <p>Before defining our <code>label</code> class, let&#39;s play with the <code>button</code> class in
 the OCaml toplevel:</p>
-<pre><code class='ocaml'><script>mlf5c64fcd8a9f1b78f26ce9bcfab29251 = '  let b = new button ~callback:(fun () -&#62; print_endline &#34;Ouch!&#34;) &#34;button&#34;;;\nb#repaint;;\n  b#press;;\n  b#repaint;;\n  b#release;;\n';</script>  <span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='o'>~</span>callback<span class='o'>:</span>(<span class='k'>fun</span> () <span class='k'>-></span> print_endline <span class='s'>&#34;Ouch!&#34;</span>) <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf5c64fcd8a9f1b78f26ce9bcfab29251 = '  let b = new button ~callback:(fun () -&#62; print_endline &#34;Ouch!&#34;) &#34;button&#34;;;\nb#repaint;;\n  b#press;;\n  b#repaint;;\n  b#release;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='o'>~</span>callback<span class='o'>:</span>(<span class='k'>fun</span> () <span class='k'>-></span> print_endline <span class='s'>&#34;Ouch!&#34;</span>) <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
 b<span class='o'>#</span>repaint<span class='o'>;;</span>
   b<span class='o'>#</span>press<span class='o'>;;</span>
   b<span class='o'>#</span>repaint<span class='o'>;;</span>
@@ -393,7 +393,7 @@ b<span class='o'>#</span>repaint<span class='o'>;;</span>
 </code></pre>
 <p>
 Here&#39;s our comparatively trivial <code>label</code> class:</p>
-<pre><code class='ocaml'><script>ml5d1f4248bd395b537b68ebe9f3aeb75d = '  class label name text =\n    object (self)\n      inherit widget name\n      method repaint =\n        print_endline (&#34;Label: &#34; ^ text)\n    end;;\n';</script>  <span class='k'>class</span> label name text <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml5d1f4248bd395b537b68ebe9f3aeb75d = '  class label name text =\n    object (self)\n      inherit widget name\n      method repaint =\n        print_endline (&#34;Label: &#34; ^ text)\n    end;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> label name text <span class='k'>=</span>
     object (self)
       <span class='k'>inherit</span> widget name
       <span class='k'>method</span> repaint <span class='k'>=</span>
@@ -402,14 +402,14 @@ Here&#39;s our comparatively trivial <code>label</code> class:</p>
 </code></pre>
 <p>
 Let&#39;s create a label which says &quot;Press me!&quot; and add it to the button:</p>
-<pre><code class='ocaml'><script>ml0a72f343704dcc5aa3710a3d51cc9324 = 'let l = new label &#34;label&#34; &#34;Press me!&#34;;;\nb#add l;;\nb#repaint;;\n';</script><span class='k'>let</span> l <span class='k'>=</span> <span class='k'>new</span> label <span class='s'>&#34;label&#34;</span> <span class='s'>&#34;Press me!&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml0a72f343704dcc5aa3710a3d51cc9324 = 'let l = new label &#34;label&#34; &#34;Press me!&#34;;;\nb#add l;;\nb#repaint;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> l <span class='k'>=</span> <span class='k'>new</span> label <span class='s'>&#34;label&#34;</span> <span class='s'>&#34;Press me!&#34;</span><span class='o'>;;</span>
 b<span class='o'>#</span>add l<span class='o'>;;</span>
 b<span class='o'>#</span>repaint<span class='o'>;;</span>
 </code></pre>
 <h3 id="Anoteaboutself"> A note about <code>self</code></h3><p>
 
 In all the examples above we defined classes using the general pattern:</p>
-<pre><code class='ocaml'><script>ml84249ec81ca5fcf10651d11207285550 = 'class name =\n  object (self)\n    (* ... *)\n  end;;\n';</script><span class='k'>class</span> name <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml84249ec81ca5fcf10651d11207285550 = 'class name =\n  object (self)\n    (* ... *)\n  end;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>class</span> name <span class='k'>=</span>
   object (self)
     <span class='com2'>(* <span class='ic'>...</span> *)</span><!-- end comment -->
   <span class='k'>end</span><span class='o'>;;</span>
@@ -424,7 +424,7 @@ examples above we could have done exactly that. However, I would advise
 you to leave it in there because you never know when you might modify
 the class and require the reference to <code>self</code>. There is no penalty for
 having it.</p>
-<h3 id="Inheritanceandcoercions"> Inheritance and coercions</h3><pre><code class='ocaml'><script>ml65234e46d6d2a7daafd408afedea8680 = 'let b = new button &#34;button&#34;;;\nlet l = new label &#34;label&#34; &#34;Press me!&#34;;;\n[b; l];;\n';</script><span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
+<h3 id="Inheritanceandcoercions"> Inheritance and coercions</h3><pre><code class='ocaml'><script>ml65234e46d6d2a7daafd408afedea8680 = 'let b = new button &#34;button&#34;;;\nlet l = new label &#34;label&#34; &#34;Press me!&#34;;;\n[b; l];;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> b <span class='k'>=</span> <span class='k'>new</span> button <span class='s'>&#34;button&#34;</span><span class='o'>;;</span>
 <span class='k'>let</span> l <span class='k'>=</span> <span class='k'>new</span> label <span class='s'>&#34;label&#34;</span> <span class='s'>&#34;Press me!&#34;</span><span class='o'>;;</span>
 <span class='o'>[</span>b<span class='o'>;</span> l<span class='o'>]</span><span class='o'>;;</span>
 </code></pre>
@@ -434,14 +434,14 @@ I created a button <code>b</code> and a label <code>l</code> and I tried to crea
 containing both, but I got an error. Yet <code>b</code> and <code>l</code> are both <code>widget</code>s,
 so why can&#39;t I put them into the same list? Perhaps OCaml can&#39;t guess
 that I want a <code>widget list</code>? Let&#39;s try telling it:</p>
-<pre><code class='ocaml'><script>mlbd65b6cdaf8089258665c469e001057d = 'let wl = ([] : widget list);;\nlet wl = b :: wl;;\n';</script><span class='k'>let</span> wl <span class='k'>=</span> (<span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> widget list)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlbd65b6cdaf8089258665c469e001057d = 'let wl = ([] : widget list);;\nlet wl = b :: wl;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> wl <span class='k'>=</span> (<span class='o'>[</span><span class='o'>]</span> <span class='o'>:</span> widget list)<span class='o'>;;</span>
 <span class='k'>let</span> wl <span class='k'>=</span> b <span class='o'>::</span> wl<span class='o'>;;</span>
 </code></pre>
 <p>
 It turns out that OCaml doesn&#39;t coerce subclasses to the type of the
 superclass by default, but you can tell it to by using the <code>:&gt;</code>
 (coercion) operator:</p>
-<pre><code class='ocaml'><script>mlc9f5403913ea9939007bbc407e2067a2 = 'let wl = (b :&#62; widget) :: wl;;\nlet wl = (l :&#62; widget) :: wl;;\n';</script><span class='k'>let</span> wl <span class='k'>=</span> (b <span class='o'>:&#62;</span> widget) <span class='o'>::</span> wl<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlc9f5403913ea9939007bbc407e2067a2 = 'let wl = (b :&#62; widget) :: wl;;\nlet wl = (l :&#62; widget) :: wl;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> wl <span class='k'>=</span> (b <span class='o'>:&#62;</span> widget) <span class='o'>::</span> wl<span class='o'>;;</span>
 <span class='k'>let</span> wl <span class='k'>=</span> (l <span class='o'>:&#62;</span> widget) <span class='o'>::</span> wl<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -505,7 +505,7 @@ that is very analog to a record type, and it can be used in type
 definitions. In addition, objects can be created without a class. They
 are called <em>immediate objects</em>. Here is the definition of an immediate
 object:</p>
-<pre><code class='ocaml'><script>mla73c01cf0f8ef59fa2431ed73507175a = '  let o =\n    object \n      val mutable n = 0 \n      method incr = n &#60;- n + 1\n      method get = n          \n    end\n';</script>  <span class='k'>let</span> o <span class='k'>=</span>
+<pre><code class='ocaml'><script>mla73c01cf0f8ef59fa2431ed73507175a = '  let o =\n    object \n      val mutable n = 0 \n      method incr = n &#60;- n + 1\n      method get = n          \n    end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> o <span class='k'>=</span>
     object 
       <span class='k'>val</span> <span class='k'>mutable</span> n <span class='k'>=</span> 0 
       <span class='k'>method</span> incr <span class='k'>=</span> n <span class='o'>&#60;-</span> n <span class='o'>+</span> 1
@@ -517,16 +517,16 @@ This object has a type, which is defined by its public methods only.
 Values are not visible and neither are private methods (not shown).
 Unlike records, such a type does not need to be predefined explicitely,
 but doing so can make things clearer. We can do it like this:</p>
-<pre><code class='ocaml'><script>ml5fd7c905300859179a64eac70a880275 = '  type counter = &#60; get : int;  incr : unit &#62;\n';</script>  <span class='k'>type</span> counter <span class='k'>=</span> <span class='o'>&#60;</span> get <span class='o'>:</span> int<span class='o'>;</span>  incr <span class='o'>:</span> unit <span class='o'>&#62;</span>
+<pre><code class='ocaml'><script>ml5fd7c905300859179a64eac70a880275 = '  type counter = &#60; get : int;  incr : unit &#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>type</span> counter <span class='k'>=</span> <span class='o'>&#60;</span> get <span class='o'>:</span> int<span class='o'>;</span>  incr <span class='o'>:</span> unit <span class='o'>&#62;</span>
 </code></pre>
 <p>
 Compare with an equivalent record type definition:</p>
-<pre><code class='ocaml'><script>ml8a33ed8df5b7645e965946f29b82c2ec = '  type counter_r = { get : unit -&#62; int;\n                     incr : unit -&#62; unit }\n';</script>  <span class='k'>type</span> counter_r <span class='k'>=</span> <span class='o'>{</span> get <span class='o'>:</span> unit <span class='k'>-></span> int<span class='o'>;</span>
+<pre><code class='ocaml'><script>ml8a33ed8df5b7645e965946f29b82c2ec = '  type counter_r = { get : unit -&#62; int;\n                     incr : unit -&#62; unit }\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>type</span> counter_r <span class='k'>=</span> <span class='o'>{</span> get <span class='o'>:</span> unit <span class='k'>-></span> int<span class='o'>;</span>
                      incr <span class='o'>:</span> unit <span class='k'>-></span> unit <span class='o'>}</span>
 </code></pre>
 <p>
 The implementation of a record working like our object would be:</p>
-<pre><code class='ocaml'><script>mle2a9623dcc43d3bb4b70654c99febd18 = '  let r =\n    let n = ref 0 in\n    { get = (fun () -&#62; !n);\n      incr = (fun () -&#62; incr n) }\n';</script>  <span class='k'>let</span> r <span class='k'>=</span>
+<pre><code class='ocaml'><script>mle2a9623dcc43d3bb4b70654c99febd18 = '  let r =\n    let n = ref 0 in\n    { get = (fun () -&#62; !n);\n      incr = (fun () -&#62; incr n) }\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> r <span class='k'>=</span>
     <span class='k'>let</span> n <span class='k'>=</span> ref 0 <span class='k'>in</span>
     <span class='o'>{</span> get <span class='k'>=</span> (<span class='k'>fun</span> () <span class='k'>-></span> <span class='o'>!</span>n)<span class='o'>;</span>
       incr <span class='k'>=</span> (<span class='k'>fun</span> () <span class='k'>-></span> incr n) <span class='o'>}</span>
@@ -558,7 +558,7 @@ OCaml jargon. An object <em>type</em> is a kind of data <em>type</em>, just like
 record type or a tuple.</p>
 <p>When a class is defined, both a <em>class type</em> and an object <em>type</em> of the
 same name are defined:</p>
-<pre><code class='ocaml'><script>ml7b282d6855f8ea44b7d8b397fa799c3c = '  class t =      \n    object\n      val x = 0\n      method get = x\n   end\n';</script>  <span class='k'>class</span> t <span class='k'>=</span>      
+<pre><code class='ocaml'><script>ml7b282d6855f8ea44b7d8b397fa799c3c = '  class t =      \n    object\n      val x = 0\n      method get = x\n   end\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>class</span> t <span class='k'>=</span>      
     object
       <span class='k'>val</span> x <span class='k'>=</span> 0
       <span class='k'>method</span> get <span class='k'>=</span> x
@@ -570,13 +570,13 @@ same name are defined:</p>
 create. Objects that derive from different classes or no class at all
 (immediate objects) can be mixed together as long as they have the same
 type:</p>
-<pre><code class='ocaml'><script>ml51eccf70061fdca83f30d81a5bec24c8 = 'let x = object method get = 123 end;;\nlet l = [ new t; x ];;\n';</script><span class='k'>let</span> x <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 123 <span class='k'>end</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml51eccf70061fdca83f30d81a5bec24c8 = 'let x = object method get = 123 end;;\nlet l = [ new t; x ];;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> x <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 123 <span class='k'>end</span><span class='o'>;;</span>
 <span class='k'>let</span> l <span class='k'>=</span> <span class='o'>[</span> <span class='k'>new</span> t<span class='o'>;</span> x <span class='o'>]</span><span class='o'>;;</span>
 </code></pre>
 <p>
 Mixing objects that share a common subtype can be done, but requires
 explicit type coercion using the <code>:&gt;</code> operator:</p>
-<pre><code class='ocaml'><script>ml18ac6b2ef818160f5a261f1906c8cff3 = 'let x = object method get = 123 end;;\nlet y = object method get = 80 method special = &#34;hello&#34; end;;\nlet l = [ x; y ];;\nlet l = [ x; (y :&#62; t) ];;\n';</script><span class='k'>let</span> x <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 123 <span class='k'>end</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml18ac6b2ef818160f5a261f1906c8cff3 = 'let x = object method get = 123 end;;\nlet y = object method get = 80 method special = &#34;hello&#34; end;;\nlet l = [ x; y ];;\nlet l = [ x; (y :&#62; t) ];;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> x <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 123 <span class='k'>end</span><span class='o'>;;</span>
 <span class='k'>let</span> y <span class='k'>=</span> object <span class='k'>method</span> get <span class='k'>=</span> 80 <span class='k'>method</span> special <span class='k'>=</span> <span class='s'>&#34;hello&#34;</span> <span class='k'>end</span><span class='o'>;;</span>
 <span class='k'>let</span> l <span class='k'>=</span> <span class='o'>[</span> x<span class='o'>;</span> y <span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>let</span> l <span class='k'>=</span> <span class='o'>[</span> x<span class='o'>;</span> (y <span class='o'>:&#62;</span> t) <span class='o'>]</span><span class='o'>;;</span>

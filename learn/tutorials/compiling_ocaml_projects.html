@@ -76,7 +76,7 @@ provides standalone executables that are normally faster than bytecode.</p>
 using <code>ocamlopt</code>. For now, we also assume that they do not use any other
 library than the standard library, which is automatically loaded. You
 can compile the program in one single step:</p>
-<pre><code class='ocaml'><script>ml28161b009bf53bcfc00d8f649096f6e2 = 'ocamlopt -o progprog module1.ml module2.ml\n';</script>ocamlopt <span class='o'>-</span>o progprog module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+<pre><code class='ocaml'><script>ml28161b009bf53bcfc00d8f649096f6e2 = 'ocamlopt -o progprog module1.ml module2.ml\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>ocamlopt <span class='o'>-</span>o progprog module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
 </code></pre>
 <p>
 That&#39;s it. The compiler produced an executable named <code>progprog</code> or
@@ -106,7 +106,7 @@ to 3D graphics. You must understand the following:</p>
 
 <p>If your program uses only the unix library (provides system calls not
 only for Unix systems), the command line would be:</p>
-<pre><code class='ocaml'><script>mleb19f969a5e52081dfb4ebd04dbb6c96 = 'ocamlopt -o progprog unix.cmxa module1.ml module2.ml\n';</script>ocamlopt <span class='o'>-</span>o progprog unix<span class='o'>.</span>cmxa module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+<pre><code class='ocaml'><script>mleb19f969a5e52081dfb4ebd04dbb6c96 = 'ocamlopt -o progprog unix.cmxa module1.ml module2.ml\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>ocamlopt <span class='o'>-</span>o progprog unix<span class='o'>.</span>cmxa module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
 </code></pre>
 <p>
 <code>.cmxa</code> is the extension of native code libraries, while <code>.cma</code> is the
@@ -135,7 +135,7 @@ the libraries you want to use have been installed properly with
 ocamlfind.</p>
 <p>You can see which packages and subpackages are available in your system
 by typing:</p>
-<pre><code class='ocaml'><script>ml415af19f982f20171ee7f277dc6077e9 = 'ocamlfind list\n';</script>ocamlfind list
+<pre><code class='ocaml'><script>ml415af19f982f20171ee7f277dc6077e9 = 'ocamlfind list\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>ocamlfind list
 </code></pre>
 <p>
 This shows the list of package names, with their version ID.</p>
@@ -144,7 +144,7 @@ following packages: lablGL, sdl, sdl.sdlimage, sdl.sdlmixer, sdl.sdlttf.
 The bigarray package is needed by the sdl package, but we don&#39;t need to
 worry about that since <code>ocamlfind</code> knows it.</p>
 <p>The command for compiling our program will be:</p>
-<pre><code class='ocaml'><script>ml27c7824d111e0d35acb81541da9082f7 = 'ocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml module2.ml\n';</script>ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
+<pre><code class='ocaml'><script>ml27c7824d111e0d35acb81541da9082f7 = 'ocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml module2.ml\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
   <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
   module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
 </code></pre>
@@ -155,7 +155,7 @@ they are known by <code>ocamlfind</code>.</p>
 you want to recompile only some parts of the programs. Here are the
 equivalent commands that perform a separate compilation of the source
 files and link them together in a final step:</p>
-<pre><code class='ocaml'><script>ml8b52a3ce7ef19d9933c8f535e319b3e3 = 'ocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml\nocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module2.ml\nocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.cmx module2.cmx\n';</script>ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
+<pre><code class='ocaml'><script>ml8b52a3ce7ef19d9933c8f535e319b3e3 = 'ocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml\nocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module2.ml\nocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.cmx module2.cmx\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
   <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
   module1<span class='o'>.</span>ml
 ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>

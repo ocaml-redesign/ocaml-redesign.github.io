@@ -51,27 +51,27 @@
 <h1 id="Set"> Set</h1><h2 id="ModuleSet"> Module Set</h2><p>
 
 To make a set of strings:</p>
-<pre><code class='ocaml'><script>mlf55ee8f7bdc2fb96eaa786f8571d5cfe = 'module SS = Set.Make(String);;\n';</script><span class='k'>module</span> SS <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf55ee8f7bdc2fb96eaa786f8571d5cfe = 'module SS = Set.Make(String);;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>module</span> SS <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
 </code></pre>
 <p>
 To create a set you need to start somewhere so here is the empty set</p>
-<pre><code class='ocaml'><script>mlea09363c7f928520b9629526e5be1ffc = 'let s = SS.empty;;\n';</script><span class='k'>let</span> s <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>empty<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlea09363c7f928520b9629526e5be1ffc = 'let s = SS.empty;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> s <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>empty<span class='o'>;;</span>
 </code></pre>
 <p>
 Alternatively if we know an element to start with we can create a set
 like</p>
-<pre><code class='ocaml'><script>ml87f1fd250afb8ddefb67b752533140b2 = 'let s = SS.singleton &#34;hello&#34;;;\n';</script><span class='k'>let</span> s <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>singleton <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml87f1fd250afb8ddefb67b752533140b2 = 'let s = SS.singleton &#34;hello&#34;;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> s <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>singleton <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
 </code></pre>
 <p>
 To add some elements to the the set we can do.</p>
-<pre><code class='ocaml'><script>ml434f741612d3caad70cf58e7bc5f5310 = 'let s = List.fold_right SS.add [&#34;hello&#34;; &#34;world&#34;; &#34;community&#34;; &#34;manager&#34;;\n                                 &#34;stuff&#34;; &#34;blue&#34;; &#34;green&#34;] s;;\n';</script><span class='k'>let</span> s <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_right <span class='m'>SS</span><span class='o'>.</span>add <span class='o'>[</span><span class='s'>&#34;hello&#34;</span><span class='o'>;</span> <span class='s'>&#34;world&#34;</span><span class='o'>;</span> <span class='s'>&#34;community&#34;</span><span class='o'>;</span> <span class='s'>&#34;manager&#34;</span><span class='o'>;</span>
+<pre><code class='ocaml'><script>ml434f741612d3caad70cf58e7bc5f5310 = 'let s = List.fold_right SS.add [&#34;hello&#34;; &#34;world&#34;; &#34;community&#34;; &#34;manager&#34;;\n                                 &#34;stuff&#34;; &#34;blue&#34;; &#34;green&#34;] s;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> s <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_right <span class='m'>SS</span><span class='o'>.</span>add <span class='o'>[</span><span class='s'>&#34;hello&#34;</span><span class='o'>;</span> <span class='s'>&#34;world&#34;</span><span class='o'>;</span> <span class='s'>&#34;community&#34;</span><span class='o'>;</span> <span class='s'>&#34;manager&#34;</span><span class='o'>;</span>
                                  <span class='s'>&#34;stuff&#34;</span><span class='o'>;</span> <span class='s'>&#34;blue&#34;</span><span class='o'>;</span> <span class='s'>&#34;green&#34;</span><span class='o'>]</span> s<span class='o'>;;</span>
 </code></pre>
 <p>
 Now if we are playing around with sets we will probably want to see what
 is in the set that we have created. To do this we can write a function
 that will print the set out.</p>
-<pre><code class='ocaml'><script>mledecd7c6551ca0d660eadcefcdcc8d67 = '(* Prints a new line &#34;\n&#34; after each string is printed *)\nlet print_set s = \n   SS.iter print_endline s;;\n';</script><span class='com2'>(* Prints a <span class='ic'>new</span> line <span class='ic'>&#34;\n&#34;</span> after each string is printed *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mledecd7c6551ca0d660eadcefcdcc8d67 = '(* Prints a new line &#34;\n&#34; after each string is printed *)\nlet print_set s = \n   SS.iter print_endline s;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='com2'>(* Prints a <span class='ic'>new</span> line <span class='ic'>&#34;\n&#34;</span> after each string is printed *)</span><!-- end comment -->
 <span class='k'>let</span> print_set s <span class='k'>=</span> 
    <span class='m'>SS</span><span class='o'>.</span>iter print_endline s<span class='o'>;;</span>
 </code></pre>
@@ -81,29 +81,29 @@ function. However if we want to remove several elements at once we could
 think of it as doing a &#39;filter&#39;. Let&#39;s filter out all words that are
 longer than 5 characters.</p>
 <p>This can be written as:</p>
-<pre><code class='ocaml'><script>ml7e3a750377b4a6f78e700b5db53a58e7 = 'let my_filter str =\n  String.length str &#60;= 5;;\nlet s2 = SS.filter my_filter s;;\n';</script><span class='k'>let</span> my_filter str <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml7e3a750377b4a6f78e700b5db53a58e7 = 'let my_filter str =\n  String.length str &#60;= 5;;\nlet s2 = SS.filter my_filter s;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> my_filter str <span class='k'>=</span>
   <span class='m'>String</span><span class='o'>.</span>length str <span class='o'>&#60;=</span> 5<span class='o'>;;</span>
 <span class='k'>let</span> s2 <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>filter my_filter s<span class='o'>;;</span>
 </code></pre>
 <p>
 or using an anonymous function:</p>
-<pre><code class='ocaml'><script>ml4ca4ce0366f05f00570768bf81ffdd36 = 'let s2 = SS.filter (fun str -&#62; String.length str &#60;= 5) s;;\n';</script><span class='k'>let</span> s2 <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>filter (<span class='k'>fun</span> str <span class='k'>-></span> <span class='m'>String</span><span class='o'>.</span>length str <span class='o'>&#60;=</span> 5) s<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml4ca4ce0366f05f00570768bf81ffdd36 = 'let s2 = SS.filter (fun str -&#62; String.length str &#60;= 5) s;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> s2 <span class='k'>=</span> <span class='m'>SS</span><span class='o'>.</span>filter (<span class='k'>fun</span> str <span class='k'>-></span> <span class='m'>String</span><span class='o'>.</span>length str <span class='o'>&#60;=</span> 5) s<span class='o'>;;</span>
 </code></pre>
 <p>
 If we want to check and see if an element is in the set it might look
 like this.</p>
-<pre><code class='ocaml'><script>ml07b8c51e9bdf19d0dfcad81639ed7f78 = 'SS.exists (fun str -&#62; str = &#34;hello&#34;) s2;;\n';</script><span class='m'>SS</span><span class='o'>.</span>exists (<span class='k'>fun</span> str <span class='k'>-></span> str <span class='k'>=</span> <span class='s'>&#34;hello&#34;</span>) s2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml07b8c51e9bdf19d0dfcad81639ed7f78 = 'SS.exists (fun str -&#62; str = &#34;hello&#34;) s2;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='m'>SS</span><span class='o'>.</span>exists (<span class='k'>fun</span> str <span class='k'>-></span> str <span class='k'>=</span> <span class='s'>&#34;hello&#34;</span>) s2<span class='o'>;;</span>
 </code></pre>
 <p>
 or even:</p>
-<pre><code class='ocaml'><script>mld039e2ee5392444da47290ce65d6a3e4 = 'SS.exists (( = ) &#34;hello&#34;) s2;;\n';</script><span class='m'>SS</span><span class='o'>.</span>exists (( <span class='k'>=</span> ) <span class='s'>&#34;hello&#34;</span>) s2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld039e2ee5392444da47290ce65d6a3e4 = 'SS.exists (( = ) &#34;hello&#34;) s2;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='m'>SS</span><span class='o'>.</span>exists (( <span class='k'>=</span> ) <span class='s'>&#34;hello&#34;</span>) s2<span class='o'>;;</span>
 </code></pre>
 <p>
 The Set module also provides the set theoretic operations union,
 intersection and difference. For example, the difference of the original
 set and the set with short strings (\&lt;=5 characters) is the set of long
 strings:</p>
-<pre><code class='ocaml'><script>ml5b9ba30f7810eecded8f235a968e4ef3 = 'print_set (SS.diff s s2);;\n';</script>print_set (<span class='m'>SS</span><span class='o'>.</span>diff s s2)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml5b9ba30f7810eecded8f235a968e4ef3 = 'print_set (SS.diff s s2);;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>print_set (<span class='m'>SS</span><span class='o'>.</span>diff s s2)<span class='o'>;;</span>
 </code></pre>
 <p>
 Note that the Set module provides a purely functional data structure:

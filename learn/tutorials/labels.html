@@ -56,7 +56,7 @@ actually not a very common thing to do, but it can be useful sometimes.
 Here&#39;s a contrived example (thanks to Ryan Tarpine): The number 0 is
 even. Other numbers greater than 0 are even if their predecessor is odd.
 Hence:</p>
-<pre><code class='ocaml'><script>ml020b97cc495960641f239b61a38bb010 = 'let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\n';</script><span class='k'>let rec</span> even n <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml020b97cc495960641f239b61a38bb010 = 'let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let rec</span> even n <span class='k'>=</span>
   <span class='k'>match</span> n <span class='k'>with</span>
   <span class='o'>|</span> 0 <span class='k'>-></span> <span class='o'>true</span>
   <span class='o'>|</span> x <span class='k'>-></span> odd (x-1)
@@ -66,7 +66,7 @@ The code above doesn&#39;t compile because we haven&#39;t defined the function
 <code>odd</code> yet! That&#39;s easy though. Zero is not odd, and other numbers
 greater than 0 are odd if their predecessor is even. So to make this
 complete we need that function too:</p>
-<pre><code class='ocaml'><script>ml9257e365f7d8d335bbb3b711fc042eb8 = 'let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\n\nlet rec odd n =\n  match n with\n  | 0 -&#62; false\n  | x -&#62; even (x-1)\n';</script><span class='k'>let rec</span> even n <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml9257e365f7d8d335bbb3b711fc042eb8 = 'let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\n\nlet rec odd n =\n  match n with\n  | 0 -&#62; false\n  | x -&#62; even (x-1)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let rec</span> even n <span class='k'>=</span>
   <span class='k'>match</span> n <span class='k'>with</span>
   <span class='o'>|</span> 0 <span class='k'>-></span> <span class='o'>true</span>
   <span class='o'>|</span> x <span class='k'>-></span> odd (x-1)
@@ -84,7 +84,7 @@ definitions around won&#39;t help either.</p>
 <p>There are no &quot;forward prototypes&quot; in OCaml but there is a special syntax
 for defining a set of two or more mutually recursive functions, like
 <code>odd</code> and <code>even</code>:</p>
-<pre><code class='ocaml'><script>mlcc2fec8d5b670e0269add0bcb00505b3 = 'let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\nand odd n =\n  match n with\n  | 0 -&#62; false\n  | x -&#62; even (x-1)\n';</script><span class='k'>let rec</span> even n <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlcc2fec8d5b670e0269add0bcb00505b3 = 'let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\nand odd n =\n  match n with\n  | 0 -&#62; false\n  | x -&#62; even (x-1)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let rec</span> even n <span class='k'>=</span>
   <span class='k'>match</span> n <span class='k'>with</span>
   <span class='o'>|</span> 0 <span class='k'>-></span> <span class='o'>true</span>
   <span class='o'>|</span> x <span class='k'>-></span> odd (x-1)
@@ -108,7 +108,7 @@ subject for the next chapter), here&#39;s an example from OCamlNet of an
 aliased function call. All you need to know is that
 <code>cgi # output # output_string &quot;string&quot;</code> is a method call, similar to
 <code>cgi.output().output_string (&quot;string&quot;)</code> in Java.</p>
-<pre><code class='ocaml'><script>ml66ba96f1f730a8b35da81f2982c2b99e = 'let begin_page cgi title =\n  let out = cgi # output # output_string in\n  out &#34;&#60;html&#62;\n&#34;;\n  out &#34;&#60;head&#62;\n&#34;;\n  out (&#34;&#60;title&#62;&#34; ^ text title ^ &#34;&#60;/title&#62;\n&#34;);\n  out (&#34;&#60;style type=\&#34;text/css\&#34;&#62;\n&#34;);\n  out &#34;body { background: white; color: black; }\n&#34;;\n  out &#34;&#60;/style&#62;\n&#34;;\n  out &#34;&#60;/head&#62;\n&#34;;\n  out &#34;&#60;body&#62;\n&#34;;\n  out (&#34;&#60;h1&#62;&#34; ^ text title ^ &#34;&#60;/h1&#62;\n&#34;)\n';</script><span class='k'>let</span> begin_page cgi title <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml66ba96f1f730a8b35da81f2982c2b99e = 'let begin_page cgi title =\n  let out = cgi # output # output_string in\n  out &#34;&#60;html&#62;\n&#34;;\n  out &#34;&#60;head&#62;\n&#34;;\n  out (&#34;&#60;title&#62;&#34; ^ text title ^ &#34;&#60;/title&#62;\n&#34;);\n  out (&#34;&#60;style type=\&#34;text/css\&#34;&#62;\n&#34;);\n  out &#34;body { background: white; color: black; }\n&#34;;\n  out &#34;&#60;/style&#62;\n&#34;;\n  out &#34;&#60;/head&#62;\n&#34;;\n  out &#34;&#60;body&#62;\n&#34;;\n  out (&#34;&#60;h1&#62;&#34; ^ text title ^ &#34;&#60;/h1&#62;\n&#34;)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> begin_page cgi title <span class='k'>=</span>
   <span class='k'>let</span> out <span class='k'>=</span> cgi <span class='o'>#</span> output <span class='o'>#</span> output_string <span class='k'>in</span>
   out <span class='s'>&#34;&#60;html&#62;\n&#34;</span><span class='o'>;</span>
   out <span class='s'>&#34;&#60;head&#62;\n&#34;</span><span class='o'>;</span>
@@ -124,17 +124,17 @@ aliased function call. All you need to know is that
 The <code>let out = ... </code> is a partial function application for that method
 call (partial, because the string parameter hasn&#39;t been applied). <code>out</code>
 is therefore a function, which takes a string parameter.</p>
-<pre><code class='ocaml'><script>mldd55b9db1e8e7bb1c7a7899d48c39441 = '  out &#34;&#60;html&#62;\n&#34;;\n';</script>  out <span class='s'>&#34;&#60;html&#62;\n&#34;</span><span class='o'>;</span>
+<pre><code class='ocaml'><script>mldd55b9db1e8e7bb1c7a7899d48c39441 = '  out &#34;&#60;html&#62;\n&#34;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  out <span class='s'>&#34;&#60;html&#62;\n&#34;</span><span class='o'>;</span>
 </code></pre>
 <p>
 is equivalent to:</p>
-<pre><code class='ocaml'><script>mlfbdb5385d9f806ae47b01c5390f5b598 = '  cgi # output # output_string &#34;&#60;html&#62;\n&#34;;\n';</script>  cgi <span class='o'>#</span> output <span class='o'>#</span> output_string <span class='s'>&#34;&#60;html&#62;\n&#34;</span><span class='o'>;</span>
+<pre><code class='ocaml'><script>mlfbdb5385d9f806ae47b01c5390f5b598 = '  cgi # output # output_string &#34;&#60;html&#62;\n&#34;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  cgi <span class='o'>#</span> output <span class='o'>#</span> output_string <span class='s'>&#34;&#60;html&#62;\n&#34;</span><span class='o'>;</span>
 </code></pre>
 <p>
 We saved ourselves a lot of typing there.</p>
 <p>We can also add arguments. This alternative definition of <code>print_string</code>
 can be thought of as a kind of alias for a function name plus arguments:</p>
-<pre><code class='ocaml'><script>ml1811c8f9043ba80221dfd4a09ef33173 = '  let print_string = output_string stdout\n';</script>  <span class='k'>let</span> print_string <span class='k'>=</span> output_string stdout
+<pre><code class='ocaml'><script>ml1811c8f9043ba80221dfd4a09ef33173 = '  let print_string = output_string stdout\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> print_string <span class='k'>=</span> output_string stdout
 </code></pre>
 <p>
 <code>output_string</code> takes two arguments (a channel and a string), but since
@@ -145,12 +145,12 @@ a function, expecting one string argument.</p>
 Python has the nicest syntax for writing arguments to functions. Here&#39;s
 an example (from the Python tutorial, since I&#39;m not a Python
 programmer):</p>
-<pre><code class='ocaml'><script>ml65fa4bb183bc73d7fc75a4ee00cf0407 = 'def ask_ok(prompt, retries=4, complaint=&#39;Yes or no, please!&#39;):\n  # function definition omitted\n';</script>def ask_ok(prompt<span class='o'>,</span> retries<span class='k'>=</span>4<span class='o'>,</span> complaint<span class='k'>=</span>'Yes <span class='k'>or</span> no<span class='o'>,</span> please<span class='o'>!</span>')<span class='o'>:</span>
+<pre><code class='ocaml'><script>ml65fa4bb183bc73d7fc75a4ee00cf0407 = 'def ask_ok(prompt, retries=4, complaint=&#39;Yes or no, please!&#39;):\n  # function definition omitted\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>def ask_ok(prompt<span class='o'>,</span> retries<span class='k'>=</span>4<span class='o'>,</span> complaint<span class='k'>=</span>'Yes <span class='k'>or</span> no<span class='o'>,</span> please<span class='o'>!</span>')<span class='o'>:</span>
   <span class='o'>#</span> <span class='k'>function</span> definition omitted
 </code></pre>
 <p>
 Here are the ways we can call this Python function:</p>
-<pre><code class='ocaml'><script>ml5b453150785f16cad3b83e4fe6877fba = 'ask_ok (&#39;Do you really want to quit?&#39;)\nask_ok (&#39;Overwrite the file?&#39;, 2)\nask_ok (prompt=&#39;Are you sure?&#39;)\nask_ok (complaint=&#39;Please answer yes or no!&#39;, prompt=&#39;Are you sure?&#39;)\n';</script>ask_ok ('Do you really want <span class='k'>to</span> quit?')
+<pre><code class='ocaml'><script>ml5b453150785f16cad3b83e4fe6877fba = 'ask_ok (&#39;Do you really want to quit?&#39;)\nask_ok (&#39;Overwrite the file?&#39;, 2)\nask_ok (prompt=&#39;Are you sure?&#39;)\nask_ok (complaint=&#39;Please answer yes or no!&#39;, prompt=&#39;Are you sure?&#39;)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>ask_ok ('Do you really want <span class='k'>to</span> quit?')
 ask_ok ('Overwrite the file?'<span class='o'>,</span> 2)
 ask_ok (prompt<span class='k'>=</span>'Are you sure?')
 ask_ok (complaint<span class='k'>=</span>'Please answer yes <span class='k'>or</span> no<span class='o'>!</span>'<span class='o'>,</span> prompt<span class='k'>=</span>'Are you sure?')
@@ -160,7 +160,7 @@ Notice that in Python we are allowed to name arguments when we call
 them, or use the usual function call syntax, and we can have optional
 arguments with default values.</p>
 <p>You can do something similar in Perl:</p>
-<pre><code class='ocaml'><script>ml41d2d5d8fbf2c57fd762c3db902bec58 = 'sub ask_ok\n{\n  my %params = @_;\n\n  my $prompt = $params{prompt};\n  my $retries = exists $params{retries} ? $params{retries} : 4;\n\n  # ... etc.\n}\n\nask_ok (prompt =&#62; &#34;Are you sure?&#34;, retries =&#62; 2);\n';</script>sub ask_ok
+<pre><code class='ocaml'><script>ml41d2d5d8fbf2c57fd762c3db902bec58 = 'sub ask_ok\n{\n  my %params = @_;\n\n  my $prompt = $params{prompt};\n  my $retries = exists $params{retries} ? $params{retries} : 4;\n\n  # ... etc.\n}\n\nask_ok (prompt =&#62; &#34;Are you sure?&#34;, retries =&#62; 2);\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>sub ask_ok
 <span class='o'>{</span>
   my <span class='o'>%</span>params <span class='k'>=</span> <span class='o'>@_;</span>
 
@@ -176,7 +176,7 @@ ask_ok (prompt <span class='o'>=&#62;</span> <span class='s'>&#34;Are you sure?&
 OCaml also has a way to label arguments and have optional arguments with
 default values.</p>
 <p>The basic syntax is:</p>
-<pre><code class='ocaml'><script>mlc85b2bc5520547b2bd1b1b96b6c58355 = '  let rec range ~first:a ~last:b =\n    if a &#62; b then []\n    else a :: range ~first:(a+1) ~last:b\n';</script>  <span class='k'>let rec</span> range <span class='o'>~</span>first<span class='o'>:</span>a <span class='o'>~</span>last<span class='o'>:</span>b <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlc85b2bc5520547b2bd1b1b96b6c58355 = '  let rec range ~first:a ~last:b =\n    if a &#62; b then []\n    else a :: range ~first:(a+1) ~last:b\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let rec</span> range <span class='o'>~</span>first<span class='o'>:</span>a <span class='o'>~</span>last<span class='o'>:</span>b <span class='k'>=</span>
     <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
     <span class='k'>else</span> a <span class='o'>::</span> range <span class='o'>~</span>first<span class='o'>:</span>(a<span class='o'>+</span>1) <span class='o'>~</span>last<span class='o'>:</span>b
 </code></pre>
@@ -185,18 +185,18 @@ default values.</p>
 cannot be used as labels. So you cannot have <code>~from/~to</code> or
 <code>~start/~end</code>.)</p>
 <p>The type of our previous <code>range</code> function was:</p>
-<pre><code class='ocaml'><script>mlb5c599afdb0bbbdbcce89ff2e0e2acd0 = 'range : int -&#62; int -&#62; int list\n';</script>range <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int list
+<pre><code class='ocaml'><script>mlb5c599afdb0bbbdbcce89ff2e0e2acd0 = 'range : int -&#62; int -&#62; int list\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>range <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int list
 </code></pre>
 <p>
 And the type of our new <code>range</code> function with labelled arguments is:</p>
-<pre><code class='ocaml'><script>ml5aa714a06dd0d2ff4361db9335c3fdca = 'range : first:int -&#62; last:int -&#62; int list\n';</script>range <span class='o'>:</span> first<span class='o'>:</span>int <span class='k'>-></span> last<span class='o'>:</span>int <span class='k'>-></span> int list
+<pre><code class='ocaml'><script>ml5aa714a06dd0d2ff4361db9335c3fdca = 'range : first:int -&#62; last:int -&#62; int list\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>range <span class='o'>:</span> first<span class='o'>:</span>int <span class='k'>-></span> last<span class='o'>:</span>int <span class='k'>-></span> int list
 </code></pre>
 <p>
 (Confusingly, the <code>~</code> (tilde) is <em>not</em> shown in the type definition, but
 you need to use it everywhere else).</p>
 <p>With labelled arguments, it doesn&#39;t matter which order you give the
 arguments anymore:</p>
-<pre><code class='ocaml'><script>mld5b33565689c54fd7e5d1dcf393c5340 = 'range ~first:1 ~last:10;;\nrange ~last:10 ~first:1;;\n';</script>range <span class='o'>~</span>first<span class='o'>:</span>1 <span class='o'>~</span>last<span class='o'>:</span>10<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld5b33565689c54fd7e5d1dcf393c5340 = 'range ~first:1 ~last:10;;\nrange ~last:10 ~first:1;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>range <span class='o'>~</span>first<span class='o'>:</span>1 <span class='o'>~</span>last<span class='o'>:</span>10<span class='o'>;;</span>
 range <span class='o'>~</span>last<span class='o'>:</span>10 <span class='o'>~</span>first<span class='o'>:</span>1<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -204,7 +204,7 @@ There is also a shorthand way to name the arguments, so that the label
 is the same as the variable in the function definition. Here is a
 function defined in <code>lablgtk/gaux.ml</code> (a library of useful oddities used
 in lablgtk):</p>
-<pre><code class='ocaml'><script>mlbd9e881b1067b7147816b08c11fe58cb = '  let may ~f x =\n    match x with\n    | None -&#62; ()\n    | Some x -&#62; ignore(f x)\n';</script>  <span class='k'>let</span> may <span class='o'>~</span>f x <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlbd9e881b1067b7147816b08c11fe58cb = '  let may ~f x =\n    match x with\n    | None -&#62; ()\n    | Some x -&#62; ignore(f x)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> may <span class='o'>~</span>f x <span class='k'>=</span>
     <span class='k'>match</span> x <span class='k'>with</span>
     <span class='o'>|</span> None <span class='k'>-></span> ()
     <span class='o'>|</span> Some x <span class='k'>-></span> ignore(f x)
@@ -228,12 +228,12 @@ gives us a clue. It&#39;s an <code>&#39;a option</code>.</p>
 <code>match</code> the result is <code>()</code>.</p>
 <p>Thus the type of the <code>may</code> function is (and you can verify this in the
 OCaml toplevel if you want):</p>
-<pre><code class='ocaml'><script>ml463f5150ccc339f739cb34e043c7afc5 = 'may : f:(&#39;a -&#62; &#39;b) -&#62; &#39;a option -&#62; unit\n';</script>may <span class='o'>:</span> f<span class='o'>:</span>('a <span class='k'>-></span> 'b) <span class='k'>-></span> 'a option <span class='k'>-></span> unit
+<pre><code class='ocaml'><script>ml463f5150ccc339f739cb34e043c7afc5 = 'may : f:(&#39;a -&#62; &#39;b) -&#62; &#39;a option -&#62; unit\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>may <span class='o'>:</span> f<span class='o'>:</span>('a <span class='k'>-></span> 'b) <span class='k'>-></span> 'a option <span class='k'>-></span> unit
 </code></pre>
 <p>
 What does this function do? Running the function in the OCaml toplevel
 gives us some clues:</p>
-<pre><code class='ocaml'><script>mlb4b968d16a0a68372159861a27408593 = 'may ~f:print_endline None;;\nmay ~f:print_endline (Some &#34;hello&#34;);;\n';</script>may <span class='o'>~</span>f<span class='o'>:</span>print_endline None<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlb4b968d16a0a68372159861a27408593 = 'may ~f:print_endline None;;\nmay ~f:print_endline (Some &#34;hello&#34;);;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>may <span class='o'>~</span>f<span class='o'>:</span>print_endline None<span class='o'>;;</span>
 may <span class='o'>~</span>f<span class='o'>:</span>print_endline (Some <span class='s'>&#34;hello&#34;</span>)<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -243,14 +243,14 @@ useful? We&#39;re just about to find out ...</p>
 <h3 id="Optionalarguments"> Optional arguments</h3><p>
 Optional arguments are like labelled arguments, but we use <code>?</code> instead
 of <code>~</code> in front of them. Here is an example:</p>
-<pre><code class='ocaml'><script>ml1a0587695e67691e7bfd7adbbf58feb0 = '  let rec range ?(step=1) a b =\n    if a &#62; b then []\n    else a :: range ~step (a+step) b\n';</script>  <span class='k'>let rec</span> range <span class='o'>?</span>(step<span class='k'>=</span>1) a b <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml1a0587695e67691e7bfd7adbbf58feb0 = '  let rec range ?(step=1) a b =\n    if a &#62; b then []\n    else a :: range ~step (a+step) b\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let rec</span> range <span class='o'>?</span>(step<span class='k'>=</span>1) a b <span class='k'>=</span>
     <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
     <span class='k'>else</span> a <span class='o'>::</span> range <span class='o'>~</span>step (a<span class='o'>+</span>step) b
 </code></pre>
 <p>
 Note the somewhat confusing syntax, switching between <code>?</code> and <code>~</code>. We&#39;ll
 talk about that in the next section. Here is how you call this function:</p>
-<pre><code class='ocaml'><script>ml22701ef86f5f5b0f0f25f111ad1b7fb3 = 'range 1 10;;\nrange 1 10 ~step:2;;\n';</script>range 1 10<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml22701ef86f5f5b0f0f25f111ad1b7fb3 = 'range 1 10;;\nrange 1 10 ~step:2;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>range 1 10<span class='o'>;;</span>
 range 1 10 <span class='o'>~</span>step<span class='o'>:</span>2<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -258,7 +258,7 @@ In this case, <code>?(step=1)</code> fairly obviously means that <code>~step</co
 optional argument which defaults to 1. We can also omit the default
 value and just have an optional argument. This example is modified from
 lablgtk:</p>
-<pre><code class='ocaml'><script>mlc0b8bf642d4b92cbec2c20841cfd31f1 = '  type window = { mutable title: string;\n                  mutable width: int;\n                  mutable height: int }\n  \n  let create_window () =\n    { title = &#34;none&#34;; width = 640; height = 480; }\n  \n  let set_title window title =\n    window.title &#60;- title\n  \n  let set_width window width =\n    window.width &#60;- width\n  \n  let set_height window height =\n    window.height &#60;- height\n  \n  let open_window ?title ?width ?height () =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n';</script>  <span class='k'>type</span> window <span class='k'>=</span> <span class='o'>{</span> <span class='k'>mutable</span> title<span class='o'>:</span> string<span class='o'>;</span>
+<pre><code class='ocaml'><script>mlc0b8bf642d4b92cbec2c20841cfd31f1 = '  type window = { mutable title: string;\n                  mutable width: int;\n                  mutable height: int }\n  \n  let create_window () =\n    { title = &#34;none&#34;; width = 640; height = 480; }\n  \n  let set_title window title =\n    window.title &#60;- title\n  \n  let set_width window width =\n    window.width &#60;- width\n  \n  let set_height window height =\n    window.height &#60;- height\n  \n  let open_window ?title ?width ?height () =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>type</span> window <span class='k'>=</span> <span class='o'>{</span> <span class='k'>mutable</span> title<span class='o'>:</span> string<span class='o'>;</span>
                   <span class='k'>mutable</span> width<span class='o'>:</span> int<span class='o'>;</span>
                   <span class='k'>mutable</span> height<span class='o'>:</span> int <span class='o'>}</span>
   
@@ -287,13 +287,13 @@ used is very common in the lablgtk source code. Let&#39;s concentrate on the
 simple <code>create_window</code> function first. This function takes a <code>unit</code> and
 returns a <code>window</code>, initialized with default settings for title, width
 and height:</p>
-<pre><code class='ocaml'><script>ml3dbcf7a594d983c93cb399b1d18bcbdf = 'create_window ();;\n';</script>create_window ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml3dbcf7a594d983c93cb399b1d18bcbdf = 'create_window ();;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>create_window ()<span class='o'>;;</span>
 </code></pre>
 <p>
 The <code>set_title</code>, <code>set_width</code> and <code>set_height</code> functions are impure
 functions which modify the <code>window</code> structure, in the obvious way. For
 example:</p>
-<pre><code class='ocaml'><script>mla7628c22d4fd709ae007b411403d0ce4 = '  let w = create_window () in\n  set_title w &#34;My Application&#34;;\n  w;;\n';</script>  <span class='k'>let</span> w <span class='k'>=</span> create_window () <span class='k'>in</span>
+<pre><code class='ocaml'><script>mla7628c22d4fd709ae007b411403d0ce4 = '  let w = create_window () in\n  set_title w &#34;My Application&#34;;\n  w;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> w <span class='k'>=</span> create_window () <span class='k'>in</span>
   set_title w <span class='s'>&#34;My Application&#34;</span><span class='o'>;</span>
   w<span class='o'>;;</span>
 </code></pre>
@@ -303,7 +303,7 @@ about in the previous chapter. Now the complex part is the <code>open_window</co
 function. This function takes <em>4</em> arguments, three of them optional,
 followed by a required, unlabelled <code>unit</code>. Let&#39;s first see this function
 in action:</p>
-<pre><code class='ocaml'><script>mlf2dc11465ca53adaa8843f1ff3556fd8 = 'open_window ~title:&#34;My Application&#34; ();;\nopen_window ~title:&#34;Clock&#34; ~width:128 ~height:128 ();;\n';</script>open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My Application&#34;</span> ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf2dc11465ca53adaa8843f1ff3556fd8 = 'open_window ~title:&#34;My Application&#34; ();;\nopen_window ~title:&#34;Clock&#34; ~width:128 ~height:128 ();;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My Application&#34;</span> ()<span class='o'>;;</span>
 open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;Clock&#34;</span> <span class='o'>~</span>width<span class='o'>:</span>128 <span class='o'>~</span>height<span class='o'>:</span>128 ()<span class='o'>;;</span>
 </code></pre>
 <p>
@@ -316,7 +316,7 @@ in the case of <code>?title</code> above, this has type <code>string option</cod
 <p>Remember the <code>may</code> function? It takes a function and an argument, and
 calls the function on the argument provided the argument isn&#39;t <code>None</code>.
 So:</p>
-<pre><code class='ocaml'><script>ml7d640fa51448bfbddcb0fc81f169fc96 = 'may ~f:(set_title window) title;\n';</script>may <span class='o'>~</span>f<span class='o'>:</span>(set_title window) title<span class='o'>;</span>
+<pre><code class='ocaml'><script>ml7d640fa51448bfbddcb0fc81f169fc96 = 'may ~f:(set_title window) title;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>may <span class='o'>~</span>f<span class='o'>:</span>(set_title window) title<span class='o'>;</span>
 </code></pre>
 <p>
 If the optional title argument is not specified by the caller, then
@@ -331,7 +331,7 @@ We&#39;ve just touched upon labels and optional arguments, but even this
 brief explanation should have raised several questions. The first may be
 why the extra <code>unit</code> argument to <code>open_window</code>? Let&#39;s try defining this
 function without the extra <code>unit</code>:</p>
-<pre><code class='ocaml'><script>mlec45c8a3441d0bbae74f0c540e1b68f0 = '  let open_window ?title ?width ?height =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n';</script>  <span class='k'>let</span> open_window <span class='o'>?</span>title <span class='o'>?</span>width <span class='o'>?</span>height <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlec45c8a3441d0bbae74f0c540e1b68f0 = '  let open_window ?title ?width ?height =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> open_window <span class='o'>?</span>title <span class='o'>?</span>width <span class='o'>?</span>height <span class='k'>=</span>
     <span class='k'>let</span> window <span class='k'>=</span> create_window () <span class='k'>in</span>
     may <span class='o'>~</span>f<span class='o'>:</span>(set_title window) title<span class='o'>;</span>
     may <span class='o'>~</span>f<span class='o'>:</span>(set_width window) width<span class='o'>;</span>
@@ -343,7 +343,7 @@ Although OCaml has compiled the function, it has generated a somewhat
 infamous warning: &quot;This optional argument cannot be erased&quot;, referring
 to the final <code>?height</code> argument. To try to show what&#39;s going on here,
 let&#39;s call our modified <code>open_window</code> function:</p>
-<pre><code class='ocaml'><script>mldeca5bd4d502d80ca1ea81a69f174b38 = 'open_window;;\nopen_window ~title:&#34;My Application&#34;;;\n';</script>open_window<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mldeca5bd4d502d80ca1ea81a69f174b38 = 'open_window;;\nopen_window ~title:&#34;My Application&#34;;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>open_window<span class='o'>;;</span>
 open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My Application&#34;</span><span class='o'>;;</span>
 </code></pre>
 <p>
@@ -352,13 +352,13 @@ Did that work or not? No it didn&#39;t. In fact it didn&#39;t even run the
 information. What&#39;s going on?</p>
 <p>Recall currying and uncurrying, and partial application of functions. If
 we have a function <code>plus</code> defined as:</p>
-<pre><code class='ocaml'><script>ml4fba7ad6417e5e59cb246d36d2367d8f = '  let plus x y =\n    x + y\n';</script>  <span class='k'>let</span> plus x y <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml4fba7ad6417e5e59cb246d36d2367d8f = '  let plus x y =\n    x + y\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> plus x y <span class='k'>=</span>
     x <span class='o'>+</span> y
 </code></pre>
 <p>
 We can partially apply this, for example as <code>plus 2</code> which is &quot;the
 function that adds 2 to things&quot;:</p>
-<pre><code class='ocaml'><script>mle1077dac19c05bb94f565f1696466062 = '  let f = plus 2;;\n  f 5;;\n  f 100;;\n';</script>  <span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mle1077dac19c05bb94f565f1696466062 = '  let f = plus 2;;\n  f 5;;\n  f 100;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
   f 5<span class='o'>;;</span>
   f 100<span class='o'>;;</span>
 </code></pre>
@@ -378,7 +378,7 @@ it as a partial function application. The expression <code>open_window</code>
 literally evaluates to a function value.</p>
 <p>Let&#39;s go back to the original and working definition of <code>open_window</code>
 where we had the extra unlabelled <code>unit</code> argument at the end:</p>
-<pre><code class='ocaml'><script>ml9941c4ad9203a3019cdffa6a7b0386a8 = '  let open_window ?title ?width ?height () =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n';</script>  <span class='k'>let</span> open_window <span class='o'>?</span>title <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml9941c4ad9203a3019cdffa6a7b0386a8 = '  let open_window ?title ?width ?height () =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> open_window <span class='o'>?</span>title <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
     <span class='k'>let</span> window <span class='k'>=</span> create_window () <span class='k'>in</span>
     may <span class='o'>~</span>f<span class='o'>:</span>(set_title window) title<span class='o'>;</span>
     may <span class='o'>~</span>f<span class='o'>:</span>(set_width window) width<span class='o'>;</span>
@@ -388,12 +388,12 @@ where we had the extra unlabelled <code>unit</code> argument at the end:</p>
 <p>
 If you want to pass optional arguments to <code>open_window</code> you must do so
 before the final <code>unit</code>, so if you type:</p>
-<pre><code class='ocaml'><script>ml360b330a97e3e627228e0a3363095d50 = '  open_window ();;\n';</script>  open_window ()<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml360b330a97e3e627228e0a3363095d50 = '  open_window ();;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  open_window ()<span class='o'>;;</span>
 </code></pre>
 <p>
 you must mean &quot;execute <code>open_window</code> now with all optional arguments
 unspecified&quot;. Whereas if you type:</p>
-<pre><code class='ocaml'><script>ml9a64edc2d5b040401bcc33c83d057489 = 'open_window;;\n';</script>open_window<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml9a64edc2d5b040401bcc33c83d057489 = 'open_window;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>open_window<span class='o'>;;</span>
 </code></pre>
 <p>
 you mean &quot;give me the functional value&quot; or (more usually in the
@@ -401,7 +401,7 @@ toplevel) &quot;print out the type of <code>open_window</code>&quot;.</p>
 <h3 id="Moreshorthand"> More <code>~</code>shorthand</h3><p>
 Let&#39;s rewrite the <code>range</code> function yet again, this time using as much
 shorthand as possible for the labels:</p>
-<pre><code class='ocaml'><script>mlaad1d29672e2a5370f587b12b8ea1483 = '  let rec range ~first ~last =\n    if first &#62; last then []\n    else first :: range ~first:(first+1) ~last\n';</script>  <span class='k'>let rec</span> range <span class='o'>~</span>first <span class='o'>~</span>last <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlaad1d29672e2a5370f587b12b8ea1483 = '  let rec range ~first ~last =\n    if first &#62; last then []\n    else first :: range ~first:(first+1) ~last\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let rec</span> range <span class='o'>~</span>first <span class='o'>~</span>last <span class='k'>=</span>
     <span class='k'>if</span> first <span class='o'>&#62;</span> last <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
     <span class='k'>else</span> first <span class='o'>::</span> range <span class='o'>~</span>first<span class='o'>:</span>(first<span class='o'>+</span>1) <span class='o'>~</span>last
 </code></pre>
@@ -413,7 +413,7 @@ hence in the above the highlighted red <code>~last</code> is short for
 <h3 id="Usingfooinafunctioncall"> Using <code>?foo</code> in a function call</h3><p>
 There&#39;s another little wrinkle concerning optional arguments. Suppose we
 write a function around <code>open_window</code> to open up an application:</p>
-<pre><code class='ocaml'><script>mlbf210827f89eb761ae274b553dcd02fa = '  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ~width ~height\n';</script>  <span class='k'>let</span> open_application <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlbf210827f89eb761ae274b553dcd02fa = '  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ~width ~height\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> open_application <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
     open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My Application&#34;</span> <span class='o'>~</span>width <span class='o'>~</span>height
 </code></pre>
 <p>
@@ -425,7 +425,7 @@ would be a function which would remove the &quot;<code>option</code> wrapper&quo
 <code>width</code> (it&#39;s not actually possible to write an <code>unwrap</code> function like
 this, but conceptually that&#39;s the idea). So the correct way to write
 this function is:</p>
-<pre><code class='ocaml'><script>ml4e8d67ab06f556802224870ef785ca2e = '  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ?width ?height\n';</script>  <span class='k'>let</span> open_application <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml4e8d67ab06f556802224870ef785ca2e = '  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ?width ?height\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> open_application <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
     open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My Application&#34;</span> <span class='o'>?</span>width <span class='o'>?</span>height
 </code></pre>
 <h3 id="Whenandwhennottouseand"> When and when not to use <code>~</code> and <code>?</code></h3><p>
@@ -435,12 +435,12 @@ often wonder when to use <code>~foo</code>, when to use <code>?foo</code> and wh
 plain <code>foo</code>. It&#39;s something of a black art which takes practice to get
 right.</p>
 <p><code>?foo</code> is only used when declaring the arguments of a function, ie:</p>
-<pre><code class='ocaml'><script>ml5d91ab8221d2cf541b42f4ed49ac11c7 = 'let f ?arg1 ... =\n';</script><span class='k'>let</span> f <span class='o'>?</span>arg1 <span class='o'>...</span> <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml5d91ab8221d2cf541b42f4ed49ac11c7 = 'let f ?arg1 ... =\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> f <span class='o'>?</span>arg1 <span class='o'>...</span> <span class='k'>=</span>
 </code></pre>
 <p>
 or when using the specialised &quot;unwrap <code>option</code> wrapper&quot; form for
 function calls:</p>
-<pre><code class='ocaml'><script>ml4e8d67ab06f556802224870ef785ca2e = '  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ?width ?height\n';</script>  <span class='k'>let</span> open_application <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml4e8d67ab06f556802224870ef785ca2e = '  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ?width ?height\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> open_application <span class='o'>?</span>width <span class='o'>?</span>height () <span class='k'>=</span>
     open_window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My Application&#34;</span> <span class='o'>?</span>width <span class='o'>?</span>height
 </code></pre>
 <p>
@@ -448,7 +448,7 @@ The declaration <code>?foo</code> creates a variable called <code>foo</code>, so
 the value of <code>?foo</code>, use just <code>foo</code>.</p>
 <p>The same applies to labels. Only use the <code>~foo</code> form when declaring
 arguments of a function, ie:</p>
-<pre><code class='ocaml'><script>ml40f905f705ac98b51c2bdd0896a6d224 = 'let f ~foo:foo ... =\n';</script><span class='k'>let</span> f <span class='o'>~</span>foo<span class='o'>:</span>foo <span class='o'>...</span> <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml40f905f705ac98b51c2bdd0896a6d224 = 'let f ~foo:foo ... =\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> f <span class='o'>~</span>foo<span class='o'>:</span>foo <span class='o'>...</span> <span class='k'>=</span>
 </code></pre>
 <p>
 The declaration <code>~foo:foo</code> creates a variable called simply <code>foo</code>, so if
@@ -459,7 +459,7 @@ function which takes a labelled or optional argument and you use the
 shorthand form.</p>
 <p>Here is some apparently obscure code from lablgtk to demonstrate all of
 this:</p>
-<pre><code class='ocaml'><script>mlda479af47cfd30636c29371a041d215a = 'let html ?border_width ?width ?height ?packing ?show () =  (* line 1 *)\n  let w = create () in\n  load_empty w;\n  Container.set w ?border_width ?width ?height;            (* line 4 *)\n  pack_return (new html w) ~packing ~show                  (* line 5 *)\n';</script><span class='k'>let</span> html <span class='o'>?</span>border_width <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show () <span class='k'>=</span>  <span class='com2'>(* line 1 *)</span><!-- end comment -->
+<pre><code class='ocaml'><script>mlda479af47cfd30636c29371a041d215a = 'let html ?border_width ?width ?height ?packing ?show () =  (* line 1 *)\n  let w = create () in\n  load_empty w;\n  Container.set w ?border_width ?width ?height;            (* line 4 *)\n  pack_return (new html w) ~packing ~show                  (* line 5 *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> html <span class='o'>?</span>border_width <span class='o'>?</span>width <span class='o'>?</span>height <span class='o'>?</span>packing <span class='o'>?</span>show () <span class='k'>=</span>  <span class='com2'>(* line 1 *)</span><!-- end comment -->
   <span class='k'>let</span> w <span class='k'>=</span> create () <span class='k'>in</span>
   load_empty w<span class='o'>;</span>
   <span class='m'>Container</span><span class='o'>.</span>set w <span class='o'>?</span>border_width <span class='o'>?</span>width <span class='o'>?</span>height<span class='o'>;</span>            <span class='com2'>(* line 4 *)</span><!-- end comment -->
@@ -473,13 +473,13 @@ type <code>&#39;a option</code>.</p>
 <p>On line 4 we use the special <code>?foo</code> form for passing optional arguments
 to functions which take optional arguments. <code>Container.set</code> has the
 following type:</p>
-<pre><code class='ocaml'><script>mld1817fba8cf04dd43b68571565e19af9 = 'module Container = struct\n  let set ?border_width ?(width = -2) ?(height = -2) w =\n    (* ... *)\n';</script><span class='k'>module</span> Container <span class='k'>=</span> <span class='k'>struct</span>
+<pre><code class='ocaml'><script>mld1817fba8cf04dd43b68571565e19af9 = 'module Container = struct\n  let set ?border_width ?(width = -2) ?(height = -2) w =\n    (* ... *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>module</span> Container <span class='k'>=</span> <span class='k'>struct</span>
   <span class='k'>let</span> set <span class='o'>?</span>border_width <span class='o'>?</span>(width <span class='k'>=</span> -2) <span class='o'>?</span>(height <span class='k'>=</span> -2) w <span class='k'>=</span>
     <span class='com2'>(* <span class='ic'>...</span> *)</span><!-- end comment -->
 </code></pre>
 <p>
 Line 5 uses the <code>~</code>shorthand. Writing this in long form:</p>
-<pre><code class='ocaml'><script>mleaef5be0820ddad32a7d0db0ade86f8e = '  pack_return (new html w) ~packing:packing ~show:show\n';</script>  pack_return (<span class='k'>new</span> html w) <span class='o'>~</span>packing<span class='o'>:</span>packing <span class='o'>~</span>show<span class='o'>:</span>show
+<pre><code class='ocaml'><script>mleaef5be0820ddad32a7d0db0ade86f8e = '  pack_return (new html w) ~packing:packing ~show:show\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  pack_return (<span class='k'>new</span> html w) <span class='o'>~</span>packing<span class='o'>:</span>packing <span class='o'>~</span>show<span class='o'>:</span>show
 </code></pre>
 <p>
 The <code>pack_return</code> function actually takes mandatory labelled arguments
@@ -493,7 +493,7 @@ lablgtk, it&#39;s unlikely you&#39;ll see labels and optional arguments used at
 all (at the moment).</p>
 <h2 id="Morevariantsquotpolymorphicvariantsquot"> More variants (&quot;polymorphic variants&quot;)</h2><p>
 Try compiling the following C code:</p>
-<pre><code class='ocaml'><script>ml328d5d1016d4bb45fc280299d92b5251 = '#include &#60;stdio.h&#62;\n#include &#60;fcntl.h&#62;\n#include &#60;unistd.h&#62;\n\nenum lock { open, close };\n\nmain ()\n{\n  int fd, n;\n  char buffer[256];\n\n  fd = open (&#34;/etc/motd&#34;, O_RDONLY);                     // line 12\n  while ((n = read (fd, buffer, sizeof buffer)) &#62; 0)\n    write (1, buffer, n);\n  close (fd);                                            // line 15\n}\n';</script><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
+<pre><code class='ocaml'><script>ml328d5d1016d4bb45fc280299d92b5251 = '#include &#60;stdio.h&#62;\n#include &#60;fcntl.h&#62;\n#include &#60;unistd.h&#62;\n\nenum lock { open, close };\n\nmain ()\n{\n  int fd, n;\n  char buffer[256];\n\n  fd = open (&#34;/etc/motd&#34;, O_RDONLY);                     // line 12\n  while ((n = read (fd, buffer, sizeof buffer)) &#62; 0)\n    write (1, buffer, n);\n  close (fd);                                            // line 15\n}\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
 <span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>fcntl<span class='o'>.</span>h<span class='o'>&#62;</span>
 <span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>unistd<span class='o'>.</span>h<span class='o'>&#62;</span>
 
@@ -512,7 +512,7 @@ main ()
 </code></pre>
 <p>
 When I compile the code I get a whole bunch of errors including:</p>
-<pre><code class='ocaml'><script>ml0599691848e23d82b926b9de6cd28353 = 'test.c: In function `main&#39;:\ntest.c:12: error: called object is not a function\ntest.c:15: error: called object is not a function\n';</script>test<span class='o'>.</span>c<span class='o'>:</span> In <span class='k'>function</span> `main'<span class='o'>:</span>
+<pre><code class='ocaml'><script>ml0599691848e23d82b926b9de6cd28353 = 'test.c: In function `main&#39;:\ntest.c:12: error: called object is not a function\ntest.c:15: error: called object is not a function\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>test<span class='o'>.</span>c<span class='o'>:</span> In <span class='k'>function</span> `main'<span class='o'>:</span>
 test<span class='o'>.</span>c<span class='o'>:</span>12<span class='o'>:</span> error<span class='o'>:</span> called object is not a <span class='k'>function</span>
 test<span class='o'>.</span>c<span class='o'>:</span>15<span class='o'>:</span> error<span class='o'>:</span> called object is not a <span class='k'>function</span>
 </code></pre>
@@ -520,12 +520,12 @@ test<span class='o'>.</span>c<span class='o'>:</span>15<span class='o'>:</span> 
 This illustrates one problem with enumerated types (enums) in C. In the
 example above, one enum statement reserves <em>three</em> symbols, namely
 <code>lock</code>, <code>open</code> and <code>close</code>. Here&#39;s another example:</p>
-<pre><code class='ocaml'><script>ml86c1b09164c3a1745568832f655aba1b = 'enum lock { open, close };\nenum door { open, close };\n';</script>enum lock <span class='o'>{</span> <span class='k'>open</span><span class='o'>,</span> close <span class='o'>}</span><span class='o'>;</span>
+<pre><code class='ocaml'><script>ml86c1b09164c3a1745568832f655aba1b = 'enum lock { open, close };\nenum door { open, close };\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>enum lock <span class='o'>{</span> <span class='k'>open</span><span class='o'>,</span> close <span class='o'>}</span><span class='o'>;</span>
 enum door <span class='o'>{</span> <span class='k'>open</span><span class='o'>,</span> close <span class='o'>}</span><span class='o'>;</span>
 </code></pre>
 <p>
 Compiling gives:</p>
-<pre><code class='ocaml'><script>mlcbf78ceaa632528fba41cb463cb2fbcb = 'test.c:2: error: conflicting types for `open&#39;\ntest.c:1: error: previous declaration of `open&#39;\ntest.c:2: error: conflicting types for `close&#39;\ntest.c:1: error: previous declaration of `close&#39;\n';</script>test<span class='o'>.</span>c<span class='o'>:</span>2<span class='o'>:</span> error<span class='o'>:</span> conflicting types <span class='k'>for</span> `<span class='k'>open</span>'
+<pre><code class='ocaml'><script>mlcbf78ceaa632528fba41cb463cb2fbcb = 'test.c:2: error: conflicting types for `open&#39;\ntest.c:1: error: previous declaration of `open&#39;\ntest.c:2: error: conflicting types for `close&#39;\ntest.c:1: error: previous declaration of `close&#39;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>test<span class='o'>.</span>c<span class='o'>:</span>2<span class='o'>:</span> error<span class='o'>:</span> conflicting types <span class='k'>for</span> `<span class='k'>open</span>'
 test<span class='o'>.</span>c<span class='o'>:</span>1<span class='o'>:</span> error<span class='o'>:</span> previous declaration <span class='k'>of</span> `<span class='k'>open</span>'
 test<span class='o'>.</span>c<span class='o'>:</span>2<span class='o'>:</span> error<span class='o'>:</span> conflicting types <span class='k'>for</span> `close'
 test<span class='o'>.</span>c<span class='o'>:</span>1<span class='o'>:</span> error<span class='o'>:</span> previous declaration <span class='k'>of</span> `close'
@@ -537,13 +537,13 @@ The first enum defines the symbol <code>open</code> as something of type
 naive code like that above. However the same issue happens with OCaml
 variants, but OCaml provides a way to work around it.</p>
 <p>Here is some OCaml code, which actually <em>does</em> compile:</p>
-<pre><code class='ocaml'><script>ml1d12cf0d011c46631ea46ec020202980 = 'type lock = Open | Close\ntype door = Open | Close\n';</script><span class='k'>type</span> lock <span class='k'>=</span> Open <span class='o'>|</span> Close
+<pre><code class='ocaml'><script>ml1d12cf0d011c46631ea46ec020202980 = 'type lock = Open | Close\ntype door = Open | Close\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>type</span> lock <span class='k'>=</span> Open <span class='o'>|</span> Close
 <span class='k'>type</span> door <span class='k'>=</span> Open <span class='o'>|</span> Close
 </code></pre>
 <p>
 After running those two statements, what is the type of <code>Open</code>? We can
 find out easily enough in the toplevel:</p>
-<pre><code class='ocaml'><script>ml2e8a95ebd2a19cb22d34055a69b4f749 = 'type lock = Open | Close;;\ntype door = Open | Close;;\nOpen;;\n';</script><span class='k'>type</span> lock <span class='k'>=</span> Open <span class='o'>|</span> Close<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml2e8a95ebd2a19cb22d34055a69b4f749 = 'type lock = Open | Close;;\ntype door = Open | Close;;\nOpen;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>type</span> lock <span class='k'>=</span> Open <span class='o'>|</span> Close<span class='o'>;;</span>
 <span class='k'>type</span> door <span class='k'>=</span> Open <span class='o'>|</span> Close<span class='o'>;;</span>
 Open<span class='o'>;;</span>
 </code></pre>
@@ -559,7 +559,7 @@ words, suppose I want to use <code>Open</code> to mean either &quot;the <code>Op
 <code>lock</code>&quot; or &quot;the <code>Open</code> of type <code>door</code>&quot; and I want OCaml to work out
 which one I mean.</p>
 <p>The syntax is slightly different, but here is how we do it:</p>
-<pre><code class='ocaml'><script>mld9b45b4ca7130af140f2eb16bdcc3ac0 = 'type lock = [ `Open | `Close ];;\ntype door = [ `Open | `Close ];;\n';</script><span class='k'>type</span> lock <span class='k'>=</span> <span class='o'>[</span> `Open <span class='o'>|</span> `Close <span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld9b45b4ca7130af140f2eb16bdcc3ac0 = 'type lock = [ `Open | `Close ];;\ntype door = [ `Open | `Close ];;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>type</span> lock <span class='k'>=</span> <span class='o'>[</span> `Open <span class='o'>|</span> `Close <span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>type</span> door <span class='k'>=</span> <span class='o'>[</span> `Open <span class='o'>|</span> `Close <span class='o'>]</span><span class='o'>;;</span>
 </code></pre>
 <p>
@@ -571,7 +571,7 @@ Notice the syntactic differences:</p>
 </ol>
 
 <p>The question naturally arises: What is the type of <code>`Ope</code>?</p>
-<pre><code class='ocaml'><script>mla6118854129583512b8caf0aa1af62b8 = '`Open;;\n';</script>`Open<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mla6118854129583512b8caf0aa1af62b8 = '`Open;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>`Open<span class='o'>;;</span>
 </code></pre>
 <p>
 <code> [&gt; `Open] </code> can be read as
@@ -580,12 +580,12 @@ The \&gt; (greater than) sign indicates that the set of possibilities is
 bigger than those listed (open-ended).</p>
 <p>There&#39;s nothing special about <code>`Ope</code>. <em>Any</em> back-ticked word can be
 used as a type, even one which we haven&#39;t mentioned before:</p>
-<pre><code class='ocaml'><script>mladb3c3f58b24492a3368ef0ae3b57eff = '`Foo;;\n`Foo 42;;\n';</script>`Foo<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mladb3c3f58b24492a3368ef0ae3b57eff = '`Foo;;\n`Foo 42;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>`Foo<span class='o'>;;</span>
 `Foo 42<span class='o'>;;</span>
 </code></pre>
 <p>
 Let&#39;s write a function to print the state of a <code>lock</code>:</p>
-<pre><code class='ocaml'><script>ml15724c8960867c182636a39ac9bee432 = '  let print_lock st =\n    match st with\n    | `Open -&#62; print_endline &#34;The lock is open&#34;\n    | `Close -&#62; print_endline &#34;The lock is closed&#34;\n';</script>  <span class='k'>let</span> print_lock st <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml15724c8960867c182636a39ac9bee432 = '  let print_lock st =\n    match st with\n    | `Open -&#62; print_endline &#34;The lock is open&#34;\n    | `Close -&#62; print_endline &#34;The lock is closed&#34;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>  <span class='k'>let</span> print_lock st <span class='k'>=</span>
     <span class='k'>match</span> st <span class='k'>with</span>
     <span class='o'>|</span> `Open <span class='k'>-></span> print_endline <span class='s'>&#34;The lock is open&#34;</span>
     <span class='o'>|</span> `Close <span class='k'>-></span> print_endline <span class='s'>&#34;The lock is closed&#34;</span>
@@ -596,7 +596,7 @@ worked out that the <code>st</code> argument has type <code> [&lt; `Close | `Ope
 \&lt; (less than) sign means that this is a \&lt;dfn\&gt;closed class\&lt;/dfn\&gt;. In
 other words, this function will only work on <code>`Clos</code> or <code>`Ope</code>
 and not on anything else.</p>
-<pre><code class='ocaml'><script>mlf8c5bc430a864528133e087cd8e4da45 = 'print_lock `Open;;\n';</script>print_lock `Open<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlf8c5bc430a864528133e087cd8e4da45 = 'print_lock `Open;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>print_lock `Open<span class='o'>;;</span>
 </code></pre>
 <p>
 Notice that <code>print_lock</code> works just as well with a <code>door</code> as with a

@@ -72,7 +72,7 @@ programmation fonctionnelle.</p>
 <p>La définition de base, bien que pas forcément claire est : «Dans un
 langage fonctionnel, les fonctions sont des citoyens de première classe»</p>
 <p>Que de mots qui n&#39;ont pas vraiment de sens. Voyons plutôt un exemple :</p>
-<pre><code class='ocaml'><script>mlbde5e27c063eb24ebcd943ac6cab15d8 = '# let double x= x *2 in\n   List.map double [ 1; 2; 3 ];;\n- : int list = [2; 4, 6]\n';</script><span class='o'>#</span> <span class='k'>let</span> double x<span class='k'>=</span> x <span class='o'>*</span>2 <span class='k'>in</span>
+<pre><code class='ocaml'><script>mlbde5e27c063eb24ebcd943ac6cab15d8 = '# let double x= x *2 in\n   List.map double [ 1; 2; 3 ];;\n- : int list = [2; 4, 6]\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> double x<span class='k'>=</span> x <span class='o'>*</span>2 <span class='k'>in</span>
    <span class='m'>List</span><span class='o'>.</span>map double <span class='o'>[</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3 <span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>,</span> 6<span class='o'>]</span>
 </code></pre>
@@ -96,7 +96,7 @@ une clôture peut référencer des variables qui sont disponibles au moment
 de la définition. Généralisons la fonction précédente de façons à
 prendre n&#39;importe quelle liste d&#39;entiers et multiplier chaque élément
 par une valeur <code>n</code> arbitraire :</p>
-<pre><code class='ocaml'><script>ml952238a8011772c6c96d76b16306daf2 = 'let multiply n list =\n    let f x =\n        n * x\n    in\n    List.map f list\n    ;:\n';</script><span class='k'>let</span> multiply n list <span class='k'>=</span>
+<pre><code class='ocaml'><script>ml952238a8011772c6c96d76b16306daf2 = 'let multiply n list =\n    let f x =\n        n * x\n    in\n    List.map f list\n    ;:\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> multiply n list <span class='k'>=</span>
     <span class='k'>let</span> f x <span class='k'>=</span>
         n <span class='o'>*</span> x
     <span class='k'>in</span>
@@ -105,7 +105,7 @@ par une valeur <code>n</code> arbitraire :</p>
 </code></pre>
 <p>
 Ainsi :</p>
-<pre><code class='ocaml'><script>mlbe88c99908e79b674fd35d685853e872 = '# multiply 2 [1; 2; 3];;\n- : int list = [2; 4; 6]\n# multiply 5 [1; 2; 3];;\n- : int list = [5; 10; 15]\n';</script><span class='o'>#</span> multiply 2 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlbe88c99908e79b674fd35d685853e872 = '# multiply 2 [1; 2; 3];;\n- : int list = [2; 4; 6]\n# multiply 5 [1; 2; 3];;\n- : int list = [5; 10; 15]\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> multiply 2 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>;</span> 6<span class='o'>]</span>
 <span class='o'>#</span> multiply 5 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>5<span class='o'>;</span> 10<span class='o'>;</span> 15<span class='o'>]</span>
@@ -130,7 +130,7 @@ donc à <code>n</code>.</p>
 l&#39;instant, mais considérons juste cela comme une définition de fonction
 pour l&#39;instant).</p>
 <p><code> class html_skel obj = object (self)</code></p>
-<pre><code class='ocaml'><script>ml49e63685f7c08c355d1dd94e21df0479 = ' ...\n ...\n method save_to_channel chan =\n   let receiver_fn content =\n     output_string chan content;\n     true\n   in\n   save obj receiver_fn\n';</script> <span class='o'>...</span>
+<pre><code class='ocaml'><script>ml49e63685f7c08c355d1dd94e21df0479 = ' ...\n ...\n method save_to_channel chan =\n   let receiver_fn content =\n     output_string chan content;\n     true\n   in\n   save obj receiver_fn\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span> <span class='o'>...</span>
  <span class='o'>...</span>
  <span class='k'>method</span> save_to_channel chan <span class='k'>=</span>
    let rec<span class='o'>eiver_fn</span> content <span class='k'>=</span>
@@ -149,7 +149,7 @@ clôture correcte parce qu&#39;elle garde une référence à <code>chan</code> v
 son environnement.</p>
 <h2 id="Applicationpartielleetcurryfication"> Application partielle et curryfication</h2><p>
 Définissons une fonction plus qui ne fait qu&#39;ajouter deux entiers :</p>
-<pre><code class='ocaml'><script>ml7134be24303940e10a741497f776ec6a = 'let plus a b = a + b ;;\n';</script><span class='k'>let</span> plus a b <span class='k'>=</span> a <span class='o'>+</span> b <span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml7134be24303940e10a741497f776ec6a = 'let plus a b = a + b ;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> plus a b <span class='k'>=</span> a <span class='o'>+</span> b <span class='o'>;;</span>
 </code></pre>
 <p>
 Quelques questions pour les endormis du fond de la classe :</p>
@@ -164,18 +164,18 @@ Quelques questions pour les endormis du fond de la classe :</p>
 <p>La première réponse est facile. <code>plus</code> est uen fonction qui prend deux
 arguments qui sont entiers et qui retourne un entier. Son type s&#39;écrit
 ainsi :</p>
-<pre><code class='ocaml'><script>mldda2dc0b0d89ff42d6ad39a677702f4d = 'plus : int -&#62; int -&#62; int\n';</script>plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+<pre><code class='ocaml'><script>mldda2dc0b0d89ff42d6ad39a677702f4d = 'plus : int -&#62; int -&#62; int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
 </code></pre>
 <p>
 La deuxième réponse est encore plus évidente. <code>plus 2 3</code> est un nombre,
 l&#39;entier <code>5</code>. Sa valeur et son type s&#39;écrivent :</p>
-<pre><code class='ocaml'><script>ml74b9a3d89af236b8966922f74e193329 = '5 : int\n';</script>5 <span class='o'>:</span> int
+<pre><code class='ocaml'><script>ml74b9a3d89af236b8966922f74e193329 = '5 : int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>5 <span class='o'>:</span> int
 </code></pre>
 <p>
 Mais quid de la question 3 ? Il semblerait que <code>plus 2</code> soit une erreur,
 un bug. Alors qu&#39;en fait, il n&#39;en est point. Si nous typons cela dans le
 toplevel d&#39;OCaml, nous obtenons :</p>
-<pre><code class='ocaml'><script>mlc8c332fad50b7fddbf667b533a08cc63 = '# plus 2;;\n- : int -&#62; int = &#60;fun&#62;\n';</script><span class='o'>#</span> plus 2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlc8c332fad50b7fddbf667b533a08cc63 = '# plus 2;;\n- : int -&#62; int = &#60;fun&#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> plus 2<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 </code></pre>
 <p>
@@ -183,7 +183,7 @@ Ceci n&#39;est pas une erreur. Il nous dit que <code>plus 2</code> est en fait u
 <em>fonction</em>, qui prend un <code>int</code> et qui retourne un <code>int</code>. Quelle genre de
 fonction cela est-il ? Essayons d&#39;abord de lui donner un nom, puis de
 lui donner quelques entiers en argument, pour voir ce que ça donne :</p>
-<pre><code class='ocaml'><script>mlceced5c9869956d8ac38f6dd16b7b327 = '# let f = plus 2;;\nval f : int -&#62; int = &#60;fun&#62;\n# f 10;;\n- : int = 12\n# f 15;;\n- : int = 17\n# f 99;;\n- : int = 101\n';</script><span class='o'>#</span> <span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlceced5c9869956d8ac38f6dd16b7b327 = '# let f = plus 2;;\nval f : int -&#62; int = &#60;fun&#62;\n# f 10;;\n- : int = 12\n# f 15;;\n- : int = 17\n# f 99;;\n- : int = 101\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> f <span class='k'>=</span> plus 2<span class='o'>;;</span>
 <span class='k'>val</span> f <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 <span class='o'>#</span> f 10<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 12
@@ -199,7 +199,7 @@ suffisante pour nous dire que <code>plus 2</code> est la fonction qu&#39;ajoute 
 choses.</p>
 <p>Revenons à la définition originelle, et remplaçons le premier argument,
 soit <code>a</code>, par la valeur <code>2</code> pour obtenir :</p>
-<pre><code class='ocaml'><script>mld56324001fb338be72821778fd91b55e = 'let plus 2 b = 2 + b ;;\n(* /!\ Ce n&#39;est pas du code OCaml valide *)\n';</script><span class='k'>let</span> plus 2 b <span class='k'>=</span> 2 <span class='o'>+</span> b <span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld56324001fb338be72821778fd91b55e = 'let plus 2 b = 2 + b ;;\n(* /!\ Ce n&#39;est pas du code OCaml valide *)\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> plus 2 b <span class='k'>=</span> 2 <span class='o'>+</span> b <span class='o'>;;</span>
 <span class='com2'>(* <span class='ic'>/!\</span> Ce n'est pas du code OCaml valide *)</span><!-- end comment -->
 </code></pre>
 <p>
@@ -207,7 +207,7 @@ On peut maintenant mieux voir pourquoi <code>plus 2</code> est la fonction qui
 ajoute <code>2</code> à quelque chose.</p>
 <p>En regardant le type de ces expressions, on peut démystifier la notation
 flèchée bizarre utilisée pour les types de fonctions :</p>
-<pre><code class='ocaml'><script>ml13532dd76c40e5e4beaed42beb292bed = '     plus : int -&#62; int -&#62; int\n   plus 2 : int -&#62; int\n plus 2 3 : int\n';</script>     plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
+<pre><code class='ocaml'><script>ml13532dd76c40e5e4beaed42beb292bed = '     plus : int -&#62; int -&#62; int\n   plus 2 : int -&#62; int\n plus 2 3 : int\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span>     plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int
    plus 2 <span class='o'>:</span> int <span class='k'>-></span> int
  plus 2 3 <span class='o'>:</span> int
 </code></pre>
@@ -223,7 +223,7 @@ google</a>
 suffit.</p>
 <p>Vous rappelez-vous des fonctions <code>double</code> et <code>multiply</code> vues
 précédemment ? <code>multiply</code> était définit ainsi :</p>
-<pre><code class='ocaml'><script>mlb028318320514a9d9cdf4b7f132dda8a = 'let multiply n list =\n    let f x = n * x in\n    List.map f list\n    ;;\n';</script><span class='k'>let</span> multiply n list <span class='k'>=</span>
+<pre><code class='ocaml'><script>mlb028318320514a9d9cdf4b7f132dda8a = 'let multiply n list =\n    let f x = n * x in\n    List.map f list\n    ;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> multiply n list <span class='k'>=</span>
     <span class='k'>let</span> f x <span class='k'>=</span> n <span class='o'>*</span> x <span class='k'>in</span>
     <span class='m'>List</span><span class='o'>.</span>map f list
     <span class='o'>;;</span>
@@ -231,12 +231,12 @@ précédemment ? <code>multiply</code> était définit ainsi :</p>
 <p>
 Nous pouvons maintenant définir <code>double</code>, <code>triple</code>, etc, très facilement
 comme suit :</p>
-<pre><code class='ocaml'><script>mla2c8abfab2eb1614734eb0f45440fb11 = 'let double = multiply 2;;\nlet triple = multiply 3;;\n';</script><span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mla2c8abfab2eb1614734eb0f45440fb11 = 'let double = multiply 2;;\nlet triple = multiply 3;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
 <span class='k'>let</span> triple <span class='k'>=</span> multiply 3<span class='o'>;;</span>
 </code></pre>
 <p>
 Ce sont de réelles fonctions, la preuve :</p>
-<pre><code class='ocaml'><script>ml7284f0df46b4755be5c2f396c67bab66 = '# double [1; 2; 3];;\n- : int list = [2; 4; 6]\n# triple [1; 2; 3];;\n- : int list = [3; 6; 9]\n';</script><span class='o'>#</span> double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml7284f0df46b4755be5c2f396c67bab66 = '# double [1; 2; 3];;\n- : int list = [2; 4; 6]\n# triple [1; 2; 3];;\n- : int list = [3; 6; 9]\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> double <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>2<span class='o'>;</span> 4<span class='o'>;</span> 6<span class='o'>]</span>
 <span class='o'>#</span> triple <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>;</span> 6<span class='o'>;</span> 9<span class='o'>]</span>
@@ -244,7 +244,7 @@ Ce sont de réelles fonctions, la preuve :</p>
 <p>
 On peut aussi utiliser l&#39;application partielle (sans la fonction
 intermédiaire <code>f</code>) de cette façon :</p>
-<pre><code class='ocaml'><script>mld6f0228a494b286d342561fe4d8512af = '# let multiply n = List.map (( * ) n);;\nval multiply : int -&#62; int list -&#62; int list = &#60;fun&#62;\n\n# let double = multiply 2;;\nval double : int list -&#62; int list = &#60;fun&#62;\n# let triple = multiply 3;;\nval triple : int list -&#62; int list = &#60;fun&#62;\n# double [1; 2; 3];;\n- : int list = [2; 4; 6]\n# triple [1; 2; 3];;\n- : int list = [3; 6; 9]\n';</script><span class='o'>#</span> <span class='k'>let</span> multiply n <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) n)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mld6f0228a494b286d342561fe4d8512af = '# let multiply n = List.map (( * ) n);;\nval multiply : int -&#62; int list -&#62; int list = &#60;fun&#62;\n\n# let double = multiply 2;;\nval double : int list -&#62; int list = &#60;fun&#62;\n# let triple = multiply 3;;\nval triple : int list -&#62; int list = &#60;fun&#62;\n# double [1; 2; 3];;\n- : int list = [2; 4; 6]\n# triple [1; 2; 3];;\n- : int list = [3; 6; 9]\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> multiply n <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map (( <span class='o'>*</span> ) n)<span class='o'>;;</span>
 <span class='k'>val</span> multiply <span class='o'>:</span> int <span class='k'>-></span> int list <span class='k'>-></span> int list <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 
 <span class='o'>#</span> <span class='k'>let</span> double <span class='k'>=</span> multiply 2<span class='o'>;;</span>
@@ -264,14 +264,14 @@ c&#39;est un début de commentaire.</p>
 <p>On peut mettre des opérateurs infixes entre parenthèses pour faire des
 fonction. Voici une définition identique à la précédente avec la
 fonction <code>plus</code> :</p>
-<pre><code class='ocaml'><script>ml4d857f0d149ca86cdae30c8abf82446f = '# let plus = (+);;\nval plus : int -&#62; int -&#62; int = &#60;fun&#62;\n# plus 2 3;;\n- : int = 5\n';</script><span class='o'>#</span> <span class='k'>let</span> plus <span class='k'>=</span> <span class='o'>(+</span>)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml4d857f0d149ca86cdae30c8abf82446f = '# let plus = (+);;\nval plus : int -&#62; int -&#62; int = &#60;fun&#62;\n# plus 2 3;;\n- : int = 5\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> plus <span class='k'>=</span> <span class='o'>(+</span>)<span class='o'>;;</span>
 <span class='k'>val</span> plus <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 <span class='o'>#</span> plus 2 3<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 5
 </code></pre>
 <p>
 Voici encore plus de curryfication :</p>
-<pre><code class='ocaml'><script>ml668f1e127f495451c29f7e35be230461 = '# List.map (plus 2) [1; 2; 3];;\n- : int list = [3; 4; 5]\n# let list_of_functions = List.map plus [1; 2; 3];;\nval list_of_functions : (int -&#62; int) list = [&#60;fun&#62;; &#60;fun&#62;; &#60;fun&#62;]\n';</script><span class='o'>#</span> <span class='m'>List</span><span class='o'>.</span>map (plus 2) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml668f1e127f495451c29f7e35be230461 = '# List.map (plus 2) [1; 2; 3];;\n- : int list = [3; 4; 5]\n# let list_of_functions = List.map plus [1; 2; 3];;\nval list_of_functions : (int -&#62; int) list = [&#60;fun&#62;; &#60;fun&#62;; &#60;fun&#62;]\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='m'>List</span><span class='o'>.</span>map (plus 2) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list <span class='k'>=</span> <span class='o'>[</span>3<span class='o'>;</span> 4<span class='o'>;</span> 5<span class='o'>]</span>
 <span class='o'>#</span> <span class='k'>let</span> list_of_functions <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>map plus <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>val</span> list_of_functions <span class='o'>:</span> (int <span class='k'>-></span> int) list <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;;</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;;</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span><span class='o'>]</span>
@@ -308,7 +308,7 @@ qu&#39;écrire des fonctions impures est parfois utile.</p>
 est que si une fonction est pure, alors elle peut être appelée plusieurs
 fois avec les même arguments, le compilateur n&#39;aura qu&#39;a appeler la
 fonction qu&#39;une seule fois. Un bon exemple en C est :</p>
-<pre><code class='ocaml'><script>ml9807fefcd9f34d70b11f396652afccad = 'for (i = 0; i &#60; strlen(s); ++i) {\n    // Du code qui n&#39;affecte pas s\n}\n';</script><span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> strlen(s)<span class='o'>;</span> <span class='o'>++</span>i) <span class='o'>{</span>
+<pre><code class='ocaml'><script>ml9807fefcd9f34d70b11f396652afccad = 'for (i = 0; i &#60; strlen(s); ++i) {\n    // Du code qui n&#39;affecte pas s\n}\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> strlen(s)<span class='o'>;</span> <span class='o'>++</span>i) <span class='o'>{</span>
     <span class='o'>//</span> Du code qui n'affecte pas s
 <span class='o'>}</span>
 </code></pre>
@@ -336,7 +336,7 @@ nécessaire.</p>
 toujours évalués en premier, et le résultat est alors passé à la
 fonction. Par exemple dans un langage à évaluation stricte, cet appel va
 toujours sortir par une erreur de division par zéro :</p>
-<pre><code class='ocaml'><script>ml1b1344662347dd431a20cee67c0c556f = ' give_me_a_three (1/0);;\n';</script> give_me_a_three (1<span class='o'>/</span>0)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml1b1344662347dd431a20cee67c0c556f = ' give_me_a_three (1/0);;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span> give_me_a_three (1<span class='o'>/</span>0)<span class='o'>;;</span>
 </code></pre>
 <p>
 Si vous avez programmé dans n&#39;importe quel langage conventionnel, c&#39;est
@@ -356,20 +356,20 @@ d&#39;itérer sur la totalité de la liste, cela fonctionne.</p>
 paresseuse (<code>Lazy</code>) qui permettent d&#39;écrire des expressions paresseuses.
 Voici un exemple. D&#39;abord nous créons une expression paresseuse pour
 <code>1/0</code> :</p>
-<pre><code class='ocaml'><script>mlcba976571d04d877dcfef403b74fc10d = '# let lazy_expr = lazy (1/0);;\nval lazy_expr : int lazy_t = &#60;lazy&#62;\n';</script><span class='o'>#</span> <span class='k'>let</span> lazy_expr <span class='k'>=</span> <span class='k'>lazy</span> (1<span class='o'>/</span>0)<span class='o'>;;</span>
+<pre><code class='ocaml'><script>mlcba976571d04d877dcfef403b74fc10d = '# let lazy_expr = lazy (1/0);;\nval lazy_expr : int lazy_t = &#60;lazy&#62;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='k'>let</span> lazy_expr <span class='k'>=</span> <span class='k'>lazy</span> (1<span class='o'>/</span>0)<span class='o'>;;</span>
 <span class='k'>val</span> lazy_expr <span class='o'>:</span> int lazy_t <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>lazy</span><span class='o'>&#62;</span>
 </code></pre>
 <p>
 A noter que le type de l&#39;expression est <code>int lazy_t</code></p>
 <p>Parce que <code>give_me_a_three</code> prend un <code>&#39;a</code> (tout type) nous pouvons passé
 cette expression à la fonction :</p>
-<pre><code class='ocaml'><script>ml526ae5f05f89688192db4cb178f84d99 = '# give_me_a_three lazy_expr;;\n- : int = 3;;\n';</script><span class='o'>#</span> give_me_a_three lazy_expr<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml526ae5f05f89688192db4cb178f84d99 = '# give_me_a_three lazy_expr;;\n- : int = 3;;\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> give_me_a_three lazy_expr<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 3<span class='o'>;;</span>
 </code></pre>
 <p>
 Pour évaluer une expression paresseuse, nous devons utiliser la fonction
 <code>Lazy.force</code> :</p>
-<pre><code class='ocaml'><script>ml2761d4a26996ed1a45ebfa8ed31fe733 = '# Lazy.force lazy_expr;;\nException : Division_by_zero.\n';</script><span class='o'>#</span> <span class='m'>Lazy</span><span class='o'>.</span>force lazy_expr<span class='o'>;;</span>
+<pre><code class='ocaml'><script>ml2761d4a26996ed1a45ebfa8ed31fe733 = '# Lazy.force lazy_expr;;\nException : Division_by_zero.\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span> <span class='m'>Lazy</span><span class='o'>.</span>force lazy_expr<span class='o'>;;</span>
 Exception <span class='o'>:</span> <span class='m'>Division_by_zero</span><span class='o'>.</span>
 </code></pre>
 <h2 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h2><p>
@@ -383,7 +383,7 @@ avant (en Perl tout est «boxed»).</p>
 <p>La façon de voir un objet «boxed» est de penser à un objet qui a été
 alloué dans le tas en utilisant <code>malloc()</code> en C (ou <code>new</code> en C++), et/ou
 qui est y est réferré via un pointeur. Prenons ce programme C :</p>
-<pre><code class='ocaml'><script>ml688c7264983d15caa7a23367d2303330 = '#include &#60;stdio.h&#62;\n\nvoid printit (int* ptr) {\n    printf(&#34;the number is %d\n&#34;, *ptr);\n}\n\nint main () {\n    int a = 3;\n    int *p = &#38;a;\n\n    printit (p);\n\n    return 0;\n}\n';</script><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
+<pre><code class='ocaml'><script>ml688c7264983d15caa7a23367d2303330 = '#include &#60;stdio.h&#62;\n\nvoid printit (int* ptr) {\n    printf(&#34;the number is %d\n&#34;, *ptr);\n}\n\nint main () {\n    int a = 3;\n    int *p = &#38;a;\n\n    printit (p);\n\n    return 0;\n}\n'; function copytoclipboard(s){}</script><span style='position:relative;top:-1em;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span><span class='o'>#</span><span class='k'>include</span> <span class='o'>&#60;</span>stdio<span class='o'>.</span>h<span class='o'>&#62;</span>
 
 void printit (int<span class='o'>*</span> ptr) <span class='o'>{</span>
     printf(<span class='s'>&#34;the number is %d\n&#34;</span><span class='o'>,</span> <span class='o'>*</span>ptr)<span class='o'>;</span>
