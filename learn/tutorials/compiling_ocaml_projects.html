@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +69,31 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="CompilingOCamlprojects"> Compiling OCaml projects</h1><p>
 This tutorial describes the base compilation commands provided with
 OCaml. It is useful to learn these commands to understand OCaml&#39;s
@@ -76,8 +123,8 @@ provides standalone executables that are normally faster than bytecode.</p>
 using <code>ocamlopt</code>. For now, we also assume that they do not use any other
 library than the standard library, which is automatically loaded. You
 can compile the program in one single step:</p>
-<pre><code class='ocaml'>ocamlopt <span class='o'>-</span>o progprog module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
-<script>ml28161b009bf53bcfc00d8f649096f6e2 = 'ocamlopt -o progprog module1.ml module2.ml\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>ocamlopt <span class='o'>-</span>o progprog module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+<a href="javascript:octry('ocamlopt -o progprog module1.ml module2.ml\n');">[try]</a></pre>
 <p>
 That&#39;s it. The compiler produced an executable named <code>progprog</code> or
 <code>progprog.exe</code>. If you are wondering how to write a program in multiple
@@ -106,8 +153,8 @@ to 3D graphics. You must understand the following:</p>
 
 <p>If your program uses only the unix library (provides system calls not
 only for Unix systems), the command line would be:</p>
-<pre><code class='ocaml'>ocamlopt <span class='o'>-</span>o progprog unix<span class='o'>.</span>cmxa module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
-<script>mleb19f969a5e52081dfb4ebd04dbb6c96 = 'ocamlopt -o progprog unix.cmxa module1.ml module2.ml\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>ocamlopt <span class='o'>-</span>o progprog unix<span class='o'>.</span>cmxa module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
+<a href="javascript:octry('ocamlopt -o progprog unix.cmxa module1.ml module2.ml\n');">[try]</a></pre>
 <p>
 <code>.cmxa</code> is the extension of native code libraries, while <code>.cma</code> is the
 extension of bytecode libraries. The file <code>unix.cmxa</code> is found because
@@ -135,8 +182,8 @@ the libraries you want to use have been installed properly with
 ocamlfind.</p>
 <p>You can see which packages and subpackages are available in your system
 by typing:</p>
-<pre><code class='ocaml'>ocamlfind list
-<script>ml415af19f982f20171ee7f277dc6077e9 = 'ocamlfind list\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>ocamlfind list
+<a href="javascript:octry('ocamlfind list\n');">[try]</a></pre>
 <p>
 This shows the list of package names, with their version ID.</p>
 <p>For our example using LablGL and OCamlSDL, we are going to use the
@@ -144,10 +191,10 @@ following packages: lablGL, sdl, sdl.sdlimage, sdl.sdlmixer, sdl.sdlttf.
 The bigarray package is needed by the sdl package, but we don&#39;t need to
 worry about that since <code>ocamlfind</code> knows it.</p>
 <p>The command for compiling our program will be:</p>
-<pre><code class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
+<pre class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
   <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
   module1<span class='o'>.</span>ml module2<span class='o'>.</span>ml
-<script>ml27c7824d111e0d35acb81541da9082f7 = 'ocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml module2.ml\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('ocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml module2.ml\n');">[try]</a></pre>
 <p>
 And it will work regardless of the location of the libraries, as long as
 they are known by <code>ocamlfind</code>.</p>
@@ -155,7 +202,7 @@ they are known by <code>ocamlfind</code>.</p>
 you want to recompile only some parts of the programs. Here are the
 equivalent commands that perform a separate compilation of the source
 files and link them together in a final step:</p>
-<pre><code class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
+<pre class='ocaml'>ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
   <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
   module1<span class='o'>.</span>ml
 ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
@@ -164,7 +211,7 @@ ocamlfind ocamlopt <span class='o'>-</span>c <span class='o'>\</span>
 ocamlfind ocamlopt <span class='o'>-</span>o progprog <span class='o'>-</span>linkpkg <span class='o'>\</span>
   <span class='o'>-</span>package lablGL<span class='o'>,</span>sdl<span class='o'>,</span>sdl<span class='o'>.</span>sdlimage<span class='o'>,</span>sdl<span class='o'>.</span>sdlmixer<span class='o'>,</span>sdl<span class='o'>.</span>sdlttf <span class='o'>\</span>
   module1<span class='o'>.</span>cmx module2<span class='o'>.</span>cmx
-<script>ml8b52a3ce7ef19d9933c8f535e319b3e3 = 'ocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml\nocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module2.ml\nocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.cmx module2.cmx\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('ocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml\nocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module2.ml\nocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.cmx module2.cmx\n');">[try]</a></pre>
 <p>
 Separate compilation is usually not performed manually but only when
 using a Makefile that will take care of recompiling only what it
@@ -188,5 +235,6 @@ necessary. See next section.</p>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

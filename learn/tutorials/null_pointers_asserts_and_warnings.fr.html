@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +69,31 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="Pointeursnulsassertsetwarnings"> Pointeurs nuls, asserts et warnings</h1><h2 id="Pointeursnuls"> Pointeurs nuls</h2><p>
 
 Supposons que votre site web dispose d&#39;un sondage, demandant à vos
@@ -68,13 +115,13 @@ couleurs primaires.</p>
 <p>L&#39;autre méthode, plus correcte, est de stocker les âges dans un champ de
 type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
 âges ressemblerait à :</p>
-<pre><code class='ocaml'>create table users
+<pre class='ocaml'>create table users
 (
   userid serial<span class='o'>,</span>
   name text not null<span class='o'>,</span>
   age int             <span class='o'>--</span> may be null
 )<span class='o'>;</span>
-<script>mlda36ba417a9334fec043358bf5266e36 = 'create table users\n(\n  userid serial,\n  name text not null,\n  age int             -- may be null\n);\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('create table users\n(\n  userid serial,\n  name text not null,\n  age int             -- may be null\n);\n');">[try]</a></pre>
 <p>
 Si l&#39;âge n&#39;est pas connu, c&#39;est la valeur spéciale SQL <code>NULL</code> qui est
 enregistrée. SQL ne tient pas compte de ces entrées si on demande à
@@ -94,26 +141,26 @@ dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</
 <p>OCaml propose une solution élégante pour les valeurs nulles, en
 utilisant un simple type variant polymorphique, défini (jusqu&#39;à
 récemment, dans le module <code>Pervasives</code>) comme :</p>
-<pre><code class='ocaml'><span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
-<script>mlaa912a4f6680345f78f66907131bc48f = 'type &#39;a option = None | Some of &#39;a\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
+<a href="javascript:octry('type &#39;a option = None | Some of &#39;a\n');">[try]</a></pre>
 <p>
 Une &quot;valeur nulle&quot; s&#39;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
 l&#39;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> dans le chapitre
 précédent).</p>
-<pre><code class='ocaml'><span class='o'>#</span> Some 3<span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span> Some 3<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int option <span class='k'>=</span> Some 3
-<script>ml2d4190b451f22d97d17cd16ac50a2630 = '# Some 3;;\n- : int option = Some 3\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# Some 3;;\n- : int option = Some 3\n');">[try]</a></pre>
 <p>
 Une liste d&#39;entiers optionels ?</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span><span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span> <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int option list <span class='k'>=</span> <span class='o'>[</span>None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None<span class='o'>]</span>
-<script>ml857003cf885c0c289aed85bfc3eab67b = '# [ None; Some 3; Some 6; None ];;\n- : int option list = [None; Some 3; Some 6; None]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# [ None; Some 3; Some 6; None ];;\n- : int option list = [None; Some 3; Some 6; None]\n');">[try]</a></pre>
 <p>
 Et une liste optionelle d&#39;entiers ?</p>
-<pre><code class='ocaml'><span class='o'>#</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int list option <span class='k'>=</span> Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>
-<script>mlc80242816dce878dd6fe309549b80f97 = '# Some [1; 2; 3];;\n- : int list option = Some [1; 2; 3]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# Some [1; 2; 3];;\n- : int list option = Some [1; 2; 3]\n');">[try]</a></pre>
 <h2 id="Assertionsavertissementserreursfatalesetcritureversstderr"> Assertions, avertissements, erreurs fatales, et écriture vers stderr</h2><p>
 
 Perl se distingue par un riche ensemble de commandes pour déboguer les
@@ -129,9 +176,9 @@ supposant que vous ne rattrapiez pas cette exception (ce qui est
 recommandé, tout particulièrement pour les débutants), son effet sera de
 stopper le programme, et d&#39;afficher l&#39;emplacement (nom du fichier,
 numéro de ligne et de colonne) où l&#39;erreur est survenue. Par exemple :</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)<span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span> <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)<span class='o'>;;</span>
 Exception<span class='o'>:</span> Assert_failure (<span class='s'>&#34;&#34;</span><span class='o'>,</span> 0<span class='o'>,</span> 30)<span class='o'>.</span>
-<script>ml9ff9b68c8ba929945777871566c7a5c4 = '# assert (Sys.os_type = &#34;Win32&#34;);;\nException: Assert_failure (&#34;&#34;, 0, 30).\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# assert (Sys.os_type = &#34;Win32&#34;);;\nException: Assert_failure (&#34;&#34;, 0, 30).\n');">[try]</a></pre>
 <p>
 (Bien entendu, cette exception ne sera pas levée sous Win32.)</p>
 <p>Vous pouvez utiliser <code>assert false</code> pour stopper votre programme dans
@@ -140,12 +187,12 @@ les situations critiques, mais il est souvent préférable d&#39;utiliser...</p>
 elle aussi, à moins d&#39;être rattrappée, va stopper le programme et
 afficher le message d&#39;erreur fourni. <code>failwith</code> est souvent utilisé lors
 du filtrage, comme dans cet exemple réel :</p>
-<pre><code class='ocaml'>  <span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
+<pre class='ocaml'>  <span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
     <span class='s'>&#34;Unix&#34;</span> <span class='o'>|</span> <span class='s'>&#34;Cygwin&#34;</span> <span class='k'>-></span>   <span class='com2'>(* code omit *)</span><!-- end comment -->
   <span class='o'>|</span> <span class='s'>&#34;Win32&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omit *)</span><!-- end comment -->
   <span class='o'>|</span> <span class='s'>&#34;MacOS&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omit *)</span><!-- end comment -->
   <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> failwith <span class='s'>&#34;Ce système n&#39;est pas supporté&#34;</span>
-<script>ml45de7cd688db17f825d7a5e8404c5fec = '  match Sys.os_type with\n    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)\n  | &#34;Win32&#34; -&#62;             (* code omit *)\n  | &#34;MacOS&#34; -&#62;             (* code omit *)\n  | _ -&#62; failwith &#34;Ce système n&#39;est pas supporté&#34;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  match Sys.os_type with\n    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)\n  | &#34;Win32&#34; -&#62;             (* code omit *)\n  | &#34;MacOS&#34; -&#62;             (* code omit *)\n  | _ -&#62; failwith &#34;Ce système n&#39;est pas supporté&#34;\n');">[try]</a></pre>
 <p>
 A noter l&#39;utilisation d&#39;un couple de fonctionnalités supplémentaires du
 système de filtrage. L&#39;union de motifs est utilisée pour reconnaître
@@ -155,7 +202,7 @@ système de filtrage. L&#39;union de motifs est utilisée pour reconnaître
 aversion pour les débogueurs autres que gdb, vous voudrez sûrement faire
 afficher des avertissements par vos fonctions. Voici un exemple (notez
 le code surligné) :</p>
-<pre><code class='ocaml'><span class='k'>open</span> Graphics<span class='o'>;;</span>
+<pre class='ocaml'><span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='k'>for</span> i <span class='k'>=</span> 12 <span class='k'>downto</span> 1 <span class='k'>do</span>
@@ -165,11 +212,11 @@ open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
   fill_circle 320 240 radius
 <span class='k'>done</span><span class='o'>;;</span>
 read_line ()<span class='o'>;;</span>
-<script>ml42cfb9b7a9b464641a2578519921f0a8 = 'open Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;prerr_endline (&#34;radius is &#34; ^ (string_of_int radius));&#60;/em&#62;\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('open Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;prerr_endline (&#34;radius is &#34; ^ (string_of_int radius));&#60;/em&#62;\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n');">[try]</a></pre>
 <p>
 Si vous préférez le style <code>printf</code> du langage C, essayez plutôt le
 module <code>Printf</code> d&#39;OCaml :</p>
-<pre><code class='ocaml'><span class='k'>open</span> Graphics<span class='o'>;;</span>
+<pre class='ocaml'><span class='k'>open</span> Graphics<span class='o'>;;</span>
 <span class='o'>&#60;</span>em<span class='o'>&#62;</span><span class='k'>open</span> Printf<span class='o'>;;&#60;/</span>em<span class='o'>&#62;</span>
 
 open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
@@ -182,7 +229,7 @@ open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='k'>done</span><span class='o'>;;</span>
 read_line ()<span class='o'>;;</span>
 
-<script>mleddded6885be11942502b7fbd03f6ffb = 'open Graphics;;\n&#60;em&#62;open Printf;;&#60;/em&#62;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;eprintf &#34;radius is %d\n&#34; radius;&#60;/em&#62;\n\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('open Graphics;;\n&#60;em&#62;open Printf;;&#60;/em&#62;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;eprintf &#34;radius is %d\n&#34; radius;&#60;/em&#62;\n\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n');">[try]</a></pre>
 
           </div>
         </div>
@@ -202,5 +249,6 @@ read_line ()<span class='o'>;;</span>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

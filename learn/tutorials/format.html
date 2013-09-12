@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -82,7 +105,31 @@
           </nav>
         </div>
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             
 <h1 id="UsingtheFormatmodule"> Using the Format module</h1><p>
 The <code>Format</code> module of Caml Light and OCaml&#39;s standard libraries
@@ -159,51 +206,51 @@ the value of the break that is explained below):</p>
  <li>within a “h” box:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
-<script>ml8d5cb61c0deb32ee4f4bede40955a7e4 = '   --b--b--\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
+<a href="javascript:octry('   --b--b--\n');">[try]</a></pre>
 <ul>
  <li>within a “v” box:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>--</span>b
+<pre class='ocaml'>   <span class='o'>--</span>b
    <span class='o'>--</span>b
    <span class='o'>--</span>
-<script>mlc8d0f256d2781694ca6c0680bc6684d8 = '   --b\n   --b\n   --\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   --b\n   --b\n   --\n');">[try]</a></pre>
 <ul>
  <li>within a “hv” box:</li>
 </ul>
 
 <p>If there is enough room to print the box on the line:</p>
-<pre><code class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
-<script>ml8d5cb61c0deb32ee4f4bede40955a7e4 = '   --b--b--\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
+<a href="javascript:octry('   --b--b--\n');">[try]</a></pre>
 <p>
 But &quot;---b---b---&quot; that cannot fit on the line is written</p>
-<pre><code class='ocaml'>   <span class='o'>---</span>b
+<pre class='ocaml'>   <span class='o'>---</span>b
    <span class='o'>---</span>b
    <span class='o'>---</span>
-<script>mlfd8b62518dbd6ac730c9aeb586a71f17 = '   ---b\n   ---b\n   ---\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   ---b\n   ---b\n   ---\n');">[try]</a></pre>
 <ul>
  <li>within a “hov” box:</li>
 </ul>
 
 <p>If there is enough room to print the box on the line:</p>
-<pre><code class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
-<script>ml8d5cb61c0deb32ee4f4bede40955a7e4 = '   --b--b--\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>   <span class='o'>--</span>b<span class='o'>--</span>b<span class='o'>--</span>
+<a href="javascript:octry('   --b--b--\n');">[try]</a></pre>
 <p>
 But if &quot;---b---b---&quot; cannot fit on the line, it is written as</p>
-<pre><code class='ocaml'>   <span class='o'>---</span>b<span class='o'>---</span>b
+<pre class='ocaml'>   <span class='o'>---</span>b<span class='o'>---</span>b
    <span class='o'>---</span>
-<script>ml69a5fd4512fc98e75eeedf134ade34cf = '   ---b---b\n   ---\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   ---b---b\n   ---\n');">[try]</a></pre>
 <p>
 The first break hint does not lead to a new line, since there is
 enough room on the line. The second one leads to a new line since
 there is no more room to print the material following it. If the
 room left on the line were even shorter, the first break hint may
 lead to a new line and &quot;---b---b---&quot; is written as:</p>
-<pre><code class='ocaml'>    <span class='o'>---</span>b
+<pre class='ocaml'>    <span class='o'>---</span>b
     <span class='o'>---</span>b
     <span class='o'>---</span>
-<script>mld30bd610a9962987fe5ab2e4ddedb150 = '    ---b\n    ---b\n    ---\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('    ---b\n    ---b\n    ---\n');">[try]</a></pre>
 <h2 id="Printingspaces"> Printing spaces</h2><p>
 Break hints are also used to output spaces (if the line is not split
 when the break is encountered, otherwise the new line indicates properly
@@ -216,28 +263,28 @@ or output a new line.</p>
  <li>within a “h” box:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
-<script>mlfb84b1f64a59361534a5a1aea40319ef = '   -- -- --\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
+<a href="javascript:octry('   -- -- --\n');">[try]</a></pre>
 <ul>
  <li>within a “v” box:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>--</span>
+<pre class='ocaml'>   <span class='o'>--</span>
    <span class='o'>--</span>
    <span class='o'>--</span>
-<script>mld68bf097bb921d38f1c6188cbb3b52a7 = '   --\n   --\n   --\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></pre>
 <ul>
  <li>within a “hv” box:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
-<script>mlfb84b1f64a59361534a5a1aea40319ef = '   -- -- --\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
+<a href="javascript:octry('   -- -- --\n');">[try]</a></pre>
 <p>
 or, according to the remaining room on the line:</p>
-<pre><code class='ocaml'>   <span class='o'>--</span>
+<pre class='ocaml'>   <span class='o'>--</span>
    <span class='o'>--</span>
    <span class='o'>--</span>
-<script>mld68bf097bb921d38f1c6188cbb3b52a7 = '   --\n   --\n   --\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></pre>
 <ul>
  <li>and similarly for “hov” boxes.</li>
 </ul>
@@ -257,21 +304,21 @@ The user gets 2 ways to fix the indentation of new lines:</p>
  &quot;---[--b--b--b--&quot;, we get:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
+<pre class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
         <span class='o'>--</span>b<span class='o'>--</span>
-<script>ml4d7027ea062eb32be5722b51bdf2feb7 = '   ---[--b--b\n        --b--\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   ---[--b--b\n        --b--\n');">[try]</a></pre>
 <p>
 with <code>open_hovbox 2</code>, we get</p>
-<pre><code class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
+<pre class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
          <span class='o'>--</span>b<span class='o'>--</span>
-<script>ml04fc84d21419c57b22908edef31bcee7 = '   ---[--b--b\n         --b--\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   ---[--b--b\n         --b--\n');">[try]</a></pre>
 <p>
 Note: the <code>[</code> sign in the display is not visible on the screen, it
 is just there to materialise the aperture of the pretty-printing
 box. Last “screen” stands for:</p>
-<pre><code class='ocaml'>    <span class='o'>-----</span>b<span class='o'>--</span>b
+<pre class='ocaml'>    <span class='o'>-----</span>b<span class='o'>--</span>b
          <span class='o'>--</span>b<span class='o'>--</span>
-<script>ml6c01e8716f1fd889f220d84a0fb40954 = '    -----b--b\n         --b--\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('    -----b--b\n         --b--\n');">[try]</a></pre>
 <ul>
  <li><strong>when defining the break that makes the new line</strong>. As said above,
  you output a break hint using <code>print_break     sp           indent</code>.
@@ -284,10 +331,10 @@ box. Last “screen” stands for:</p>
  we get:</li>
 </ul>
 
-<pre><code class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span> <span class='o'>--</span>
+<pre class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span> <span class='o'>--</span>
          <span class='o'>--</span>
          <span class='o'>--</span>
-<script>ml5056d79926449a43d89834ecb8a8d619 = '   ---[-- --\n         --\n         --\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('   ---[-- --\n         --\n         --\n');">[try]</a></pre>
 <h2 id="Refinementonhovboxes"> Refinement on “hov” boxes</h2><h3 id="Packingandstructuralhovboxes"> Packing and structural “hov” boxes</h3><p>
 
 The “hov” box type is refined into two categories.</p>
@@ -313,22 +360,22 @@ each break hint will lead to a new line. For instance, when printing
 &quot;[(---[(----[(---b)]b)]b)]&quot;, where &quot;b&quot; is a break hint without extra
 indentation (<code>print_cut ()</code>). If &quot;[&quot; means opening of a packing “hov”
 box (open_hovbox), &quot;[(---[(----[(---b)]b)]b)]&quot; is printed as follows:</p>
-<pre><code class='ocaml'><span class='o'>(---</span>
+<pre class='ocaml'><span class='o'>(---</span>
  <span class='o'>(----</span>
   <span class='o'>(---</span>)))
-<script>mlc8b4a2aba4322490d09c3dc74a79871a = '(---\n (----\n  (---)))\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(---\n (----\n  (---)))\n');">[try]</a></pre>
 <p>
 If we replace the packing boxes by structural boxes (open_box), each
 break hint that precedes a closing parenthesis can show the boxes
 structure, if it leads to a new line; hence &quot;[(---[(----[(---b)]b)]b)]&quot;
 is printed like this:</p>
-<pre><code class='ocaml'><span class='o'>(---</span>
+<pre class='ocaml'><span class='o'>(---</span>
  <span class='o'>(----</span>
   <span class='o'>(---</span>
   )
  )
 )
-<script>mla119c106352dfb2f0a397bc4de4d371e = '(---\n (----\n  (---\n  )\n )\n)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(---\n (----\n  (---\n  )\n )\n)\n');">[try]</a></pre>
 <h2 id="Practicaladvice"> Practical advice</h2><p>
 
 When writing a pretty-printing routine, follow these simple rules:</p>
@@ -404,11 +451,11 @@ be called from within a <code>printf</code> format string. For instance</p>
 </ul>
 
 <p>For instance</p>
-<pre><code class='ocaml'>printf <span class='s'>&#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34;</span> <span class='s'>&#34;Prix TTC&#34;</span> 100 <span class='s'>&#34;Euros&#34;</span><span class='o'>;;</span>
+<pre class='ocaml'>printf <span class='s'>&#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34;</span> <span class='s'>&#34;Prix TTC&#34;</span> 100 <span class='s'>&#34;Euros&#34;</span><span class='o'>;;</span>
 Prix TTC <span class='k'>=</span> 100 Euros
 
 <span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
-<script>mla7f5e7b7d76a661f4dbb8579dd2bd77f = 'printf &#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34; &#34;Prix TTC&#34; 100 &#34;Euros&#34;;;\nPrix TTC = 100 Euros\n\n- : unit = ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('printf &#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34; &#34;Prix TTC&#34; 100 &#34;Euros&#34;;;\nPrix TTC = 100 Euros\n\n- : unit = ()\n');">[try]</a></pre>
 <h2 id="Aconcreteexample"> A concrete example</h2><p>
 
 Let me give a full example: the shortest non trivial example you could
@@ -418,14 +465,14 @@ that models a language of expressions that defines functions and their
 applications to arguments.</p>
 <p>First, I give the abstract syntax of lambda-terms (we illustrate is in
 the <a href='../description.html#interactive'>interactive system</a>):</p>
-<pre><code class='ocaml'>  <span class='k'>type</span> lambda <span class='k'>=</span>
+<pre class='ocaml'>  <span class='k'>type</span> lambda <span class='k'>=</span>
     <span class='o'>|</span> Lambda <span class='k'>of</span> string <span class='o'>*</span> lambda
     <span class='o'>|</span> Var <span class='k'>of</span> string
     <span class='o'>|</span> Apply <span class='k'>of</span> lambda <span class='o'>*</span> lambda
-<script>ml9086d339d24610088e3dfca6d70cdba8 = '  type lambda =\n    | Lambda of string * lambda\n    | Var of string\n    | Apply of lambda * lambda\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  type lambda =\n    | Lambda of string * lambda\n    | Var of string\n    | Apply of lambda * lambda\n');">[try]</a></pre>
 <p>
 I use the format library to print the lambda-terms:</p>
-<pre><code class='ocaml'>  <span class='k'>open</span> Format<span class='o'>;;</span>
+<pre class='ocaml'>  <span class='k'>open</span> Format<span class='o'>;;</span>
 
   <span class='k'>let</span> ident <span class='k'>=</span> print_string
   <span class='k'>let</span> kwd <span class='k'>=</span> print_string<span class='o'>;;</span>
@@ -445,11 +492,11 @@ I use the format library to print the lambda-terms:</p>
         kwd <span class='s'>&#34;\\&#34;; ident s; kwd &#34;</span><span class='o'>.</span>"<span class='o'>;</span> print_space()<span class='o'>;</span> print_lambda lam<span class='o'>;</span>
         close_box()
     <span class='o'>|</span> e <span class='k'>-></span> print_app e
-<script>mlcbbf238488d56f3906e3ad87408a731f = '  open Format;;\n\n  let ident = print_string\n  let kwd = print_string;;\n\n  let rec print_exp0 = function\n    | Var s -&#62;  ident s\n    | lam -&#62; open_hovbox 1; kwd &#34;(&#34;; print_lambda lam; kwd &#34;)&#34;; close_box ()\n  and print_app = function\n    | e -&#62; open_hovbox 2; print_other_applications e; close_box ()\n  and print_other_applications f =\n    match f with\n    | Apply (f, arg) -&#62; print_app f; print_space (); print_exp0 arg\n    | f -&#62; print_exp0 f\n  and print_lambda = function\n    | Lambda (s, lam) -&#62;\n        open_hovbox 1;\n        kwd &#34;\\&#34;; ident s; kwd &#34;.&#34;; print_space(); print_lambda lam;\n        close_box()\n    | e -&#62; print_app e\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  open Format;;\n\n  let ident = print_string\n  let kwd = print_string;;\n\n  let rec print_exp0 = function\n    | Var s -&#62;  ident s\n    | lam -&#62; open_hovbox 1; kwd &#34;(&#34;; print_lambda lam; kwd &#34;)&#34;; close_box ()\n  and print_app = function\n    | e -&#62; open_hovbox 2; print_other_applications e; close_box ()\n  and print_other_applications f =\n    match f with\n    | Apply (f, arg) -&#62; print_app f; print_space (); print_exp0 arg\n    | f -&#62; print_exp0 f\n  and print_lambda = function\n    | Lambda (s, lam) -&#62;\n        open_hovbox 1;\n        kwd &#34;\\&#34;; ident s; kwd &#34;.&#34;; print_space(); print_lambda lam;\n        close_box()\n    | e -&#62; print_app e\n');">[try]</a></pre>
 <p>
 In Caml Light, replace the first line by:</p>
-<pre><code class='ocaml'><span class='o'>#</span><span class='k'>open</span> <span class='s'>&#34;format&#34;</span><span class='o'>;;</span>
-<script>ml77efcf2f84331048edcca85ad70369bb = '#open &#34;format&#34;;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='o'>#</span><span class='k'>open</span> <span class='s'>&#34;format&#34;</span><span class='o'>;;</span>
+<a href="javascript:octry('#open &#34;format&#34;;;\n');">[try]</a></pre>
 <h3 id="Mostgeneralprettyprintingusingfprintf"> Most general pretty-printing: using <code>fprintf</code></h3><p>
 
 We use the <code>fprintf</code> function to write the most versatile version of the
@@ -465,7 +512,7 @@ function (these user&#39;s supplied functions also have a formatter as first
 argument).</p>
 <p>Using <code>fprintf</code>, the lambda-terms printing routines can be written as
 follows:</p>
-<pre><code class='ocaml'>  <span class='k'>open</span> Format<span class='o'>;;</span>
+<pre class='ocaml'>  <span class='k'>open</span> Format<span class='o'>;;</span>
 
   <span class='k'>let</span> ident ppf s <span class='k'>=</span> fprintf ppf <span class='s'>&#34;%s&#34;</span> s
   <span class='k'>let</span> kwd ppf s <span class='k'>=</span> fprintf ppf <span class='s'>&#34;%s&#34;</span> s<span class='o'>;;</span>
@@ -484,14 +531,14 @@ follows:</p>
        fprintf ppf <span class='s'>&#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;</span>
                kwd <span class='s'>&#34;\\&#34; ident s kwd &#34;</span><span class='o'>.</span>" pr_lambda lam
     <span class='o'>|</span> e <span class='k'>-></span> pr_app ppf e
-<script>mle0902c96a7ca47b3f2c6762b4f57e1ca = '  open Format;;\n\n  let ident ppf s = fprintf ppf &#34;%s&#34; s\n  let kwd ppf s = fprintf ppf &#34;%s&#34; s;;\n\n  let rec pr_exp0 ppf = function\n    | Var s -&#62; fprintf ppf &#34;%a&#34; ident s\n    | lam -&#62; fprintf ppf &#34;@[&#60;1&#62;(%a)@]&#34; pr_lambda lam\n  and pr_app ppf e =\n    fprintf ppf &#34;@[&#60;2&#62;%a@]&#34; pr_other_applications e\n  and pr_other_applications ppf f =\n    match f with\n    | Apply (f, arg) -&#62; fprintf ppf &#34;%a@ %a&#34; pr_app f pr_exp0 arg\n    | f -&#62; pr_exp0 ppf f\n  and pr_lambda ppf = function\n    | Lambda (s, lam) -&#62;\n       fprintf ppf &#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;\n               kwd &#34;\\&#34; ident s kwd &#34;.&#34; pr_lambda lam\n    | e -&#62; pr_app ppf e\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  open Format;;\n\n  let ident ppf s = fprintf ppf &#34;%s&#34; s\n  let kwd ppf s = fprintf ppf &#34;%s&#34; s;;\n\n  let rec pr_exp0 ppf = function\n    | Var s -&#62; fprintf ppf &#34;%a&#34; ident s\n    | lam -&#62; fprintf ppf &#34;@[&#60;1&#62;(%a)@]&#34; pr_lambda lam\n  and pr_app ppf e =\n    fprintf ppf &#34;@[&#60;2&#62;%a@]&#34; pr_other_applications e\n  and pr_other_applications ppf f =\n    match f with\n    | Apply (f, arg) -&#62; fprintf ppf &#34;%a@ %a&#34; pr_app f pr_exp0 arg\n    | f -&#62; pr_exp0 ppf f\n  and pr_lambda ppf = function\n    | Lambda (s, lam) -&#62;\n       fprintf ppf &#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;\n               kwd &#34;\\&#34; ident s kwd &#34;.&#34; pr_lambda lam\n    | e -&#62; pr_app ppf e\n');">[try]</a></pre>
 <p>
 Given those general printing routines, procedures to print to <code>stdout</code>
 or <code>stderr</code> is just a matter of partial application:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> print_lambda <span class='k'>=</span> pr_lambda std_formatter
+<pre class='ocaml'>  <span class='k'>let</span> print_lambda <span class='k'>=</span> pr_lambda std_formatter
   <span class='k'>let</span> eprint_lambda <span class='k'>=</span> pr_lambda err_formatter
 
-<script>ml5ad0be71e71d04ac2d16ffa35e13f0fc = '  let print_lambda = pr_lambda std_formatter\n  let eprint_lambda = pr_lambda err_formatter\n\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  let print_lambda = pr_lambda std_formatter\n  let eprint_lambda = pr_lambda err_formatter\n\n');">[try]</a></pre>
 
           </div>
         </div>
@@ -511,5 +558,6 @@ or <code>stderr</code> is just a matter of partial application:</p>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

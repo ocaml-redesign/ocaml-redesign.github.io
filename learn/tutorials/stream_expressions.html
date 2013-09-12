@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +69,31 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="StreamExpressions"> Stream Expressions</h1><h2 id="StreamExpressionsx"> Stream Expressions</h2><p>
 
 Streams are very powerful and concise once the necessary tools (stream
@@ -59,30 +106,30 @@ simplifying many common stream-oriented tasks.</p>
 <h2 id="InteractiveUse"> Interactive Use</h2><p>
 To enable stream expression support in the toplevel, you can type the
 following:</p>
-<pre><code class='ocaml'><span class='o'>#</span>load <span class='s'>&#34;dynlink.cma&#34;</span><span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span>load <span class='s'>&#34;dynlink.cma&#34;</span><span class='o'>;;</span>
 <span class='o'>#</span>load <span class='s'>&#34;camlp4o.cma&#34;</span><span class='o'>;;</span>
-<script>ml0167aba4c5988c8c792b1bf1cd5cb11b = '#load &#34;dynlink.cma&#34;;;\n#load &#34;camlp4o.cma&#34;;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('#load &#34;dynlink.cma&#34;;;\n#load &#34;camlp4o.cma&#34;;;\n');">[try]</a></pre>
 <p>
 Or, if you are using findlib:</p>
-<pre><code class='ocaml'><span class='o'>#</span>use <span class='s'>&#34;topfind&#34;</span><span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span>use <span class='s'>&#34;topfind&#34;</span><span class='o'>;;</span>
 <span class='o'>#</span>camlp4o<span class='o'>;;</span>
-<script>ml3b7fd71c9aec120f6134d155cf7c54e8 = '#use &#34;topfind&#34;;;\n#camlp4o;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('#use &#34;topfind&#34;;;\n#camlp4o;;\n');">[try]</a></pre>
 <h2 id="StreamLiterals"> Stream Literals</h2><p>
 
 Stream expressions are enclosed by &quot;[\&lt;&quot; and &quot;\&gt;]&quot; brackets, and using
 them is a lot like using lists. The simplest stream possible is the
 empty stream:</p>
-<pre><code class='ocaml'><span class='o'>[</span><span class='o'>&#60;</span> <span class='o'>&#62;</span><span class='o'>]</span>
-<script>ml0ee648140baeeb97d004e719419e5f84 = '[&#60; &#62;]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='o'>[</span><span class='o'>&#60;</span> <span class='o'>&#62;</span><span class='o'>]</span>
+<a href="javascript:octry('[&#60; &#62;]\n');">[try]</a></pre>
 <p>
 Literal values in stream expressions are prefixied by single-quotes:</p>
-<pre><code class='ocaml'><span class='k'>let</span> more_numbers <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> '2<span class='o'>;</span> '(1 <span class='o'>+</span> 2) <span class='o'>&#62;</span><span class='o'>]</span>  <span class='com2'>(* Equivalent <span class='ic'>to</span> <span class='ic'>Stream</span><span class='ic'>.</span>of_list <span class='ic'>[</span>1<span class='ic'>;</span> 2<span class='ic'>;</span> 3<span class='ic'>]</span> *)</span><!-- end comment -->
-<script>mla4840b313cf5d731d0fc32df1d14ee58 = 'let more_numbers = [&#60; &#39;1; &#39;2; &#39;(1 + 2) &#62;]  (* Equivalent to Stream.of_list [1; 2; 3] *)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let</span> more_numbers <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> '2<span class='o'>;</span> '(1 <span class='o'>+</span> 2) <span class='o'>&#62;</span><span class='o'>]</span>  <span class='com2'>(* Equivalent <span class='ic'>to</span> <span class='ic'>Stream</span><span class='ic'>.</span>of_list <span class='ic'>[</span>1<span class='ic'>;</span> 2<span class='ic'>;</span> 3<span class='ic'>]</span> *)</span><!-- end comment -->
+<a href="javascript:octry('let more_numbers = [&#60; &#39;1; &#39;2; &#39;(1 + 2) &#62;]  (* Equivalent to Stream.of_list [1; 2; 3] *)\n');">[try]</a></pre>
 <p>
 This is to distinguish them from streams, which are automatically
 concatenated:</p>
-<pre><code class='ocaml'><span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> '2<span class='o'>;</span> more_numbers<span class='o'>;</span> '99 <span class='o'>&#62;</span><span class='o'>]</span>
-<script>mlbf2de5526874541af005bdc89e564e4d = '[&#60; &#39;1; &#39;2; more_numbers; &#39;99 &#62;]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> '2<span class='o'>;</span> more_numbers<span class='o'>;</span> '99 <span class='o'>&#62;</span><span class='o'>]</span>
+<a href="javascript:octry('[&#60; &#39;1; &#39;2; more_numbers; &#39;99 &#62;]\n');">[try]</a></pre>
 <p>
 In the above example, the stream will produce the integers 1 and 2,
 followed by all of the values generated by the <code>more_numbers</code> stream,
@@ -92,47 +139,47 @@ and once <code>more_numbers</code> as been exhausted, it will produce the intege
 Streams can be defined with recursive functions, providing a
 straightforward and familiar mechanism to produce infinite sequences.
 The following defines an never-ending stream of 1s:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> ones <span class='k'>=</span>
+<pre class='ocaml'>  <span class='k'>let</span> ones <span class='k'>=</span>
     <span class='k'>let rec</span> aux () <span class='k'>=</span>
       <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> aux () <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>in</span>
     aux ()
-<script>ml72336216f45e97123fb85a64ee934c9c = '  let ones =\n    let rec aux () =\n      [&#60; &#39;1; aux () &#62;] in\n    aux ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  let ones =\n    let rec aux () =\n      [&#60; &#39;1; aux () &#62;] in\n    aux ()\n');">[try]</a></pre>
 <p>
 Note the auxiliary function, <code>aux</code>, which is called recursively to form
 a loop. This is necessarily different from infinite lists, which can be
 defined with &quot;let rec&quot; without a helper function:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> ones <span class='k'>=</span> 1 <span class='o'>::</span> ones
-<script>ml5ae65b354f1d2667dd636a6a05927af3 = 'let rec ones = 1 :: ones\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let rec</span> ones <span class='k'>=</span> 1 <span class='o'>::</span> ones
+<a href="javascript:octry('let rec ones = 1 :: ones\n');">[try]</a></pre>
 <p>
 The stream expression syntax is not able to interpret recursive values
 like this, and attempts to do this will result in a syntax error:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> ones <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> ones <span class='o'>&#62;</span><span class='o'>]</span><span class='o'>;;</span>
-<script>ml5656027c287d4d0eeccd1103126eb345 = 'let rec ones = [&#60; &#39;1; ones &#62;];;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let rec</span> ones <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> ones <span class='o'>&#62;</span><span class='o'>]</span><span class='o'>;;</span>
+<a href="javascript:octry('let rec ones = [&#60; &#39;1; ones &#62;];;\n');">[try]</a></pre>
 <p>
 This is only a minor inconvenience, since most streams will be built
 from one or more parameters. For example, here is the <code>const_stream</code>
 from the <a href='streams.html' title='Streams'>Streams</a> chapter, redefined using
 stream expression syntax:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> const_stream k <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'k<span class='o'>;</span> const_stream k <span class='o'>&#62;</span><span class='o'>]</span>
-<script>ml214a01dc51f039dfd45152a12ac94df8 = 'let rec const_stream k = [&#60; &#39;k; const_stream k &#62;]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let rec</span> const_stream k <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'k<span class='o'>;</span> const_stream k <span class='o'>&#62;</span><span class='o'>]</span>
+<a href="javascript:octry('let rec const_stream k = [&#60; &#39;k; const_stream k &#62;]\n');">[try]</a></pre>
 <p>
 Similarly, this simple one-liner is all it takes to produce a counter:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> count_stream i <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'i<span class='o'>;</span> count_stream (i <span class='o'>+</span> 1) <span class='o'>&#62;</span><span class='o'>]</span>
-<script>ml0206feacda1b222382f669b797a644d7 = 'let rec count_stream i = [&#60; &#39;i; count_stream (i + 1) &#62;]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let rec</span> count_stream i <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'i<span class='o'>;</span> count_stream (i <span class='o'>+</span> 1) <span class='o'>&#62;</span><span class='o'>]</span>
+<a href="javascript:octry('let rec count_stream i = [&#60; &#39;i; count_stream (i + 1) &#62;]\n');">[try]</a></pre>
 <p>
 Below is a slightly more complicated example, using two stream
 expressions to define a Fibonacci sequence:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> fib <span class='k'>=</span>
+<pre class='ocaml'>  <span class='k'>let</span> fib <span class='k'>=</span>
     <span class='k'>let rec</span> aux a b <span class='k'>=</span>
       <span class='o'>[</span><span class='o'>&#60;</span> '(a <span class='o'>+</span> b)<span class='o'>;</span> aux b (a <span class='o'>+</span> b) <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>in</span>
     <span class='o'>[</span><span class='o'>&#60;</span> '0<span class='o'>;</span> '1<span class='o'>;</span> aux 0 1 <span class='o'>&#62;</span><span class='o'>]</span><span class='o'>;;</span>
   <span class='m'>Stream</span><span class='o'>.</span>npeek 10 fib<span class='o'>;;</span>
-<script>ml96d7a9f72713d6bdda94774ab909355c = '  let fib =\n    let rec aux a b =\n      [&#60; &#39;(a + b); aux b (a + b) &#62;] in\n    [&#60; &#39;0; &#39;1; aux 0 1 &#62;];;\n  Stream.npeek 10 fib;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  let fib =\n    let rec aux a b =\n      [&#60; &#39;(a + b); aux b (a + b) &#62;] in\n    [&#60; &#39;0; &#39;1; aux 0 1 &#62;];;\n  Stream.npeek 10 fib;;\n');">[try]</a></pre>
 <h2 id="ExampleDirectorywalker"> Example: Directory walker</h2><p>
 
 As a more practical example, we can define a recursive directory walker
 that avoids loading the entire directory tree into memory:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> walk dir <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let rec</span> walk dir <span class='k'>=</span>
   <span class='k'>let</span> items <span class='k'>=</span>
     <span class='k'>try</span>
       <span class='m'>Array</span><span class='o'>.</span>map
@@ -152,7 +199,7 @@ that avoids loading the entire directory tree into memory:</p>
        <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>&#60;</span> 'item<span class='o'>;</span> rest <span class='o'>&#62;</span><span class='o'>]</span>)
     items
     <span class='o'>[</span><span class='o'>&#60;</span> <span class='o'>&#62;</span><span class='o'>]</span>
-<script>ml09dfe92e1c92469fa60adda1c54cadb3 = 'let rec walk dir =\n  let items =\n    try\n      Array.map\n        (fun fn -&#62;\n           let path = Filename.concat dir fn in\n           try\n             if Sys.is_directory path\n             then `Dir path\n             else `File path\n           with e -&#62; `Error (path, e))\n        (Sys.readdir dir)\n    with e -&#62; [| `Error (dir, e) |] in\n  Array.fold_right\n    (fun item rest -&#62;\n       match item with\n       | `Dir path -&#62; [&#60; &#39;item; walk path; rest &#62;]\n       | _ -&#62; [&#60; &#39;item; rest &#62;])\n    items\n    [&#60; &#62;]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let rec walk dir =\n  let items =\n    try\n      Array.map\n        (fun fn -&#62;\n           let path = Filename.concat dir fn in\n           try\n             if Sys.is_directory path\n             then `Dir path\n             else `File path\n           with e -&#62; `Error (path, e))\n        (Sys.readdir dir)\n    with e -&#62; [| `Error (dir, e) |] in\n  Array.fold_right\n    (fun item rest -&#62;\n       match item with\n       | `Dir path -&#62; [&#60; &#39;item; walk path; rest &#62;]\n       | _ -&#62; [&#60; &#39;item; rest &#62;])\n    items\n    [&#60; &#62;]\n');">[try]</a></pre>
 <p>
 This function works by first assembling an array of paths for the
 specified base directory. Each path is wrapped in a variant type that
@@ -161,8 +208,8 @@ is then folded into a stream, expanding each subdirectory by recursively
 calling <code>walk</code> again. Errors are included in the variant so that
 exceptions can be handled or ignored as needed.</p>
 <p>The expanding of subdirectories</p>
-<pre><code class='ocaml'><span class='o'>[</span><span class='o'>&#60;</span> 'item<span class='o'>;</span> walk path<span class='o'>;</span> rest <span class='o'>&#62;</span><span class='o'>]</span>
-<script>ml48993abafbbb4f3e7017c7daf8c40664 = '[&#60; &#39;item; walk path; rest &#62;]\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='o'>[</span><span class='o'>&#60;</span> 'item<span class='o'>;</span> walk path<span class='o'>;</span> rest <span class='o'>&#62;</span><span class='o'>]</span>
+<a href="javascript:octry('[&#60; &#39;item; walk path; rest &#62;]\n');">[try]</a></pre>
 <p>
 illustrates a convenient feature of stream expressions: any number of
 sub-streams can appear in any order, and they will be lazily evaluated
@@ -172,7 +219,7 @@ single stream, just as if we had used something like <code>stream_concat</code>,
 defined in the <a href='streams.html' title='Streams'>Streams</a> chapter.</p>
 <p>With little effort, we can now print the names of all the directories
 and files underneath &quot;/var/log&quot;:</p>
-<pre><code class='ocaml'><span class='k'>let</span> () <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> () <span class='k'>=</span>
   <span class='m'>Stream</span><span class='o'>.</span>iter
     (<span class='k'>function</span>
      <span class='o'>|</span> `Dir path <span class='k'>-></span>
@@ -184,7 +231,7 @@ and files underneath &quot;/var/log&quot;:</p>
            (<span class='m'>Printexc</span><span class='o'>.</span>to_string e))
     (walk <span class='s'>&#34;/var/log&#34;</span>)
 
-<script>ml1e52cdca55ef84fd2dfd15396401e188 = 'let () =\n  Stream.iter\n    (function\n     | `Dir path -&#62;\n         Printf.printf &#34;dir: %s%!\n&#34; path\n     | `File path -&#62;\n         Printf.printf &#34;file: %s%!\n&#34; path\n     | `Error (path, e) -&#62;\n         Printf.printf &#34;error: %s (%s)%!\n&#34; path\n           (Printexc.to_string e))\n    (walk &#34;/var/log&#34;)\n\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let () =\n  Stream.iter\n    (function\n     | `Dir path -&#62;\n         Printf.printf &#34;dir: %s%!\n&#34; path\n     | `File path -&#62;\n         Printf.printf &#34;file: %s%!\n&#34; path\n     | `Error (path, e) -&#62;\n         Printf.printf &#34;error: %s (%s)%!\n&#34; path\n           (Printexc.to_string e))\n    (walk &#34;/var/log&#34;)\n\n');">[try]</a></pre>
 
           </div>
         </div>
@@ -204,5 +251,6 @@ and files underneath &quot;/var/log&quot;:</p>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

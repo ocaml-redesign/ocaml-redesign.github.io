@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -76,7 +99,31 @@
           </nav>
         </div>
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             
 <h1 id="OCamlProgrammingGuidelines"> OCaml Programming Guidelines</h1><p>
 This is a set of reasonable guidelines for formatting OCaml
@@ -94,7 +141,7 @@ symbols operator write to How  ####
 a is `;` since( `]3 ;2 ;1[` and )spaces by surrounded hence operator,
 infix an is `::` since( `::` the around spaces with `l :: x` Write
 lists write to How  ####
-</code></pre>
+</pre>
 <p>
 .<code>&gt;-</code> and <code>|</code> by nicely off set are patterns &gt;<br/>
 
@@ -169,7 +216,7 @@ of critique the in participated already have who those all to Thanks
 
 .)edu.berkeley.math@datta:mailto(]Datta
 Ruchira[ :French from translation Original
-</code></pre>
+</pre>
 <p>
 Example: write <code>x + 1</code> or <code>x + !y</code>.</p>
 <blockquote>
@@ -208,18 +255,18 @@ separated by spaces.&lt;br /&gt;
  In fact you will quickly feel that this rule is not so difficult to
 follow: the space bar is the greatest and best situated key of the
 keyboard, it is the easiest to enter and you cannot miss it!
-</code></pre>
+</pre>
 </blockquote>
 <h4 id="Howtowritelongcharacterstrings"> How to write long character strings</h4><p>
 Indent long character strings with the convention in force at that line
 plus an indication of string continuation at the end of each line (a <code>\</code>
 character at the end of the line that omits white spaces on the
 beginning of next line):</p>
-<pre><code class='ocaml'><span class='k'>let</span> universal_declaration <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> universal_declaration <span class='k'>=</span>
   <span class='s'>&#34;-1- Programs are born and remain free and equal under the law;\n\
    distinctions can only be based on the common good.&#34;</span> <span class='k'>in</span>
   <span class='o'>...</span>
-<script>mld533012d72e513c4b044391e9a981421 = 'let universal_declaration =\n  &#34;-1- Programs are born and remain free and equal under the law;\n\\n   distinctions can only be based on the common good.&#34; in\n  ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let universal_declaration =\n  &#34;-1- Programs are born and remain free and equal under the law;\n\\n   distinctions can only be based on the common good.&#34; in\n  ...\n');">[try]</a></pre>
 <h2 id="Indentationofprograms"> Indentation of programs</h2>
 <blockquote>
 <p><strong>Landin&#39;s pseudo law</strong>: Treat the indentation of your programs as if
@@ -242,18 +289,18 @@ y :: x
 in &#39;&#39;expression  
 large``  
 = u let
-ocaml</code></pre>
+ocaml</pre>
 <p>:example For .operators all to extend guidelines These</p>
 <pre><code>u / )t * z + y + x(
 in &#39;&#39;expression  
 large``  
 = u let
-ocaml</code></pre>
+ocaml</pre>
 <p>write</p>
 <pre><code>)&#39;&#39;expression    
 large``( /
 )t * z + y + x(
-ocaml</code></pre>
+ocaml</pre>
 <p>expression unreadable the
 of place In .operators of combination a of case the in operation one in
 written be to large too expressions those bind must certainly most You</p>
@@ -261,16 +308,16 @@ written be to large too expressions those bind must certainly most You</p>
 in &#39;&#39;expression   
 large``  
 = t let
-ocaml</code></pre>
+ocaml</pre>
 <p>write</p>
 <pre><code>&#39;&#39;expression  
 large`` +
 z + y + x
-ocaml</code></pre>
+ocaml</pre>
 <p>of place In .line the indent to having to preferable is construction
 <code>in let</code> a of help the with &#39;&#39;expression large</p>
 <pre><code> the define to
-sequence, operation an such in &#39;&#39;expression large</code></pre>
+sequence, operation an such in &#39;&#39;expression large</pre>
 <p> a of case the In</p>
 <p> &gt;
 .line this on continues operation the &gt;
@@ -278,7 +325,7 @@ that clear is it line, the starts operator the When :<strong>Justification</stro
  &gt;</p>
 <pre><code>u + t +
 z + y + x
-ocaml</code></pre>
+ocaml</pre>
 <p>:example For .operation the of rest the indent t&#39;don and
 operator, the with line the next the start operator, same the to calls
 multiple of presence the in or arguments, complex takes operator an When
@@ -292,7 +339,7 @@ in blabla
 blabla  
 blabla  
 = x f let
-ocaml</code></pre>
+ocaml</pre>
 <p>write</p>
 <pre><code>l  
 )blabla    
@@ -300,7 +347,7 @@ blabla
 blabla    
 &gt;- x function(  
 map.List
-ocaml</code></pre>
+ocaml</pre>
 <p>of place In .well as binding <code>let</code> a by function the
 define function, complex a is argument whose iterator an of case the In
 :functions anonymous Naming  ####</p>
@@ -313,7 +360,7 @@ large other``
 &#39;&#39;expression  
 large``  
 = t let
-ocaml</code></pre>
+ocaml</pre>
 <p>write</p>
 <pre><code>...
 in &#39;&#39;expression    
@@ -322,7 +369,7 @@ large other``
 large``    
 z y x f  
 = temp let
-ocaml</code></pre>
+ocaml</pre>
 <p>of place In
 :arguments complex Naming  ####</p>
 <p> &gt;
@@ -817,7 +864,7 @@ it use then indentation, of style accepted generally a Choose
 indentation of Consistency  ###
 
 .below first the is rule absolute only The 
-</code></pre>
+</pre>
 <blockquote><p>
  and then polish it and re-polish it.*</p>
 </blockquote>
@@ -863,7 +910,7 @@ nocuous comments.</p>
 <p>An example of what to avoid: the following comment uses technical words
 and is thus masquerade into a real comment when it has no additional
 information of interest;</p>
-<pre><code class='ocaml'><span class='com2'>(*</span>
+<pre class='ocaml'><span class='com2'>(*</span>
 <span class='com2'>  Function print_lambda<span class='ic'>:</span></span>
 <span class='com2'>  print a lambda<span class='ic'>-</span>expression given <span class='ic'>as</span> argument<span class='ic'>.</span></span>
 <span class='com2'></span>
@@ -878,7 +925,7 @@ information of interest;</p>
   <span class='o'>|</span> Abs l <span class='k'>-></span> printf <span class='s'>&#34;\\ %a&#34;</span> print_lambda l
   <span class='o'>|</span> App (l1<span class='o'>,</span> l2) <span class='k'>-></span>
      printf <span class='s'>&#34;(%a %a)&#34;</span> print_lambda l1 print_lambda l2
-<script>ml7c79a3dc68031e871b4aa9ed7bc71e6f = '(*\n  Function print_lambda:\n  print a lambda-expression given as argument.\n\n  Arguments: lam, any lambda-expression.\n  Returns: nothing.\n\n  Remark: print_lambda can only be used for its side effect.\n*)\nlet rec print_lambda lam =\n  match lam with\n  | Var s -&#62; printf &#34;%s&#34; s\n  | Abs l -&#62; printf &#34;\\ %a&#34; print_lambda l\n  | App (l1, l2) -&#62;\n     printf &#34;(%a %a)&#34; print_lambda l1 print_lambda l2\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(*\n  Function print_lambda:\n  print a lambda-expression given as argument.\n\n  Arguments: lam, any lambda-expression.\n  Returns: nothing.\n\n  Remark: print_lambda can only be used for its side effect.\n*)\nlet rec print_lambda lam =\n  match lam with\n  | Var s -&#62; printf &#34;%s&#34; s\n  | Abs l -&#62; printf &#34;\\ %a&#34; print_lambda l\n  | App (l1, l2) -&#62;\n     printf &#34;(%a %a)&#34; print_lambda l1 print_lambda l2\n');">[try]</a></pre>
 <h4 id="Usageinmoduleinterface"> Usage in module interface</h4><p>
 
 The function&#39;s usage must appear in the interface of the module which
@@ -891,10 +938,10 @@ Use assertions as much as possible: they let you avoid verbose comments,
 while allowing a useful verification upon execution.</p>
 <p>For example, the conditions for the arguments of a function to be valid
 are usefully verified by assertions.</p>
-<pre><code class='ocaml'><span class='k'>let</span> f x <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> f x <span class='k'>=</span>
   <span class='k'>assert</span> (x <span class='o'>&#62;=</span> 0)<span class='o'>;</span>
   <span class='o'>...</span>
-<script>mlbe19a7d3d9716c25335c1bbf26d6b63e = 'let f x =\n  assert (x &#62;= 0);\n  ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let f x =\n  assert (x &#62;= 0);\n  ...\n');">[try]</a></pre>
 <p>
 Note as well that an assertion is often preferable to a comment because
 it&#39;s more trustworthy: an assertion is forced to be pertinent because it
@@ -935,9 +982,9 @@ This augments regularity of style. Avoid using identifiers whose
 appearance can lead to confusion such as <code>l</code> or <code>O</code>, easy to confuse
 with <code>1</code> and <code>0</code>.</p>
 <p>Example:</p>
-<pre><code class='ocaml'><span class='k'>let</span> add_expression expr1 expr2 <span class='k'>=</span> <span class='o'>...</span>
+<pre class='ocaml'><span class='k'>let</span> add_expression expr1 expr2 <span class='k'>=</span> <span class='o'>...</span>
 <span class='k'>let</span> print_expression expr <span class='k'>=</span> <span class='o'>...</span>
-<script>mld20f2f6ef0bb58de53fa4a5b39c5f1f6 = 'let add_expression expr1 expr2 = ...\nlet print_expression expr = ...\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let add_expression expr1 expr2 = ...\nlet print_expression expr = ...\n');">[try]</a></pre>
 <p>
 An exception to the recommendation not to use capitalization to separate
 words within identifiers is tolerated in the case of interfacing with
@@ -970,7 +1017,7 @@ closed them leaving than rather modules open use to When  ####</p>
 in 1 - v length.Array = lim let
 ...
 in 1 - name length.String = lim let
-ocaml</code></pre>
+ocaml</pre>
 <p> &gt;
 .errors semantic detect-to-difficult to rise gives &gt;
 and ambiguous is identifiers unqualified of use The :<strong>Justification</strong> &gt;
@@ -991,7 +1038,7 @@ begin else end
 e2  
 ;e1  
 begin then cond if
-ocaml</code></pre>
+ocaml</pre>
 <p>:delimited be must conditional a of
 part <code>else</code> or <code>then</code> the in appears which sequence a way, same the In
 <code>if</code> of branches inside Sequences  ####</p>
@@ -1002,7 +1049,7 @@ end
 with y match begin  
 &gt;- 1 |
 with x match
-ocaml</code></pre>
+ocaml</pre>
 <p>:example For .)construct matching-pattern enclosed
 the with associated be automatically will construct matching-pattern
 enclosing the of clauses subsequent otherwise( construct embedded
@@ -1038,9 +1085,9 @@ printing function, and this could be perfectly silent, since many
 (<code>Pervasives</code>). Mixing printing functions from <code>Format</code> and <code>Pervasives</code>
 leads to subtle bugs in the display, that are difficult to trace. For
 instance:</p>
-<pre><code class='ocaml'><span class='k'>let</span> f () <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> f () <span class='k'>=</span>
   <span class='m'>Format</span><span class='o'>.</span>print_string <span class='s'>&#34;Hello World!&#34;</span><span class='o'>;</span> print_newline ()
-<script>ml71f1bf03fdc659a459a3a02f697e3ee8 = 'let f () =\n  Format.print_string &#34;Hello World!&#34;; print_newline ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let f () =\n  Format.print_string &#34;Hello World!&#34;; print_newline ()\n');">[try]</a></pre>
 <p>
 is bogus since it does not call <code>Format.print_newline</code> to flush the
 pretty-printer queue and output <code>&quot;Hello World!&quot;</code>. Instead
@@ -1054,11 +1101,11 @@ still open), while a spurious carriage return appeared on the screen!</p>
 <p>For the same reason, open large libraries such as the one with
 arbitrary-precision integers so as not to burden the program which uses
 them.</p>
-<pre><code class='ocaml'><span class='k'>open</span> Num
+<pre class='ocaml'><span class='k'>open</span> Num
 
 <span class='k'>let rec</span> fib n <span class='k'>=</span>
   <span class='k'>if</span> n <span class='o'>&#60;=</span> 2 <span class='k'>then</span> Int 1 <span class='k'>else</span> fib (n <span class='o'>-</span> 1) <span class='o'>+/</span> fib (n <span class='o'>-</span> 2)
-<script>ml032a164e4ff984d8bd1af3dfac87c4d8 = 'open Num\n\nlet rec fib n =\n  if n &#60;= 2 then Int 1 else fib (n - 1) +/ fib (n - 2)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('open Num\n\nlet rec fib n =\n  if n &#60;= 2 then Int 1 else fib (n - 1) +/ fib (n - 2)\n');">[try]</a></pre>
 <blockquote>
 <p><strong>Justification</strong>: The program would be less readable if you had to
 qualify all the identifiers.</p>
@@ -1090,7 +1137,7 @@ Warnings about pattern-matching must be treated with the upmost care:</p>
  corresponding pattern-matching construct, without adding a default
  case <pre><code>catch-all&#39;&#39;, such as `| _ -&gt; ... `, but with an explicit
  list of the constructors not examined by the rest of the construct,
- for example `| Cn _ | Cn1 _ -&gt; ... `.</code></pre>
+ for example `| Cn _ | Cn1 _ -&gt; ... `.</pre>
  </li>
 </ul>
 
@@ -1105,7 +1152,7 @@ that is warranted. On the contrary, the</p>
 will make the function compile silently and it might be thought
 that the function is correct as the new constructor will be
 handled by the default case.
-</code></pre>
+</pre>
 </blockquote>
 <ul>
  <li>Non-exhaustive pattern-matches induced by clauses with guards must
@@ -1512,12 +1559,12 @@ easiest way the computation that implements the algorithm.
 
 ####  Style dangers
 Concerning programming styles, one can usually observe the two
-symmetrical problematic behaviors: on the one hand, the </code></pre>
+symmetrical problematic behaviors: on the one hand, the </pre>
 <p>all
 imperative&#39;&#39; way (<em>systematic</em> usage of loops and assignment), and on
 the other hand the</p>
 <pre><code>purely functional&#39;&#39; way (*never* use loops nor
-assignments); the </code></pre>
+assignments); the </pre>
 <p>100% object&#39;&#39; style will certainly appear in the
 next future, but (fortunately) it is too new to be discussed here.</p>
 <ul>
@@ -1530,32 +1577,32 @@ next future, but (fortunately) it is too new to be discussed here.</p>
  </li>
 </ul>
 
-<pre><code class='ocaml'><span class='k'>let</span> list_length l <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> list_length l <span class='k'>=</span>
   <span class='k'>let</span> l <span class='k'>=</span> ref l <span class='k'>in</span>
   <span class='k'>let</span> res <span class='k'>=</span> ref 0 <span class='k'>in</span>
   <span class='k'>while</span> <span class='o'>!</span>l <span class='o'>&#60;&#62;</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>do</span>
     incr res<span class='o'>;</span> l <span class='o'>:=</span> <span class='m'>List</span><span class='o'>.</span>tl <span class='o'>!</span>l
   <span class='k'>done</span><span class='o'>;</span>
   <span class='o'>!</span>res<span class='o'>;;</span>
-<script>ml075d557116f5b1c455b00938cdac366c = 'let list_length l =\n  let l = ref l in\n  let res = ref 0 in\n  while !l &#60;&#62; [] do\n    incr res; l := List.tl !l\n  done;\n  !res;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let list_length l =\n  let l = ref l in\n  let res = ref 0 in\n  while !l &#60;&#62; [] do\n    incr res; l := List.tl !l\n  done;\n  !res;;\n');">[try]</a></pre>
 <p>
 in place of the following recursive function, so simple and
 clear:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> list_length <span class='k'>=</span> <span class='k'>function</span>
+<pre class='ocaml'><span class='k'>let rec</span> list_length <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> 0
   <span class='o'>|</span> <span class='o'>_</span> <span class='o'>::</span> l <span class='k'>-></span> 1 <span class='o'>+</span> list_length l
-<script>mle141f1e7600693cb943f51b0deef6963 = 'let rec list_length = function\n  | [] -&#62; 0\n  | _ :: l -&#62; 1 + list_length l\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let rec list_length = function\n  | [] -&#62; 0\n  | _ :: l -&#62; 1 + list_length l\n');">[try]</a></pre>
 <p>
 (For those that would contest the equivalence of those two
 versions, see the <a href='#equivalenceprogrammes'>note below</a>).</p>
-<pre><code class='ocaml'><span class='o'>-</span>   Another common “over imperative error” <span class='k'>in</span> the imperative world
+<pre class='ocaml'><span class='o'>-</span>   Another common “over imperative error” <span class='k'>in</span> the imperative world
     is not <span class='k'>to</span> systematically choose the simple `<span class='k'>for</span>` loop <span class='k'>to</span> iter on
     the element <span class='k'>of</span> a vector<span class='o'>,</span> but instead <span class='k'>to</span> use a complex `<span class='k'>while</span>`
     loop<span class='o'>,</span> <span class='k'>with</span> one <span class='k'>or</span> two references (too many useless assignments<span class='o'>,</span>
     too many opportunity <span class='k'>for</span> errors)<span class='o'>.</span>
 <span class='o'>-</span>   This category <span class='k'>of</span> programmer consider that the `<span class='k'>mutable</span>` keyword
     <span class='k'>in</span> the record <span class='k'>type</span> definitions should be implicit<span class='o'>.</span>
-<script>mlcce3fea4e268f2b1a3ffcdd3b3b0fdca = '-   Another common “over imperative error” in the imperative world\n    is not to systematically choose the simple `for` loop to iter on\n    the element of a vector, but instead to use a complex `while`\n    loop, with one or two references (too many useless assignments,\n    too many opportunity for errors).\n-   This category of programmer consider that the `mutable` keyword\n    in the record type definitions should be implicit.\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('-   Another common “over imperative error” in the imperative world\n    is not to systematically choose the simple `for` loop to iter on\n    the element of a vector, but instead to use a complex `while`\n    loop, with one or two references (too many useless assignments,\n    too many opportunity for errors).\n-   This category of programmer consider that the `mutable` keyword\n    in the record type definitions should be implicit.\n');">[try]</a></pre>
 <ul>
  <li><strong>The “Too much functional” danger</strong>:
   <ul>
@@ -1589,29 +1636,29 @@ unreadable program.</p>
  <li>Use useless (hence nocive for readability) <code>if then else</code>, as in</li>
 </ul>
 
-<pre><code class='ocaml'><span class='k'>let</span> flush_ps () <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> flush_ps () <span class='k'>=</span>
   <span class='k'>if</span> not <span class='o'>!</span>psused <span class='k'>then</span> psused <span class='o'>:=</span> <span class='o'>true</span>
-<script>mla6d60d0f5bb83535c64e508369ca5ca9 = 'let flush_ps () =\n  if not !psused then psused := true\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let flush_ps () =\n  if not !psused then psused := true\n');">[try]</a></pre>
 <p>
 or (more subtle)</p>
-<pre><code class='ocaml'><span class='k'>let</span> sync b <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> sync b <span class='k'>=</span>
   <span class='k'>if</span> <span class='o'>!</span>last_is_dvi <span class='o'>&#60;&#62;</span> b <span class='k'>then</span> last_is_dvi <span class='o'>:=</span> b
-<script>mlda177231c0e36a9674a1e29b432b8d0a = 'let sync b =\n  if !last_is_dvi &#60;&#62; b then last_is_dvi := b\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let sync b =\n  if !last_is_dvi &#60;&#62; b then last_is_dvi := b\n');">[try]</a></pre>
 <ul>
  <li>Code one construct with another. For example code a <code>let ... in</code> by
  the application of an anonymous function to an argument. You would
  write<br /></li>
 </ul>
 
-<pre><code class='ocaml'>(<span class='k'>fun</span> x y <span class='k'>-></span> x <span class='o'>+</span> y)
+<pre class='ocaml'>(<span class='k'>fun</span> x y <span class='k'>-></span> x <span class='o'>+</span> y)
    e1 e2
-<script>mlcf771795e4e0deecd62aa015b5a033ce = '(fun x y -&#62; x + y)\n   e1 e2\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(fun x y -&#62; x + y)\n   e1 e2\n');">[try]</a></pre>
 <p>
 instead of simply writing</p>
-<pre><code class='ocaml'><span class='k'>let</span> x <span class='k'>=</span> e1
+<pre class='ocaml'><span class='k'>let</span> x <span class='k'>=</span> e1
 <span class='k'>and</span> y <span class='k'>=</span> e2 <span class='k'>in</span>
 x <span class='o'>+</span> y
-<script>mlab29d8b7560bc2a52b02a2528126c757 = 'let x = e1\nand y = e2 in\nx + y\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let x = e1\nand y = e2 in\nx + y\n');">[try]</a></pre>
 <ul>
  <li>Systematically code sequences with <code>let in</code> bindings.</li>
 </ul>
@@ -1641,11 +1688,11 @@ x <span class='o'>+</span> y
  of these methods. For example:</li>
 </ul>
 
-<pre><code class='ocaml'>(<span class='k'>fun</span> u <span class='k'>-></span> print_string <span class='s'>&#34;world&#34;</span><span class='o'>;</span> print_string u)
+<pre class='ocaml'>(<span class='k'>fun</span> u <span class='k'>-></span> print_string <span class='s'>&#34;world&#34;</span><span class='o'>;</span> print_string u)
   (<span class='k'>let</span> temp <span class='k'>=</span> print_string <span class='s'>&#34;Hello&#34;</span><span class='o'>;</span> <span class='s'>&#34;!&#34;</span> <span class='k'>in</span>
    ((<span class='k'>fun</span> x <span class='k'>-></span> print_string x<span class='o'>;</span> flush stdout) <span class='s'>&#34; &#34;</span><span class='o'>;</span>
     temp))<span class='o'>;;</span>
-<script>ml4b47b0c981c97a3045347db5f7345d3d = '(fun u -&#62; print_string &#34;world&#34;; print_string u)\n  (let temp = print_string &#34;Hello&#34;; &#34;!&#34; in\n   ((fun x -&#62; print_string x; flush stdout) &#34; &#34;;\n    temp));;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(fun u -&#62; print_string &#34;world&#34;; print_string u)\n  (let temp = print_string &#34;Hello&#34;; &#34;!&#34; in\n   ((fun x -&#62; print_string x; flush stdout) &#34; &#34;;\n    temp));;\n');">[try]</a></pre>
 <p>If you naturally write the program <code>print_string &quot;Hello world!&quot;</code> in this
 way, you can without a doubt submit your work to the <a href='mailto:Pierre.Weis@inria.fr'>Obfuscated OCaml
 Contest</a>.</p>
@@ -1685,35 +1732,35 @@ subsequent <code>ESC-/</code> proposes an alternate completion.</p>
 followed by <code> CTRL-X-` </code> is also used to find all occurrences of a
 certain string in a OCaml program. Instead of launching <code>make</code> to
 recompile, you launch the <code>grep</code> command; then all the</p>
-<pre><code class='error'>messages&#39;&#39; from `grep` are compatible with the </code></pre>
+<pre class='error'>messages&#39;&#39; from `grep` are compatible with the </pre>
 <p> CTRL-X-</p>
 <pre><code> `` usage
 which automatically takes you to the file and the place where the string
 is found.
 
 ###  How to edit with the interactive system
-Under Unix: use the line editor </code></pre>
+Under Unix: use the line editor </pre>
 <p>ledit</p>
 <pre><code> which offers great editing
-capabilities ``à la emacs&#39;&#39; (including </code></pre>
+capabilities ``à la emacs&#39;&#39; (including </pre>
 <p>ESC-/</p>
 <pre><code>!), as well as a history
 mechanism which lets you retrieve previously typed commands and even
-retrieve commands from one session in another. </code></pre>
+retrieve commands from one session in another. </pre>
 <p>ledit</p>
 <pre><code> is written in
 OCaml and can be freely down-loaded
 [here](ftp://ftp.inria.fr/INRIA/Projects/cristal/caml-light/bazar-ocaml/ledit.tar.gz).
 
 ###  How to compile
-The </code></pre>
+The </pre>
 <p>make</p>
 <pre><code> utility is indispensable for managing the compilation and
-re-compilation of programs. Sample </code></pre>
+re-compilation of programs. Sample </pre>
 <p>make</p>
 <pre><code> files can be found on [The
 Hump](http://caml.inria.fr//cgi-bin/hump.en.cgi). You can also consult
-the </code></pre>
+the </pre>
 <p>Makefiles</p>
 <pre><code> for the OCaml compilers.
 
@@ -1731,9 +1778,9 @@ OCaml compilers](https://github.com/ocaml/ocaml), and the sources of
 other software related to OCaml.
 
 ###  Notes
-####  Imperative and functional versions of </code></pre>
+####  Imperative and functional versions of </pre>
 <p>list_length</p>
-<pre><code>The two versions of </code></pre>
+<pre><code>The two versions of </pre>
 <p>list_length</p>
 <pre><code> are not completely equivalent in term
 of complexity, since the imperative version uses a constant amount of
@@ -1743,7 +1790,7 @@ equal to the length of the list argument). If you want to retrieve a
 constant space requirement to run the functional program you just have
 to write a function that is recursive in its tail (or *tail-rec*), that
 is a function that just ends by a recursive call (which is not the case
-here since a call to </code></pre>
+here since a call to </pre>
 <p>+</p>
 <pre><code> has to be perform after the recursive call has
 returned). Just use an accumulator for intermediate results, as in:
@@ -1761,7 +1808,7 @@ looking of an algorithm that performs pattern matching and recursive
 calls to handle an argument that belongs to a recursive sum data type.
 
 
-</code></pre>
+</pre>
 
           </div>
         </div>
@@ -1781,5 +1828,6 @@ calls to handle an argument that belongs to a recursive sum data type.
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

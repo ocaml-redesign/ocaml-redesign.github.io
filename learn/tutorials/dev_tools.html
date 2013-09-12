@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +69,31 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="DevelopmentTools"> Development Tools</h1><p>
 <img src='img/under_construction_icon.gif' alt='Under Construction' /></p>
 <h2 id="Editormodes"> Editor modes</h2><h3 id="Emacs"> Emacs</h3>
@@ -59,24 +106,24 @@ use to make it friendlier:</p>
 <h4 id="Plumbimg"> Plumbimg</h4><p>
 To allow plumbing of OCaml error messages, add the following to your
 plumbing rules:</p>
-<pre><code class='ocaml'><span class='k'>type</span> is text
+<pre class='ocaml'><span class='k'>type</span> is text
 data matches 'File <span class='s'>&#34;([.a-zA-Z¡-&#60;U+FFFF&#62;0-9_/\-]*[a-zA-Z¡-&#60;U+FFFF&#62;0-9_/\-])&#34;</span><span class='o'>,</span> line (<span class='o'>[</span>0-9<span class='o'>]</span><span class='o'>+)</span><span class='o'>,</span> characters (<span class='o'>[</span>0-9<span class='o'>]</span><span class='o'>+)</span><span class='o'>-</span>(<span class='o'>[</span>0-9<span class='o'>]</span><span class='o'>+)</span><span class='o'>:</span>'
 arg isfile      <span class='o'>$</span>1
 data set        <span class='o'>$</span>file
 attr add        addr<span class='o'>=$</span>2<span class='o'>-</span><span class='o'>#</span>0<span class='o'>+</span><span class='o'>#</span><span class='o'>$</span>3<span class='o'>,</span><span class='o'>$</span>2<span class='o'>-</span><span class='o'>#</span>0<span class='o'>+</span><span class='o'>#</span><span class='o'>$</span>4
 plumb <span class='k'>to</span> edit
 plumb client <span class='o'>$</span>editor
-<script>mld86a18989d91aa8b4a192d00a7057573 = 'type is text\ndata matches &#39;File &#34;([.a-zA-Z¡-&#60;U+FFFF&#62;0-9_/\-]*[a-zA-Z¡-&#60;U+FFFF&#62;0-9_/\-])&#34;, line ([0-9]+), characters ([0-9]+)-([0-9]+):&#39;\narg isfile      $1\ndata set        $file\nattr add        addr=$2-#0+#$3,$2-#0+#$4\nplumb to edit\nplumb client $editor\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('type is text\ndata matches &#39;File &#34;([.a-zA-Z¡-&#60;U+FFFF&#62;0-9_/\-]*[a-zA-Z¡-&#60;U+FFFF&#62;0-9_/\-])&#34;, line ([0-9]+), characters ([0-9]+)-([0-9]+):&#39;\narg isfile      $1\ndata set        $file\nattr add        addr=$2-#0+#$3,$2-#0+#$4\nplumb to edit\nplumb client $editor\n');">[try]</a></pre>
 <h4 id="OCamltoplevel"> OCaml top-level</h4><p>
 
 Simply execute <code>win</code> to get a shell and run <code>ocaml</code> from within this
 shell.</p>
 <h4 id="Commenting"> Commenting</h4><p>
 The following <code>Edit</code> command will comment your selection.</p>
-<pre><code class='ocaml'><span class='m'>Edit</span> <span class='o'>.</span><span class='o'>{</span>i<span class='o'>/</span><span class='com2'>(*</span>
+<pre class='ocaml'><span class='m'>Edit</span> <span class='o'>.</span><span class='o'>{</span>i<span class='o'>/</span><span class='com2'>(*</span>
 <span class='com2'>a<span class='ic'>/*)</span></span>
 <span class='com2'><span class='ic'>}</span></span>
-<span class='com2'></span><script>ml1fdb55941a6c2e429e26e353136b3d48 = 'Edit .{i/(*\na/*)\n}\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<span class='com2'></span><a href="javascript:octry('Edit .{i/(*\na/*)\n}\n');">[try]</a></pre>
 <h4 id="Indenting"> Indenting</h4><p>
 
 You can pipe your selection (or the whole file) through an external
@@ -123,5 +170,6 @@ Debugging facilities are described <a href='debug.html'>here</a>.</p>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

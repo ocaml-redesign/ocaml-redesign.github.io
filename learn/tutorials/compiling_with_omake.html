@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +69,31 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="CompilingwithOMake"> Compiling with OMake</h1><p>
 Here is the summary on how to compile an OCaml program with
 <a href='http://omake.metaprl.org/' title='OMake'>OMake</a>. It produces a native code
@@ -66,7 +113,7 @@ findlib/ocamlfind:</p>
  and put the following:</li>
 </ol>
 
-<!-- --><pre><code class='ocaml'><span class='o'>#</span> Program name (without extension)
+<!-- --><pre class='ocaml'><span class='o'>#</span> Program name (without extension)
 PROGRAM <span class='k'>=</span> myprog
 
 <span class='o'>#</span> Source files without extension<span class='o'>.</span> One item per line<span class='o'>,</span> no trailing spaces<span class='o'>.</span>
@@ -106,7 +153,7 @@ clean<span class='o'>:</span>
   rm <span class='o'>-</span>f <span class='o'>\</span>
      <span class='o'>$</span>(filter<span class='o'>-</span>proper<span class='o'>-</span>targets <span class='o'>$</span>(glob <span class='o'>$</span>(addsuffix <span class='o'>.*</span><span class='o'>,</span> <span class='o'>$</span>(FILES)))) <span class='o'>\</span>
      <span class='o'>$</span>(PROGRAM)<span class='o'>.</span>run <span class='o'>$</span>(PROGRAM)<span class='o'>.</span>opt
-<script>mld0159a5ffb0f509ce2512d6b9548162d = '# Program name (without extension)\nPROGRAM = myprog\n\n# Source files without extension. One item per line, no trailing spaces.\nFILES[] =\n   parser\n   lexer\n   main\n# Another syntax for the same thing:\n# FILES = parser lexer \\n#         main\n\n# We use ocamlfind\nUSE_OCAMLFIND = true\n# All ocamlfind packages that we use\nOCAMLPACKS[] =\n   unix\n   micmatch_pcre\n   labltk\n# We need to tell omake that we want camlp4 preprocessing\nOCAMLFINDFLAGS = -syntax camlp4o\n\n# We need to tell OMake that these files need to be created\n# before it attempts to run ocamldep.\n# (OMake knows that ocamllex and ocamlyacc should be used)\nOCamlGeneratedFiles(lexer.ml parser.mli parser.ml)\n\n# Compile into an executable\nOCamlProgram($(PROGRAM), $(FILES))\n\n# Default target: compile into bytecode or native code, or both\n.DEFAULT: $(if $(BYTE_ENABLED), $(PROGRAM).run) \\n          $(if $(NATIVE_ENABLED), $(PROGRAM).opt)\n\n# Cleanup\n.PHONY: clean\nclean:\n  rm -f \\n     $(filter-proper-targets $(glob $(addsuffix .*, $(FILES)))) \\n     $(PROGRAM).run $(PROGRAM).opt\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# Program name (without extension)\nPROGRAM = myprog\n\n# Source files without extension. One item per line, no trailing spaces.\nFILES[] =\n   parser\n   lexer\n   main\n# Another syntax for the same thing:\n# FILES = parser lexer \\n#         main\n\n# We use ocamlfind\nUSE_OCAMLFIND = true\n# All ocamlfind packages that we use\nOCAMLPACKS[] =\n   unix\n   micmatch_pcre\n   labltk\n# We need to tell omake that we want camlp4 preprocessing\nOCAMLFINDFLAGS = -syntax camlp4o\n\n# We need to tell OMake that these files need to be created\n# before it attempts to run ocamldep.\n# (OMake knows that ocamllex and ocamlyacc should be used)\nOCamlGeneratedFiles(lexer.ml parser.mli parser.ml)\n\n# Compile into an executable\nOCamlProgram($(PROGRAM), $(FILES))\n\n# Default target: compile into bytecode or native code, or both\n.DEFAULT: $(if $(BYTE_ENABLED), $(PROGRAM).run) \\n          $(if $(NATIVE_ENABLED), $(PROGRAM).opt)\n\n# Cleanup\n.PHONY: clean\nclean:\n  rm -f \\n     $(filter-proper-targets $(glob $(addsuffix .*, $(FILES)))) \\n     $(PROGRAM).run $(PROGRAM).opt\n');">[try]</a></pre>
 <p>
 
 Adapt your OMakefile to suit your needs in terms of source files, result
@@ -136,5 +183,6 @@ information.</p>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

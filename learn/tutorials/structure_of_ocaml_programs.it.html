@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +69,31 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="LastrutturadeiprogrammiOCaml"> La struttura dei programmi OCaml</h1><h2 id="LastrutturadeiprogrammiOCamlx"> La struttura dei programmi OCaml</h2><p>
 
 Ci prenderemo ora del tempo per dare uno sguardo ad alto livello a
@@ -60,19 +107,19 @@ rileverò.</p>
 <h3 id="quotVariabiliquotlocaliinrealtespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3><p>
 Prendiamo la funzione <code>average</code> ed aggiungiamovi una variabile locale in
 C. (Confrontatela con la prima definizione che ne avevamo sopra).</p>
-<pre><code class='ocaml'>double
+<pre class='ocaml'>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>{</span>
   double sum <span class='k'>=</span> a <span class='o'>+</span> b<span class='o'>;</span>
   return sum <span class='o'>/</span> 2<span class='o'>;</span>
 <span class='o'>}</span>
-<script>mld9c0b5244e56de408dd9912a1fb481c1 = 'double\naverage (double a, double b)\n{\n  double sum = a + b;\n  return sum / 2;\n}\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('double\naverage (double a, double b)\n{\n  double sum = a + b;\n  return sum / 2;\n}\n');">[try]</a></pre>
 <p>
 Faccia ora lo stesso con la nostra versione in OCaml:</p>
-<pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
   <span class='k'>let</span> sum <span class='k'>=</span> a <span class='o'>+.</span> b <span class='k'>in</span>
   sum <span class='o'>/.</span> 2.0<span class='o'>;;</span>
-<script>mle7b8a5bd99161b8f6a5f55eca9b1b61d = 'let average a b =\n  let sum = a +. b in\n  sum /. 2.0;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let average a b =\n  let sum = a +. b in\n  sum /. 2.0;;\n');">[try]</a></pre>
 <p>
 La frase standard <code>let nome = espressione in</code> è usata per definire
 un&#39;espressione locale dotata di nome, e <code>name</code> può dunque essere
@@ -112,7 +159,7 @@ Potete anche definire nomi globali per cose al livello superiore, e come
 le nostre &quot;variabili&quot; locali sopra queste non sono affatto realmente
 variabili, ma soltanto nomi abbreviati per queste cose. Ecco un esempio
 reale (ma ridotto):</p>
-<pre><code class='ocaml'><span class='k'>let</span> html <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> html <span class='k'>=</span>
   <span class='k'>let</span> content <span class='k'>=</span> read_whole_file file <span class='k'>in</span>
   <span class='m'>GHtml</span><span class='o'>.</span>html_from_string content
   <span class='o'>;;</span>
@@ -127,7 +174,7 @@ reale (ma ridotto):</p>
   <span class='com2'>(* codice omesso *)</span><!-- end comment -->
   factory<span class='o'>#</span>add_item <span class='s'>&#34;Cut&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>X <span class='o'>~</span>callback<span class='o'>:</span> html<span class='o'>#</span>cut
   <span class='o'>;;</span>
-<script>ml2bd72982fd44231139908b8e7954b43e = 'let html =\n  let content = read_whole_file file in\n  GHtml.html_from_string content\n  ;;\n\nlet menu_bold () =\n  match bold_button#active with\n    true -&#62; html#set_font_style ~enable:[`BOLD] ()\n  | false -&#62; html#set_font_style ~disable:[`BOLD] ()\n  ;;\n\nlet main () =\n  (* codice omesso *)\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback: html#cut\n  ;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let html =\n  let content = read_whole_file file in\n  GHtml.html_from_string content\n  ;;\n\nlet menu_bold () =\n  match bold_button#active with\n    true -&#62; html#set_font_style ~enable:[`BOLD] ()\n  | false -&#62; html#set_font_style ~disable:[`BOLD] ()\n  ;;\n\nlet main () =\n  (* codice omesso *)\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback: html#cut\n  ;;\n');">[try]</a></pre>
 <p>
 In questo reale pezzo di codice, <code>html</code> è un accessorio di editing HTML
 (un oggetto della libreria lablgtk) che è creato una sola volta
@@ -152,36 +199,36 @@ ai puntatori in C/C++. In Java, tutte le variabili che immagazzinano
 oggetti sono in realtà riferiment (puntatori) agli oggetti. In Perl, i
 riferimenti sono riferimenti - la medesima cosa che sono in OCaml.</p>
 <p>Ecco come creiamo un riferimento ad un <code>int</code> in OCaml:</p>
-<pre><code class='ocaml'>ref 0<span class='o'>;;</span>
-<script>ml01ea4b6c6ad116533b3a2a32f107f5fc = 'ref 0;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>ref 0<span class='o'>;;</span>
+<a href="javascript:octry('ref 0;;\n');">[try]</a></pre>
 <p>
 In realtà tale istruzione non era veramente molto utile. Abbiamo creato
 il riferimento e quindi, poiché che non gli abbiamo dato un nome, il
 garbage collector è arrivato e l&#39;ha raccolto immediatamente dopo! (in
 realtà, è stato probabilmente gettato via durante la compilazione.)
 Diamo un nome al riferimento:</p>
-<pre><code class='ocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
-<script>ml2a25fc9a3e9613ab7482618b7c23b7ec = 'let my_ref = ref 0;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
+<a href="javascript:octry('let my_ref = ref 0;;\n');">[try]</a></pre>
 <p>
 Questo riferimento sta attualmente immagazzinando un intero pari a zero.
 Mettiamoci dentro qualcosa d&#39;altro (assegnamento):</p>
-<pre><code class='ocaml'>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
-<script>ml4c28e0ca368d7960c92b306cd6216b77 = 'my_ref := 100;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
+<a href="javascript:octry('my_ref := 100;;\n');">[try]</a></pre>
 <p>
 E troviamo che cosa contiene ora il riferimento:</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
+<pre class='ocaml'><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 100
-<script>ml268edc45f79387af51fb74249e091575 = '# !my_ref;;\n- : int = 100\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# !my_ref;;\n- : int = 100\n');">[try]</a></pre>
 <p>
 Quindi l&#39;operatore <code>:=</code> è utilizzato per fare assegnamenti a
 riferimenti, e l&#39;operatore <code>!</code> dereferenzia per ottenere i contenuti.
 Ecco un pronto ed approssimativo confronto con C/C++:</p>
-<pre><code class='ocaml'>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
+<pre class='ocaml'>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
 
 <span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>    int a <span class='k'>=</span> 0<span class='o'>;</span> int <span class='o'>*</span>my_ptr <span class='k'>=</span> <span class='o'>&#38;</span>a<span class='o'>;</span>
 my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>         <span class='o'>*</span>my_ptr <span class='k'>=</span> 100<span class='o'>;</span>
 <span class='o'>!</span>my_ref                 <span class='o'>*</span>my_ptr
-<script>ml7804bc5b6a3f975f7d113b6927d03e76 = 'OCaml                   C/C++\n\nlet my_ref = ref 0;;    int a = 0; int *my_ptr = &#38;a;\nmy_ref := 100;;         *my_ptr = 100;\n!my_ref                 *my_ptr\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('OCaml                   C/C++\n\nlet my_ref = ref 0;;    int a = 0; int *my_ptr = &#38;a;\nmy_ref := 100;;         *my_ptr = 100;\n!my_ref                 *my_ptr\n');">[try]</a></pre>
 <p>
 I riferimenti hanno il loro posto, ma potrete trovare di non utilizzare
 i riferimenti molto spesso. Molto più spesso utilizzerete
@@ -212,9 +259,9 @@ La funzione annidata può accedere a tutte le variabili della funzione
 che la contiene le quali siano visibili al punto a cui essa è definita.
 Ciò è detto &quot;scoping lessicale&quot; (&quot;lexical scoping&quot; nell&#39;originale, NdT).
 Ad esempio, mostriamo qui una funzione annidata che utilizza una
-variabile ereditata chiamata </code></pre>
+variabile ereditata chiamata </pre>
 <p>offset&#39;:</p>
-<pre><code class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
+<pre class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
 <span class='o'>{</span>
   int access (int <span class='o'>*</span>array<span class='o'>,</span> int index)
     <span class='o'>{</span> return array<span class='o'>[</span>index <span class='o'>+</span> offset<span class='o'>]</span><span class='o'>;</span> <span class='o'>}</span>
@@ -223,12 +270,12 @@ variabile ereditata chiamata </code></pre>
   <span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> size<span class='o'>;</span> i<span class='o'>++)</span>
     <span class='o'>/*</span> <span class='o'>...</span> <span class='o'>*/</span> access (array<span class='o'>,</span> i) <span class='o'>/*</span> <span class='o'>...</span> <span class='o'>*/</span>
 <span class='o'>}</span>
-<script>mlbe290664f7d3c72bb3e00e373660d47b = 'bar (int *array, int offset, int size)\n{\n  int access (int *array, int index)\n    { return array[index + offset]; }\n  int i;\n  /* ... */\n  for (i = 0; i &#60; size; i++)\n    /* ... */ access (array, i) /* ... */\n}\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('bar (int *array, int offset, int size)\n{\n  int access (int *array, int index)\n    { return array[index + offset]; }\n  int i;\n  /* ... */\n  for (i = 0; i &#60; size; i++)\n    /* ... */ access (array, i) /* ... */\n}\n');">[try]</a></pre>
 <p>
 Afferrate l&#39;idea. Le funzioni annidate sono tuttavia molto utili e molto
 diffusamente utilizzate in OCaml. Ecco un esempio di funzione annidata
 proveniente da codice reale:</p>
-<pre><code class='ocaml'><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
+<pre class='ocaml'><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
   <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 4096 <span class='k'>in</span>
   <span class='k'>let rec</span> loop () <span class='k'>=</span>
     <span class='k'>let</span> newline <span class='k'>=</span> input_line chan <span class='k'>in</span>
@@ -240,7 +287,7 @@ proveniente da codice reale:</p>
     loop ()
   <span class='k'>with</span>
     End_of_file <span class='k'>-></span> <span class='m'>Buffer</span><span class='o'>.</span>contents buf<span class='o'>;;</span>
-<script>mldf3cfaff5d3f8382a4152258f253a50e = 'let read_whole_channel chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let newline = input_line chan in\n    Buffer.add_string buf newline;\n    Buffer.add_char buf &#39;\n&#39;;\n    loop ()\n  in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let read_whole_channel chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let newline = input_line chan in\n    Buffer.add_string buf newline;\n    Buffer.add_char buf &#39;\n&#39;;\n    loop ()\n  in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf;;\n');">[try]</a></pre>
 <p>
 Non preoccupatevi di che cosa fa questo codice - contiene molti concetti
 che non sono ancora stati discussi in questo tutorial. Concentratevi
@@ -264,12 +311,12 @@ chiamate di sistema POSIX. Tali librerie sono collocate in
 <code>/usr/lib/ocaml/VERSIONE/</code> (negli Unix comunque). Per questi esempi ci
 concentreremo su un modulo piuttosto semplice chiamato <code>Graphics</code>.</p>
 <p>Il modulo <code>Graphics</code> è installato in 5 file (sul mio sistema):</p>
-<pre><code class='ocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
+<pre class='ocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cma
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmi
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmxa
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>mli
-<script>mlfde383a84d1424fa97e6f5f8da5c615f = '/usr/lib/ocaml/3.08/graphics.a\n/usr/lib/ocaml/3.08/graphics.cma\n/usr/lib/ocaml/3.08/graphics.cmi\n/usr/lib/ocaml/3.08/graphics.cmxa\n/usr/lib/ocaml/3.08/graphics.mli\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('/usr/lib/ocaml/3.08/graphics.a\n/usr/lib/ocaml/3.08/graphics.cma\n/usr/lib/ocaml/3.08/graphics.cmi\n/usr/lib/ocaml/3.08/graphics.cmxa\n/usr/lib/ocaml/3.08/graphics.mli\n');">[try]</a></pre>
 <p>
 Concentriamoci per un momento soltanto sul file <code>graphics.mli</code>. Questo è
 un file di testo, per cui lo potete leggere ora. Notate innanzitutto che
@@ -285,7 +332,7 @@ poco come l&#39;istruzione <code>import</code> di Java, e molto più come l&#39;
 <p>Un paio di esempi dovrebbero rendere chiaro quanto detto. (I due esempi
 disegnano cose diverse - provateli). Si noti che il primo esempio chiama
 <code>open_graph</code> ed il secondo <code>Graphics.open_graph</code>.</p>
-<pre><code class='ocaml'><span class='com2'>(* Per compilare questo esempio<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
+<pre class='ocaml'><span class='com2'>(* Per compilare questo esempio<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
 
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
@@ -319,7 +366,7 @@ read_line ()<span class='o'>;;</span>
 <span class='k'>done</span><span class='o'>;;</span>
 
 read_line ()<span class='o'>;;</span>
-<script>mlc4050e07b10c335478dcf83ea6c4765c = '(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)\n\nopen Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n(* Per compilare questo esempio: ocamlc graphics.cma grtest2.ml -o grtest2 *)\n\nRandom.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n        let r = 4.0 *. (float_of_int x) /. 640.0 in\n        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\ndone;;\n\nread_line ();;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)\n\nopen Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n(* Per compilare questo esempio: ocamlc graphics.cma grtest2.ml -o grtest2 *)\n\nRandom.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n        let r = 4.0 *. (float_of_int x) /. 640.0 in\n        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\ndone;;\n\nread_line ();;\n');">[try]</a></pre>
 <p>
 Entrambi gli esempi fanno uso di alcune caratteristiche di cui non
 abbiamo ancora parlato: i loop for in stile imperativo, gli if-then-else
@@ -336,12 +383,12 @@ OCaml.</p>
 Che cosa succede se volete utilizzare i simboli del modulo <code>Graphics</code>,
 ma non volete importarli tutti e non sopportate il fastidio di digitare
 <code>Graphics</code> ogni volta? Semplicemente rinominatelo usando questo trucco:</p>
-<pre><code class='ocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
+<pre class='ocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
 
 <span class='m'>Gr</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='m'>Gr</span><span class='o'>.</span>fill_circle 320 240 240<span class='o'>;;</span>
 read_line ()<span class='o'>;;</span>
-<script>ml989e08c577015d25ca16f55ccc1d13da = 'module Gr = Graphics;;\n\nGr.open_graph &#34; 640x480&#34;;;\nGr.fill_circle 320 240 240;;\nread_line ();;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('module Gr = Graphics;;\n\nGr.open_graph &#34; 640x480&#34;;;\nGr.fill_circle 320 240 240;;\nread_line ();;\n');">[try]</a></pre>
 <p>
 In realtà questo è utile quando volete importare un modulo annidato (i
 moduli possono essere annidati l&#39;uno dentro l&#39;altro), ma non volete
@@ -356,7 +403,7 @@ imparando OCaml.</p>
 altto livello del vostro codice, e <em>mai</em> all&#39;interno di definizioni di
 funzioni o di qualunque altro tipo di istruzione.</p>
 <p>Osservate una sezione dal secondo esempio su &quot;graphics&quot; sopra:</p>
-<pre><code class='ocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
+<pre class='ocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
 <span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 
 <span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
@@ -364,7 +411,7 @@ funzioni o di qualunque altro tipo di istruzione.</p>
         <span class='k'>else</span>
                 <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
                 r <span class='o'>*.</span> x <span class='o'>*.</span> (1.0 <span class='o'>-.</span> x)<span class='o'>;;</span>
-<script>mla993e34b55bcc0034541145648f0663b = 'Random.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('Random.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n');">[try]</a></pre>
 <p>
 Abbiamo due istruzioni del livello più alto ed una definizione di
 funzione (per una funzione chiamata <code>iterate</code>). Ciascuna è seguita da
@@ -390,7 +437,7 @@ sono:</p>
 </ul>
 
 <p>Ecco del codice funzionante con <code>;;</code> eliso ovunque possibile:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
+<pre class='ocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 self_init ()<span class='o'>;;</span>
@@ -413,7 +460,7 @@ open_graph <span class='s'>&#34; 640x480&#34;</span>         <span class='com2'>
 <span class='k'>done</span><span class='o'>;;</span>
 
 read_line ()                  <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
-<script>ml146a100fb8555a5f80f764fde8bd5a24 = 'open Random                   (* ;; *)\nopen Graphics;;\n\nself_init ();;\nopen_graph &#34; 640x480&#34;         (* ;; *)\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n        let r = 4.0 *. (float_of_int x) /. 640.0 in\n        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\ndone;;\n\nread_line ()                  (* ;; *)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('open Random                   (* ;; *)\nopen Graphics;;\n\nself_init ();;\nopen_graph &#34; 640x480&#34;         (* ;; *)\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n        let r = 4.0 *. (float_of_int x) /. 640.0 in\n        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\ndone;;\n\nread_line ()                  (* ;; *)\n');">[try]</a></pre>
 <p>
 Le regole n° 3 e n° 4 sono riferite al <code>;</code> singolo. Esso è del tutto
 differente da <code>;;</code>. Il punto e virgola singolo <code>;</code> è ciò che è noto come
@@ -429,13 +476,13 @@ di codice, falle seguire da un singolo <code>;</code>, <em>eccetto</em> per l&#3
 fondo.</p>
 <p>Il ciclo for interno nel nostro esempio sopra è una buona dimostrazione.
 Notate che in questo codice non usiamo mai un singolo <code>;</code>:</p>
-<pre><code class='ocaml'>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
+<pre class='ocaml'>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
                 <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
                 <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
                 <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
                 <span class='m'>Graphics</span><span class='o'>.</span>plot x y
         <span class='k'>done</span>
-<script>ml643413e3cc411b027d0f3a50cf2c92f5 = '        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\n');">[try]</a></pre>
 <p>
 L&#39;unico posto nel codice sopra dove si potrebbe pensare di inserire un
 <code>;</code> è dopo il <code>Graphics.plot x y</code>, ma poiché questa è l&#39;ultima
@@ -453,7 +500,7 @@ bene - in OCaml, pressoché ogni cosa è un&#39;espressione. <code>if/then/else<
 un&#39;espressione. <code>a ; b</code> è un&#39;espressione. <code>match foo with ...</code> è un
 espressione. Il codice che segue è perfettamente legale (e tutto fa la
 medesima cosa):</p>
-<pre><code class='ocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
+<pre class='ocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
 
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
 
@@ -462,12 +509,12 @@ medesima cosa):</p>
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> g z <span class='k'>=</span> <span class='k'>function</span> <span class='o'>true</span> <span class='k'>-></span> z <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> 0 <span class='k'>in</span> g y b)
 
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> <span class='o'>_</span> <span class='k'>=</span> y <span class='o'>+</span> 3 <span class='k'>in</span> ()<span class='o'>;</span> <span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
-<script>ml40098f2a2ff3a7271063e44c9b66181e = 'let f x b y = if b then x+y else x+0\n\nlet f x b y = x + (if b then y else 0)\n\nlet f x b y = x + (match b with true -&#62; y | false -&#62; 0)\n\nlet f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)\n\nlet f x b y = x + (let _ = y + 3 in (); if b then y else 0)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let f x b y = if b then x+y else x+0\n\nlet f x b y = x + (if b then y else 0)\n\nlet f x b y = x + (match b with true -&#62; y | false -&#62; 0)\n\nlet f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)\n\nlet f x b y = x + (let _ = y + 3 in (); if b then y else 0)\n');">[try]</a></pre>
 <p>
 Si noti in special modo la prima - uso <code>;</code> come operatore per &quot;unire&quot;
 due istruzioni. Tutte le funzioni in OCaml possono essere espresse come:</p>
-<pre><code class='ocaml'><span class='k'>let</span> nome <span class='o'>[</span>parametri<span class='o'>]</span> <span class='k'>=</span> espressione
-<script>ml2cc0bf644dd5c679a11667fdc9607dbb = 'let nome [parametri] = espressione\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let</span> nome <span class='o'>[</span>parametri<span class='o'>]</span> <span class='k'>=</span> espressione
+<a href="javascript:octry('let nome [parametri] = espressione\n');">[try]</a></pre>
 <p>
 La definizione di OCaml di che cos&#39;è un&#39;espressione è soltanto un po&#39;
 più ampia che quella di C. Infatti, C ha il concetto di &quot;istruzione&quot; -
@@ -476,8 +523,8 @@ ma tutte le istruzioni di C sono in OCaml semplicemente espressioni
 <p>L&#39;unico punto in cui <code>;</code> differisce da <code>+</code> è che posso fare riferimento
 a <code>+</code> semplicemente come ad una funzione. Ad esempio, posso definire una
 funzione <code>sum_list</code>, per sommare una lista di int, come segue:</p>
-<pre><code class='ocaml'><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
-<script>ml27e25ebff4965461eeb239e3f0e5b489 = 'let sum_list = List.fold_left ( + ) 0\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
+<a href="javascript:octry('let sum_list = List.fold_left ( + ) 0\n');">[try]</a></pre>
 <h3 id="Metteretuttoinsiemedelcodicereale"> Mettere tutto insieme: del codice reale</h3><p>
 
 In questa sezione mostreremo dei frammenti di codice reale provenienti
@@ -508,7 +555,7 @@ espressioni con nomi locali e globali.</p>
 All&#39;interno di questa funzione definisce un&#39;espressione con nome
 chiamata <code>sel</code> usando un&#39;istruzione <code>let sel = ... in</code> su due righe.
 Quindi chiama diversi metodi su <code>sel</code>.</p>
-<pre><code class='ocaml'><span class='com2'>(* Primo frammento *)</span><!-- end comment -->
+<pre class='ocaml'><span class='com2'>(* Primo frammento *)</span><!-- end comment -->
 
 <span class='k'>open</span> StdLabels
 <span class='k'>open</span> GMain
@@ -519,12 +566,12 @@ Quindi chiama diversi metodi su <code>sel</code>.</p>
   sel<span class='o'>#</span>cancel_button<span class='o'>#</span>connect<span class='o'>#</span>clicked <span class='o'>~</span>callback<span class='o'>:</span>sel<span class='o'>#</span>destroy<span class='o'>;</span>
   sel<span class='o'>#</span>ok_button<span class='o'>#</span>connect<span class='o'>#</span>clicked <span class='o'>~</span>callback<span class='o'>:</span>do_ok<span class='o'>;</span>
   sel<span class='o'>#</span>show ()
-<script>mla323f7a3456ea3c3302b7aefbd2a386a = '(* Primo frammento *)\n\nopen StdLabels\nopen GMain\n\nlet file_dialog ~title ~callback ?filename () =\n  let sel =\n    GWindow.file_selection ~title ~modal:true ?filename () in\n  sel#cancel_button#connect#clicked ~callback:sel#destroy;\n  sel#ok_button#connect#clicked ~callback:do_ok;\n  sel#show ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(* Primo frammento *)\n\nopen StdLabels\nopen GMain\n\nlet file_dialog ~title ~callback ?filename () =\n  let sel =\n    GWindow.file_selection ~title ~modal:true ?filename () in\n  sel#cancel_button#connect#clicked ~callback:sel#destroy;\n  sel#ok_button#connect#clicked ~callback:do_ok;\n  sel#show ()\n');">[try]</a></pre>
 <p>
 Secondo frammento: Solo una lunga lista di nomi globali al livello
 superiore. Notate che l&#39;autore ha eliso ogni singolo <code>;;</code> grazie alla
 regola n° 2.</p>
-<pre><code class='ocaml'><span class='com2'>(* Secondo frammento *)</span><!-- end comment -->
+<pre class='ocaml'><span class='com2'>(* Secondo frammento *)</span><!-- end comment -->
 
 <span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>500 <span class='o'>~</span>height<span class='o'>:</span>300 <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;editor&#34;</span> ()
 <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>window<span class='o'>#</span>add ()
@@ -538,7 +585,7 @@ regola n° 2.</p>
 <span class='k'>let</span> hbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>hbox <span class='o'>~</span>packing<span class='o'>:</span>vbox<span class='o'>#</span>add ()
 <span class='k'>let</span> editor <span class='k'>=</span> <span class='k'>new</span> editor <span class='o'>~</span>packing<span class='o'>:</span>hbox<span class='o'>#</span>add ()
 <span class='k'>let</span> scrollbar <span class='k'>=</span> <span class='m'>GRange</span><span class='o'>.</span>scrollbar `VERTICAL <span class='o'>~</span>packing<span class='o'>:</span>hbox<span class='o'>#</span>pack ()
-<script>ml69f44b1156a7e8a512c25ec172967b7e = '(* Secondo frammento *)\n\nlet window = GWindow.window ~width:500 ~height:300 ~title:&#34;editor&#34; ()\nlet vbox = GPack.vbox ~packing:window#add ()\n\nlet menubar = GMenu.menu_bar ~packing:vbox#pack ()\nlet factory = new GMenu.factory menubar\nlet accel_group = factory#accel_group\nlet file_menu = factory#add_submenu &#34;File&#34;\nlet edit_menu = factory#add_submenu &#34;Edit&#34;\n\nlet hbox = GPack.hbox ~packing:vbox#add ()\nlet editor = new editor ~packing:hbox#add ()\nlet scrollbar = GRange.scrollbar `VERTICAL ~packing:hbox#pack ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(* Secondo frammento *)\n\nlet window = GWindow.window ~width:500 ~height:300 ~title:&#34;editor&#34; ()\nlet vbox = GPack.vbox ~packing:window#add ()\n\nlet menubar = GMenu.menu_bar ~packing:vbox#pack ()\nlet factory = new GMenu.factory menubar\nlet accel_group = factory#accel_group\nlet file_menu = factory#add_submenu &#34;File&#34;\nlet edit_menu = factory#add_submenu &#34;Edit&#34;\n\nlet hbox = GPack.hbox ~packing:vbox#add ()\nlet editor = new editor ~packing:hbox#add ()\nlet scrollbar = GRange.scrollbar `VERTICAL ~packing:hbox#pack ()\n');">[try]</a></pre>
 <p>
 Terzo frammento: L&#39;autore importa tutti i simboli dal modulo
 <code>GdkKeysyms</code>. Ora abbiamo un inusuale let-binding. <code>let _ = espressione</code>
@@ -553,7 +600,7 @@ probabilmente un valore di ritorno <code>unit</code>, ma non ho verificato - e n
 <p>Notate che in questo frammento abbiamo una lunga serie di comandi
 essenzialmente procedurali. Questo è in realtà un classico programma
 imperativo.</p>
-<pre><code class='ocaml'><span class='com2'>(* Terzo frammento *)</span><!-- end comment -->
+<pre class='ocaml'><span class='com2'>(* Terzo frammento *)</span><!-- end comment -->
 
 <span class='k'>open</span> GdkKeysyms
 
@@ -586,7 +633,7 @@ imperativo.</p>
   window<span class='o'>#</span>show ()<span class='o'>;</span>
   <span class='m'>Main</span><span class='o'>.</span>main ()
 
-<script>ml772c58ca9063206aed6e059a0cdcb55e = '(* Terzo frammento *)\n\nopen GdkKeysyms\n\nlet _ =\n  window#connect#destroy ~callback:Main.quit;\n  let factory = new GMenu.factory file_menu ~accel_group in\n  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;\n  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;\n  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;\n  factory#add_separator ();\n  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;\n  let factory = new GMenu.factory edit_menu ~accel_group in\n  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;\n  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;\n  factory#add_separator ();\n  factory#add_check_item &#34;Word wrap&#34; ~active:false\n    ~callback:editor#text#set_word_wrap;\n  factory#add_check_item &#34;Read only&#34; ~active:false\n    ~callback:(fun b -&#62; editor#text#set_editable (not b));\n  window#add_accel_group accel_group;\n  editor#text#event#connect#button_press\n    ~callback:(fun ev -&#62;\n\n      let button = GdkEvent.Button.button ev in\n      if button = 3 then begin\n        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true\n      end else false);\n  editor#text#set_vadjustment scrollbar#adjustment;\n  window#show ();\n  Main.main ()\n\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(* Terzo frammento *)\n\nopen GdkKeysyms\n\nlet _ =\n  window#connect#destroy ~callback:Main.quit;\n  let factory = new GMenu.factory file_menu ~accel_group in\n  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;\n  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;\n  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;\n  factory#add_separator ();\n  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;\n  let factory = new GMenu.factory edit_menu ~accel_group in\n  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;\n  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;\n  factory#add_separator ();\n  factory#add_check_item &#34;Word wrap&#34; ~active:false\n    ~callback:editor#text#set_word_wrap;\n  factory#add_check_item &#34;Read only&#34; ~active:false\n    ~callback:(fun b -&#62; editor#text#set_editable (not b));\n  window#add_accel_group accel_group;\n  editor#text#event#connect#button_press\n    ~callback:(fun ev -&#62;\n\n      let button = GdkEvent.Button.button ev in\n      if button = 3 then begin\n        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true\n      end else false);\n  editor#text#set_vadjustment scrollbar#adjustment;\n  window#show ();\n  Main.main ()\n\n');">[try]</a></pre>
 
           </div>
         </div>
@@ -606,5 +653,6 @@ imperativo.</p>
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

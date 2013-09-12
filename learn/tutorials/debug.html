@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -78,7 +101,31 @@
           </nav>
         </div>
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             
 <h1 id="Debugging"> Debugging</h1><p>
 This note quickly presents two techniques to debug OCaml programs:</p>
@@ -92,7 +139,7 @@ This note quickly presents two techniques to debug OCaml programs:</p>
 <h2 id="Tracingfunctionscallsinthetoplevel"> Tracing functions calls in the toplevel</h2><p>
 The simplest way to debug programs in the toplevel is to follow the
 function calls, by “tracing” the faulty function:</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
+<pre class='ocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
 <span class='o'>#</span> <span class='o'>#</span>trace fib<span class='o'>;;</span>
 fib is now traced<span class='o'>.</span>
 <span class='o'>#</span> fib 3<span class='o'>;;</span>
@@ -109,13 +156,13 @@ fib <span class='o'>--&#62;</span> 3
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 3
 <span class='o'>#</span> <span class='o'>#</span>untrace fib<span class='o'>;;</span>
 fib is no longer traced<span class='o'>.</span>
-<script>ml6b52ead9551f3ddd62dfa5d83326f19c = '  let rec fib x = if x &#60;= 1 then 1 else fib (x - 1) + fib (x - 2);;\n# #trace fib;;\nfib is now traced.\n# fib 3;;\nfib &#60;-- 3\nfib &#60;-- 1\nfib --&#62; 1\nfib &#60;-- 2\nfib &#60;-- 0\nfib --&#62; 1\nfib &#60;-- 1\nfib --&#62; 1\nfib --&#62; 2\nfib --&#62; 3\n- : int = 3\n# #untrace fib;;\nfib is no longer traced.\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  let rec fib x = if x &#60;= 1 then 1 else fib (x - 1) + fib (x - 2);;\n# #trace fib;;\nfib is now traced.\n# fib 3;;\nfib &#60;-- 3\nfib &#60;-- 1\nfib --&#62; 1\nfib &#60;-- 2\nfib &#60;-- 0\nfib --&#62; 1\nfib &#60;-- 1\nfib --&#62; 1\nfib --&#62; 2\nfib --&#62; 3\n- : int = 3\n# #untrace fib;;\nfib is no longer traced.\n');">[try]</a></pre>
 <h3 id="Polymorphicfunction"> Polymorphic function</h3><p>
 
 A difficulty with polymorphic functions is that the output of the trace
 system is not very informative in case of polymorphic arguments and/or
 results. Consider a sorting algorithm (say bubble sort):</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> exchange i j v <span class='k'>=</span>
+<pre class='ocaml'>  <span class='k'>let</span> exchange i j v <span class='k'>=</span>
     <span class='k'>let</span> aux <span class='k'>=</span> v<span class='o'>.</span>(i) <span class='k'>in</span>
     v<span class='o'>.</span>(i) <span class='o'>&#60;-</span> v<span class='o'>.</span>(j)<span class='o'>;</span> v<span class='o'>.</span>(j) <span class='o'>&#60;-</span> aux<span class='o'>;;</span>
   
@@ -147,7 +194,7 @@ one_pass_vect <span class='o'>--&#62;</span> <span class='o'>&#60;</span><span c
 one_pass_vect<span class='o'>*</span> <span class='o'>&#60;--</span> <span class='o'>[</span><span class='o'>|&#60;</span>poly<span class='o'>&#62;;</span> <span class='o'>&#60;</span>poly<span class='o'>&#62;;</span> <span class='o'>&#60;</span>poly<span class='o'>&#62;|</span><span class='o'>]</span>
 one_pass_vect<span class='o'>*</span> <span class='o'>--&#62;</span> ()
 <span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
-<script>ml96a3423010cece730c4338f59b62a05d = '  let exchange i j v =\n    let aux = v.(i) in\n    v.(i) &#60;- v.(j); v.(j) &#60;- aux;;\n  \n  let one_pass_vect fin v =\n    for j = 1 to fin do\n      if v.(j - 1) &#62; v.(j) then exchange (j - 1) j v\n    done;;\n  \n  let bubble_sort_vect v =\n    for i = Array.length v - 1 downto 0 do\n    one_pass_vect i v\n  done;;\n\n  let q = [| 18; 3; 1 |];;\n\n# #trace one_pass_vect;;\none_pass_vect is now traced.\n# bubble_sort_vect q;;\none_pass_vect &#60;-- 2\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 1\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 0\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\n- : unit = ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('  let exchange i j v =\n    let aux = v.(i) in\n    v.(i) &#60;- v.(j); v.(j) &#60;- aux;;\n  \n  let one_pass_vect fin v =\n    for j = 1 to fin do\n      if v.(j - 1) &#62; v.(j) then exchange (j - 1) j v\n    done;;\n  \n  let bubble_sort_vect v =\n    for i = Array.length v - 1 downto 0 do\n    one_pass_vect i v\n  done;;\n\n  let q = [| 18; 3; 1 |];;\n\n# #trace one_pass_vect;;\none_pass_vect is now traced.\n# bubble_sort_vect q;;\none_pass_vect &#60;-- 2\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 1\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 0\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\n- : unit = ()\n');">[try]</a></pre>
 <p>
 The function <code>one_pass_vect</code> being polymorphic, its vector argument is
 printed as a vector containing polymorphic values,
@@ -161,7 +208,7 @@ corrected, you just have to suppress the type constraint to revert to a
 polymorphic version of the function. For our sorting routine, a single
 type constraint on the argument of the <code>exchange</code> function warranties a
 monomorphic typing, that allows a proper trace of function calls:</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> exchange i j (v <span class='o'>:</span> int vect) <span class='k'>=</span>
+<pre class='ocaml'><span class='o'>#</span> <span class='k'>let</span> exchange i j (v <span class='o'>:</span> int vect) <span class='k'>=</span>
     <span class='o'>[</span><span class='o'>...</span><span class='o'>]</span>
 exchange <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int vect <span class='k'>-></span> unit <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
     <span class='o'>[</span><span class='o'>...</span><span class='o'>]</span>
@@ -186,7 +233,7 @@ one_pass_vect <span class='o'>--&#62;</span> <span class='o'>&#60;</span><span c
 one_pass_vect<span class='o'>*</span> <span class='o'>&#60;--</span> <span class='o'>[</span><span class='o'>|</span>1<span class='o'>;</span> 3<span class='o'>;</span> 18<span class='o'>|</span><span class='o'>]</span>
 one_pass_vect<span class='o'>*</span> <span class='o'>--&#62;</span> ()
 <span class='o'>-</span> <span class='o'>:</span> unit <span class='k'>=</span> ()
-<script>mle3c6cfee70c2eb31cf14ef9fc78c76ec = '# let exchange i j (v : int vect) =\n    [...]\nexchange : int -&#62; int -&#62; int vect -&#62; unit = &#60;fun&#62;\n    [...]\none_pass_vect : int -&#62; int vect -&#62; unit = &#60;fun&#62;\n    [...]\nbubble_sort_vect : int vect -&#62; unit = &#60;fun&#62;\n# #trace one_pass_vect;;\none_pass_vect is now traced.\n# let q = [| 18; 3; 1 |];;\nq : int vect = [|18; 3; 1|]\n# bubble_sort_vect q;;\none_pass_vect &#60;-- 2\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|18; 3; 1|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 1\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|3; 1; 18|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 0\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|1; 3; 18|]\none_pass_vect* --&#62; ()\n- : unit = ()\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('# let exchange i j (v : int vect) =\n    [...]\nexchange : int -&#62; int -&#62; int vect -&#62; unit = &#60;fun&#62;\n    [...]\none_pass_vect : int -&#62; int vect -&#62; unit = &#60;fun&#62;\n    [...]\nbubble_sort_vect : int vect -&#62; unit = &#60;fun&#62;\n# #trace one_pass_vect;;\none_pass_vect is now traced.\n# let q = [| 18; 3; 1 |];;\nq : int vect = [|18; 3; 1|]\n# bubble_sort_vect q;;\none_pass_vect &#60;-- 2\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|18; 3; 1|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 1\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|3; 1; 18|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 0\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|1; 3; 18|]\none_pass_vect* --&#62; ()\n- : unit = ()\n');">[try]</a></pre>
 <h3 id="Limitations"> Limitations</h3><p>
 
 To keep track of assignments to data structures and mutable variables in
@@ -216,13 +263,13 @@ native Windows ports of OCaml (but it runs under the Cygwin port.</p>
 <h3 id="Launchingthedebugger"> Launching the debugger</h3><p>
 Consider the following obviously wrong program written in the file
 <code>uncaught.ml</code>:</p>
-<pre><code class='ocaml'><span class='com2'>(* file uncaught<span class='ic'>.</span>ml *)</span><!-- end comment -->
+<pre class='ocaml'><span class='com2'>(* file uncaught<span class='ic'>.</span>ml *)</span><!-- end comment -->
 <span class='k'>let</span> l <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>let</span> find_address name <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>assoc name <span class='o'>!</span>l<span class='o'>;;</span>
 <span class='k'>let</span> add_address name address <span class='k'>=</span> l <span class='o'>:=</span> (name<span class='o'>,</span> address) <span class='o'>::</span> <span class='o'>!</span> l<span class='o'>;;</span>
 add_address <span class='s'>&#34;IRIA&#34;</span> <span class='s'>&#34;Rocquencourt&#34;</span><span class='o'>;;</span>
 print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
-<script>ml7cec6ab7a52300ffc0c3d775b4672291 = '(* file uncaught.ml *)\nlet l = ref [];;\nlet find_address name = List.assoc name !l;;\nlet add_address name address = l := (name, address) :: ! l;;\nadd_address &#34;IRIA&#34; &#34;Rocquencourt&#34;;;\nprint_string (find_address &#34;INRIA&#34;); print_newline ();;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(* file uncaught.ml *)\nlet l = ref [];;\nlet find_address name = List.assoc name !l;;\nlet add_address name address = l := (name, address) :: ! l;;\nadd_address &#34;IRIA&#34; &#34;Rocquencourt&#34;;;\nprint_string (find_address &#34;INRIA&#34;); print_newline ();;\n');">[try]</a></pre>
 <p>
 At runtime, the program raises an uncaught exception <code>Not_found</code>.
 Suppose we want to find where and why this exception has been raised, we
@@ -231,37 +278,37 @@ can proceed as follows:</p>
  <li>we compile the program in debug mode:<br /></li>
 </ol>
 
-<pre><code class='ocaml'>ocamlc <span class='o'>-</span>g uncaught<span class='o'>.</span>ml
-<script>ml912334278196c864807fe0e8289c32b4 = 'ocamlc -g uncaught.ml\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>ocamlc <span class='o'>-</span>g uncaught<span class='o'>.</span>ml
+<a href="javascript:octry('ocamlc -g uncaught.ml\n');">[try]</a></pre>
 <ol>
  <li>we launch the debugger:</li>
 </ol>
 
-<pre><code class='ocaml'>ocamldebug a<span class='o'>.</span>out
-<script>mlba2b65be0d3ff8228911462cac61fc85 = 'ocamldebug a.out\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<pre class='ocaml'>ocamldebug a<span class='o'>.</span>out
+<a href="javascript:octry('ocamldebug a.out\n');">[try]</a></pre>
 <p>Then the debugger answers with a banner and a prompt:</p>
-<pre><code class='ocaml'>        OCaml Debugger version 4.00<span class='o'>.</span>1
+<pre class='ocaml'>        OCaml Debugger version 4.00<span class='o'>.</span>1
 
 (ocd)
-<script>ml7c36e34619117eb32533b53faae2b69f = '        OCaml Debugger version 4.00.1\n\n(ocd)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('        OCaml Debugger version 4.00.1\n\n(ocd)\n');">[try]</a></pre>
 <h3 id="Findingthecauseofaspuriousexception"> Finding the cause of a spurious exception</h3><p>
 
 Type <code>r</code> (for <em>run</em>); you get</p>
-<pre><code class='ocaml'>(ocd) r
+<pre class='ocaml'>(ocd) r
 Loading program<span class='o'>...</span> <span class='k'>done</span><span class='o'>.</span>
 Time <span class='o'>:</span> 12
 Program <span class='k'>end</span><span class='o'>.</span>
 Uncaught <span class='k'>exception</span><span class='o'>:</span> Not_found
 (ocd)
-<script>ml4a0881bb0604eba626a60b219792849e = '(ocd) r\nLoading program... done.\nTime : 12\nProgram end.\nUncaught exception: Not_found\n(ocd)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(ocd) r\nLoading program... done.\nTime : 12\nProgram end.\nUncaught exception: Not_found\n(ocd)\n');">[try]</a></pre>
 <p>
 Self explanatory, is&#39;nt it? So, you want to step backward to set the
 program counter before the time the exception is raised; hence type in
 <code>b</code> as <em>backstep</em>, and you get</p>
-<pre><code class='ocaml'>(ocd) b
+<pre class='ocaml'>(ocd) b
 Time <span class='o'>:</span> 11 <span class='o'>-</span> pc <span class='o'>:</span> 15500 <span class='o'>-</span> <span class='k'>module</span> List
 143     <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>&#60;|</span>b<span class='o'>|&#62;</span>raise Not_found
-<script>ml321f5d4412a0c60c09b9c1b55609535c = '(ocd) b\nTime : 11 - pc : 15500 - module List\n143     [] -&#62; &#60;|b|&#62;raise Not_found\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(ocd) b\nTime : 11 - pc : 15500 - module List\n143     [] -&#62; &#60;|b|&#62;raise Not_found\n');">[try]</a></pre>
 <p>
 The debugger tells you that you are in module <code>List</code>, inside a pattern
 matching on a list that already chose the <code>[]</code> case and is about to
@@ -270,24 +317,24 @@ expression (as witnessed by the <code>&lt;|b|&gt;</code> mark).</p>
 <p>But, as you know, you want the debugger to tell you which procedure
 calls the one from <code>List</code>, and also who calls the procedure that calls
 the one from <code>List</code>; hence, you want a backtrace of the execution stack:</p>
-<pre><code class='ocaml'>(ocd) bt
+<pre class='ocaml'>(ocd) bt
 <span class='o'>#</span>0  Pc <span class='o'>:</span> 15500  List char 3562
 <span class='o'>#</span>1  Pc <span class='o'>:</span> 19128  Uncaught char 221
-<script>mlea2797a036c21f48808c60d7329071be = '(ocd) bt\n#0  Pc : 15500  List char 3562\n#1  Pc : 19128  Uncaught char 221\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(ocd) bt\n#0  Pc : 15500  List char 3562\n#1  Pc : 19128  Uncaught char 221\n');">[try]</a></pre>
 <p>
 So the last function called is from module <code>List</code> at character 3562,
 that is :</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> assoc x <span class='k'>=</span> <span class='k'>function</span>
+<pre class='ocaml'><span class='k'>let rec</span> assoc x <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> raise Not_found
           <span class='o'>^</span>
   <span class='o'>|</span> (a<span class='o'>,</span>b)<span class='o'>::</span>l <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> x <span class='k'>then</span> b <span class='k'>else</span> assoc x l
-<script>ml2685e01bff7b59258735fc568a384d9e = 'let rec assoc x = function\n    [] -&#62; raise Not_found\n          ^\n  | (a,b)::l -&#62; if a = x then b else assoc x l\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('let rec assoc x = function\n    [] -&#62; raise Not_found\n          ^\n  | (a,b)::l -&#62; if a = x then b else assoc x l\n');">[try]</a></pre>
 <p>
 The function that calls it is in module <code>Uncaught</code>, file <code>uncaught.ml</code>
 char 221:</p>
-<pre><code class='ocaml'>print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
+<pre class='ocaml'>print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
                                   <span class='o'>^</span>
-<script>ml7411b075ca1a389a831cc0a263729a2c = 'print_string (find_address &#34;INRIA&#34;); print_newline ();;\n                                  ^\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('print_string (find_address &#34;INRIA&#34;); print_newline ();;\n                                  ^\n');">[try]</a></pre>
 <p>
 To sum up: if you&#39;re developping a program you can compile it with the
 <code>-g</code> option, to be ready to debug the program if necessary. Hence, to
@@ -296,7 +343,7 @@ find a spurious exception you just need to type <code>ocamldebug a.out</code>, t
 <h3 id="Gettinghelpandinfointhedebugger"> Getting help and info in the debugger</h3><p>
 To get more info about the current status of the debugger you can ask it
 directly at the toplevel prompt of the debugger; for instance:</p>
-<pre><code class='ocaml'>(ocd) info breakpoints
+<pre class='ocaml'>(ocd) info breakpoints
 No breakpoint<span class='o'>.</span>
 
 (ocd) help break
@@ -305,12 +352,12 @@ break <span class='o'>:</span> Set breakpoint at specified line <span class='k'>
 Syntax<span class='o'>:</span> break <span class='k'>function</span><span class='o'>-</span>name
 break <span class='o'>@</span> <span class='o'>[</span><span class='k'>module</span><span class='o'>]</span> linenum
 break <span class='o'>@</span> <span class='o'>[</span><span class='k'>module</span><span class='o'>]</span> <span class='o'>#</span> characternum
-<script>ml79d191d0da2d3541a007ddced9bdbe9a = '(ocd) info breakpoints\nNo breakpoint.\n\n(ocd) help break\n  1      15396  in List, character 3539\nbreak : Set breakpoint at specified line or function.\nSyntax: break function-name\nbreak @ [module] linenum\nbreak @ [module] # characternum\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(ocd) info breakpoints\nNo breakpoint.\n\n(ocd) help break\n  1      15396  in List, character 3539\nbreak : Set breakpoint at specified line or function.\nSyntax: break function-name\nbreak @ [module] linenum\nbreak @ [module] # characternum\n');">[try]</a></pre>
 <h3 id="Settingbreakpoints"> Setting break points</h3><p>
 
 Let&#39;s set up a breakpoint and rerun the entire program from the
 beginning (<code>(g)oto 0</code> then <code>(r)un</code>):</p>
-<pre><code class='ocaml'>(ocd) break <span class='o'>@</span>Uncaught 9
+<pre class='ocaml'>(ocd) break <span class='o'>@</span>Uncaught 9
 Breakpoint 3 at 19112 <span class='o'>:</span> file Uncaught<span class='o'>,</span> line 9 column 34
 
 (ocd) g 0
@@ -321,11 +368,11 @@ Beginning <span class='k'>of</span> program<span class='o'>.</span>
 Time <span class='o'>:</span> 6 <span class='o'>-</span> pc <span class='o'>:</span> 19112 <span class='o'>-</span> <span class='k'>module</span> Uncaught
 Breakpoint <span class='o'>:</span> 1
 9 add <span class='s'>&#34;IRIA&#34;</span> <span class='s'>&#34;Rocquencourt&#34;</span><span class='o'>&#60;|</span>a<span class='o'>|&#62;;;</span>
-<script>ml915c919784878053079f7cf1333946b2 = '(ocd) break @Uncaught 9\nBreakpoint 3 at 19112 : file Uncaught, line 9 column 34\n\n(ocd) g 0\nTime : 0\nBeginning of program.\n\n(ocd) r\nTime : 6 - pc : 19112 - module Uncaught\nBreakpoint : 1\n9 add &#34;IRIA&#34; &#34;Rocquencourt&#34;&#60;|a|&#62;;;\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(ocd) break @Uncaught 9\nBreakpoint 3 at 19112 : file Uncaught, line 9 column 34\n\n(ocd) g 0\nTime : 0\nBeginning of program.\n\n(ocd) r\nTime : 6 - pc : 19112 - module Uncaught\nBreakpoint : 1\n9 add &#34;IRIA&#34; &#34;Rocquencourt&#34;&#60;|a|&#62;;;\n');">[try]</a></pre>
 <p>
 Then, we can step and find what happens when <code>find_address</code> is about to
 be called</p>
-<pre><code class='ocaml'>(ocd) s
+<pre class='ocaml'>(ocd) s
 Time <span class='o'>:</span> 7 <span class='o'>-</span> pc <span class='o'>:</span> 19012 <span class='o'>-</span> <span class='k'>module</span> Uncaught
 5 <span class='k'>let</span> find_address name <span class='k'>=</span> <span class='o'>&#60;|</span>b<span class='o'>|&#62;</span><span class='m'>List</span><span class='o'>.</span>assoc name <span class='o'>!</span>l<span class='o'>;;</span>
 
@@ -335,7 +382,7 @@ name <span class='o'>:</span> string <span class='k'>=</span> <span class='s'>&#
 (ocd) p <span class='o'>!</span>l
 <span class='o'>$</span>1 <span class='o'>:</span> (string <span class='o'>*</span> string) list <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;IRIA&#34;</span><span class='o'>,</span> <span class='s'>&#34;Rocquencourt&#34;</span><span class='o'>]</span>
 (ocd)
-<script>ml4468c47de16f1b56a4da90c028a7860b = '(ocd) s\nTime : 7 - pc : 19012 - module Uncaught\n5 let find_address name = &#60;|b|&#62;List.assoc name !l;;\n\n(ocd) p name\nname : string = &#34;INRIA&#34;\n\n(ocd) p !l\n$1 : (string * string) list = [&#34;IRIA&#34;, &#34;Rocquencourt&#34;]\n(ocd)\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('(ocd) s\nTime : 7 - pc : 19012 - module Uncaught\n5 let find_address name = &#60;|b|&#62;List.assoc name !l;;\n\n(ocd) p name\nname : string = &#34;INRIA&#34;\n\n(ocd) p !l\n$1 : (string * string) list = [&#34;IRIA&#34;, &#34;Rocquencourt&#34;]\n(ocd)\n');">[try]</a></pre>
 <p>
 Now we can guess why <code>List.assoc</code> will fail to find &quot;INRIA&quot; in the
 list...</p>
@@ -364,5 +411,6 @@ using <code>ESC-b</code> and <code>ESC-s</code>, you can set up break points usi
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>

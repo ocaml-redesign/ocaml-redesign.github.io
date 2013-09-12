@@ -14,6 +14,29 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+      if(document.getElementById('buttons').innerHTML=='') {
+      t = document.getElementById('tryocaml');
+      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+      t.appendChild(js);
+      } else {
+      t = document.getElementById('tryocaml');
+      t.style.display = 'block';
+      p=document.getElementsByTagName('pre')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      p=document.getElementsByTagName('code')
+      for(i=0;p[i];i++){
+      p.onClick=function () {}
+      }
+      document.getElementById('console').value = x;
+      document.getElementById('console').focus();
+      document.getElementById('console').select();
+      }
+      }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,10 +69,34 @@
       <div class="row">
 
         <div id="content-primary" class="span8">
-          <div class="content">
+    <div id='tryocaml' class="content" style='display:none;'>
+      <div class="container">
+        <div class="row">
+          <div id="lesson-message"></div>
+          <div id="languages" style='display:none;'></div>
+          <div id="menu-lessons" style='display:none'>
+            <table class="zebra-striped">
+              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+            </table>
+          </div>
+          <div class="span9 ocaml">
+            <div id="toplevel-container">
+              <pre id="output"></pre>
+              <div id="sharp">#</div>
+              <div id="toplevel"></div>
+            </div>
+            <div id="buttons"></div>
+            <div id="graphics-title"></div>
+            <div id="graphics"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div id='main-contents' class="content">
             <h1 id="Camlp4310dynamicoldsyntaxml"> Camlp4 3.10 dynamic_old_syntax.ml</h1><p>
 dynamic_old_syntax.ml:</p>
-<pre><code class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
+<pre class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
 <span class='k'>type</span> t2 <span class='k'>=</span> Foo <span class='k'>of</span> string <span class='o'>*</span> t1
 <span class='k'>open</span> Pcaml
 <span class='k'>let</span> foo <span class='k'>=</span> <span class='m'>Entry</span><span class='o'>.</span>mk gram <span class='s'>&#34;foo&#34;</span>
@@ -62,7 +109,7 @@ END<span class='o'>;;</span>
 <span class='m'>Entry</span><span class='o'>.</span>parse foo (<span class='m'>Stream</span><span class='o'>.</span>of_string <span class='s'>&#34;foo x?&#34;</span>) <span class='k'>=</span> Foo(<span class='s'>&#34;x&#34;</span><span class='o'>,</span> A)
 DELETE_RULE foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span><span class='o'>;</span> LIDENT<span class='o'>;</span> bar END
 
-<script>ml6ef87963a215dec0667e55777b3e8fff = 'type t1 = A | B\ntype t2 = Foo of string * t1\nopen Pcaml\nlet foo = Entry.mk gram &#34;foo&#34;\nlet bar = Entry.mk gram &#34;bar&#34;\nEXTEND\n  GLOBAL: foo bar;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nEntry.parse foo (Stream.of_string &#34;foo x?&#34;) = Foo(&#34;x&#34;, A)\nDELETE_RULE foo: &#34;foo&#34;; LIDENT; bar END\n\n';</script><span style='position:relative;bottom:-1em;font-size:80%;'><span onclick='alert("not yet implemented")'>[try]</span><span onclick='alert("not yet implemented")'>[copy]</span><span onclick='alert("not yet implemented")'>[github]</span></span></code></pre>
+<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Pcaml\nlet foo = Entry.mk gram &#34;foo&#34;\nlet bar = Entry.mk gram &#34;bar&#34;\nEXTEND\n  GLOBAL: foo bar;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nEntry.parse foo (Stream.of_string &#34;foo x?&#34;) = Foo(&#34;x&#34;, A)\nDELETE_RULE foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></pre>
 
           </div>
         </div>
@@ -82,5 +129,6 @@ DELETE_RULE foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span><spa
     <!-- Load javascript from CDN -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
   </body>
 </html>
