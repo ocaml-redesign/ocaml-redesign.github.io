@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -90,51 +82,54 @@ which is widely used by the OCaml community.</p>
 Is it possible to do computations with arbritrary precision arithmetics?</p>
 <p>OCaml and Caml Light both provide a library that handles exact
 arithmetic computation for rational numbers. The library is called <code>Num</code>
-in OCaml and <code>camlnum</code> in Caml Light.<br />.<code>m</code> array the of lines the all by shared physically and unique
-is <code>0 3 make.Array</code> by allocated is which line the why s&#39;That .array
-new the of element each in written is value this then ;computed is
-value initial the First, .phases two has array new a of allocation The</p>
-<pre><code>;;m  
-;;1 -&lt; )0(.)0(.m  
-;;)0 3 make.Array( 2 make.Array = m let  
-ocaml</pre>
-<p>:)entry previous also see( array new the of lines
-the between sharing physical unexpected some is there because right not
-is result the :bogus is arrays multidimensional define to way naive The
-.)vectors mathematical modelize they unidimensional, are arrays OCaml(
-themselves arrays are elements whose array an define to is way only The</p>
-<p>?arrays multidimensional define to How</p>
-<p>.)below entry
-the also see( others the modifies elements these of one modifying that
-implies vectors these of sharing the vectors, also are elements these if
-:vectors in stored elements to applies also effect sharing physical The</p>
-<pre><code>;;v  
-;;4 -&lt; )0(.w  
-;;v = w let  
-;;0 3 make.Array = v let  
-ocaml</pre>
-<p>:other
-the to visible be will array one on modification every array, same
-the to names two give you If .copying array implicit no are there OCaml
-In .missed you that arrays two of sharing physical the to due is This</p>
-<p>why know t&#39;don I and modified, is array My
-structures Data  ###</p>
-<pre><code>;;100 fact  
-;;))1 - n( fact( /* n int_of_num else )1 int_of_num( then 0 =&lt; n if    
-= n fact rec let  
-;;&quot;3/2&quot; string_of_num /+ &quot;3/1&quot; string_of_num = n let  
-;;&quot;3/2&quot; string_of_num  
-;;num_print printer_install#  
-;;)n num_of_string( &quot;s%&quot; ff fprintf = n ff num_print let  
-;;Format open  
-Num open  
-;;&quot;cma.nums&quot; load#  
-ocaml</pre>
-<p>.below given is OCaml under example An .used
-be can printer custom a toplevel, the in printing For .strings character
-or integers )small( from conversion using numbers big build You
-.<code>/+</code> thus is addition :<code>/</code> suffix the gets numbers big on Operations 
-<br />
+in OCaml and <code>camlnum</code> in Caml Light.<br />
+ Operations on big numbers gets the suffix <code>/</code>: addition is thus <code>+/</code>.
+You build big numbers using conversion from (small) integers or
+character strings. For printing in the toplevel, a custom printer can be
+used. An example under OCaml is given below.</p>
+<pre class='ocaml'>  <span class='o'>#</span>load <span class='s'>&#34;nums.cma&#34;</span><span class='o'>;;</span>
+  <span class='k'>open</span> Num
+  <span class='k'>open</span> Format<span class='o'>;;</span>
+  <span class='k'>let</span> print_num ff n <span class='k'>=</span> fprintf ff <span class='s'>&#34;%s&#34;</span> (string_of_num n)<span class='o'>;;</span>
+  <span class='o'>#</span>install_printer print_num<span class='o'>;;</span>
+  num_of_string <span class='s'>&#34;2/3&#34;</span><span class='o'>;;</span>
+  <span class='k'>let</span> n <span class='k'>=</span> num_of_string <span class='s'>&#34;1/3&#34;</span> <span class='o'>+/</span> num_of_string <span class='s'>&#34;2/3&#34;</span><span class='o'>;;</span>
+  <span class='k'>let rec</span> fact n <span class='k'>=</span>
+    <span class='k'>if</span> n <span class='o'>&#60;=</span> 0 <span class='k'>then</span> (num_of_int 1) <span class='k'>else</span> num_of_int n <span class='o'>*/</span> (fact (n <span class='o'>-</span> 1))<span class='o'>;;</span>
+  fact 100<span class='o'>;;</span>
+<a href="javascript:octry('  #load &#34;nums.cma&#34;;;\n  open Num\n  open Format;;\n  let print_num ff n = fprintf ff &#34;%s&#34; (string_of_num n);;\n  #install_printer print_num;;\n  num_of_string &#34;2/3&#34;;;\n  let n = num_of_string &#34;1/3&#34; +/ num_of_string &#34;2/3&#34;;;\n  let rec fact n =\n    if n &#60;= 0 then (num_of_int 1) else num_of_int n */ (fact (n - 1));;\n  fact 100;;\n');">[try]</a></pre>
+<h3 id="Datastructures"> Data structures</h3><p>
+
+My array is modified, and I don&#39;t know why</p>
+<p>This is due to the physical sharing of two arrays that you missed. In
+OCaml there are no implicit array copying. If you give two names to the
+same array, every modification on one array will be visible to the
+other:</p>
+<pre class='ocaml'>  <span class='k'>let</span> v <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>make 3 0<span class='o'>;;</span>
+  <span class='k'>let</span> w <span class='k'>=</span> v<span class='o'>;;</span>
+  w<span class='o'>.</span>(0) <span class='o'>&#60;-</span> 4<span class='o'>;;</span>
+  v<span class='o'>;;</span>
+<a href="javascript:octry('  let v = Array.make 3 0;;\n  let w = v;;\n  w.(0) &#60;- 4;;\n  v;;\n');">[try]</a></pre>
+<p>
+The physical sharing effect also applies to elements stored in vectors:
+if these elements are also vectors, the sharing of these vectors implies
+that modifying one of these elements modifies the others (see also the
+entry below).</p>
+<p>How to define multidimensional arrays?</p>
+<p>The only way is to define an array whose elements are arrays themselves
+(OCaml arrays are unidimensional, they modelize mathematical vectors).
+The naive way to define multidimensional arrays is bogus: the result is
+not right because there is some unexpected physical sharing between the
+lines of the new array (see also previous entry):</p>
+<pre class='ocaml'>  <span class='k'>let</span> m <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>make 2 (<span class='m'>Array</span><span class='o'>.</span>make 3 0)<span class='o'>;;</span>
+  m<span class='o'>.</span>(0)<span class='o'>.</span>(0) <span class='o'>&#60;-</span> 1<span class='o'>;;</span>
+  m<span class='o'>;;</span>
+<a href="javascript:octry('  let m = Array.make 2 (Array.make 3 0);;\n  m.(0).(0) &#60;- 1;;\n  m;;\n');">[try]</a></pre>
+<p>
+The allocation of a new array has two phases. First, the initial value
+is computed; then this value is written in each element of the new
+array. That&#39;s why the line which is allocated by <code>Array.make 3 0</code> is
+unique and physically shared by all the lines of the array <code>m</code>.<br />
  The solution is to use the <code>make_matrix</code> primitive that builds the
 matrix with all elements equal to the initial value provided.
 Alternatively, write the program that allocates a new line for each line
@@ -272,27 +267,27 @@ How to apply a function?</p>
 <p>Functions are applied as in mathematics: write the function&#39;s name,
 followed by its argument enclosed in parens: f (x). In practice, parens
 are omitted in case of constants or identifiers: we write <code>fib 2</code>
-instead of <code>fib (2)</code>, and <code>fact x</code> instead of <code>fact (x)</code>.<br />.result meaningful mathematically no have but ,)location
-memory some writing or terminal the on something printing instance
-for( <em>effect</em> an produce that commands are <em>procedures</em> that Recall</p>
-<p>?procedure a define to How</p>
-<p>.)application an
-not subtraction, a is it hence( <code>1 - f</code> to similar syntactically is that
-<code>1- f</code> <strong>not</strong> and <code>)1-( f</code> write must you <code>1-</code> to <code>f</code> apply to :number
-constant negative a is argument the when parens need you particular
-In .parentheses between argument this enclose must you identifier,
-an just than complex more is function a of argument the When 
-<br />
+instead of <code>fib (2)</code>, and <code>fact x</code> instead of <code>fact (x)</code>.<br />
+ When the argument of a function is more complex than just an
+identifier, you must enclose this argument between parentheses. In
+particular you need parens when the argument is a negative constant
+number: to apply <code>f</code> to <code>-1</code> you must write <code>f (-1)</code> and <strong>not</strong> <code>f -1</code>
+that is syntactically similar to <code>f - 1</code> (hence it is a subtraction, not
+an application).</p>
+<p>How to define a procedure?</p>
+<p>Recall that <em>procedures</em> are commands that produce an <em>effect</em> (for
+instance printing something on the terminal or writing some memory
+location), but have no mathematically meaningful result.<br />
  In OCaml, there is no special treatment of procedures: they are just
 considered as special cases of functions that return the special
 “meaningless” value <a href='donnees_de_base-eng.html#units'><code>()</code></a>. For
 instance, the <code>print_string</code> primitive that prints a character string on
 the terminal, just returns <code>()</code> as a way of indicating that its job has
-been properly completed.<br />.<code>unit &gt;-       unit</code>
-type has it :argument meaningful no gets terminal, the on newline
-a outputs that procedure, <code>newline_print</code> the instance, For .argument
-dummy as <code>)(</code> get argument, meaningful any need not do that Procedures 
-<br />
+been properly completed.<br />
+ Procedures that do not need any meaningful argument, get <code>()</code> as dummy
+argument. For instance, the <code>print_newline</code> procedure, that outputs a
+newline on the terminal, gets no meaningful argument: it has type
+<code>unit       -&gt; unit</code>.<br />
  Procedures with argument are defined exactly as ordinary functions. For
 instance:</p>
 <pre class='ocaml'>  <span class='k'>let</span> message s <span class='k'>=</span> print_string s<span class='o'>;</span> print_newline()<span class='o'>;;</span>
@@ -414,204 +409,244 @@ usual trick is to enclose inner pattern matchings with <code>begin</code> and
 Error message: a type is not compatible with itself</p>
 <p>You may obtain the message: This expression has type “some type” but is
 used with type “the same some type”. This may occur very often when
-using the interactive system.<br />.hoped have could we as polymorphic as not is function The</p>
-<pre><code>;;y g x, g = y x )a&#39; &gt;- a&#39; : g( f let  
-ocaml</pre>
-<p>:typing following the hence ;function the of
-body the inside polymorphic be cannot function a of argument an ML, In</p>
-<p>?arguments polymorphic with function a write to How</p>
-<p>.<code>f</code> of case the in as ))expansion-eta#(]expansion-eta<a href='' title='Broken URL'> 
-using example for( code the of part some rewriting 
-through polymorphic something into transformed be can expression The *
-.monomorphic 
-completely something into it turn to order in annotation, 
-type explicit an use must You .above `r` in as expression, 
-polymorphic a into turned be not really can expression The *
+using the interactive system.<br />
+ The reason is that two types with the same name have been defined the
+compiler does not confuse the two types, but the types are evidently
+written the same. Consider for instance:</p>
+<pre class='ocaml'>  <span class='k'>type</span> t <span class='k'>=</span> T <span class='k'>of</span> int<span class='o'>;;</span>
+  <span class='k'>let</span> x <span class='k'>=</span> T 1<span class='o'>;;</span>
+  <span class='k'>type</span> t <span class='k'>=</span> T <span class='k'>of</span> int<span class='o'>;;</span>
+  <span class='k'>let</span> incr <span class='k'>=</span> <span class='k'>function</span> T x <span class='k'>-></span> T (x<span class='o'>+</span>1)<span class='o'>;;</span>
+  incr x<span class='o'>;;</span>
+<a href="javascript:octry('  type t = T of int;;\n  let x = T 1;;\n  type t = T of int;;\n  let incr = function T x -&#62; T (x+1);;\n  incr x;;\n');">[try]</a></pre>
+<p>
+This phenomenon appears when you load many times the same file into the
+interactive system, since each reloading redefines the types. The
+solution is to quit your interactive system and reload your files in a
+new session.</p>
+<p>A function obtained through partial application is not polymorphic
+enough</p>
+<p>The more common case to get a</p>
+<pre><code>not polymorphic enough&#39;&#39; definition is
+when defining a function via partial application of a general
+polymorphic function. In OCaml polymorphism is introduced only through
+the “let” construct, and results from application are weakly polymorph;
+hence the function resulting from the application is not polymorph. In
+this case, you recover a fully polymorphic definition by clearly
+exhibiting the functionality to the type-checker : define the function
+with an explicit functional abstraction, that is, add a `function`
+construct or an extra parameter (this rewriting is known as
+eta-expansion):
 
-:envisioned be must cases two is, as
-compiled be cannot message error the in mentionned expression the Since
+```ocaml
+  let map_id = List.map (function x -&gt; x) (* Result is weakly polymorphic *);;
+  map_id [1;2];;
+  map_id (* No longer polymorphic *);;
+  let map_id&#39; l = List.map (function x -&gt; x) l;;
+  map_id&#39; [1;2];;
+  map_id&#39; (* Still fully polymorphic *);;
 ```
-;;)x &gt;- x fun( map.List = f let  
-;;</a>2;1[ &#39;id_map<br/>
+The two definitions are semantically equivalent, and the new one can be
+assigned a polymorphic type scheme, since it is no more a function
+application.
 
-;;l )x &gt;- x function( map.List = l &#39;id_map let<br/>
+The type of this expression contains type variables that cannot be
+generalized
 
-;;)<em> polymorphic longer No *( id_map<br/>
+This message appears when the OCaml compiler tries to compile a function
+or a value which is monorphic, but for which some types have not been
+completely inferred. Some types variables are left in the type, which
+are are called “weak” (and are displayed by an underscore: `&#39;_a`); they
+will disappear thanks to type inference as soon as enough informations
+will be given.
 
-;;]2;1[ id_map<br/>
+```ocaml
+  let r = ref [];;
+  let f = List.map (fun x -&gt; x);;
+```
+Since the expression mentionned in the error message cannot be compiled
+as is, two cases must be envisioned:
 
-;;)</em> polymorphic weakly is Result *( )x &gt;- x function( map.List = id_map let<br/>
+* The expression can really not be turned into a polymorphic
+ expression, as in `r` above. You must use an explicit type
+ annotation, in order to turn it into something completely
+ monomorphic.
+* The expression can be transformed into something polymorphic through
+ rewriting some part of the code (for example using
+ [eta-expansion](#eta-expansion)) as in the case of `f`.
 
-ocaml</p>
-<pre><code>
+How to write a function with polymorphic arguments?
 
-:)expansion-eta
-as known is rewriting this( parameter extra an or construct
-`function` a add is, that abstraction, functional explicit an with
-function the define : checker-type the to functionality the exhibiting
-clearly by definition polymorphic fully a recover you case, this
-In .polymorph not is application the from resulting function the hence
-;polymorph weakly are application from results and construct, “let” the
-through only introduced is polymorphism OCaml In .function polymorphic
-general a of application partial via function a defining when
-is definition &#39;&#39;enough polymorphic not`` a get to case common more The
+In ML, an argument of a function cannot be polymorphic inside the body
+of the function; hence the following typing:
 
-enough
-polymorphic not is application partial through obtained function A
-
-.session new
-a in files your reload and system interactive your quit to is solution
-The .types the redefines reloading each since system, interactive
-the into file same the times many load you when appears phenomenon This
-</pre>
-<p>
-;;x incr<br/>
-
-;;)1+x( T &gt;- x T function = incr let<br/>
-
-;;int of T = t type<br/>
-
-;;1 T = x let<br/>
-
-;;int of T = t type<br/>
-
-ocaml</p>
-<pre><code>
-
-:instance for Consider .same the written
-evidently are types the but types, two the confuse not does compiler
-the defined been have name same the with types two that is reason The 
-</pre>
-<p>
+```ocaml
+  let f (g : &#39;a -&gt; &#39;a) x y = g x, g y;;
+```
+The function is not as polymorphic as we could have hoped.
  Nevertheless, in OCaml it is possible to use first-order polymorphism.
 For this, you can use either records or objects; in the case of records,
-you need to declare the type before using it in the function.</p>
-<pre class='ocaml'>  <span class='k'>let</span> f (o <span class='o'>:</span> <span class='o'>&#60;</span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'>&#62;)</span> x y <span class='k'>=</span> o<span class='o'>#</span>g x<span class='o'>,</span> o<span class='o'>#</span>g y<span class='o'>;;</span>
-  <span class='k'>type</span> id <span class='k'>=</span> <span class='o'>{</span> g <span class='o'>:</span> 'a<span class='o'>.</span> 'a <span class='k'>-></span> 'a <span class='o'>}</span><span class='o'>;;</span>
-  <span class='k'>let</span> f r x y <span class='k'>=</span> r<span class='o'>.</span>g x<span class='o'>,</span> r<span class='o'>.</span>g y<span class='o'>;;</span>
-<a href="javascript:octry('  let f (o : &#60; g : &#39;a. &#39;a -&#62; &#39;a &#62;) x y = o#g x, o#g y;;\n  type id = { g : &#39;a. &#39;a -&#62; &#39;a };;\n  let f r x y = r.g x, r.g y;;\n');">[try]</a></pre>
-<p>
-FIXME: A direct way now exists.</p>
-<h3 id="Intputoutput"> Intput/output</h3><p>
+you need to declare the type before using it in the function.
+
+```ocaml
+  let f (o : &lt; g : &#39;a. &#39;a -&gt; &#39;a &gt;) x y = o#g x, o#g y;;
+  type id = { g : &#39;a. &#39;a -&gt; &#39;a };;
+  let f r x y = r.g x, r.g y;;
+```
+FIXME: A direct way now exists.
+
+###  Intput/output
 Why some printing material is mixed up and does not appear in the right
-order?</p>
-<p>If you use printing functions of the <code>format</code> module, you might not mix
-printing commands from <code>format</code> with printing commands from the basic
+order?
+
+If you use printing functions of the `format` module, you might not mix
+printing commands from `format` with printing commands from the basic
 I/O system. In effect, the material printed by functions from the
-<code>format</code> module is delayed (stored into the pretty-printing queue) in
+`format` module is delayed (stored into the pretty-printing queue) in
 order to find out the proper line breaking to perform with the material
 at hand. By contrast low level output is performed with no more
-buffering than usual I/O buffering.</p>
-<pre class='ocaml'>  print_endline <span class='s'>&#34;before&#34;</span><span class='o'>;</span>
-  <span class='m'>Format</span><span class='o'>.</span>print_string <span class='s'>&#34;MIDDLE&#34;</span><span class='o'>;</span>
-  print_endline <span class='s'>&#34;after&#34;</span><span class='o'>;;</span>
+buffering than usual I/O buffering.
+
+```ocaml
+  print_endline &quot;before&quot;;
+  Format.print_string &quot;MIDDLE&quot;;
+  print_endline &quot;after&quot;;;
   
-<a href="javascript:octry('  print_endline &#34;before&#34;;\n  Format.print_string &#34;MIDDLE&#34;;\n  print_endline &#34;after&#34;;;\n  \n');">[try]</a></pre>
-<p>
+```
 To avoid this kind of problems you should not mix printing orders from
-<code>format</code> and basic printing commands; that&#39;s the reason why when using
-functions from the <code>format</code> module, it is considered good programming
-habit to open <code>format</code> globally in order to completely mask low level
+`format` and basic printing commands; that&#39;s the reason why when using
+functions from the `format` module, it is considered good programming
+habit to open `format` globally in order to completely mask low level
 printing functions by the high level printing functions provided by
-<code>format</code>.</p>
-<h2 id="GeneralQuestions"> General Questions</h2><p>
-What is OCaml?</p>
-<p>OCaml is a programming language. It is a functional language, since the
+`format`.
+
+## General Questions
+What is OCaml?
+
+OCaml is a programming language. It is a functional language, since the
 basic units of programs are functions. It is a strongly-typed language;
 it means that the objects that you use belong to a set that has a name,
 called its type. In OCaml, types are managed by the computer, the user
 has nothing to do about types (types are synthesized). The language is
 available on almost every Unix platform (including Linux and MacOS X)
 and on PCs under Windows. A brief tour on main
-<a href='description.html'>features</a> of OCaml.</p>
-<p>Under what licensing terms is the OCaml software available?</p>
-<p>The OCaml system is open source software: the compiler is distributed
+[features](description.html) of OCaml.
+
+Under what licensing terms is the OCaml software available?
+
+The OCaml system is open source software: the compiler is distributed
 under the terms of the Q Public License, and its library is under LGPL;
-please read the <a href='license.html'>license</a> document for more details. A
-BSD-style license is also available for a fee through the <a href='support.html#consortium'>OCaml
-Consortium</a>.</p>
-<p>What is the meaning of the name “OCaml”</p>
-<p>“Caml” is an acronym: it stands for “Categorical Abstract Machine
+please read the [license](license.html) document for more details. A
+BSD-style license is also available for a fee through the [OCaml
+Consortium](support.html#consortium).
+
+What is the meaning of the name “OCaml”
+
+“Caml” is an acronym: it stands for “Categorical Abstract Machine
 Language”. The “Categorical Abstract Machine” is an abstract machine to
 define and execute functions. It is issued from theoretical
 considerations on the relationship between category theory and
 lambda-calculus. The first Caml compiler produced code for this abstract
 machine (in 1984). The “O” stands for “Objective” and was added after
-object oriented features were available in the language.<br />.OCaml write We</p>
-<p>?“OCAML” or “Ocaml” “OCaml”, “CAML”, or “Caml” write you Do</p>
-<p>.system proof LCF the in tactics” “proof the
-write to language programming the as used and 1978, in Milner Robin by
-designed language, programming ML the from issued is OCaml addition, In 
-<br />
+object oriented features were available in the language.
+ In addition, OCaml is issued from the ML programming language, designed
+by Robin Milner in 1978, and used as the programming language to write
+the “proof tactics” in the LCF proof system.
+
+Do you write “Caml” or “CAML”, “OCaml”, “Ocaml” or “OCAML”?
+
+We write OCaml.
  According to usual rules for acronyms, we should write CAML, as we
 write USA. On the other hand, this upper case name seems to yell all
 over the place, and writing OCaml is far more pretty and elegant — with
-“O” and “C” capitalized.</p>
-<p>Is OCaml a compiled or interpreted language?</p>
-<p>OCaml is compiled. However each OCaml compiler offers a top-level
+“O” and “C” capitalized.
+
+Is OCaml a compiled or interpreted language?
+
+OCaml is compiled. However each OCaml compiler offers a top-level
 interactive loop, that is similar to an interpreter. In fact, in the
 interactive system, the user may type in program chunks (we call these
 pieces OCaml “phrases”) that the system handles at once, compiling them,
-executing them, and writing their results.</p>
-<p>What are the differences between Caml V3.1, Caml Light, and OCaml?</p>
-<p>These are different Caml implementations that have been developed
+executing them, and writing their results.
+
+What are the differences between Caml V3.1, Caml Light, and OCaml?
+
+These are different Caml implementations that have been developed
 successively at Inria. These systems share many features since they all
 implement the core of the OCaml language; so the basic syntax is nearly
 the same. However, all these systems have their own extensions to the
-Caml core language.<br />
- Caml V3.1 is no longer maintained nor distributed. <a href='caml-light/'>Caml
-Light</a> is no longer developed, but still maintained.
+Caml core language.
+ Caml V3.1 is no longer maintained nor distributed. [Caml
+Light](caml-light/) is no longer developed, but still maintained.
 Because of its stable status, it is actively used in education. Most
 other users have switched to OCaml, the latest variant of the language.
 This is the version we suggest using in new software developments. See
-our brief <a href='history.html'>history</a> of the OCaml language.</p>
-<p>How to report a bug in the compilers?</p>
-<p>Use the <a href='http://caml.inria.fr/mantis/'>bug tracking system</a> to browse
-bug reports and features request, and submit new ones.</p>
-<h2 id="ModuleLanguage"> Module Language</h2><p>
-Can I have two mutually recursive compilation units / structures /
-signatures / functors?</p>
-<p>Currently not in the stable langage. However there exists an <a href='http://caml.inria.fr/pub/docs/manual-ocaml/manual021.html#toc75'>OCaml
-extension</a>
-(which is subject to change or removal at any time) which adresses some
-of these problems.</p>
-<p>How do I express sharing constraints between modules?</p>
-<p>Use manifest type specifications in the arguments of the functor. For
-instance, assume defined the following signatures:</p>
-<pre class='ocaml'><span class='k'>module</span> <span class='k'>type</span> S1 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> t <span class='o'>...</span> <span class='k'>end</span>
-<span class='k'>module</span> <span class='k'>type</span> S2 <span class='k'>=</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='o'>...</span> <span class='k'>end</span>
-<a href="javascript:octry('module type S1 = sig ... type t ... end\nmodule type S2 = sig ... type u ... end\n');">[try]</a></pre>
-<p>
-To define a functor <code>F</code> that takes two arguments <code>X:S1</code> and <code>Y:S2</code> such
-that <code>X.t</code> and <code>Y.u</code> are the same, write:</p>
-<pre class='ocaml'><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> S2 <span class='k'>with</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t) <span class='k'>=</span>
-  <span class='k'>struct</span> <span class='o'>...</span> <span class='k'>end</span>
-<a href="javascript:octry('module F (X: S1) (Y: S2 with type u = X.t) =\n  struct ... end\n');">[try]</a></pre>
-<p>
-Indeed, internally this expands to</p>
-<pre class='ocaml'><span class='k'>module</span> F (X<span class='o'>:</span> S1) (Y<span class='o'>:</span> <span class='k'>sig</span> <span class='o'>...</span> <span class='k'>type</span> u <span class='k'>=</span> <span class='m'>X</span><span class='o'>.</span>t <span class='o'>...</span> <span class='k'>end</span>) <span class='k'>=</span>
-  <span class='k'>struct</span> <span class='o'>...</span> <span class='k'>end</span>
-<a href="javascript:octry('module F (X: S1) (Y: sig ... type u = X.t ... end) =\n  struct ... end\n');">[try]</a></pre>
-<p>
-Compilation units are forced to be modules. What if I want to make a
-unit with a functor or a signature instead?</p>
-<p>In OCaml, functors and signatures (module types) can be components of
-modules. So, just make the functor or signature be a component of a
-compilation unit. A good example is the module <code>Set</code> from the standard
-library.</p>
-<h2 id="DevelopmentTools"> Development Tools</h2><h3 id="Interactivelooptoplevel"> Interactive loop (toplevel)</h3><p>
+our brief [history](history.html) of the OCaml language.
 
-How to stop the evaluation (execution) of an expression?</p>
-<p>It is often possible to interrupt a program or the OCaml system by
+How to report a bug in the compilers?
+
+Use the [bug tracking system](http://caml.inria.fr/mantis/) to browse
+bug reports and features request, and submit new ones.
+
+## Module Language
+Can I have two mutually recursive compilation units / structures /
+signatures / functors?
+
+Currently not in the stable langage. However there exists an [OCaml
+extension](http://caml.inria.fr/pub/docs/manual-ocaml/manual021.html#toc75)
+(which is subject to change or removal at any time) which adresses some
+of these problems.
+
+How do I express sharing constraints between modules?
+
+Use manifest type specifications in the arguments of the functor. For
+instance, assume defined the following signatures:
+
+```ocaml
+module type S1 = sig ... type t ... end
+module type S2 = sig ... type u ... end
+```
+To define a functor `F` that takes two arguments `X:S1` and `Y:S2` such
+that `X.t` and `Y.u` are the same, write:
+
+```ocaml
+module F (X: S1) (Y: S2 with type u = X.t) =
+  struct ... end
+```
+Indeed, internally this expands to
+
+```ocaml
+module F (X: S1) (Y: sig ... type u = X.t ... end) =
+  struct ... end
+```
+Compilation units are forced to be modules. What if I want to make a
+unit with a functor or a signature instead?
+
+In OCaml, functors and signatures (module types) can be components of
+modules. So, just make the functor or signature be a component of a
+compilation unit. A good example is the module `Set` from the standard
+library.
+
+## Development Tools
+###  Interactive loop (toplevel)
+How to stop the evaluation (execution) of an expression?
+
+It is often possible to interrupt a program or the OCaml system by
 typing some combination of keys that is operating system dependent:
-under Unix send an interrupt signal (generally <code>Control-C</code>), under
-Macintosh OS type <code>Command-.</code>, under Windows use the “OCaml” menu.</p>
-<p>How to quit the interactive loop?</p>
-<p>With Caml Light, type <code>quit();;</code>. With OCaml, type <code>#quit;;</code>. In both,
+under Unix send an interrupt signal (generally `Control-C`), under
+Macintosh OS type `Command-.`, under Windows use the “OCaml” menu.
+
+How to quit the interactive loop?
+
+With Caml Light, type `quit();;`. With OCaml, type `#quit;;`. In both,
 you can also send an end-of-file (CTRL-D for Unix, CTRL-Z for DOS,
-etc.).</p>
-<h3 id="BatchCompilers"> Batch Compilers</h3><h3 id="Yacc"> Yacc</h3>
-<h3 id="Lex"> Lex</h3>
+etc.).
+
+###  Batch Compilers
+###  Yacc
+###  Lex
+</pre>
+
           </div>
         </div>
       </div>

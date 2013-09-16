@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -76,9 +68,9 @@ The OCaml Planet aggregates various blogs from the OCaml community. It
 is kindly provided by <a href='http://www.ocamlcore.com/'>OCamlCore</a>. If you
 would like to be added, read the <a href='http://www.ocamlcore.org/planet/'>Planet subscription
 HOWTO</a>.</p>
-<p><img src='../img/rss20.png' alt='' />[</p>
+<p><br /></p>
 <p><em>Subscriptions</em></p>
-<p><br />](http://planet.ocaml.org/rss20.xml)
+<p><a href='http://planet.ocaml.org/rss20.xml'><img src='../img/rss20.png' alt='' /></a>
 <a href='http://planet.ocaml.org/opml.xml'><img src='../img/opml.png' alt='' /></a></p>
 
           </div>

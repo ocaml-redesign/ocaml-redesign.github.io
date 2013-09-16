@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -206,41 +198,57 @@ espaces (si la ligne n&#39;est pas coupée quand l&#39;indication de coupure est
 traitée, sinon le retour à la ligne sépare correctement les éléments à
 imprimer). Vous donnez une indication de coupure en appelant
 <code>print_break sp indent</code>, où <code>sp</code> est l&#39;entier qui indique le nombre
-d&#39;espaces à imprimer.<br />.boîte la dans 
-ouverte ligne chaque à ajoutée indentation&#39;l fixer peut on boîte, la 
-de ouverture&#39;l à :<strong>apparaît ligne la où boîte la définissant En</strong> *</p>
-<p>: lignes des indentation&#39;l fixer de moyens deux de dispose On
-nouvelles lignes des Indentation ##</p>
-<p>).ligne de coupure une déclenche ou espace un écrit
-et <code>0 1     break_print</code> de synonyme est qui <code>)( space_print</code> de aide&#39;l
-à exemple Par( .coupure de indications des émet mais même-lui espaces&#39;d
-pas écrit&#39;n ,<code>format</code> utilise qui programme un générale, façon De</p>
-<p>.» hov « boîtes les pour même de et *</p>
-<pre><code>--   
---   
---   
-ocaml</pre>
-<p>: ligne la sur restante place la suivant ou,</p>
-<pre><code>-- -- --   
-ocaml</pre>
-<p>: » hv « boîte une dans *</p>
-<pre><code>--   
---   
---   
-ocaml</pre>
-<p>: » v « boîte une dans *</p>
-<pre><code>-- -- --   
-ocaml</pre>
-<p>: » h « boîte une dans *</p>
-<p>: suivante
-sortie la obtient on ,)espace un&#39;d impression&#39;l à correspond qui ce
-,<code>0 1 break_print</code> est <code>b</code> où( &quot;--b--b--&quot; imprime on&#39;l si exemple, Par</p>
-<p>.ligne
-la à aller ou espaces <code>sp</code> imprimer signifie <code>... sp break_print</code> Donc 
-<br />
+d&#39;espaces à imprimer.<br />
+ Donc <code>print_break sp ...</code> signifie imprimer <code>sp</code> espaces ou aller à la
+ligne.</p>
+<p>Par exemple, si l&#39;on imprime &quot;--b--b--&quot; (où <code>b</code> est <code>print_break 1 0</code>,
+ce qui correspond à l&#39;impression d&#39;un espace), on obtient la sortie
+suivante :</p>
+<ul>
+ <li>dans une boîte « h » :</li>
+</ul>
+
+<pre class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
+<a href="javascript:octry('   -- -- --\n');">[try]</a></pre>
+<ul>
+ <li>dans une boîte « v » :</li>
+</ul>
+
+<pre class='ocaml'>   <span class='o'>--</span>
+   <span class='o'>--</span>
+   <span class='o'>--</span>
+<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></pre>
+<ul>
+ <li>dans une boîte « hv » :</li>
+</ul>
+
+<pre class='ocaml'>   <span class='o'>--</span> <span class='o'>--</span> <span class='o'>--</span>
+<a href="javascript:octry('   -- -- --\n');">[try]</a></pre>
+<p>
+ou, suivant la place restante sur la ligne :</p>
+<pre class='ocaml'>   <span class='o'>--</span>
+   <span class='o'>--</span>
+   <span class='o'>--</span>
+<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></pre>
+<ul>
+ <li>et de même pour les boîtes « hov ».</li>
+</ul>
+
+<p>De façon générale, un programme qui utilise <code>format</code>, n&#39;écrit pas
+d&#39;espaces lui-même mais émet des indications de coupure. (Par exemple à
+l&#39;aide de <code>print_space ()</code> qui est synonyme de <code>print_break     1 0</code> et
+écrit un espace ou déclenche une coupure de ligne.)</p>
+<h2 id="Indentationdeslignesnouvelles"> Indentation des lignes nouvelles</h2><p>
+On dispose de deux moyens de fixer l&#39;indentation des lignes :</p>
+<ul>
+ <li><strong>En définissant la boîte où la ligne apparaît</strong>: à l&#39;ouverture de
+ la boîte, on peut fixer l&#39;indentation ajoutée à chaque ligne ouverte
+ dans la boîte.<br />
  Par exemple: <code>open_hovbox 1</code> ouvre une boîte hovbox dont les lignes
  seront indentées de 1 par rapport à l&#39;indentation initiale de la
- boîte. Ainsi avec &quot;---[--b--b--b--&quot;, on obtient :</p>
+ boîte. Ainsi avec &quot;---[--b--b--b--&quot;, on obtient :</li>
+</ul>
+
 <pre class='ocaml'>   <span class='o'>---</span><span class='o'>[</span><span class='o'>--</span>b<span class='o'>--</span>b
         <span class='o'>--</span>b<span class='o'>--</span>
 <a href="javascript:octry('   ---[--b--b\n        --b--\n');">[try]</a></pre>
@@ -388,7 +396,7 @@ Ainsi :</p>
 <ul>
  <li>« <code>@[</code> » ouvre une boîte (<code>open_box             0</code>). On peut
  préciser le type de la boîte en argument supplémentaire. Par exemple
- <code>@[&lt;hov n&gt;</code> est équivalent à <code>open_hovbox n</code>.
+ <code>@[</code> est équivalent à <code>open_hovbox n</code>.
  </li>
  <li>« <code>@]</code> » ferme la dernière boîte ouverte (<code>close_box ()</code>).
  </li>
@@ -397,7 +405,7 @@ Ainsi :</p>
  <li>« <code>@,</code> » émet une indication de coupure sans espace ni indentation
  supplémentaire en cas de coupure (<code>print_cut ()</code>).
  </li>
- <li>« <code>@;&lt;n m&gt;</code> » émet une indication de coupure la plus générale, avec
+ <li>« <code>@;</code> » émet une indication de coupure la plus générale, avec
  ses deux arguments entiers (<code>print_break n m</code>).
  </li>
  <li>« <code>@.</code> » termine l&#39;impression en fermant toutes les boîtes encore

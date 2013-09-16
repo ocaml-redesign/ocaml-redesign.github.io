@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -173,7 +165,7 @@ From source:</p>
 OCaml is very easy to install under <a href='http://www.debian.org'>Debian</a>. We
 recommend you install <code>ocaml-nox</code> to develop applications not needing
 the graphics library or <code>ocaml</code> if you need the
-<a href='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Graphics.html'><code> Graphics&lt;/code&gt;</a>
+<a href='http://caml.inria.fr/pub/docs/manual-ocaml/libref/Graphics.html'><code> Graphics</code></a>
 module. We also recommend you install</p>
 <ul>
  <li><code>ocaml-native-compilers</code> to be able to compile your program the
@@ -343,7 +335,7 @@ notes</a>.</p>
 </ul>
 
 <p>To install libraries, you may use <a href='http://wodi.forge.ocamlcore.org/'>Godi for Windows or OPAM (see the <em>By
-Package Manager&lt;/em&gt; tab).</a></p>
+Package Manager</em> tab).</a></p>
 <h2 id="MacOSX"> Mac OS X</h2><p>
 Under Mac OS X, there are, at least for the base package, five different
 ways to go: Install the binary package from Inria; Install via Fink;
@@ -596,11 +588,11 @@ contents:</p>
 
           
           
-          CFBundleExecutable<span class='o'>&#60;/</span>key<span class='o'>&#62;</span>
-          hello<span class='o'>&#60;/</span>string<span class='o'>&#62;</span>
-          <span class='o'>&#60;/</span>dict<span class='o'>&#62;</span>
-          <span class='o'>&#60;/</span>plist<span class='o'>&#62;</span>        
-<a href="javascript:octry('          &#60;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&#62;\n\n          \n          \n          CFBundleExecutable&#60;/key&#62;\n          hello&#60;/string&#62;\n          &#60;/dict&#62;\n          &#60;/plist&#62;        \n');">[try]</a></pre>
+          CFBundleExecutable
+          hello
+          
+                  
+<a href="javascript:octry('          &#60;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&#62;\n\n          \n          \n          CFBundleExecutable\n          hello\n          \n                  \n');">[try]</a></pre>
 <p>
 The hello application can now be run from the command line by typing
 <code>open hello.app</code>, or by double-clicking on the app&#39;s icon (again, this

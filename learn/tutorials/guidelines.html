@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -73,13 +65,57 @@
             <ul class="nav nav-list">
               <li class="nav-header"><a href="#">Contents</a></li>
 <ul>
+ <li><a href='#Generalguidelinestowriteprograms'> General guidelines to write programs</a>
+  <ul>
+   <li><a href='#Besimpleandreadable'> Be simple and readable</a>
+   </li>
+  </ul>
+ </li>
+ <li><a href='#Programformattingguidelines'> Program formatting guidelines</a>
+  <ul>
+   <li><a href='#Lexicalconventions'> Lexical conventions</a>
+   </li>
+  </ul>
+ </li>
  <li><a href='#Indentationofprograms'> Indentation of programs</a>
   <ul>
+   <li><a href='#Consistencyofindentation'> Consistency of indentation</a>
+   </li>
+   <li><a href='#Widthofthepage'> Width of the page</a>
+   </li>
+   <li><a href='#Heightofthepage'> Height of the page</a>
+   </li>
+   <li><a href='#Howmuchtoindent'> How much to indent</a>
+   </li>
+   <li><a href='#Usingtabstops'> Using tab stops</a>
+   </li>
+   <li><a href='#Howtoindentgloballetdefinitions'> How to indent global <code>let ... ;;</code> definitions</a>
+   </li>
+   <li><a href='#Howtoindentletinconstructs'> How to indent <code>let ... in</code> constructs</a>
+   </li>
+   <li><a href='#Howtoindentifthenelse'> How to indent <code>if ... then   ... else ... </code></a>
+   </li>
+   <li><a href='#Howtoindentpatternmatchingconstructs'> How to indent pattern-matching constructs</a>
+   </li>
+   <li><a href='#Badindentationofpatternmatchingconstructs'> Bad indentation of pattern-matching constructs</a>
+   </li>
+   <li><a href='#Howtoindentfunctioncalls'> How to indent function calls</a>
+   </li>
+  </ul>
+ </li>
+ <li><a href='#Programmingguidelines'> Programming guidelines</a>
+  <ul>
+   <li><a href='#Howtoprogram'> How to program</a>
+   </li>
    <li><a href='#Howtocommentprograms'> How to comment programs</a>
    </li>
    <li><a href='#Howtochooseidentifiers'> How to choose identifiers</a>
    </li>
    <li><a href='#Whentouseparentheseswithinanexpression'> When to use parentheses within an expression</a>
+   </li>
+   <li><a href='#Howtodelimitconstructsinprograms'> How to delimit constructs in programs</a>
+   </li>
+   <li><a href='#Howtousemodules'> How to use modules</a>
    </li>
    <li><a href='#Patternmatching'> Pattern-matching</a>
    </li>
@@ -108,131 +144,120 @@ programs—guidelines which reflect the consensus among veteran OCaml
 programmers. Nevertheless, all detailed notifications of possible errors
 or omissions will be noted with pleasure. To send your comments using
 <a href='https://github.com/ocaml/ocaml.org/issues?state=open'>GitHub issues</a>.
-<br />).arguments their from separated not are &#39;&#39;<code>.``` and &#39;&#39;</code>!</p>
-<pre><code>symbols the :rule this to exceptions Obvious( .operators character-multi
-with confusion avoid will you but readable, more be formulas your will
-only not :spaces by separated well symbols operator keep to careful Be
-symbols operator write to How  ####
+<br />
+Original translation from French: <a href='mailto:datta@math.berkeley.edu'>Ruchira
+Datta</a>.</p>
+<p>Thanks to all those who have already participated in the critique of
+this page: Daniel de Rauglaudre, Luc Maranget, Jacques Garrigue, Damien
+Doligez, Xavier Leroy, Bruno Verlyck, Bruno Petazzoni, Francois Maltey,
+Basile Starynkevitch, Toby Moth, Pierre Lescanne.</p>
+<h2 id="Generalguidelinestowriteprograms"> General guidelines to write programs</h2><h3 id="Besimpleandreadable"> Be simple and readable</h3><p>
 
-.)space a by followed hence delimiter,
-a is `;` since( `]3 ;2 ;1[` and )spaces by surrounded hence operator,
-infix an is `::` since( `::` the around spaces with `l :: x` Write
-lists write to How  ####
-</pre>
-<p>
-.<code>&gt;-</code> and <code>|</code> by nicely off set are patterns &gt;<br/>
-
-the while ,<code>with</code> and <code>match</code> by off set are matched being &gt;<br/>
-
-expressions the Moreover, .tuple a construct to not parallel, &gt;<br/>
-
-in values several match to is point The :<strong>Justification</strong> &gt;<br/></p>
-<p>... &gt;- y x, |<br/>
-
-... &gt;- 1 x, |<br/>
-
-... &gt;- _ 1, |<br/>
-
-with y x, match<br/></p>
-<p>.simultaneously<br/>
-
-values several matching when tuples-n around parentheses<br/>
-
-omit to okay s&#39;It :<strong>simultaneously values several Matching</strong>   -
-ocaml</p>
-<pre><code>
-
-.`=` and `let` between nicely off set is pattern &gt;
-the Moreover, .tuple a construct to not simultaneously, &gt;
-values several define to is point The :**Justification** &gt;
- &gt;
-
-.`... = y x, let` write can you ,`...       = )y x,( let` 
-of place In :**pair a of components the of Definition** *    
-:**exceptions accepted Commonly** *
-
-...`)z y, x,( = triplet   let` ,`)2 1,(` :space a by followed
-each are )delimiters( therein commas the and parenthesized is tuple A
-pairs write to How  ####
-
-.readable be to them want you if programs your in same the Do .read
-to easier texts written make to spaces by words separate to typography
-in forward step great a been has It .symbols operator surround
-should spaces and symbol, delimiter a follow always should space A
-Delimiters  ####
-
- &gt;
-!necessary as often as it press keyboard, &gt;
-the on find to key easiest the is bar space the ;spaces with programs &gt;
-your of words separate to hesitate never :**law spaces Pseudo** &gt;
- &gt;
-conventions Lexical  ###
-guidelines formatting Program ##
-
- &gt;
-.readability jeopardize never and mind, in modifications &gt;
-future keep always writing, its simplify So .times 100 read and times, &gt;
-ten modified once, written is program A :**law programs Writing** &gt;
- &gt;
-
-.)debugging
-first the with starting( program the of readings and modifications
-many uncountably the during future the in times hundred a return
-will today, program simpler a get to &quot;wasting&quot; are you time the All
-
-.readability optimize to hard work you
-if time of lot a save you why reason the s&#39;That .them reading spent time
-the to compared neglectable is programs the typing spend you time The
-readable and simple Be  ###
-programs write to guidelines General ##
-
-.Lescanne Pierre Moth, Toby Starynkevitch, Basile
-Maltey, Francois Petazzoni, Bruno Verlyck, Bruno Leroy, Xavier Doligez,
-Damien Garrigue, Jacques Maranget, Luc Rauglaudre, de Daniel :page this
-of critique the in participated already have who those all to Thanks
-
-.)edu.berkeley.math@datta:mailto(]Datta
-Ruchira[ :French from translation Original
-</pre>
-<p>
-Example: write <code>x + 1</code> or <code>x + !y</code>.</p>
+The time you spend typing the programs is neglectable compared to the
+time spent reading them. That&#39;s the reason why you save a lot of time if
+you work hard to optimize readability.</p>
+<p>All the time you are &quot;wasting&quot; to get a simpler program today, will
+return a hundred times in the future during the uncountably many
+modifications and readings of the program (starting with the first
+debugging).</p>
 <blockquote>
-<p><strong>Justification</strong>: If you left out the spaces then <code>x+1</code> would be
-understood, but <code>x+!y</code> would change its meaning since</p>
-<pre><code>+!`&#39;&#39; would
-be interpreted as a multi-character operator.
+<p><strong>Writing programs law</strong>: A program is written once, modified ten
+times, and read 100 times. So simplify its writing, always keep future
+modifications in mind, and never jeopardize readability.</p>
+</blockquote>
+<h2 id="Programformattingguidelines"> Program formatting guidelines</h2><h3 id="Lexicalconventions"> Lexical conventions</h3>
+<blockquote>
+<p><strong>Pseudo spaces law</strong>: never hesitate to separate words of your
+programs with spaces; the space bar is the easiest key to find on the
+keyboard, press it as often as necessary!</p>
+</blockquote>
+<h4 id="Delimiters"> Delimiters</h4><p>
+A space should always follow a delimiter symbol, and spaces should
+surround operator symbols. It has been a great step forward in
+typography to separate words by spaces to make written texts easier to
+read. Do the same in your programs if you want them to be readable.</p>
+<h4 id="Howtowritepairs"> How to write pairs</h4><p>
+A tuple is parenthesized and the commas therein (delimiters) are each
+followed by a space: <code>(1, 2)</code>, <code>let   triplet = (x, y, z)</code>...</p>
+<ul>
+ <li><strong>Commonly accepted exceptions</strong>:
+  <ul>
+   <li><strong>Definition of the components of a pair</strong>: In place of
+ <code>let (x, y) =       ...</code>, you can write <code>let x, y = ...</code>.</li>
+  </ul>
+ </li>
+</ul>
 
-**Criticism**: The absence of spaces around an operator improves the
+<blockquote>
+<p><strong>Justification</strong>: The point is to define several values
+simultaneously, not to construct a tuple. Moreover, the
+pattern is set off nicely between <code>let</code> and <code>=</code>.</p>
+</blockquote>
+<pre class='ocaml'><span class='o'>-</span>   <span class='o'>**</span>Matching several values simultaneously<span class='o'>**:</span> It's okay <span class='k'>to</span> omit
+    parentheses around n<span class='o'>-</span>tuples <span class='k'>when</span> matching several values
+    simultaneously<span class='o'>.</span>
+
+        <span class='k'>match</span> x<span class='o'>,</span> y <span class='k'>with</span>
+        <span class='o'>|</span> 1<span class='o'>,</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>...</span>
+        <span class='o'>|</span> x<span class='o'>,</span> 1 <span class='k'>-></span> <span class='o'>...</span>
+        <span class='o'>|</span> x<span class='o'>,</span> y <span class='k'>-></span> <span class='o'>...</span>
+
+    <span class='o'>&#62;</span> <span class='o'>**</span>Justification<span class='o'>**:</span> The point is <span class='k'>to</span> <span class='k'>match</span> several values <span class='k'>in</span>
+    <span class='o'>&#62;</span> parallel<span class='o'>,</span> not <span class='k'>to</span> construct a tuple<span class='o'>.</span> Moreover<span class='o'>,</span> the expressions
+    <span class='o'>&#62;</span> being matched are set off by `<span class='k'>match</span>` <span class='k'>and</span> `<span class='k'>with</span>`<span class='o'>,</span> <span class='k'>while</span> the
+    <span class='o'>&#62;</span> patterns are set off nicely by `<span class='o'>|</span>` <span class='k'>and</span> `<span class='k'>-></span>`<span class='o'>.</span>
+<a href="javascript:octry('-   **Matching several values simultaneously**: It&#39;s okay to omit\n    parentheses around n-tuples when matching several values\n    simultaneously.\n\n        match x, y with\n        | 1, _ -&#62; ...\n        | x, 1 -&#62; ...\n        | x, y -&#62; ...\n\n    &#62; **Justification**: The point is to match several values in\n    &#62; parallel, not to construct a tuple. Moreover, the expressions\n    &#62; being matched are set off by `match` and `with`, while the\n    &#62; patterns are set off nicely by `|` and `-&#62;`.\n');">[try]</a></pre>
+<h4 id="Howtowritelists"> How to write lists</h4><p>
+
+Write <code>x :: l</code> with spaces around the <code>::</code> (since <code>::</code> is an infix
+operator, hence surrounded by spaces) and <code>[1; 2; 3]</code> (since <code>;</code> is a
+delimiter, hence followed by a space).</p>
+<h4 id="Howtowriteoperatorsymbols"> How to write operator symbols</h4><p>
+Be careful to keep operator symbols well separated by spaces: not only
+will your formulas be more readable, but you will avoid confusion with
+multi-character operators. (Obvious exceptions to this rule: the symbols
+<code>!`&#39;&#39; and </code>.</p>
+<pre><code>&#39;&#39; are not separated from their arguments.)
+Example: write </pre>
+<p>x + 1<code> or </code>x + !y</p>
+<pre><code>.
+
+&gt; 
+&gt; **Justification**: If you left out the spaces then </pre>
+<p>x+1</p>
+<pre><code> would be
+&gt; understood, but </pre>
+<p>x+!y<code> would change its meaning since ```+!</code>&#39;&#39; would</p>
+<blockquote><p>
+be interpreted as a multi-character operator.</p>
+<p><strong>Criticism</strong>: The absence of spaces around an operator improves the
 readability of formulas when you use it to reflect the relative
-precedences of operators. For example `x*y + 2*z` makes it very
-obvious that multiplication takes precedence over addition.
-
-**Response**: This is a bad idea, a chimera, because nothing in the
+precedences of operators. For example <code>x*y + 2*z</code> makes it very
+obvious that multiplication takes precedence over addition.</p>
+<p><strong>Response</strong>: This is a bad idea, a chimera, because nothing in the
 language ensures that the spaces properly reflect the meaning of the
-formula. For example `x * z-1` means `(x * z) - 1`, and not
-`x * (z - 1)` as the proposed interpretation of spaces would seem to
+formula. For example <code>x * z-1</code> means <code>(x * z) - 1</code>, and not
+<code>x * (z - 1)</code> as the proposed interpretation of spaces would seem to
 suggest. Besides, the problem of multi-character symbols would keep
 you from using this convention in a uniform way: you couldn&#39;t leave
-out the spaces around the multiplication to write `x*!y + 2*!z`.
+out the spaces around the multiplication to write <code>x*!y + 2*!z</code>.
 Finally, this playing with the spaces is a subtle and flimsy
 convention, a subliminal message which is difficult to grasp on
 reading. If you want to make the precedences obvious, use the
-expressive means brought to you by the language: write parentheses.
-
-**Additional justification**: Systematically surrounding operators
+expressive means brought to you by the language: write parentheses.</p>
+<p><strong>Additional justification</strong>: Systematically surrounding operators
 with spaces simplify the treatment of infix operators which are no
-more a complex particular case; in effect, whereas you can write `(+)`
-without spaces, you evidently cannot write `(*)` since `(*` is read as
+more a complex particular case; in effect, whereas you can write <code>(+)</code>
+without spaces, you evidently cannot write <code>(*)</code> since <code>(*</code> is read as
 the beginning of a comment. You must write at least one space as in
-“`( *)`”, although an extra space after `*` is definitively preferable
-if you want to avoid that `*)` could be read, in some contexts, as the
+“<code>( *)</code>”, although an extra space after <code>*</code> is definitively preferable
+if you want to avoid that <code>*)</code> could be read, in some contexts, as the
 end of a comment. All those difficulties are easily avoided if you
 adopt the simple rule proposed here: keep operator symbols well
-separated by spaces.&lt;br /&gt;
+separated by spaces.<br />
  In fact you will quickly feel that this rule is not so difficult to
 follow: the space bar is the greatest and best situated key of the
-keyboard, it is the easiest to enter and you cannot miss it!
-</pre>
+keyboard, it is the easiest to enter and you cannot miss it!</p>
 </blockquote>
 <h4 id="Howtowritelongcharacterstrings"> How to write long character strings</h4><p>
 Indent long character strings with the convention in force at that line
@@ -257,593 +282,525 @@ experience and which have not been severely criticized.</p>
 <p>When a justification for the adopted style has seemed obvious to me, I
 have indicated it. On the other hand, criticisms are also noted.</p>
 <p>So each time, you have to choose between the different styles
-suggested.<br />bench, the on back handiwork your put Always* &gt;
- &gt;
-program to How  ###
-guidelines Programming ##</p>
-<pre><code>u :: t :: 1 + z ::
-y :: x
-in &#39;&#39;expression  
-large``  
-= u let
-ocaml</pre>
-<p>:example For .operators all to extend guidelines These</p>
-<pre><code>u / )t * z + y + x(
-in &#39;&#39;expression  
-large``  
-= u let
-ocaml</pre>
-<p>write</p>
-<pre><code>)&#39;&#39;expression    
-large``( /
-)t * z + y + x(
-ocaml</pre>
-<p>expression unreadable the
-of place In .operators of combination a of case the in operation one in
-written be to large too expressions those bind must certainly most You</p>
-<pre><code>t + z + y + x
-in &#39;&#39;expression   
-large``  
-= t let
-ocaml</pre>
-<p>write</p>
-<pre><code>&#39;&#39;expression  
-large`` +
-z + y + x
-ocaml</pre>
-<p>of place In .line the indent to having to preferable is construction
-<code>in let</code> a of help the with &#39;&#39;expression large</p>
-<pre><code> the define to
-sequence, operation an such in &#39;&#39;expression large</pre>
-<p> a of case the In</p>
-<p> &gt;
-.line this on continues operation the &gt;
-that clear is it line, the starts operator the When :<strong>Justification</strong> &gt;
- &gt;</p>
-<pre><code>u + t +
-z + y + x
-ocaml</pre>
-<p>:example For .operation the of rest the indent t&#39;don and
-operator, the with line the next the start operator, same the to calls
-multiple of presence the in or arguments, complex takes operator an When
-operations indent to How  ###</p>
-<p> &gt;
-.meaningful is function the &gt;
-to given name the if particular in clearer, Much :<strong>Justification</strong> &gt;
- &gt;</p>
-<pre><code>l f map.List
-in blabla  
-blabla  
-blabla  
-= x f let
-ocaml</pre>
-<p>write</p>
-<pre><code>l  
-)blabla    
-blabla    
-blabla    
-&gt;- x function(  
-map.List
-ocaml</pre>
-<p>of place In .well as binding <code>let</code> a by function the
-define function, complex a is argument whose iterator an of case the In
-:functions anonymous Naming  ####</p>
-<pre><code>...
-in u t z y x f  
-= temp let
-in &#39;&#39;expression  
-large other``  
-= u and
-&#39;&#39;expression  
-large``  
-= t let
-ocaml</pre>
-<p>write</p>
-<pre><code>...
-in &#39;&#39;expression    
-large other``    
-&#39;&#39;expression    
-large``    
-z y x f  
-= temp let
-ocaml</pre>
-<p>of place In
-:arguments complex Naming  ####</p>
-<p> &gt;
-.evaluation of order the define explicitly &gt;
-to necessary fact in is binding <code>let</code> the effects, side produces &gt;
-arguments the of evaluation the If :<strong>justification Additional</strong> &gt;
- &gt;
-.well as readable more is code the meaningful, is expressions &gt;
-the to given name the if ;problem indentation No :<strong>Justification</strong> &gt;
- &gt;</p>
-<p>.construction
-<code>let</code> a by argument &#39;&#39;large</p>
-<pre><code> the define cases these in :expressions
-complex of consist which arguments avoid possible, as far As
+suggested.<br />
+ The only absolute rule is the first below.</p>
+<h3 id="Consistencyofindentation"> Consistency of indentation</h3><p>
+Choose a generally accepted style of indentation, then use it
+systematically throughout the whole application.</p>
+<h3 id="Widthofthepage"> Width of the page</h3><p>
+The page is 80 columns wide.</p>
+<blockquote>
+<p><strong>Justification</strong>: This width makes it possible to read the code on
+all displays and to print it in a legible font on a standard sheet.</p>
+</blockquote>
+<h3 id="Heightofthepage"> Height of the page</h3><p>
+A function should always fit within one screenful (of about 70 lines),
+or in exceptional cases two, at the very most three. To go beyond this
+is unreasonable.</p>
+<blockquote>
+<p><strong>Justification</strong>: When a function goes beyond one screenful, it&#39;s
+time to divide it into subproblems and handle them independently.
+Beyond a screenful, one gets lost in the code. The indentation is not
+readable and is difficult to keep correct.</p>
+</blockquote>
+<h3 id="Howmuchtoindent"> How much to indent</h3><p>
+The change in indentation between successive lines of the program is
+generally 1 or 2 spaces. Pick an amount to indent and stick with it
+throughout the program.</p>
+<h3 id="Usingtabstops"> Using tab stops</h3><p>
+Using the tab character (ASCII character 9) is absolutely <em>not</em>
+recommended.</p>
+<blockquote>
+<p><strong>Justification</strong>: Between one display and another, the indentation of
+the program changes completely; it can also becomes completely wrong,
+if the programmer used both tabulations and spaces to indent the
+program.</p>
+<p><strong>Criticism</strong>: The purpose of using tabulations is just to allow the
+readers of the program to indent more or less by changing the tabs
+stops. The overall indentation remains correct and the reader is glad
+to easily customize the indentation amount.</p>
+<p><strong>Answer</strong>: It seems almost impossible to use this method since you
+should always use tabulations to indent, which is hard and unnatural.</p>
+</blockquote>
+<h3 id="Howtoindentgloballetdefinitions"> How to indent global <code>let ... ;;</code> definitions</h3><p>
+The body of a function defined globally in a module is generally
+indented normally. However, it&#39;s okay to treat this case specially to
+set off the definition better.</p>
+<p>With a regular indentation of 1 or 2 spaces:</p>
+<pre class='ocaml'><span class='k'>let</span> f x <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> C <span class='k'>-></span>
+  <span class='o'>|</span> D <span class='k'>-></span>
+  <span class='o'>...</span>
 
-.argument an of start the at lines change and line, same the on
-arguments small Write .)convention chosen the to according spaces 2 or
-1( function the of name the to respect with expressions the indent must
-You .line same the on fit t&#39;can which --well as arguments complicated
-very or-- arguments many with functions for except arises problem No
-:name s&#39;function the to Indentation  ####
-calls function indent to How  ###
+<span class='k'>let</span> g x <span class='k'>=</span>
+  <span class='k'>let</span> tmp <span class='k'>=</span>
+    <span class='k'>match</span> x <span class='k'>with</span>
+    <span class='o'>|</span> C <span class='k'>-></span> 1
+    <span class='o'>|</span> x <span class='k'>-></span> 0 <span class='k'>in</span>
+  tmp <span class='o'>+</span> 1
+<a href="javascript:octry('let f x = function\n  | C -&#62;\n  | D -&#62;\n  ...\n\nlet g x =\n  let tmp =\n    match x with\n    | C -&#62; 1\n    | x -&#62; 0 in\n  tmp + 1\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: No exception to the amount of indentation.</p>
+</blockquote>
+<p>Other conventions are acceptable, for example:</p>
+<ul>
+ <li>The body is left-justified in the case of pattern-matching.</li>
+</ul>
 
- &gt;
-.)!place first the in arrows the align to not better is it then &gt;
-time, that at alignment up give often we ... so and change to lines &gt;
-the all of indentations the lead can case supplementary a of addition &gt;
-the( program the maintain to harder it makes This :**Justification** &gt;
- &gt;
-```
-3 &gt;-           _ |  
-2 &gt;- _ name_Long |  
-1 &gt;-          C1 |  
-function = f let
-ocaml```
+<pre class='ocaml'><span class='k'>let</span> f x <span class='k'>=</span> <span class='k'>function</span>
+<span class='o'>|</span> C <span class='k'>-></span>
+<span class='o'>|</span> D <span class='k'>-></span>
+<span class='o'>...</span>
+<a href="javascript:octry('let f x = function\n| C -&#62;\n| D -&#62;\n...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: The vertical bars separating the patterns stop
+when the definition is done, so it&#39;s still easy to pass on to the
+following definition.</p>
+<p><strong>Criticism</strong>: An unpleasant exception to the normal indentation.</p>
+</blockquote>
+<ul>
+ <li>The body is justified just under the name of the defined function.</li>
+</ul>
 
-:fragment following the in exemplify as practice,
-bad considered is matching pattern a of arrows the of alignment Careful
-.clauses matching-pattern in symbols `&gt;-` the of alignment *beastly* No  ####
+<pre class='ocaml'><span class='k'>let</span> f x <span class='k'>=</span>
+    <span class='k'>let</span> tmp <span class='k'>=</span> <span class='o'>...</span> <span class='k'>in</span>
+    <span class='k'>try</span> g x <span class='k'>with</span>
+    <span class='o'>|</span> Not_found <span class='k'>-></span>
+    <span class='o'>...</span>
+<a href="javascript:octry('let f x =\n    let tmp = ... in\n    try g x with\n    | Not_found -&#62;\n    ...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: The first line of the definition is set off
+nicely, so it&#39;s easier to pass from definition to definition.</p>
+<p><strong>Criticism</strong>: You run into the right margin too quickly.</p>
+</blockquote>
+<h3 id="Howtoindentletinconstructs"> How to indent <code>let ... in</code> constructs</h3><p>
+The expression following a definition introduced by <code>let</code> is indented to
+the same level as the keyword <code>let</code>, and the keyword <code>in</code> which
+introduces it is written at the end of the line:</p>
+<pre class='ocaml'><span class='k'>let</span> expr1 <span class='k'>=</span> <span class='o'>...</span> <span class='k'>in</span>
+expr1 <span class='o'>+</span> expr1
+<a href="javascript:octry('let expr1 = ... in\nexpr1 + expr1\n');">[try]</a></pre>
+<p>
+In the case of a series of <code>let</code> definitions, the preceding rule implies
+that these definitions should be placed at the same indentation level:</p>
+<pre class='ocaml'><span class='k'>let</span> expr1 <span class='k'>=</span> <span class='o'>...</span> <span class='k'>in</span>
+<span class='k'>let</span> n <span class='k'>=</span> <span class='o'>...</span> <span class='k'>in</span>
+<span class='o'>...</span>
+<a href="javascript:octry('let expr1 = ... in\nlet n = ... in\n...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: It is suggested that a series of “let ... in”
+constructs is analogous to a set of assumptions in a mathematical
+text, whence the same indentation level for all the assumptions.</p>
+</blockquote>
+<p>Variation: some write the keyword <code>in</code> alone on one line to set apart
+the final expression of the computation:</p>
+<pre class='ocaml'><span class='k'>let</span> e1 <span class='k'>=</span> <span class='o'>...</span> <span class='k'>in</span>
+<span class='k'>let</span> e2 <span class='k'>=</span> <span class='o'>...</span> <span class='k'>in</span>
+<span class='k'>let</span> new_expr <span class='k'>=</span>
+  <span class='k'>let</span> e1' <span class='k'>=</span> derive_expression e1
+  <span class='k'>and</span> e2' <span class='k'>=</span> derive_expression e2 <span class='k'>in</span>
+  Add_expression e1' e2'
+<span class='k'>in</span>
+Mult_expression (new_expr<span class='o'>,</span> new_expr)
+<a href="javascript:octry('let e1 = ... in\nlet e2 = ... in\nlet new_expr =\n  let e1&#39; = derive_expression e1\n  and e2&#39; = derive_expression e2 in\n  Add_expression e1&#39; e2&#39;\nin\nMult_expression (new_expr, new_expr)\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Criticism</strong>: Lack of consistency.</p>
+</blockquote>
+<h3 id="Howtoindentifthenelse"> How to indent <code>if ... then   ... else ... </code></h3><h4 id="Multiplebranches"> Multiple branches</h4><p>
 
- &gt;
-...doubtful &gt;
-is value aesthetic The .margin the into bump You :**Justification** &gt;
- &gt;
-```
-...  
-... &gt;- ][ |  
-function = x f rec let
-ocaml```
-
-:keyword `let` the under line the indent to choose but
-```
-...              
-... &gt;- ][ |              
-function = x f rec let
-ocaml```
-
-:write t&#39;Don .right the to pushed been previously has which `function`
-or `match` keyword the under normally indenting in consists This
-.analyses case and functions of indentation *beastly* No  ####
-constructs matching-pattern of indentation Bad  ###
-```
-accu succ &gt;- v Var |
-lam2 )lam1 accu lambda_size( lambda_size &gt;- )lam2 lam1,( App |
-body )accu succ( lambda_size &gt;- )body x,( Abs |
-function = accu lambda_size rec let
-
-accu succ &gt;- v Var |  
-lam2 )lam1 accu lambda_size( lambda_size &gt;- )lam2 lam1,( App |  
-body )accu succ( lambda_size &gt;- )body x,( Abs |  
-function = accu lambda_size rec let
-ocaml```
-
-.styles recommanded for above
-See .)excepted evidently being functions anonymous for one the( matching
-pattern for rules preceding the obey which styles reasonable several to
-rise gives `rec let` or `let` by defined functions in matching-Pattern
-functions named in matching Pattern  ####
-```
-list_lambda  
-)1 &gt;- v Var |   
-lam2 )lam1 0 lambda_size( lambda_size &gt;- )lam2 lam1,( App |   
-body 0 lambda_size + 1 &gt;- )body x,( Abs |   
-function(  
-map
-ocaml```
-
-:keyword
-`function` the to respect with indented are ,`function` by starting
-functions, anonymous of matching pattern ,`try` or `match` to Similarly
-functions anonymous in matching Pattern  ####
-
- &gt;
-!programs OCaml &gt;
-your in bugs more adding without money more get to rule this use case &gt;
-this in :code of lines of number the to proportionally paid are you &gt;
-unless rule, this for reason good any see t&#39;don I :**Justitification** &gt;
- &gt;
-.readability to good &gt;
-any add not does rule the ,)matchings complex in clauses simple or( &gt;
-matchings pattern simple for ;enough compact not be May :**Criticism** &gt;
- &gt;
-```
-)2 - n ( fib + )1 - n( fib     
-&gt;- n |  
-1     
-&gt;- 1 |  
-1     
-&gt;- 0 |  
-function = fib rec let
-ocaml```
-
-.matching pattern any of clause any to
-systematically rule this apply and further step one go programmers Other
-```
-1   
-&gt;- v Var |
-ocaml```
-
-:this like clause last the indent then will They .overflows expressions
-one as soon as clauses, all to rule this generalize programmers Some
-```
-&gt;- v Var |
-lam2 lambda_size + lam1 lambda_size   
-&gt;- )lam2 lam1,( App |
-body lambda_size + 1   
-&gt;- )body x,( Abs |
-with lam match
-ocaml```
-
-.arrow the after line the cut large,
-too is arrow matching pattern the of right the on expression the If
-clauses inside expressions Indenting  ####
-
- &gt;
-.construct the of part matching pattern the enters program the &gt;
-that shows itself by line a on ,`with` keyword The :**Justification** &gt;
- &gt;
-```
-... &gt;- &quot;implemented yet not&quot; Failure |
-... &gt;- found_Not |
-with
-... if  
-in x f = y let  
-try
-ocaml```
-
-:itself by line a on `with` put line, one beyond extends expression
-preceding the If .line the of end the at `with` keyword the Put
-```
-... &gt;- &quot;implemented yet not&quot; Failure |
-... &gt;- found_Not |
-with x f try
-
-1 &gt;- v Var |
-lam2 lambda_size + lam1 lambda_size &gt;- )lam2 lam1,( App |
-body lambda_size + 1 &gt;- )body x,( Abs |
-with lam match
-ocaml```
-
-:construct
-the of beginning the with clauses the align `try` a or `match` a For
-`try` or `match`  ####
-
-.aligned be not should clauses matching pattern of Arrows
-
-.clause
-the of pattern the of beginning the from starting normally, indent Then
-.clause corresponding the of arrow the after immediately line the break
-must you line, the on fit to large too is clause a in expression an If
-
-.one first the *including* clause, each begins which
-bar vertical the of level the at clauses matching-pattern the all Align
-
- &gt;
-.)“doubtful” &gt;
-of instead “awful” say would people some( dubious doubtful is value &gt;
-aesthetic Last, .syntax different slightly a with exception an as &gt;
-clause first the writing clauses, of set whole the for syntax same the &gt;
-use to not insists also It .rule indentation correct the to exception &gt;
-useless a thus is It .necessitate would line new normal a than &gt;
-greater is that indentation an gets case first the : unnatural seems &gt;
-indentation the bar first the omit you If :**criticism to Answer** &gt;
- &gt;
-.it write to need no is &gt;
-there hence, :mandatory not is bar vertical first The :**Criticism** &gt;
- &gt;
-
-.one first the *including*
-bar, vertical a by introduced are clauses matching-pattern the All
-principles General  ####
-constructs matching-pattern indent to How  ###
-
-``` &gt; &gt;
-e2 else ) &gt; &gt;
-e1     &gt; &gt;
-( then cond if &gt; &gt;
-ocaml``` &gt; &gt;
- &gt; &gt;
-small is `e2` but `) (` requires `e1` where mixture A &gt; &gt;
- &gt; &gt;
-``` &gt; &gt;
-) &gt; &gt;
-e2   &gt; &gt;
-( else ) &gt; &gt;
-e1   &gt; &gt;
-( then cond if &gt; &gt;
-ocaml``` &gt; &gt;
- &gt; &gt;
-delimiters `) (` are there If &gt; &gt;
- &gt; &gt;
-``` &gt; &gt;
-e2   &gt; &gt;
-else &gt; &gt;
-e1   &gt; &gt;
-then cond if &gt; &gt;
-ocaml``` &gt; &gt;
- &gt; &gt;
-:large are expressions the all If &gt; &gt;
- &gt; &gt;
-``` &gt; &gt;
-e2 else &gt; &gt;
-e1   &gt; &gt;
-then cond if &gt; &gt;
-ocaml``` &gt; &gt;
- &gt; &gt;
-:small `e2` and large are `cond` and `e1` If &gt; &gt;
- &gt; &gt;
-``` &gt; &gt;
-e2   &gt; &gt;
-else e1 then cond if &gt; &gt;
-ocaml``` &gt; &gt;
- &gt; &gt;
-:large `e2` but small, are `cond` and `e1` If &gt; &gt;
- &gt; &gt;
- &gt;
-.`in ... = e let` &gt;
-a with them binding simply from us keeps which effects, side have &gt;
-do question in expressions the which in case the consider we now So &gt;
- &gt;
- &gt; &gt;
-.comprehension to aid an as acts &gt; &gt;
-naming the benefit, side a As .readable most the is which line one &gt; &gt;
-on indentation simple the back get you way This :**Justification** &gt; &gt;
- &gt; &gt;
- &gt;
-.line &gt;
-a on fit to big too re&#39;they when `in ... = e let` with conditional &gt;
-the within them binding advocate we ,)effects side without( &gt;
-functional purely are conditional a up making expressions the If &gt;
-``` &gt;
-e2 else e1 then cond if &gt;
-ocaml``` &gt;
- &gt;
-:line one on them write simply small, are `e2` and `e1` ,`cond` If &gt;
- &gt;
-
-.up them make which expressions
-the of sizes the on depends conditionals of indentation the fact In
-
-``` &gt;
-end   &gt;
-e2     &gt;
-begin else end   &gt;
-e1     &gt;
-begin   &gt;
-then cond if &gt;
-ocaml``` &gt;
- &gt;
-:line of beginning at `begin` first alternatively Or &gt;
-``` &gt;
-) &gt;
-e2   &gt;
-( else ) &gt;
-e1   &gt;
-( then cond if &gt;
-ocaml``` &gt;
- &gt;
-:line of end at `(` style &gt;
- &gt;
-
-:used are
-styles several conditional, a of branches the delimiting of case the In
-
-.expressions these for delimiters `)` `(` or `end`
-`begin` of presence the especially and question in expressions the of
-size the to according branches, single for possible are styles Several
-branches Single  ####
-
-.systematically it use and style your choose again, Yet
-
- &gt;
-?condition first the for case special a Why .conditions &gt;
-the all of treatment the in consistency of Lack :**Criticism** &gt;
- &gt;
-.performed is test another or continued &gt;
-is condition the whether know to line of end the to look to have &gt;
-not do you Morever, .mind to it bring to `if else` and indentation &gt;
-use so languages, many in keyword a is `elsif` :**Justification** &gt;
- &gt;
-```
-... cond3 if else
-... cond2 if else
-... cond1 if
-ocaml```
-
-:`else` keyword the by line
-each starting conditionals, multiple for method another suggest Some
-```
-... then cond3 if
-else end  
-e2    
-begin then cond2 if
-else end  
-e1    
-begin then cond if
-ocaml```
-
-:write ,)instance for statements include they when( enclosed
-be to have conditions multiple of branches the in expressions If
-```
+Write conditions with multiple branches at the same level of
+indentation:</p>
+<pre class='ocaml'><span class='k'>if</span> cond1 <span class='o'>...</span>
+<span class='k'>if</span> cond2 <span class='o'>...</span>
+<span class='k'>if</span> cond3 <span class='o'>...</span>
+<a href="javascript:octry('if cond1 ...\nif cond2 ...\nif cond3 ...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: Analogous treatment to pattern-matching clauses,
+all aligned to the same tab stop.</p>
+</blockquote>
+<p>If the sizes of the conditions and the expressions allow, write for
+example:</p>
+<pre class='ocaml'><span class='k'>if</span> cond1 <span class='k'>then</span> e1 <span class='k'>else</span>
+<span class='k'>if</span> cond2 <span class='k'>then</span> e2 <span class='k'>else</span>
+<span class='k'>if</span> cond3 <span class='k'>then</span> e3 <span class='k'>else</span>
 e4
-else e3 then cond3 if
-else e2 then cond2 if
-else e1 then cond1 if
-ocaml```
+<a href="javascript:octry('if cond1 then e1 else\nif cond2 then e2 else\nif cond3 then e3 else\ne4\n');">[try]</a></pre>
+<p>
+If expressions in the branches of multiple conditions have to be
+enclosed (when they include statements for instance), write:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> <span class='k'>begin</span>
+    e1
+  <span class='k'>end</span> <span class='k'>else</span>
+<span class='k'>if</span> cond2 <span class='k'>then</span> <span class='k'>begin</span>
+    e2
+  <span class='k'>end</span> <span class='k'>else</span>
+<span class='k'>if</span> cond3 <span class='k'>then</span> <span class='o'>...</span>
+<a href="javascript:octry('if cond then begin\n    e1\n  end else\nif cond2 then begin\n    e2\n  end else\nif cond3 then ...\n');">[try]</a></pre>
+<p>
+Some suggest another method for multiple conditionals, starting each
+line by the keyword <code>else</code>:</p>
+<pre class='ocaml'><span class='k'>if</span> cond1 <span class='o'>...</span>
+<span class='k'>else</span> <span class='k'>if</span> cond2 <span class='o'>...</span>
+<span class='k'>else</span> <span class='k'>if</span> cond3 <span class='o'>...</span>
+<a href="javascript:octry('if cond1 ...\nelse if cond2 ...\nelse if cond3 ...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: <code>elsif</code> is a keyword in many languages, so use
+indentation and <code>else if</code> to bring it to mind. Morever, you do not
+have to look to the end of line to know whether the condition is
+continued or another test is performed.</p>
+<p><strong>Criticism</strong>: Lack of consistency in the treatment of all the
+conditions. Why a special case for the first condition?</p>
+</blockquote>
+<p>Yet again, choose your style and use it systematically.</p>
+<h4 id="Singlebranches"> Single branches</h4><p>
+Several styles are possible for single branches, according to the size
+of the expressions in question and especially the presence of <code>begin</code>
+<code>end</code> or <code>(</code> <code>)</code> delimiters for these expressions.</p>
+<p>In the case of delimiting the branches of a conditional, several styles
+are used:</p>
+<blockquote>
+<p>style <code>(</code> at end of line:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> (
+  e1
+) <span class='k'>else</span> (
+  e2
+)
+<a href="javascript:octry('if cond then (\n  e1\n) else (\n  e2\n)\n');">[try]</a></pre>
+<p>
+Or alternatively first <code>begin</code> at beginning of line:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span>
+  <span class='k'>begin</span>
+    e1
+  <span class='k'>end</span> <span class='k'>else</span> <span class='k'>begin</span>
+    e2
+  <span class='k'>end</span>
+<a href="javascript:octry('if cond then\n  begin\n    e1\n  end else begin\n    e2\n  end\n');">[try]</a></pre>
+</blockquote>
+<p>In fact the indentation of conditionals depends on the sizes of the
+expressions which make them up.</p>
+<blockquote>
+<p>If <code>cond</code>, <code>e1</code> and <code>e2</code> are small, simply write them on one line:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> e1 <span class='k'>else</span> e2
+<a href="javascript:octry('if cond then e1 else e2\n');">[try]</a></pre>
+<p>
+If the expressions making up a conditional are purely functional
+(without side effects), we advocate binding them within the
+conditional with <code>let e = ... in</code> when they&#39;re too big to fit on a
+line.</p>
+<blockquote>
+<p><strong>Justification</strong>: This way you get back the simple indentation on
+one line which is the most readable. As a side benefit, the naming
+acts as an aid to comprehension.</p>
+</blockquote>
+<p>So now we consider the case in which the expressions in question do
+have side effects, which keeps us from simply binding them with a
+<code>let e = ... in</code>.</p>
+<blockquote>
+<p>If <code>e1</code> and <code>cond</code> are small, but <code>e2</code> large:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> e1 <span class='k'>else</span>
+  e2
+<a href="javascript:octry('if cond then e1 else\n  e2\n');">[try]</a></pre>
+<p>If <code>e1</code> and <code>cond</code> are large and <code>e2</code> small:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span>
+  e1
+<span class='k'>else</span> e2
+<a href="javascript:octry('if cond then\n  e1\nelse e2\n');">[try]</a></pre>
+<p>If all the expressions are large:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span>
+  e1
+<span class='k'>else</span>
+  e2
+<a href="javascript:octry('if cond then\n  e1\nelse\n  e2\n');">[try]</a></pre>
+<p>If there are <code>( )</code> delimiters</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> (
+  e1
+) <span class='k'>else</span> (
+  e2
+)
+<a href="javascript:octry('if cond then (\n  e1\n) else (\n  e2\n)\n');">[try]</a></pre>
+<p>A mixture where <code>e1</code> requires <code>( )</code> but <code>e2</code> is small</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> (
+    e1
+) <span class='k'>else</span> e2
+<a href="javascript:octry('if cond then (\n    e1\n) else e2\n');">[try]</a></pre>
+</blockquote>
+</blockquote>
+<h3 id="Howtoindentpatternmatchingconstructs"> How to indent pattern-matching constructs</h3><h4 id="Generalprinciples"> General principles</h4><p>
 
-:example
-for write allow, expressions the and conditions the of sizes the If
+All the pattern-matching clauses are introduced by a vertical bar,
+<em>including</em> the first one.</p>
+<blockquote>
+<p><strong>Criticism</strong>: The first vertical bar is not mandatory: hence, there
+is no need to write it.</p>
+<p><strong>Answer to criticism</strong>: If you omit the first bar the indentation
+seems unnatural : the first case gets an indentation that is greater
+than a normal new line would necessitate. It is thus a useless
+exception to the correct indentation rule. It also insists not to use
+the same syntax for the whole set of clauses, writing the first clause
+as an exception with a slightly different syntax. Last, aesthetic
+value is doubtful dubious (some people would say “awful” instead of
+“doubtful”).</p>
+</blockquote>
+<p>Align all the pattern-matching clauses at the level of the vertical bar
+which begins each clause, <em>including</em> the first one.</p>
+<p>If an expression in a clause is too large to fit on the line, you must
+break the line immediately after the arrow of the corresponding clause.
+Then indent normally, starting from the beginning of the pattern of the
+clause.</p>
+<p>Arrows of pattern matching clauses should not be aligned.</p>
+<h4 id="matchortry"> <code>match</code> or <code>try</code></h4><p>
+For a <code>match</code> or a <code>try</code> align the clauses with the beginning of the
+construct:</p>
+<pre class='ocaml'><span class='k'>match</span> lam <span class='k'>with</span>
+<span class='o'>|</span> Abs (x<span class='o'>,</span> body) <span class='k'>-></span> 1 <span class='o'>+</span> size_lambda body
+<span class='o'>|</span> App (lam1<span class='o'>,</span> lam2) <span class='k'>-></span> size_lambda lam1 <span class='o'>+</span> size_lambda lam2
+<span class='o'>|</span> Var v <span class='k'>-></span> 1
 
- &gt;
-.stop tab same the to aligned all &gt;
-clauses, matching-pattern to treatment Analogous :**Justification** &gt;
- &gt;
-```
-... cond3 if
-... cond2 if
-... cond1 if
-ocaml```
+<span class='k'>try</span> f x <span class='k'>with</span>
+<span class='o'>|</span> Not_found <span class='k'>-></span> <span class='o'>...</span>
+<span class='o'>|</span> Failure <span class='s'>&#34;not yet implemented&#34;</span> <span class='k'>-></span> <span class='o'>...</span>
+<a href="javascript:octry('match lam with\n| Abs (x, body) -&#62; 1 + size_lambda body\n| App (lam1, lam2) -&#62; size_lambda lam1 + size_lambda lam2\n| Var v -&#62; 1\n\ntry f x with\n| Not_found -&#62; ...\n| Failure &#34;not yet implemented&#34; -&#62; ...\n');">[try]</a></pre>
+<p>
+Put the keyword <code>with</code> at the end of the line. If the preceding
+expression extends beyond one line, put <code>with</code> on a line by itself:</p>
+<pre class='ocaml'><span class='k'>try</span>
+  <span class='k'>let</span> y <span class='k'>=</span> f x <span class='k'>in</span>
+  <span class='k'>if</span> <span class='o'>...</span>
+<span class='k'>with</span>
+<span class='o'>|</span> Not_found <span class='k'>-></span> <span class='o'>...</span>
+<span class='o'>|</span> Failure <span class='s'>&#34;not yet implemented&#34;</span> <span class='k'>-></span> <span class='o'>...</span>
+<a href="javascript:octry('try\n  let y = f x in\n  if ...\nwith\n| Not_found -&#62; ...\n| Failure &#34;not yet implemented&#34; -&#62; ...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: The keyword <code>with</code>, on a line by itself shows that
+the program enters the pattern matching part of the construct.</p>
+</blockquote>
+<h4 id="Indentingexpressionsinsideclauses"> Indenting expressions inside clauses</h4><p>
+If the expression on the right of the pattern matching arrow is too
+large, cut the line after the arrow.</p>
+<pre class='ocaml'><span class='k'>match</span> lam <span class='k'>with</span>
+<span class='o'>|</span> Abs (x<span class='o'>,</span> body) <span class='k'>-></span>
+   1 <span class='o'>+</span> size_lambda body
+<span class='o'>|</span> App (lam1<span class='o'>,</span> lam2) <span class='k'>-></span>
+   size_lambda lam1 <span class='o'>+</span> size_lambda lam2
+<span class='o'>|</span> Var v <span class='k'>-></span>
+<a href="javascript:octry('match lam with\n| Abs (x, body) -&#62;\n   1 + size_lambda body\n| App (lam1, lam2) -&#62;\n   size_lambda lam1 + size_lambda lam2\n| Var v -&#62;\n');">[try]</a></pre>
+<p>
+Some programmers generalize this rule to all clauses, as soon as one
+expressions overflows. They will then indent the last clause like this:</p>
+<pre class='ocaml'><span class='o'>|</span> Var v <span class='k'>-></span>
+   1
+<a href="javascript:octry('| Var v -&#62;\n   1\n');">[try]</a></pre>
+<p>
+Other programmers go one step further and apply this rule systematically
+to any clause of any pattern matching.</p>
+<pre class='ocaml'><span class='k'>let rec</span> fib <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> 0 <span class='k'>-></span>
+     1
+  <span class='o'>|</span> 1 <span class='k'>-></span>
+     1
+  <span class='o'>|</span> n <span class='k'>-></span>
+     fib (n <span class='o'>-</span> 1) <span class='o'>+</span> fib ( n <span class='o'>-</span> 2)
+<a href="javascript:octry('let rec fib = function\n  | 0 -&#62;\n     1\n  | 1 -&#62;\n     1\n  | n -&#62;\n     fib (n - 1) + fib ( n - 2)\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Criticism</strong>: May be not compact enough; for simple pattern matchings
+(or simple clauses in complex matchings), the rule does not add any
+good to readability.</p>
+<p><strong>Justitification</strong>: I don&#39;t see any good reason for this rule, unless
+you are paid proportionally to the number of lines of code: in this
+case use this rule to get more money without adding more bugs in your
+OCaml programs!</p>
+</blockquote>
+<h4 id="Patternmatchinginanonymousfunctions"> Pattern matching in anonymous functions</h4><p>
+Similarly to <code>match</code> or <code>try</code>, pattern matching of anonymous functions,
+starting by <code>function</code>, are indented with respect to the <code>function</code>
+keyword:</p>
+<pre class='ocaml'>map
+  (<span class='k'>function</span>
+   <span class='o'>|</span> Abs (x<span class='o'>,</span> body) <span class='k'>-></span> 1 <span class='o'>+</span> size_lambda 0 body
+   <span class='o'>|</span> App (lam1<span class='o'>,</span> lam2) <span class='k'>-></span> size_lambda (size_lambda 0 lam1) lam2
+   <span class='o'>|</span> Var v <span class='k'>-></span> 1)
+  lambda_list
+<a href="javascript:octry('map\n  (function\n   | Abs (x, body) -&#62; 1 + size_lambda 0 body\n   | App (lam1, lam2) -&#62; size_lambda (size_lambda 0 lam1) lam2\n   | Var v -&#62; 1)\n  lambda_list\n');">[try]</a></pre>
+<h4 id="Patternmatchinginnamedfunctions"> Pattern matching in named functions</h4><p>
 
-:indentation
-of level same the at branches multiple with conditions Write
-branches Multiple  ####
-` ... else ...   then ... if` indent to How  ###
+Pattern-matching in functions defined by <code>let</code> or <code>let rec</code> gives rise
+to several reasonable styles which obey the preceding rules for pattern
+matching (the one for anonymous functions being evidently excepted). See
+above for recommanded styles.</p>
+<pre class='ocaml'><span class='k'>let rec</span> size_lambda accu <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> Abs (x<span class='o'>,</span> body) <span class='k'>-></span> size_lambda (succ accu) body
+  <span class='o'>|</span> App (lam1<span class='o'>,</span> lam2) <span class='k'>-></span> size_lambda (size_lambda accu lam1) lam2
+  <span class='o'>|</span> Var v <span class='k'>-></span> succ accu
 
- &gt;
-.consistency of Lack :**Criticism** &gt;
- &gt;
-```
-)expr_new expr,_new( expression_Mult
-in
-&#39;e2 &#39;e1 expression_Add  
-in e2 expression_derive = &#39;e2 and  
-e1 expression_derive = &#39;e1 let  
-= expr_new let
-in ... = e2 let
-in ... = e1 let
-ocaml```
+<span class='k'>let rec</span> size_lambda accu <span class='k'>=</span> <span class='k'>function</span>
+<span class='o'>|</span> Abs (x<span class='o'>,</span> body) <span class='k'>-></span> size_lambda (succ accu) body
+<span class='o'>|</span> App (lam1<span class='o'>,</span> lam2) <span class='k'>-></span> size_lambda (size_lambda accu lam1) lam2
+<span class='o'>|</span> Var v <span class='k'>-></span> succ accu
+<a href="javascript:octry('let rec size_lambda accu = function\n  | Abs (x, body) -&#62; size_lambda (succ accu) body\n  | App (lam1, lam2) -&#62; size_lambda (size_lambda accu lam1) lam2\n  | Var v -&#62; succ accu\n\nlet rec size_lambda accu = function\n| Abs (x, body) -&#62; size_lambda (succ accu) body\n| App (lam1, lam2) -&#62; size_lambda (size_lambda accu lam1) lam2\n| Var v -&#62; succ accu\n');">[try]</a></pre>
+<h3 id="Badindentationofpatternmatchingconstructs"> Bad indentation of pattern-matching constructs</h3>
+<h4 id="Nobeastlyindentationoffunctionsandcaseanalyses"> No <em>beastly</em> indentation of functions and case analyses.</h4><p>
+This consists in indenting normally under the keyword <code>match</code> or
+<code>function</code> which has previously been pushed to the right. Don&#39;t write:</p>
+<pre class='ocaml'><span class='k'>let rec</span> f x <span class='k'>=</span> <span class='k'>function</span>
+              <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>...</span>
+              <span class='o'>...</span>
+<a href="javascript:octry('let rec f x = function\n              | [] -&#62; ...\n              ...\n');">[try]</a></pre>
+<p>
+but choose to indent the line under the <code>let</code> keyword:</p>
+<pre class='ocaml'><span class='k'>let rec</span> f x <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>...</span>
+  <span class='o'>...</span>
+<a href="javascript:octry('let rec f x = function\n  | [] -&#62; ...\n  ...\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: You bump into the margin. The aesthetic value is
+doubtful...</p>
+</blockquote>
+<h4 id="Nobeastlyalignmentofthegtsymbolsinpatternmatchingclauses"> No <em>beastly</em> alignment of the <code>-&gt;</code> symbols in pattern-matching clauses.</h4><p>
+Careful alignment of the arrows of a pattern matching is considered bad
+practice, as exemplify in the following fragment:</p>
+<pre class='ocaml'><span class='k'>let</span> f <span class='k'>=</span> <span class='k'>function</span>
+  <span class='o'>|</span> C1          <span class='k'>-></span> 1
+  <span class='o'>|</span> Long_name <span class='o'>_</span> <span class='k'>-></span> 2
+  <span class='o'>|</span> <span class='o'>_</span>           <span class='k'>-></span> 3
+<a href="javascript:octry('let f = function\n  | C1          -&#62; 1\n  | Long_name _ -&#62; 2\n  | _           -&#62; 3\n');">[try]</a></pre>
+<blockquote>
+<p><strong>Justification</strong>: This makes it harder to maintain the program (the
+addition of a supplementary case can lead the indentations of all the
+lines to change and so ... we often give up alignment at that time,
+then it is better not to align the arrows in the first place!).</p>
+</blockquote>
+<h3 id="Howtoindentfunctioncalls"> How to indent function calls</h3><h4 id="Indentationtothefunction39sname"> Indentation to the function&#39;s name:</h4><p>
 
-:computation the of expression final the
-apart set to line one on alone `in` keyword the write some :Variation
+No problem arises except for functions with many arguments --or very
+complicated arguments as well-- which can&#39;t fit on the same line. You
+must indent the expressions with respect to the name of the function (1
+or 2 spaces according to the chosen convention). Write small arguments
+on the same line, and change lines at the start of an argument.</p>
+<p>As far as possible, avoid arguments which consist of complex
+expressions: in these cases define the</p>
+<pre><code>large&#39;&#39; argument by a `let`
+construction.
 
- &gt;
-.assumptions the all for level indentation same the whence text, &gt;
-mathematical a in assumptions of set a to analogous is constructs &gt;
-in” ... “let of series a that suggested is It :**Justification** &gt;
- &gt;
-```
-...
-in ... = n let
-in ... = expr1 let
-ocaml```
+&gt; 
+&gt; **Justification**: No indentation problem; if the name given to the
+&gt; expressions is meaningful, the code is more readable as well.
+&gt; 
+&gt; **Additional justification**: If the evaluation of the arguments
+&gt; produces side effects, the `let` binding is in fact necessary to
+&gt; explicitly define the order of evaluation.
+&gt; 
 
-:level indentation same the at placed be should definitions these that
-implies rule preceding the definitions, `let` of series a of case the In
-```
-expr1 + expr1
-in ... = expr1 let
-ocaml```
+####  Naming complex arguments:
+In place of
 
-:line the of end the at written is it introduces
-which `in` keyword the and ,`let` keyword the as level same the
-to indented is `let` by introduced definition a following expression The
-constructs `in ... let` indent to How  ###
+```ocaml
+let temp =
+  f x y z
+    </pre>
+<p>large</p>
+<pre><code>expression&#39;&#39;
+``other large
+expression&#39;&#39; in</pre>
+<p>...</p>
+<pre><code>write
 
-
- &gt;
-.quickly too margin right the into run You :**Criticism** &gt;
- &gt;
-.definition to definition from pass to easier s&#39;it so nicely, &gt;
-off set is definition the of line first The :**Justification** &gt;
- &gt;
-```
-...    
-&gt;- found_Not |    
-with x g try    
-in ... = tmp let    
-= x f let
-ocaml```
-
-.function defined the of name the under just justified is body The *
-
-
- &gt;
-.indentation normal the to exception unpleasant An :**Criticism** &gt;
- &gt;
-.definition following &gt;
-the to on pass to easy still s&#39;it so done, is definition the when &gt;
-stop patterns the separating bars vertical The :**Justification** &gt;
- &gt;
-```
-...
-&gt;- D |
-&gt;- C |
-function = x f let
-ocaml```
-
-.matching-pattern of case the in justified-left is body The *
-
-:example for acceptable, are conventions Other
-
- &gt;
-.indentation of amount the to exception No :**Justification** &gt;
- &gt;
-```
-1 + tmp  
-in 0 &gt;- x |    
-1 &gt;- C |    
-with x match    
-= tmp let  
-= x g let
-
-...  
-&gt;- D |  
-&gt;- C |  
-function = x f let
-ocaml```
-
-:spaces 2 or 1 of indentation regular a With
-
-.better definition the off set
-to specially case this treat to okay s&#39;it However, .normally indented
-generally is module a in globally defined function a of body The
-definitions `;; ... let` global indent to How  ###
-
- &gt;
-.unnatural and hard is which indent, to tabulations use always should &gt;
-you since method this use to impossible almost seems It :**Answer** &gt;
- &gt;
-.amount indentation the customize easily to &gt;
-glad is reader the and correct remains indentation overall The .stops &gt;
-tabs the changing by less or more indent to program the of readers &gt;
-the allow to just is tabulations using of purpose The :**Criticism** &gt;
- &gt;
-.program &gt;
-the indent to spaces and tabulations both used programmer the if &gt;
-wrong, completely becomes also can it ;completely changes program the &gt;
-of indentation the another, and display one Between :**Justification** &gt;
- &gt;
-
-.recommended
-*not* absolutely is )9 character ASCII( character tab the Using
-stops tab Using  ###
-
-.program the throughout
-it with stick and indent to amount an Pick .spaces 2 or 1 generally
-is program the of lines successive between indentation in change The
-indent to much How  ###
-
- &gt;
-.correct keep to difficult is and readable &gt;
-not is indentation The .code the in lost gets one screenful, a Beyond &gt;
-.independently them handle and subproblems into it divide to time &gt;
-s&#39;it screenful, one beyond goes function a When :**Justification** &gt;
- &gt;
-
-.unreasonable is
-this beyond go To .three most very the at two, cases exceptional in or
-,)lines 70 about of( screenful one within fit always should function A
-page the of Height  ###
-
- &gt;
-.sheet standard a on font legible a in it print to and displays all &gt;
-on code the read to possible it makes width This :**Justification** &gt;
- &gt;
-
-.wide columns 80 is page The
-page the of Width  ###
-
-.application whole the throughout systematically
-it use then indentation, of style accepted generally a Choose
-indentation of Consistency  ###
-
-.below first the is rule absolute only The 
 </pre>
-<blockquote><p>
- and then polish it and re-polish it.*</p>
+<p>ocaml
+let t =</p>
+<pre class='large'>  expression&#39;&#39;
+and u =
+  </pre>
+<p>other large
+  expression&#39;&#39; in
+let temp =
+  f x y z t u in
+...</p>
+<pre><code>####  Naming anonymous functions:
+In the case of an iterator whose argument is a complex function, define
+the function by a `let` binding as well. In place of
+
+</pre>
+<p>ocaml
+List.map
+  (function x -&gt;</p>
+<pre><code>blabla
+blabla
+blabla)</pre>
+<p>  l</p>
+<pre><code>write
+
+</pre>
+<p>ocaml
+let f x =
+  blabla
+  blabla
+  blabla in
+List.map f l</p>
+<pre><code>&gt; 
+&gt; **Justification**: Much clearer, in particular if the name given to
+&gt; the function is meaningful.
+&gt; 
+
+###  How to indent operations
+When an operator takes complex arguments, or in the presence of multiple
+calls to the same operator, start the next the line with the operator,
+and don&#39;t indent the rest of the operation. For example:
+
+</pre>
+<p>ocaml
+x + y + z</p>
+<ul>
+ <li>t + u
+<pre><code>&gt; 
+&gt; **Justification**: When the operator starts the line, it is clear that
+&gt; the operation continues on this line.
+&gt; </pre>
+ </li>
+</ul>
+
+<p>In the case of a</p>
+<pre><code>large expression&#39;&#39; in such an operation sequence,
+to define the </pre>
+<p>large expression&#39;&#39; with the help of a <code>let in</code>
+construction is preferable to having to indent the line. In place of</p>
+<pre class='ocaml'>x <span class='o'>+</span> y <span class='o'>+</span> z
+<span class='o'>+</span> ``large
+  expression''
+<a href="javascript:octry('x + y + z\n+ ``large\n  expression&#39;&#39;\n');">[try]</a></pre>
+<p>
+write</p>
+<pre class='ocaml'><span class='k'>let</span> t <span class='k'>=</span>
+  ``large
+   expression'' <span class='k'>in</span>
+x <span class='o'>+</span> y <span class='o'>+</span> z <span class='o'>+</span> t
+<a href="javascript:octry('let t =\n  ``large\n   expression&#39;&#39; in\nx + y + z + t\n');">[try]</a></pre>
+<p>
+You most certainly must bind those expressions too large to be written
+in one operation in the case of a combination of operators. In place of
+the unreadable expression</p>
+<pre class='ocaml'>(x <span class='o'>+</span> y <span class='o'>+</span> z <span class='o'>*</span> t)
+<span class='o'>/</span> (``large
+    expression'')
+<a href="javascript:octry('(x + y + z * t)\n/ (``large\n    expression&#39;&#39;)\n');">[try]</a></pre>
+<p>
+write</p>
+<pre class='ocaml'><span class='k'>let</span> u <span class='k'>=</span>
+  ``large
+  expression'' <span class='k'>in</span>
+(x <span class='o'>+</span> y <span class='o'>+</span> z <span class='o'>*</span> t) <span class='o'>/</span> u
+<a href="javascript:octry('let u =\n  ``large\n  expression&#39;&#39; in\n(x + y + z * t) / u\n');">[try]</a></pre>
+<p>
+These guidelines extend to all operators. For example:</p>
+<pre class='ocaml'><span class='k'>let</span> u <span class='k'>=</span>
+  ``large
+  expression'' <span class='k'>in</span>
+x <span class='o'>::</span> y
+<span class='o'>::</span> z <span class='o'>+</span> 1 <span class='o'>::</span> t <span class='o'>::</span> u
+<a href="javascript:octry('let u =\n  ``large\n  expression&#39;&#39; in\nx :: y\n:: z + 1 :: t :: u\n');">[try]</a></pre>
+<h2 id="Programmingguidelines"> Programming guidelines</h2>
+<h3 id="Howtoprogram"> How to program</h3><blockquote>
+<p><em>Always put your handiwork back on the bench,<br />
+ and then polish it and re-polish it.</em></p>
 </blockquote>
 <h4 id="Writesimpleandclearprograms"> Write simple and clear programs</h4><p>
 When this is done, reread, simplify and clarify. At every stage of
@@ -981,81 +938,83 @@ For example: <code>1 + 2 * x</code> means <code>1 + (2 * x)</code>.</p>
 In mathematics you write <code>sin x</code> to mean <code>sin (x)</code>. In the same way
 <code>sin x + cos x</code> means <code>(sin x) + (cos x)</code> not <code>sin (x + (cos x))</code>. Use
 the same conventions in OCaml: write <code>f x + g x</code> to mean
-<code>(f x) + (g x)</code>.<br />.file the of top the at systematically it open ,<code>Format</code>
-use you when So .etc ,<code>float_print</code> ,<code>int_print</code> ,<code>string_print</code>
-functions printing usual the redefines module This .printing
-indented automatically provides module <code>Format</code> the example, For
-.functions of set important an of versions other brings and environment,
-the modifies which module a open to normal it consider can You
-closed them leaving than rather modules open use to When  ####</p>
-<pre><code>... succ map.Array ...
-... succ map.List ...
-...
-in 1 - v length.Array = lim let
-...
-in 1 - name length.String = lim let
-ocaml</pre>
-<p> &gt;
-.errors semantic detect-to-difficult to rise gives &gt;
-and ambiguous is identifiers unqualified of use The :<strong>Justification</strong> &gt;
- &gt;</p>
-<p>.names module meaningful but short prefer will you Thus .notation
-identifier qualified the instead using directives, <code>open</code> Avoid
-modules Opening  ####</p>
-<p>.etc exceptions, types, functions,
-:module the by defined things the document must you interface, each For</p>
-<p>.interface an write explicitly must you module, each For</p>
-<p>.modules coherent into programs your subdivide must You
-modules into Subdividing  ####
-modules use to How  ###</p>
-<pre><code>end
-e4  
-;e3  
-begin else end
-e2  
-;e1  
-begin then cond if
-ocaml</pre>
-<p>:delimited be must conditional a of
-part <code>else</code> or <code>then</code> the in appears which sequence a way, same the In
-<code>if</code> of branches inside Sequences  ####</p>
-<pre><code>...
-&gt;- 2 |
-end  
-... |  
-with y match begin  
-&gt;- 1 |
-with x match
-ocaml</pre>
-<p>:example For .)construct matching-pattern enclosed
-the with associated be automatically will construct matching-pattern
-enclosing the of clauses subsequent otherwise( construct embedded
-this delimit to necessary absolutely is it clause, matching-pattern
-a in appears construct <code>with ... try</code> or <code>with ... match</code> a When
-construct <code>match</code> a in construct <code>match</code>  ####</p>
-<p>.constructs <code>else     then if</code>
-within embedded sequences or constructs matching-pattern
-concerns essentially constructs of delimiting explicit This</p>
-<p>.way systematic, is, that
-consistent, a in it do you if acceptable is parentheses using However
-.parentheses than rather <code>end</code> and <code>begin</code> keywords the delimiters
-as use programs, in constructs syntactic delimit to necessary is it When
-programs in constructs delimit to How  ###</p>
-<p>.<code>)x &amp;&amp; false( || true</code> means <code>x &amp;&amp; false || true</code>
-,<code>)x * 2( + 1</code> means <code>x * 2 + 1</code> as just So, .multiplication to
-&#39;&#39;and<code> the and addition to analogous is operator &#39;&#39;or</code> boolean the
-case, this in parens overuse to tendency a have mathematicians Although
-mathematics of those are operators boolean the of precedences relative The  ####</p>
-<p>.<code>)3 &gt; x( &amp;&amp; ))2 + x( &lt; )x f((</code>
-means <code>3 &gt; x &amp;&amp; 2 + x &lt; x f</code> way same the In .<code>)2 + x( &lt; )x f(</code>
-means <code>2 + x &lt; x f</code> expression the )interpretation sensible
-other no( reasons type For .<code>)x g( &lt; )x f(</code> means <code>x g &lt; x f</code> why
-is This .apply rules preceding the so operators, infix are Comparisons
-operators boolean and Comparisons  ####</p>
-<p>.<code>)&#39;s ^ s( failwith</code> <em>not</em> ,<code>&#39;s ^ )s failwith(</code> means <code>&#39;s ^ s failwith</code>
-and ,<code>)x g( @ )x f(</code> means <code>x g @ x f</code> ,<code>)x g( :: )x f(</code> means
-<code>x g :: x f</code> :<strong>operators )infix( all to</strong> generalizes convention This
-<br />
+<code>(f x) + (g x)</code>.<br />
+This convention generalizes <strong>to all (infix) operators</strong>: <code>f x :: g x</code>
+means <code>(f x) :: (g x)</code>, <code>f x @ g x</code> means <code>(f x) @ (g x)</code>, and
+<code>failwith s ^ s&#39;</code> means <code>(failwith s) ^ s&#39;</code>, <em>not</em> <code>failwith (s ^ s&#39;)</code>.</p>
+<h4 id="Comparisonsandbooleanoperators"> Comparisons and boolean operators</h4><p>
+Comparisons are infix operators, so the preceding rules apply. This is
+why <code>f x &lt; g x</code> means <code>(f x) &lt; (g x)</code>. For type reasons (no other
+sensible interpretation) the expression <code>f x &lt; x + 2</code> means
+<code>(f x) &lt; (x + 2)</code>. In the same way <code>f x &lt; x + 2 &amp;&amp; x &gt; 3</code> means
+<code>((f x) &lt; (x + 2)) &amp;&amp; (x &gt; 3)</code>.</p>
+<h4 id="Therelativeprecedencesofthebooleanoperatorsarethoseofmathematics"> The relative precedences of the boolean operators are those of mathematics</h4><p>
+Although mathematicians have a tendency to overuse parens in this case,
+the boolean <code>or&#39;&#39; operator is analogous to addition and the </code>and&#39;&#39;
+to multiplication. So, just as <code>1 + 2 * x</code> means <code>1 + (2 * x)</code>,
+<code>true || false &amp;&amp; x</code> means <code>true || (false &amp;&amp; x)</code>.</p>
+<h3 id="Howtodelimitconstructsinprograms"> How to delimit constructs in programs</h3><p>
+When it is necessary to delimit syntactic constructs in programs, use as
+delimiters the keywords <code>begin</code> and <code>end</code> rather than parentheses.
+However using parentheses is acceptable if you do it in a consistent,
+that is, systematic, way.</p>
+<p>This explicit delimiting of constructs essentially concerns
+pattern-matching constructs or sequences embedded within
+<code>if then     else</code> constructs.</p>
+<h4 id="matchconstructinamatchconstruct"> <code>match</code> construct in a <code>match</code> construct</h4><p>
+When a <code>match ... with</code> or <code>try ... with</code> construct appears in a
+pattern-matching clause, it is absolutely necessary to delimit this
+embedded construct (otherwise subsequent clauses of the enclosing
+pattern-matching construct will automatically be associated with the
+enclosed pattern-matching construct). For example:</p>
+<pre class='ocaml'><span class='k'>match</span> x <span class='k'>with</span>
+<span class='o'>|</span> 1 <span class='k'>-></span>
+  <span class='k'>begin</span> <span class='k'>match</span> y <span class='k'>with</span>
+  <span class='o'>|</span> <span class='o'>...</span>
+  <span class='k'>end</span>
+<span class='o'>|</span> 2 <span class='k'>-></span>
+<span class='o'>...</span>
+<a href="javascript:octry('match x with\n| 1 -&#62;\n  begin match y with\n  | ...\n  end\n| 2 -&#62;\n...\n');">[try]</a></pre>
+<h4 id="Sequencesinsidebranchesofif"> Sequences inside branches of <code>if</code></h4><p>
+
+In the same way, a sequence which appears in the <code>then</code> or <code>else</code> part
+of a conditional must be delimited:</p>
+<pre class='ocaml'><span class='k'>if</span> cond <span class='k'>then</span> <span class='k'>begin</span>
+  e1<span class='o'>;</span>
+  e2
+<span class='k'>end</span> <span class='k'>else</span> <span class='k'>begin</span>
+  e3<span class='o'>;</span>
+  e4
+<span class='k'>end</span>
+<a href="javascript:octry('if cond then begin\n  e1;\n  e2\nend else begin\n  e3;\n  e4\nend\n');">[try]</a></pre>
+<h3 id="Howtousemodules"> How to use modules</h3>
+<h4 id="Subdividingintomodules"> Subdividing into modules</h4><p>
+You must subdivide your programs into coherent modules.</p>
+<p>For each module, you must explicitly write an interface.</p>
+<p>For each interface, you must document the things defined by the module:
+functions, types, exceptions, etc.</p>
+<h4 id="Openingmodules"> Opening modules</h4><p>
+Avoid <code>open</code> directives, using instead the qualified identifier
+notation. Thus you will prefer short but meaningful module names.</p>
+<blockquote>
+<p><strong>Justification</strong>: The use of unqualified identifiers is ambiguous and
+gives rise to difficult-to-detect semantic errors.</p>
+</blockquote>
+<pre class='ocaml'><span class='k'>let</span> lim <span class='k'>=</span> <span class='m'>String</span><span class='o'>.</span>length name <span class='o'>-</span> 1 <span class='k'>in</span>
+<span class='o'>...</span>
+<span class='k'>let</span> lim <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length v <span class='o'>-</span> 1 <span class='k'>in</span>
+<span class='o'>...</span>
+<span class='o'>...</span> <span class='m'>List</span><span class='o'>.</span>map succ <span class='o'>...</span>
+<span class='o'>...</span> <span class='m'>Array</span><span class='o'>.</span>map succ <span class='o'>...</span>
+<a href="javascript:octry('let lim = String.length name - 1 in\n...\nlet lim = Array.length v - 1 in\n...\n... List.map succ ...\n... Array.map succ ...\n');">[try]</a></pre>
+<h4 id="Whentouseopenmodulesratherthanleavingthemclosed"> When to use open modules rather than leaving them closed</h4><p>
+
+You can consider it normal to open a module which modifies the
+environment, and brings other versions of an important set of functions.
+For example, the <code>Format</code> module provides automatically indented
+printing. This module redefines the usual printing functions
+<code>print_string</code>, <code>print_int</code>, <code>print_float</code>, etc. So when you use
+<code>Format</code>, open it systematically at the top of the file.<br />
 If you don&#39;t open <code>Format</code> you could miss the qualification of a
 printing function, and this could be perfectly silent, since many
 <code>Format</code>&#39;s functions have a correspondent in the default environment
@@ -1147,14 +1106,14 @@ expression. When the `let` binding is evaluated, it unpacks the
 collections on both sides and binds each expression to its corresponding
 name. For example, `let x, y = 1, 2` is a de-structuring `let` binding
 which performs both the bindings `let x = 1` and `let y = 2`
-simultaneously.]&lt;br /&gt;
+simultaneously.]
 The `let` binding is not limited to simple identifier definitions: you
 can use it with more complex or simpler patterns. For instance
 
-* `let` with complex patterns:&lt;br /&gt;
- `let [x; y] as l = ...`&lt;br /&gt;
+* `let` with complex patterns:
+ `let [x; y] as l = ...`
  simultaneously defines a list `l` and its two elements `x` and `y`.
-* `let` with simple pattern:&lt;br /&gt;
+* `let` with simple pattern:
  `let _ = ...` does not define anything, it just evaluate the
  expression on the right hand side of the `=` symbol.
 
@@ -1226,11 +1185,11 @@ print_newline ()
  your code computes a result that is useless since this result is
  just deleted after computation. Hence, if useful at all, this
  computation is performed only for its side-effects; hence it should
- return unit.&lt;br /&gt;
+ return unit.
  Most of the time, the warning indicates the use of the wrong
  function, a probable confusion between the side-effect only version
  of a function (which is a procedure whose result is irrelevant) with
- its functional counterpart (whose result is meaningful).&lt;br /&gt;
+ its functional counterpart (whose result is meaningful).
  In the example mentioned above, the first situation prevailed, and
  the programmer should have called `iter` instead of `map`, and
  simply write
@@ -1489,7 +1448,7 @@ comment: in my opinion it&#39;s absolutely necessary!
 
 ###  How to optimize programs
 &gt; 
-&gt; **Pseudo law of optimization**: No optimization *a priori*.&lt;br /&gt;
+&gt; **Pseudo law of optimization**: No optimization *a priori*.
 &gt;  No optimization *a posteriori* either.
 &gt; 
 
@@ -1746,7 +1705,7 @@ Users of the [Git](http://git-scm.com/) software version control system
 are never run out of good things to say about the productivity gains it
 brings. This system supports managing development by a team of
 programmers while imposing consistency among them, and also maintains a
-log of changes made to the software.&lt;br /&gt;
+log of changes made to the software.
  Git also supports simultaneous development by several teams, possibly
 dispersed among several sites linked on the Net.
 

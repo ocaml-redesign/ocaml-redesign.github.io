@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -126,10 +118,10 @@ programming:</p>
  <li>In C the header files describe the functions, etc., but only by
  convention. In OCaml, the *.mli file is the exported signature of
  the <a href='modules.html' title='modules'>module</a>, and the compiler strictly
- enforces it.<br />.signature or interface the is 
-<code>mli.foo</code> and implementation the is <code>ml.foo</code> .<code>mli.foo</code> and <code>ml.foo</code> 
-:files two find will you <code>Foo</code> called module a for cases most In 
-<br />
+ enforces it.<br />
+ In most cases for a module called <code>Foo</code> you will find two files:
+ <code>foo.ml</code> and <code>foo.mli</code>. <code>foo.ml</code> is the implementation and <code>foo.mli</code>
+ is the interface or signature.<br />
  Notice also that the first letter of the file is turned to
  uppercase to get the module name. For example, Extlib contains a
  file called <code>uTF8.mli</code> which is the signature of a module called

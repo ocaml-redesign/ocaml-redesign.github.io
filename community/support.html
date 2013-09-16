@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -76,18 +68,18 @@
 A great way to get free support is by using the active <a href='mailing_lists.html'>mailing
 lists</a>. When you need to go beyond this and get
 professional support, you have the following options:</p>
-<p><a href='http://www.ocamlpro.com/'>OCamlPro</a><br />)en.html.search_ocaml_work/buero/de.stolpmann-gerd.www//:http(]Stolpmann Gerd[</p>
-<p>.Consortium OCaml the of member a is OCamlPro
-.itself distribution OCaml the on support and software OCaml optimize
-and debug to expertise strong provide and topic, related OCaml any
-on developers train OCaml, in components software specialized develop
-can OCamlPro customers, its For .)/com.ocamlpro.opam//:http(]manager
-package OPAM[ the and )/com.ocamlpro.try//:http(]OCaml Try[ as
-such community, OCaml the to software source-open contributes OCamlPro
-.team development core OCaml the of members including programmers, OCaml
-experienced skilled highly of team a is OCamlPro .companies for OCaml
-on support professional provides that off-spin INRIA an is OCamlPro
-<br />
+<p><a href='http://www.ocamlpro.com/'>OCamlPro</a><br />
+OCamlPro is an INRIA spin-off that provides professional support on
+OCaml for companies. OCamlPro is a team of highly skilled experienced
+OCaml programmers, including members of the OCaml core development team.
+OCamlPro contributes open-source software to the OCaml community, such
+as <a href='http://try.ocamlpro.com/'>Try OCaml</a> and the <a href='http://opam.ocamlpro.com/'>OPAM package
+manager</a>. For its customers, OCamlPro can
+develop specialized software components in OCaml, train developers on
+any OCaml related topic, and provide strong expertise to debug and
+optimize OCaml software and support on the OCaml distribution itself.
+OCamlPro is a member of the OCaml Consortium.</p>
+<p><a href='http://www.gerd-stolpmann.de/buero/work_ocaml_search.html.en'>Gerd Stolpmann</a><br />
 Gerd Stolpmann has been helping companies master OCaml since 2005. He is
 an expert of the ecosystem surrounding OCaml and developed the
 <a href='http://godi.camlcity.org/godi/'>GODI</a> platform. Stolpmann is a computer
@@ -110,7 +102,7 @@ contributions can be of 10000€ or higher. Membership is important not
 only for the development of OCaml, its promotion and its dissemination,
 but also for its continuity.</p>
 <h4 id="CurrentMembers"> Current Members</h4>
-<table>
+<p><table>
 <tbody>
 <tr class="odd">
 <td align="left"><a href="http://www.cea.fr"><img src="img/cea.png" alt="CEA" /></a></td>
@@ -133,7 +125,7 @@ but also for its continuity.</p>
 <td align="left"><a href="http://www.ocamlpro.com"><img src="img/ocamlpro.png" alt="OCamlPro" /></a></td>
 </tr>
 </tbody>
-</table>
+</table></p>
 <h4 id="Howtobecomeamember"> How to become a member?</h4><p>
 In order to fully understand the Consortium membership, it is advised to
 read the OCaml Consortium membership agreement and its appendices, which
@@ -182,14 +174,14 @@ are also several research grants associated with OCamlLabs:</p>
  <li>EU FP7 <a href='http://trilogy2.eu'>Trilogy2</a> project.</li>
 </ul>
 
-<table>
+<p><table>
 <tbody>
 <tr class="odd">
 <td align="left"><a href="http://janestreet.com/"><img src="http://www.cl.cam.ac.uk/projects/ocamllabs/images/janest.jpg" alt="Jane Street" /></a></td>
 <td align="left"><a href="http://www.xen.org/products/cloudxen.html"><img src="http://www.cl.cam.ac.uk/projects/ocamllabs/images/citrix.gif" alt="Citrix" /></a></td>
 </tr>
 </tbody>
-</table>
+</table></p>
 
           </div>
         </div>

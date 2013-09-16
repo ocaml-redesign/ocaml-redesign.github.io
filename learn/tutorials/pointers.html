@@ -16,25 +16,17 @@
     <![endif]-->
     <script type="text/javascript">
       function octry(x){
-      if(document.getElementById('buttons').innerHTML=='') {
-      t = document.getElementById('tryocaml');
-      js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
-      t.appendChild(js);
-      } else {
-      t = document.getElementById('tryocaml');
-      t.style.display = 'block';
-      p=document.getElementsByTagName('pre')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      p=document.getElementsByTagName('code')
-      for(i=0;p[i];i++){
-      p.onClick=function () {}
-      }
-      document.getElementById('console').value = x;
-      document.getElementById('console').focus();
-      document.getElementById('console').select();
-      }
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
       }
     </script>
   </head>
@@ -75,6 +67,8 @@
 <ul>
  <li><a href='#StatusofpointersinOCaml'> Status of pointers in OCaml</a>
   <ul>
+   <li><a href='#ExplicitpointersareOCamlvaluesoftyperef'> Explicit pointers are OCaml values of type <code>ref</code></a>
+   </li>
    <li><a href='#Pointersandmutablefieldsorvectors'> Pointers and mutable fields or vectors</a>
    </li>
   </ul>
@@ -103,46 +97,48 @@ majority of pointers usages that are found in usual programming
 languages simply disapear in OCaml, or more exactly, those pointers are
 totally automatically handled by the compiler and the OCaml programmer
 can safely just ignore their existence, focusing on the semantic of its
-program.<br />.)constructor <code>Cons</code> the( list empty non and )constructor<code>Nil</code>
-the( list empty alternatives, two the with evident, is lists
-of structure recursive the and pairs, as represented thus are lists Cell</p>
-<pre><code>list * int of Cons | Nil = list type  
-ocaml</pre>
-<p>:pointers
-without definition, type sum a using OCaml, in this translate can We</p>
-<pre><code>;end 
-;cell :tl  
-;integer :hd  
-record = cell 
-;cell^ = list 
-type
-}Pascal in type lists and Cells{
+program.<br />
+ For instance lists or trees are defined without explicit pointers using
+a concrete datatype definition. The underlying implementation uses
+pointers, but this is transparent to the programmer since pointer
+handling is done by the compiler.</p>
+<p>In the rare occasions where explicit pointers are needed (the most
+common case is when translating in OCaml an algorithm described in a
+classic imperative language), OCaml provides references that are
+full-fledged pointers, even first class citizen pointers (references can
+be passed as argument, embedded into arbitrary data structures, and
+returned as function results).</p>
+<h3 id="ExplicitpointersareOCamlvaluesoftyperef"> Explicit pointers are OCaml values of type <code>ref</code></h3><p>
+You can program directly with explicit references if you want to, but
+this is normally a waste of time and effort.</p>
+<p>Let&#39;s examine the simple example of linked lists (integer lists to be
+simple). This data type is defined in C (or in Pascal) using explicit
+pointers, for instance:</p>
+<pre class='ocaml'><span class='o'>/*</span> Cells <span class='k'>and</span> lists <span class='k'>type</span> <span class='k'>in</span> C <span class='o'>*/</span>
+<span class='k'>struct</span> cell <span class='o'>{</span>
+  int hd<span class='o'>;</span>
+  <span class='k'>struct</span> cell <span class='o'>*</span>tl<span class='o'>;</span>
+<span class='o'>}</span><span class='o'>;</span>
 
-;list* cell, cell struct typedef
+typedef <span class='k'>struct</span> cell cell<span class='o'>,</span> <span class='o'>*</span>list<span class='o'>;</span>
 
-;}
-;tl* cell struct  
-;hd int  
-{ cell struct
-/* C in type lists and Cells */
-ocaml</pre>
-<p>:instance for pointers,
-explicit using )Pascal in or( C in defined is type data This .)simple
-be to lists integer( lists linked of example simple the examine s&#39;Let</p>
-<p>.effort and time of waste a normally is this
-but to, want you if references explicit with directly program can You
-<code>ref</code> type of values OCaml are pointers Explicit  ###</p>
-<p>.)results function as returned
-and structures, data arbitrary into embedded argument, as passed be
-can references( pointers citizen class first even pointers, fledged-full
-are that references provides OCaml ,)language imperative classic
-a in described algorithm an OCaml in translating when is case common
-most the( needed are pointers explicit where occasions rare the In</p>
-<p>.compiler the by done is handling
-pointer since programmer the to transparent is this but pointers,
-uses implementation underlying The .definition datatype concrete a
-using pointers explicit without defined are trees or lists instance For 
-<br />
+<span class='o'>{</span>Cells <span class='k'>and</span> lists <span class='k'>type</span> <span class='k'>in</span> Pascal<span class='o'>}</span>
+<span class='k'>type</span>
+ list <span class='k'>=</span> <span class='o'>^</span>cell<span class='o'>;</span>
+ cell <span class='k'>=</span> record
+  hd<span class='o'>:</span> integer<span class='o'>;</span>
+  tl<span class='o'>:</span> cell<span class='o'>;</span>
+ <span class='k'>end</span><span class='o'>;</span>
+<a href="javascript:octry('/* Cells and lists type in C */\nstruct cell {\n  int hd;\n  struct cell *tl;\n};\n\ntypedef struct cell cell, *list;\n\n{Cells and lists type in Pascal}\ntype\n list = ^cell;\n cell = record\n  hd: integer;\n  tl: cell;\n end;\n');">[try]</a></pre>
+<p>
+We can translate this in OCaml, using a sum type definition, without
+pointers:</p>
+<pre class='ocaml'>  <span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> int <span class='o'>*</span> list
+<a href="javascript:octry('  type list = Nil | Cons of int * list\n');">[try]</a></pre>
+<p>
+Cell lists are thus represented as pairs, and the recursive structure of
+lists is evident, with the two alternatives, empty list (the
+<code>Nil</code>constructor) and non empty list (the <code>Cons</code> constructor).<br />
  Automatic management of pointers and automatic memory allocation shine
 when allocating list values: one just writes <code>Cons (x, l)</code> to add <code>x</code> in
 front of the list <code>l</code>. In C, you need to write this function, to
