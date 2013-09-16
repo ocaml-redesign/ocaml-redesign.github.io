@@ -723,15 +723,15 @@ Determine the prime factors of a given positive integer (2).</p>
 <a href="javascript:octry('  let factors n =\n    let rec aux d n =\n      if n = 1 then [] else\n        if n mod d = 0 then\n          match aux d (n / d) with\n          | (h,n) :: t when h = d -&#62; (h,n+1) :: t\n          | l -&#62; (d,1) :: l\n        else aux (d+1) n\n    in\n    aux 2 n\n\n  factors 315 = [3,2 ; 5,1 ; 7,1]\n');">[try]</a></pre>
 <p>
 Calculate Euler&#39;s totient function phi(m) (improved).</p>
-<p>See problem “<a href='#totient'>Calculate Euler&amp;apos;s totient function phi(m)</a>” for
+<p>See problem “<a href='#totient'>Calculate Euler&#39;s totient function phi(m)</a>” for
 the definition of Euler&#39;s totient function. If the list of the prime
 factors of a number m is known in the form of the previous problem then
 the function phi(m) can be efficiently calculated as follows: Let
 <code>[(p1, m1); (p2, m2);   (p3, m3); ...]</code> be the list of prime factors
 (and their multiplicities) of a given number m. Then φ(m) can be
 calculated with the following formula:</p>
-<p>φ(m) = (p1 - 1) × p1<sup>m1\ -\ 1&lt;/sup&gt; × (p2 - 1) ×
-p2<sup>m2\ -\ 1&lt;/sup&gt; × (p3 - 1) × p3<sup>m3\ -\ 1&lt;/sup&gt; × ...</p>
+<p>φ(m) = (p1 - 1) × p1<sup>m1\ -\ 1</sup> × (p2 - 1) ×
+p2<sup>m2\ -\ 1</sup> × (p3 - 1) × p3<sup>m3\ -\ 1</sup> × ...</p>
 <p>Solution</p>
 <pre class='ocaml'>  <span class='com2'>(* Naive power <span class='ic'>function</span><span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let rec</span> pow n p <span class='k'>=</span> <span class='k'>if</span> p <span class='o'>&#60;</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> n <span class='o'>*</span> pow n (p-1) <span class='o'>;;</span>
@@ -747,8 +747,8 @@ p2<sup>m2\ -\ 1&lt;/sup&gt; × (p3 - 1) × p3<sup>m3\ -\ 1&lt;/sup&gt; × ...</p
 <a href="javascript:octry('  (* Naive power function. *)\n  let rec pow n p = if p &#60; 1 then 1 else n * pow n (p-1) ;;\n  (* [factors] is defined in the previous question. *)\n  let phi_improved n =\n    let rec aux acc = function\n      | [] -&#62; acc\n      | (p,m) :: t -&#62; aux ((p - 1) * pow p (m - 1) * acc) t in\n    aux 1 (factors n)\n\n  phi_improved 10 = 4;;\n  phi_improved 13 = 12\n');">[try]</a></pre>
 <p>
 Compare the two methods of calculating Euler&#39;s totient function.</p>
-<p>Use the solutions of problems “<a href='#totient'>Calculate Euler&amp;apos;s totient function
-phi(m)</a>” and “<a href='#totient-improved'>Calculate Euler&amp;apos;s totient function phi(m)
+<p>Use the solutions of problems “<a href='#totient'>Calculate Euler&#39;s totient function
+phi(m)</a>” and “<a href='#totient-improved'>Calculate Euler&#39;s totient function phi(m)
 (improved)</a>” to compare the algorithms. Take the
 number of logical inferences as a measure for efficiency. Try to
 calculate φ(10090) as an example.</p>
@@ -1100,7 +1100,7 @@ tree.</p>
 <p>
 Construct height-balanced binary trees with a given number of nodes</p>
 <p>Consider a height-balanced binary tree of height <code>h</code>. What is the
-maximum number of nodes it can contain? Clearly, <em>maxN = 2<sup><code>h</code>&lt;/sup&gt;
+maximum number of nodes it can contain? Clearly, <em>maxN = 2<sup><code>h</code></sup>
 </em> 1
 <em>. However, what is the minimum number *minN</em>? This question is more
 difficult. Try to find a recursive statement and turn it into a function
@@ -1177,7 +1177,7 @@ creates the level-order sequence of the nodes. However, there are more
 efficient ways to do that.</p>
 <p>Construct a complete binary tree</p>
 <p>A <em>complete</em> binary tree with height H is defined as follows: The levels
-1,2,3,...,H-1 contain the maximum number of nodes (i.e 2<sup>i-1&lt;/sup&gt;
+1,2,3,...,H-1 contain the maximum number of nodes (i.e 2<sup>i-1</sup>
 at the level i, note that we start counting the levels from 1 at the
 root). In level H, which may contain less than the maximum possible
 number of nodes, all the nodes are &quot;left-adjusted&quot;. This means that in a
@@ -1282,7 +1282,7 @@ lower-case letters, as in the example of the previous problem.</p>
  </li>
  <li>Solve problems 1. to 3. using difference lists. Cool! Use the
  function <code>timeit</code> (defined in problem “<a href='#timeit'>Compare the two methods of
- calculating Euler&amp;apos;s totient function.</a>”) to compare the
+ calculating Euler&#39;s totient function.</a>”) to compare the
  solutions.</li>
 </ol>
 
@@ -1590,7 +1590,7 @@ Hint: Use an open-ended list to represent the function f.</p>
  <li>Write a function that generates a list of all nodes of a graph
  sorted according to decreasing degree.
  </li>
- <li>Use <a href='http://en.wikipedia.org/wiki/Graph_coloring#Greedy_coloring'>Welsh-Powell&amp;apos;s
+ <li>Use <a href='http://en.wikipedia.org/wiki/Graph_coloring#Greedy_coloring'>Welsh-Powell&#39;s
  algorithm</a>
  to paint the nodes of a graph in such a way that adjacent nodes have
  different colors.</li>
