@@ -14,6 +14,7 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+
     <script type="text/javascript">
       function octry(x){
         if(document.getElementById('buttons').innerHTML=='') {
@@ -28,8 +29,8 @@
           document.getElementById('console').select();
         }
       }
+      if(!(document.getElementById('buttons'))) octry = function() {}
     </script>
-
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
