@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Macro recorder</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre><div class="info"><div class="info">Type of macro recorders.</div></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">'a list -&gt; 'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">create macro</code> create a new macro recorder, with initial
+      contents <code class="code">macro</code>.</div></div>
+<pre><span class="VALrecording"><span class="keyword">val</span> recording</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; bool <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre><div class="info"><div class="info">Whether the recorder is recording a macro.</div></div>
+<pre><span class="VALget_recording"><span class="keyword">val</span> get_recording</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; bool</code></pre><div class="info"><div class="info">Returns the current state of the recorder.</div></div>
+<pre><span class="VALset_recording"><span class="keyword">val</span> set_recording</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; bool -&gt; unit</code></pre><div class="info"><div class="info">Starts or stops the macro recorder.</div></div>
+<pre><span class="VALcancel"><span class="keyword">val</span> cancel</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info">Cancels the current macro if recording one.</div></div>
+<pre><span class="VALcount"><span class="keyword">val</span> count</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; int <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre><div class="info"><div class="info">The number of actions in the macro recorder. It is <code class="code">0</code> if the
+      recorder is not currently recording.</div></div>
+<pre><span class="VALget_count"><span class="keyword">val</span> get_count</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; int</code></pre><div class="info"><div class="info">Returns the current number of actions in the macro recorder.</div></div>
+<pre><span class="VALadd"><span class="keyword">val</span> add</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; 'a -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">add recorder x</code> adds <code class="code">x</code> to the recorder if it is recording a
+      macro.</div></div>
+<pre><span class="VALcontents"><span class="keyword">val</span> contents</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; 'a list</code></pre><div class="info"><div class="info">Returns the currently recorded macro.</div></div>
+<pre><span class="VALcounter"><span class="keyword">val</span> counter</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; int <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre><div class="info"><div class="info">The contents of the macro counter.</div></div>
+<pre><span class="VALget_counter"><span class="keyword">val</span> get_counter</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; int</code></pre><div class="info"><div class="info">Gets the contents of the macro counter.</div></div>
+<pre><span class="VALset_counter"><span class="keyword">val</span> set_counter</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; int -&gt; unit</code></pre><div class="info"><div class="info">Sets the macro counter to the given value.</div></div>
+<pre><span class="VALadd_counter"><span class="keyword">val</span> add_counter</span> : <code class="type">'a <a href="?package=zed&amp;module=Zed_macro&amp;type=t">t</a> -&gt; int -&gt; unit</code></pre><div class="info"><div class="info">Adds the given value to the macro counter.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

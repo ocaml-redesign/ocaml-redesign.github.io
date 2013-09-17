@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">An implementation of compressed integer sets using lists of integer ranges. Operations
+    such as adding and membership are O(n) where n is the number of contigous ranges in
+    the set. For data that is mostly serial, n should remain very small.<br/>    Note that when n gets very large, in addition to poor performance, this behavior may
+    throw exceptions since some of the code is not tail-recursive.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<pre><span class="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a></code></pre>
+<pre><span class="VALto_string"><span class="keyword">val</span> to_string</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; string</code></pre>
+<pre><span class="VALadd_range"><span class="keyword">val</span> add_range</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; int -&gt; int -&gt; <a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">add_range t i j</code> add all the numbers between <code class="code">i</code> and <code class="code">j</code> (inclusive) to the set. Note
+    that it doesn't matter which order <code class="code">i</code> and <code class="code">j</code> are specified in, the effect is the
+    same.</div></div>
+<pre><span class="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; int -&gt; <a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">add t i</code> add <code class="code">i</code> to the set</div></div>
+<pre><span class="VALmem"><span class="keyword">val</span> mem</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; int -&gt; bool</code></pre><div class="info"><div class="info"><code class="code">mem t i</code> test whether <code class="code">i</code> is a member of the set</div></div>
+<pre><span class="VALranges"><span class="keyword">val</span> ranges</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; (int * int) list</code></pre><div class="info"><div class="info"><code class="code">ranges t</code> return a list of all ranges that make up the set</div></div>
+<pre><span class="VALmax"><span class="keyword">val</span> max</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; int option</code></pre><div class="info"><div class="info"><code class="code">max t</code> the biggest number in the set (if it exists)</div></div>
+<pre><span class="VALmin"><span class="keyword">val</span> min</span> : <code class="type"><a href="?package=core_kernel&amp;module=Int_set&amp;type=t">t</a> -&gt; int option</code></pre><div class="info"><div class="info"><code class="code">min t</code> the smallest number in the set (if it exists)</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

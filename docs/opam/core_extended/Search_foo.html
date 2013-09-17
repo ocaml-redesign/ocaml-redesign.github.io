@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="TYPEcomparison"><span class="keyword">type</span> comparison</span> = <code class="type">int</code></pre>
+<pre><span class="VALcmp_fasc"><span class="keyword">val</span> cmp_fasc</span> : <code class="type">('a -&gt; 'comparable) -&gt; 'a -&gt; 'a -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a></code></pre>
+<pre><span class="VALcmp_fdesc"><span class="keyword">val</span> cmp_fdesc</span> : <code class="type">('a -&gt; 'comparable) -&gt; 'a -&gt; 'a -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a></code></pre>
+<pre><span class="VALmaxf"><span class="keyword">val</span> maxf</span> : <code class="type">('a -&gt; 'comparable) -&gt; 'a -&gt; 'a -&gt; 'a</code></pre>
+<pre><span class="VALminf"><span class="keyword">val</span> minf</span> : <code class="type">('a -&gt; 'comparable) -&gt; 'a -&gt; 'a -&gt; 'a</code></pre>
+<pre><span class="VALin_order"><span class="keyword">val</span> in_order</span> : <code class="type">'a list -&gt; cmp:('a -&gt; 'a -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a>) -&gt; bool</code></pre>
+<pre><span class="VALmax_len"><span class="keyword">val</span> max_len</span> : <code class="type">key:('a -&gt; string) -&gt; 'a array -&gt; int</code></pre>
+<pre><span class="VALbsearch"><span class="keyword">val</span> bsearch</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a>) -&gt; low:int -&gt; high:int -&gt; int option</code></pre>
+<pre><span class="VALbsearch_opt"><span class="keyword">val</span> bsearch_opt</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a>) -&gt; low:int -&gt; high:int -&gt; int option</code></pre>
+<pre><span class="VALbsearch_exn"><span class="keyword">val</span> bsearch_exn</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a>) -&gt; low:int -&gt; high:int -&gt; int</code></pre>
+<pre><span class="TYPEpoly_comparison"><span class="keyword">type</span> poly_comparison</span> = <code class="type">[ `Good | `High | `Low ]</code></pre>
+<pre><span class="VALbsearch2"><span class="keyword">val</span> bsearch2</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=poly_comparison">poly_comparison</a>) -&gt; low:int -&gt; high:int -&gt; int option</code></pre>
+<pre><span class="VALbsearch2_opt"><span class="keyword">val</span> bsearch2_opt</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=poly_comparison">poly_comparison</a>) -&gt; low:int -&gt; high:int -&gt; int option</code></pre>
+<pre><span class="VALbsearch2_exn"><span class="keyword">val</span> bsearch2_exn</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=poly_comparison">poly_comparison</a>) -&gt; low:int -&gt; high:int -&gt; int</code></pre>
+<pre><span class="VALbsearch_val"><span class="keyword">val</span> bsearch_val</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a> * 'a) -&gt; low:int -&gt; high:int -&gt; (int * 'a) option</code></pre>
+<pre><span class="VALbsearch_val_opt"><span class="keyword">val</span> bsearch_val_opt</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a> * 'a) -&gt; low:int -&gt; high:int -&gt; (int * 'a) option</code></pre>
+<pre><span class="VALbsearch_val_exn"><span class="keyword">val</span> bsearch_val_exn</span> : <code class="type">f:(int -&gt; <a href="?package=core_extended&amp;module=Search_foo&amp;type=comparison">comparison</a> * 'a) -&gt; low:int -&gt; high:int -&gt; int * 'a</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

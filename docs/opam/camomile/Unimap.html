@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Unicode &lt;-&gt; Asian charctor codings</div>
+<div class="ocaml_module sig" name="Type"><pre><span class="keyword">module type</span> <a href="?package=camomile&amp;module=Unimap.Type">Type</a> = <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEmapping"><span class="keyword">type</span> mapping</span> </pre>
+<pre><span class="VALread_map"><span class="keyword">val</span> read_map</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping">mapping</a> -&gt; int -&gt; int</code></pre>
+<pre><span class="TYPEmapping_rw"><span class="keyword">type</span> mapping_rw</span> </pre>
+<pre><span class="VALcreate_mapping_rw"><span class="keyword">val</span> create_mapping_rw</span> : <code class="type">int -&gt; <a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping_rw">mapping_rw</a></code></pre>
+<pre><span class="VALmapping_rw_to_ro"><span class="keyword">val</span> mapping_rw_to_ro</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping_rw">mapping_rw</a> -&gt; <a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping">mapping</a></code></pre>
+<pre><span class="VALadd_mapping"><span class="keyword">val</span> add_mapping</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping_rw">mapping_rw</a> -&gt; int -&gt; int -&gt; unit</code></pre>
+<pre><code><span class="TYPEt"><span class="keyword">type</span> t</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.enc_to_ucs">enc_to_ucs</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping">mapping</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.ucs_to_enc">ucs_to_enc</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping">mapping</a></code></code></td></tr><tr><td>}</td></tr></table>
+<pre><code><span class="TYPErw"><span class="keyword">type</span> rw</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTrw.rw_enc_to_ucs">rw_enc_to_ucs</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping_rw">mapping_rw</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTrw.rw_ucs_to_enc">rw_ucs_to_enc</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=mapping_rw">mapping_rw</a></code></code></td></tr><tr><td>}</td></tr></table>
+<pre><span class="VALcreate_rw"><span class="keyword">val</span> create_rw</span> : <code class="type">int -&gt; int -&gt; <a href="?package=camomile&amp;module=Unimap.Type&amp;type=rw">rw</a></code></pre>
+<pre><span class="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=rw">rw</a> -&gt; int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALrw_to_ro"><span class="keyword">val</span> rw_to_ro</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=rw">rw</a> -&gt; <a href="?package=camomile&amp;module=Unimap.Type&amp;type=t">t</a></code></pre>
+<pre><span class="VALno_char_ucs"><span class="keyword">val</span> no_char_ucs</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=t">t</a> -&gt; int</code></pre>
+<pre><span class="VALno_char_enc"><span class="keyword">val</span> no_char_enc</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=t">t</a> -&gt; int</code></pre>
+<pre><span class="VALenc_to_ucs"><span class="keyword">val</span> enc_to_ucs</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=t">t</a> -&gt; int -&gt; int</code></pre>
+<pre><span class="VALucs_to_enc"><span class="keyword">val</span> ucs_to_enc</span> : <code class="type"><a href="?package=camomile&amp;module=Unimap.Type&amp;type=t">t</a> -&gt; int -&gt; int</code></pre>
+<pre><span class="VALof_name"><span class="keyword">val</span> of_name</span> : <code class="type">string -&gt; <a href="?package=camomile&amp;module=Unimap.Type&amp;type=t">t</a></code></pre></div></div>
+<div class="ocaml_module ident" name="Make" path="?package=camomile&amp;module=Unimap.Type"><pre><span class="keyword">module</span> <a href="?package=camomile&amp;module=Unimap.Make">Make</a> : <code class="type"><div class="sig_block"><code class="code">functor (</code><code class="code">Config</code><code class="code"> : </code><code class="code"><a href="?package=camomile&amp;module=ConfigInt.Type">ConfigInt.Type</a></code><code class="code">) -&gt; </code><code class="code"><a href="?package=camomile&amp;module=Unimap.Type">Type</a></code></div></code></pre></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

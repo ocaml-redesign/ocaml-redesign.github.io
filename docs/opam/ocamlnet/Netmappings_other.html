@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="VALwindows1258_to_unicode"><span class="keyword">val</span> windows1258_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1258_from_unicode"><span class="keyword">val</span> windows1258_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1257_to_unicode"><span class="keyword">val</span> windows1257_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1257_from_unicode"><span class="keyword">val</span> windows1257_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1256_to_unicode"><span class="keyword">val</span> windows1256_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1256_from_unicode"><span class="keyword">val</span> windows1256_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1255_to_unicode"><span class="keyword">val</span> windows1255_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1255_from_unicode"><span class="keyword">val</span> windows1255_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1254_to_unicode"><span class="keyword">val</span> windows1254_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1254_from_unicode"><span class="keyword">val</span> windows1254_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1253_to_unicode"><span class="keyword">val</span> windows1253_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1253_from_unicode"><span class="keyword">val</span> windows1253_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1252_to_unicode"><span class="keyword">val</span> windows1252_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1252_from_unicode"><span class="keyword">val</span> windows1252_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1251_to_unicode"><span class="keyword">val</span> windows1251_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1251_from_unicode"><span class="keyword">val</span> windows1251_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1250_to_unicode"><span class="keyword">val</span> windows1250_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALwindows1250_from_unicode"><span class="keyword">val</span> windows1250_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALmacroman_to_unicode"><span class="keyword">val</span> macroman_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALmacroman_from_unicode"><span class="keyword">val</span> macroman_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALkoi8r_to_unicode"><span class="keyword">val</span> koi8r_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALkoi8r_from_unicode"><span class="keyword">val</span> koi8r_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALadobe_zapf_dingbats_encoding_to_unicode"><span class="keyword">val</span> adobe_zapf_dingbats_encoding_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALadobe_zapf_dingbats_encoding_from_unicode"><span class="keyword">val</span> adobe_zapf_dingbats_encoding_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALadobe_symbol_encoding_to_unicode"><span class="keyword">val</span> adobe_symbol_encoding_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALadobe_symbol_encoding_from_unicode"><span class="keyword">val</span> adobe_symbol_encoding_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALadobe_standard_encoding_to_unicode"><span class="keyword">val</span> adobe_standard_encoding_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALadobe_standard_encoding_from_unicode"><span class="keyword">val</span> adobe_standard_encoding_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp875_to_unicode"><span class="keyword">val</span> cp875_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp875_from_unicode"><span class="keyword">val</span> cp875_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp874_to_unicode"><span class="keyword">val</span> cp874_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp874_from_unicode"><span class="keyword">val</span> cp874_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp869_to_unicode"><span class="keyword">val</span> cp869_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp869_from_unicode"><span class="keyword">val</span> cp869_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp866_to_unicode"><span class="keyword">val</span> cp866_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp866_from_unicode"><span class="keyword">val</span> cp866_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp865_to_unicode"><span class="keyword">val</span> cp865_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp865_from_unicode"><span class="keyword">val</span> cp865_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp864_to_unicode"><span class="keyword">val</span> cp864_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp864_from_unicode"><span class="keyword">val</span> cp864_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp863_to_unicode"><span class="keyword">val</span> cp863_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp863_from_unicode"><span class="keyword">val</span> cp863_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp862_to_unicode"><span class="keyword">val</span> cp862_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp862_from_unicode"><span class="keyword">val</span> cp862_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp861_to_unicode"><span class="keyword">val</span> cp861_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp861_from_unicode"><span class="keyword">val</span> cp861_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp860_to_unicode"><span class="keyword">val</span> cp860_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp860_from_unicode"><span class="keyword">val</span> cp860_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp857_to_unicode"><span class="keyword">val</span> cp857_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp857_from_unicode"><span class="keyword">val</span> cp857_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp856_to_unicode"><span class="keyword">val</span> cp856_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp856_from_unicode"><span class="keyword">val</span> cp856_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp855_to_unicode"><span class="keyword">val</span> cp855_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp855_from_unicode"><span class="keyword">val</span> cp855_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp852_to_unicode"><span class="keyword">val</span> cp852_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp852_from_unicode"><span class="keyword">val</span> cp852_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp850_to_unicode"><span class="keyword">val</span> cp850_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp850_from_unicode"><span class="keyword">val</span> cp850_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp775_to_unicode"><span class="keyword">val</span> cp775_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp775_from_unicode"><span class="keyword">val</span> cp775_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp737_to_unicode"><span class="keyword">val</span> cp737_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp737_from_unicode"><span class="keyword">val</span> cp737_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp500_to_unicode"><span class="keyword">val</span> cp500_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp500_from_unicode"><span class="keyword">val</span> cp500_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp437_to_unicode"><span class="keyword">val</span> cp437_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp437_from_unicode"><span class="keyword">val</span> cp437_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp424_to_unicode"><span class="keyword">val</span> cp424_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp424_from_unicode"><span class="keyword">val</span> cp424_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp1047_to_unicode"><span class="keyword">val</span> cp1047_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp1047_from_unicode"><span class="keyword">val</span> cp1047_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp1026_to_unicode"><span class="keyword">val</span> cp1026_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp1026_from_unicode"><span class="keyword">val</span> cp1026_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp1006_to_unicode"><span class="keyword">val</span> cp1006_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp1006_from_unicode"><span class="keyword">val</span> cp1006_from_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp037_to_unicode"><span class="keyword">val</span> cp037_to_unicode</span> : <code class="type">string</code></pre>
+<pre><span class="VALcp037_from_unicode"><span class="keyword">val</span> cp037_from_unicode</span> : <code class="type">string</code></pre>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Widgets resources</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre><div class="info"><div class="info">Type of resources.</div></div>
+<pre><span class="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a></code></pre><div class="info"><div class="info">The empty set of resources.</div></div>
+<pre><span class="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; string</code></pre><div class="info"><div class="info"><code class="code">get key resources</code> returns the key associated to the last
+      pattern that matches <code class="code">key</code> in <code class="code">resources</code>, or the empty string
+      if no pattern matches <code class="code">key</code>.</div></div>
+<pre><span class="VALadd"><span class="keyword">val</span> add</span> : <code class="type">string -&gt; string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">add pattern value</code> returns the new set of resources with the
+      binding <code class="code">pattern -&gt; value</code> at the end.</div></div>
+<pre><span class="VALmerge"><span class="keyword">val</span> merge</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">merge res1 res2</code> merges the two given sets of resources.</div></div>
+<pre><span class="EXCEPTIONError"><span class="keyword">exception</span> Error</span> <span class="keyword">of</span> <code class="type">string</code></pre><div class="info"><div class="info">Exception raised when the contents of a resource is invalid.</div></div>
+<pre><span class="VALget_bool"><span class="keyword">val</span> get_bool</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; bool option</code></pre><div class="info"><div class="info"><code class="code">get_bool name resources</code> reads the boolean encoded in
+      <code class="code">resources</code>.</div></div>
+<pre><span class="VALget_color"><span class="keyword">val</span> get_color</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_style&amp;type=color">LTerm_style.color</a> option</code></pre><div class="info"><div class="info"><code class="code">get_color name resources</code> reads the color encoded in
+      <code class="code">resources</code>.</div></div>
+<pre><span class="VALget_style"><span class="keyword">val</span> get_style</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_style&amp;type=t">LTerm_style.t</a></code></pre><div class="info"><div class="info"><code class="code">get_style prefix resources</code> reads the style encoded in
+      <code class="code">resources</code>.</div></div>
+<pre><span class="VALget_connection"><span class="keyword">val</span> get_connection</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_draw&amp;type=connection">LTerm_draw.connection</a></code></pre><div class="info"><div class="info"><code class="code">get_connection name resources</code></div></div>
+<pre><span class="EXCEPTIONParse_error"><span class="keyword">exception</span> Parse_error</span> <span class="keyword">of</span> <code class="type">string * int * string</code></pre><div class="info"><div class="info"><code class="code">Parse_error(source, line, msg)</code> is raised when a parsing error
+      is encountered in the input.</div></div>
+<pre><span class="VALparse"><span class="keyword">val</span> parse</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">parse str</code> parses a string for a list of properties. <code class="code">str</code> must
+      follow the format of X resources files. i.e. comments start with a
+      <code class="code">!</code>, empty lines are ignored, and configuration lines looks-like:<br/>      <pre class="codepre"><code class="code">
+        key: value
+      </code></pre></div></div>
+<pre><span class="VALload"><span class="keyword">val</span> load</span> : <code class="type">string -&gt; <a href="?package=lambda-term&amp;module=LTerm_resources&amp;type=t">t</a> <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a></code></pre><div class="info"><div class="info">Same as TODO reference : parse but parses the contents of a file.</div></div>
+<pre><span class="VALhome"><span class="keyword">val</span> home</span> : <code class="type">string</code></pre><div class="info"><div class="info">The home directory.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

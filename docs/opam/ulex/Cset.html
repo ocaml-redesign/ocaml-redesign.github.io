@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="TYPEt"><span class="keyword">type</span> t</span> = <code class="type">(int * int) list</code></pre>
+<pre><span class="VALmax_code"><span class="keyword">val</span> max_code</span> : <code class="type">int</code></pre>
+<pre><span class="VALmin_code"><span class="keyword">val</span> min_code</span> : <code class="type">int</code></pre>
+<pre><span class="VALempty"><span class="keyword">val</span> empty</span> : <code class="type">'a list</code></pre>
+<pre><span class="VALsingleton"><span class="keyword">val</span> singleton</span> : <code class="type">'a -&gt; ('a * 'a) list</code></pre>
+<pre><span class="VALis_empty"><span class="keyword">val</span> is_empty</span> : <code class="type">'a list -&gt; bool</code></pre>
+<pre><span class="VALinterval"><span class="keyword">val</span> interval</span> : <code class="type">'a -&gt; 'a -&gt; ('a * 'a) list</code></pre>
+<pre><span class="VALeof"><span class="keyword">val</span> eof</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALany"><span class="keyword">val</span> any</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALprint"><span class="keyword">val</span> print</span> : <code class="type">Format.formatter -&gt; (int * int) list -&gt; unit</code></pre>
+<pre><span class="VALdump"><span class="keyword">val</span> dump</span> : <code class="type">(int * int) list -&gt; unit</code></pre>
+<pre><span class="VALunion"><span class="keyword">val</span> union</span> : <code class="type">(int * int) list -&gt; (int * int) list -&gt; (int * int) list</code></pre>
+<pre><span class="VALcomplement"><span class="keyword">val</span> complement</span> : <code class="type">(int * int) list -&gt; (int * int) list</code></pre>
+<pre><span class="VALintersection"><span class="keyword">val</span> intersection</span> : <code class="type">(int * int) list -&gt; (int * int) list -&gt; (int * int) list</code></pre>
+<pre><span class="VALdifference"><span class="keyword">val</span> difference</span> : <code class="type">(int * int) list -&gt; (int * int) list -&gt; (int * int) list</code></pre>
+<pre><span class="VALbase_char"><span class="keyword">val</span> base_char</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALideographic"><span class="keyword">val</span> ideographic</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALcombining_char"><span class="keyword">val</span> combining_char</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALdigit"><span class="keyword">val</span> digit</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALextender"><span class="keyword">val</span> extender</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALblank"><span class="keyword">val</span> blank</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALletter"><span class="keyword">val</span> letter</span> : <code class="type">(int * int) list</code></pre>
+<pre><span class="VALtr8876_ident_char"><span class="keyword">val</span> tr8876_ident_char</span> : <code class="type">(int * int) list</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Functions common to unsafe binary protocol conversion.</div>
+<div class="info"><div class="info">NOTE: these functions are not supposed to be called by the casual
+    user.  They are required by automatically generated code, or if a
+    developer really needs to get down and dirty for performance reasons.<br/>    USE WITH CAUTION!</div></div>
+<pre><span class="TYPEsptr"><span class="keyword">type</span> sptr</span> </pre><div class="info"><div class="info">Type of start pointers</div></div>
+<pre><span class="TYPEeptr"><span class="keyword">type</span> eptr</span> </pre><div class="info"><div class="info">Type of end pointers</div></div>
+<pre><span class="TYPEsptr_ptr"><span class="keyword">type</span> sptr_ptr</span> </pre><div class="info"><div class="info">Type of pointers to start pointers</div></div>
+<pre><span class="VALget_sptr"><span class="keyword">val</span> get_sptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; pos:<a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a></code></pre><div class="info"><div class="info"><code class="code">get_sptr buf ~pos</code><b>Returns</b> a start pointer given buffer <code class="code">buf</code>
+    and start position <code class="code">pos</code>.</div></div>
+<pre><span class="VALget_eptr"><span class="keyword">val</span> get_eptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; pos:<a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=eptr">eptr</a></code></pre><div class="info"><div class="info"><code class="code">get_eptr buf ~pos</code><b>Returns</b> an end pointer given buffer <code class="code">buf</code>
+    and end position <code class="code">pos</code>.</div></div>
+<pre><span class="VALshift_sptr"><span class="keyword">val</span> shift_sptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; int -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a></code></pre><div class="info"><div class="info"><code class="code">shift_sptr sptr n</code><b>Returns</b> a start pointer by shifting <code class="code">sptr</code> by <code class="code">n</code>
+    characters.</div></div>
+<pre><span class="VALget_eptr_from_sptr_ptr"><span class="keyword">val</span> get_eptr_from_sptr_ptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> -&gt; pos:<a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=eptr">eptr</a></code></pre><div class="info"><div class="info"><code class="code">get_eptr_from_sptr_ptr sptr_ptr ~pos</code><b>Returns</b> an end pointer by
+    obtaining the position <code class="code">pos</code> after location <code class="code">sptr_ptr</code>.</div></div>
+<pre><span class="VALget_buf_pos"><span class="keyword">val</span> get_buf_pos</span> : <code class="type">start:<a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; cur:<a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; <a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a></code></pre><div class="info"><div class="info"><code class="code">get_buf_pos ~start ~cur</code><b>Returns</b> a buffer position as difference
+    between start pointers <code class="code">start</code> and <code class="code">cur</code>.</div></div>
+<pre><span class="VALget_safe_buf_pos"><span class="keyword">val</span> get_safe_buf_pos</span> : <code class="type"><a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; start:<a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; cur:<a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; <a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a></code></pre><div class="info"><div class="info"><code class="code">get_safe_buf_pos buf ~start ~cur</code><b>Returns</b> a buffer position as
+    difference between start pointers <code class="code">start</code> and <code class="code">cur</code>.  <code class="code">buf</code> is
+    ignored, but prevents the buffer from being reclaimed by the GC,
+    which it needs to until this function gets called.</div></div>
+<pre><span class="VALalloc_sptr_ptr"><span class="keyword">val</span> alloc_sptr_ptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; pos:<a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a></code></pre><div class="info"><div class="info"><code class="code">alloc_sptr_ptr buf ~pos</code> allocate a pointer to a start pointer.
+    NOTE: do not forget to deallocate it, otherwise there will be a
+    space leak!
+    NOTE: The &quot;noalloc&quot; attribute is correct, because it indicates
+    there is no OCaml allocation.  <code class="code">alloc_sptr_ptr</code> only does C
+    allocation.</div></div>
+<pre><span class="VALdealloc_sptr_ptr"><span class="keyword">val</span> dealloc_sptr_ptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> -&gt; <a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a></code></pre><div class="info"><div class="info"><code class="code">dealloc_sptr_ptr buf sptr_ptr</code> deallocate a pointer to a start
+    pointer and return its position.  NOTE: do not do this more than
+    once, otherwise the program may crash!</div></div>
+<pre><span class="VALget_sptr_ptr"><span class="keyword">val</span> get_sptr_ptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> -&gt; <a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; <a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a></code></pre><div class="info"><div class="info"><code class="code">get_sptr_ptr sptr_ptr buf</code><b>Returns</b> the position in buffer <code class="code">buf</code>
+    denoted by the pointer stored in <code class="code">sptr_ptr</code>.</div></div>
+<pre><span class="VALset_sptr_ptr"><span class="keyword">val</span> set_sptr_ptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> -&gt; <a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; pos:<a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">set_sptr_ptr sptr_ptr buf ~pos</code> sets the pointer in <code class="code">sptr_ptr</code>
+    to the location denoted by position <code class="code">pos</code> in buffer <code class="code">buf</code>.</div></div>
+<pre><span class="VALget_sptr_ptr_sptr"><span class="keyword">val</span> get_sptr_ptr_sptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a></code></pre><div class="info"><div class="info"><code class="code">get_sptr_ptr_sptr sptr_ptr</code><b>Returns</b> the pointer in <code class="code">sptr_ptr</code>.</div></div>
+<pre><span class="VALset_sptr_ptr_sptr"><span class="keyword">val</span> set_sptr_ptr_sptr</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">set_sptr_ptr_sptr sptr_ptr sptr</code> sets the pointer in
+    <code class="code">sptr_ptr</code> to <code class="code">sptr</code>.</div></div>
+<pre><span class="VALget_ptr_string"><span class="keyword">val</span> get_ptr_string</span> : <code class="type"><a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr">sptr</a> -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=eptr">eptr</a> -&gt; string</code></pre><div class="info"><div class="info"><code class="code">get_ptr_string sptr_ptr eptr</code><b>Returns</b> the string in the range from
+    start pointer <code class="code">sptr</code> to end pointer <code class="code">eptr</code>.</div></div>
+<pre><span class="VALget_read_init"><span class="keyword">val</span> get_read_init</span> : <code class="type"><a href="?package=bin_prot&amp;module=Common&amp;type=buf">Common.buf</a> -&gt; pos_ref:<a href="?package=bin_prot&amp;module=Common&amp;type=pos">Common.pos</a> Pervasives.ref -&gt; <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=sptr_ptr">sptr_ptr</a> * <a href="?package=bin_prot&amp;module=Unsafe_common&amp;type=eptr">eptr</a></code></pre><div class="info"><div class="info"><code class="code">get_read_init buf ~pos_ref</code><b>Returns</b> the <code class="code">sptr_ptr</code> denoting the
+    start and the <code class="code">eptr</code> denoting the end of buffer <code class="code">buf</code>.  NOTE: do
+    not forget to deallocate the <code class="code">sptr_ptr</code>!</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

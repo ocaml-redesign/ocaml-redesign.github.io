@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Syntactic sugars for lwt</div>
+<div class="info"><div class="info">This extension add the following sugars:<br/>    - anonymous bind:<br/>      <pre class="codepre"><code class="code">
+         write stdio &quot;Hello, &quot; &gt;&gt; write stdio &quot;world!&quot;
+      </code></pre><br/>    - lwt-binding:<br/>      <pre class="codepre"><code class="code">
+         lwt ch = get_char stdin in
+         code
+      </code></pre><br/>      is the same as <code class="code">bind (get_char stdin) (fun ch -&gt; code)</code><br/>      Moreover it supports parallel binding:<br/>      <pre class="codepre"><code class="code">
+         lwt x = do_something1 ()
+         and y = do_something2 in
+         code
+      </code></pre><br/>      will let <code class="code">do_something1 ()</code> and <code class="code">do_something2 ()</code> runs then
+      bind their result to <code class="code">x</code> and <code class="code">y</code>. It is the same as:<br/>      <pre class="codepre"><code class="code">
+         let t1 = do_something1
+         and t2 = do_something2 in
+         bind t1 (fun x -&gt; bind t2 (fun y -&gt; code))
+      </code></pre><br/>    - exception catching:<br/>      <pre class="codepre"><code class="code">
+         try_lwt
+           &lt;expr&gt;
+      </code></pre>,<br/>      <pre class="codepre"><code class="code">
+         try_lwt
+           &lt;expr&gt;
+         with
+           &lt;branches&gt;
+      </code></pre>,<br/>      <pre class="codepre"><code class="code">
+         try_lwt
+           &lt;expr&gt;
+         finally
+           &lt;expr&gt;
+       </code></pre><br/>    and:<br/>      <pre class="codepre"><code class="code">
+         try_lwt
+           &lt;expr&gt;
+         with
+           &lt;branches&gt;
+         finally
+           &lt;expr&gt;
+      </code></pre><br/>    For example:<br/>      <pre class="codepre"><code class="code">
+         try_lwt
+           f x
+         with
+           | Failure msg -&gt;
+               prerr_endline msg;
+               return ()
+      </code></pre><br/>    is expanded to:<br/>      <pre class="codepre"><code class="code">
+         catch (fun _ -&gt; f x)
+           (function
+              | Failure msg -&gt;
+                  prerr_endline msg;
+                  return ()
+              | exn -&gt;
+                  Lwt.fail exn)
+      </code></pre><br/>    Note that the <code class="code">exn -&gt; Lwt.fail exn</code> branch is automatically addedd
+    when needed.<br/>    The construction <code class="code">try_lwt &lt;expr&gt;</code> just catch regular exception
+    into lwt exception. i.e. it is the same as <code class="code">catch (fun _ -&gt; &lt;expr&gt;) fail</code>.<br/>    - exception raising:<br/>      <pre class="codepre"><code class="code">
+        raise_lwt &lt;expr&gt;
+      </code></pre><br/>      This allow exception to be traced when the -lwt-debug switch is passed
+      to the syntax extension.<br/>    - assertion:<br/>      <pre class="codepre"><code class="code">
+        assert_lwt &lt;expr&gt;
+      </code></pre><br/>    - for loop:<br/>      <pre class="codepre"><code class="code">
+        for_lwt i = &lt;expr&gt; to &lt;expr&gt; do
+          &lt;expr&gt;
+        done
+      </code></pre><br/>    and:<br/>      <pre class="codepre"><code class="code">
+        for_lwt i = &lt;expr&gt; downto &lt;expr&gt; do
+          &lt;expr&gt;
+        done
+      </code></pre><br/>    - iteration over streams:<br/>      <pre class="codepre"><code class="code">
+        for_lwt &lt;patt&gt; in &lt;expr&gt; do
+          &lt;expr&gt;
+        done
+      </code></pre><br/>    - while loop:<br/>      <pre class="codepre"><code class="code">
+        while_lwt &lt;expr&gt; do
+          &lt;expr&gt;
+        done
+      </code></pre><br/>    - pattern mattching:<br/>      <pre class="codepre"><code class="code">
+        match_lwt &lt;expr&gt; with
+          | &lt;patt_1&gt; -&gt; &lt;expr_1&gt;
+          ...
+          | &lt;patt_n&gt; -&gt; &lt;expr_n&gt;
+      </code></pre></div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

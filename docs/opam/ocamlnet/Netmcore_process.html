@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Statically typed processes</div>
+<div class="info"><div class="info">This module provides a slightly higher-level view on processes,
+    but is also a bit more restricted than the primitives in
+    TODO reference : Netmcore.<br/>    Please read TODO reference : Netmcore_basics for an introduction into using
+    this module. There is also TODO reference : Netmcore_tut with more advanced
+    techniques.</div></div>
+<pre><span class="TYPEfork_point"><span class="keyword">type</span> <code class="type">'a </code>fork_point</span> </pre><div class="info"><div class="info">A fork point can start a new process with argument <code class="code">'a</code></div></div>
+<pre><span class="TYPEjoin_point"><span class="keyword">type</span> <code class="type">'b </code>join_point</span> </pre><div class="info"><div class="info">A join point can wait until a process finishes with a result <code class="code">'b</code></div></div>
+<pre><span class="VALdef_process"><span class="keyword">val</span> def_process</span> : <code class="type">('a -&gt; 'b) -&gt; 'a <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=fork_point">fork_point</a> * 'b <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=join_point">join_point</a></code></pre><div class="info"><div class="info"><code class="code">let (fp,jp) = def_process proc</code>: Defines a process (which must happen
+      in the master process), so that:<br/>      - <code class="code">let pid = start fp arg</code>: Starts the new process and passes the
+        argument <code class="code">arg</code> to it. The process runs <code class="code">proc arg</code> which will
+        finally result in a value <code class="code">r</code><ul><li><code class="code">let r_opt = join jp pid</code>: Waits until the process identified by
+        <code class="code">pid</code> finishes, and returns the result as <code class="code">r_opt = Some r</code>.
+        On error, it returns <code class="code">None</code>.</li></ul>      <code class="code">def_process</code> should be called at module initialization time
+      before any process is started. This interface is not designed for
+      calling <code class="code">def_process</code> later.</div></div>
+<pre><span class="VALstart"><span class="keyword">val</span> start</span> : <code class="type">?inherit_resources:<a href="?package=ocamlnet&amp;module=Netmcore&amp;type=inherit_request">Netmcore.inherit_request</a> -&gt;
+'a <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=fork_point">fork_point</a> -&gt; 'a -&gt; <a href="?package=ocamlnet&amp;module=Netmcore&amp;type=process_id">Netmcore.process_id</a></code></pre><div class="info"><div class="info"><code class="code">let pid = start fp arg</code>: Starts a new process at the fork point
+      <code class="code">fp</code> with argument <code class="code">arg</code>. This means that the process is forked
+      from the master process, and that the value of <code class="code">arg</code> is sent to it
+      using <code class="code">Marshal</code>. The returned process ID is Netmulticore's own
+      ID and not to be confused with the ID assigned by the operating
+      system.<br/>      Option <code class="code">inherit_resources</code>: Certain resources are only accessible by
+      the process when they are inherited to it. This is the case for
+      <code class="code">`Posix_shm_preallocated</code>. This can be set to <code class="code">`All</code> to inherit
+      all inheritable resources, or to <code class="code">`Resources l</code> to only inherit
+      the resources of <code class="code">l</code>. By default, no resources are inherited.</div></div>
+<pre><span class="VALjoin"><span class="keyword">val</span> join</span> : <code class="type">'b <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=join_point">join_point</a> -&gt; <a href="?package=ocamlnet&amp;module=Netmcore&amp;type=process_id">Netmcore.process_id</a> -&gt; 'b option</code></pre><div class="info"><div class="info"><code class="code">let r_opt = join jp pid</code>: Waits until the process <code class="code">pid</code> finishes,
+      and uses the join point <code class="code">jp</code> to extract the result. The result
+      is returned as <code class="code">Some r</code> on success, and <code class="code">None</code> on error.
+      Result values are transmitted from the joining process to
+      this function using <code class="code">Marshal</code>. Errors include uncaught exceptions
+      as well as unexpected process termination (<code class="code">exit</code>, signal).<br/>      If the process referenced by <code class="code">pid</code> is not an instance that belongs
+      to <code class="code">jp</code>, the function will fail.<br/>      This function must not be called from the master process (which is
+      not allowed to block until a result is available).</div></div>
+<pre><span class="VALjoin_nowait"><span class="keyword">val</span> join_nowait</span> : <code class="type">'b <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=join_point">join_point</a> -&gt; <a href="?package=ocamlnet&amp;module=Netmcore&amp;type=process_id">Netmcore.process_id</a> -&gt; 'b option</code></pre><div class="info"><div class="info">Like <code class="code">join</code>, but it is not waited for the termination of the process.
+       If the process is not yet done, this function returns <code class="code">None</code>.
+       It also returns <code class="code">None</code> if the process terminated with an error or did
+       not set a result value for other reasons.<br/>       Unlike <code class="code">join</code>, this function can be called in the master process.</div></div>
+<pre><span class="VALrelease_fork_point"><span class="keyword">val</span> release_fork_point</span> : <code class="type">'a <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=fork_point">fork_point</a> -&gt; unit</code></pre><div class="info"><div class="info">Releases a fork point so it is deleted from the internal
+      resource table.</div></div>
+<pre><span class="VALrelease_join_point"><span class="keyword">val</span> release_join_point</span> : <code class="type">'b <a href="?package=ocamlnet&amp;module=Netmcore_process&amp;type=join_point">join_point</a> -&gt; unit</code></pre><div class="info"><div class="info">Releases a join point so it is deleted from the internal
+      resource table.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

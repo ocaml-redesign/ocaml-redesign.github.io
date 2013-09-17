@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Unicode (ISO-UCS) characters.<br/>   This module implements Unicode (actually ISO-UCS) characters.  All
+   31-bit code points are allowed.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre><div class="info"><div class="info">Unicode characters. All 31bit code points are allowed.</div></div>
+<pre><span class="EXCEPTIONOut_of_range"><span class="keyword">exception</span> Out_of_range</span></pre>
+<pre><span class="VALchar_of"><span class="keyword">val</span> char_of</span> : <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; char</code></pre><div class="info"><div class="info"><code class="code">char_of u</code> returns the Latin-1 representation of <code class="code">u</code>.
+   If <code class="code">u</code> can not be represented by Latin-1, raises Out_of_range</div></div>
+<pre><span class="VALof_char"><span class="keyword">val</span> of_char</span> : <code class="type">char -&gt; <a href="?package=camomile&amp;module=UChar&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">of_char c</code> returns the Unicode character of the Latin-1 character <code class="code">c</code></div></div>
+<pre><span class="VALcode"><span class="keyword">val</span> code</span> : <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; int</code></pre><div class="info"><div class="info"><code class="code">code u</code> returns the Unicode code number of <code class="code">u</code>.
+   If the value can not be represented by a positive integer,
+   raise Out_of_range</div></div>
+<pre><span class="VALchr"><span class="keyword">val</span> chr</span> : <code class="type">int -&gt; <a href="?package=camomile&amp;module=UChar&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">code n</code> returns the Unicode character with the code number <code class="code">n</code>. 
+   If n &gt;= 2^32 or n &lt; 0, raises <code class="code">invalid_arg</code></div></div>
+<pre><span class="VALuint_code"><span class="keyword">val</span> uint_code</span> : <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; int</code></pre><div class="info"><div class="info"><code class="code">uint_code u</code> returns the Unicode code number of <code class="code">u</code>.
+   The returned int is unsigned, that is, on 32-bits platforms,
+   the sign bit is used for storing the 31-th bit of the code number.</div></div>
+<pre><span class="VALchr_of_uint"><span class="keyword">val</span> chr_of_uint</span> : <code class="type">int -&gt; <a href="?package=camomile&amp;module=UChar&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">chr_of_uint n</code> returns the Unicode character of the code number <code class="code">n</code>.
+   <code class="code">n</code> is interpreted as unsigned, that is, on 32-bits platforms,
+   the sign bit is treated as the 31-th bit of the code number.
+   If n exceed 31-bits values, then raise <code class="code">invalid_arg</code>.</div></div>
+<pre><span class="VALeq"><span class="keyword">val</span> eq</span> : <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; <a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; bool</code></pre><div class="info"><div class="info">Equality by code point comparison</div></div>
+<pre><span class="VALcompare"><span class="keyword">val</span> compare</span> : <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; <a href="?package=camomile&amp;module=UChar&amp;type=t">t</a> -&gt; int</code></pre><div class="info"><div class="info"><code class="code">compare u1 u2</code> returns, 
+   a value &gt; 0 if <code class="code">u1</code> has a larger Unicode code number than <code class="code">u2</code>, 
+   0 if <code class="code">u1</code> and <code class="code">u2</code> are the same Unicode character,
+   a value &lt; 0 if <code class="code">u1</code> has a smaller Unicode code number than <code class="code">u2</code>.</div></div>
+<pre><span class="TYPEuchar"><span class="keyword">type</span> uchar</span> = <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=t">t</a></code></pre><div class="info"><div class="info">Aliases of <code class="code">type t</code></div></div>
+<pre><span class="VALint_of"><span class="keyword">val</span> int_of</span> : <code class="type"><a href="?package=camomile&amp;module=UChar&amp;type=uchar">uchar</a> -&gt; int</code></pre><div class="info"><div class="info">Alias of <code class="code">uint_code</code></div></div>
+<pre><span class="VALof_int"><span class="keyword">val</span> of_int</span> : <code class="type">int -&gt; <a href="?package=camomile&amp;module=UChar&amp;type=uchar">uchar</a></code></pre><div class="info"><div class="info">Alias of <code class="code">chr_of_uint</code></div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

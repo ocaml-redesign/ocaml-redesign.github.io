@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Type-safe marshalling between processes of the same executable</div>
+<div class="info"><div class="info">This is a pragmatic approach to type-safe marshalling. We define
+    <code class="code">type encap</code> as an arbitrary value that carries a type identifier with it.
+    The type identifier is generated when the functor
+    TODO reference : Netplex_encap.Make_encap is applied. Every instantiation of this
+    functor generates a new type identifier.<br/>    The idea is then that an <code class="code">encap</code> value can be marshalled to another
+    process using <code class="code">Marshal</code>, and when it is unwrapped the type identifier
+    is checked. Unwrapping is only successful when the <code class="code">unwrap</code> function
+    from the same functor instantiation is used as the <code class="code">wrap</code>
+    function.<br/>    This module is incompatible with:<ul><li>Marshalling to processes running a different executable</li><li>Marshalling to processes that are dynamically loading 
+       modules</li><li>The functor must be instantiated at program initialization time.
+       Especially this must not happen in <code class="code">let module</code> expressions.</li></ul>    Only some of these assumptions can be checked at runtime by this
+    implementation.</div></div>
+<pre><span class="EXCEPTIONType_mismatch"><span class="keyword">exception</span> Type_mismatch</span></pre><div class="info"><div class="info">Raised when an encapulated type is tried to be unwrapped by the
+      wrong encapsulation module</div></div>
+<pre><span class="TYPEencap"><span class="keyword">type</span> encap</span> </pre><div class="info"><div class="info">An encapsulated value with a type identifier</div></div>
+<div class="ocaml_module sig" name="TYPE"><pre><span class="keyword">module type</span> <a href="?package=ocamlnet&amp;module=Netplex_encap.TYPE">TYPE</a> = <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code><div class="info"><div class="info">Just a (monomorphic) type <code class="code">t</code></div></div></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre></div></div>
+<div class="ocaml_module sig" name="ENCAP"><pre><span class="keyword">module type</span> <a href="?package=ocamlnet&amp;module=Netplex_encap.ENCAP">ENCAP</a> = <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<pre><span class="VALwrap"><span class="keyword">val</span> wrap</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netplex_encap.ENCAP&amp;type=t">t</a> -&gt; <a href="?package=ocamlnet&amp;module=Netplex_encap&amp;type=encap">encap</a></code></pre>
+<pre><span class="VALunwrap"><span class="keyword">val</span> unwrap</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netplex_encap&amp;type=encap">encap</a> -&gt; <a href="?package=ocamlnet&amp;module=Netplex_encap.ENCAP&amp;type=t">t</a></code></pre><div class="info"><div class="info">Raises TODO reference : Netplex_encap.Type_mismatch if the value does not fit</div></div></div></div>
+<div class="ocaml_module ident" name="Make_encap" path="?package=ocamlnet&amp;module=Netplex_encap.ENCAP"><pre><span class="keyword">module</span> <a href="?package=ocamlnet&amp;module=Netplex_encap.Make_encap">Make_encap</a> : <code class="type"><div class="sig_block"><code class="code">functor (</code><code class="code">T</code><code class="code"> : </code><code class="code"><a href="?package=ocamlnet&amp;module=Netplex_encap.TYPE">TYPE</a></code><code class="code">) -&gt; </code><code class="code"><a href="?package=ocamlnet&amp;module=Netplex_encap.ENCAP">ENCAP</a></code> with type <a href="?package=ocamlnet&amp;module=Netplex_encap.ENCAP&amp;type=t">t</a> = T.t</div></code><div class="info"><div class="info">Create an encapsulation module</div></div></pre></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

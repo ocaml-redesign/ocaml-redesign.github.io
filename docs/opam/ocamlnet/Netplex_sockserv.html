@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Socket service creation<br/> A socket service object is an encapsulation of a user-defined processor
+ for a list of sockets.</div>
+<pre><span class="VALcreate_socket_service"><span class="keyword">val</span> create_socket_service</span> : <code class="type">Netplex_types.processor -&gt;
+Netplex_types.socket_service_config -&gt; Netplex_types.socket_service</code></pre><div class="info"><div class="info">Create the socket service (usually only internally used)</div></div>
+<pre><span class="VALcreate_server_socket"><span class="keyword">val</span> create_server_socket</span> : <code class="type">string -&gt;
+Netplex_types.protocol -&gt; Netplex_types.extended_address -&gt; Unix.file_descr</code></pre><div class="info"><div class="info"><code class="code">create_server_socket service_name proto addr</code>: Creates a server socket
+      as specified in <code class="code">proto</code> for the address <code class="code">addr</code> and returns it.<br/>      Addresses of type <code class="code">`Container</code> are not supported.</div></div>
+<pre><span class="VALclose_server_socket"><span class="keyword">val</span> close_server_socket</span> : <code class="type">Unix.file_descr -&gt; unit</code></pre><div class="info"><div class="info">Closes a socket as opened with <code class="code">create_server_socket</code></div></div>
+<pre><span class="VALany_file_client_connector"><span class="keyword">val</span> any_file_client_connector</span> : <code class="type">string -&gt; <a href="?package=ocamlnet&amp;module=Rpc_client&amp;type=connector">Rpc_client.connector</a></code></pre><div class="info"><div class="info">Interprets a file name as connector for a local RPC service. The
+      file must either be a Unix Domain socket, or it must be a text
+      file as written by Netplex with the details of the service
+      endpoint.</div></div>
+<pre><span class="VALclient_connector"><span class="keyword">val</span> client_connector</span> : <code class="type">Netplex_types.extended_address -&gt; <a href="?package=ocamlnet&amp;module=Rpc_client&amp;type=connector">Rpc_client.connector</a></code></pre><div class="info"><div class="info">Returns the RPC client connector for this Netplex address</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

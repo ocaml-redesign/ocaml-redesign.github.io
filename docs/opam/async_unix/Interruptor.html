@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">An interruptor provides a file descriptor that can be used to cause a
+    file-descr-watcher to detect the file descriptor is ready for reading.  We use an
+    interruptor when a thread needs the async scheduler to service a request.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<div class="ocaml_include ident" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code">Core.Std.Invariant.S</code> with type t := <a href="?package=async_unix&amp;module=Interruptor&amp;type=t">t</a></code></pre></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">create_fd:(<a href="?package=async_unix&amp;module=Raw_fd.Kind&amp;type=t">Raw_fd.Kind.t</a> -&gt;
+           Core.Std.Unix.File_descr.t -&gt; Core.Std.Info.t -&gt; <a href="?package=async_unix&amp;module=Raw_fd&amp;type=t">Raw_fd.t</a>) -&gt;
+<a href="?package=async_unix&amp;module=Interruptor&amp;type=t">t</a></code></pre>
+<pre><span class="VALread_fd"><span class="keyword">val</span> read_fd</span> : <code class="type"><a href="?package=async_unix&amp;module=Interruptor&amp;type=t">t</a> -&gt; <a href="?package=async_unix&amp;module=Raw_fd&amp;type=t">Raw_fd.t</a></code></pre>
+<pre><span class="VALthread_safe_interrupt"><span class="keyword">val</span> thread_safe_interrupt</span> : <code class="type"><a href="?package=async_unix&amp;module=Interruptor&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">thread_safe_interrupt t</code> causes <code class="code">read_fd t</code> to become ready for reading.</div></div>
+<pre><span class="VALclear"><span class="keyword">val</span> clear</span> : <code class="type"><a href="?package=async_unix&amp;module=Interruptor&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">clear t</code> causes <code class="code">read_fd t</code> to become not ready for reading.  It is guaranteed that
+    any calls to <code class="code">thread_safe_interrupt</code> after <code class="code">clear t</code> returns (and prior to another
+    call to <code class="code">clear t</code>) will cause <code class="code">read_fd</code> to become ready for reading.</div></div>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type"><a href="?package=async_unix&amp;module=Interruptor&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+<div class="info"><div class="info"><code class="code">thread_safe_interrupt t</code> causes <code class="code">read_fd t</code> to become ready for reading.</div></div>
+<div class="info"><div class="info"><code class="code">clear t</code> causes <code class="code">read_fd t</code> to become not ready for reading.  It is guaranteed that
+    any calls to <code class="code">thread_safe_interrupt</code> after <code class="code">clear t</code> returns (and prior to another
+    call to <code class="code">clear t</code>) will cause <code class="code">read_fd</code> to become ready for reading.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

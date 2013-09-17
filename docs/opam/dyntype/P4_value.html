@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="VALvalue_of"><span class="keyword">val</span> value_of</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALof_value"><span class="keyword">val</span> of_value</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALof_value_aux"><span class="keyword">val</span> of_value_aux</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALvalue_of_aux"><span class="keyword">val</span> value_of_aux</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALgen_id"><span class="keyword">val</span> gen_id</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALinit_gen_id"><span class="keyword">val</span> init_gen_id</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALdebug_ctyp"><span class="keyword">val</span> debug_ctyp</span> : <code class="type">Camlp4.PreCast.Syntax.Ast.ctyp -&gt; unit</code></pre>
+<pre><span class="VALlist_of_ctyp_decl"><span class="keyword">val</span> list_of_ctyp_decl</span> : <code class="type">Camlp4.PreCast.Ast.ctyp -&gt; (string * Camlp4.PreCast.Ast.ctyp) list</code></pre>
+<pre><span class="VALdecompose_fields"><span class="keyword">val</span> decompose_fields</span> : <code class="type">'a -&gt; Camlp4.PreCast.Ast.ctyp -&gt; (string * Camlp4.PreCast.Ast.ctyp) list</code></pre>
+<pre><span class="VALdecompose_variants"><span class="keyword">val</span> decompose_variants</span> : <code class="type">'a -&gt;
+Camlp4.PreCast.Ast.ctyp -&gt;
+(string * [&gt; `PV | `V ]) list * Camlp4.PreCast.Ast.ctyp list list</code></pre>
+<pre><span class="VALrecompose_variant"><span class="keyword">val</span> recompose_variant</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+string * [&lt; `PV | `V ] -&gt;
+Camlp4.PreCast.Ast.patt list -&gt; Camlp4.PreCast.Ast.patt</code></pre>
+<pre><span class="VALcount"><span class="keyword">val</span> count</span> : <code class="type">int Pervasives.ref</code></pre>
+<pre><span class="VALnew_id"><span class="keyword">val</span> new_id</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; Camlp4.PreCast.Ast.expr * Camlp4.PreCast.Ast.patt</code></pre>
+<pre><span class="VALnew_id_list"><span class="keyword">val</span> new_id_list</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+'a list -&gt; Camlp4.PreCast.Ast.expr list * Camlp4.PreCast.Ast.patt list</code></pre>
+<pre><span class="EXCEPTIONType_not_supported"><span class="keyword">exception</span> Type_not_supported</span> <span class="keyword">of</span> <code class="type">Camlp4.PreCast.Ast.ctyp</code></pre>
+<div class="ocaml_module sig" name="Value_of"><pre><span class="keyword">module</span> <a href="?package=dyntype&amp;module=P4_value.Value_of">Value_of</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="VALenv_type"><span class="keyword">val</span> env_type</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.ctyp</code></pre>
+<pre><span class="VALempty_env"><span class="keyword">val</span> empty_env</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALreplace_env"><span class="keyword">val</span> replace_env</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+'a list -&gt; Camlp4.PreCast.Ast.expr -&gt; string -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALgen_id_default"><span class="keyword">val</span> gen_id_default</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALgen_binding"><span class="keyword">val</span> gen_binding</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+(Camlp4.PreCast.Ast.loc -&gt; string -&gt; Camlp4.PreCast.Ast.expr) -&gt;
+string -&gt; Camlp4.PreCast.Ast.binding</code></pre>
+<pre><span class="VALid_seed_default"><span class="keyword">val</span> id_seed_default</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+Camlp4.PreCast.Ast.expr option * Camlp4.PreCast.Ast.ctyp</code></pre>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">string list -&gt;
+Camlp4.PreCast.Ast.expr -&gt; Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALgen_one"><span class="keyword">val</span> gen_one</span> : <code class="type">string list -&gt;
+string -&gt; Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.binding</code></pre>
+<pre><span class="VALgen"><span class="keyword">val</span> gen</span> : <code class="type">Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.binding</code></pre>
+<pre><span class="VALinputs"><span class="keyword">val</span> inputs</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+id_seed_t:'a -&gt; opt:'b -&gt; string list -&gt; Camlp4.PreCast.Ast.patt</code></pre>
+<pre><span class="VALoutputs"><span class="keyword">val</span> outputs</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt;
+?id_seed:Camlp4.PreCast.Ast.expr -&gt; string list -&gt; Camlp4.PreCast.Ast.expr</code></pre></div></div>
+<div class="ocaml_module sig" name="Of_value"><pre><span class="keyword">module</span> <a href="?package=dyntype&amp;module=P4_value.Of_value">Of_value</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="VALenv_type"><span class="keyword">val</span> env_type</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.ctyp</code></pre>
+<pre><span class="VALempty_env"><span class="keyword">val</span> empty_env</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALreplace_env"><span class="keyword">val</span> replace_env</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; 'a list -&gt; string -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALstring_of_env"><span class="keyword">val</span> string_of_env</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALstr_of_id"><span class="keyword">val</span> str_of_id</span> : <code class="type">Camlp4.PreCast.Ast.expr -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALruntime_error"><span class="keyword">val</span> runtime_error</span> : <code class="type">Camlp4.PreCast.Ast.expr -&gt; string -&gt; Camlp4.PreCast.Ast.match_case</code></pre>
+<pre><span class="VALruntime_exn_error"><span class="keyword">val</span> runtime_exn_error</span> : <code class="type">Camlp4.PreCast.Ast.expr -&gt; string -&gt; Camlp4.PreCast.Ast.match_case</code></pre>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">string list -&gt;
+Camlp4.PreCast.Ast.expr -&gt; Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALdefault_value"><span class="keyword">val</span> default_value</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALset_value"><span class="keyword">val</span> set_value</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.expr</code></pre>
+<pre><span class="VALgen_one"><span class="keyword">val</span> gen_one</span> : <code class="type">string list -&gt;
+string -&gt; Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.binding</code></pre>
+<pre><span class="VALgen"><span class="keyword">val</span> gen</span> : <code class="type">Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.binding</code></pre>
+<pre><span class="VALinputs"><span class="keyword">val</span> inputs</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.patt</code></pre>
+<pre><span class="VALoutputs"><span class="keyword">val</span> outputs</span> : <code class="type">Camlp4.PreCast.Ast.loc -&gt; string list -&gt; Camlp4.PreCast.Ast.expr</code></pre></div></div>
+<pre><span class="VALgen"><span class="keyword">val</span> gen</span> : <code class="type">?gen_id:(Camlp4.PreCast.Ast.loc -&gt; string -&gt; Camlp4.PreCast.Ast.expr) -&gt;
+?id_seed:(Camlp4.PreCast.Ast.loc -&gt;
+          Camlp4.PreCast.Ast.expr option * Camlp4.PreCast.Ast.ctyp) -&gt;
+Camlp4.PreCast.Ast.ctyp -&gt; Camlp4.PreCast.Ast.str_item</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Heap implementation based on a pairing-heap.<br/>    This heap implementations supports an arbitrary element type, via a comparison
+    function.  If you need a heap with elements ordered by integers, then it may be more
+    efficient to use a <code class="code">Timing_wheel.Priority_queue</code>, which is a heap implementation
+    specialized to integer keys, and with some other performance differences and usage
+    restrictions.</div>
+<div class="ocaml_include ident" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code">Heap_intf.S</code></code></pre></div>
+<div class="ocaml_module sig" name="Removable"><pre><span class="keyword">module</span> <a href="?package=core_kernel&amp;module=Heap.Removable">Removable</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code><div class="info"><div class="info">Removable augments a heap with the ability to remove elements from the heap in lg(n)
+    (amortized) time at any point after they have been added.  Elements within a Removable
+    heap consume 4 words more memory and all heap operations will be somewhat slower.</div></div></pre><div class="ocaml_module_content">
+<div class="ocaml_include ident" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code">Heap_intf.S</code></code></pre></div>
+<div class="ocaml_module sig" name="Elt"><pre><span class="keyword">module</span> <a href="?package=core_kernel&amp;module=Heap.Removable.Elt">Elt</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre>
+<pre><span class="VALvalue_exn"><span class="keyword">val</span> value_exn</span> : <code class="type">'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">t</a> -&gt; 'a</code></pre><div class="info"><div class="info"><code class="code">value_exn t</code> return the value in the heap controlled by this token if the value
+        is still in the heap.  Raise otherwise.</div></div>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type">('a -&gt; Sexplib.Sexp.t) -&gt; 'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+<div class="info"><div class="info"><code class="code">value_exn t</code> return the value in the heap controlled by this token if the value
+        is still in the heap.  Raise otherwise.</div></div></div></div>
+<pre><span class="VALadd_removable"><span class="keyword">val</span> add_removable</span> : <code class="type">'a <a href="?package=core_kernel&amp;module=Heap.Removable&amp;type=t">t</a> -&gt; 'a -&gt; 'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">Elt.t</a></code></pre><div class="info"><div class="info"><code class="code">add_removable t v</code> adds <code class="code">v</code> to <code class="code">t</code>, returning a token that can be used to delete <code class="code">v</code>
+      from <code class="code">t</code> in lg(n) amortized time.</div></div>
+<pre><span class="VALremove"><span class="keyword">val</span> remove</span> : <code class="type">'a <a href="?package=core_kernel&amp;module=Heap.Removable&amp;type=t">t</a> -&gt; 'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">Elt.t</a> -&gt; unit</code></pre><div class="info"><div class="info">If <code class="code">t</code> and <code class="code">token</code> are mismatched then behavior is undefined.  <code class="code">remove</code> may safely
+      be called on a token more than once.  This doesn't free all the memory associated
+      with the Elt until some number of <code class="code">pop</code> operations later -- see Heap_intf for
+      details.</div></div>
+<pre><span class="VALupdate"><span class="keyword">val</span> update</span> : <code class="type">'a <a href="?package=core_kernel&amp;module=Heap.Removable&amp;type=t">t</a> -&gt; 'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">Elt.t</a> -&gt; 'a -&gt; 'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">Elt.t</a></code></pre><div class="info"><div class="info"><code class="code">update t token v</code> is shorthand for <code class="code">remove t token; add_removable t v</code></div></div>
+<pre><span class="VALfind_elt"><span class="keyword">val</span> find_elt</span> : <code class="type">'a <a href="?package=core_kernel&amp;module=Heap.Removable&amp;type=t">t</a> -&gt; f:('a -&gt; bool) -&gt; 'a <a href="?package=core_kernel&amp;module=Heap.Removable.Elt&amp;type=t">Elt.t</a> option</code></pre><div class="info"><div class="info"><code class="code">find_elt t ~f</code>.  If <code class="code">f</code> is true for some element in <code class="code">t</code>, return a <code class="code">Elt.t</code> for
+      that element.  This operation is O(n).</div></div></div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Thread-safe queue module, using locks.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">int -&gt; 'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">create maxsize</code> returns a synchronized queue bounded to have no more than
+    <code class="code">maxsize</code> elements.</div></div>
+<pre><span class="VALpush"><span class="keyword">val</span> push</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a -&gt; unit</code></pre><div class="info"><div class="info">Blocks until there's room on the queue, then pushes.</div></div>
+<pre><span class="VALpush_uncond"><span class="keyword">val</span> push_uncond</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a -&gt; unit</code></pre><div class="info"><div class="info">Does not block, may grow the queue past maxsize</div></div>
+<pre><span class="VALpush_or_drop"><span class="keyword">val</span> push_or_drop</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a -&gt; bool</code></pre><div class="info"><div class="info">Pushes an event on the queue if the queue is less than maxsize, otherwise drops it.
+  Returns true if the push was successful</div></div>
+<pre><span class="VALlength"><span class="keyword">val</span> length</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; int</code></pre><div class="info"><div class="info">returns the number of elements in the queue.</div></div>
+<pre><span class="VALpop"><span class="keyword">val</span> pop</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a</code></pre><div class="info"><div class="info">pops an element off the queue, blocking until something is
+ available</div></div>
+<pre><span class="VALlpop"><span class="keyword">val</span> lpop</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a * int</code></pre><div class="info"><div class="info">returns the element popped and the length of the queue after
+ this element was popped.</div></div>
+<pre><span class="VALtransfer_queue_in"><span class="keyword">val</span> transfer_queue_in</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a Core_kernel.Std.Queue.t -&gt; unit</code></pre><div class="info"><div class="info">Transfers all the elements from an ordinary queue into the
+    squeue. Blocks until there's room on the queue, then pushes. may
+    grow queue past maxsize.</div></div>
+<pre><span class="VALtransfer_queue_in_uncond"><span class="keyword">val</span> transfer_queue_in_uncond</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a Core_kernel.Std.Queue.t -&gt; unit</code></pre>
+<pre><span class="VALtransfer_queue"><span class="keyword">val</span> transfer_queue</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a Core_kernel.Std.Queue.t -&gt; unit</code></pre><div class="info"><div class="info">Transfers all elements from the squeue to an ordinary queue.
+    The elements remain in order.
+    Waits until at least one element can be transferred.</div></div>
+<pre><span class="VALtransfer_queue_nowait"><span class="keyword">val</span> transfer_queue_nowait</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; 'a Core_kernel.Std.Queue.t -&gt; unit</code></pre><div class="info"><div class="info">Transfers all elements from the squeue to an ordinary queue.
+    The elements remain in order.
+    Does not wait for elements to arrive.</div></div>
+<pre><span class="VALclear"><span class="keyword">val</span> clear</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info">clears the queue</div></div>
+<pre><span class="VALwait_not_empty"><span class="keyword">val</span> wait_not_empty</span> : <code class="type">'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">wait_not_empty sq</code> Waits for something to be available. This is
+    useful if you want to wait, but not take something out. This
+    function is not useful in most cases, but in some complex cases it
+    is essential. For example, if you need to take another lock before
+    you remove something from the queue for processing, you might
+    want to try to take that other lock, and if it fails do something
+    else.<br/>    This function is not dangerous, there is just ONE thing you HAVE
+    to remember if you use it. Just because this function returns
+    doesn't mean that pop will succeed, someone might have gotten
+    there first, so you have to use transfer_queue_nowait if you don't
+    want to block.</div></div>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type">('a -&gt; Sexplib.Sexp.t) -&gt; 'a <a href="?package=core&amp;module=Squeue&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+<div class="info"><div class="info"><code class="code">create maxsize</code> returns a synchronized queue bounded to have no more than
+    <code class="code">maxsize</code> elements.</div></div>
+<div class="info"><div class="info">Blocks until there's room on the queue, then pushes.</div></div>
+<div class="info"><div class="info">Does not block, may grow the queue past maxsize</div></div>
+<div class="info"><div class="info">Pushes an event on the queue if the queue is less than maxsize, otherwise drops it.
+  Returns true if the push was successful</div></div>
+<div class="info"><div class="info">returns the number of elements in the queue.</div></div>
+<div class="info"><div class="info">pops an element off the queue, blocking until something is
+ available</div></div>
+<div class="info"><div class="info">returns the element popped and the length of the queue after
+ this element was popped.</div></div>
+<div class="info"><div class="info">Transfers all the elements from an ordinary queue into the
+    squeue. Blocks until there's room on the queue, then pushes. may
+    grow queue past maxsize.</div></div>
+<div class="info"><div class="info">Transfers all elements from the squeue to an ordinary queue.
+    The elements remain in order.
+    Waits until at least one element can be transferred.</div></div>
+<div class="info"><div class="info">Transfers all elements from the squeue to an ordinary queue.
+    The elements remain in order.
+    Does not wait for elements to arrive.</div></div>
+<div class="info"><div class="info">clears the queue</div></div>
+<div class="info"><div class="info"><code class="code">wait_not_empty sq</code> Waits for something to be available. This is
+    useful if you want to wait, but not take something out. This
+    function is not useful in most cases, but in some complex cases it
+    is essential. For example, if you need to take another lock before
+    you remove something from the queue for processing, you might
+    want to try to take that other lock, and if it fails do something
+    else.<br/>    This function is not dangerous, there is just ONE thing you HAVE
+    to remember if you use it. Just because this function returns
+    doesn't mean that pop will succeed, someone might have gotten
+    there first, so you have to use transfer_queue_nowait if you don't
+    want to block.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

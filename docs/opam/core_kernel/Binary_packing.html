@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Packs and unpacks various types of integers into and from strings.<br/>   Functions ending in _int should not be used on 32 bit programs because native ocaml
+   ints will not be big enough.<br/>   <code class="code">pos</code> arguments refer to the location in the buf string.<br/>   We support big and little endian ints.  Note that for an 8 bit (1 byte) integer, there
+   is no difference because endian-ness only changes the order of bytes, not bits.</div>
+<pre><span class="TYPEendian"><span class="keyword">type</span> endian</span> = <code class="type">[ `Big_endian | `Little_endian ]</code></pre>
+<pre><span class="VALunpack_signed_8"><span class="keyword">val</span> unpack_signed_8</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_signed_8"><span class="keyword">val</span> pack_signed_8</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_unsigned_8"><span class="keyword">val</span> unpack_unsigned_8</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_unsigned_8"><span class="keyword">val</span> pack_unsigned_8</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_signed_16"><span class="keyword">val</span> unpack_signed_16</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int</code></pre><div class="info"><div class="info">The functions ending with <code class="code">_big_endian</code> or <code class="code">_little_endian</code> are faster than the ones
+   with explicit <code class="code">byte_order</code> argument:<br/> <span class="verbatim">                                Name | Run time | S. dev. | Warnings
+  ---------------------------------- | -------- | ------- | --------
+        pack_signed_16_little_endian |     4 ns |    0 ns |
+      unpack_signed_16_little_endian |     5 ns |    0 ns |
+                  pack_signed_32_int |    12 ns |    0 ns |
+                unpack_signed_32_int |    12 ns |    0 ns |
+    pack_signed_32_int_little_endian |     4 ns |    0 ns |
+  unpack_signed_32_int_little_endian |     5 ns |    0 ns |        M
+                  pack_signed_64_int |    21 ns |    0 ns |        M
+                unpack_signed_64_int |    21 ns |    0 ns |        M
+        pack_signed_64_little_endian |     8 ns |    0 ns |
+      unpack_signed_64_little_endian |     9 ns |    0 ns |        M
+
+</span></div></div>
+<pre><span class="VALpack_signed_16"><span class="keyword">val</span> pack_signed_16</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_unsigned_16_big_endian"><span class="keyword">val</span> unpack_unsigned_16_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALunpack_unsigned_16_little_endian"><span class="keyword">val</span> unpack_unsigned_16_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_unsigned_16_big_endian"><span class="keyword">val</span> pack_unsigned_16_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALpack_unsigned_16_little_endian"><span class="keyword">val</span> pack_unsigned_16_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_signed_16_big_endian"><span class="keyword">val</span> unpack_signed_16_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALunpack_signed_16_little_endian"><span class="keyword">val</span> unpack_signed_16_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_signed_16_big_endian"><span class="keyword">val</span> pack_signed_16_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALpack_signed_16_little_endian"><span class="keyword">val</span> pack_signed_16_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_unsigned_16"><span class="keyword">val</span> unpack_unsigned_16</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_unsigned_16"><span class="keyword">val</span> pack_unsigned_16</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_signed_32"><span class="keyword">val</span> unpack_signed_32</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int32</code></pre>
+<pre><span class="VALunpack_signed_32_int"><span class="keyword">val</span> unpack_signed_32_int</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_signed_32"><span class="keyword">val</span> pack_signed_32</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; Int32.t -&gt; unit</code></pre>
+<pre><span class="VALpack_signed_32_int"><span class="keyword">val</span> pack_signed_32_int</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_unsigned_32_int_big_endian"><span class="keyword">val</span> unpack_unsigned_32_int_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALunpack_unsigned_32_int_little_endian"><span class="keyword">val</span> unpack_unsigned_32_int_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_unsigned_32_int_big_endian"><span class="keyword">val</span> pack_unsigned_32_int_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALpack_unsigned_32_int_little_endian"><span class="keyword">val</span> pack_unsigned_32_int_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_signed_32_int_big_endian"><span class="keyword">val</span> unpack_signed_32_int_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALunpack_signed_32_int_little_endian"><span class="keyword">val</span> unpack_signed_32_int_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_signed_32_int_big_endian"><span class="keyword">val</span> pack_signed_32_int_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALpack_signed_32_int_little_endian"><span class="keyword">val</span> pack_signed_32_int_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_unsigned_32_int"><span class="keyword">val</span> unpack_unsigned_32_int</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_unsigned_32_int"><span class="keyword">val</span> pack_unsigned_32_int</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_signed_64"><span class="keyword">val</span> unpack_signed_64</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int64</code></pre>
+<pre><span class="VALunpack_signed_64_int"><span class="keyword">val</span> unpack_signed_64_int</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int</code></pre>
+<pre><span class="VALpack_signed_64"><span class="keyword">val</span> pack_signed_64</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; Int64.t -&gt; unit</code></pre>
+<pre><span class="VALpack_signed_64_int"><span class="keyword">val</span> pack_signed_64_int</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunpack_signed_64_big_endian"><span class="keyword">val</span> unpack_signed_64_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int64</code></pre>
+<pre><span class="VALunpack_signed_64_little_endian"><span class="keyword">val</span> unpack_signed_64_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int64</code></pre>
+<pre><span class="VALpack_signed_64_big_endian"><span class="keyword">val</span> pack_signed_64_big_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int64 -&gt; unit</code></pre>
+<pre><span class="VALpack_signed_64_little_endian"><span class="keyword">val</span> pack_signed_64_little_endian</span> : <code class="type">buf:string -&gt; pos:int -&gt; int64 -&gt; unit</code></pre>
+<pre><span class="VALunpack_float"><span class="keyword">val</span> unpack_float</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; float</code></pre><div class="info"><div class="info">As with integers, floats can be be packed big endian or little endian, depending on
+    the order in which the bytes of the float are layed out.  There is nothing interesting
+    going on computationally from a floating-point perspective; just laying out eight
+    bytes in one order or the other.</div></div>
+<pre><span class="VALpack_float"><span class="keyword">val</span> pack_float</span> : <code class="type">byte_order:<a href="?package=core_kernel&amp;module=Binary_packing&amp;type=endian">endian</a> -&gt; buf:string -&gt; pos:int -&gt; float -&gt; unit</code></pre>
+<div class="info"><div class="info">The following functions operate on &quot;fixed length padded strings&quot;, by which is meant a
+    string possibly followed by some padding, such that the length of the string plus the
+    length of the padding equals the fixed length.</div></div>
+<pre><span class="VALunpack_padded_fixed_string"><span class="keyword">val</span> unpack_padded_fixed_string</span> : <code class="type">?padding:char -&gt; buf:string -&gt; pos:int -&gt; len:int -&gt; unit -&gt; string</code></pre><div class="info"><div class="info">Decode the fixed length padded string having length <code class="code">len</code> from <code class="code">buf</code> starting at
+    <code class="code">pos</code>.  Return a string containing only the non-padding characters.  The default
+    padding is '\x00'.</div></div>
+<pre><span class="VALpack_padded_fixed_string"><span class="keyword">val</span> pack_padded_fixed_string</span> : <code class="type">?padding:char -&gt; buf:string -&gt; pos:int -&gt; len:int -&gt; string -&gt; unit</code></pre><div class="info"><div class="info">Encode and pack the given string as a padded fixed length string having length <code class="code">len</code>.
+    Place it in <code class="code">buf</code> starting at position <code class="code">pos</code>.  If the length of the string is less
+    then <code class="code">len</code> pad it with the padding characters until its length is equal to <code class="code">len</code>.  If
+    the string is longer than <code class="code">len</code> raise <code class="code">Invalid_argument</code>.  The default padding is
+    '\x00'.</div></div>
+<pre><span class="VALtest"><span class="keyword">val</span> test</span> : <code class="type">unit -&gt; unit</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

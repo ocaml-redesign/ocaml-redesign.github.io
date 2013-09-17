@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="VALnormal"><span class="keyword">val</span> normal</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALbold"><span class="keyword">val</span> bold</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALunderline"><span class="keyword">val</span> underline</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALinverse"><span class="keyword">val</span> inverse</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALred"><span class="keyword">val</span> red</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALyellow"><span class="keyword">val</span> yellow</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALgreen"><span class="keyword">val</span> green</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALblue"><span class="keyword">val</span> blue</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALmagenta"><span class="keyword">val</span> magenta</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALcyan"><span class="keyword">val</span> cyan</span> : <code class="type">string -&gt; string</code></pre>
+<pre><span class="VALgray"><span class="keyword">val</span> gray</span> : <code class="type">string -&gt; brightness:float -&gt; string</code></pre>
+<pre><span class="VALrgb"><span class="keyword">val</span> rgb</span> : <code class="type">string -&gt; r:float -&gt; g:float -&gt; b:float -&gt; string</code></pre>
+<pre><span class="TYPEcolor"><span class="keyword">type</span> color</span> = <code class="type">[ `Amber
+| `Black
+| `Blue
+| `Blue_violet
+| `Bright_green
+| `Chartreuse
+| `Cyan
+| `Dark_blue
+| `Dark_cyan
+| `Dark_green
+| `Dark_magenta
+| `Dark_red
+| `Dark_yellow
+| `Deep_pink
+| `Deep_sky_blue
+| `Dodger_blue
+| `Gold
+| `Gray
+| `Green
+| `Green_yellow
+| `Khaki
+| `Light_gray
+| `Light_green
+| `Light_pink
+| `Light_slate_blue
+| `Light_steel_blue
+| `Magenta
+| `Medium_spring_green
+| `Orange
+| `Orchid
+| `Pale_turquoise
+| `Pink
+| `Plum
+| `Purple
+| `Red
+| `Rose
+| `Sea_green
+| `Spring_green
+| `Turquoise
+| `Violet
+| `Wheat
+| `White
+| `Yellow ]</code></pre>
+<pre><span class="VALcolor"><span class="keyword">val</span> color</span> : <code class="type">string -&gt; color:<a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> -&gt; string</code></pre>
+<pre><span class="VALboldprintf"><span class="keyword">val</span> boldprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALunderlineprintf"><span class="keyword">val</span> underlineprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALinverseprintf"><span class="keyword">val</span> inverseprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALredprintf"><span class="keyword">val</span> redprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALyellowprintf"><span class="keyword">val</span> yellowprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALgreenprintf"><span class="keyword">val</span> greenprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALblueprintf"><span class="keyword">val</span> blueprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALmagentaprintf"><span class="keyword">val</span> magentaprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALcyanprintf"><span class="keyword">val</span> cyanprintf</span> : <code class="type">('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALgrayprintf"><span class="keyword">val</span> grayprintf</span> : <code class="type">brightness:float -&gt;
+('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALrgbprintf"><span class="keyword">val</span> rgbprintf</span> : <code class="type">r:float -&gt;
+g:float -&gt;
+b:float -&gt; ('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALcolorprintf"><span class="keyword">val</span> colorprintf</span> : <code class="type">color:<a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> -&gt; ('a, Pervasives.out_channel, unit) Pervasives.format -&gt; 'a</code></pre>
+<pre><span class="VALbin_color"><span class="keyword">val</span> bin_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Type_class.t</code></pre>
+<pre><span class="VALbin_read_color"><span class="keyword">val</span> bin_read_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Read_ml.reader</code></pre>
+<pre><span class="VALbin_read_color_"><span class="keyword">val</span> bin_read_color_</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Unsafe_read_c.reader</code></pre>
+<pre><span class="VALbin_read_color__"><span class="keyword">val</span> bin_read_color__</span> : <code class="type">(int -&gt; <a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a>) Core.Std.Bin_prot.Unsafe_read_c.reader</code></pre>
+<pre><span class="VALbin_reader_color"><span class="keyword">val</span> bin_reader_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Type_class.reader</code></pre>
+<pre><span class="VALbin_size_color"><span class="keyword">val</span> bin_size_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Size.sizer</code></pre>
+<pre><span class="VALbin_write_color"><span class="keyword">val</span> bin_write_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Write_ml.writer</code></pre>
+<pre><span class="VALbin_write_color_"><span class="keyword">val</span> bin_write_color_</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Unsafe_write_c.writer</code></pre>
+<pre><span class="VALbin_writer_color"><span class="keyword">val</span> bin_writer_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> Core.Std.Bin_prot.Type_class.writer</code></pre>
+<pre><span class="VALcolor_of_sexp"><span class="keyword">val</span> color_of_sexp</span> : <code class="type">Sexplib.Sexp.t -&gt; <a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a></code></pre>
+<pre><span class="VAL__color_of_sexp__"><span class="keyword">val</span> __color_of_sexp__</span> : <code class="type">Sexplib.Sexp.t -&gt; <a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a></code></pre>
+<pre><span class="VALsexp_of_color"><span class="keyword">val</span> sexp_of_color</span> : <code class="type"><a href="?package=core_extended&amp;module=Color_print&amp;type=color">color</a> -&gt; Sexplib.Sexp.t</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

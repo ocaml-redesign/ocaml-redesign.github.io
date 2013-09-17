@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Semaphores<div class="authors"><b>Author(s): </b><span class="author">Markus Mottl &lt;mmottl@janestreet.com&gt;</span></div></div>
+<pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre><div class="info"><div class="info">Type of semaphores</div></div>
+<pre><span class="VALinit"><span class="keyword">val</span> init</span> : <code class="type">'a option -&gt; 'a <a href="?package=core_extended&amp;module=Semaphore&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">init v</code> initializes a semaphore with an optional value <code class="code">v</code>.  If it is
+    <code class="code">Some x</code>, then TODO reference : Semaphore.wait will return immediately with <code class="code">x</code>,
+    otherwise it will block until TODO reference : Semaphore.signal is called.</div></div>
+<pre><span class="VALsignal"><span class="keyword">val</span> signal</span> : <code class="type">'a <a href="?package=core_extended&amp;module=Semaphore&amp;type=t">t</a> -&gt; 'a -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">signal sem v</code> allows one thread blocked in TODO reference : Semaphore.wait on
+    semaphore <code class="code">sem</code> to continue.  The semaphore will then block again
+    further threads.</div></div>
+<pre><span class="VALwait"><span class="keyword">val</span> wait</span> : <code class="type">'a <a href="?package=core_extended&amp;module=Semaphore&amp;type=t">t</a> -&gt; 'a</code></pre><div class="info"><div class="info"><code class="code">wait sem</code> blocks the calling thread on semaphore <code class="code">sem</code> if it was not
+    initialized with <code class="code">Some x</code> or not signalled before.  The semaphore
+    is reset to <code class="code">None</code>, i.e. calling <code class="code">wait</code> again will block unless the
+    semaphore was signalled inbetween.</div></div>
+<pre><span class="VALget"><span class="keyword">val</span> get</span> : <code class="type">'a <a href="?package=core_extended&amp;module=Semaphore&amp;type=t">t</a> -&gt; 'a option</code></pre><div class="info"><div class="info"><code class="code">get sem</code><b>Returns</b> <code class="code">None</code> if semaphore is not set, <code class="code">Some value</code>
+    otherwise.  The semaphore is reset to <code class="code">None</code>, and a subsequent wait
+    will block again.</div></div>
+<pre><span class="VALlook"><span class="keyword">val</span> look</span> : <code class="type">'a <a href="?package=core_extended&amp;module=Semaphore&amp;type=t">t</a> -&gt; 'a option</code></pre><div class="info"><div class="info"><code class="code">look sem</code><b>Returns</b> <code class="code">None</code> if semaphore is not set, <code class="code">Some value</code>
+    otherwise.  The state of the semaphore remains unchanged.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

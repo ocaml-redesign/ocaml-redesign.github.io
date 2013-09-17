@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre>
+<div class="ocaml_include ident" path="?package=core_kernel&amp;module=Hash_set_intf.Creators" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Hash_set_intf.Creators">Hash_set_intf.Creators</a></code> with type t := 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=t">t</a> with type elt = 'a with type create_options := ('key, 'z) <a href="?package=core_kernel&amp;module=Hash_set_intf&amp;type=create_options_with_hashable_required">Hash_set_intf.create_options_with_hashable_required</a></code></pre></div>
+<div class="ocaml_include ident" path="?package=core_kernel&amp;module=Hash_set_intf.Accessors" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Hash_set_intf.Accessors">Hash_set_intf.Accessors</a></code> with type t := 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=t">t</a> with type elt := 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=elt">elt</a></code></pre></div>
+<div class="ocaml_module ident" name="Elt" path="?package=core_kernel&amp;module=Core_hashtbl.Key"><pre><span class="keyword">module type</span> <a href="?package=core_kernel&amp;module=Hash_set.Elt">Elt</a> = <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Core_hashtbl.Key">Core_hashtbl.Key</a></code></code></pre></div>
+<div class="ocaml_module ident" name="Elt_binable" path="?package=core_kernel&amp;module=Core_hashtbl.Key_binable"><pre><span class="keyword">module type</span> <a href="?package=core_kernel&amp;module=Hash_set.Elt_binable">Elt_binable</a> = <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Core_hashtbl.Key_binable">Core_hashtbl.Key_binable</a></code></code></pre></div>
+<div class="ocaml_module ident" name="S" path="?package=core_kernel&amp;module=Hash_set_intf.S"><pre><span class="keyword">module type</span> <a href="?package=core_kernel&amp;module=Hash_set.S">S</a> = <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Hash_set_intf.S">Hash_set_intf.S</a></code> with type hash_set = 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=t">t</a></code></pre></div>
+<div class="ocaml_module ident" name="S_binable" path="?package=core_kernel&amp;module=Hash_set_intf.S_binable"><pre><span class="keyword">module type</span> <a href="?package=core_kernel&amp;module=Hash_set.S_binable">S_binable</a> = <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Hash_set_intf.S_binable">Hash_set_intf.S_binable</a></code> with type hash_set = 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=t">t</a></code></pre></div>
+<div class="ocaml_module sig" name="Poly"><pre><span class="keyword">module</span> <a href="?package=core_kernel&amp;module=Hash_set.Poly">Poly</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code> with type <a href="?package=core_kernel&amp;module=Hash_set.Poly&amp;type=t">t</a> = 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=t">t</a></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre>
+<div class="ocaml_include ident" path="?package=core_kernel&amp;module=Hash_set_intf.Creators" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Hash_set_intf.Creators">Hash_set_intf.Creators</a></code> with type t := 'a <a href="?package=core_kernel&amp;module=Hash_set.Poly&amp;type=t">t</a> with type elt = 'a with type create_options := ('key, 'z) <a href="?package=core_kernel&amp;module=Hash_set_intf&amp;type=create_options_without_hashable">Hash_set_intf.create_options_without_hashable</a></code></pre></div>
+<div class="ocaml_include ident" path="?package=core_kernel&amp;module=Hash_set_intf.Accessors" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Hash_set_intf.Accessors">Hash_set_intf.Accessors</a></code> with type t := 'a <a href="?package=core_kernel&amp;module=Hash_set.Poly&amp;type=t">t</a> with type elt := 'a <a href="?package=core_kernel&amp;module=Hash_set.Poly&amp;type=elt">elt</a></code></pre></div>
+<pre><span class="VALt_of_sexp"><span class="keyword">val</span> t_of_sexp</span> : <code class="type">(Sexplib.Sexp.t -&gt; 'a) -&gt; Sexplib.Sexp.t -&gt; 'a <a href="?package=core_kernel&amp;module=Hash_set.Poly&amp;type=t">t</a></code></pre>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type">('a -&gt; Sexplib.Sexp.t) -&gt; 'a <a href="?package=core_kernel&amp;module=Hash_set.Poly&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre></div></div>
+<div class="ocaml_module ident" name="Make" path="?package=core_kernel&amp;module=Hash_set.S"><pre><span class="keyword">module</span> <a href="?package=core_kernel&amp;module=Hash_set.Make">Make</a> : <code class="type"><div class="sig_block"><code class="code">functor (</code><code class="code">Elt</code><code class="code"> : </code><code class="code"><a href="?package=core_kernel&amp;module=Hash_set.Elt">Elt</a></code><code class="code">) -&gt; </code><code class="code"><a href="?package=core_kernel&amp;module=Hash_set.S">S</a></code> with type elt = Elt.t</div></code></pre></div>
+<div class="ocaml_module ident" name="Make_binable" path="?package=core_kernel&amp;module=Hash_set.S_binable"><pre><span class="keyword">module</span> <a href="?package=core_kernel&amp;module=Hash_set.Make_binable">Make_binable</a> : <code class="type"><div class="sig_block"><code class="code">functor (</code><code class="code">Elt</code><code class="code"> : </code><code class="code"><a href="?package=core_kernel&amp;module=Hash_set.Elt_binable">Elt_binable</a></code><code class="code">) -&gt; </code><code class="code"><a href="?package=core_kernel&amp;module=Hash_set.S_binable">S_binable</a></code> with type elt = Elt.t</div></code></pre></div>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type">('a -&gt; Sexplib.Sexp.t) -&gt; 'a <a href="?package=core_kernel&amp;module=Hash_set&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="ocaml_module sig" name="Key"><pre><span class="keyword">module type</span> <a href="?package=core_extended&amp;module=Trie.Key">Key</a> = <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<div class="ocaml_module sig" name="Part"><pre><span class="keyword">module</span> <a href="?package=core_extended&amp;module=Trie.Key.Part">Part</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<pre><span class="VALhash"><span class="keyword">val</span> hash</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.Key.Part&amp;type=t">t</a> -&gt; int</code></pre>
+<pre><span class="VALcompare"><span class="keyword">val</span> compare</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.Key.Part&amp;type=t">t</a> -&gt; <a href="?package=core_extended&amp;module=Trie.Key.Part&amp;type=t">t</a> -&gt; int</code></pre>
+<pre><span class="VALt_of_sexp"><span class="keyword">val</span> t_of_sexp</span> : <code class="type">Sexplib.Sexp.t -&gt; <a href="?package=core_extended&amp;module=Trie.Key.Part&amp;type=t">t</a></code></pre>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.Key.Part&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre></div></div>
+<pre><span class="VALiter"><span class="keyword">val</span> iter</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.Key&amp;type=t">t</a> -&gt; f:(<a href="?package=core_extended&amp;module=Trie.Key.Part&amp;type=t">Part.t</a> -&gt; unit) -&gt; unit</code></pre></div></div>
+<div class="ocaml_module sig" name="S"><pre><span class="keyword">module type</span> <a href="?package=core_extended&amp;module=Trie.S">S</a> = <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<div class="ocaml_module sig" name="Key"><pre><span class="keyword">module</span> <a href="?package=core_extended&amp;module=Trie.S.Key">Key</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre></div></div>
+<div class="ocaml_module sig" name="Part"><pre><span class="keyword">module</span> <a href="?package=core_extended&amp;module=Trie.S.Part">Part</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<div class="ocaml_include ident" items="[&quot;Hash_queue&quot;,&quot;Hash_set&quot;,&quot;Pooled_hashtbl&quot;,&quot;Table&quot;,&quot;Hashable&quot;]"><pre><span class="keyword">include</span> <code class="type"><code class="code">Core.Std.Hashable</code> with type t := <a href="?package=core_extended&amp;module=Trie.S.Part&amp;type=t">t</a></code></pre></div></div></div>
+<pre><code><span class="TYPEt"><span class="keyword">type</span> t</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTt.Node"><span class="constructor">Node</span></span> <span class="keyword">of</span> <code class="type">(bool * <a href="?package=core_extended&amp;module=Trie.S&amp;type=t">t</a>) <a href="?package=core_extended&amp;module=Trie.S.Part.Table&amp;type=t">Part.Table.t</a></code></code></td></tr></table>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">unit -&gt; <a href="?package=core_extended&amp;module=Trie.S&amp;type=t">t</a></code></pre>
+<pre><span class="VALcontains"><span class="keyword">val</span> contains</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.S&amp;type=t">t</a> -&gt; <a href="?package=core_extended&amp;module=Trie.S.Key&amp;type=t">Key.t</a> -&gt; bool</code></pre>
+<pre><span class="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.S&amp;type=t">t</a> -&gt; <a href="?package=core_extended&amp;module=Trie.S.Key&amp;type=t">Key.t</a> -&gt; unit</code></pre>
+<pre><span class="VALremove"><span class="keyword">val</span> remove</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.S&amp;type=t">t</a> -&gt; <a href="?package=core_extended&amp;module=Trie.S.Key&amp;type=t">Key.t</a> -&gt; unit</code></pre>
+<pre><span class="VALrender_as_regexp"><span class="keyword">val</span> render_as_regexp</span> : <code class="type"><a href="?package=core_extended&amp;module=Trie.S&amp;type=t">t</a> -&gt; capture_parts:bool -&gt; to_quoted_string:(<a href="?package=core_extended&amp;module=Trie.S.Part&amp;type=t">Part.t</a> -&gt; string) -&gt; string</code></pre></div></div>
+<div class="ocaml_module ident" name="Make" path="?package=core_extended&amp;module=Trie.S"><pre><span class="keyword">module</span> <a href="?package=core_extended&amp;module=Trie.Make">Make</a> : <code class="type"><div class="sig_block"><code class="code">functor (</code><code class="code">T</code><code class="code"> : </code><code class="code"><a href="?package=core_extended&amp;module=Trie.Key">Key</a></code><code class="code">) -&gt; </code><code class="code"><a href="?package=core_extended&amp;module=Trie.S">S</a></code> with type <a href="?package=core_extended&amp;module=Trie.S.Key&amp;type=t">Key.t</a> = T.t with type Part.t = T.Part.t</div></code></pre></div>
+<div class="ocaml_module ident" name="String_trie" path="?package=core_extended&amp;module=Trie.S"><pre><span class="keyword">module</span> <a href="?package=core_extended&amp;module=Trie.String_trie">String_trie</a> : <code class="type"><code class="code"><a href="?package=core_extended&amp;module=Trie.S">S</a></code> with type <a href="?package=core_extended&amp;module=Trie.S.Key&amp;type=t">Key.t</a> = Core.Std.String.t with type Part.t = Core.Std.Char.t</code></pre></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

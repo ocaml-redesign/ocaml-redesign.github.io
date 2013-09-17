@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">The <code class="code">Thread_safe</code> module has functions that are safe to call from threads outside
+    async.<br/>    All the <code class="code">Thread_safe.block*</code> and <code class="code">Thread_safe.run*</code> functions wake up the async
+    scheduler to ensure that it continues in a timely manned with whatever jobs got
+    started.  Some functions take an optional <code class="code">?wakeup_scheduler:bool</code> argument, which
+    defaults to <code class="code">true</code>.  One can cause the scheduler to not be woken up by supplying
+    <code class="code">~wakeup_scheduler:false</code>, which can reduce CPU use, but increase latency, because the
+    scheduler may not wake up for a while to process jobs.</div>
+<pre><span class="VALam_holding_async_lock"><span class="keyword">val</span> am_holding_async_lock</span> : <code class="type">unit -&gt; bool</code></pre><div class="info"><div class="info"><code class="code">am_holding_async_lock ()</code> returns true if the currently running thread is holding the
+    async lock.</div></div>
+<pre><span class="VALdeferred"><span class="keyword">val</span> deferred</span> : <code class="type">unit -&gt; 'a Async_core.Deferred.t * ('a -&gt; unit)</code></pre><div class="info"><div class="info"><code class="code">deferred ()</code> returns <code class="code">(d, fill)</code> where <code class="code">d</code> is a deferred that will become determined
+    with value <code class="code">v</code> once <code class="code">fill v</code> is called.<br/>    It is ok to call <code class="code">deferred</code> from inside or outside async.  <code class="code">fill</code> must be called from
+    outside async.</div></div>
+<pre><span class="VALrun_in_async_with_optional_cycle"><span class="keyword">val</span> run_in_async_with_optional_cycle</span> : <code class="type">?wakeup_scheduler:bool -&gt;
+(unit -&gt; [ `Do_not_run_a_cycle | `Run_a_cycle ] * 'a) -&gt;
+('a, exn) Core.Std.Result.t</code></pre><div class="info"><div class="info"><code class="code">run_in_async_with_optional_cycle f</code> acquires the async lock and runs <code class="code">f ()</code> while
+    holding the lock.  Depending on the result of <code class="code">f</code>, it may also run a cycle.</div></div>
+<pre><span class="VALrun_in_async"><span class="keyword">val</span> run_in_async</span> : <code class="type">?wakeup_scheduler:bool -&gt; (unit -&gt; 'a) -&gt; ('a, exn) Core.Std.Result.t</code></pre><div class="info"><div class="info"><code class="code">run_in_async f</code> acquires the async lock and runs <code class="code">f ()</code> while holding the lock. It
+    returns the result of <code class="code">f ()</code> to the outside world.  The scheduler is woken up to
+    ensures the code that depends on <code class="code">f ()</code> is run soon enough.<br/>    <code class="code">run_in_async</code> doesn't run a cycle.<br/>    <code class="code">run_in_async</code> does not automatically start the async scheduler.  You still need to
+    call <code class="code">Scheduler.go</code> elsewhere in your program.</div></div>
+<pre><span class="VALrun_in_async_exn"><span class="keyword">val</span> run_in_async_exn</span> : <code class="type">?wakeup_scheduler:bool -&gt; (unit -&gt; 'a) -&gt; 'a</code></pre>
+<pre><span class="VALblock_on_async"><span class="keyword">val</span> block_on_async</span> : <code class="type">(unit -&gt; 'a Async_core.Deferred.t) -&gt; ('a, exn) Core.Std.Result.t</code></pre><div class="info"><div class="info"><code class="code">block_on_async f</code> runs <code class="code">f ()</code> in the async world and blocks until the result becomes
+    determined.  This function can be called from the main thread or from a thread outside
+    async.<br/>    <code class="code">block_on_async</code> will run a cycle if the deferred isn't determined, in the hope that
+    running the cycle will cause the deferred to become determined.<br/>    <code class="code">block_on_async</code> will automatically start the scheduler if it isn't already
+    running.</div></div>
+<pre><span class="VALblock_on_async_exn"><span class="keyword">val</span> block_on_async_exn</span> : <code class="type">(unit -&gt; 'a Async_core.Deferred.t) -&gt; 'a</code></pre>
+<pre><span class="VALrun_in_async_wait"><span class="keyword">val</span> run_in_async_wait</span> : <code class="type">(unit -&gt; 'a Async_core.Deferred.t) -&gt; ('a, exn) Core.Std.Result.t</code></pre><div class="info"><div class="info"><code class="code">run_in_async_wait f</code> is like <code class="code">block_on_async f</code>, except that it must be called from a
+    thread outside async.  Upon returning from <code class="code">run_in_async_wait</code>, it is guaranteed that
+    the caller does not have the async lock.</div></div>
+<pre><span class="VALrun_in_async_wait_exn"><span class="keyword">val</span> run_in_async_wait_exn</span> : <code class="type">(unit -&gt; 'a Async_core.Deferred.t) -&gt; 'a</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

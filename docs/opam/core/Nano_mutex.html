@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">A nano-mutex is a lightweight mutex that can be used only within a single OCaml
+    runtime.<br/>    <br/><h1 id="1_TITLE">Performance</h1><br/>
+    ===============
+    Nano-mutexes are intended to be significantly cheaper than OS-level mutexes.  Creating
+    a nano-mutex allocates a single OCaml record.  Locking and unlocking an uncontested
+    nano-mutex take a handful of instructions.  Only if a nano-mutex is contested will it
+    fall back to using an OS-level mutex.  If a nano-mutex becomes uncontested again, it
+    will switch back to using an OCaml-only lock.<br/>    Nano-mutexes can be faster than using OS-level mutexes because OCaml uses a global
+    lock on the runtime, and requires all running OCaml code to hold the lock.  The OCaml
+    compiler only allows thread switches at certain points, and we can use that fact to get
+    the atomic test-and-set used in the core of our implementaion without needing any
+    primitive locking, essentially because we're protected by the OCaml global lock.<br/>    Here are some benchmarks comparing various mutexes available in OCaml:<br/>    <span class="verbatim">      |-------------------------------------------------------------|
+      |                       Name | Run time | S. dev. | Allocated |
+      |----------------------------+----------+---------+-----------+
+      |          Caml.Mutex create |   247 ns |    0 ns |         3 |
+      |     Caml.Mutex lock/unlock |    49 ns |    0 ns |         0 |
+      |          Core.Mutex create |   698 ns |    0 ns |         3 |
+      |     Core.Mutex lock/unlock |    49 ns |    0 ns |         0 |
+      |          Nano_mutex create |    10 ns |    0 ns |         4 |
+      |     Nano_mutex lock/unlock |    28 ns |    0 ns |         0 |
+      |-------------------------------------------------------------|
+    </span><br/>    The benchmark code is in core/extended/lib_test/bench_nano_mutex.ml.<br/>    <br/><h1 id="1_TITLE">Error handling</h1><br/>
+    ==================
+    For any mutex, there are design choices as to how to behave in certain situations:<br/>    - recursive locking (when a thread locks a mutex it already has)<ul><li>unlocking an unlocked mutex</li><li>unlocking a mutex held by another thread</li></ul>    Here is a table comparing how the various mutexes behave:<br/>    <span class="verbatim">      |--------------------+------------+------------+------------+
+      |                    | Caml.Mutex | Core.Mutex | Nano_mutex |
+      |--------------------+------------+------------+------------+
+      | recursive lock     | undefined  | error      | error      |
+      | unlocking unlocked | undefined  | error      | error      |
+      | t1:lock  t2:unlock | undefined  | error      | error      |
+      |--------------------+------------+------------+------------+
+    </span></div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<pre><span class="VALinvariant"><span class="keyword">val</span> invariant</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; unit</code></pre>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">unit -&gt; <a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">create ()</code> returns a new, unlocked mutex.</div></div>
+<pre><span class="VALequal"><span class="keyword">val</span> equal</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; <a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; bool</code></pre><div class="info"><div class="info"><code class="code">equal</code> is <code class="code">phys_equal</code></div></div>
+<pre><span class="VALcurrent_thread_has_lock"><span class="keyword">val</span> current_thread_has_lock</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; bool</code></pre><div class="info"><div class="info"><code class="code">current_thread_has_lock t</code> returns <code class="code">true</code> iff the current thread has <code class="code">t</code> locked.</div></div>
+<pre><span class="VALlock"><span class="keyword">val</span> lock</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; unit Core_kernel.Std.Or_error.t</code></pre><div class="info"><div class="info"><code class="code">lock t</code> locks the mutex <code class="code">t</code>, blocking until it can be locked.  <code class="code">lock</code> immediately
+    returns <code class="code">Error</code> if the current thread already holds <code class="code">t</code>.</div></div>
+<pre><span class="VALlock_exn"><span class="keyword">val</span> lock_exn</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; unit</code></pre>
+<pre><span class="VALtry_lock"><span class="keyword">val</span> try_lock</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; [ `Acquired | `Not_acquired ] Core_kernel.Std.Or_error.t</code></pre><div class="info"><div class="info"><code class="code">try_lock t</code> locks <code class="code">t</code> if it can immediately do so.  The result indicates whether
+    <code class="code">try_lock</code> succeeded in acquiring the lock.  <code class="code">try_lock</code> returns <code class="code">Error</code> if the current
+    thread already holds <code class="code">t</code>.</div></div>
+<pre><span class="VALtry_lock_exn"><span class="keyword">val</span> try_lock_exn</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; [ `Acquired | `Not_acquired ]</code></pre>
+<pre><span class="VALunlock"><span class="keyword">val</span> unlock</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; unit Core_kernel.Std.Or_error.t</code></pre><div class="info"><div class="info"><code class="code">unlock t</code> unlocks <code class="code">t</code>, if the current thread holds it.  <code class="code">unlock</code> returns <code class="code">Error</code> if
+    the lock is not held by the calling thread.</div></div>
+<pre><span class="VALunlock_exn"><span class="keyword">val</span> unlock_exn</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; unit</code></pre>
+<pre><span class="VALcritical_section"><span class="keyword">val</span> critical_section</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; f:(unit -&gt; 'a) -&gt; 'a</code></pre>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type"><a href="?package=core&amp;module=Nano_mutex&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+<div class="info"><div class="info"><code class="code">create ()</code> returns a new, unlocked mutex.</div></div>
+<div class="info"><div class="info"><code class="code">equal</code> is <code class="code">phys_equal</code></div></div>
+<div class="info"><div class="info"><code class="code">current_thread_has_lock t</code> returns <code class="code">true</code> iff the current thread has <code class="code">t</code> locked.</div></div>
+<div class="info"><div class="info"><code class="code">lock t</code> locks the mutex <code class="code">t</code>, blocking until it can be locked.  <code class="code">lock</code> immediately
+    returns <code class="code">Error</code> if the current thread already holds <code class="code">t</code>.</div></div>
+<div class="info"><div class="info"><code class="code">try_lock t</code> locks <code class="code">t</code> if it can immediately do so.  The result indicates whether
+    <code class="code">try_lock</code> succeeded in acquiring the lock.  <code class="code">try_lock</code> returns <code class="code">Error</code> if the current
+    thread already holds <code class="code">t</code>.</div></div>
+<div class="info"><div class="info"><code class="code">unlock t</code> unlocks <code class="code">t</code>, if the current thread holds it.  <code class="code">unlock</code> returns <code class="code">Error</code> if
+    the lock is not held by the calling thread.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Netplex-wide semaphores</div>
+<div class="info"><div class="info">Semaphores are counters with atomic increment and decrement operations.
+    They are very useful for counting the number of uses of a shared
+    resource, and allow the identification of the first use (so the resource
+    must be made available at all), and the last use (the resource can be
+    released).<br/>    This implementation works in both multi-processing and
+    multi-threading netplex environments. It is, however, not very
+    fast, because the counters live in the controller, and the
+    increment/decrement operations are realized by RPC's. It is good
+    enough when these operations are only infrequently called, e.g. in
+    the post-start and pre-finish processor callbacks.<br/>    This interface is designed so that a later re-implementation with
+    POSIX semaphores is relatively straight-forward.<br/>    <b>Thread safety:</b> Full. The functions can be called from any thread.</div></div>
+<pre><span class="VALplugin"><span class="keyword">val</span> plugin</span> : <code class="type">Netplex_types.plugin</code></pre><div class="info"><div class="info">To enable semaphores, call the controller's <code class="code">add_plugin</code> method 
+      with this object as argument. This can e.g. be done in the
+      <code class="code">post_add_hook</code> of the processor.</div></div>
+<div class="info"><div class="info">The following functions can <b>only</b> be invoked in container
+    contexts. Outside of such a context the exception
+    TODO reference : Netplex_cenv.Not_in_container_thread is raised.</div></div>
+<pre><span class="VALincrement"><span class="keyword">val</span> increment</span> : <code class="type">string -&gt; int64</code></pre><div class="info"><div class="info">Increment the named semaphore by 1, and return the new value.
+      If the semaphore does not exist yet, it is created with an initial
+      value of 0, which is then incremented. <br/>      Semaphore names are global to the whole netplex system. By convention,
+      these names are formed like <code class="code">&quot;service_name.local_name&quot;</code>, i.e. they
+      are prefixed by the socket service to which they refer.</div></div>
+<pre><span class="VALdecrement"><span class="keyword">val</span> decrement</span> : <code class="type">?wait:bool -&gt; string -&gt; int64</code></pre><div class="info"><div class="info">Decrement the named semaphore by 1, and return the new value.
+      Semaphore values cannot become negative. If the value is already 0,
+      it is not decremented anymore if <code class="code">wait = false</code>. However, (-1)
+      is then returned nevertheless.<br/>      If the value is already 0 and <code class="code">wait=true</code>, the operation waits until
+      the value exceeds 0, and when this happens, the semaphore is then
+      decremented again. If several waiters exist, only one waiter gets
+      the chance to decrement.</div></div>
+<pre><span class="VALget"><span class="keyword">val</span> get</span> : <code class="type">string -&gt; int64</code></pre><div class="info"><div class="info">Get the value of the named semaphore. Useful e.g. for monitoring
+      the semaphore. If the semaphore does not exist, a value of 0 is
+      returned.<br/>      <code class="code">get</code> can also be invoked from the controller process.</div></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">?protected:bool -&gt; string -&gt; int64 -&gt; bool</code></pre><div class="info"><div class="info">Create the semaphore with this initial value. Returns <code class="code">true</code> if the
+      creation is successful, and <code class="code">false</code> if the semaphore already existed.<br/>      If <code class="code">protected</code>, the semaphore
+      is automatically decremented by some value when the container
+      calling this function terminates. This value is <code class="code">pi - d</code> where
+      <code class="code">pi</code> is the number of increments and <code class="code">d</code> is the number
+      of (successful) decrements requested by the container.<br/>      A semaphore needs not to be explicitly created by calling <code class="code">create</code>.
+      It is automatically created at the first use time with a value of 0
+      and <code class="code">protected=true</code>.<br/>      <code class="code">create</code> can also be invoked from the controller process.</div></div>
+<pre><span class="VALdestroy"><span class="keyword">val</span> destroy</span> : <code class="type">string -&gt; unit</code></pre><div class="info"><div class="info">Destroy this semaphore. Any waiting <code class="code">decrement</code> will immediately
+      get (-1L).<br/>      Note that there is no protection against unintended re-creation
+      after <code class="code">destroy</code>.<br/>      <code class="code">destroy</code> can also be invoked from the controller process.</div></div>
+<pre><span class="VALctrl_increment"><span class="keyword">val</span> ctrl_increment</span> : <code class="type">string -&gt; Netplex_types.container_id -&gt; int64</code></pre><div class="info"><div class="info">Increment the named semaphore from controller context, substituting
+      an increment from a container (e.g. a container that terminated
+      or is otherwise no longer able to do so). In this
+      case the ID of the container needs to be passed</div></div>
+<div class="info"><div class="info">Example (code fragment):<br/>    Override the processor callbacks as follows to count the number of
+    containers for the service:<br/>  <pre class="codepre"><code class="code"> 
+    method post_add_hook sockserv ctrl =
+      ctrl # add_plugin Netplex_semaphore.plugin
+
+    method post_start_hook container =
+      let sem_name = container#socket_service#name ^ &quot;.counter&quot; in
+      let n =
+        Netplex_semaphore.increment sem_name in
+      if n=1 then
+        prerr_endline &quot;First container&quot;
+
+    method pre_finish_hook container =
+      let sem_name = container#socket_service#name ^ &quot;.counter&quot; in
+      let n =
+        Netplex_semaphore.decrement sem_name in
+      if n=0 then
+        prerr_endline &quot;Last container&quot;
+   </code></pre></div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

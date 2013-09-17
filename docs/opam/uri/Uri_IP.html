@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Handle IPv4 and IPv6 addresses as used in URIs.<div class="authors"><b>Author(s): </b><span class="author">Richard Mortier &lt;mort@cantab.net&gt;</span></div></div>
+<pre><span class="TYPEbyte"><span class="keyword">type</span> byte</span> </pre><div class="info"><div class="info">Type alias for a byte.</div></div>
+<pre><span class="VALbyte_to_int32"><span class="keyword">val</span> byte_to_int32</span> : <code class="type"><a href="?package=uri&amp;module=Uri_IP&amp;type=byte">byte</a> -&gt; int32</code></pre><div class="info"><div class="info">Convert TODO reference : byte to TODO reference : Int32.</div></div>
+<pre><span class="TYPEbytes"><span class="keyword">type</span> bytes</span> </pre><div class="info"><div class="info">Type alias for a sequence of bytes.</div></div>
+<pre><span class="VALbytes"><span class="keyword">val</span> bytes</span> : <code class="type">string -&gt; <a href="?package=uri&amp;module=Uri_IP&amp;type=bytes">bytes</a></code></pre>
+<pre><span class="VALbytes_to_string"><span class="keyword">val</span> bytes_to_string</span> : <code class="type"><a href="?package=uri&amp;module=Uri_IP&amp;type=bytes">bytes</a> -&gt; string</code></pre>
+<pre><span class="TYPEipv4"><span class="keyword">type</span> ipv4</span> = <code class="type">Int32.t</code></pre><div class="info"><div class="info">Simple representation of an IPv4 address as TODO reference : Int32.</div></div>
+<pre><span class="VALipv4_to_string"><span class="keyword">val</span> ipv4_to_string</span> : <code class="type"><a href="?package=uri&amp;module=Uri_IP&amp;type=ipv4">ipv4</a> -&gt; string</code></pre><div class="info"><div class="info">Standard dotted quad string representation of an IPv4 address.</div></div>
+<pre><span class="VALstring_to_ipv4"><span class="keyword">val</span> string_to_ipv4</span> : <code class="type">string -&gt; <a href="?package=uri&amp;module=Uri_IP&amp;type=ipv4">ipv4</a></code></pre><div class="info"><div class="info">Parse standard dotted quad string representation of an IPv4 address.</div></div>
+<pre><span class="VALbytes_to_ipv4"><span class="keyword">val</span> bytes_to_ipv4</span> : <code class="type"><a href="?package=uri&amp;module=Uri_IP&amp;type=bytes">bytes</a> -&gt; <a href="?package=uri&amp;module=Uri_IP&amp;type=ipv4">ipv4</a></code></pre><div class="info"><div class="info">Generate numeric IPv4 address from a packed bytestring.</div></div>
+<pre><span class="TYPEipv6"><span class="keyword">type</span> ipv6</span> = <code class="type">int32 * int32 * int32 * int32</code></pre><div class="info"><div class="info">Simple representation of an IPv6 address (128 bits).</div></div>
+<pre><span class="VALipv6_to_string"><span class="keyword">val</span> ipv6_to_string</span> : <code class="type"><a href="?package=uri&amp;module=Uri_IP&amp;type=ipv6">ipv6</a> -&gt; string</code></pre><div class="info"><div class="info">Standard string representation of an IPv6 address.
+    Note this is not yet canonicalised per RFC 5952.</div></div>
+<pre><span class="VALbytes_to_ipv6"><span class="keyword">val</span> bytes_to_ipv6</span> : <code class="type"><a href="?package=uri&amp;module=Uri_IP&amp;type=bytes">bytes</a> -&gt; <a href="?package=uri&amp;module=Uri_IP&amp;type=ipv6">ipv6</a></code></pre><div class="info"><div class="info">Generate numeric -- 4-tuple of Int32, as above -- IPv6 address from packed
+    bytestring.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

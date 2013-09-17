@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Connection cache</div>
+<div class="info"><div class="info">This module allows one to create special connection caches, e.g.
+    by deriving from the official ones</div></div>
+<pre><span class="TYPEchannel_binding_id"><span class="keyword">type</span> channel_binding_id</span> = <code class="type">int</code></pre><div class="info"><div class="info">Same as in TODO reference : Http_client.channel_binding_id</div></div>
+<pre><span class="TYPEconn_state"><span class="keyword">type</span> conn_state</span> = <code class="type">[ `Active of &lt;  &gt; | `Inactive of <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;type=channel_binding_id">channel_binding_id</a> ]</code></pre><div class="info"><div class="info">A TCP connection may be either <code class="code">`Inactive</code>, i.e. it is not used
+ by any pipeline, or <code class="code">`Active obj</code>, i.e. it is in use by the pipeline
+ <code class="code">obj</code> (this is the TODO reference : Http_client.pipeline coerced to <code class="code">&lt; &gt;</code>).<br/> Since Ocamlnet-3.3, <code class="code">`Inactive</code> connections carry the channel binding
+ ID as argument.</div></div>
+<pre><span class="TYPEpeer"><span class="keyword">type</span> peer</span> = <code class="type">[ `Direct of string * int
+| `Http_proxy of string * int
+| `Http_proxy_connect of (string * int) * (string * int)
+| `Socks5 of (string * int) * (string * int) ]</code></pre>
+<div class="ocaml_class sig" name="connection_cache"><pre><span class="TYPEconnection_cache"><span class="keyword">class type</span> <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=connection_cache">connection_cache</a></span> : <code class="code">object</code> .. <code class="code">end</code></pre><div class="ocaml_class_content">
+<pre><span class="METHODget_connection_state"><span class="keyword">method</span> get_connection_state</span> : <code class="code">Unix.file_descr -&gt; <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;type=conn_state">conn_state</a></code></pre>
+<div class="info"><div class="info">Returns the state of the file descriptor, or raises <code class="code">Not_found</code></div></div>
+<pre><span class="METHODset_connection_state"><span class="keyword">method</span> set_connection_state</span> : <code class="code">Unix.file_descr -&gt; <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;type=peer">peer</a> -&gt; <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;type=conn_state">conn_state</a> -&gt; unit</code></pre>
+<div class="info"><div class="info">Sets the state of the file descriptor. It is allowed that
+ inactive descriptors are simply closed and forgotten. It is
+ also possible that this method raises <code class="code">Not_found</code>, leaving it
+ to the caller to close the connection.</div></div>
+<pre><span class="METHODfind_inactive_connection"><span class="keyword">method</span> find_inactive_connection</span> : <code class="code"><a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;type=peer">peer</a> -&gt; <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;type=channel_binding_id">channel_binding_id</a> -&gt; Unix.file_descr</code></pre>
+<div class="info"><div class="info">Returns an inactive connection to the passed peer, or raise
+ <code class="code">Not_found</code>. Since Ocamlnet-3.3, the required channel binding ID
+ is also an argument of this method.</div></div>
+<pre><span class="METHODfind_my_connections"><span class="keyword">method</span> find_my_connections</span> : <code class="code">&lt;  &gt; -&gt; Unix.file_descr list</code></pre>
+<div class="info"><div class="info">Returns all active connections owned by the object</div></div>
+<pre><span class="METHODclose_connection"><span class="keyword">method</span> close_connection</span> : <code class="code">Unix.file_descr -&gt; unit</code></pre>
+<div class="info"><div class="info">Deletes the connection from the cache, and closes it</div></div>
+<pre><span class="METHODclose_all"><span class="keyword">method</span> close_all</span> : <code class="code">unit -&gt; unit</code></pre>
+<div class="info"><div class="info">Closes all descriptors known to the cache</div></div></div></div>
+<div class="ocaml_class ident" name="restrictive_cache" path="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=connection_cache"><pre><span class="TYPErestrictive_cache"><span class="keyword">class</span> <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=restrictive_cache">restrictive_cache</a></span> : <code class="type">unit -&gt; </code><a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=connection_cache">connection_cache</a></pre><div class="info"><div class="info">A restrictive cache closes connections as soon as there are no
+ pending requests.</div></div></div>
+<div class="ocaml_class ident" name="aggressive_cache" path="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=connection_cache"><pre><span class="TYPEaggressive_cache"><span class="keyword">class</span> <a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=aggressive_cache">aggressive_cache</a></span> : <code class="type">unit -&gt; </code><a href="?package=ocamlnet&amp;module=Http_client_conncache&amp;class=connection_cache">connection_cache</a></pre><div class="info"><div class="info">This type of cache tries to keep connections as long open as
+ possible. The consequence is that users are responsible for
+ closing the descriptors (by calling <code class="code">close_connection_cache</code>) when the
+ cache is no longer in use. It is also possible to derive a special
+ version of the cache from this class, e.g. for closing descriptors
+ when they are idle for some time.</div></div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

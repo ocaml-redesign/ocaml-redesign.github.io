@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="TYPEpacked_value"><span class="keyword">type</span> packed_value</span> </pre>
+<pre><span class="VALpack_call"><span class="keyword">val</span> pack_call</span> : <code class="type">?encoder:<a href="?package=ocamlnet&amp;module=Xdr&amp;type=encoder">Xdr.encoder</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> -&gt;
+string -&gt;
+string -&gt; string -&gt; string -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALpack_call_gssapi_header"><span class="keyword">val</span> pack_call_gssapi_header</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt; <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> -&gt; string -&gt; string -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALunpack_call"><span class="keyword">val</span> unpack_call</span> : <code class="type">?mstring_factories:<a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=named_mstring_factories">Xdr_mstring.named_mstring_factories</a> -&gt;
+?decoder:<a href="?package=ocamlnet&amp;module=Xdr&amp;type=decoder">Xdr.decoder</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt;
+string -&gt;
+<a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * string * 
+string * string * string * <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VALunpack_call_frame"><span class="keyword">val</span> unpack_call_frame</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * string * 
+string * string * string</code></pre>
+<pre><span class="VALunpack_call_frame_l"><span class="keyword">val</span> unpack_call_frame_l</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * string * 
+string * string * string * int</code></pre>
+<pre><span class="VALextract_call_gssapi_header"><span class="keyword">val</span> extract_call_gssapi_header</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; int</code></pre>
+<pre><span class="VALunpack_call_body"><span class="keyword">val</span> unpack_call_body</span> : <code class="type">?mstring_factories:<a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=named_mstring_factories">Xdr_mstring.named_mstring_factories</a> -&gt;
+?decoder:<a href="?package=ocamlnet&amp;module=Xdr&amp;type=decoder">Xdr.decoder</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; int -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VALunpack_call_body_raw"><span class="keyword">val</span> unpack_call_body_raw</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; int -&gt; string</code></pre>
+<pre><span class="VALpack_successful_reply"><span class="keyword">val</span> pack_successful_reply</span> : <code class="type">?encoder:<a href="?package=ocamlnet&amp;module=Xdr&amp;type=encoder">Xdr.encoder</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt;
+string -&gt; <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> -&gt; string -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALpack_successful_reply_raw"><span class="keyword">val</span> pack_successful_reply_raw</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> -&gt; string -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=mstring">Xdr_mstring.mstring</a> list -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALpack_accepting_reply"><span class="keyword">val</span> pack_accepting_reply</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> -&gt; string -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Rpc&amp;type=server_error">Rpc.server_error</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALpack_rejecting_reply"><span class="keyword">val</span> pack_rejecting_reply</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc&amp;type=server_error">Rpc.server_error</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALunpack_reply"><span class="keyword">val</span> unpack_reply</span> : <code class="type">?mstring_factories:<a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=named_mstring_factories">Xdr_mstring.named_mstring_factories</a> -&gt;
+?decoder:<a href="?package=ocamlnet&amp;module=Xdr&amp;type=decoder">Xdr.decoder</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt;
+string -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a> * string * string * <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VALunpack_reply_verifier"><span class="keyword">val</span> unpack_reply_verifier</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; string * string</code></pre>
+<pre><span class="VALpeek_xid"><span class="keyword">val</span> peek_xid</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rtypes&amp;type=uint4">Rtypes.uint4</a></code></pre>
+<pre><span class="VALpeek_auth_error"><span class="keyword">val</span> peek_auth_error</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc&amp;type=server_error">Rpc.server_error</a> option</code></pre>
+<pre><span class="VALlength_of_packed_value"><span class="keyword">val</span> length_of_packed_value</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; int</code></pre>
+<pre><span class="VALstring_of_packed_value"><span class="keyword">val</span> string_of_packed_value</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; string</code></pre>
+<pre><span class="VALpacked_value_of_string"><span class="keyword">val</span> packed_value_of_string</span> : <code class="type">string -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALmstrings_of_packed_value"><span class="keyword">val</span> mstrings_of_packed_value</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=mstring">Xdr_mstring.mstring</a> list</code></pre>
+<pre><span class="VALpacked_value_of_mstrings"><span class="keyword">val</span> packed_value_of_mstrings</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=mstring">Xdr_mstring.mstring</a> list -&gt; <a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a></code></pre>
+<pre><span class="VALprefix_of_packed_value"><span class="keyword">val</span> prefix_of_packed_value</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_packer&amp;type=packed_value">packed_value</a> -&gt; int -&gt; string</code></pre><div class="info"><div class="info">The first n bytes of the packed value</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

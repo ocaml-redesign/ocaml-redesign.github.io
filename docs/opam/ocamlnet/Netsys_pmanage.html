@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Manage persistent objects</div>
+<div class="info"><div class="info">This module allows you to keep a list of all objects with
+    kernel persistency in an external file.</div></div>
+<pre><span class="TYPEpm_obj"><span class="keyword">type</span> pm_obj</span> = <code class="type">[ `File of string
+| `Posix_sem of string
+| `Posix_shm of string
+| `Sem_cont of string ]</code></pre>
+<div class="ocaml_class sig" name="pmanage"><pre><span class="TYPEpmanage"><span class="keyword">class type</span> <a href="?package=ocamlnet&amp;module=Netsys_pmanage&amp;class=pmanage">pmanage</a></span> : <code class="code">object</code> .. <code class="code">end</code></pre><div class="ocaml_class_content">
+<pre><span class="METHODregister_file"><span class="keyword">method</span> register_file</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Register a temporary file</div></div>
+<pre><span class="METHODunregister_file"><span class="keyword">method</span> unregister_file</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Unregister a temporary file</div></div>
+<pre><span class="METHODregister_posix_shm"><span class="keyword">method</span> register_posix_shm</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Register a POSIX shared memory object identified by this path</div></div>
+<pre><span class="METHODunregister_posix_shm"><span class="keyword">method</span> unregister_posix_shm</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Unregister a POSIX shared memory object identified by this path</div></div>
+<pre><span class="METHODregister_posix_sem"><span class="keyword">method</span> register_posix_sem</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Register a POSIX named semaphore identified by this path</div></div>
+<pre><span class="METHODunregister_posix_sem"><span class="keyword">method</span> unregister_posix_sem</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Unregister a POSIX named semaphore identified by this path</div></div>
+<pre><span class="METHODregister_sem_cont"><span class="keyword">method</span> register_sem_cont</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Register a semaphore container (see TODO reference : Netsys_sem)</div></div>
+<pre><span class="METHODunregister_sem_cont"><span class="keyword">method</span> unregister_sem_cont</span> : <code class="code">string -&gt; unit</code></pre>
+<div class="info"><div class="info">Unregister a semaphore container (see TODO reference : Netsys_sem)</div></div>
+<pre><span class="METHODregistered"><span class="keyword">method</span> registered</span> : <code class="code"><a href="?package=ocamlnet&amp;module=Netsys_pmanage&amp;type=pm_obj">pm_obj</a> list</code></pre>
+<div class="info"><div class="info">Return the registered objects</div></div>
+<pre><span class="METHODregister"><span class="keyword">method</span> register</span> : <code class="code"><a href="?package=ocamlnet&amp;module=Netsys_pmanage&amp;type=pm_obj">pm_obj</a> list -&gt; unit</code></pre>
+<div class="info"><div class="info">Mass-register a list of objects</div></div>
+<pre><span class="METHODunlink"><span class="keyword">method</span> unlink</span> : <code class="code">unit -&gt; unit</code></pre>
+<div class="info"><div class="info">Delete all registered objects</div></div></div></div>
+<pre><span class="VALpmanage"><span class="keyword">val</span> pmanage</span> : <code class="type">string -&gt; <a href="?package=ocamlnet&amp;module=Netsys_pmanage&amp;type=pmanage">pmanage</a></code></pre><div class="info"><div class="info">Create a new manager for persistent kernel objects. The data is stored
+      in a text file whose path is passed to this function. If the file already
+      exists, it is opened and used. If the file does not exist yet, an
+      empty manager will be created.<br/>      This function can be safely used from several threads and several
+      processes.</div></div>
+<pre><span class="VALfake_pmanage"><span class="keyword">val</span> fake_pmanage</span> : <code class="type">unit -&gt; <a href="?package=ocamlnet&amp;module=Netsys_pmanage&amp;type=pmanage">pmanage</a></code></pre><div class="info"><div class="info">A pseudo manager that does not save anything to a text file</div></div>
+<pre><span class="VALunlink_this"><span class="keyword">val</span> unlink_this</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netsys_pmanage&amp;type=pm_obj">pm_obj</a> -&gt; unit</code></pre><div class="info"><div class="info">Unlinks this object</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

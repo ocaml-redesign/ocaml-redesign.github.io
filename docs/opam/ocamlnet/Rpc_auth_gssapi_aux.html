@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="TYPErpc_gss_proc_enum_t"><span class="keyword">type</span> rpc_gss_proc_enum_t</span> = <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="TYPErpc_gss_proc_t"><span class="keyword">type</span> rpc_gss_proc_t</span> = <code class="type">[ `rpcsec_gss_continue_init
+| `rpcsec_gss_data
+| `rpcsec_gss_destroy
+| `rpcsec_gss_init ]</code></pre>
+<pre><span class="TYPErpc_gss_service_enum_t"><span class="keyword">type</span> rpc_gss_service_enum_t</span> = <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="TYPErpc_gss_service_t"><span class="keyword">type</span> rpc_gss_service_t</span> = <code class="type">[ `rpc_gss_svc_integrity | `rpc_gss_svc_none | `rpc_gss_svc_privacy ]</code></pre>
+<pre><span class="TYPErpc_gss_cred_t"><span class="keyword">type</span> rpc_gss_cred_t</span> = <code class="type">[ `_1 of _t0 ]</code></pre>
+<pre><code><span class="TYPErpc_gss_init_arg"><span class="keyword">type</span> rpc_gss_init_arg</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_init_arg.gss_token">gss_token</span> : <code class="type">string</code></code></td></tr><tr><td>}</td></tr></table>
+<pre><code><span class="TYPErpc_gss_init_res"><span class="keyword">type</span> rpc_gss_init_res</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_init_res.res_handle">res_handle</span> : <code class="type">string</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_init_res.res_major">res_major</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_init_res.res_minor">res_minor</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_init_res.res_seq_window">res_seq_window</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_init_res.res_token">res_token</span> : <code class="type">string</code></code></td></tr><tr><td>}</td></tr></table>
+<pre><code><span class="TYPErpc_gss_integ_data"><span class="keyword">type</span> rpc_gss_integ_data</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_integ_data.databody_integ">databody_integ</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=mstring">Xdr_mstring.mstring</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_integ_data.checksum">checksum</span> : <code class="type">string</code></code></td></tr><tr><td>}</td></tr></table>
+<pre><code><span class="TYPErpc_gss_priv_data"><span class="keyword">type</span> rpc_gss_priv_data</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTrpc_gss_priv_data.databody_priv">databody_priv</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr_mstring&amp;type=mstring">Xdr_mstring.mstring</a></code></code></td></tr><tr><td>}</td></tr></table>
+<pre><code><span class="TYPE_t0"><span class="keyword">type</span> _t0</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELT_t0.gss_proc">gss_proc</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_proc_t">rpc_gss_proc_t</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELT_t0.seq_num">seq_num</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELT_t0.service">service</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_service_t">rpc_gss_service_t</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELT_t0.handle">handle</span> : <code class="type">string</code></code></td></tr><tr><td>}</td></tr></table>
+<pre><span class="VALrpcsec_gss_data"><span class="keyword">val</span> rpcsec_gss_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALrpcsec_gss_init"><span class="keyword">val</span> rpcsec_gss_init</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALrpcsec_gss_continue_init"><span class="keyword">val</span> rpcsec_gss_continue_init</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALrpcsec_gss_destroy"><span class="keyword">val</span> rpcsec_gss_destroy</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALrpc_gss_svc_none"><span class="keyword">val</span> rpc_gss_svc_none</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALrpc_gss_svc_integrity"><span class="keyword">val</span> rpc_gss_svc_integrity</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALrpc_gss_svc_privacy"><span class="keyword">val</span> rpc_gss_svc_privacy</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=int4">Netnumber.int4</a></code></pre>
+<pre><span class="VALgss_s_complete"><span class="keyword">val</span> gss_s_complete</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VALgss_s_continue_needed"><span class="keyword">val</span> gss_s_continue_needed</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VALzero"><span class="keyword">val</span> zero</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VALmaxseq"><span class="keyword">val</span> maxseq</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_proc_enum_t"><span class="keyword">val</span> _to_rpc_gss_proc_enum_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_proc_enum_t">rpc_gss_proc_enum_t</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_proc_enum_t"><span class="keyword">val</span> _of_rpc_gss_proc_enum_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_proc_enum_t">rpc_gss_proc_enum_t</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_proc_t"><span class="keyword">val</span> _to_rpc_gss_proc_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_proc_t">rpc_gss_proc_t</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_proc_t"><span class="keyword">val</span> _of_rpc_gss_proc_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_proc_t">rpc_gss_proc_t</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_service_enum_t"><span class="keyword">val</span> _to_rpc_gss_service_enum_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_service_enum_t">rpc_gss_service_enum_t</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_service_enum_t"><span class="keyword">val</span> _of_rpc_gss_service_enum_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_service_enum_t">rpc_gss_service_enum_t</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_service_t"><span class="keyword">val</span> _to_rpc_gss_service_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_service_t">rpc_gss_service_t</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_service_t"><span class="keyword">val</span> _of_rpc_gss_service_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_service_t">rpc_gss_service_t</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_cred_t"><span class="keyword">val</span> _to_rpc_gss_cred_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_cred_t">rpc_gss_cred_t</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_cred_t"><span class="keyword">val</span> _of_rpc_gss_cred_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_cred_t">rpc_gss_cred_t</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_init_arg"><span class="keyword">val</span> _to_rpc_gss_init_arg</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_init_arg">rpc_gss_init_arg</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_init_arg"><span class="keyword">val</span> _of_rpc_gss_init_arg</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_init_arg">rpc_gss_init_arg</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_init_res"><span class="keyword">val</span> _to_rpc_gss_init_res</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_init_res">rpc_gss_init_res</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_init_res"><span class="keyword">val</span> _of_rpc_gss_init_res</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_init_res">rpc_gss_init_res</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_integ_data"><span class="keyword">val</span> _to_rpc_gss_integ_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_integ_data">rpc_gss_integ_data</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_integ_data"><span class="keyword">val</span> _of_rpc_gss_integ_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_integ_data">rpc_gss_integ_data</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VAL_to_rpc_gss_priv_data"><span class="keyword">val</span> _to_rpc_gss_priv_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_priv_data">rpc_gss_priv_data</a></code></pre>
+<pre><span class="VAL_of_rpc_gss_priv_data"><span class="keyword">val</span> _of_rpc_gss_priv_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_auth_gssapi_aux&amp;type=rpc_gss_priv_data">rpc_gss_priv_data</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_proc_enum_t"><span class="keyword">val</span> xdrt_rpc_gss_proc_enum_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_proc_t"><span class="keyword">val</span> xdrt_rpc_gss_proc_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_service_enum_t"><span class="keyword">val</span> xdrt_rpc_gss_service_enum_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_service_t"><span class="keyword">val</span> xdrt_rpc_gss_service_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_cred_t"><span class="keyword">val</span> xdrt_rpc_gss_cred_t</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_init_arg"><span class="keyword">val</span> xdrt_rpc_gss_init_arg</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_init_res"><span class="keyword">val</span> xdrt_rpc_gss_init_res</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_integ_data"><span class="keyword">val</span> xdrt_rpc_gss_integ_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+<pre><span class="VALxdrt_rpc_gss_priv_data"><span class="keyword">val</span> xdrt_rpc_gss_priv_data</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a></code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

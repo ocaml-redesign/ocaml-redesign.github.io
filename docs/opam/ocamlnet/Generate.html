@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="VALextract_type_info"><span class="keyword">val</span> extract_type_info</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt;
+(string, string) Hashtbl.t * (string, <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a>) Hashtbl.t</code></pre>
+<pre><span class="VALget_type_from_map"><span class="keyword">val</span> get_type_from_map</span> : <code class="type">(string, <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a>) Hashtbl.t -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a></code></pre>
+<pre><span class="VALoutput_uint4_pattern"><span class="keyword">val</span> output_uint4_pattern</span> : <code class="type">Format.formatter -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; unit</code></pre>
+<pre><span class="VALmax_int_as_uint4"><span class="keyword">val</span> max_int_as_uint4</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VALoutput_uint4"><span class="keyword">val</span> output_uint4</span> : <code class="type">Format.formatter -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; unit</code></pre>
+<pre><span class="VALint64_of_const"><span class="keyword">val</span> int64_of_const</span> : <code class="type">bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; int64</code></pre>
+<pre><span class="VALoutput_int4_pattern"><span class="keyword">val</span> output_int4_pattern</span> : <code class="type">Format.formatter -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; unit</code></pre>
+<pre><span class="VALoutput_int4"><span class="keyword">val</span> output_int4</span> : <code class="type">Format.formatter -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; unit</code></pre>
+<pre><span class="VALstrip_enum_list"><span class="keyword">val</span> strip_enum_list</span> : <code class="type">('a * <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_constant">Syntax.xdr_constant</a> Pervasives.ref) list -&gt;
+('a * <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_constant">Syntax.xdr_constant</a> Pervasives.ref) list</code></pre>
+<pre><span class="VALn0"><span class="keyword">val</span> n0</span> : <code class="type">bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VALn1"><span class="keyword">val</span> n1</span> : <code class="type">bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a></code></pre>
+<pre><span class="VALenum_type"><span class="keyword">val</span> enum_type</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; (<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_id">Syntax.xdr_id</a> * <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_constant">Syntax.xdr_constant</a> Pervasives.ref) list</code></pre>
+<pre><span class="VALvalues_of_enum_type"><span class="keyword">val</span> values_of_enum_type</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_constant">Syntax.xdr_constant</a> list</code></pre>
+<pre><span class="VALget_union_discriminator_type"><span class="keyword">val</span> get_union_discriminator_type</span> : <code class="type">(string, <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a>) Hashtbl.t -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_union">Syntax.xdr_union</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a></code></pre>
+<pre><span class="VALoutput_consts"><span class="keyword">val</span> output_consts</span> : <code class="type">Format.formatter -&gt; Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; unit</code></pre>
+<pre><span class="VALoutput_type_declarations"><span class="keyword">val</span> output_type_declarations</span> : <code class="type">Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; unit</code></pre>
+<pre><span class="VALoutput_xdr_type"><span class="keyword">val</span> output_xdr_type</span> : <code class="type">Format.formatter -&gt; Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; unit</code></pre>
+<pre><span class="VALcalc_min_size"><span class="keyword">val</span> calc_min_size</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; int</code></pre>
+<pre><span class="VALconversion_custom_int_of_netnumber"><span class="keyword">val</span> conversion_custom_int_of_netnumber</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; string</code></pre>
+<pre><span class="VALconversion_netnumber_of_custom_int"><span class="keyword">val</span> conversion_netnumber_of_custom_int</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; string</code></pre>
+<pre><span class="VALname_of_int"><span class="keyword">val</span> name_of_int</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; string</code></pre>
+<pre><span class="VALxv_name_of_int"><span class="keyword">val</span> xv_name_of_int</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; string</code></pre>
+<pre><span class="VALnetnumber_name_of_int"><span class="keyword">val</span> netnumber_name_of_int</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; string</code></pre>
+<pre><span class="VALsize_of_int"><span class="keyword">val</span> size_of_int</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; int</code></pre>
+<pre><span class="VALoutput_any_int"><span class="keyword">val</span> output_any_int</span> : <code class="type">Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; unit</code></pre>
+<pre><span class="VALconversion_int32_of_discr"><span class="keyword">val</span> conversion_int32_of_discr</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; string</code></pre>
+<pre><span class="VALhave_enum_default_with_arg"><span class="keyword">val</span> have_enum_default_with_arg</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_union">Syntax.xdr_union</a> -&gt; (<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a>) -&gt; bool</code></pre>
+<pre><span class="VALoutput_match_union_by_cases"><span class="keyword">val</span> output_match_union_by_cases</span> : <code class="type">Format.formatter -&gt;
+<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_union">Syntax.xdr_union</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt;
+string -&gt;
+(<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a>) -&gt;
+(int -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; bool -&gt; bool -&gt; 'a) -&gt;
+(<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; bool -&gt; 'b) -&gt; (unit -&gt; 'c) -&gt; unit</code></pre>
+<pre><span class="VALoutput_match_union_by_number"><span class="keyword">val</span> output_match_union_by_number</span> : <code class="type">Format.formatter -&gt;
+<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_union">Syntax.xdr_union</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt;
+string -&gt;
+bool -&gt;
+'a -&gt;
+(int -&gt; bool * <a href="?package=ocamlnet&amp;module=Netnumber&amp;type=uint4">Netnumber.uint4</a> -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; bool -&gt; 'b) -&gt;
+(<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; 'c) -&gt; (unit -&gt; 'd) -&gt; (unit -&gt; 'e) -&gt; unit</code></pre>
+<pre><span class="VALoutput_coerce_pattern"><span class="keyword">val</span> output_coerce_pattern</span> : <code class="type">Format.formatter -&gt;
+<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_union">Syntax.xdr_union</a> -&gt;
+<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a> -&gt; (<a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_decl">Syntax.xdr_decl</a> -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_type">Syntax.xdr_type</a>) -&gt; unit</code></pre>
+<pre><span class="VALproj_pattern"><span class="keyword">val</span> proj_pattern</span> : <code class="type">string -&gt; int -&gt; int -&gt; string</code></pre>
+<pre><span class="VALoutput_conversions"><span class="keyword">val</span> output_conversions</span> : <code class="type">Format.formatter -&gt; Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; unit</code></pre>
+<pre><span class="VALoutput_progdefs"><span class="keyword">val</span> output_progdefs</span> : <code class="type">Format.formatter -&gt; Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; unit</code></pre>
+<pre><span class="VALoutput_client"><span class="keyword">val</span> output_client</span> : <code class="type">Format.formatter -&gt; Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; string -&gt; unit</code></pre>
+<pre><span class="TYPEstyle"><span class="keyword">type</span> style</span> = <code class="type">[ `Create | `Create2 ]</code></pre>
+<pre><span class="VALoutput_server"><span class="keyword">val</span> output_server</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Generate&amp;type=style">style</a> -&gt;
+Format.formatter -&gt; Format.formatter -&gt; <a href="?package=ocamlnet&amp;module=Syntax&amp;type=xdr_def">Syntax.xdr_def</a> list -&gt; string -&gt; unit</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

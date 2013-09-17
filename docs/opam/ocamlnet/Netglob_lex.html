@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="EXCEPTIONBracket_Unsupported"><span class="keyword">exception</span> Bracket_Unsupported</span></pre>
+<pre><span class="EXCEPTIONLexing_Error"><span class="keyword">exception</span> Lexing_Error</span></pre>
+<pre><code><span class="TYPEbracket_token"><span class="keyword">type</span> bracket_token</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTbracket_token.Bracket_char"><span class="constructor">Bracket_char</span></span> <span class="keyword">of</span> <code class="type">char</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTbracket_token.Bracket_range"><span class="constructor">Bracket_range</span></span> <span class="keyword">of</span> <code class="type">char * char</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTbracket_token.Bracket_code"><span class="constructor">Bracket_code</span></span> <span class="keyword">of</span> <code class="type">int</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr></table>
+<pre><code><span class="TYPEbrace_token"><span class="keyword">type</span> brace_token</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTbrace_token.Brace_literal"><span class="constructor">Brace_literal</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTbrace_token.Brace_braces"><span class="constructor">Brace_braces</span></span> <span class="keyword">of</span> <code class="type"><a href="?package=ocamlnet&amp;module=Netglob_lex&amp;type=brace_token">brace_token</a> list</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr></table>
+<pre><code><span class="TYPEglob_features"><span class="keyword">type</span> glob_features</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTglob_features.enable_star">enable_star</span> : <code class="type">bool</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTglob_features.enable_qmark">enable_qmark</span> : <code class="type">bool</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTglob_features.enable_brackets">enable_brackets</span> : <code class="type">bool</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTglob_features.enable_braces">enable_braces</span> : <code class="type">bool</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTglob_features.enable_tilde">enable_tilde</span> : <code class="type">bool</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTglob_features.enable_escape">enable_escape</span> : <code class="type">bool</code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTglob_features.escaped">escaped</span> : <code class="type">bool</code></code></td></tr><tr><td>}</td></tr></table>
+<pre><code><span class="TYPEglob_token"><span class="keyword">type</span> glob_token</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTglob_token.Glob_literal"><span class="constructor">Glob_literal</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTglob_token.Glob_brackets"><span class="constructor">Glob_brackets</span></span> <span class="keyword">of</span> <code class="type">bool * <a href="?package=ocamlnet&amp;module=Netglob_lex&amp;type=bracket_token">bracket_token</a> list</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTglob_token.Glob_braces"><span class="constructor">Glob_braces</span></span> <span class="keyword">of</span> <code class="type"><a href="?package=ocamlnet&amp;module=Netglob_lex&amp;type=brace_token">brace_token</a> list</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTglob_token.Glob_tilde"><span class="constructor">Glob_tilde</span></span> <span class="keyword">of</span> <code class="type">string * bool</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr></table>
+<pre><code><span class="TYPEexploded_char"><span class="keyword">type</span> exploded_char</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTexploded_char.C"><span class="constructor">C</span></span> <span class="keyword">of</span> <code class="type">char</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTexploded_char.E"><span class="constructor">E</span></span> <span class="keyword">of</span> <code class="type">char</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTexploded_char.Delim"><span class="constructor">Delim</span></span> <span class="keyword">of</span> <code class="type">char</code></code></td></tr></table>
+<pre><span class="VALcollect_until"><span class="keyword">val</span> collect_until</span> : <code class="type">'a -&gt; ('b -&gt; 'a) -&gt; 'b -&gt; 'a list</code></pre>
+<pre><span class="VALstring_of_exploded"><span class="keyword">val</span> string_of_exploded</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netglob_lex&amp;type=exploded_char">exploded_char</a> list -&gt; string</code></pre>
+<pre><span class="VALhave_delim"><span class="keyword">val</span> have_delim</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netglob_lex&amp;type=exploded_char">exploded_char</a> list -&gt; bool</code></pre>
+<pre><span class="VAL__ocaml_lex_tables"><span class="keyword">val</span> __ocaml_lex_tables</span> : <code class="type">Lexing.lex_tables</code></pre>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

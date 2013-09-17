@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><pre><span class="TYPEcode_stylist"><span class="keyword">type</span> code_stylist</span> = <code class="type">&lt; style : lang:string -&gt; string -&gt; string &gt;</code></pre><div class="info"><div class="info">has at least a method <code class="code">style</code> that takes a language name and some
+    code and returns that code with style.</div></div>
+<pre><span class="VALdefault_language"><span class="keyword">val</span> default_language</span> : <code class="type">string Pervasives.ref</code></pre><div class="info"><div class="info">default language for code blocks can be set to any name, 
+    by default it is the empty string</div></div>
+<pre><span class="VALmake_paragraphs"><span class="keyword">val</span> make_paragraphs</span> : <code class="type"><a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt; <a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a></code></pre><div class="info"><div class="info">Since <code class="code">Omd_parser.parse</code> doesn't build paragraphs, if you want
+    Markdown-style paragraphs, you need to apply this function to
+    the result of <code class="code">Omd_parser.parse</code>.</div></div>
+<pre><span class="VALhtml_of_md"><span class="keyword">val</span> html_of_md</span> : <code class="type">?pindent:bool -&gt;
+?nl2br:bool -&gt; ?cs:<a href="?package=omd&amp;module=Omd_backend&amp;type=code_stylist">code_stylist</a> -&gt; <a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt; string</code></pre><div class="info"><div class="info"><code class="code">html_of_md md</code> returns a string containing the HTML version of
+    <code class="code">md</code>. Note that <code class="code">md</code> uses the internal representation of
+    Markdown.</div></div>
+<pre><span class="VALheaders_of_md"><span class="keyword">val</span> headers_of_md</span> : <code class="type"><a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt; (<a href="?package=omd&amp;module=Omd_representation&amp;type=element">Omd_representation.element</a> * string * string) list</code></pre><div class="info"><div class="info"><code class="code">headers_of_md md</code> returns a list of 3-tuples; in each of them the
+    first element is the header (e.g., <code class="code">H1(foo)</code>), the second is the
+    HTML id (as produced by <code class="code">html_of_md</code>), and the thrid element is
+    the HTML version of <code class="code">foo</code>.  The third elements of those 3-tuples
+    exist because if you use <code class="code">html_and_headers_of_md</code>, then you have
+    the guarantee that the HTML version of <code class="code">foo</code> is the same for
+    both the headers and the HTML version of <code class="code">md</code>.</div></div>
+<pre><span class="VALhtml_and_headers_of_md"><span class="keyword">val</span> html_and_headers_of_md</span> : <code class="type">?pindent:bool -&gt;
+?nl2br:bool -&gt;
+?cs:<a href="?package=omd&amp;module=Omd_backend&amp;type=code_stylist">code_stylist</a> -&gt;
+<a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt;
+string * (<a href="?package=omd&amp;module=Omd_representation&amp;type=element">Omd_representation.element</a> * <a href="?package=omd&amp;module=Omd_utils.StringSet&amp;type=elt">Omd_utils.StringSet.elt</a> * string) list</code></pre><div class="info"><div class="info"><code class="code">html_and_headers_of_md md</code> is the same as <code class="code">(html_of_md md,
+    headers_of_md md)</code> except that it's two times faster.
+    If you need headers and html, don't use <code class="code">html_of_md</code>
+    and <code class="code">headers_of_md</code> but this function instead.
+    Optional parameters</div></div>
+<pre><span class="VALtext_of_md"><span class="keyword">val</span> text_of_md</span> : <code class="type"><a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt; string</code></pre><div class="info"><div class="info"><code class="code">text_of_md md</code> is basically the same as <code class="code">html_of_md md</code> but without
+    the HTML tags in the output.</div></div>
+<pre><span class="VALmarkdown_of_md"><span class="keyword">val</span> markdown_of_md</span> : <code class="type"><a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt; string</code></pre><div class="info"><div class="info"><code class="code">markdown_of_md md</code> is basically the same as <code class="code">html_of_md md</code> but
+    with the output in Markdown syntax rather than HTML.</div></div>
+<pre><span class="VALsexpr_of_md"><span class="keyword">val</span> sexpr_of_md</span> : <code class="type"><a href="?package=omd&amp;module=Omd_representation&amp;type=t">Omd_representation.t</a> -&gt; string</code></pre><div class="info"><div class="info"><code class="code">sexpr_of_md md</code> is basically the same as <code class="code">html_of_md md</code> but with
+    the output in s-expressions rather than HTML. This is mainly used
+    for debugging.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

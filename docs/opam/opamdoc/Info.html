@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Types for the information collected in comments.</div>
+<pre><code><span class="TYPEstyle_kind"><span class="keyword">type</span> style_kind</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTstyle_kind.SK_custom"><span class="constructor">SK_custom</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr></table><div class="info"><div class="info">The differents kinds of style.</div><div class="info">The differents kinds of element references.</div></div>
+<pre><code><span class="TYPEref_kind"><span class="keyword">type</span> ref_kind</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTref_kind.RK_custom"><span class="constructor">RK_custom</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr></table>
+<pre><code><span class="TYPEspecial_ref_kind"><span class="keyword">type</span> special_ref_kind</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTspecial_ref_kind.SRK_module_list"><span class="constructor">SRK_module_list</span></span> <span class="keyword">of</span> <code class="type">string list</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td></tr></table>
+<pre><code><span class="TYPEtext_element"><span class="keyword">type</span> text_element</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Raw"><span class="constructor">Raw</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td><td class="typefieldcomment" align="left"><div class="info">Raw text.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Code"><span class="constructor">Code</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td><td class="typefieldcomment" align="left"><div class="info">The string is source code.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.PreCode"><span class="constructor">PreCode</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td><td class="typefieldcomment" align="left"><div class="info">The string is pre-formatted source code.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Verbatim"><span class="constructor">Verbatim</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td><td class="typefieldcomment" align="left"><div class="info">String 'as is'.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Style"><span class="constructor">Style</span></span> <span class="keyword">of</span> <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=style_kind">style_kind</a> * text</code></code></td><td class="typefieldcomment" align="left"><div class="info">Text tagged with a style.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.List"><span class="constructor">List</span></span> <span class="keyword">of</span> <code class="type">text list</code></code></td><td class="typefieldcomment" align="left"><div class="info">A list.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Enum"><span class="constructor">Enum</span></span> <span class="keyword">of</span> <code class="type">text list</code></code></td><td class="typefieldcomment" align="left"><div class="info">An enumerated list.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code/></td><td class="typefieldcomment" align="left"><div class="info">To force a line break.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Block"><span class="constructor">Block</span></span> <span class="keyword">of</span> <code class="type">text</code></code></td><td class="typefieldcomment" align="left"><div class="info">Like html's block quote.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Title"><span class="constructor">Title</span></span> <span class="keyword">of</span> <code class="type">int * string option * text</code></code></td><td class="typefieldcomment" align="left"><div class="info">Style number, optional label, and text.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Ref"><span class="constructor">Ref</span></span> <span class="keyword">of</span> <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=ref_kind">ref_kind</a> * string * text option</code></code></td><td class="typefieldcomment" align="left"><div class="info">A reference to an element. Complete name and kind. An optional
+        text can be given to display this text instead of the element name.</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Special_ref"><span class="constructor">Special_ref</span></span> <span class="keyword">of</span> <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=special_ref_kind">special_ref_kind</a></code></code></td><td class="typefieldcomment" align="left"><div class="info">Special kinds of reference</div></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTtext_element.Target"><span class="constructor">Target</span></span> <span class="keyword">of</span> <code class="type">string option * string</code></code></td><td class="typefieldcomment" align="left"><div class="info">(target, code) : to specify code for a specific target format</div></td></tr></table>
+<pre><span class="TYPEtext"><span class="keyword">type</span> text</span> = <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=text_element">text_element</a> list</code></pre><div class="info"><div class="info"><code class="code">text</code> is a list of text_elements. The order matters.</div></div>
+<pre><code><span class="TYPEsee_ref"><span class="keyword">type</span> see_ref</span> = </code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTsee_ref.See_url"><span class="constructor">See_url</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTsee_ref.See_file"><span class="constructor">See_file</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr><tr><td align="left" valign="top"><code><span class="keyword">|</span></code></td><td align="left" valign="top"><code><span class="TYPEELTsee_ref.See_doc"><span class="constructor">See_doc</span></span> <span class="keyword">of</span> <code class="type">string</code></code></td></tr></table><div class="info"><div class="info">The different forms of references in @see tags.</div><div class="info">The information in a @see tag.</div></div>
+<pre><span class="TYPEsee"><span class="keyword">type</span> see</span> = <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=see_ref">see_ref</a> * <a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a></code></pre>
+<pre><span class="TYPEparam"><span class="keyword">type</span> param</span> = <code class="type">string * <a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a></code></pre><div class="info"><div class="info">Parameter name and description.</div></div>
+<pre><span class="TYPEraised_exception"><span class="keyword">type</span> raised_exception</span> = <code class="type">string * <a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a></code></pre><div class="info"><div class="info">Raised exception name and description.</div></div>
+<pre><code><span class="TYPEt"><span class="keyword">type</span> t</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_desc">i_desc</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a> option</code></code></td><td class="typefieldcomment" align="left"><div class="info">The description text.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_authors">i_authors</span> : <code class="type">string list</code></code></td><td class="typefieldcomment" align="left"><div class="info">The list of authors in @author tags.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_version">i_version</span> : <code class="type">string option</code></code></td><td class="typefieldcomment" align="left"><div class="info">The string in the @version tag.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_sees">i_sees</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=see">see</a> list</code></code></td><td class="typefieldcomment" align="left"><div class="info">The list of @see tags.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_since">i_since</span> : <code class="type">string option</code></code></td><td class="typefieldcomment" align="left"><div class="info">The string in the @since tag.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_before">i_before</span> : <code class="type">(string * <a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a>) list</code></code></td><td class="typefieldcomment" align="left"><div class="info">the version number and text in @before tag</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_deprecated">i_deprecated</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a> option</code></code></td><td class="typefieldcomment" align="left"><div class="info">The of the @deprecated tag.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_params">i_params</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=param">param</a> list</code></code></td><td class="typefieldcomment" align="left"><div class="info">The list of parameter descriptions.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_raised_exceptions">i_raised_exceptions</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=raised_exception">raised_exception</a> list</code></code></td><td class="typefieldcomment" align="left"><div class="info">The list of raised exceptions.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_return_value">i_return_value</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a> option</code></code></td><td class="typefieldcomment" align="left"><div class="info">The description text of the return value.</div></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="TYPEELTt.i_custom">i_custom</span> : <code class="type">(string * <a href="?package=opamdoc&amp;module=Info&amp;type=text">text</a>) list</code></code></td><td class="typefieldcomment" align="left"><div class="info">A text associated to a custom @-tag.</div></td></tr><tr><td>}</td></tr></table><div class="info"><div class="info">Information in a special comment.</div></div>
+<pre><span class="VALdummy"><span class="keyword">val</span> dummy</span> : <code class="type"><a href="?package=opamdoc&amp;module=Info&amp;type=t">t</a></code></pre><div class="info"><div class="info">An empty doc_info structure.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

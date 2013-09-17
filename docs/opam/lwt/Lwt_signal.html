@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Signals utilities</div>
+<div class="info"><div class="info">This module is deprecated, you should use TODO reference : Lwt_react.S
+    instead.</div></div>
+<pre><span class="VALreturn"><span class="keyword">val</span> return</span> : <code class="type">'a -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALbind"><span class="keyword">val</span> bind</span> : <code class="type">?eq:('b -&gt; 'b -&gt; bool) -&gt;
+'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; ('a -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a>) -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALwith_finaliser"><span class="keyword">val</span> with_finaliser</span> : <code class="type">(unit -&gt; unit) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALlimit"><span class="keyword">val</span> limit</span> : <code class="type">?eq:('a -&gt; 'a -&gt; bool) -&gt;
+(unit -&gt; unit <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALdelay"><span class="keyword">val</span> delay</span> : <code class="type">'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=event">React.event</a></code></pre>
+<pre><span class="VALapp_s"><span class="keyword">val</span> app_s</span> : <code class="type">?eq:('b -&gt; 'b -&gt; bool) -&gt;
+('a -&gt; 'b <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALmap_s"><span class="keyword">val</span> map_s</span> : <code class="type">?eq:('b -&gt; 'b -&gt; bool) -&gt;
+('a -&gt; 'b <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'b -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALfilter_s"><span class="keyword">val</span> filter_s</span> : <code class="type">?eq:('a -&gt; 'a -&gt; bool) -&gt;
+('a -&gt; bool <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALfmap_s"><span class="keyword">val</span> fmap_s</span> : <code class="type">?eq:('b -&gt; 'b -&gt; bool) -&gt;
+('a -&gt; 'b option <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'b -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALdiff_s"><span class="keyword">val</span> diff_s</span> : <code class="type">('a -&gt; 'a -&gt; 'b <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=event">React.event</a></code></pre>
+<pre><span class="VALsample_s"><span class="keyword">val</span> sample_s</span> : <code class="type">('b -&gt; 'a -&gt; 'c <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'b <a href="?package=react&amp;module=React&amp;type=event">React.event</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'c <a href="?package=react&amp;module=React&amp;type=event">React.event</a></code></pre>
+<pre><span class="VALaccum_s"><span class="keyword">val</span> accum_s</span> : <code class="type">?eq:('a -&gt; 'a -&gt; bool) -&gt;
+('a -&gt; 'a <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) <a href="?package=react&amp;module=React&amp;type=event">React.event</a> -&gt; 'a -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALfold_s"><span class="keyword">val</span> fold_s</span> : <code class="type">?eq:('a -&gt; 'a -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'a <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a -&gt; 'b <a href="?package=react&amp;module=React&amp;type=event">React.event</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALmerge_s"><span class="keyword">val</span> merge_s</span> : <code class="type">?eq:('a -&gt; 'a -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'a <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> list -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALl1_s"><span class="keyword">val</span> l1_s</span> : <code class="type">?eq:('b -&gt; 'b -&gt; bool) -&gt;
+('a -&gt; 'b <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'b -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALl2_s"><span class="keyword">val</span> l2_s</span> : <code class="type">?eq:('c -&gt; 'c -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'c <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt;
+'c -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'c <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALl3_s"><span class="keyword">val</span> l3_s</span> : <code class="type">?eq:('d -&gt; 'd -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'c -&gt; 'd <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt;
+'d -&gt;
+'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'c <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'd <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALl4_s"><span class="keyword">val</span> l4_s</span> : <code class="type">?eq:('e -&gt; 'e -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'c -&gt; 'd -&gt; 'e <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt;
+'e -&gt;
+'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt;
+'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'c <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'd <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'e <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALl5_s"><span class="keyword">val</span> l5_s</span> : <code class="type">?eq:('f -&gt; 'f -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'c -&gt; 'd -&gt; 'e -&gt; 'f <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt;
+'f -&gt;
+'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt;
+'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt;
+'c <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'd <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'e <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'f <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALl6_s"><span class="keyword">val</span> l6_s</span> : <code class="type">?eq:('g -&gt; 'g -&gt; bool) -&gt;
+('a -&gt; 'b -&gt; 'c -&gt; 'd -&gt; 'e -&gt; 'f -&gt; 'g <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt;
+'g -&gt;
+'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt;
+'b <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt;
+'c <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt;
+'d <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'e <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'f <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'g <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="VALrun_s"><span class="keyword">val</span> run_s</span> : <code class="type">?eq:('a -&gt; 'a -&gt; bool) -&gt; 'a -&gt; 'a <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a> <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a></code></pre>
+<pre><span class="TYPEnotifier"><span class="keyword">type</span> notifier</span> </pre>
+<pre><span class="VALdisable"><span class="keyword">val</span> disable</span> : <code class="type"><a href="?package=lwt&amp;module=Lwt_signal&amp;type=notifier">notifier</a> -&gt; unit</code></pre>
+<pre><span class="VALnotify"><span class="keyword">val</span> notify</span> : <code class="type">('a -&gt; unit) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; <a href="?package=lwt&amp;module=Lwt_signal&amp;type=notifier">notifier</a></code></pre>
+<pre><span class="VALnotify_p"><span class="keyword">val</span> notify_p</span> : <code class="type">('a -&gt; unit <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; <a href="?package=lwt&amp;module=Lwt_signal&amp;type=notifier">notifier</a></code></pre>
+<pre><span class="VALnotify_s"><span class="keyword">val</span> notify_s</span> : <code class="type">('a -&gt; unit <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; <a href="?package=lwt&amp;module=Lwt_signal&amp;type=notifier">notifier</a></code></pre>
+<pre><span class="VALalways_notify"><span class="keyword">val</span> always_notify</span> : <code class="type">('a -&gt; unit) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; unit</code></pre>
+<pre><span class="VALalways_notify_p"><span class="keyword">val</span> always_notify_p</span> : <code class="type">('a -&gt; unit <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; unit</code></pre>
+<pre><span class="VALalways_notify_s"><span class="keyword">val</span> always_notify_s</span> : <code class="type">('a -&gt; unit <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a>) -&gt; 'a <a href="?package=react&amp;module=React&amp;type=signal">React.signal</a> -&gt; unit</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

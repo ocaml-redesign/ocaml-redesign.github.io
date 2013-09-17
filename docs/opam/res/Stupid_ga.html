@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="ocaml_module sig" name="GA_SPEC"><pre><span class="keyword">module type</span> <a href="?package=res&amp;module=Stupid_ga.GA_SPEC">GA_SPEC</a> = <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="VALngenes"><span class="keyword">val</span> ngenes</span> : <code class="type">int</code></pre>
+<pre><span class="VALmut_prob"><span class="keyword">val</span> mut_prob</span> : <code class="type">int</code></pre>
+<pre><span class="VALrecomb_prob"><span class="keyword">val</span> recomb_prob</span> : <code class="type">int</code></pre>
+<pre><span class="VALevaluate_indiv"><span class="keyword">val</span> evaluate_indiv</span> : <code class="type"><a href="?package=res&amp;module=Res.Bits&amp;type=t">Res.Bits.t</a> -&gt; float</code></pre></div></div>
+<div class="ocaml_module sig" name="Ga"><pre><span class="keyword">module</span> <a href="?package=res&amp;module=Stupid_ga.Ga">Ga</a> : <code class="type"><div class="sig_block"><code class="code">functor (</code><code class="code">Spec</code><code class="code"> : </code><code class="code"><a href="?package=res&amp;module=Stupid_ga.GA_SPEC">GA_SPEC</a></code><code class="code">) -&gt; </code><code class="code">sig</code> .. <code class="code">end</code></div></code></pre><div class="ocaml_module_content">
+<div class="ocaml_module ident" name="Genes" path="?package=res&amp;module=Res.Bits"><pre><span class="keyword">module</span> <a href="?package=res&amp;module=Stupid_ga.Ga.Genes">Genes</a> : <code class="type"><code class="code"><a href="?package=res&amp;module=Res.Bits">Res.Bits</a></code></code></pre></div>
+<pre><span class="TYPEgenes"><span class="keyword">type</span> genes</span> = <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga.Genes&amp;type=t">Genes.t</a></code></pre>
+<pre><code><span class="TYPEindiv"><span class="keyword">type</span> indiv</span> = {</code></pre><table class="typetable">
+		    <tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTindiv.genes">genes</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=genes">genes</a></code></code></td></tr><tr><td align="left" valign="top"><code>  </code></td><td align="left" valign="top"><code><span class="keyword">mutable</span> <span class="TYPEELTindiv.fitness">fitness</span> : <code class="type">float option</code></code></td></tr><tr><td>}</td></tr></table>
+<pre><span class="TYPEpopulation"><span class="keyword">type</span> population</span> = <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> array</code></pre>
+<pre><span class="VALrandom_bit"><span class="keyword">val</span> random_bit</span> : <code class="type">unit -&gt; bool</code></pre>
+<pre><span class="VALcreate_indiv"><span class="keyword">val</span> create_indiv</span> : <code class="type">unit -&gt; <a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a></code></pre>
+<pre><span class="VALprint_indiv"><span class="keyword">val</span> print_indiv</span> : <code class="type">Pervasives.out_channel -&gt; <a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> -&gt; unit</code></pre>
+<pre><span class="VALmutate_indiv"><span class="keyword">val</span> mutate_indiv</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> -&gt; unit</code></pre>
+<pre><span class="VALevaluate_indiv"><span class="keyword">val</span> evaluate_indiv</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> -&gt; float</code></pre>
+<pre><span class="VALcreate_pop"><span class="keyword">val</span> create_pop</span> : <code class="type">int -&gt; <a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> array</code></pre>
+<pre><span class="VALmutate_pop"><span class="keyword">val</span> mutate_pop</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> array -&gt; unit</code></pre>
+<pre><span class="VALrecombine_indiv"><span class="keyword">val</span> recombine_indiv</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> -&gt; <a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALevaluate_pop"><span class="keyword">val</span> evaluate_pop</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> array -&gt; <a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a></code></pre>
+<pre><span class="VALrecombine_pop"><span class="keyword">val</span> recombine_pop</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> array -&gt; unit</code></pre>
+<pre><span class="VALselect_pop"><span class="keyword">val</span> select_pop</span> : <code class="type"><a href="?package=res&amp;module=Stupid_ga.Ga&amp;type=indiv">indiv</a> array -&gt; unit</code></pre></div></div>
+<div class="ocaml_module sig" name="MyGA_Spec"><pre><span class="keyword">module</span> <a href="?package=res&amp;module=Stupid_ga.MyGA_Spec">MyGA_Spec</a> : <code class="type"><code class="code">sig</code> .. <code class="code">end</code></code></pre><div class="ocaml_module_content">
+<pre><span class="VALngenes"><span class="keyword">val</span> ngenes</span> : <code class="type">int</code></pre>
+<pre><span class="VALmut_prob"><span class="keyword">val</span> mut_prob</span> : <code class="type">int</code></pre>
+<pre><span class="VALrecomb_prob"><span class="keyword">val</span> recomb_prob</span> : <code class="type">int</code></pre>
+<pre><span class="VALevaluate_indiv"><span class="keyword">val</span> evaluate_indiv</span> : <code class="type"><a href="?package=res&amp;module=Res.Bits&amp;type=t">Res.Bits.t</a> -&gt; float</code></pre></div></div>
+<div class="ocaml_module ident" name="MyGA" path="?package=res&amp;module=Stupid_ga.Ga"><pre><span class="keyword">module</span> <a href="?package=res&amp;module=Stupid_ga.MyGA">MyGA</a> : <code class="type"><code class="code"><a href="?package=res&amp;module=Stupid_ga.Ga">Ga</a></code>(<code class="code"><a href="?package=res&amp;module=Stupid_ga.MyGA_Spec">MyGA_Spec</a></code>)</code></pre></div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

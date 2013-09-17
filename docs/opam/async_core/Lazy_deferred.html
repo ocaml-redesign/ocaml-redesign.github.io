@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">A <code class="code">Lazy_deferred.t</code> is a delayed computation that can produce a deferred.  Nothing
+    happens with a lazy deferred unless one <code class="code">force</code>s it.  Forcing a lazy deferred starts
+    the computation, which will eventually cause the deferred to become determined.  As
+    usual with laziness, multiply forcing a lazy deferred is no different than forcing it
+    a single time.<br/>    Exceptions (both synchronous and asynchronous) raised by a delayed computation are
+    returned by <code class="code">force</code> (<code class="code">wait</code>, <code class="code">peek</code>, etc.), or will be raised to the monitor in effect
+    when <code class="code">force_exn</code> (<code class="code">wait_exn</code>, <code class="code">peek_exn</code>, etc.) was called.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> <code class="type">'a </code>t</span> </pre>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">(unit -&gt; 'a <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a>) -&gt; 'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">create f</code> creates a new lazy deferred that will call <code class="code">f</code> when it is forced.</div></div>
+<pre><span class="VALforce"><span class="keyword">val</span> force</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; ('a, exn) Core.Std.Result.t <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a></code></pre><div class="info"><div class="info"><code class="code">force t</code> forces evaluation of <code class="code">t</code> and returns a deferred that becomes determined
+    when the deferred computation becomes determined or raises.</div></div>
+<pre><span class="VALforce_exn"><span class="keyword">val</span> force_exn</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; 'a <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a></code></pre>
+<pre><span class="VALwait"><span class="keyword">val</span> wait</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; ('a, exn) Core.Std.Result.t <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a></code></pre><div class="info"><div class="info"><code class="code">wait t</code> waits for <code class="code">t</code> to be forced.  If no one ever calls <code class="code">force t</code>, <code class="code">wait</code> will wait
+    forever.</div></div>
+<pre><span class="VALwait_exn"><span class="keyword">val</span> wait_exn</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; 'a <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a></code></pre>
+<div class="ocaml_include ident" items="[&quot;Monad_infix&quot;]"><pre><span class="keyword">include</span> <code class="type"><code class="code">Core.Std.Monad</code> with type t := 'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a></code><div class="info"><div class="info"><code class="code">bind t f</code> in the lazy-deferred monad creates a computation that, when forced, will
+    force <code class="code">t</code>, apply <code class="code">f</code> to the result, and then force the result of that.</div></div></pre></div>
+<pre><span class="VALbind'"><span class="keyword">val</span> bind'</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; ('a -&gt; 'b <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a>) -&gt; 'b <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">bind'</code> differs from <code class="code">bind</code> in that the supplied function produces an <code class="code">'a Deferred.t</code>
+    rather than an <code class="code">'a t</code>.</div></div>
+<pre><span class="VALfollow"><span class="keyword">val</span> follow</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; ('a -&gt; 'b <a href="?package=async_core&amp;module=Deferred&amp;type=t">Deferred.t</a>) -&gt; 'b <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">follow t f</code> returns a new lazy deferred almost like <code class="code">bind'</code> with the notable
+    difference that its computation will start as soon as the deferred it is following
+    becomes <code class="code">determined</code>.  Since the resulting deferred depends on the <code class="code">'a</code> value computed
+    by <code class="code">t</code> forcing the resulting of <code class="code">follow</code> will force the compuation of <code class="code">t</code>.</div></div>
+<div class="info"><div class="info">Read-only operations.</div></div>
+<pre><span class="VALpeek"><span class="keyword">val</span> peek</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; ('a, exn) Core.Std.Result.t option</code></pre><div class="info"><div class="info"><code class="code">peek t = Deferred.peek (wait t)</code></div></div>
+<pre><span class="VALpeek_exn"><span class="keyword">val</span> peek_exn</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; 'a option</code></pre>
+<pre><span class="VALis_determined"><span class="keyword">val</span> is_determined</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; bool</code></pre>
+<pre><span class="VALis_forced"><span class="keyword">val</span> is_forced</span> : <code class="type">'a <a href="?package=async_core&amp;module=Lazy_deferred&amp;type=t">t</a> -&gt; bool</code></pre>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

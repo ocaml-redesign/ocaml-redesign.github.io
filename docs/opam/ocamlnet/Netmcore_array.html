@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Shared arrays</div>
+<div class="info"><div class="info">This type of array is to some degree comparable with <code class="code">Array</code>, but
+    there are a few extensions:<ul><li>There is a so-called header. The header can have any type, and
+      is typically used for managing concurrent access (e.g. mutexes).
+      The header also lives in shared memory.</li><li>The arrays can be grown in size
+ </li></ul></div></div>
+<pre><span class="TYPEsarray"><span class="keyword">type</span> <code class="type">('e, 'h) </code>sarray</span> </pre><div class="info"><div class="info">Arrays where the elements have type <code class="code">'e</code> and the header has
+      type <code class="code">'h</code></div></div>
+<pre><span class="TYPEsarray_descr"><span class="keyword">type</span> <code class="type">('e, 'h) </code>sarray_descr</span> </pre><div class="info"><div class="info">The marshallable descriptor of a shared array</div></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netmcore&amp;type=res_id">Netmcore.res_id</a> -&gt; 'e array -&gt; 'h -&gt; ('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a></code></pre><div class="info"><div class="info"><code class="code">create pool_id a h</code>:
+      Creates a shared array by deeply copying a normal array <code class="code">a</code>
+      and using the copy of <code class="code">h</code> as header</div></div>
+<pre><span class="VALmake"><span class="keyword">val</span> make</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netmcore&amp;type=res_id">Netmcore.res_id</a> -&gt; int -&gt; 'e -&gt; 'h -&gt; ('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a></code></pre><div class="info"><div class="info"><code class="code">make pool_id n x h</code>:
+      Creates a shared array of the passed number of elements, 
+      copies the element <code class="code">x</code>, and initializes each element of the new array
+      with the single copy of <code class="code">x</code>. The value <code class="code">h</code> is copied and used
+      as header.</div></div>
+<pre><span class="VALinit"><span class="keyword">val</span> init</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netmcore&amp;type=res_id">Netmcore.res_id</a> -&gt; int -&gt; (int -&gt; 'e) -&gt; 'h -&gt; ('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a></code></pre><div class="info"><div class="info"><code class="code">init pool_id n f h</code>:
+      Creates a shared array of the passed number of elements, 
+      and for getting the element at position <code class="code">k</code> the function
+      <code class="code">f k</code> is run, and the copy of the result is written to the
+      position. The header is set to the copy of <code class="code">h</code>.</div></div>
+<pre><span class="VALgrow"><span class="keyword">val</span> grow</span> : <code class="type">('e, 'a) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; int -&gt; 'e -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">grow sa n x</code>: Grows the array to <code class="code">n</code> elements. The new elements
+      are initialized to a (single) copy of <code class="code">x</code>.<br/>      If <code class="code">n</code> is smaller than the current length, the function will do
+      nothing, and keep the length.</div></div>
+<pre><span class="VALset"><span class="keyword">val</span> set</span> : <code class="type">('e, 'a) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; int -&gt; 'e -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">set sa k x</code>: Sets the <code class="code">k-th</code> element of the array <code class="code">sa</code> to a
+      deep copy of <code class="code">x</code>.</div></div>
+<pre><span class="VALget_ro"><span class="keyword">val</span> get_ro</span> : <code class="type">('e, 'a) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; int -&gt; 'e</code></pre><div class="info"><div class="info"><code class="code">get_ro sa k</code>: Gets the <code class="code">k</code>-th element of the shared array <code class="code">sa</code>.
+      Note that there is no guarantee that this value still exists if
+      it is returned, and a parallely running <code class="code">set</code> changes this element.
+      If such values are accessed the program may crash!</div></div>
+<pre><span class="VALget_p"><span class="keyword">val</span> get_p</span> : <code class="type">('e, 'b) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; int -&gt; ('e -&gt; 'a) -&gt; 'a</code></pre><div class="info"><div class="info"><code class="code">get_p sa k f</code>: Gets the <code class="code">k</code>-th element of the shared array <code class="code">sa</code>
+      and call <code class="code">f</code> with this element, and returns the result of <code class="code">f</code>.
+      During the execution of <code class="code">f</code> the requested element cannot be
+      garbage collected.</div></div>
+<pre><span class="VALget_c"><span class="keyword">val</span> get_c</span> : <code class="type">('e, 'a) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; int -&gt; 'e</code></pre><div class="info"><div class="info"><code class="code">get_c sa k</code>: Gets a copy of the <code class="code">k</code>-th element of the shared array
+      <code class="code">sæ</code></div></div>
+<pre><span class="VALlength"><span class="keyword">val</span> length</span> : <code class="type">('a, 'b) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; int</code></pre><div class="info"><div class="info">Returns the length</div></div>
+<pre><span class="VALheader"><span class="keyword">val</span> header</span> : <code class="type">('a, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; 'h</code></pre><div class="info"><div class="info">Returns the header</div></div>
+<pre><span class="VALderef"><span class="keyword">val</span> deref</span> : <code class="type">('e, 'a) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; 'e array</code></pre><div class="info"><div class="info">Returns the raw array in shared memory for unprotected access</div></div>
+<pre><span class="VALheap"><span class="keyword">val</span> heap</span> : <code class="type">('a, 'b) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; Obj.t <a href="?package=ocamlnet&amp;module=Netmcore_heap&amp;type=heap">Netmcore_heap.heap</a></code></pre><div class="info"><div class="info">Return the backing heap structure</div></div>
+<pre><span class="VALdescr_of_sarray"><span class="keyword">val</span> descr_of_sarray</span> : <code class="type">('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a> -&gt; ('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray_descr">sarray_descr</a></code></pre><div class="info"><div class="info">Returns the descriptor</div></div>
+<pre><span class="VALsarray_of_descr"><span class="keyword">val</span> sarray_of_descr</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netmcore&amp;type=res_id">Netmcore.res_id</a> -&gt; ('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray_descr">sarray_descr</a> -&gt; ('e, 'h) <a href="?package=ocamlnet&amp;module=Netmcore_array&amp;type=sarray">sarray</a></code></pre><div class="info"><div class="info">Look up the buffer for this descriptor</div></div>
+<div class="info"><div class="info"><br/><h3 id="3_TITLE">Mutating header fields</h3><br/><br/>    Special care has to be taken when mutating header fields. The header
+    must completely live in the same heap. For adding new values, one
+    has to use TODO reference : Netmcore_heap.modify. Example for a header of type:<br/>    <pre class="codepre"><code class="code">
+    type header =
+      { mutable n : int;
+        mutable name : string
+      }
+    </code></pre><br/>    Here, the field <code class="code">n</code> can be directly assigned because an <code class="code">int</code>
+    is always an unboxed value. So,<br/>    <pre class="codepre"><code class="code">
+    h.n &lt;- new_value
+    </code></pre><br/>    is legal. However, strings are heap-allocated. For an assignment
+    to <code class="code">name</code> we need to use TODO reference : Netmcore_heap.modify, as in<br/>    <pre class="codepre"><code class="code">
+    Netmcore_heap.modify
+      (Netmcore_array.heap sa)
+      (fun mutator -&gt;
+        h.name &lt;- Netmcore_heap.add mutator new_value
+      )
+    </code></pre><br/>    The function TODO reference : Netmcore_heap.add pushes a copy of the <code class="code">new_value</code>
+    to the heap, and this allows us to do the assignment.<br/>    During TODO reference : Netcore_heap.modify certain operations are prohibited
+    because they would cause a deadlock:<ul><li><code class="code">grow</code></li><li><code class="code">set</code></li><li><code class="code">get_p</code></li><li><code class="code">get_c</code></li></ul>    (This may be relaxed in a future version.)</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

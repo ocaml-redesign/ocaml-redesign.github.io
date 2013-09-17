@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">High level function for writing full-screen applications</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre><div class="info"><div class="info">Type of a user interface.</div></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm&amp;type=t">LTerm.t</a> -&gt; ?save_state:bool -&gt; (<a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_draw&amp;type=matrix">LTerm_draw.matrix</a> -&gt; unit) -&gt; <a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a></code></pre><div class="info"><div class="info"><code class="code">create term ?save_state draw</code> creates a new user
+      interface. <code class="code">draw</code> is used to draw the user interface. If
+      <code class="code">save_state</code> is <code class="code">true</code> (the default) then the state of the
+      terminal is saved.</div></div>
+<pre><span class="VALquit"><span class="keyword">val</span> quit</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; unit <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a></code></pre><div class="info"><div class="info"><code class="code">quit ()</code> quit the given ui and restore the terminal state.</div></div>
+<pre><span class="VALsize"><span class="keyword">val</span> size</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_geom&amp;type=size">LTerm_geom.size</a></code></pre><div class="info"><div class="info"><code class="code">size ui</code> returns the current size of the terminal used by the
+      given user-interface. It is updated by TODO reference : wait.</div></div>
+<pre><span class="VALdraw"><span class="keyword">val</span> draw</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">draw ui</code> enqueue a draw operation for the given UI.</div></div>
+<pre><span class="VALcursor_visible"><span class="keyword">val</span> cursor_visible</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; bool</code></pre><div class="info"><div class="info"><code class="code">cursor_visible ui</code> returns <code class="code">true</code> if the cursor is displayed in
+      the UI. It is initially not visible.</div></div>
+<pre><span class="VALset_cursor_visible"><span class="keyword">val</span> set_cursor_visible</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; bool -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">set_cursor_visible ui visible</code> sets the cursor visible
+      state.</div></div>
+<pre><span class="VALcursor_position"><span class="keyword">val</span> cursor_position</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_geom&amp;type=coord">LTerm_geom.coord</a></code></pre><div class="info"><div class="info"><code class="code">cursor_position ui</code> returns the position of the cursor inside
+      the UI.</div></div>
+<pre><span class="VALset_cursor_position"><span class="keyword">val</span> set_cursor_position</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_geom&amp;type=coord">LTerm_geom.coord</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">set_cursor_position ui coord</code> sets the position of the cursor
+      inside the UI.</div></div>
+<pre><span class="VALwait"><span class="keyword">val</span> wait</span> : <code class="type"><a href="?package=lambda-term&amp;module=LTerm_ui&amp;type=t">t</a> -&gt; <a href="?package=lambda-term&amp;module=LTerm_event&amp;type=t">LTerm_event.t</a> <a href="?package=lwt&amp;module=Lwt&amp;type=t">Lwt.t</a></code></pre><div class="info"><div class="info"><code class="code">wait ui</code> wait for an event.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

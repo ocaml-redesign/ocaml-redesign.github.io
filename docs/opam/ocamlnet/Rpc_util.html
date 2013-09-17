@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">Utility functions</div>
+<pre><span class="TYPEverbosity"><span class="keyword">type</span> verbosity</span> = <code class="type">[ `Name_abbrev_args | `Name_full_args | `Name_only ]</code></pre><div class="info"><div class="info">How verbose the RPC ftrace is:<ul><li><code class="code">`Name_only</code>: For each RPC call only the name is logged</li><li><code class="code">`Name_abbrev_args</code>: The name and the abbreviated argument list
+          are logged</li><li><code class="code">`Name_full_args</code>: The name and the full argument list are logged
+    </li></ul></div></div>
+<pre><span class="VALstring_of_request"><span class="keyword">val</span> string_of_request</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_util&amp;type=verbosity">verbosity</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; string</code></pre><div class="info"><div class="info">Return the string representation of this call request</div></div>
+<pre><span class="VALstring_of_response"><span class="keyword">val</span> string_of_response</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Rpc_util&amp;type=verbosity">verbosity</a> -&gt; <a href="?package=ocamlnet&amp;module=Rpc_program&amp;type=t">Rpc_program.t</a> -&gt; string -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; string</code></pre><div class="info"><div class="info">Return the string representation of this call response</div></div>
+<pre><span class="VALstring_of_value"><span class="keyword">val</span> string_of_value</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_type_term">Xdr.xdr_type_term</a> -&gt; <a href="?package=ocamlnet&amp;module=Xdr&amp;type=xdr_value">Xdr.xdr_value</a> -&gt; string</code></pre><div class="info"><div class="info">Return a string representation of the value which must have the
+       passed type</div></div>
+<pre><span class="VALhex_dump_m"><span class="keyword">val</span> hex_dump_m</span> : <code class="type"><a href="?package=ocamlnet&amp;module=Netsys_mem&amp;type=memory">Netsys_mem.memory</a> -&gt; int -&gt; int -&gt; string</code></pre>
+<pre><span class="VALhex_dump_s"><span class="keyword">val</span> hex_dump_s</span> : <code class="type">string -&gt; int -&gt; int -&gt; string</code></pre><div class="info"><div class="info">Format the contents as hex sequence</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

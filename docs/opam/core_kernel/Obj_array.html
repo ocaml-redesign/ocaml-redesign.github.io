@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">An array of <code class="code">Obj.t</code>s.<br/>    This is useful to have as its own type because we can implement faster <code class="code">get</code> and <code class="code">set</code>
+    functions that know that they aren't dealing with float arrays and save a test for it.
+    We also have <code class="code">set</code> avoid the write barrier (caml_modify) in certain situations.<br/>    Just like with a regular <code class="code">Array</code>, the elements are boxed so they don't get copied by
+    <code class="code">sub</code>, <code class="code">get</code>, <code class="code">set</code>, <code class="code">blit</code>, etc.<br/>    The dynamic check this array module implements is something we hope to have
+    implemented at a lower level (as part of the native compiler's code generation).
+    Given that, the interface is somewhat spartan and intended for use within internal
+    data structures.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<div class="ocaml_include ident" path="?package=core_kernel&amp;module=Blit.S" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Blit.S">Blit.S</a></code> with type t := <a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a></code></pre></div>
+<div class="ocaml_include ident" path="?package=core_kernel&amp;module=Invariant.S" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code"><a href="?package=core_kernel&amp;module=Invariant.S">Invariant.S</a></code> with type t := <a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a></code></pre></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">len:int -&gt; <a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">create ~len</code> returns an obj-array of length <code class="code">len</code>, all of whose indices have value
+    <code class="code">Obj.repr 0</code>.</div></div>
+<pre><span class="VALcopy"><span class="keyword">val</span> copy</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; <a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">copy t</code> returns a new array with the same elements as <code class="code">t</code>.</div></div>
+<pre><span class="VALsingleton"><span class="keyword">val</span> singleton</span> : <code class="type">Obj.t -&gt; <a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a></code></pre>
+<pre><span class="VALempty"><span class="keyword">val</span> empty</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a></code></pre>
+<pre><span class="VALlength"><span class="keyword">val</span> length</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int</code></pre>
+<pre><span class="VALget"><span class="keyword">val</span> get</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; Obj.t</code></pre><div class="info"><div class="info"><code class="code">get t i</code> and <code class="code">unsafe_get t i</code> return the object at index <code class="code">i</code>.  <code class="code">set t i o</code> and
+    <code class="code">unsafe_set t i o</code> set index <code class="code">i</code> to <code class="code">o</code>.  In no case is the object copied.  The
+    <code class="code">unsafe_*</code> variants omit the bounds check of <code class="code">i</code>.</div></div>
+<pre><span class="VALunsafe_get"><span class="keyword">val</span> unsafe_get</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; Obj.t</code></pre>
+<pre><span class="VALset"><span class="keyword">val</span> set</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; Obj.t -&gt; unit</code></pre>
+<pre><span class="VALunsafe_set"><span class="keyword">val</span> unsafe_set</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; Obj.t -&gt; unit</code></pre>
+<pre><span class="VALunsafe_set_assuming_currently_int"><span class="keyword">val</span> unsafe_set_assuming_currently_int</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; Obj.t -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">unsafe_set_assuming_currently_int t i obj</code> sets index <code class="code">i</code> of <code class="code">t</code> to <code class="code">obj</code>, but only
+    works correctly if <code class="code">Obj.is_int (get t i)</code>.  This precondition saves a dynamic
+    check.<br/>    <code class="code">unsafe_set_int_assuming_currently_int</code> is similar, except the value being set is an
+    int.</div></div>
+<pre><span class="VALunsafe_set_int_assuming_currently_int"><span class="keyword">val</span> unsafe_set_int_assuming_currently_int</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; int -&gt; unit</code></pre>
+<pre><span class="VALunsafe_clear_if_pointer"><span class="keyword">val</span> unsafe_clear_if_pointer</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; int -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">unsafe_clear_if_pointer t i</code> prevents <code class="code">t.(i)</code> from pointing to anything to prevent
+    space leaks.  It does this by setting <code class="code">t.(i)</code> to <code class="code">Obj.repr 0</code>.  As a performance hack,
+    it only does this when <code class="code">not (Obj.is_int t.(i))</code>.</div></div>
+<pre><span class="VALtruncate"><span class="keyword">val</span> truncate</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; len:int -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">truncate t ~len</code> shortens <code class="code">t</code>'s length to <code class="code">len</code>.  It is an error if <code class="code">len &lt;= 0</code> or
+    <code class="code">len &gt; length t</code>.</div></div>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type"><a href="?package=core_kernel&amp;module=Obj_array&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+<div class="info"><div class="info"><code class="code">create ~len</code> returns an obj-array of length <code class="code">len</code>, all of whose indices have value
+    <code class="code">Obj.repr 0</code>.</div></div>
+<div class="info"><div class="info"><code class="code">copy t</code> returns a new array with the same elements as <code class="code">t</code>.</div></div>
+<div class="info"><div class="info"><code class="code">get t i</code> and <code class="code">unsafe_get t i</code> return the object at index <code class="code">i</code>.  <code class="code">set t i o</code> and
+    <code class="code">unsafe_set t i o</code> set index <code class="code">i</code> to <code class="code">o</code>.  In no case is the object copied.  The
+    <code class="code">unsafe_*</code> variants omit the bounds check of <code class="code">i</code>.</div></div>
+<div class="info"><div class="info"><code class="code">unsafe_set_assuming_currently_int t i obj</code> sets index <code class="code">i</code> of <code class="code">t</code> to <code class="code">obj</code>, but only
+    works correctly if <code class="code">Obj.is_int (get t i)</code>.  This precondition saves a dynamic
+    check.<br/>    <code class="code">unsafe_set_int_assuming_currently_int</code> is similar, except the value being set is an
+    int.</div></div>
+<div class="info"><div class="info"><code class="code">unsafe_clear_if_pointer t i</code> prevents <code class="code">t.(i)</code> from pointing to anything to prevent
+    space leaks.  It does this by setting <code class="code">t.(i)</code> to <code class="code">Obj.repr 0</code>.  As a performance hack,
+    it only does this when <code class="code">not (Obj.is_int t.(i))</code>.</div></div>
+<div class="info"><div class="info"><code class="code">truncate t ~len</code> shortens <code class="code">t</code>'s length to <code class="code">len</code>.  It is an error if <code class="code">len &lt;= 0</code> or
+    <code class="code">len &gt; length t</code>.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>

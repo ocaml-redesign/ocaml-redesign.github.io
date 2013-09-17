@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> &ndash; OCaml</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Domine:400,700" rel="stylesheet">
+    <!-- Only part of Bootstrap that we don't load from a CDN is our own customized CSS build. -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      function octry(x){
+        if(document.getElementById('buttons').innerHTML=='') {
+          t = document.getElementById('tryocaml');
+          js = document.createElement("script"); js.type = "text/javascript"; js.src = "/try-ocaml.js";
+          t.appendChild(js);
+        } else {
+          t = document.getElementById('tryocaml');
+          t.style.display = 'block';
+          document.getElementById('console').value = x;
+          document.getElementById('console').focus();
+          document.getElementById('console').select();
+        }
+      }
+    </script>
+
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <script type="text/javascript" src="/docs/opam/doc_loader.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/"><img src="/static/img/ocaml.png" alt="OCaml"></a>
+          <div class="nav-collapse collapse">
+                        <ul class="nav">
+              <li ><a href="/learn/">Learn</a></li>
+              <li ><a href="/docs/">Documentation</a></li>
+              <li ><a href="/platform/">Platform</a></li>
+              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/community/">Community</a></li>
+            </ul>
+
+            <form class="navbar-search pull-right">
+              <input class="search-query" type="text" placeholder="Search" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+        <div class="container">
+      <div class="row">
+
+
+
+          <div id='main-contents' class="content">
+            <div class="ocaml_toplevel_module"><div class="info">A signal manager keeps track of a set of signals to be managed and the signal handlers
+    for them.  When a signal manager is managing a signal, it installs its own OCaml
+    handler for that signal that records delivery of the signal.  It then later, upon
+    request, will deliver the signal to all its handlers.<br/>    Once a signal manager starts managing a signal, it never stops.</div>
+<pre><span class="TYPEt"><span class="keyword">type</span> t</span> </pre>
+<div class="ocaml_include ident" items="[]"><pre><span class="keyword">include</span> <code class="type"><code class="code">Core.Std.Invariant.S</code> with type t := <a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a></code></pre></div>
+<pre><span class="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">thread_safe_notify_signal_delivered:(unit -&gt; unit) -&gt; <a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a></code></pre><div class="info"><div class="info"><code class="code">create</code> creates and returns a signal manager <code class="code">t</code>.  Whenever a signal that <code class="code">t</code> is
+    managing is delivered, it will call <code class="code">thread_safe_notify_signal_delivered</code> from within
+    the OCaml signal handler.  Therefore <code class="code">thread_safe_notify_signal_delivered</code> must be
+    thread safe.</div></div>
+<pre><span class="VALmanage"><span class="keyword">val</span> manage</span> : <code class="type"><a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a> -&gt; Core.Std.Signal.t -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">manage t signal</code> causes <code class="code">t</code> to manage <code class="code">signal</code>, thus overriding
+    <code class="code">default_sys_behavior</code> for that signal, and any other OCaml handler for that
+    signal.</div></div>
+<pre><span class="VALis_managing"><span class="keyword">val</span> is_managing</span> : <code class="type"><a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a> -&gt; Core.Std.Signal.t -&gt; bool</code></pre><div class="info"><div class="info"><code class="code">is_managing t signal</code> returns true iff <code class="code">manage t signal</code> has been called</div></div>
+<pre><span class="TYPEhandler"><span class="keyword">type</span> handler</span> </pre><div class="info"><div class="info"><code class="code">install_handler t signals f</code> causes <code class="code">t</code> to manage the handling of <code class="code">signals</code>, and
+    registers <code class="code">f</code> to run on every signal in <code class="code">signals</code> that is delivered.   It is an
+    error if <code class="code">f</code> ever raises when it is called.</div></div>
+<pre><span class="VALinstall_handler"><span class="keyword">val</span> install_handler</span> : <code class="type"><a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a> -&gt; Core.Std.Signal.t list -&gt; (Core.Std.Signal.t -&gt; unit) -&gt; <a href="?package=async_unix&amp;module=Signal_manager&amp;type=handler">handler</a></code></pre>
+<pre><span class="VALremove_handler"><span class="keyword">val</span> remove_handler</span> : <code class="type"><a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a> -&gt; <a href="?package=async_unix&amp;module=Signal_manager&amp;type=handler">handler</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">remove_handler handler</code> causes the particular <code class="code">handler</code> to no longer handle the
+    signals it was registered to handle.  The signal manager continues to manage those
+    signals, i.e. the OCaml signal handler remains installed, whether or not they still
+    have handlers.</div></div>
+<pre><span class="VALhandle_delivered"><span class="keyword">val</span> handle_delivered</span> : <code class="type"><a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a> -&gt; unit</code></pre><div class="info"><div class="info"><code class="code">handle_delivered t</code> runs all signal handlers on the signals that have been
+    delivered but not yet handled.</div></div>
+<pre><span class="VALsexp_of_t"><span class="keyword">val</span> sexp_of_t</span> : <code class="type"><a href="?package=async_unix&amp;module=Signal_manager&amp;type=t">t</a> -&gt; Sexplib.Sexp.t</code></pre>
+<div class="info"><div class="info"><code class="code">create</code> creates and returns a signal manager <code class="code">t</code>.  Whenever a signal that <code class="code">t</code> is
+    managing is delivered, it will call <code class="code">thread_safe_notify_signal_delivered</code> from within
+    the OCaml signal handler.  Therefore <code class="code">thread_safe_notify_signal_delivered</code> must be
+    thread safe.</div></div>
+<div class="info"><div class="info"><code class="code">manage t signal</code> causes <code class="code">t</code> to manage <code class="code">signal</code>, thus overriding
+    <code class="code">default_sys_behavior</code> for that signal, and any other OCaml handler for that
+    signal.</div></div>
+<div class="info"><div class="info"><code class="code">is_managing t signal</code> returns true iff <code class="code">manage t signal</code> has been called</div></div>
+<div class="info"><div class="info"><code class="code">install_handler t signals f</code> causes <code class="code">t</code> to manage the handling of <code class="code">signals</code>, and
+    registers <code class="code">f</code> to run on every signal in <code class="code">signals</code> that is delivered.   It is an
+    error if <code class="code">f</code> ever raises when it is called.</div></div>
+<div class="info"><div class="info"><code class="code">remove_handler handler</code> causes the particular <code class="code">handler</code> to no longer handle the
+    signals it was registered to handle.  The signal manager continues to manage those
+    signals, i.e. the OCaml signal handler remains installed, whether or not they still
+    have handlers.</div></div>
+<div class="info"><div class="info"><code class="code">handle_delivered t</code> runs all signal handlers on the signals that have been
+    delivered but not yet handled.</div></div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav pull-right">
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Find us on GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <!-- Load javascript from CDN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script>octry('')</script>
+  </body>
+</html>
