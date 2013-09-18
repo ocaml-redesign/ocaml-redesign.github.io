@@ -69,15 +69,15 @@
 
 The Hashtbl module implements an efficient, mutable lookup table. To
 create a hash table we could write:</p>
-<pre class='ocaml'><span class='k'>let</span> my_hash <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 123456<span class='o'>;;</span>
-<a href="javascript:octry('let my_hash = Hashtbl.create 123456;;\n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='k'>let</span> my_hash <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 123456<span class='o'>;;</span>
+<a href="javascript:octry('let my_hash = Hashtbl.create 123456;;\n');">[try]</a></code></pre>
 <p>
 The 123456 is the initial size of the hashtbl. This initial number is
 just your best guess as to the amount of data that you will be putting
 into the hash table. The hash table can grow if you under-estimate the
 size so don&#39;t worry about it too much. The type of my_hash is:</p>
-<pre class='ocaml'><span class='k'>val</span> my_hash <span class='o'>:</span> ('_a<span class='o'>,</span> '_b) <span class='m'>Hashtbl</span><span class='o'>.</span>t <span class='k'>=</span> 
-<a href="javascript:octry('val my_hash : (&#39;_a, &#39;_b) Hashtbl.t = \n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='k'>val</span> my_hash <span class='o'>:</span> ('_a<span class='o'>,</span> '_b) <span class='m'>Hashtbl</span><span class='o'>.</span>t <span class='k'>=</span> 
+<a href="javascript:octry('val my_hash : (&#39;_a, &#39;_b) Hashtbl.t = \n');">[try]</a></code></pre>
 <p>
 The &#39;_a and &#39;_b correspond to the key and value types, respectively.
 There are no concrete types (e.g., int or float * string) filled in in
@@ -93,37 +93,37 @@ letter. First I need to enter the data into my_hash.</p>
 another hash table is not created every time you change the table. Thus,
 the code &quot;let my_hash = Hashtbl.add my_hash ...&quot; wouldn&#39;t make any
 sense. Instead, we would write something like this:</p>
-<pre class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hug&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;h&#34;</span> <span class='s'>&#34;hard&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;w&#34;</span> <span class='s'>&#34;wimp&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;w&#34;</span> <span class='s'>&#34;world&#34;</span><span class='o'>;;</span>
 <span class='m'>Hashtbl</span><span class='o'>.</span>add my_hash <span class='s'>&#34;w&#34;</span> <span class='s'>&#34;wine&#34;</span><span class='o'>;;</span>
-<a href="javascript:octry('Hashtbl.add my_hash &#34;h&#34; &#34;hello&#34;;;\nHashtbl.add my_hash &#34;h&#34; &#34;hi&#34;;;\nHashtbl.add my_hash &#34;h&#34; &#34;hug&#34;;;\nHashtbl.add my_hash &#34;h&#34; &#34;hard&#34;;;\nHashtbl.add my_hash &#34;w&#34; &#34;wimp&#34;;;\nHashtbl.add my_hash &#34;w&#34; &#34;world&#34;;;\nHashtbl.add my_hash &#34;w&#34; &#34;wine&#34;;;\n');">[try]</a></pre>
+<a href="javascript:octry('Hashtbl.add my_hash &#34;h&#34; &#34;hello&#34;;;\nHashtbl.add my_hash &#34;h&#34; &#34;hi&#34;;;\nHashtbl.add my_hash &#34;h&#34; &#34;hug&#34;;;\nHashtbl.add my_hash &#34;h&#34; &#34;hard&#34;;;\nHashtbl.add my_hash &#34;w&#34; &#34;wimp&#34;;;\nHashtbl.add my_hash &#34;w&#34; &#34;world&#34;;;\nHashtbl.add my_hash &#34;w&#34; &#34;wine&#34;;;\n');">[try]</a></code></pre>
 <p>
 If we want to find one element in my_hash that has an &quot;h&quot; in it then we
 would write. Notice how it only returns just one element? That element
 was the last one entered in with the value of &quot;h&quot;.</p>
-<pre class='ocaml'> 
+<pre><code class='ocaml'> 
 <span class='m'>Hashtbl</span><span class='o'>.</span>find my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
-<a href="javascript:octry(' \nHashtbl.find my_hash &#34;h&#34;;;\n');">[try]</a></pre>
+<a href="javascript:octry(' \nHashtbl.find my_hash &#34;h&#34;;;\n');">[try]</a></code></pre>
 <p>
 What we probably want is all the elements that start with &quot;h&quot;. To do
 this we want to find all of them. What better name for this then
 &quot;find_all&quot;?</p>
-<pre class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>find_all my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
-<a href="javascript:octry('Hashtbl.find_all my_hash &#34;h&#34;;;\n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>find_all my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
+<a href="javascript:octry('Hashtbl.find_all my_hash &#34;h&#34;;;\n');">[try]</a></code></pre>
 <p>
 returns</p>
-<pre class='ocaml'><span class='o'>[</span><span class='s'>&#34;hard&#34;</span><span class='o'>;</span> <span class='s'>&#34;hug&#34;</span><span class='o'>;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>]</span>
-<a href="javascript:octry('[&#34;hard&#34;; &#34;hug&#34;; &#34;hi&#34;; &#34;hello&#34;]\n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='o'>[</span><span class='s'>&#34;hard&#34;</span><span class='o'>;</span> <span class='s'>&#34;hug&#34;</span><span class='o'>;</span> <span class='s'>&#34;hi&#34;</span><span class='o'>;</span> <span class='s'>&#34;hello&#34;</span><span class='o'>]</span>
+<a href="javascript:octry('[&#34;hard&#34;; &#34;hug&#34;; &#34;hi&#34;; &#34;hello&#34;]\n');">[try]</a></code></pre>
 <p>
 To find out if there is an entry in the my_hash for a letter we would
 do:</p>
-<pre class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>mem my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
+<pre><code class='ocaml'><span class='m'>Hashtbl</span><span class='o'>.</span>mem my_hash <span class='s'>&#34;h&#34;</span><span class='o'>;;</span>
 
-<a href="javascript:octry('Hashtbl.mem my_hash &#34;h&#34;;;\n\n');">[try]</a></pre>
+<a href="javascript:octry('Hashtbl.mem my_hash &#34;h&#34;;;\n\n');">[try]</a></code></pre>
 
           </div>
         </div>
@@ -133,6 +133,7 @@ do:</p>
       <div class="navbar-inner">
         <div class="container-fluid">
           <ul class="nav pull-right">
+            <li><a href="https://github.com/ocamllabs/sandbox-ocaml.org/tree/master/md-pages/learn/tutorials/hashtbl.md">Edit</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Find us on GitHub</a></li>

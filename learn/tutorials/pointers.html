@@ -115,7 +115,7 @@ this is normally a waste of time and effort.</p>
 <p>Let&#39;s examine the simple example of linked lists (integer lists to be
 simple). This data type is defined in C (or in Pascal) using explicit
 pointers, for instance:</p>
-<pre class='ocaml'><span class='o'>/*</span> Cells <span class='k'>and</span> lists <span class='k'>type</span> <span class='k'>in</span> C <span class='o'>*/</span>
+<pre><code class='ocaml'><span class='o'>/*</span> Cells <span class='k'>and</span> lists <span class='k'>type</span> <span class='k'>in</span> C <span class='o'>*/</span>
 <span class='k'>struct</span> cell <span class='o'>{</span>
   int hd<span class='o'>;</span>
   <span class='k'>struct</span> cell <span class='o'>*</span>tl<span class='o'>;</span>
@@ -130,12 +130,12 @@ typedef <span class='k'>struct</span> cell cell<span class='o'>,</span> <span cl
   hd<span class='o'>:</span> integer<span class='o'>;</span>
   tl<span class='o'>:</span> cell<span class='o'>;</span>
  <span class='k'>end</span><span class='o'>;</span>
-<a href="javascript:octry('/* Cells and lists type in C */\nstruct cell {\n  int hd;\n  struct cell *tl;\n};\n\ntypedef struct cell cell, *list;\n\n{Cells and lists type in Pascal}\ntype\n list = ^cell;\n cell = record\n  hd: integer;\n  tl: cell;\n end;\n');">[try]</a></pre>
+<a href="javascript:octry('/* Cells and lists type in C */\nstruct cell {\n  int hd;\n  struct cell *tl;\n};\n\ntypedef struct cell cell, *list;\n\n{Cells and lists type in Pascal}\ntype\n list = ^cell;\n cell = record\n  hd: integer;\n  tl: cell;\n end;\n');">[try]</a></code></pre>
 <p>
 We can translate this in OCaml, using a sum type definition, without
 pointers:</p>
-<pre class='ocaml'>  <span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> int <span class='o'>*</span> list
-<a href="javascript:octry('  type list = Nil | Cons of int * list\n');">[try]</a></pre>
+<pre><code class='ocaml'>  <span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> int <span class='o'>*</span> list
+<a href="javascript:octry('  type list = Nil | Cons of int * list\n');">[try]</a></code></pre>
 <p>
 Cell lists are thus represented as pairs, and the recursive structure of
 lists is evident, with the two alternatives, empty list (the
@@ -144,7 +144,7 @@ lists is evident, with the two alternatives, empty list (the
 when allocating list values: one just writes <code>Cons (x, l)</code> to add <code>x</code> in
 front of the list <code>l</code>. In C, you need to write this function, to
 allocate a new cell and then fill its fields. For instance:</p>
-<pre class='ocaml'><span class='o'>/*</span> The empty list <span class='o'>*/</span>
+<pre><code class='ocaml'><span class='o'>/*</span> The empty list <span class='o'>*/</span>
 <span class='o'>#</span>define nil NULL
 
 <span class='o'>/*</span> The constructor <span class='k'>of</span> lists <span class='o'>*/</span>
@@ -156,10 +156,10 @@ list cons (element x<span class='o'>,</span> list l)
   result <span class='k'>-></span> tl <span class='k'>=</span> l<span class='o'>;</span>
   return (result)<span class='o'>;</span>
 <span class='o'>}</span>
-<a href="javascript:octry('/* The empty list */\n#define nil NULL\n\n/* The constructor of lists */\nlist cons (element x, list l)\n{\n  list result;\n  result = (list) malloc (sizeof (cellule));\n  result -&#62; hd = x;\n  result -&#62; tl = l;\n  return (result);\n}\n');">[try]</a></pre>
+<a href="javascript:octry('/* The empty list */\n#define nil NULL\n\n/* The constructor of lists */\nlist cons (element x, list l)\n{\n  list result;\n  result = (list) malloc (sizeof (cellule));\n  result -&#62; hd = x;\n  result -&#62; tl = l;\n  return (result);\n}\n');">[try]</a></code></pre>
 <p>
 Similarly, in Pascal:</p>
-<pre class='ocaml'><span class='o'>{</span>Creating a list cell<span class='o'>}</span>
+<pre><code class='ocaml'><span class='o'>{</span>Creating a list cell<span class='o'>}</span>
 <span class='k'>function</span> cons (x<span class='o'>:</span> integer<span class='o'>;</span> l<span class='o'>:</span> list)<span class='o'>:</span> list<span class='o'>;</span>
  var p<span class='o'>:</span> list<span class='o'>;</span>
  <span class='k'>begin</span>
@@ -168,7 +168,7 @@ Similarly, in Pascal:</p>
   p<span class='o'>^.</span>tl <span class='o'>:=</span> l<span class='o'>;</span>
   cons <span class='o'>:=</span> p
  <span class='k'>end</span><span class='o'>;</span>
-<a href="javascript:octry('{Creating a list cell}\nfunction cons (x: integer; l: list): list;\n var p: list;\n begin\n  new(p);\n  p^.hd := x;\n  p^.tl := l;\n  cons := p\n end;\n');">[try]</a></pre>
+<a href="javascript:octry('{Creating a list cell}\nfunction cons (x: integer; l: list): list;\n var p: list;\n begin\n  new(p);\n  p^.hd := x;\n  p^.tl := l;\n  cons := p\n end;\n');">[try]</a></code></pre>
 <p>
 We thus see that fields of list cells in the C program have to be
 mutable, otherwise initialization is impossible. By contrast in OCaml,
@@ -179,16 +179,16 @@ definable (those data types are often refered to as “pure” or
 for other reasons than mere initialization, OCaml provides records with
 mutable fields. For instance, a list type defining lists whose elements
 can be in place modified could be written:</p>
-<pre class='ocaml'><span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> cell
+<pre><code class='ocaml'><span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> cell
 <span class='k'>and</span> cell <span class='k'>=</span> <span class='o'>{</span> <span class='k'>mutable</span> hd <span class='o'>:</span> int<span class='o'>;</span> tl <span class='o'>:</span> list <span class='o'>}</span>
-<a href="javascript:octry('type list = Nil | Cons of cell\nand cell = { mutable hd : int; tl : list }\n');">[try]</a></pre>
+<a href="javascript:octry('type list = Nil | Cons of cell\nand cell = { mutable hd : int; tl : list }\n');">[try]</a></code></pre>
 <p>
 If the structure of the list itself must also be modified (cells must be
 physically removed from the list), the <code>tl</code> field would also be declared
 as mutable:</p>
-<pre class='ocaml'><span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> cell
+<pre><code class='ocaml'><span class='k'>type</span> list <span class='k'>=</span> Nil <span class='o'>|</span> Cons <span class='k'>of</span> cell
 <span class='k'>and</span> cell <span class='k'>=</span> <span class='o'>{</span><span class='k'>mutable</span> hd <span class='o'>:</span> int<span class='o'>;</span> <span class='k'>mutable</span> tl <span class='o'>:</span> list<span class='o'>}</span><span class='o'>;;</span>
-<a href="javascript:octry('type list = Nil | Cons of cell\nand cell = {mutable hd : int; mutable tl : list};;\n');">[try]</a></pre>
+<a href="javascript:octry('type list = Nil | Cons of cell\nand cell = {mutable hd : int; mutable tl : list};;\n');">[try]</a></code></pre>
 <p>
 Physical assignments are still useless to allocate mutable data: you
 write <code>Cons {hd = 1; tl = l}</code> to add <code>1</code> to the list <code>l</code>. Physical
@@ -211,14 +211,14 @@ classical algorithmic languages. See a more complete example below.</p>
 The general pointer type can be defined using the definition of a
 pointer: a pointer is either null, or a pointer to an assignable memory
 location:</p>
-<pre class='ocaml'><span class='k'>type</span> 'a pointer <span class='k'>=</span> Null <span class='o'>|</span> Pointer <span class='k'>of</span> 'a ref
-<a href="javascript:octry('type &#39;a pointer = Null | Pointer of &#39;a ref\n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='k'>type</span> 'a pointer <span class='k'>=</span> Null <span class='o'>|</span> Pointer <span class='k'>of</span> 'a ref
+<a href="javascript:octry('type &#39;a pointer = Null | Pointer of &#39;a ref\n');">[try]</a></code></pre>
 <p>
 Explicit dereferencing (or reading the pointer&#39;s designated value) and
 pointer assignment (or writing to the pointer&#39;s designated memory
 location) are easily defined. We define dereferencing as a prefix
 operator named <code>!^</code>, and assigment as the infix <code>^:=</code>.</p>
-<pre class='ocaml'>  <span class='k'>let</span> ( <span class='o'>!^</span> ) <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> ( <span class='o'>!^</span> ) <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> Null <span class='k'>-></span> invalid_arg <span class='s'>&#34;Attempt to dereference the null pointer&#34;</span>
     <span class='o'>|</span> Pointer r <span class='k'>-></span> <span class='o'>!</span>r<span class='o'>;;</span>
   
@@ -226,30 +226,30 @@ operator named <code>!^</code>, and assigment as the infix <code>^:=</code>.</p>
     <span class='k'>match</span> p <span class='k'>with</span>
     <span class='o'>|</span> Null <span class='k'>-></span> invalid_arg <span class='s'>&#34;Attempt to assign the null pointer&#34;</span>
     <span class='o'>|</span> Pointer r <span class='k'>-></span> r <span class='o'>:=</span> v<span class='o'>;;</span>
-<a href="javascript:octry('  let ( !^ ) = function\n    | Null -&#62; invalid_arg &#34;Attempt to dereference the null pointer&#34;\n    | Pointer r -&#62; !r;;\n  \n  let ( ^:= ) p v =\n    match p with\n    | Null -&#62; invalid_arg &#34;Attempt to assign the null pointer&#34;\n    | Pointer r -&#62; r := v;;\n');">[try]</a></pre>
+<a href="javascript:octry('  let ( !^ ) = function\n    | Null -&#62; invalid_arg &#34;Attempt to dereference the null pointer&#34;\n    | Pointer r -&#62; !r;;\n  \n  let ( ^:= ) p v =\n    match p with\n    | Null -&#62; invalid_arg &#34;Attempt to assign the null pointer&#34;\n    | Pointer r -&#62; r := v;;\n');">[try]</a></code></pre>
 <p>
 Now we define the allocation of a new pointer initialized to points to a
 given value:</p>
-<pre class='ocaml'>  <span class='k'>let</span> new_pointer x <span class='k'>=</span> Pointer (ref x)<span class='o'>;;</span>
-<a href="javascript:octry('  let new_pointer x = Pointer (ref x);;\n');">[try]</a></pre>
+<pre><code class='ocaml'>  <span class='k'>let</span> new_pointer x <span class='k'>=</span> Pointer (ref x)<span class='o'>;;</span>
+<a href="javascript:octry('  let new_pointer x = Pointer (ref x);;\n');">[try]</a></code></pre>
 <p>
 For instance, let&#39;s define and then assign a pointer to an integer:</p>
-<pre class='ocaml'>  <span class='k'>let</span> p <span class='k'>=</span> new_pointer 0<span class='o'>;;</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> p <span class='k'>=</span> new_pointer 0<span class='o'>;;</span>
   p <span class='o'>^:=</span> 1<span class='o'>;;</span>
   <span class='o'>!^</span>p<span class='o'>;;</span>
-<a href="javascript:octry('  let p = new_pointer 0;;\n  p ^:= 1;;\n  !^p;;\n');">[try]</a></pre>
+<a href="javascript:octry('  let p = new_pointer 0;;\n  p ^:= 1;;\n  !^p;;\n');">[try]</a></code></pre>
 <h2 id="IntegerLists"> Integer Lists</h2><p>
 
 Now we can define lists using explicit pointers as in usual imperative
 languages:</p>
-<pre class='ocaml'>  <span class='com2'>(* The list <span class='ic'>type</span> ``à la Pascal'' *)</span><!-- end comment -->
+<pre><code class='ocaml'>  <span class='com2'>(* The list <span class='ic'>type</span> ``à la Pascal'' *)</span><!-- end comment -->
   <span class='k'>type</span> ilist <span class='k'>=</span> cell pointer
   <span class='k'>and</span> cell <span class='k'>=</span> <span class='o'>{</span><span class='k'>mutable</span> hd <span class='o'>:</span> int<span class='o'>;</span> <span class='k'>mutable</span> tl <span class='o'>:</span> ilist<span class='o'>}</span>
-<a href="javascript:octry('  (* The list type ``à la Pascal&#39;&#39; *)\n  type ilist = cell pointer\n  and cell = {mutable hd : int; mutable tl : ilist}\n');">[try]</a></pre>
+<a href="javascript:octry('  (* The list type ``à la Pascal&#39;&#39; *)\n  type ilist = cell pointer\n  and cell = {mutable hd : int; mutable tl : ilist}\n');">[try]</a></code></pre>
 <p>
 We then define allocation of a new cell, the list constructor and its
 associated destructors.</p>
-<pre class='ocaml'>  <span class='k'>let</span> new_cell () <span class='k'>=</span> <span class='o'>{</span>hd <span class='k'>=</span> 0<span class='o'>;</span> tl <span class='k'>=</span> Null<span class='o'>}</span><span class='o'>;;</span>
+<pre><code class='ocaml'>  <span class='k'>let</span> new_cell () <span class='k'>=</span> <span class='o'>{</span>hd <span class='k'>=</span> 0<span class='o'>;</span> tl <span class='k'>=</span> Null<span class='o'>}</span><span class='o'>;;</span>
 
   <span class='k'>let</span> cons x l <span class='k'>=</span>
     <span class='k'>let</span> c <span class='k'>=</span> new_cell () <span class='k'>in</span>
@@ -259,7 +259,7 @@ associated destructors.</p>
 
   <span class='k'>let</span> hd (l <span class='o'>:</span> ilist) <span class='k'>=</span> <span class='o'>!^</span>l<span class='o'>.</span>hd<span class='o'>;;</span>
   <span class='k'>let</span> tl (l <span class='o'>:</span> ilist) <span class='k'>=</span> <span class='o'>!^</span>l<span class='o'>.</span>tl<span class='o'>;;</span>
-<a href="javascript:octry('  let new_cell () = {hd = 0; tl = Null};;\n\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- x;\n    c.tl &#60;- l;\n    (new_pointer c : ilist);;\n\n  let hd (l : ilist) = !^l.hd;;\n  let tl (l : ilist) = !^l.tl;;\n');">[try]</a></pre>
+<a href="javascript:octry('  let new_cell () = {hd = 0; tl = Null};;\n\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- x;\n    c.tl &#60;- l;\n    (new_pointer c : ilist);;\n\n  let hd (l : ilist) = !^l.hd;;\n  let tl (l : ilist) = !^l.tl;;\n');">[try]</a></code></pre>
 <p>
 We can now write all kind of classical algorithms, based on pointers
 manipulation, with their associated loops, their unwanted sharing
@@ -267,7 +267,7 @@ problems and their null pointer errors. For instance, list
 concatenation, as often described in litterature, physically modifies
 its first list argument, hooking the second list to the end of the
 first:</p>
-<pre class='ocaml'>  <span class='com2'>(* Physical append *)</span><!-- end comment -->
+<pre><code class='ocaml'>  <span class='com2'>(* Physical append *)</span><!-- end comment -->
   <span class='k'>let</span> append (l1 <span class='o'>:</span> ilist) (l2 <span class='o'>:</span> ilist) <span class='k'>=</span>
     <span class='k'>let</span> temp <span class='k'>=</span> ref l1 <span class='k'>in</span>
     <span class='k'>while</span> tl <span class='o'>!</span>temp <span class='o'>&#60;&#62;</span> Null <span class='k'>do</span>
@@ -281,11 +281,11 @@ first:</p>
   <span class='k'>let</span> l2 <span class='k'>=</span> cons 3 Null<span class='o'>;;</span>
 
   append l1 l2<span class='o'>;;</span>
-<a href="javascript:octry('  (* Physical append *)\n  let append (l1 : ilist) (l2 : ilist) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n  (* An example: *)\n  let l1 = cons 1 (cons 2 Null);;\n\n  let l2 = cons 3 Null;;\n\n  append l1 l2;;\n');">[try]</a></pre>
+<a href="javascript:octry('  (* Physical append *)\n  let append (l1 : ilist) (l2 : ilist) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n  (* An example: *)\n  let l1 = cons 1 (cons 2 Null);;\n\n  let l2 = cons 3 Null;;\n\n  append l1 l2;;\n');">[try]</a></code></pre>
 <p>
 The lists <code>l1</code> and <code>l2</code> are effectively catenated:</p>
-<pre class='ocaml'>  l1<span class='o'>;;</span>
-<a href="javascript:octry('  l1;;\n');">[try]</a></pre>
+<pre><code class='ocaml'>  l1<span class='o'>;;</span>
+<a href="javascript:octry('  l1;;\n');">[try]</a></code></pre>
 <p>
 Just a nasty side effect of physical list concatenation: <code>l1</code> now
 contains the concatenation of the two lists <code>l1</code> and <code>l2</code>, thus the list
@@ -294,18 +294,18 @@ argument. In other words, the value of a list data now depends on its
 history, that is on the sequence of function calls that use the value.
 This strange behaviour leads to a lot of difficulties when explicitely
 manipulating pointers. Try for instance, the seemingly harmless:</p>
-<pre class='ocaml'>  append l1 l1<span class='o'>;;</span>
-<a href="javascript:octry('  append l1 l1;;\n');">[try]</a></pre>
+<pre><code class='ocaml'>  append l1 l1<span class='o'>;;</span>
+<a href="javascript:octry('  append l1 l1;;\n');">[try]</a></code></pre>
 <p>
 Then evaluate <code>l1</code>:</p>
-<pre class='ocaml'>  l1<span class='o'>;;</span>
-<a href="javascript:octry('  l1;;\n');">[try]</a></pre>
+<pre><code class='ocaml'>  l1<span class='o'>;;</span>
+<a href="javascript:octry('  l1;;\n');">[try]</a></code></pre>
 <h2 id="Polymorphiclists"> Polymorphic lists</h2><p>
 
 To go beyond Pascal type system, we define polymorphic lists using
 pointers; here is a simple implementation of those polymorphic mutable
 lists:</p>
-<pre class='ocaml'>  <span class='k'>type</span> 'a lists <span class='k'>=</span> 'a cell pointer
+<pre><code class='ocaml'>  <span class='k'>type</span> 'a lists <span class='k'>=</span> 'a cell pointer
   <span class='k'>and</span> 'a cell <span class='k'>=</span> <span class='o'>{</span><span class='k'>mutable</span> hd <span class='o'>:</span> 'a pointer<span class='o'>;</span> <span class='k'>mutable</span> tl <span class='o'>:</span> 'a lists<span class='o'>}</span><span class='o'>;;</span>
 
   <span class='k'>let</span> new_cell () <span class='k'>=</span> <span class='o'>{</span>hd <span class='k'>=</span> Null<span class='o'>;</span> tl <span class='k'>=</span> Null<span class='o'>}</span><span class='o'>;;</span>
@@ -324,7 +324,7 @@ lists:</p>
     <span class='k'>done</span><span class='o'>;</span>
     <span class='o'>!^</span> <span class='o'>!</span>temp<span class='o'>.</span>tl <span class='o'>&#60;-</span> l2<span class='o'>;;</span>
 
-<a href="javascript:octry('  type &#39;a lists = &#39;a cell pointer\n  and &#39;a cell = {mutable hd : &#39;a pointer; mutable tl : &#39;a lists};;\n\n  let new_cell () = {hd = Null; tl = Null};;\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- new_pointer x;\n    c.tl &#60;- l;\n    (new_pointer c : &#39;a lists);;\n  let hd (l : &#39;a lists) = !^l.hd;;\n  let tl (l : &#39;a lists) = !^l.tl;;\n\n  let append (l1 : &#39;a lists) (l2 : &#39;a lists) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n');">[try]</a></pre>
+<a href="javascript:octry('  type &#39;a lists = &#39;a cell pointer\n  and &#39;a cell = {mutable hd : &#39;a pointer; mutable tl : &#39;a lists};;\n\n  let new_cell () = {hd = Null; tl = Null};;\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- new_pointer x;\n    c.tl &#60;- l;\n    (new_pointer c : &#39;a lists);;\n  let hd (l : &#39;a lists) = !^l.hd;;\n  let tl (l : &#39;a lists) = !^l.tl;;\n\n  let append (l1 : &#39;a lists) (l2 : &#39;a lists) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n');">[try]</a></code></pre>
 
           </div>
         </div>
@@ -334,6 +334,7 @@ lists:</p>
       <div class="navbar-inner">
         <div class="container-fluid">
           <ul class="nav pull-right">
+            <li><a href="https://github.com/ocamllabs/sandbox-ocaml.org/tree/master/md-pages/learn/tutorials/pointers.md">Edit</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Find us on GitHub</a></li>

@@ -91,27 +91,27 @@ directly translate into calls to the C <code>libgtk-1.2.so</code> library.</p>
 <p>I also wanted to rationalise the module naming scheme for Gtk. So there
 is exactly one top-level module called (surprise!) <code>Gtk</code> and all classes
 are inside this module. A test program looks like this:</p>
-<pre class='ocaml'><span class='k'>let</span> win <span class='k'>=</span> <span class='k'>new</span> <span class='m'>Gtk</span><span class='o'>.</span>window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My window&#34;</span> ()<span class='o'>;;</span>
+<pre><code class='ocaml'><span class='k'>let</span> win <span class='k'>=</span> <span class='k'>new</span> <span class='m'>Gtk</span><span class='o'>.</span>window <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;My window&#34;</span> ()<span class='o'>;;</span>
 <span class='k'>let</span> lbl <span class='k'>=</span> <span class='k'>new</span> <span class='m'>Gtk</span><span class='o'>.</span>label <span class='o'>~</span>text<span class='o'>:</span><span class='s'>&#34;Hello&#34;</span> ()<span class='o'>;;</span>
 win<span class='o'>#</span>add lbl<span class='o'>;;</span>
 
 <span class='k'>let</span> () <span class='k'>=</span>
   <span class='m'>Gtk</span><span class='o'>.</span>main ()
-<a href="javascript:octry('let win = new Gtk.window ~title:&#34;My window&#34; ();;\nlet lbl = new Gtk.label ~text:&#34;Hello&#34; ();;\nwin#add lbl;;\n\nlet () =\n  Gtk.main ()\n');">[try]</a></pre>
+<a href="javascript:octry('let win = new Gtk.window ~title:&#34;My window&#34; ();;\nlet lbl = new Gtk.label ~text:&#34;Hello&#34; ();;\nwin#add lbl;;\n\nlet () =\n  Gtk.main ()\n');">[try]</a></code></pre>
 <p>
 I defined a single abstract type to cover all <code>GtkObject</code>s (and
 &quot;subclasses&quot; of this C structure). In the <code>Gtk</code> module you&#39;ll find this
 type definition:</p>
-<pre class='ocaml'><span class='k'>type</span> obj
-<a href="javascript:octry('type obj\n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='k'>type</span> obj
+<a href="javascript:octry('type obj\n');">[try]</a></code></pre>
 <p>
 As discussed in the last chapter, this defines an abstract type of which
 it is impossible to create any instances. In OCaml, at least. Certain C
 functions are going to create instances of this type. For instance, the
 function which creates new labels (ie. <code>GtkLabel</code> structures) is defined
 this way:</p>
-<pre class='ocaml'><span class='k'>external</span> gtk_label_new <span class='o'>:</span> string <span class='k'>-></span> obj <span class='k'>=</span> <span class='s'>&#34;gtk_label_new_c&#34;</span>
-<a href="javascript:octry('external gtk_label_new : string -&#62; obj = &#34;gtk_label_new_c&#34;\n');">[try]</a></pre>
+<pre><code class='ocaml'><span class='k'>external</span> gtk_label_new <span class='o'>:</span> string <span class='k'>-></span> obj <span class='k'>=</span> <span class='s'>&#34;gtk_label_new_c&#34;</span>
+<a href="javascript:octry('external gtk_label_new : string -&#62; obj = &#34;gtk_label_new_c&#34;\n');">[try]</a></code></pre>
 <p>
 This strange function definition defines an \&lt;dfn\&gt;external
 function\&lt;/dfn\&gt;, one coming from C. The C function is called
@@ -122,14 +122,14 @@ a little C wrapper around the library&#39;s function to translate to and
 from OCaml&#39;s internal types and C types. <code>gtk_label_new_c</code> (note the
 additional <code>_c</code>) is my wrapper around the real Gtk C function called
 <code>gtk_label_new</code>. Here it is. I&#39;ll explain more about it later.</p>
-<pre class='ocaml'>CAMLprim value
+<pre><code class='ocaml'>CAMLprim value
 gtk_label_new_c (value str)
 <span class='o'>{</span>
   CAMLparam1 (str)<span class='o'>;</span>
   CAMLreturn (wrap (GTK_OBJECT (
     gtk_label_new (String_val (str)))))<span class='o'>;</span>
  <span class='o'>}</span>
-<a href="javascript:octry('CAMLprim value\ngtk_label_new_c (value str)\n{\n  CAMLparam1 (str);\n  CAMLreturn (wrap (GTK_OBJECT (\n    gtk_label_new (String_val (str)))));\n }\n');">[try]</a></pre>
+<a href="javascript:octry('CAMLprim value\ngtk_label_new_c (value str)\n{\n  CAMLparam1 (str);\n  CAMLreturn (wrap (GTK_OBJECT (\n    gtk_label_new (String_val (str)))));\n }\n');">[try]</a></code></pre>
 <p>
 Before explaining this function further, I&#39;m going to take a step back
 and look at the hierarchy of our Gtk classes. I&#39;ve chosen to reflect the
@@ -138,14 +138,14 @@ derived from a virtual base class called <code>GtkObject</code>. In fact from th
 class is derived <code>GtkWidget</code> and the whole variety of Gtk widgets are
 derived from this. So we define our own <code>GtkObject</code> equivalent class
 like this (note that <code>object</code> is a reserved word in OCaml).</p>
-<pre class='ocaml'><span class='k'>type</span> obj
+<pre><code class='ocaml'><span class='k'>type</span> obj
 
 <span class='k'>class</span> <span class='k'>virtual</span> gtk_object (obj <span class='o'>:</span> obj) <span class='k'>=</span>
 object (self)
   <span class='k'>val</span> obj <span class='k'>=</span> obj
   <span class='k'>method</span> obj <span class='k'>=</span> obj
 <span class='k'>end</span>
-<a href="javascript:octry('type obj\n\nclass virtual gtk_object (obj : obj) =\nobject (self)\n  val obj = obj\n  method obj = obj\nend\n');">[try]</a></pre>
+<a href="javascript:octry('type obj\n\nclass virtual gtk_object (obj : obj) =\nobject (self)\n  val obj = obj\n  method obj = obj\nend\n');">[try]</a></code></pre>
 <p>
 <code>type obj</code> defines our abstract object type, and <code>class gtk_object</code>
 takes one of these &quot;things&quot; as a parameter to its constructor. Recall
@@ -157,19 +157,19 @@ class, but if you could you&#39;d have to construct them like this:
 pass the return value of, for instance, <code>gtk_label_new</code> (go back and
 have a look at how that <code>external</code> function was typed). This is shown
 below:</p>
-<pre class='ocaml'><span class='com2'>(* Example code<span class='ic'>,</span> not really part <span class='ic'>of</span> MiniGtk<span class='ic'>!</span> *)</span><!-- end comment -->
+<pre><code class='ocaml'><span class='com2'>(* Example code<span class='ic'>,</span> not really part <span class='ic'>of</span> MiniGtk<span class='ic'>!</span> *)</span><!-- end comment -->
 <span class='k'>class</span> label text <span class='k'>=</span>
   <span class='k'>let</span> obj <span class='k'>=</span> gtk_label_new text <span class='k'>in</span>
   object (self)
     <span class='k'>inherit</span> gtk_object obj
   <span class='k'>end</span>
-<a href="javascript:octry('(* Example code, not really part of MiniGtk! *)\nclass label text =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit gtk_object obj\n  end\n');">[try]</a></pre>
+<a href="javascript:octry('(* Example code, not really part of MiniGtk! *)\nclass label text =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit gtk_object obj\n  end\n');">[try]</a></code></pre>
 <p>
 Of course the real <code>label</code> class doesn&#39;t inherit directly from
 <code>gtk_object</code> as shown above, but in principle this is how it works.</p>
 <p>Following the Gtk class hierarchy the only class derived directly from
 <code>gtk_object</code> is our <code>widget</code> class, defined like this:</p>
-<pre class='ocaml'><span class='k'>external</span> gtk_widget_show <span class='o'>:</span> obj <span class='k'>-></span> unit <span class='k'>=</span> <span class='s'>&#34;gtk_widget_show_c&#34;</span>
+<pre><code class='ocaml'><span class='k'>external</span> gtk_widget_show <span class='o'>:</span> obj <span class='k'>-></span> unit <span class='k'>=</span> <span class='s'>&#34;gtk_widget_show_c&#34;</span>
 <span class='k'>external</span> gtk_widget_show_all <span class='o'>:</span> obj <span class='k'>-></span> unit <span class='k'>=</span> <span class='s'>&#34;gtk_widget_show_all_c&#34;</span>
 
 <span class='k'>class</span> <span class='k'>virtual</span> widget <span class='o'>?</span>show obj <span class='k'>=</span>
@@ -179,17 +179,17 @@ Of course the real <code>label</code> class doesn&#39;t inherit directly from
     <span class='k'>method</span> show_all <span class='k'>=</span> gtk_widget_show_all obj
     <span class='k'>initializer</span> <span class='k'>if</span> show <span class='o'>&#60;&#62;</span> Some <span class='o'>false</span> <span class='k'>then</span> self<span class='o'>#</span>show
   <span class='k'>end</span>
-<a href="javascript:octry('external gtk_widget_show : obj -&#62; unit = &#34;gtk_widget_show_c&#34;\nexternal gtk_widget_show_all : obj -&#62; unit = &#34;gtk_widget_show_all_c&#34;\n\nclass virtual widget ?show obj =\n  object (self)\n    inherit gtk_object obj\n    method show = gtk_widget_show obj\n    method show_all = gtk_widget_show_all obj\n    initializer if show &#60;&#62; Some false then self#show\n  end\n');">[try]</a></pre>
+<a href="javascript:octry('external gtk_widget_show : obj -&#62; unit = &#34;gtk_widget_show_c&#34;\nexternal gtk_widget_show_all : obj -&#62; unit = &#34;gtk_widget_show_all_c&#34;\n\nclass virtual widget ?show obj =\n  object (self)\n    inherit gtk_object obj\n    method show = gtk_widget_show obj\n    method show_all = gtk_widget_show_all obj\n    initializer if show &#60;&#62; Some false then self#show\n  end\n');">[try]</a></code></pre>
 <p>
 This class is considerably more complex. Let&#39;s look at the
 initialization code first:</p>
-<pre class='ocaml'><span class='k'>class</span> <span class='k'>virtual</span> widget <span class='o'>?</span>show obj <span class='k'>=</span>
+<pre><code class='ocaml'><span class='k'>class</span> <span class='k'>virtual</span> widget <span class='o'>?</span>show obj <span class='k'>=</span>
   object (self)
     <span class='k'>inherit</span> gtk_object obj
     <span class='k'>initializer</span>
       <span class='k'>if</span> show <span class='o'>&#60;&#62;</span> Some <span class='o'>false</span> <span class='k'>then</span> self<span class='o'>#</span>show
   <span class='k'>end</span>
-<a href="javascript:octry('class virtual widget ?show obj =\n  object (self)\n    inherit gtk_object obj\n    initializer\n      if show &#60;&#62; Some false then self#show\n  end\n');">[try]</a></pre>
+<a href="javascript:octry('class virtual widget ?show obj =\n  object (self)\n    inherit gtk_object obj\n    initializer\n      if show &#60;&#62; Some false then self#show\n  end\n');">[try]</a></code></pre>
 <p>
 The <code>initializer</code> section may well be new to you. This is code which
 runs when an object is being created - the equivalent of a constructor
@@ -202,9 +202,9 @@ hidden).</p>
 of external functions. These are basically direct calls to the C library
 (well, in fact there&#39;s a tiny bit of wrapper code, but that&#39;s not
 functionally important).</p>
-<pre class='ocaml'><span class='k'>method</span> show <span class='k'>=</span> gtk_widget_show obj
+<pre><code class='ocaml'><span class='k'>method</span> show <span class='k'>=</span> gtk_widget_show obj
 <span class='k'>method</span> show_all <span class='k'>=</span> gtk_widget_show_all obj
-<a href="javascript:octry('method show = gtk_widget_show obj\nmethod show_all = gtk_widget_show_all obj\n');">[try]</a></pre>
+<a href="javascript:octry('method show = gtk_widget_show obj\nmethod show_all = gtk_widget_show_all obj\n');">[try]</a></code></pre>
 <p>
 Notice that we pass the underlying <code>GtkObject</code> to both C library calls.
 This makes sense because these functions are prototyped as
@@ -214,7 +214,7 @@ are safely used interchangably in this context).</p>
 between <code>widget</code> and <code>label</code> is <code>misc</code>, a generic class which describes
 a large class of miscellaneous widgets. This class just adds padding and
 alignment around a widget such as a label. Here is its definition:</p>
-<pre class='ocaml'><span class='k'>let</span> may f x <span class='k'>=</span>
+<pre><code class='ocaml'><span class='k'>let</span> may f x <span class='k'>=</span>
   <span class='k'>match</span> x <span class='k'>with</span>
   <span class='o'>|</span> None <span class='k'>-></span> ()
   <span class='o'>|</span> Some x <span class='k'>-></span> f x
@@ -233,7 +233,7 @@ alignment around a widget such as a label. Here is its definition:</p>
       may (gtk_misc_set_alignment obj) alignment<span class='o'>;</span>
       may (gtk_misc_set_padding obj) padding
   <span class='k'>end</span>
-<a href="javascript:octry('let may f x =\n  match x with\n  | None -&#62; ()\n  | Some x -&#62; f x\n\nexternal gtk_misc_set_alignment :\n  obj -&#62; float * float -&#62; unit = &#34;gtk_misc_set_alignment_c&#34;\nexternal gtk_misc_set_padding :\n  obj -&#62; int * int -&#62; unit = &#34;gtk_misc_set_padding_c&#34;\n\nclass virtual misc ?alignment ?padding ?show obj =\n  object (self)\n    inherit widget ?show obj\n    method set_alignment = gtk_misc_set_alignment obj\n    method set_padding = gtk_misc_set_padding obj\n    initializer\n      may (gtk_misc_set_alignment obj) alignment;\n      may (gtk_misc_set_padding obj) padding\n  end\n');">[try]</a></pre>
+<a href="javascript:octry('let may f x =\n  match x with\n  | None -&#62; ()\n  | Some x -&#62; f x\n\nexternal gtk_misc_set_alignment :\n  obj -&#62; float * float -&#62; unit = &#34;gtk_misc_set_alignment_c&#34;\nexternal gtk_misc_set_padding :\n  obj -&#62; int * int -&#62; unit = &#34;gtk_misc_set_padding_c&#34;\n\nclass virtual misc ?alignment ?padding ?show obj =\n  object (self)\n    inherit widget ?show obj\n    method set_alignment = gtk_misc_set_alignment obj\n    method set_padding = gtk_misc_set_padding obj\n    initializer\n      may (gtk_misc_set_alignment obj) alignment;\n      may (gtk_misc_set_padding obj) padding\n  end\n');">[try]</a></code></pre>
 <p>
 We start with a helper function called
 <code>may : (&#39;a -&gt; unit) -&gt; &#39;a option -&gt; unit</code> which invokes its first
@@ -245,10 +245,10 @@ initialization code. First notice that we take optional <code>alignment</code> a
 <code>padding</code> arguments to the constructor, and we pass the optional <code>show</code>
 and mandatory <code>obj</code> arguments directly up to <code>widget</code>. What do we do
 with the optional <code>alignment</code> and <code>padding</code>? The initializer uses these:</p>
-<pre class='ocaml'><span class='k'>initializer</span>
+<pre><code class='ocaml'><span class='k'>initializer</span>
   may (gtk_misc_set_alignment obj) alignment<span class='o'>;</span>
   may (gtk_misc_set_padding obj) padding 
-<a href="javascript:octry('initializer\n  may (gtk_misc_set_alignment obj) alignment;\n  may (gtk_misc_set_padding obj) padding \n');">[try]</a></pre>
+<a href="javascript:octry('initializer\n  may (gtk_misc_set_alignment obj) alignment;\n  may (gtk_misc_set_padding obj) padding \n');">[try]</a></code></pre>
 <p>
 It&#39;s that tricky <code>may</code> function in action. <em>If</em> the user gave an
 <code>alignment</code> argument, then this will set the alignment on the object by
@@ -260,7 +260,7 @@ alignment, whatever that is). A similar thing happens with the
 this is done.</p>
 <p>Now we can finally get to the <code>label</code> class, which is derived directly
 from <code>misc</code>:</p>
-<pre class='ocaml'><span class='k'>external</span> gtk_label_new <span class='o'>:</span>
+<pre><code class='ocaml'><span class='k'>external</span> gtk_label_new <span class='o'>:</span>
     string <span class='k'>-></span> obj  <span class='k'>=</span> <span class='s'>&#34;gtk_label_new_c&#34;</span>
 <span class='k'>external</span> gtk_label_set_text <span class='o'>:</span>
     obj <span class='k'>-></span> string <span class='k'>-></span> unit <span class='k'>=</span> <span class='s'>&#34;gtk_label_set_text_c&#34;</span>
@@ -286,19 +286,19 @@ from <code>misc</code>:</p>
       may (gtk_label_set_pattern obj) pattern<span class='o'>;</span>
       may (gtk_label_set_line_wrap obj) line_wrap
   <span class='k'>end</span>
-<a href="javascript:octry('external gtk_label_new :\n    string -&#62; obj  = &#34;gtk_label_new_c&#34;\nexternal gtk_label_set_text :\n    obj -&#62; string -&#62; unit = &#34;gtk_label_set_text_c&#34;\nexternal gtk_label_set_justify :\n    obj -&#62; Justification.t -&#62; unit = &#34;gtk_label_set_justify_c&#34;\nexternal gtk_label_set_pattern :\n    obj -&#62; string -&#62; unit = &#34;gtk_label_set_pattern_c&#34;\nexternal gtk_label_set_line_wrap :\n    obj -&#62; bool -&#62; unit = &#34;gtk_label_set_line_wrap_c&#34;\n\nclass label ~text\n  ?justify ?pattern ?line_wrap ?alignment\n  ?padding ?show () =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit misc ?alignment ?padding ?show obj\n    method set_text = gtk_label_set_text obj\n    method set_justify = gtk_label_set_justify obj\n    method set_pattern = gtk_label_set_pattern obj\n    method set_line_wrap = gtk_label_set_line_wrap obj\n    initializer\n      may (gtk_label_set_justify obj) justify;\n      may (gtk_label_set_pattern obj) pattern;\n      may (gtk_label_set_line_wrap obj) line_wrap\n  end\n');">[try]</a></pre>
+<a href="javascript:octry('external gtk_label_new :\n    string -&#62; obj  = &#34;gtk_label_new_c&#34;\nexternal gtk_label_set_text :\n    obj -&#62; string -&#62; unit = &#34;gtk_label_set_text_c&#34;\nexternal gtk_label_set_justify :\n    obj -&#62; Justification.t -&#62; unit = &#34;gtk_label_set_justify_c&#34;\nexternal gtk_label_set_pattern :\n    obj -&#62; string -&#62; unit = &#34;gtk_label_set_pattern_c&#34;\nexternal gtk_label_set_line_wrap :\n    obj -&#62; bool -&#62; unit = &#34;gtk_label_set_line_wrap_c&#34;\n\nclass label ~text\n  ?justify ?pattern ?line_wrap ?alignment\n  ?padding ?show () =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit misc ?alignment ?padding ?show obj\n    method set_text = gtk_label_set_text obj\n    method set_justify = gtk_label_set_justify obj\n    method set_pattern = gtk_label_set_pattern obj\n    method set_line_wrap = gtk_label_set_line_wrap obj\n    initializer\n      may (gtk_label_set_justify obj) justify;\n      may (gtk_label_set_pattern obj) pattern;\n      may (gtk_label_set_line_wrap obj) line_wrap\n  end\n');">[try]</a></code></pre>
 <p>
 Although this class is bigger than the ones we&#39;ve looked at up til now,
 it&#39;s really more of the same idea, <em>except</em> that this class isn&#39;t
 virtual. You can create instances of this class which means it finally
 has to call <code>gtk_..._new</code>. This is the initialization code (we discussed
 this pattern above):</p>
-<pre class='ocaml'><span class='k'>class</span> label <span class='o'>~</span>text <span class='o'>...</span> () <span class='k'>=</span>
+<pre><code class='ocaml'><span class='k'>class</span> label <span class='o'>~</span>text <span class='o'>...</span> () <span class='k'>=</span>
   <span class='k'>let</span> obj <span class='k'>=</span> gtk_label_new text <span class='k'>in</span>
   object (self)
     <span class='k'>inherit</span> misc <span class='o'>...</span> obj
   <span class='k'>end</span>
-<a href="javascript:octry('class label ~text ... () =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit misc ... obj\n  end\n');">[try]</a></pre>
+<a href="javascript:octry('class label ~text ... () =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit misc ... obj\n  end\n');">[try]</a></code></pre>
 <p>
 (Pop quiz: what happens if we need to define a class which is both a
 base class from which other classes can be derived, and is also a
@@ -307,7 +307,7 @@ instances?)</p>
 <h4 id="WrappingcallstoClibraries"> Wrapping calls to C libraries</h4><p>
 Now we&#39;ll look in more detail at actually wrapping up calls to C library
 functions. Here&#39;s a simple example:</p>
-<pre class='ocaml'><span class='o'>/*</span> <span class='k'>external</span> gtk_label_set_text <span class='o'>:</span>
+<pre><code class='ocaml'><span class='o'>/*</span> <span class='k'>external</span> gtk_label_set_text <span class='o'>:</span>
      obj <span class='k'>-></span> string <span class='k'>-></span> unit
        <span class='k'>=</span> <span class='s'>&#34;gtk_label_set_text_c&#34;</span> <span class='o'>*/</span>
 
@@ -319,7 +319,7 @@ gtk_label_set_text_c (value obj<span class='o'>,</span> value str)
     String_val (str))<span class='o'>;</span>
   CAMLreturn (Val_unit)<span class='o'>;</span>
 <span class='o'>}</span>
-<a href="javascript:octry('/* external gtk_label_set_text :\n     obj -&#62; string -&#62; unit\n       = &#34;gtk_label_set_text_c&#34; */\n\nCAMLprim value\ngtk_label_set_text_c (value obj, value str)\n{\n  CAMLparam2 (obj, str);\n  gtk_label_set_text (unwrap (GtkLabel, obj),\n    String_val (str));\n  CAMLreturn (Val_unit);\n}\n');">[try]</a></pre>
+<a href="javascript:octry('/* external gtk_label_set_text :\n     obj -&#62; string -&#62; unit\n       = &#34;gtk_label_set_text_c&#34; */\n\nCAMLprim value\ngtk_label_set_text_c (value obj, value str)\n{\n  CAMLparam2 (obj, str);\n  gtk_label_set_text (unwrap (GtkLabel, obj),\n    String_val (str));\n  CAMLreturn (Val_unit);\n}\n');">[try]</a></code></pre>
 <p>
 Comparing the OCaml prototype for the external function call (in the
 comment) with the definition of the function we can see two things:</p>
@@ -363,10 +363,10 @@ garbage collector about the &quot;roots&quot; that you&#39;re using. And tell th
 garbage collector when you finish using those roots too, of course. This
 is done by framing the function within <code>CAMLparamN</code> ... <code>CAMLreturn</code>.
 Hence:</p>
-<pre class='ocaml'>CAMLparam2 (obj<span class='o'>,</span> str)<span class='o'>;</span>
+<pre><code class='ocaml'>CAMLparam2 (obj<span class='o'>,</span> str)<span class='o'>;</span>
 <span class='o'>...</span>
 CAMLreturn (Val_unit)<span class='o'>;</span> 
-<a href="javascript:octry('CAMLparam2 (obj, str);\n...\nCAMLreturn (Val_unit); \n');">[try]</a></pre>
+<a href="javascript:octry('CAMLparam2 (obj, str);\n...\nCAMLreturn (Val_unit); \n');">[try]</a></code></pre>
 <p>
 <code>CAMLparam2</code> is a macro saying that you&#39;re using two <code>value</code> parameters.
 (There is another macro for annotating local <code>value</code> variables too). You
@@ -375,7 +375,7 @@ you&#39;ve finished with those roots. It might be instructive to examine
 what code is inlined when you write <code>CAMLparam2 (obj, str)</code>. This is the
 generated code (with the author&#39;s version of OCaml, so it might vary
 between implementations slightly):</p>
-<pre class='ocaml'><span class='k'>struct</span> caml__roots_block <span class='o'>*</span>caml__frame
+<pre><code class='ocaml'><span class='k'>struct</span> caml__roots_block <span class='o'>*</span>caml__frame
     <span class='k'>=</span> local_roots<span class='o'>;</span>
 <span class='k'>struct</span> caml__roots_block caml__roots_obj<span class='o'>;</span>
 
@@ -385,12 +385,12 @@ caml__roots_obj<span class='o'>.</span>nitems <span class='k'>=</span> 1<span cl
 caml__roots_obj<span class='o'>.</span>ntables <span class='k'>=</span> 2<span class='o'>;</span>
 caml__roots_obj<span class='o'>.</span>tables <span class='o'>[</span>0<span class='o'>]</span> <span class='k'>=</span> <span class='o'>&#38;</span>obj<span class='o'>;</span>
 caml__roots_obj<span class='o'>.</span>tables <span class='o'>[</span>1<span class='o'>]</span> <span class='k'>=</span> <span class='o'>&#38;</span>str<span class='o'>;</span> 
-<a href="javascript:octry('struct caml__roots_block *caml__frame\n    = local_roots;\nstruct caml__roots_block caml__roots_obj;\n\ncaml__roots_obj.next = local_roots;\nlocal_roots = &#38;caml__roots_obj;\ncaml__roots_obj.nitems = 1;\ncaml__roots_obj.ntables = 2;\ncaml__roots_obj.tables [0] = &#38;obj;\ncaml__roots_obj.tables [1] = &#38;str; \n');">[try]</a></pre>
+<a href="javascript:octry('struct caml__roots_block *caml__frame\n    = local_roots;\nstruct caml__roots_block caml__roots_obj;\n\ncaml__roots_obj.next = local_roots;\nlocal_roots = &#38;caml__roots_obj;\ncaml__roots_obj.nitems = 1;\ncaml__roots_obj.ntables = 2;\ncaml__roots_obj.tables [0] = &#38;obj;\ncaml__roots_obj.tables [1] = &#38;str; \n');">[try]</a></code></pre>
 <p>
 And for <code>CAMLreturn (foo)</code>:</p>
-<pre class='ocaml'>local_roots <span class='k'>=</span> caml__frame<span class='o'>;</span>
+<pre><code class='ocaml'>local_roots <span class='k'>=</span> caml__frame<span class='o'>;</span>
 return (foo)<span class='o'>;</span> 
-<a href="javascript:octry('local_roots = caml__frame;\nreturn (foo); \n');">[try]</a></pre>
+<a href="javascript:octry('local_roots = caml__frame;\nreturn (foo); \n');">[try]</a></code></pre>
 <p>
 If you follow the code closely you&#39;ll see that <code>local_roots</code> is
 obviously a linked list of <code>caml__roots_block</code> structures. One (or more)
@@ -434,6 +434,7 @@ too closely ......</p>
       <div class="navbar-inner">
         <div class="container-fluid">
           <ul class="nav pull-right">
+            <li><a href="https://github.com/ocamllabs/sandbox-ocaml.org/tree/master/md-pages/learn/tutorials/calling_c_libraries.md">Edit</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Find us on GitHub</a></li>

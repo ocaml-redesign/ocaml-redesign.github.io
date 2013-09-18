@@ -66,7 +66,7 @@
           <div id='main-contents' class="content">
             <h1 id="Camlp4310staticfunctorexample"> Camlp4 3.10: static functor example</h1><p>
 static_functor_example.ml</p>
-<pre class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
+<pre><code class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
 <span class='k'>type</span> t2 <span class='k'>=</span> Foo <span class='k'>of</span> string <span class='o'>*</span> t1
 <span class='k'>open</span> <span class='m'>Camlp4</span><span class='o'>.</span>PreCast
 <span class='k'>module</span> Lexer <span class='k'>=</span> <span class='k'>struct</span>
@@ -83,7 +83,7 @@ END<span class='o'>;;</span>
 <span class='m'>Gram</span><span class='o'>.</span>parse_string foo (<span class='m'>Loc</span><span class='o'>.</span>mk <span class='s'>&#34;&#60;string&#62;&#34;</span>) <span class='s'>&#34;foo x?&#34;</span> <span class='k'>=</span> Foo(<span class='s'>&#34;x&#34;</span><span class='o'>,</span> A)
 DELETE_RULE Gram foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span><span class='o'>;</span> LIDENT<span class='o'>;</span> bar END
 
-<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4.PreCast\nmodule Lexer = struct\n  ... if you need a different lexer ...\nend\nmodule Gram = MakeGram(Lexer)\nlet foo = Gram.Entry.mk &#34;foo&#34;\nlet foo = Gram.Entry.mk &#34;foo&#34;\nEXTEND Gram\n  GLOBAL: foo;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nGram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\nDELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></pre>
+<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4.PreCast\nmodule Lexer = struct\n  ... if you need a different lexer ...\nend\nmodule Gram = MakeGram(Lexer)\nlet foo = Gram.Entry.mk &#34;foo&#34;\nlet foo = Gram.Entry.mk &#34;foo&#34;\nEXTEND Gram\n  GLOBAL: foo;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nGram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\nDELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></code></pre>
 
           </div>
         </div>
@@ -93,6 +93,7 @@ DELETE_RULE Gram foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span
       <div class="navbar-inner">
         <div class="container-fluid">
           <ul class="nav pull-right">
+            <li><a href="https://github.com/ocamllabs/sandbox-ocaml.org/tree/master/md-pages/learn/tutorials/camlp4_3.10/static_functor_example.md">Edit</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Find us on GitHub</a></li>

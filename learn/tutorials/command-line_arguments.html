@@ -78,31 +78,31 @@ array. It is obtained using the <code>Array.length</code> function.</p>
 <h2 id="Simpleexample"> Simple example</h2><p>
 The following program displays the arguments with their position in
 <code>Sys.argv</code>:</p>
-<pre class='ocaml'><span class='k'>open</span> Printf
+<pre><code class='ocaml'><span class='k'>open</span> Printf
 
 <span class='k'>let</span> () <span class='k'>=</span>
   <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> <span class='m'>Array</span><span class='o'>.</span>length <span class='m'>Sys</span><span class='o'>.</span>argv <span class='o'>-</span> 1 <span class='k'>do</span>
     printf <span class='s'>&#34;[%i] %s\n&#34;</span> i <span class='m'>Sys</span><span class='o'>.</span>argv<span class='o'>.</span>(i)
   <span class='k'>done</span>
-<a href="javascript:octry('open Printf\n\nlet () =\n  for i = 0 to Array.length Sys.argv - 1 do\n    printf &#34;[%i] %s\n&#34; i Sys.argv.(i)\n  done\n');">[try]</a></pre>
+<a href="javascript:octry('open Printf\n\nlet () =\n  for i = 0 to Array.length Sys.argv - 1 do\n    printf &#34;[%i] %s\n&#34; i Sys.argv.(i)\n  done\n');">[try]</a></code></pre>
 <p>
 If you save the program above as <code>args.ml</code>, and run
 <code>ocaml args.ml arg1 arg2 arg3</code>, here is what you get:</p>
-<pre class='ocaml'><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
+<pre><code class='ocaml'><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
 <span class='o'>[</span>1<span class='o'>]</span> arg1
 <span class='o'>[</span>2<span class='o'>]</span> arg2
 <span class='o'>[</span>3<span class='o'>]</span> arg3
-<a href="javascript:octry('[0] args.ml\n[1] arg1\n[2] arg2\n[3] arg3\n');">[try]</a></pre>
+<a href="javascript:octry('[0] args.ml\n[1] arg1\n[2] arg2\n[3] arg3\n');">[try]</a></code></pre>
 <p>
 Note that <code>ocaml</code> launched a subprocess that actually runs the program
 where argv is <code>args.ml arg1 arg2 arg3</code>. You can also compile your
 program using <code>ocamlopt -o args args.ml</code>, and then run
 <code>./args arg1 arg2 arg3</code> and you will get:</p>
-<pre class='ocaml'><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
+<pre><code class='ocaml'><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
 <span class='o'>[</span>1<span class='o'>]</span> arg1
 <span class='o'>[</span>2<span class='o'>]</span> arg2
 <span class='o'>[</span>3<span class='o'>]</span> arg3
-<a href="javascript:octry('[0] ./args\n[1] arg1\n[2] arg2\n[3] arg3\n');">[try]</a></pre>
+<a href="javascript:octry('[0] ./args\n[1] arg1\n[2] arg2\n[3] arg3\n');">[try]</a></code></pre>
 <h2 id="Toolsforparsingcommandlineoptions"> Tools for parsing command-line options</h2><p>
 
 A few libraries exist that let you process command-line arguments
@@ -127,6 +127,7 @@ without having to scan the <code>Sys.argv</code> array yourself:</p>
       <div class="navbar-inner">
         <div class="container-fluid">
           <ul class="nav pull-right">
+            <li><a href="https://github.com/ocamllabs/sandbox-ocaml.org/tree/master/md-pages/learn/tutorials/command-line_arguments.md">Edit</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Find us on GitHub</a></li>
