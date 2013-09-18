@@ -14,6 +14,7 @@
     <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script type="text/javascript">
       function octry(x){
         if(document.getElementById('buttons').innerHTML=='') {
@@ -45,7 +46,7 @@
               <li ><a href="/learn/">Learn</a></li>
               <li ><a href="/docs/">Documentation</a></li>
               <li ><a href="/platform/">Platform</a></li>
-              <li ><a href="/list.html">Packages</a></li>
+              <li ><a href="/pkg/">Packages</a></li>
               <li ><a href="/community/">Community</a></li>
             </ul>
 
@@ -433,6 +434,7 @@
       <div class="navbar-inner">
         <div class="container-fluid">
           <ul class="nav pull-right">
+            <li><a href="https://github.com/ocamllabs/sandbox-ocaml.org/tree/master/">Edit</a></li>
             <li><a href="#">Feedback</a></li>
             <li><a href="#">Contact us</a></li>
             <li><a href="#">Find us on GitHub</a></li>
@@ -441,7 +443,6 @@
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <script>
       if(document.getElementById('buttons')) octry('')
