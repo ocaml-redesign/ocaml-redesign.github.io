@@ -59,14 +59,14 @@
       </div>
     </nav>
     
-        <div class="container">
-      <div class="row">
-
-        <div class="span4">
-          <nav id="nav-secondary">
-            <ul class="nav nav-list">
-              <li class="nav-header"><a href="#">Contents</a></li>
-<ul>
+    <div class="container">
+  <div class="row">
+    
+    <div class="span4">
+      <nav id="nav-secondary">
+        <ul class="nav nav-list">
+          <li class="nav-header"><a href="#">Contents</a></li>
+          <ul>
  <li><a href='#StatusofpointersinOCaml'> Status of pointers in OCaml</a>
   <ul>
    <li><a href='#ExplicitpointersareOCamlvaluesoftyperef'> Explicit pointers are OCaml values of type <code>ref</code></a>
@@ -83,13 +83,37 @@
  </li>
 </ul>
 
-            </ul>
-          </nav>
+        </ul>
+      </nav>
+    </div>
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
+        <div class="container">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
         </div>
+      </div>
 
-
-          <div id='main-contents' class="content">
-            
+      <div id='main-contents' class="content">
+        
 <h1 id="PointersinOCaml"> Pointers in OCaml</h1><h2 id="StatusofpointersinOCaml"> Status of pointers in OCaml</h2><p>
 
 Pointers exist in OCaml, and in fact they spread all over the place.
@@ -327,9 +351,10 @@ lists:</p>
 
 <a href="javascript:octry('  type &#39;a lists = &#39;a cell pointer\n  and &#39;a cell = {mutable hd : &#39;a pointer; mutable tl : &#39;a lists};;\n\n  let new_cell () = {hd = Null; tl = Null};;\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- new_pointer x;\n    c.tl &#60;- l;\n    (new_pointer c : &#39;a lists);;\n  let hd (l : &#39;a lists) = !^l.hd;;\n  let tl (l : &#39;a lists) = !^l.tl;;\n\n  let append (l1 : &#39;a lists) (l2 : &#39;a lists) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -348,9 +373,12 @@ lists:</p>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

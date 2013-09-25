@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <h1 id="Books"> Books</h1><h2 id="BooksinEnglish"> Books in English</h2>
+      <div id='main-contents' class="content">
+        <h1 id="Books"> Books</h1><h2 id="BooksinEnglish"> Books in English</h2>
 <h3 id="TheOCamlSystemDocumentationandUser39sManual"> The OCaml System: Documentation and User&#39;s Manual</h3><p>
 <a href='http://caml.inria.fr/pub/docs/manual-ocaml/index.html'>Online</a> |
 <a href='http://caml.inria.fr/distrib/ocaml-4.00/ocaml-4.00-refman.pdf'>PDF</a> |
@@ -359,9 +383,10 @@ last chapter a comprehensive description of the language kernel.</p>
 <em>Carla Limongelli and Marta Cialdea<br />
  Societa&#39; Editrice Esculapio, 2002, ISBN 88-7488-031-6.</em></p>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -380,9 +405,12 @@ last chapter a comprehensive description of the language kernel.</p>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

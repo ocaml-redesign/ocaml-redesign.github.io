@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <h1 id="Camlp4310quicknonextensibleexample"> Camlp4 3.10: quick non extensible example</h1><p>
+      <div id='main-contents' class="content">
+        <h1 id="Camlp4310quicknonextensibleexample"> Camlp4 3.10: quick non extensible example</h1><p>
 quick_non_extensible_example.ml</p>
 <pre><code class='ocaml'><span class='com2'>(* This scheme only works <span class='ic'>when</span> the grammar value is not really</span>
 <span class='com2'>   used <span class='ic'>for</span> other things than entry creation<span class='ic'>.</span> In fact grammars</span>
@@ -86,9 +110,10 @@ DELETE_RULE Gram foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span
 
 <a href="javascript:octry('(* This scheme only works when the grammar value is not really\n   used for other things than entry creation. In fact grammars\n   are now static by default. *)\ntype t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4.PreCast\nopen Syntax\nlet foo = Gram.Entry.mk &#34;foo&#34;\nlet bar = Gram.Entry.mk &#34;bar&#34;\nEXTEND Gram\n  GLOBAL: foo bar;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nGram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\nDELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -107,9 +132,12 @@ DELETE_RULE Gram foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

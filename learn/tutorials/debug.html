@@ -59,14 +59,14 @@
       </div>
     </nav>
     
-        <div class="container">
-      <div class="row">
-
-        <div class="span4">
-          <nav id="nav-secondary">
-            <ul class="nav nav-list">
-              <li class="nav-header"><a href="#">Contents</a></li>
-<ul>
+    <div class="container">
+  <div class="row">
+    
+    <div class="span4">
+      <nav id="nav-secondary">
+        <ul class="nav nav-list">
+          <li class="nav-header"><a href="#">Contents</a></li>
+          <ul>
  <li><a href='#Tracingfunctionscallsinthetoplevel'> Tracing functions calls in the toplevel</a>
   <ul>
    <li><a href='#Polymorphicfunction'> Polymorphic function</a>
@@ -91,13 +91,37 @@
  </li>
 </ul>
 
-            </ul>
-          </nav>
+        </ul>
+      </nav>
+    </div>
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
+        <div class="container">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
         </div>
+      </div>
 
-
-          <div id='main-contents' class="content">
-            
+      <div id='main-contents' class="content">
+        
 <h1 id="Debugging"> Debugging</h1><p>
 This note quickly presents two techniques to debug OCaml programs:</p>
 <ul>
@@ -364,9 +388,10 @@ character reported by the debugger, and you can step back and forth
 using <code>ESC-b</code> and <code>ESC-s</code>, you can set up break points using
 <code>CTRL-X       space</code>, and so on...</p>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -385,9 +410,12 @@ using <code>ESC-b</code> and <code>ESC-s</code>, you can set up break points usi
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

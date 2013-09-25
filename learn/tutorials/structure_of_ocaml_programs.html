@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <p>The Structure of OCaml Programs</p>
+      <div id='main-contents' class="content">
+        <p>The Structure of OCaml Programs</p>
 <h1 id="TheStructureofOCamlPrograms"> The Structure of OCaml Programs</h1><h2 id="ThestructureofOCamlprograms"> The structure of OCaml programs</h2><p>
 
 Now we&#39;re going to take some time out to take a high-level look at some
@@ -578,9 +602,10 @@ procedural commands. This is really a classic imperative program.</p>
 
 <a href="javascript:octry('(* Third snippet *)\nopen GdkKeysyms\n\nlet () =\n  window#connect#destroy ~callback:Main.quit;\n  let factory = new GMenu.factory file_menu ~accel_group in\n  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;\n  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;\n  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;\n  factory#add_separator ();\n  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;\n  let factory = new GMenu.factory edit_menu ~accel_group in\n  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;\n  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;\n  factory#add_separator ();\n  factory#add_check_item &#34;Word wrap&#34; ~active:false\n    ~callback:editor#text#set_word_wrap;\n  factory#add_check_item &#34;Read only&#34; ~active:false\n    ~callback:(fun b -&#62; editor#text#set_editable (not b));\n  window#add_accel_group accel_group;\n  editor#text#event#connect#button_press\n    ~callback:(fun ev -&#62;\n      let button = GdkEvent.Button.button ev in\n      if button = 3 then begin\n        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true\n      end else false);\n  editor#text#set_vadjustment scrollbar#adjustment;\n  window#show ();\n  Main.main ()\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -599,9 +624,12 @@ procedural commands. This is really a classic imperative program.</p>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

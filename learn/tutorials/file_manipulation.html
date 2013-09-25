@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <h1 id="Filemanipulation"> File manipulation</h1><p>
+      <div id='main-contents' class="content">
+        <h1 id="Filemanipulation"> File manipulation</h1><p>
 This is a guide to basic file manipulation in OCaml using only what the
 standard library provides.</p>
 <p>Official documentation for the modules of interest:
@@ -179,9 +203,10 @@ channels that point to regular files, use <code>seek_in</code> or <code>seek_out
 
 <a href="javascript:octry('open Printf\n\nlet file = &#34;example.dat&#34;\nlet message = &#34;Hello!&#34;\n\nlet () =\n  (* Write message to file *)\n  let oc = open_out file in    (* create or truncate file, return channel *)\n  fprintf oc &#34;%s\n&#34; message;   (* write something *)   \n  close_out oc;                (* flush and close the channel *)\n\n  (* Read file and display the first line *)\n  let ic = open_in file in\n  try \n    let line = input_line ic in  (* read line from in_channel and discard \n *)\n    print_endline line;          (* write the result to stdout *)\n    flush stdout;                (* write on the underlying device now *)\n    close_in ic                  (* close the input channel *) \n\n  with e -&#62;                      (* some unexpected exception occurs *)\n    close_in_noerr ic;           (* emergency closing *)\n    raise e                      (* exit with error: files are closed but\n                                    channels are not flushed *)\n\n  (* normal exit: all channels are flushed and closed *)\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -200,9 +225,12 @@ channels that point to regular files, use <code>seek_in</code> or <code>seek_out
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

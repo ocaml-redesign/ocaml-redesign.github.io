@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <p>Data Types and Matching</p>
+      <div id='main-contents' class="content">
+        <p>Data Types and Matching</p>
 <h1 id="DataTypesandMatching"> Data Types and Matching</h1><h2 id="Linkedlists"> Linked lists</h2><p>
 
 As with Perl, OCaml has support for lists built into the language. All
@@ -400,9 +424,10 @@ reported the following warning:</p>
 
 <a href="javascript:octry('  let rec to_string e =\n    match e with\n    | Plus (left, right)   -&#62; &#34;(&#34; ^ to_string left ^ &#34; + &#34; ^ to_string right ^ &#34;)&#34;\n    | Minus (left, right)  -&#62; &#34;(&#34; ^ to_string left ^ &#34; - &#34; ^ to_string right ^ &#34;)&#34;\n    | Times (left, right)  -&#62; &#34;(&#34; ^ to_string left ^ &#34; * &#34; ^ to_string right ^ &#34;)&#34;\n    | Divide (left, right) -&#62; &#34;(&#34; ^ to_string left ^ &#34; / &#34; ^ to_string right ^ &#34;)&#34;\n    | Value v -&#62; v ;;\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -421,9 +446,12 @@ reported the following warning:</p>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

@@ -59,14 +59,14 @@
       </div>
     </nav>
     
-        <div class="container">
-      <div class="row">
-
-        <div class="span4">
-          <nav id="nav-secondary">
-            <ul class="nav nav-list">
-              <li class="nav-header"><a href="#">Contents</a></li>
-<ul>
+    <div class="container">
+  <div class="row">
+    
+    <div class="span4">
+      <nav id="nav-secondary">
+        <ul class="nav nav-list">
+          <li class="nav-header"><a href="#">Contents</a></li>
+          <ul>
  <li><a href='#Elementaryfunctions'> Elementary functions</a>
  </li>
  <li><a href='#Automaticmemorymanagement'> Automatic memory management</a>
@@ -85,37 +85,37 @@
  </li>
 </ul>
 
-            </ul>
-          </nav>
-        </div>
+        </ul>
+      </nav>
+    </div>
 
-        <div id="content-primary" class="span8">
-    <div id='tryocaml' class="content" style='display:none;'>
-      <div class="container">
-        <div class="row">
-          <div id="lesson-message"></div>
-          <div id="languages" style='display:none;'></div>
-          <div id="menu-lessons" style='display:none'>
-            <table class="zebra-striped">
-              <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
-            </table>
-          </div>
-          <div class="span9 ocaml">
-            <div id="toplevel-container">
-              <pre id="output"></pre>
-              <div id="sharp">#</div>
-              <div id="toplevel"></div>
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
+        <div class="container">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
             </div>
-            <div id="buttons"></div>
-            <div id="graphics-title"></div>
-            <div id="graphics"></div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-          <div id='main-contents' class="content">
-            <!--  --><h1 id="AHundredLinesofOCaml"> A Hundred Lines of OCaml</h1>
+      <div id='main-contents' class="content">
+        <!--  --><h1 id="AHundredLinesofOCaml"> A Hundred Lines of OCaml</h1>
 <p>OCaml possesses an <a href='description.html#interactive'>interactive system</a>,
 called “toploop”, that lets you type OCaml code and have it evaluated
 immediately. It is a great way to learn the language and to quickly
@@ -296,9 +296,10 @@ fib <span class='o'>--&#62;</span> 3
 Go and <a href='http://try.ocamlpro.com/'>try it in your browser</a> or
 <a href='install.html'>install</a> it and read some <a href='tutorials/'>tutorials</a>.</p>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -317,9 +318,12 @@ Go and <a href='http://try.ocamlpro.com/'>try it in your browser</a> or
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <h1 id="Camlp4310dynamicfunctorexampleml"> Camlp4 3.10 dynamic_functor_example.ml</h1><p>
+      <div id='main-contents' class="content">
+        <h1 id="Camlp4310dynamicfunctorexampleml"> Camlp4 3.10 dynamic_functor_example.ml</h1><p>
 dynamic_functor_example.ml:</p>
 <pre><code class='ocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
 <span class='k'>type</span> t2 <span class='k'>=</span> Foo <span class='k'>of</span> string <span class='o'>*</span> t1
@@ -96,9 +120,10 @@ dynamic_functor_example.ml:</p>
 
 <a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4\n\nmodule Id = struct (* Information for dynamic loading *)\n  let name = &#34;My_extension&#34;\n  let version = &#34;$Id$&#34;\nend\n\n(* An extension is just a functor: Syntax -&#62; Syntax *)\nmodule Make (Syntax : Sig.Syntax) = struct\n  include Syntax\n  let foo = Gram.Entry.mk &#34;foo&#34;\n  let bar = Gram.Entry.mk &#34;bar&#34;\n  open Camlp4.Sig\n  EXTEND Gram\n    GLOBAL: foo bar;\n    foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n    bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\n  END;;\n  Gram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\n  DELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\nend\n\n(* Register it to make it usable via the camlp4 binary. *)\nmodule M = Register.SyntaxExtension(Id)(Make)\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -117,9 +142,12 @@ dynamic_functor_example.ml:</p>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

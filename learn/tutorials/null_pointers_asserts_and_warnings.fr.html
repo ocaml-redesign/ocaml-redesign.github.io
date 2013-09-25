@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <h1 id="Pointeursnulsassertsetwarnings"> Pointeurs nuls, asserts et warnings</h1><h2 id="Pointeursnuls"> Pointeurs nuls</h2><p>
+      <div id='main-contents' class="content">
+        <h1 id="Pointeursnulsassertsetwarnings"> Pointeurs nuls, asserts et warnings</h1><h2 id="Pointeursnuls"> Pointeurs nuls</h2><p>
 
 Supposons que votre site web dispose d&#39;un sondage, demandant à vos
 lecteurs leurs noms et leurs âges. Le problème, c&#39;est que pour une
@@ -202,9 +226,10 @@ read_line ()<span class='o'>;;</span>
 
 <a href="javascript:octry('open Graphics;;\n&#60;em&#62;open Printf;;&#60;/em&#62;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;eprintf &#34;radius is %d\n&#34; radius;&#60;/em&#62;\n\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -223,9 +248,12 @@ read_line ()<span class='o'>;;</span>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>

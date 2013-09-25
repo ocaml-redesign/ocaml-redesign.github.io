@@ -59,13 +59,37 @@
       </div>
     </nav>
     
+    <div class="container">
+  <div class="row">
+    
+
+    <div id="content-primary" class="span8">
+      <div id='tryocaml' class="content" style='display:none;'>
         <div class="container">
-      <div class="row">
+          <div class="row">
+            <div id="lesson-message"></div>
+            <div id="languages" style='display:none;'></div>
+            <div id="menu-lessons" style='display:none'>
+              <table class="zebra-striped">
+                <tr><td id="text-x"><code></code></td> <td id=""></td></tr>
+              </table>
+            </div>
+            <div class="span9 ocaml">
+              <div id="toplevel-container">
+                <pre id="output"></pre>
+                <div id="sharp">#</div>
+                <div id="toplevel"></div>
+              </div>
+              <div id="buttons"></div>
+              <div id="graphics-title"></div>
+              <div id="graphics"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
-          <div id='main-contents' class="content">
-            <h1 id="StreamExpressions"> Stream Expressions</h1><h2 id="StreamExpressionsx"> Stream Expressions</h2><p>
+      <div id='main-contents' class="content">
+        <h1 id="StreamExpressions"> Stream Expressions</h1><h2 id="StreamExpressionsx"> Stream Expressions</h2><p>
 
 Streams are very powerful and concise once the necessary tools (stream
 builders, combinators, and other utilities) are in place. However, the
@@ -204,9 +228,10 @@ and files underneath &quot;/var/log&quot;:</p>
 
 <a href="javascript:octry('let () =\n  Stream.iter\n    (function\n     | `Dir path -&#62;\n         Printf.printf &#34;dir: %s%!\n&#34; path\n     | `File path -&#62;\n         Printf.printf &#34;file: %s%!\n&#34; path\n     | `Error (path, e) -&#62;\n         Printf.printf &#34;error: %s (%s)%!\n&#34; path\n           (Printexc.to_string e))\n    (walk &#34;/var/log&#34;)\n\n');">[try]</a></code></pre>
 
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+</div>
 
     <footer id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
@@ -225,9 +250,12 @@ and files underneath &quot;/var/log&quot;:</p>
       </div>
     </footer>
     <!-- Load javascript from CDN -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script>
-      if(document.getElementById('buttons')) octry('')
-</script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      // <!--
+      if(document.getElementsByTagName('pre').length > 0)
+         octry('')
+      // -->
+    </script>
   </body>
 </html>
