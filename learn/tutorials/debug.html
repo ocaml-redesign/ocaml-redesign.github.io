@@ -134,7 +134,7 @@ This note quickly presents two techniques to debug OCaml programs:</p>
 <h2 id="Tracingfunctionscallsinthetoplevel"> Tracing functions calls in the toplevel</h2><p>
 The simplest way to debug programs in the toplevel is to follow the
 function calls, by “tracing” the faulty function:</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
 <span class='o'>#</span> <span class='o'>#</span>trace fib<span class='o'>;;</span>
 fib is now traced<span class='o'>.</span>
 <span class='o'>#</span> fib 3<span class='o'>;;</span>
@@ -157,7 +157,7 @@ fib is no longer traced<span class='o'>.</span>
 A difficulty with polymorphic functions is that the output of the trace
 system is not very informative in case of polymorphic arguments and/or
 results. Consider a sorting algorithm (say bubble sort):</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> exchange i j v <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> exchange i j v <span class='k'>=</span>
     <span class='k'>let</span> aux <span class='k'>=</span> v<span class='o'>.</span>(i) <span class='k'>in</span>
     v<span class='o'>.</span>(i) <span class='o'>&#60;-</span> v<span class='o'>.</span>(j)<span class='o'>;</span> v<span class='o'>.</span>(j) <span class='o'>&#60;-</span> aux<span class='o'>;;</span>
   
@@ -203,7 +203,7 @@ corrected, you just have to suppress the type constraint to revert to a
 polymorphic version of the function. For our sorting routine, a single
 type constraint on the argument of the <code>exchange</code> function warranties a
 monomorphic typing, that allows a proper trace of function calls:</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> exchange i j (v <span class='o'>:</span> int vect) <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='o'>#</span> <span class='k'>let</span> exchange i j (v <span class='o'>:</span> int vect) <span class='k'>=</span>
     <span class='o'>[</span><span class='o'>...</span><span class='o'>]</span>
 exchange <span class='o'>:</span> int <span class='k'>-></span> int <span class='k'>-></span> int vect <span class='k'>-></span> unit <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
     <span class='o'>[</span><span class='o'>...</span><span class='o'>]</span>
@@ -258,7 +258,7 @@ native Windows ports of OCaml (but it runs under the Cygwin port.</p>
 <h3 id="Launchingthedebugger"> Launching the debugger</h3><p>
 Consider the following obviously wrong program written in the file
 <code>uncaught.ml</code>:</p>
-<pre><code class='ocaml'><span class='com2'>(* file uncaught<span class='ic'>.</span>ml *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* file uncaught<span class='ic'>.</span>ml *)</span><!-- end comment -->
 <span class='k'>let</span> l <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>let</span> find_address name <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>assoc name <span class='o'>!</span>l<span class='o'>;;</span>
 <span class='k'>let</span> add_address name address <span class='k'>=</span> l <span class='o'>:=</span> (name<span class='o'>,</span> address) <span class='o'>::</span> <span class='o'>!</span> l<span class='o'>;;</span>
@@ -273,23 +273,23 @@ can proceed as follows:</p>
  <li>we compile the program in debug mode:<br /></li>
 </ol>
 
-<pre><code class='ocaml'>ocamlc <span class='o'>-</span>g uncaught<span class='o'>.</span>ml
+<pre><code class='tryocaml'>ocamlc <span class='o'>-</span>g uncaught<span class='o'>.</span>ml
 <a href="javascript:octry('ocamlc -g uncaught.ml\n');">[try]</a></code></pre>
 <ol>
  <li>we launch the debugger:</li>
 </ol>
 
-<pre><code class='ocaml'>ocamldebug a<span class='o'>.</span>out
+<pre><code class='tryocaml'>ocamldebug a<span class='o'>.</span>out
 <a href="javascript:octry('ocamldebug a.out\n');">[try]</a></code></pre>
 <p>Then the debugger answers with a banner and a prompt:</p>
-<pre><code class='ocaml'>        OCaml Debugger version 4.00<span class='o'>.</span>1
+<pre><code class='tryocaml'>        OCaml Debugger version 4.00<span class='o'>.</span>1
 
 (ocd)
 <a href="javascript:octry('        OCaml Debugger version 4.00.1\n\n(ocd)\n');">[try]</a></code></pre>
 <h3 id="Findingthecauseofaspuriousexception"> Finding the cause of a spurious exception</h3><p>
 
 Type <code>r</code> (for <em>run</em>); you get</p>
-<pre><code class='ocaml'>(ocd) r
+<pre><code class='tryocaml'>(ocd) r
 Loading program<span class='o'>...</span> <span class='k'>done</span><span class='o'>.</span>
 Time <span class='o'>:</span> 12
 Program <span class='k'>end</span><span class='o'>.</span>
@@ -300,7 +300,7 @@ Uncaught <span class='k'>exception</span><span class='o'>:</span> Not_found
 Self explanatory, is&#39;nt it? So, you want to step backward to set the
 program counter before the time the exception is raised; hence type in
 <code>b</code> as <em>backstep</em>, and you get</p>
-<pre><code class='ocaml'>(ocd) b
+<pre><code class='tryocaml'>(ocd) b
 Time <span class='o'>:</span> 11 <span class='o'>-</span> pc <span class='o'>:</span> 15500 <span class='o'>-</span> <span class='k'>module</span> List
 143     <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>&#60;|</span>b<span class='o'>|&#62;</span>raise Not_found
 <a href="javascript:octry('(ocd) b\nTime : 11 - pc : 15500 - module List\n143     [] -&#62; &#60;|b|&#62;raise Not_found\n');">[try]</a></code></pre>
@@ -312,14 +312,14 @@ expression (as witnessed by the <code>&lt;|b|&gt;</code> mark).</p>
 <p>But, as you know, you want the debugger to tell you which procedure
 calls the one from <code>List</code>, and also who calls the procedure that calls
 the one from <code>List</code>; hence, you want a backtrace of the execution stack:</p>
-<pre><code class='ocaml'>(ocd) bt
+<pre><code class='tryocaml'>(ocd) bt
 <span class='o'>#</span>0  Pc <span class='o'>:</span> 15500  List char 3562
 <span class='o'>#</span>1  Pc <span class='o'>:</span> 19128  Uncaught char 221
 <a href="javascript:octry('(ocd) bt\n#0  Pc : 15500  List char 3562\n#1  Pc : 19128  Uncaught char 221\n');">[try]</a></code></pre>
 <p>
 So the last function called is from module <code>List</code> at character 3562,
 that is :</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> assoc x <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='tryocaml'><span class='k'>let rec</span> assoc x <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> raise Not_found
           <span class='o'>^</span>
   <span class='o'>|</span> (a<span class='o'>,</span>b)<span class='o'>::</span>l <span class='k'>-></span> <span class='k'>if</span> a <span class='k'>=</span> x <span class='k'>then</span> b <span class='k'>else</span> assoc x l
@@ -327,7 +327,7 @@ that is :</p>
 <p>
 The function that calls it is in module <code>Uncaught</code>, file <code>uncaught.ml</code>
 char 221:</p>
-<pre><code class='ocaml'>print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
+<pre><code class='tryocaml'>print_string (find_address <span class='s'>&#34;INRIA&#34;</span>)<span class='o'>;</span> print_newline ()<span class='o'>;;</span>
                                   <span class='o'>^</span>
 <a href="javascript:octry('print_string (find_address &#34;INRIA&#34;); print_newline ();;\n                                  ^\n');">[try]</a></code></pre>
 <p>
@@ -338,7 +338,7 @@ find a spurious exception you just need to type <code>ocamldebug a.out</code>, t
 <h3 id="Gettinghelpandinfointhedebugger"> Getting help and info in the debugger</h3><p>
 To get more info about the current status of the debugger you can ask it
 directly at the toplevel prompt of the debugger; for instance:</p>
-<pre><code class='ocaml'>(ocd) info breakpoints
+<pre><code class='tryocaml'>(ocd) info breakpoints
 No breakpoint<span class='o'>.</span>
 
 (ocd) help break
@@ -352,7 +352,7 @@ break <span class='o'>@</span> <span class='o'>[</span><span class='k'>module</s
 
 Let&#39;s set up a breakpoint and rerun the entire program from the
 beginning (<code>(g)oto 0</code> then <code>(r)un</code>):</p>
-<pre><code class='ocaml'>(ocd) break <span class='o'>@</span>Uncaught 9
+<pre><code class='tryocaml'>(ocd) break <span class='o'>@</span>Uncaught 9
 Breakpoint 3 at 19112 <span class='o'>:</span> file Uncaught<span class='o'>,</span> line 9 column 34
 
 (ocd) g 0
@@ -367,7 +367,7 @@ Breakpoint <span class='o'>:</span> 1
 <p>
 Then, we can step and find what happens when <code>find_address</code> is about to
 be called</p>
-<pre><code class='ocaml'>(ocd) s
+<pre><code class='tryocaml'>(ocd) s
 Time <span class='o'>:</span> 7 <span class='o'>-</span> pc <span class='o'>:</span> 19012 <span class='o'>-</span> <span class='k'>module</span> Uncaught
 5 <span class='k'>let</span> find_address name <span class='k'>=</span> <span class='o'>&#60;|</span>b<span class='o'>|&#62;</span><span class='m'>List</span><span class='o'>.</span>assoc name <span class='o'>!</span>l<span class='o'>;;</span>
 

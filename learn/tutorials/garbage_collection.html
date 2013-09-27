@@ -139,7 +139,7 @@ object can be freed.</p>
 computer scientists, yet it has one big practical advantage over full
 garbage collectors. With reference counting, you can avoid many explicit
 calls to <code>close</code>/<code>closedir</code> in code. For example:</p>
-<pre><code class='ocaml'>foreach <span class='o'>(@</span>files)
+<pre><code class='tryocaml'>foreach <span class='o'>(@</span>files)
 <span class='o'>{</span>
   my <span class='o'>$</span>io <span class='k'>=</span> <span class='k'>new</span> IO<span class='o'>::</span>File <span class='s'>&#34;&#60; $_&#34;</span> <span class='k'>or</span> die<span class='o'>;</span>
   <span class='o'>#</span> read from <span class='o'>$</span>io
@@ -153,7 +153,7 @@ end of the loop, the <code>$io</code> variable goes out of scope, so the referen
 count on the file object goes to zero, and it is immediately freed (ie.
 closed).</p>
 <p>Consider the equivalent OCaml code:</p>
-<pre><code class='ocaml'><span class='k'>let</span> read_file filename <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> read_file filename <span class='k'>=</span>
   <span class='k'>let</span> chan <span class='k'>=</span> open_in filename <span class='k'>in</span>
   <span class='com2'>(* read from chan *)</span><!-- end comment --> <span class='k'>in</span>
 <span class='m'>List</span><span class='o'>.</span>iter read_file files
@@ -192,7 +192,7 @@ The <code>Gc</code> module contains some useful functions for querying and calli
 the garbage collector from OCaml programs.</p>
 <p>Here is a program which runs and then prints out GC statistics just
 before quitting:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
   <span class='k'>if</span> i <span class='k'>=</span> 1 <span class='k'>then</span> x_init
   <span class='k'>else</span>
     <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
@@ -215,7 +215,7 @@ before quitting:</p>
 <a href="javascript:octry('let rec iterate r x_init i =\n  if i = 1 then x_init\n  else\n    let x = iterate r x_init (i-1) in\n    r *. x *. (1.0 -. x)\n\nlet () =\n  Random.self_init ();\n  Graphics.open_graph &#34; 640x480&#34;\n  for x = 0 to 640 do\n    let r = 4.0 *. (float_of_int x) /. 640.0 in\n    for i = 0 to 39 do\n      let x_init = Random.float 1.0 in\n      let x_final = iterate r x_init 500 in\n      let y = int_of_float (x_final *. 480.) in\n      Graphics.plot x y\n    done\n  done;\n  read_line ();\n  Gc.print_stat stdout\n');">[try]</a></code></pre>
 <p>
 Here is what it printed out for me:</p>
-<pre><code class='ocaml'>minor_words<span class='o'>:</span> 115926165          <span class='o'>#</span> Total number <span class='k'>of</span> words allocated
+<pre><code class='tryocaml'>minor_words<span class='o'>:</span> 115926165          <span class='o'>#</span> Total number <span class='k'>of</span> words allocated
 promoted_words<span class='o'>:</span> 31217           <span class='o'>#</span> Promoted from minor <span class='k'>-></span> major
 major_words<span class='o'>:</span> 31902              <span class='o'>#</span> Large objects allocated <span class='k'>in</span> major directly
 minor_collections<span class='o'>:</span> 3538         <span class='o'>#</span> Number <span class='k'>of</span> minor heap collections
@@ -243,7 +243,7 @@ heap.</p>
 <p>We can instruct the GC to print out debugging messages when one of
 several events happen (eg. on every major collection). Try adding the
 following code to the example above near the beginning:</p>
-<pre><code class='ocaml'><span class='m'>Gc</span><span class='o'>.</span>set <span class='o'>{</span> (<span class='m'>Gc</span><span class='o'>.</span>get ()) <span class='k'>with</span> <span class='m'>Gc</span><span class='o'>.</span>verbose <span class='k'>=</span> 0x01 <span class='o'>}</span>
+<pre><code class='tryocaml'><span class='m'>Gc</span><span class='o'>.</span>set <span class='o'>{</span> (<span class='m'>Gc</span><span class='o'>.</span>get ()) <span class='k'>with</span> <span class='m'>Gc</span><span class='o'>.</span>verbose <span class='k'>=</span> 0x01 <span class='o'>}</span>
 <a href="javascript:octry('Gc.set { (Gc.get ()) with Gc.verbose = 0x01 }\n');">[try]</a></code></pre>
 <p>
 (We haven&#39;t seen the <code>{ expression with field = value }</code> form before,
@@ -272,7 +272,7 @@ might access the data on the disk, so we need to lock individual records
 when we hold copies of them in memory.</p>
 <p>The <em>public</em> interface to our &quot;in-memory object database cache&quot; is going
 to be just two functions:</p>
-<pre><code class='ocaml'><span class='k'>type</span> record <span class='k'>=</span> <span class='o'>{</span> <span class='k'>mutable</span> name <span class='o'>:</span> string<span class='o'>;</span> <span class='k'>mutable</span> address <span class='o'>:</span> string <span class='o'>}</span>
+<pre><code class='tryocaml'><span class='k'>type</span> record <span class='k'>=</span> <span class='o'>{</span> <span class='k'>mutable</span> name <span class='o'>:</span> string<span class='o'>;</span> <span class='k'>mutable</span> address <span class='o'>:</span> string <span class='o'>}</span>
 
 <span class='k'>val</span> get_record <span class='o'>:</span> int <span class='k'>-></span> record
 <span class='k'>val</span> sync_records <span class='o'>:</span> unit <span class='k'>-></span> unit
@@ -289,7 +289,7 @@ function synchronises the disk copy and in-memory copies of all records.</p>
 <p>OCaml doesn&#39;t currently run finalisers at exit. However you can easily
 force it to by adding the following command to your code. This command
 causes a full major GC cycle on exit:</p>
-<pre><code class='ocaml'>at_exit <span class='m'>Gc</span><span class='o'>.</span>full_major
+<pre><code class='tryocaml'>at_exit <span class='m'>Gc</span><span class='o'>.</span>full_major
 <a href="javascript:octry('at_exit Gc.full_major\n');">[try]</a></code></pre>
 <p>
 Our code is also going to implement a cache of recently accessed records
@@ -307,7 +307,7 @@ memory, the program must acquire an exclusive lock on the record. After
 the in-memory copy is written back out to the file, the program must
 release the lock. Here is some code to define the on-disk format and
 some low-level functions to read, write, lock and unlock records:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Unix
+<pre><code class='tryocaml'><span class='k'>open</span> Unix
 
 <span class='com2'>(* On<span class='ic'>-</span>disk format<span class='ic'>.</span> *)</span><!-- end comment -->
 let rec<span class='o'>ord_size</span> <span class='k'>=</span> 256
@@ -339,7 +339,7 @@ let rec<span class='o'>ord_size</span> <span class='k'>=</span> 256
 <a href="javascript:octry('open Unix\n\n(* On-disk format. *)\nlet record_size = 256\nlet name_size = 64\nlet addr_size = 192\n\n(* Low-level load/save records to file. *)\nlet seek_record n fd =\n  lseek fd (n * record_size) SEEK_SET\n\nlet write_record record n fd =\n  seek_record n fd;\n  write fd record.name 0 name_size;\n  write fd record.address 0 addr_size\n\nlet read_record record n fd =\n  seek_record n fd;\n  read fd record.name 0 name_size;\n  read fd record.address 0 addr_size\n\n(* Lock/unlock the nth record in a file. *)\nlet lock_record n fd =\n  seek_record n fd;\n  lockf fd F_LOCK record_size\n\nlet unlock_record n fd =\n  seek_record n fd;\n  lockf fd F_ULOCK record_size\n');">[try]</a></code></pre>
 <p>
 We also need a function to create new, empty in-memory <code>record</code> objects:</p>
-<pre><code class='ocaml'><span class='com2'>(* Create a <span class='ic'>new</span><span class='ic'>,</span> empty record<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Create a <span class='ic'>new</span><span class='ic'>,</span> empty record<span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> new_record () <span class='k'>=</span>
   <span class='o'>{</span> name <span class='k'>=</span> (<span class='m'>String</span><span class='o'>.</span>make name_size <span class='s'>&#39; &#39;</span>)<span class='o'>;</span>
     address <span class='k'>=</span> (<span class='m'>String</span><span class='o'>.</span>make addr_size <span class='s'>&#39; &#39;</span>) <span class='o'>}</span>
@@ -347,7 +347,7 @@ We also need a function to create new, empty in-memory <code>record</code> objec
 <p>
 Because this is a really simple program, we&#39;re going to fix the number
 of records in advance:</p>
-<pre><code class='ocaml'><span class='com2'>(* Total number <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Total number <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> nr_records <span class='k'>=</span> 10000
 
 <span class='com2'>(* On<span class='ic'>-</span>disk file<span class='ic'>.</span> *)</span><!-- end comment -->
@@ -357,7 +357,7 @@ of records in advance:</p>
 Download <a href='../img/users.bin.gz'>users.bin.gz</a> and decompress it before
 running the program.</p>
 <p>Our cache of records is very simple:</p>
-<pre><code class='ocaml'><span class='com2'>(* Cache <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Cache <span class='ic'>of</span> records<span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> cache <span class='k'>=</span> <span class='m'>Weak</span><span class='o'>.</span>create nr_records
 <a href="javascript:octry('(* Cache of records. *)\nlet cache = Weak.create nr_records\n');">[try]</a></code></pre>
 <p>
@@ -368,7 +368,7 @@ yet, or else it has been written out to disk (finalised) and dropped
 from the cache. If the cache gives us <code>Some record</code> then we just return
 <code>record</code> (this promotes the weak pointer to the record to a normal
 pointer).</p>
-<pre><code class='ocaml'><span class='k'>open</span> Printf
+<pre><code class='tryocaml'><span class='k'>open</span> Printf
 
 <span class='com2'>(* The finaliser <span class='ic'>function</span><span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> finaliser n record <span class='k'>=</span>
@@ -398,7 +398,7 @@ that the garbage collector <em>can</em> collect and finalise all of those
 records. But it doesn&#39;t necessarily mean that the GC <em>will</em> collect the
 records straightaway (in fact it&#39;s not likely that it will), so to force
 the GC to collect the records immediately, we also invoke a major cycle:</p>
-<pre><code class='ocaml'><span class='com2'>(* Synchronise all records<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Synchronise all records<span class='ic'>.</span> *)</span><!-- end comment -->
 <span class='k'>let</span> sync_records () <span class='k'>=</span>
   <span class='m'>Weak</span><span class='o'>.</span>fill cache 0 nr_records None<span class='o'>;</span>
   <span class='m'>Gc</span><span class='o'>.</span>full_major ()
@@ -407,7 +407,7 @@ the GC to collect the records immediately, we also invoke a major cycle:</p>
 Finally we have some test code. I won&#39;t reproduce the test code, but you
 can download the complete program and test code
 <a href='_file/objcache.ml'>objcache.ml</a>, and compile it with:</p>
-<pre><code class='ocaml'>ocamlc <span class='o'>-</span>w s unix<span class='o'>.</span>cma objcache<span class='o'>.</span>ml <span class='o'>-</span>o objcache
+<pre><code class='tryocaml'>ocamlc <span class='o'>-</span>w s unix<span class='o'>.</span>cma objcache<span class='o'>.</span>ml <span class='o'>-</span>o objcache
 <a href="javascript:octry('ocamlc -w s unix.cma objcache.ml -o objcache\n');">[try]</a></code></pre>
 <h2 id="Exercises"> Exercises</h2><p>
 

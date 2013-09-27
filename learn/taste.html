@@ -131,7 +131,7 @@ Let us define the square function and the recursive factorial function.
 Then, let us apply these functions to sample values. Unlike the majority
 of languages, OCaml uses parentheses for grouping but not for the
 arguments of a function.</p>
-<pre><code class='ocaml'><span class='k'>let</span> square x <span class='k'>=</span> x <span class='o'>*</span> x<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> square x <span class='k'>=</span> x <span class='o'>*</span> x<span class='o'>;;</span>
   square 3<span class='o'>;;</span>
   <span class='k'>let rec</span> fact x <span class='k'>=</span>
     <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> x <span class='o'>*</span> fact (x <span class='o'>-</span> 1)<span class='o'>;;</span>
@@ -145,14 +145,14 @@ example, let us consider simply linked lists.</p>
 <p>Lists are predefined in OCaml. The empty list is written <code>[]</code>. The
 constructor that allows prepending an element to a list is written <code>::</code>
 (in infix form).</p>
-<pre><code class='ocaml'><span class='k'>let</span> l <span class='k'>=</span> 1 <span class='o'>::</span> 2 <span class='o'>::</span> 3 <span class='o'>::</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> l <span class='k'>=</span> 1 <span class='o'>::</span> 2 <span class='o'>::</span> 3 <span class='o'>::</span> <span class='o'>[</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 5 <span class='o'>::</span> l<span class='o'>;;</span>
 <a href="javascript:octry('let l = 1 :: 2 :: 3 :: [];;\n[1; 2; 3];;\n5 :: l;;\n');">[try]</a></code></pre>
 <h2 id="Polymorphismsortinglists"> Polymorphism: sorting lists</h2><p>
 
 Insertion sort is defined using two recursive functions.</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> sort <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='tryocaml'><span class='k'>let rec</span> sort <span class='k'>=</span> <span class='k'>function</span>
   <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>]</span>
   <span class='o'>|</span> x <span class='o'>::</span> l <span class='k'>-></span> insert x (sort l)
 <span class='k'>and</span> insert elem <span class='k'>=</span> <span class='k'>function</span>
@@ -164,7 +164,7 @@ Insertion sort is defined using two recursive functions.</p>
 Note that the type of the list elements remains unspecified: it is
 represented by a <em>type variable</em> <code>&#39;a</code>. Thus, <code>sort</code> can be applied both
 to a list of integers and to a list of strings.</p>
-<pre><code class='ocaml'>sort <span class='o'>[</span>2<span class='o'>;</span> 1<span class='o'>;</span> 0<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='tryocaml'>sort <span class='o'>[</span>2<span class='o'>;</span> 1<span class='o'>;</span> 0<span class='o'>]</span><span class='o'>;;</span>
 sort <span class='o'>[</span><span class='s'>&#34;yes&#34;</span><span class='o'>;</span> <span class='s'>&#34;ok&#34;</span><span class='o'>;</span> <span class='s'>&#34;sure&#34;</span><span class='o'>;</span> <span class='s'>&#34;ya&#34;</span><span class='o'>;</span> <span class='s'>&#34;yep&#34;</span><span class='o'>]</span><span class='o'>;;</span>
 <a href="javascript:octry('sort [2; 1; 0];;\nsort [&#34;yes&#34;; &#34;ok&#34;; &#34;sure&#34;; &#34;ya&#34;; &#34;yep&#34;];;\n');">[try]</a></code></pre>
 <h2 id="Imperativefeatures"> Imperative features</h2><p>
@@ -172,7 +172,7 @@ sort <span class='o'>[</span><span class='s'>&#34;yes&#34;</span><span class='o'
 Let us encode polynomials as arrays of integer coefficients. Then, to
 add two polynomials, we first allocate the result array, then fill its
 slots using two successive <code>for</code> loops.</p>
-<pre><code class='ocaml'><span class='k'>let</span> add_polynom p1 p2 <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> add_polynom p1 p2 <span class='k'>=</span>
   <span class='k'>let</span> n1 <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length p1
   <span class='k'>and</span> n2 <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>length p2 <span class='k'>in</span>
   <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>create (max n1 n2) 0 <span class='k'>in</span>
@@ -187,7 +187,7 @@ returns a new cell with initial contents <code>init</code>, <code>!cell</code> r
 current contents of <code>cell</code>, and <code>cell := v</code> writes the value <code>v</code> into
 <code>cell</code>.</p>
 <p>We may redefine <code>fact</code> using a reference cell and a <code>for</code> loop:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> fact n <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> fact n <span class='k'>=</span>
     <span class='k'>let</span> result <span class='k'>=</span> ref 1 <span class='k'>in</span>
     <span class='k'>for</span> i <span class='k'>=</span> 2 <span class='k'>to</span> n <span class='k'>do</span>
       result <span class='o'>:=</span> i <span class='o'>*</span> <span class='o'>!</span>result
@@ -201,19 +201,19 @@ There is no restriction on functions, which may thus be passed as
 arguments to other functions. Let us define a function <code>sigma</code> that
 returns the sum of the results of applying a given function <code>f</code> to each
 element of a list:</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> sigma f <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='tryocaml'>  <span class='k'>let rec</span> sigma f <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> 0
     <span class='o'>|</span> x <span class='o'>::</span> l <span class='k'>-></span> f x <span class='o'>+</span> sigma f l
 <a href="javascript:octry('  let rec sigma f = function\n    | [] -&#62; 0\n    | x :: l -&#62; f x + sigma f l\n');">[try]</a></code></pre>
 <p>
 Anonymous functions may be defined using the <code>fun</code> or <code>function</code>
 construct:</p>
-<pre><code class='ocaml'>sigma (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>*</span> x) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='tryocaml'>sigma (<span class='k'>fun</span> x <span class='k'>-></span> x <span class='o'>*</span> x) <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span><span class='o'>;;</span>
 <a href="javascript:octry('sigma (fun x -&#62; x * x) [1; 2; 3];;\n');">[try]</a></code></pre>
 <p>
 Polymorphism and higher-order functions allow defining function
 composition in its most general form:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> compose f g <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> f (g x)<span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> compose f g <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> f (g x)<span class='o'>;;</span>
   <span class='k'>let</span> square_o_fact <span class='k'>=</span> compose square fact<span class='o'>;;</span>
   square_o_fact 5<span class='o'>;;</span>
 <a href="javascript:octry('  let compose f g = fun x -&#62; f (g x);;\n  let square_o_fact = compose square fact;;\n  square_o_fact 5;;\n');">[try]</a></code></pre>
@@ -221,7 +221,7 @@ composition in its most general form:</p>
 
 The power of functions cannot be better illustrated than by the <code>power</code>
 function:</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> power f n <span class='k'>=</span> 
+<pre><code class='tryocaml'>  <span class='k'>let rec</span> power f n <span class='k'>=</span> 
     <span class='k'>if</span> n <span class='k'>=</span> 0 <span class='k'>then</span> <span class='k'>fun</span> x <span class='k'>-></span> x 
     <span class='k'>else</span> compose f (power f (n <span class='o'>-</span> 1))<span class='o'>;;</span>
 <a href="javascript:octry('  let rec power f n = \n    if n = 0 then fun x -&#62; x \n    else compose f (power f (n - 1));;\n');">[try]</a></code></pre>
@@ -229,7 +229,7 @@ function:</p>
 The <code>n</code><sup>th</sup> derivative of a function can be computed as in
 mathematics by raising the derivative function to the <code>n</code><sup>th</sup>
 power:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> derivative dx f <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> (f (x <span class='o'>+.</span> dx) <span class='o'>-.</span> f x) <span class='o'>/.</span> dx<span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> derivative dx f <span class='k'>=</span> <span class='k'>fun</span> x <span class='k'>-></span> (f (x <span class='o'>+.</span> dx) <span class='o'>-.</span> f x) <span class='o'>/.</span> dx<span class='o'>;;</span>
   <span class='k'>let</span> sin<span class='s'>&#39;&#39;&#39;</span> <span class='k'>=</span> power (derivative 1e-5) 3 sin<span class='o'>;;</span>
   <span class='k'>let</span> pi <span class='k'>=</span> 4.0 <span class='o'>*.</span> atan 1.0 <span class='k'>in</span> sin<span class='s'>&#39;&#39;&#39;</span> pi<span class='o'>;;</span>
 <a href="javascript:octry('  let derivative dx f = fun x -&#62; (f (x +. dx) -. f x) /. dx;;\n  let sin&#39;&#39;&#39; = power (derivative 1e-5) 3 sin;;\n  let pi = 4.0 *. atan 1.0 in sin&#39;&#39;&#39; pi;;\n');">[try]</a></code></pre>
@@ -238,7 +238,7 @@ power:</p>
 Let us consider simple symbolic expressions made up of integers,
 variables, <code>let</code> bindings, and binary operators. Such expressions can be
 defined as a new data type, as follows:</p>
-<pre><code class='ocaml'>  <span class='k'>type</span> expression <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>type</span> expression <span class='k'>=</span>
     <span class='o'>|</span> Num <span class='k'>of</span> int
     <span class='o'>|</span> Var <span class='k'>of</span> string
     <span class='o'>|</span> Let <span class='k'>of</span> string <span class='o'>*</span> expression <span class='o'>*</span> expression
@@ -247,7 +247,7 @@ defined as a new data type, as follows:</p>
 <p>
 Evaluation of these expressions involves an environment that maps
 identifiers to values, represented as a list of pairs.</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> eval env <span class='k'>=</span> <span class='k'>function</span>
+<pre><code class='tryocaml'>  <span class='k'>let rec</span> eval env <span class='k'>=</span> <span class='k'>function</span>
     <span class='o'>|</span> Num i <span class='k'>-></span> i
     <span class='o'>|</span> Var x <span class='k'>-></span> <span class='m'>List</span><span class='o'>.</span>assoc x env
     <span class='o'>|</span> Let (x<span class='o'>,</span> e1<span class='o'>,</span> in_e2) <span class='k'>-></span>
@@ -267,7 +267,7 @@ identifiers to values, represented as a list of pairs.</p>
 <a href="javascript:octry('  let rec eval env = function\n    | Num i -&#62; i\n    | Var x -&#62; List.assoc x env\n    | Let (x, e1, in_e2) -&#62;\n       let val_x = eval env e1 in\n       eval ((x, val_x) :: env) in_e2\n    | Binop (op, e1, e2) -&#62;\n       let v1 = eval env e1 in\n       let v2 = eval env e2 in\n       eval_op op v1 v2\n  and eval_op op v1 v2 =\n    match op with\n    | &#34;+&#34; -&#62; v1 + v2\n    | &#34;-&#34; -&#62; v1 - v2\n    | &#34;*&#34; -&#62; v1 * v2\n    | &#34;/&#34; -&#62; v1 / v2\n    | _ -&#62; failwith (&#34;Unknown operator: &#34; ^ op);;\n');">[try]</a></code></pre>
 <p>
 As an example, we evaluate the phrase <code>let   x = 1 in x   +       x</code>:</p>
-<pre><code class='ocaml'>  eval <span class='o'>[</span><span class='o'>]</span> (Let (<span class='s'>&#34;x&#34;</span><span class='o'>,</span> Num 1<span class='o'>,</span> Binop (<span class='s'>&#34;+&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span>)))<span class='o'>;;</span>
+<pre><code class='tryocaml'>  eval <span class='o'>[</span><span class='o'>]</span> (Let (<span class='s'>&#34;x&#34;</span><span class='o'>,</span> Num 1<span class='o'>,</span> Binop (<span class='s'>&#34;+&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span><span class='o'>,</span> Var <span class='s'>&#34;x&#34;</span>)))<span class='o'>;;</span>
 <a href="javascript:octry('  eval [] (Let (&#34;x&#34;, Num 1, Binop (&#34;+&#34;, Var &#34;x&#34;, Var &#34;x&#34;)));;\n');">[try]</a></code></pre>
 <p>
 Pattern matching eases the definition of functions operating on symbolic
@@ -276,7 +276,7 @@ shapes. Indeed, note the close resemblance between the definition of the
 <code>eval</code> function and that of the <code>expression</code> type.</p>
 <h2 id="Elementarydebugging"> Elementary debugging</h2><p>
 To conclude, here is the simplest way of spying over functions:</p>
-<pre><code class='ocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='k'>let rec</span> fib x <span class='k'>=</span> <span class='k'>if</span> x <span class='o'>&#60;=</span> 1 <span class='k'>then</span> 1 <span class='k'>else</span> fib (x <span class='o'>-</span> 1) <span class='o'>+</span> fib (x <span class='o'>-</span> 2)<span class='o'>;;</span>
 <span class='o'>#</span> <span class='o'>#</span>trace fib<span class='o'>;;</span>
 fib is now traced<span class='o'>.</span>
 <span class='o'>#</span> fib 3<span class='o'>;;</span>

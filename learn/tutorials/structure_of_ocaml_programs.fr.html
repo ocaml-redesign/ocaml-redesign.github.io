@@ -101,7 +101,7 @@ et aux fonctionnalités mises en avant.</p>
 <h2 id="Variableslocalesplusexactementexpressionslocales"> « Variables » locales (<em>plus exactement</em> expressions locales)</h2><p>
 Prenons la fonction <code>average</code> écrite en C, et ajoutons lui une variable
 locale. (à comparer avec la première version que nous avions)</p>
-<pre><code class='ocaml'>double
+<pre><code class='tryocaml'>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>{</span>
   double sum <span class='k'>=</span> a <span class='o'>+</span> b<span class='o'>;</span>
@@ -110,7 +110,7 @@ average (double a<span class='o'>,</span> double b)
 <a href="javascript:octry('double\naverage (double a, double b)\n{\n  double sum = a + b;\n  return sum / 2;\n}\n');">[try]</a></code></pre>
 <p>
 Faisons la même chose avec notre version OCaml :</p>
-<pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
   <span class='k'>let</span> sum <span class='k'>=</span> a <span class='o'>+.</span> b <span class='k'>in</span>
   sum <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <a href="javascript:octry('let average a b =\n  let sum = a +. b in\n  sum /. 2.0;;\n');">[try]</a></code></pre>
@@ -132,7 +132,7 @@ peu plus loin).</p>
 <p>Voyons un autre exemple qui devrait clarifier les choses. Les deux bouts
 de code suivants devraient retourner la même valeur (à savoir (a+b) +
 (a+b)<sup>2</sup>):</p>
-<pre><code class='ocaml'><span class='k'>let</span> f a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> f a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>+.</span> (a <span class='o'>+.</span> b) <span class='o'>**</span> 2.
   <span class='o'>;;</span>
 
@@ -152,7 +152,7 @@ Vous pouvez aussi donner des noms à des choses dans l&#39;environnement
 global, et comme pour les &quot;variables&quot; locales ci-dessus, ce ne sont pas
 vraiment des variables, mais des abbréviations pour ces choses. Voici un
 exemple pris dans un programme réel :</p>
-<pre><code class='ocaml'><span class='k'>let</span> html <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> html <span class='k'>=</span>
   <span class='k'>let</span> content <span class='k'>=</span> read_whole_file file <span class='k'>in</span>
   <span class='m'>GHtml</span><span class='o'>.</span>html_from_string content
   <span class='o'>;;</span>
@@ -192,7 +192,7 @@ Java, toutes les variables qui stockent des objets sont en fait des
 références (pointeurs) sur ces objets. En Perl, les références sont des
 références - comme en OCaml.</p>
 <p>Voici comment créer une référence sur un entier (<code>int</code>) en OCaml :</p>
-<pre><code class='ocaml'>ref 0<span class='o'>;;</span>
+<pre><code class='tryocaml'>ref 0<span class='o'>;;</span>
 <a href="javascript:octry('ref 0;;\n');">[try]</a></code></pre>
 <p>
 En fait cette instruction n&#39;est pas très utile. Nous avons créé une
@@ -200,23 +200,23 @@ référence et puis, comme elle n&#39;a pas de nom, le glaneur de cellules a
 fait son travail et l&#39;a immédiatement libérée! (Il est même probable que
 le compileur ait éliminé cette instruction à la compilation). Donnons un
 nom à cette référence :</p>
-<pre><code class='ocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
 <a href="javascript:octry('let my_ref = ref 0;;\n');">[try]</a></code></pre>
 <p>
 Cette référence contient maintenant l&#39;entier 0. Mettons une autre valeur
 à la place (assignement) :</p>
-<pre><code class='ocaml'>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
+<pre><code class='tryocaml'>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
 <a href="javascript:octry('my_ref := 100;;\n');">[try]</a></code></pre>
 <p>
 Voyons ce que la référence contient à présent :</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
 <span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 100
 <a href="javascript:octry('# !my_ref;;\n- : int = 100\n');">[try]</a></code></pre>
 <p>
 Donc l&#39;opérateur <code>:=</code> est utilisé pour assigner les références, et <code>!</code>
 pour les déréférencer et accéder au contenu. Voici une comparaison
 approximative avec C/C++ :</p>
-<pre><code class='ocaml'>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
+<pre><code class='tryocaml'>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
 
 <span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>    int a <span class='k'>=</span> 0<span class='o'>;</span> int <span class='o'>*</span>my_ptr <span class='k'>=</span> <span class='o'>&#38;</span>a<span class='o'>;</span>
 my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>         <span class='o'>*</span>my_ptr <span class='k'>=</span> 100<span class='o'>;</span>
@@ -238,7 +238,7 @@ C++.) Le nom de la fonction imbriquée est local au bloc dans lequel il
 est défini. Par exemple, définissons une fonction imbriquée nommée</p>
 <pre><code>square&#39;, et appelons-là deux fois :
 
-```ocaml
+```tryocaml
 foo (double a, double b)
 {
   double square (double z) { return z * z; }
@@ -251,7 +251,7 @@ englobante qui sont visibles à l&#39;emplacement de sa définition. Cela
 s&#39;appelle la &quot;portée lexicale&quot;. Par exemple, voici une fonction
 imbriquée qui utilise une variable héritée nommée </code></pre>
 <p>offset&#39; :</p>
-<pre><code class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
+<pre><code class='tryocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
 <span class='o'>{</span>
   int access (int <span class='o'>*</span>array<span class='o'>,</span> int index)
     <span class='o'>{</span> return array<span class='o'>[</span>index <span class='o'>+</span> offset<span class='o'>]</span><span class='o'>;</span> <span class='o'>}</span>
@@ -265,7 +265,7 @@ imbriquée qui utilise une variable héritée nommée </code></pre>
 Vous comprenez l&#39;idée. Les fonctions imbriquées sont, cependant, très
 utiles et largement employées en OCaml. Voici un exemple d&#39;utilisation
 réel de fonction imbriquées :</p>
-<pre><code class='ocaml'><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
   <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 4096 <span class='k'>in</span>
   <span class='k'>let rec</span> loop () <span class='k'>=</span>
     <span class='k'>let</span> newline <span class='k'>=</span> input_line chan <span class='k'>in</span>
@@ -303,7 +303,7 @@ bibliothèques se trouvent dans <code>/usr/lib/ocaml/VERSION/</code> (sous Unix 
 tout cas). Pour ces exemples, nous allons nous concentrer sur un module
 relativement simple appelé <code>Graphics</code>.</p>
 <p>Le module <code>Graphics</code> est constitué de cinq fichiers (sur mon système) :</p>
-<pre><code class='ocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>graphics<span class='o'>.</span>a
+<pre><code class='tryocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>graphics<span class='o'>.</span>a
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>graphics<span class='o'>.</span>cma
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>graphics<span class='o'>.</span>cmi
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>graphics<span class='o'>.</span>cmxa
@@ -323,7 +323,7 @@ comme l&#39;instruction <code>use</code> en Perl.</p>
 <p>Une paire d&#39;exemples devrait éclaircir ce point. (Les deux exemples
 dessinent des choses différentes - essayez-les). Remarquez que le
 premier exemple appelle <code>open_graph</code> et le second <code>Graphics.open_graph</code>.</p>
-<pre><code class='ocaml'><span class='com2'>(* To compile this example<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* To compile this example<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
 
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
@@ -374,7 +374,7 @@ programmes OCaml.</p>
 Que faire si vous voulez utiliser des symboles en provenance du module
 <code>Graphics</code>, mais ne voulez pas tous les importer, et n&#39;avez pas envie de
 taper <code>Graphics.</code> à chaque fois ? Renommez le module avec cette astuce :</p>
-<pre><code class='ocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
 
 <span class='m'>Gr</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='m'>Gr</span><span class='o'>.</span>fill_circle 320 240 240<span class='o'>;;</span>
@@ -394,7 +394,7 @@ j&#39;apprenais le langage OCaml.</p>
 instructions de niveau général dans votre code, et <em>jamais</em> au milieu
 d&#39;une définition de fonction ou d&#39;aucune autre instruction.</p>
 <p>Reprenons un bout du second exemple graphique précédent:</p>
-<pre><code class='ocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
 <span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 
 <span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
@@ -427,7 +427,7 @@ peut parfois être omis. Les endroits où cela est possible sont :</p>
 
 <p>Voici un exemple de code correct, où <code>;;</code> a été omis quand c&#39;était
 possible :</p>
-<pre><code class='ocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 self_init ()<span class='o'>;;</span>
@@ -465,7 +465,7 @@ dernière.</p>
 <p>La boucle for interne de notre exemple ci-dessus est une bonne
 démonstration. Remarquez que nous n&#39;utilisons jamais de simple <code>;</code> dans
 ce code :</p>
-<pre><code class='ocaml'>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
+<pre><code class='tryocaml'>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
                 <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
                 <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
                 <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
@@ -490,7 +490,7 @@ clairement - en OCaml, quasiment tout est une expression. <code>if/then/else</co
 est une expression. <code>a ; b</code> est une expression. <code>match foo with ...</code> est
 une expression. Les codes suivants sont parfaitement légaux (et tous
 font la même chose) :</p>
-<pre><code class='ocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
+<pre><code class='tryocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
 
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
 
@@ -504,7 +504,7 @@ font la même chose) :</p>
 Notez tout particulièrement la dernière fonction - j&#39;utilise <code>;</code> comme
 opérateur pour &quot;joindre&quot; deux instructions. En OCaml, toutes les
 fonctions peuvent être exprimées par :</p>
-<pre><code class='ocaml'><span class='k'>let</span> nom <span class='o'>[</span>paramètres<span class='o'>]</span> <span class='k'>=</span> expression
+<pre><code class='tryocaml'><span class='k'>let</span> nom <span class='o'>[</span>paramètres<span class='o'>]</span> <span class='k'>=</span> expression
 <a href="javascript:octry('let nom [paramètres] = expression\n');">[try]</a></code></pre>
 <p>
 La définition de ce qu&#39;est une expression en OCaml est juste un peu plus
@@ -514,7 +514,7 @@ l&#39;opérateur <code>;</code>).</p>
 <p>Une différence entre <code>;</code> et <code>+</code> est que je peux utiliser <code>+</code> comme une
 fonction. Par exemple, je peux définir une fonction <code>sum_list</code> pour
 calculer la somme d&#39;une liste d&#39;entier comme ceci :</p>
-<pre><code class='ocaml'><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
+<pre><code class='tryocaml'><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
 <a href="javascript:octry('let sum_list = List.fold_left ( + ) 0\n');">[try]</a></code></pre>
 <h2 id="Toutescesnotionsensembleunexempledecoderel"> Toutes ces notions ensemble : un exemple de code réel</h2><p>
 
@@ -547,7 +547,7 @@ soyez pas totalement perdus !</p>
 <code>file_dialog</code>. Dans cette fonction il définit une expression nommée
 appelée <code>sel</code> en utilisant une instruction <code>let sel = ... in</code> de deux
 lignes. Puis il appelle plusieurs méthodes de <code>sel</code>.</p>
-<pre><code class='ocaml'><span class='com2'>(* First snippet *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* First snippet *)</span><!-- end comment -->
 
 <span class='k'>open</span> StdLabels
 <span class='k'>open</span> GMain
@@ -563,7 +563,7 @@ lignes. Puis il appelle plusieurs méthodes de <code>sel</code>.</p>
 Deuxième fragment : Juste une longue liste de définitions au niveau
 global. Remarquez que l&#39;auteur a omis toutes les occurrences de <code>;;</code>
 grâce à la règle n°2.</p>
-<pre><code class='ocaml'><span class='com2'>(* Second snippet *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Second snippet *)</span><!-- end comment -->
 
 <span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>500 <span class='o'>~</span>height<span class='o'>:</span>300 <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;editor&#34;</span> ()
 <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>window<span class='o'>#</span>add ()
@@ -591,7 +591,7 @@ je n&#39;ai pas vérifié - et elle n&#39;est retournée que quand l&#39;applica
 est en train de se terminer.</p>
 <p>Remarquez que dans ce fragment nous avons de longues successions de
 commandes procédurales. C&#39;est un programme impératif classique.</p>
-<pre><code class='ocaml'><span class='com2'>(* Third snippet *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Third snippet *)</span><!-- end comment -->
 
 <span class='k'>open</span> GdkKeysyms
 

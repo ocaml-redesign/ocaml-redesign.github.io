@@ -103,7 +103,7 @@ array. It is obtained using the <code>Array.length</code> function.</p>
 <h2 id="Simpleexample"> Simple example</h2><p>
 The following program displays the arguments with their position in
 <code>Sys.argv</code>:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Printf
+<pre><code class='tryocaml'><span class='k'>open</span> Printf
 
 <span class='k'>let</span> () <span class='k'>=</span>
   <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> <span class='m'>Array</span><span class='o'>.</span>length <span class='m'>Sys</span><span class='o'>.</span>argv <span class='o'>-</span> 1 <span class='k'>do</span>
@@ -113,7 +113,7 @@ The following program displays the arguments with their position in
 <p>
 If you save the program above as <code>args.ml</code>, and run
 <code>ocaml args.ml arg1 arg2 arg3</code>, here is what you get:</p>
-<pre><code class='ocaml'><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
+<pre><code class='tryocaml'><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
 <span class='o'>[</span>1<span class='o'>]</span> arg1
 <span class='o'>[</span>2<span class='o'>]</span> arg2
 <span class='o'>[</span>3<span class='o'>]</span> arg3
@@ -123,7 +123,7 @@ Note that <code>ocaml</code> launched a subprocess that actually runs the progra
 where argv is <code>args.ml arg1 arg2 arg3</code>. You can also compile your
 program using <code>ocamlopt -o args args.ml</code>, and then run
 <code>./args arg1 arg2 arg3</code> and you will get:</p>
-<pre><code class='ocaml'><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
+<pre><code class='tryocaml'><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
 <span class='o'>[</span>1<span class='o'>]</span> arg1
 <span class='o'>[</span>2<span class='o'>]</span> arg2
 <span class='o'>[</span>3<span class='o'>]</span> arg3

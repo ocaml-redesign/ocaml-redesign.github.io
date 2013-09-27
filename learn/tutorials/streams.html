@@ -98,7 +98,7 @@ but because the entire file is loaded into memory, it does not scale
 well when the file is large.</p>
 <p>More commonly, the <code>input_line</code> function can be used to read one line at
 a time from a channel. This typically looks like:</p>
-<pre><code class='ocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;lines.txt&#34;</span> <span class='k'>in</span>
+<pre><code class='tryocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;lines.txt&#34;</span> <span class='k'>in</span>
 <span class='k'>try</span>
   <span class='k'>while</span> <span class='o'>true</span> <span class='k'>do</span>
     <span class='k'>let</span> line <span class='k'>=</span> input_line in_channel <span class='k'>in</span>
@@ -121,7 +121,7 @@ items from a sequence. They don&#39;t assume anything about files or
 channels, and they replace the <code>End_of_file</code> exception with a more
 structured approach to dealing with the end of input. Here is a function
 that builds a stream of lines from an input channel:</p>
-<pre><code class='ocaml'><span class='k'>let</span> line_stream_of_channel channel <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> line_stream_of_channel channel <span class='k'>=</span>
   <span class='m'>Stream</span><span class='o'>.</span>from
     (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span>
        <span class='k'>try</span> Some (input_line channel) <span class='k'>with</span> End_of_file <span class='k'>-></span> None)
@@ -137,13 +137,13 @@ further reads will be attempted. Since the option is polymorphic,
 type of <code>&#39;a Stream.t</code>.</p>
 <p>With this simple function, we can now easily construct line streams from
 any input channel:</p>
-<pre><code class='ocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span><span class='o'>;;</span>
 <span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_channel in_channel<span class='o'>;;</span>
 <a href="javascript:octry('let in_channel = open_in &#34;_oasis&#34;;;\nlet lines = line_stream_of_channel in_channel;;\n');">[try]</a></code></pre>
 <p>
 This variable <code>lines</code> is a stream of strings, one string per line. We
 can now begin reading lines from it by passing it to <code>Stream.next</code>:</p>
-<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
@@ -155,13 +155,13 @@ or raises a <code>Stream.Failure</code> exception indicating that the stream is
 empty. Likewise, with a little help from the <code>Stream.of_list</code>
 constructor and the <code>Str</code> regular expression module, we could build a
 stream of lines from a string in memory:</p>
-<pre><code class='ocaml'><span class='o'>#</span>load <span class='s'>&#34;str.cma&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='o'>#</span>load <span class='s'>&#34;str.cma&#34;</span><span class='o'>;;</span>
 <span class='k'>let</span> line_stream_of_string string <span class='k'>=</span>
   <span class='m'>Stream</span><span class='o'>.</span>of_list (<span class='m'>Str</span><span class='o'>.</span>split (<span class='m'>Str</span><span class='o'>.</span>regexp <span class='s'>&#34;\n&#34;</span>) string)
 <a href="javascript:octry('#load &#34;str.cma&#34;;;\nlet line_stream_of_string string =\n  Stream.of_list (Str.split (Str.regexp &#34;\n&#34;) string)\n');">[try]</a></code></pre>
 <p>
 and these streams could be used exactly the same way:</p>
-<pre><code class='ocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nstream\nworld&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nstream\nworld&#34;</span><span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
@@ -175,7 +175,7 @@ receive data from multiple sources.</p>
 <p>The <code>Stream.iter</code> function automates the common task of performing an
 operation for each item. With it, we can rewrite the original example as
 follows:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span> <span class='k'>in</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span> <span class='k'>in</span>
   <span class='k'>try</span>
     <span class='m'>Stream</span><span class='o'>.</span>iter
       (<span class='k'>fun</span> line <span class='k'>-></span>
@@ -192,7 +192,7 @@ Note how much easier it is to handle I/O exceptions properly, since we
 can deal with them independently from the end-of-file condition. This
 separation of concerns allows us to decompose this into simpler and more
 reusable functions:</p>
-<pre><code class='ocaml'><span class='k'>let</span> process_line line <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> process_line line <span class='k'>=</span>
   print_endline line
 
 <span class='k'>let</span> process_lines lines <span class='k'>=</span>
@@ -230,7 +230,7 @@ In the above examples, we saw two methods for constructing streams:</p>
 of any type. It is not limited to I/O and can even produce infinite
 sequences. Here are a few simple stream builders defined with
 <code>Stream.from</code>:</p>
-<pre><code class='ocaml'>  <span class='com2'>(* A stream that is always empty<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'>  <span class='com2'>(* A stream that is always empty<span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> empty_stream () <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> None)<span class='o'>;;</span>
   <span class='com2'>(* A stream that yields the same item repeatedly<span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> const_stream k <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> Some k)<span class='o'>;;</span>
@@ -246,7 +246,7 @@ functions allow you to see what the next item would be. This feature,
 known as &quot;look ahead&quot;, is very useful when writing parsers. Even if you
 don&#39;t need to look ahead, the peek/junk protocol may be nicer to work
 with because it uses options instead of exceptions:</p>
-<pre><code class='ocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nworld&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nworld&#34;</span><span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;;</span>
@@ -262,7 +262,7 @@ next item. <code>Stream.peek</code> will always give you either the next item or
 <h2 id="AmorecomplexquotStreamfromquotexample"> A more complex &quot;Stream.from&quot; example</h2><p>
 Here is a function that converts a line stream into a paragraph stream.
 As such, it is both a stream consumer and a stream producer.</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> paragraphs lines <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> paragraphs lines <span class='k'>=</span>
     <span class='k'>let rec</span> next para_lines i <span class='k'>=</span>
       <span class='k'>match</span> <span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>,</span> para_lines <span class='k'>with</span>
       <span class='o'>|</span> None<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None
@@ -303,7 +303,7 @@ are handled:</p>
 ensure that we are handling all possible cases.</p>
 <p>With this new tool, we can now work just as easily with paragraphs as we
 could before with lines:</p>
-<pre><code class='ocaml'>  <span class='com2'>(* Print each paragraph<span class='ic'>,</span> followed by a separator<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'>  <span class='com2'>(* Print each paragraph<span class='ic'>,</span> followed by a separator<span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_channel in_channel <span class='k'>in</span>
   <span class='m'>Stream</span><span class='o'>.</span>iter
     (<span class='k'>fun</span> para <span class='k'>-></span>
@@ -319,7 +319,7 @@ Just like lists and arrays, common iteration patterns such as <code>map</code>,
 <code>filter</code>, and <code>fold</code> can be very useful. The <code>Stream</code> module does not
 provide such functions, but they can be built easily using
 <code>Stream.from</code>:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> stream_map f stream <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> stream_map f stream <span class='k'>=</span>
     <span class='k'>let rec</span> next i <span class='k'>=</span>
       <span class='k'>try</span> Some (f (<span class='m'>Stream</span><span class='o'>.</span>next stream))
       <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
@@ -342,7 +342,7 @@ provide such functions, but they can be built easily using
 <a href="javascript:octry('  let stream_map f stream =\n    let rec next i =\n      try Some (f (Stream.next stream))\n      with Stream.Failure -&#62; None in\n    Stream.from next\n\n  let stream_filter p stream =\n    let rec next i =\n      try\n        let value = Stream.next stream in\n        if p value then Some value else next i\n      with Stream.Failure -&#62; None in\n    Stream.from next\n  \n  let stream_fold f stream init =\n    let result = ref init in\n    Stream.iter\n      (fun x -&#62; result := f x !result)\n      stream;\n    !result\n');">[try]</a></code></pre>
 <p>
 For example, here is a stream of leap years starting with 2000:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> is_leap year <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> is_leap year <span class='k'>=</span>
     year <span class='k'>mod</span> 4 <span class='k'>=</span> 0 <span class='o'>&#38;&#38;</span> (year <span class='k'>mod</span> 100 <span class='o'>&#60;&#62;</span> 0 <span class='o'>||</span> year <span class='k'>mod</span> 400 <span class='k'>=</span> 0)
   <span class='k'>let</span> leap_years <span class='k'>=</span> stream_filter is_leap (count_stream 2000)
 <a href="javascript:octry('  let is_leap year =\n    year mod 4 = 0 &#38;&#38; (year mod 100 &#60;&#62; 0 || year mod 400 = 0)\n  let leap_years = stream_filter is_leap (count_stream 2000)\n');">[try]</a></code></pre>
@@ -351,13 +351,13 @@ We can use the <code>Stream.npeek</code> function to look ahead by more than one
 item. In this case, we&#39;ll peek at the next 30 items to make sure that
 the year 2100 is not a leap year (since it&#39;s divisible by 100 but not
 400!):</p>
-<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 30 leap_years<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 30 leap_years<span class='o'>;;</span>
 <a href="javascript:octry('Stream.npeek 30 leap_years;;\n');">[try]</a></code></pre>
 <p>
 Note that we must be careful not to use <code>Stream.iter</code> on an infinite
 stream like <code>leap_years</code>. This applies to <code>stream_fold</code>, as well as any
 function that attempts to consume the entire stream.</p>
-<pre><code class='ocaml'>stream_fold <span class='o'>(+</span>) (<span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>) 0<span class='o'>;;</span>
+<pre><code class='tryocaml'>stream_fold <span class='o'>(+</span>) (<span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>) 0<span class='o'>;;</span>
 <a href="javascript:octry('stream_fold (+) (Stream.of_list [1; 2; 3]) 0;;\n');">[try]</a></code></pre>
 <p>
 <code>stream_fold (+) (count_stream 0) 0</code> runs forever.</p>
@@ -365,7 +365,7 @@ function that attempts to consume the entire stream.</p>
 The previously defined <code>const_stream</code> function builds a stream that
 repeats a single value. It is also useful to build a stream that repeats
 a sequence of values. The following function does just that:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> cycle items <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> cycle items <span class='k'>=</span>
     <span class='k'>let</span> buf <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
     <span class='k'>let rec</span> next i <span class='k'>=</span>
       <span class='k'>if</span> <span class='o'>!</span>buf <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>then</span> buf <span class='o'>:=</span> items<span class='o'>;</span>
@@ -380,7 +380,7 @@ generation of alternating background colors for HTML. By using <code>cycle</code
 with <code>stream_combine</code>, explained in the next section, an infinite stream
 of background colors can be combined with a finite stream of data to
 produce a sequence of HTML blocks:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
     <span class='k'>let rec</span> next i <span class='k'>=</span>
       <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream1<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>next stream2)
       <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
@@ -395,7 +395,7 @@ produce a sequence of HTML blocks:</p>
 <a href="javascript:octry('  let stream_combine stream1 stream2 =\n    let rec next i =\n      try Some (Stream.next stream1, Stream.next stream2)\n      with Stream.Failure -&#62; None in\n    Stream.from next;;\n  Stream.iter print_endline\n    (stream_map\n       (fun (bg, s) -&#62;\n          Printf.sprintf &#34;&#60;div style=&#39;background: %s&#39;&#62;%s&#60;/div&#62;&#34; bg s)\n       (stream_combine\n          (cycle [&#34;#eee&#34;; &#34;#fff&#34;])\n          (Stream.of_list [&#34;hello&#34;; &#34;html&#34;; &#34;world&#34;])))\n');">[try]</a></code></pre>
 <p>
 Here is a simple <code>range</code> function that produces a sequence of integers:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> range <span class='o'>?</span>(start<span class='k'>=</span>0) <span class='o'>?</span>(stop<span class='k'>=</span>0) <span class='o'>?</span>(step<span class='k'>=</span>1) () <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> range <span class='o'>?</span>(start<span class='k'>=</span>0) <span class='o'>?</span>(stop<span class='k'>=</span>0) <span class='o'>?</span>(step<span class='k'>=</span>1) () <span class='k'>=</span>
     <span class='k'>let</span> in_range <span class='k'>=</span> <span class='k'>if</span> step <span class='o'>&#60;</span> 0 <span class='k'>then</span> <span class='o'>(&#62;</span>) <span class='k'>else</span> <span class='o'>(&#60;</span>) <span class='k'>in</span>
     <span class='k'>let</span> current <span class='k'>=</span> ref start <span class='k'>in</span>
     <span class='k'>let rec</span> next i <span class='k'>=</span>
@@ -409,7 +409,7 @@ Here is a simple <code>range</code> function that produces a sequence of integer
 This works just like Python&#39;s <code>xrange</code> built-in function, providing an
 easy way to produce an assortment of lazy integer sequences by
 specifying combinations of <code>start</code>, <code>stop</code>, or <code>step</code> values:</p>
-<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>5 <span class='o'>~</span>stop<span class='o'>:</span>10 ())<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>5 <span class='o'>~</span>stop<span class='o'>:</span>10 ())<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>stop<span class='o'>:</span>10 <span class='o'>~</span>step<span class='o'>:</span>2 ())<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>10 <span class='o'>~</span>step<span class='o'>:</span><span class='o'>(-</span>1) ())<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>10 <span class='o'>~</span>stop<span class='o'>:</span>5 <span class='o'>~</span>step<span class='o'>:</span><span class='o'>(-</span>1) ())<span class='o'>;;</span>
@@ -420,7 +420,7 @@ There are several ways to combine streams. One is to produce a stream of
 streams and then concatenate them into a single stream. The following
 function works just like <code>List.concat</code>, but instead of turning a list of
 lists into a list, it turns a stream of streams into a stream:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> stream_concat streams <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> stream_concat streams <span class='k'>=</span>
     <span class='k'>let</span> current_stream <span class='k'>=</span> ref None <span class='k'>in</span>
     <span class='k'>let rec</span> next i <span class='k'>=</span>
       <span class='k'>try</span>
@@ -439,7 +439,7 @@ lists into a list, it turns a stream of streams into a stream:</p>
 <p>
 Here is a sequence of ranges which are themselves derived from a range,
 concatenated with <code>stream_concat</code> to produce a flattened <code>int Stream.t</code>.</p>
-<pre><code class='ocaml'>  <span class='m'>Stream</span><span class='o'>.</span>npeek 10
+<pre><code class='tryocaml'>  <span class='m'>Stream</span><span class='o'>.</span>npeek 10
     (stream_concat
        (stream_map
           (<span class='k'>fun</span> i <span class='k'>-></span> range <span class='o'>~</span>stop<span class='o'>:</span>i ())
@@ -448,7 +448,7 @@ concatenated with <code>stream_concat</code> to produce a flattened <code>int St
 <p>
 Another way to combine streams is to iterate through them in a pairwise
 fashion:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
     <span class='k'>let rec</span> next i <span class='k'>=</span>
       <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream1<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>next stream2)
       <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
@@ -458,7 +458,7 @@ fashion:</p>
 This is useful, for instance, if you have a stream of keys and a stream
 of corresponding values. Iterating through key value pairs is then as
 simple as:</p>
-<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>iter
+<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>iter
   (<span class='k'>fun</span> (key<span class='o'>,</span> value) <span class='k'>-></span>
      <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> 'key' <span class='ic'>and</span> 'value' *)</span><!-- end comment -->
      ())
@@ -468,7 +468,7 @@ simple as:</p>
 Since <code>stream_combine</code> stops as soon as either of its input streams runs
 out, it can be used to combine an infinite stream with a finite one.
 This provides a neat way to add indexes to a sequence:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> items <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;this&#34;</span><span class='o'>;</span> <span class='s'>&#34;is&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;test&#34;</span><span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> items <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;this&#34;</span><span class='o'>;</span> <span class='s'>&#34;is&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;test&#34;</span><span class='o'>]</span><span class='o'>;;</span>
   <span class='m'>Stream</span><span class='o'>.</span>iter
     (<span class='k'>fun</span> (index<span class='o'>,</span> value) <span class='k'>-></span>
        <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;%d. %s\n%!&#34;</span> index value)
@@ -482,7 +482,7 @@ use the same stream more than once? One way is to create a &quot;tee&quot;. The
 following function creates two output streams from one input stream,
 intelligently queueing unseen values until they have been produced by
 both streams:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> stream_tee stream <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> stream_tee stream <span class='k'>=</span>
     <span class='k'>let</span> next self other i <span class='k'>=</span>
       <span class='k'>try</span>
         <span class='k'>if</span> <span class='m'>Queue</span><span class='o'>.</span>is_empty self
@@ -499,7 +499,7 @@ both streams:</p>
 <a href="javascript:octry('  let stream_tee stream =\n    let next self other i =\n      try\n        if Queue.is_empty self\n        then\n          let value = Stream.next stream in\n          Queue.add value other;\n          Some value\n        else\n          Some (Queue.take self)\n      with Stream.Failure -&#62; None in\n    let q1 = Queue.create () in\n    let q2 = Queue.create () in\n    (Stream.from (next q1 q2), Stream.from (next q2 q1))\n');">[try]</a></code></pre>
 <p>
 Here is an example of a stream tee in action:</p>
-<pre><code class='ocaml'><span class='k'>let</span> let<span class='o'>ters</span> <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span><span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> let<span class='o'>ters</span> <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span><span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>]</span><span class='o'>;;</span>
 <span class='k'>let</span> s1<span class='o'>,</span> s2 <span class='k'>=</span> stream_tee let<span class='o'>ters</span><span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
@@ -511,7 +511,7 @@ Here is an example of a stream tee in action:</p>
 <p>
 Again, since streams are destructive, you probably want to leave the
 original stream alone or you will lose items from the copied streams:</p>
-<pre><code class='ocaml'><span class='m'>Stream</span><span class='o'>.</span>next let<span class='o'>ters</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>next let<span class='o'>ters</span><span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
 <span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
 <a href="javascript:octry('Stream.next letters;;\nStream.next s1;;\nStream.next s2;;\n');">[try]</a></code></pre>
@@ -521,7 +521,7 @@ Here are a few functions for converting between streams and lists,
 arrays, and hash tables. These probably belong in the standard library,
 but they are simple to define anyhow. Again, beware of infinite streams,
 which will cause these functions to hang.</p>
-<pre><code class='ocaml'>  <span class='com2'>(* This one is free<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'>  <span class='com2'>(* This one is free<span class='ic'>.</span> *)</span><!-- end comment -->
   <span class='k'>let</span> stream_of_list <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list
 
   <span class='k'>let</span> list_of_stream stream <span class='k'>=</span>
@@ -553,7 +553,7 @@ which will cause these functions to hang.</p>
 What if you want to convert arbitary data types to streams? Well, if the
 data type defines an <code>iter</code> function, and you don&#39;t mind using threads,
 you can use a producer-consumer arrangement to invert control:</p>
-<pre><code class='ocaml'>  <span class='o'>#</span>directory <span class='s'>&#34;+threads&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='o'>#</span>directory <span class='s'>&#34;+threads&#34;</span><span class='o'>;;</span>
   <span class='o'>#</span>load <span class='s'>&#34;threads.cma&#34;</span><span class='o'>;;</span>
   <span class='k'>let</span> elements iter coll <span class='k'>=</span>
     <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
@@ -569,7 +569,7 @@ you can use a producer-consumer arrangement to invert control:</p>
 <p>
 Now it is possible to build a stream from an <code>iter</code> function and a
 corresponding value:</p>
-<pre><code class='ocaml'><span class='k'>module</span> StringSet <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>module</span> StringSet <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
 
 <span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>empty<span class='o'>;;</span>
 <span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;here&#34;</span> set<span class='o'>;;</span>
@@ -582,7 +582,7 @@ corresponding value:</p>
 <p>
 Some data types, like Hashtbl and Map, provide an <code>iter</code> function that
 iterates through key-value pairs. Here&#39;s a function for those, too:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> items iter coll <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> items iter coll <span class='k'>=</span>
     <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
     <span class='k'>let</span> producer () <span class='k'>=</span>
       <span class='k'>let</span> () <span class='k'>=</span>
@@ -597,7 +597,7 @@ iterates through key-value pairs. Here&#39;s a function for those, too:</p>
 <p>
 If we want just the keys, or just the values, it is simple to transform
 the output of <code>items</code> using <code>stream_map</code>:</p>
-<pre><code class='ocaml'><span class='k'>let</span> keys iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> k) (items iter coll)
+<pre><code class='tryocaml'><span class='k'>let</span> keys iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> k) (items iter coll)
 <span class='k'>let</span> values iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> v) (items iter coll)
 <a href="javascript:octry('let keys iter coll = stream_map (fun (k, v) -&#62; k) (items iter coll)\nlet values iter coll = stream_map (fun (k, v) -&#62; v) (items iter coll)\n');">[try]</a></code></pre>
 <p>

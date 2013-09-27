@@ -97,7 +97,7 @@ complex OCaml projects.</p>
 <p>For a basic OCaml program or library that doesn&#39;t use any library
 besides the standard library, just copy OCamlMakefile to the current
 directory and create the following Makefile:</p>
-<pre><code class='ocaml'>RESULT <span class='k'>=</span> myprogram
+<pre><code class='tryocaml'>RESULT <span class='k'>=</span> myprogram
 SOURCES <span class='k'>=</span> <span class='o'>\</span>
   mymodule1<span class='o'>.</span>mli mymodule1<span class='o'>.</span>ml <span class='o'>\</span>
   myparser<span class='o'>.</span>mli myparser<span class='o'>.</span>mly mylexer<span class='o'>.</span>mll mymodule2<span class='o'>.</span>ml <span class='o'>\</span>
@@ -114,7 +114,7 @@ in the example.</p>
 <p>The included OCamlMakefile provides a variety of targets. For details
 please refer to the documentation of OCamlMakefile, but here are the
 main ones:</p>
-<pre><code class='ocaml'>nc     make a native code executable
+<pre><code class='tryocaml'>nc     make a native code executable
 bc     make a bytecode executable
 ncl    make a native code library
 bcl    make a bytecode library
@@ -135,13 +135,13 @@ situation.</p>
 by setting the LIBS and INCDIRS variable. LIBS is the list of the name
 of the library files (xxx.cma or xxx.cmxa) without the .cma or .cmxa
 extension:</p>
-<pre><code class='ocaml'>LIBS <span class='k'>=</span> str unix
+<pre><code class='tryocaml'>LIBS <span class='k'>=</span> str unix
 <a href="javascript:octry('LIBS = str unix\n');">[try]</a></code></pre>
 <p>
 If you use non-standard libraries that are not installed in the same
 directory as the standard library, the INCDIRS variable must contain the
 list of these directories:</p>
-<pre><code class='ocaml'>INCDIRS <span class='k'>=</span> <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>somelibdirectory<span class='o'>/</span>
+<pre><code class='tryocaml'>INCDIRS <span class='k'>=</span> <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>somelibdirectory<span class='o'>/</span>
 <a href="javascript:octry('INCDIRS = /path/to/somelibdirectory/\n');">[try]</a></code></pre>
 <p>
 Usually this requires some preliminary configuration as it is
@@ -150,12 +150,12 @@ from one installation to another. An exception is when using standard
 directories which are not included in the search path by default such as
 /path/to/stdlib/camlp4. In this case, this should be enough and
 portable:</p>
-<pre><code class='ocaml'>INCDIRS <span class='k'>=</span> <span class='o'>+</span>camlp4
+<pre><code class='tryocaml'>INCDIRS <span class='k'>=</span> <span class='o'>+</span>camlp4
 <a href="javascript:octry('INCDIRS = +camlp4\n');">[try]</a></code></pre>
 <p>
 OK, but we prefer libraries that are installed with ocamlfind. To use
 them with OCamlMakefile, the PACKS variable must be set:</p>
-<pre><code class='ocaml'>PACKS <span class='k'>=</span> netstring num
+<pre><code class='tryocaml'>PACKS <span class='k'>=</span> netstring num
 <a href="javascript:octry('PACKS = netstring num\n');">[try]</a></code></pre>
 <p>
 Note that libraries that not part of the standard library but are
@@ -167,22 +167,22 @@ pcre) is automatically loaded.</p>
 extensions, which are bytecode units that are loaded by the
 preprocessor. With OCamlMakefile, a preprocessor to be used can be
 defined in the first line of the file:</p>
-<pre><code class='ocaml'><span class='com2'>(*pp <span class='ic'>...</span></span>
+<pre><code class='tryocaml'><span class='com2'>(*pp <span class='ic'>...</span></span>
 <span class='com2'></span><a href="javascript:octry('(*pp ...\n');">[try]</a></code></pre>
 <p>
 So it could be something like:</p>
-<pre><code class='ocaml'><span class='com2'>(*pp camlp4o <span class='ic'>-</span>I <span class='ic'>/</span>path<span class='ic'>/</span><span class='ic'>to</span><span class='ic'>/</span>pa_infix pa_infix<span class='ic'>.</span>cmo *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(*pp camlp4o <span class='ic'>-</span>I <span class='ic'>/</span>path<span class='ic'>/</span><span class='ic'>to</span><span class='ic'>/</span>pa_infix pa_infix<span class='ic'>.</span>cmo *)</span><!-- end comment -->
 <a href="javascript:octry('(*pp camlp4o -I /path/to/pa_infix pa_infix.cmo *)\n');">[try]</a></code></pre>
 <p>
 Well, this form is not very convenient, so we will use the same
 preprocessor for each file and store its value in the PP variable of the
 Makefile:</p>
-<pre><code class='ocaml'>PP <span class='k'>=</span> camlp4o <span class='o'>-</span>I <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>pa_infix pa_infix<span class='o'>.</span>cmo
+<pre><code class='tryocaml'>PP <span class='k'>=</span> camlp4o <span class='o'>-</span>I <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>pa_infix pa_infix<span class='o'>.</span>cmo
 export PP
 <a href="javascript:octry('PP = camlp4o -I /path/to/pa_infix pa_infix.cmo\nexport PP\n');">[try]</a></code></pre>
 <p>
 So each OCaml file will start with:</p>
-<pre><code class='ocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
 <a href="javascript:octry('(*pp $PP *)\n');">[try]</a></code></pre>
 <p>
 This way of defining the preprocessor is still not satisfying: we would
@@ -192,7 +192,7 @@ script</a>.
 Every package which we use will listed as usual in the PACKS variable,
 and camlp4find will call ocamlfind to know which syntax extensions to
 load:</p>
-<pre><code class='ocaml'>PACKS <span class='k'>=</span> unix micmatch_pcre <span class='o'>\</span>
+<pre><code class='tryocaml'>PACKS <span class='k'>=</span> unix micmatch_pcre <span class='o'>\</span>
    pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg
 PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
 export PP
@@ -218,7 +218,7 @@ export PP
 
 <p>Full example using ocamllex and the unix and micmatch_pcre libraries.
 The Makefile file would be:</p>
-<pre><code class='ocaml'>RESULT <span class='k'>=</span> myprogram
+<pre><code class='tryocaml'>RESULT <span class='k'>=</span> myprogram
 SOURCES <span class='k'>=</span> mymodule1<span class='o'>.</span>mll mymodule2<span class='o'>.</span>mli mymodule2<span class='o'>.</span>ml mymainmodule<span class='o'>.</span>ml
 PACKS <span class='k'>=</span> unix micmatch_pcre
 PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
@@ -229,7 +229,7 @@ OCAMLMAKEFILE <span class='k'>=</span> OCamlMakefile
 <a href="javascript:octry('RESULT = myprogram\nSOURCES = mymodule1.mll mymodule2.mli mymodule2.ml mymainmodule.ml\nPACKS = unix micmatch_pcre\nPP = camlp4find $(PACKS)\nexport PP\nCREATE_LIB = yes # ???\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n');">[try]</a></code></pre>
 <p>
 And each .ml or .mli file starts with:</p>
-<pre><code class='ocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
 
 <a href="javascript:octry('(*pp $PP *)\n\n');">[try]</a></code></pre>
 

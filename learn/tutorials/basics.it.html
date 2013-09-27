@@ -92,7 +92,7 @@
         <h1 id="Lebasi"> Le basi</h1><h2 id="Commenti"> Commenti</h2><p>
 
 In OCaml i commenti sono delimitati da <code>(*</code> e <code>*)</code>, come segue:</p>
-<pre><code class='ocaml'><span class='com2'>(* Questo è un commento su un'unica riga<span class='ic'>.</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Questo è un commento su un'unica riga<span class='ic'>.</span> *)</span><!-- end comment -->
 
 <span class='com2'>(* Questo è un</span>
 <span class='com2'> <span class='ic'>*</span> commento su</span>
@@ -108,7 +108,7 @@ discusso dell&#39;utilizzo di <code>## ...</code>, ed io raccomando molto alla g
 OCaml di aggiungerlo in futuro.</p>
 <p>OCaml conta i blocchi <code>(* ... *)</code> annodati, e questo vi consente di
 commentare assai facilmente regioni di codice:</p>
-<pre><code class='ocaml'><span class='com2'>(* Questo codice non è valido <span class='ic'>...</span></span>
+<pre><code class='tryocaml'><span class='com2'>(* Questo codice non è valido <span class='ic'>...</span></span>
 <span class='com2'></span>
 <span class='com2'><span class='other'>(* Test di primalità<span class='other'>.</span> *)</span></span>
 <span class='com2'><span class='ic'>let</span> is_prime n <span class='ic'>=</span></span>
@@ -123,7 +123,7 @@ che prende una stringa <code>s</code> ed un numero <code>n</code>, e restituisce
 stringa che contiene la stringa originale <code>s</code> ripetuta <code>n</code> volte.</p>
 <p>Nella maggior parte dei linguaggi derivati da C una chiamata a questa
 funzione apparirà come segue:</p>
-<pre><code class='ocaml'>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> questo è codice C <span class='o'>*/</span>
+<pre><code class='tryocaml'>repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)  <span class='o'>/*</span> questo è codice C <span class='o'>*/</span>
 <a href="javascript:octry('repeated (&#34;hello&#34;, 3)  /* questo è codice C */\n');">[try]</a></code></pre>
 <p>
 Questo significa &quot;chiama la funzione <code>repeated</code> con due argomenti, di
@@ -131,7 +131,7 @@ cui il primo è la stringa hello ed il secondo il numero 3&quot;.</p>
 <p>OCaml, in comune con altri linguaggi funzionali, scrive e mette tra
 parentesi le chiamate di funzioni in modo differente, e questo è causa
 di molti errori. Ecco la modesima chiamata di funzione in OCaml:</p>
-<pre><code class='ocaml'>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* questo è codice OCaml *)</span><!-- end comment -->
+<pre><code class='tryocaml'>repeated <span class='s'>&#34;hello&#34;</span> 3  <span class='com2'>(* questo è codice OCaml *)</span><!-- end comment -->
 <a href="javascript:octry('repeated &#34;hello&#34; 3  (* questo è codice OCaml *)\n');">[try]</a></code></pre>
 <p>
 Notate - <strong>non</strong> vi sono parentesi e <strong>non</strong> vi sono virgole fra gli
@@ -149,7 +149,7 @@ essi.</p>
 una stringa da terminale e restituisce la stringa digitata dall&#39;utente.
 Vogliamo passare questa stringa in <code>repeated</code>. Seguono le versioni C e
 OCaml:</p>
-<pre><code class='ocaml'><span class='o'>/*</span> codice C<span class='o'>:</span> <span class='o'>*/</span>
+<pre><code class='tryocaml'><span class='o'>/*</span> codice C<span class='o'>:</span> <span class='o'>*/</span>
 repeated (get_string_from_user (<span class='s'>&#34;Si inserisca una stringa.&#34;</span>)<span class='o'>,</span> 3)
 
 <span class='com2'>(* codice OCaml<span class='ic'>:</span> *)</span><!-- end comment -->
@@ -160,7 +160,7 @@ Guardate con attenzione la posizione delle parentesi e la mancanza di
 virgole. In generale la regola è: &quot;parentesi intorno all&#39;intera chiamata
 di funzione - non mettere parentesi intorno agli argomenti ad una
 chiamata di funzione&quot;. Seguono ulteriori esempi:</p>
-<pre><code class='ocaml'>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f ha tre argomenti<span class='ic'>,</span> g ha un argomento *)</span><!-- end comment -->
+<pre><code class='tryocaml'>f 5 (g <span class='s'>&#34;hello&#34;</span>) 3    <span class='com2'>(* f ha tre argomenti<span class='ic'>,</span> g ha un argomento *)</span><!-- end comment -->
 f (g 3 4)            <span class='com2'>(* f ha un argomento<span class='ic'>,</span> g ha due argomenti *)</span><!-- end comment -->
 
 <span class='o'>#</span> repeated (<span class='s'>&#34;hello&#34;</span><span class='o'>,</span> 3)<span class='o'>;;</span>     <span class='com2'>(* OCaml segnalerà l'errore *)</span><!-- end comment -->
@@ -172,13 +172,13 @@ Tutti voi sapete come definire una funzione (o un metodo statico, per
 chi pensa in Java) nei nostri linguaggi. Come lo facciamo in OCaml?</p>
 <p>La sintassi di OCaml è piacevolmente concisa. Ecco una funzione che
 prende due numeri floating point e ne calcola la media:</p>
-<pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <a href="javascript:octry('let average a b =\n  (a +. b) /. 2.0;;\n');">[try]</a></code></pre>
 <p>
 Scrivete questo nel &quot;toplevel&quot; di OCaml (su Unix, scrivete il comando
 <code>ocaml</code> dalla shell) e vedrete così:</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <span class='k'>val</span> average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 <a href="javascript:octry('# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n');">[try]</a></code></pre>
@@ -196,7 +196,7 @@ voglio andare a definire la medesima sezione in C (la definizione in
 Java sarebbe piuttosto simile a quella in C), e plausibilmente questo
 dovrebbe sollevare ancora più questioni. Ecco la nostra versione in C di
 <code>average</code>:</p>
-<pre><code class='ocaml'>double
+<pre><code class='tryocaml'>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>{</span>
   return (a <span class='o'>+</span> b) <span class='o'>/</span> 2<span class='o'>;</span>
@@ -242,7 +242,7 @@ Probabilmente chiederete:</p>
 <p>I dettagli effettivi seguono nelle sezioni e nei capitoli successivi.</p>
 <h2 id="Tipidibase"> Tipi di base</h2><p>
 I tipi di base in OCaml sono:</p>
-<pre><code class='ocaml'>tipo OCaml     Range
+<pre><code class='tryocaml'>tipo OCaml     Range
 
 int            Intero a 31 bit con segno<span class='o'>,</span> circa <span class='o'>+/-</span> 1 billion
 float          Floating point a doppia precisione IEEE<span class='o'>,</span> equivalente al double di C
@@ -286,7 +286,7 @@ il risultato è un numero floating point. È come se aveste scritto
 errore di tipo. L&#39;operatore <code>+</code> in OCaml richiede come argomenti due
 int, e qui gli stiamo dando un int e un float, dunque esso riposta
 questo errore:</p>
-<pre><code class='ocaml'><span class='o'>#</span> 1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='o'>#</span> 1 <span class='o'>+</span> 2.5<span class='o'>;;</span>
 This expression has <span class='k'>type</span> float but is here used <span class='k'>with</span> <span class='k'>type</span> int
 <a href="javascript:octry('# 1 + 2.5;;\nThis expression has type float but is here used with type int\n');">[try]</a></code></pre>
 <p>
@@ -296,7 +296,7 @@ questo significa &quot;hai messo qui un float, ma aspettavo un int&quot;).</p>
 <code>+.</code> (si noti il punto in coda).</p>
 <p>OCaml non promuove gli int a float automaticamente, quindi è un errore
 anche il seguente:</p>
-<pre><code class='ocaml'><span class='o'>#</span> 1 <span class='o'>+.</span> 2.5<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='o'>#</span> 1 <span class='o'>+.</span> 2.5<span class='o'>;;</span>
 This expression has <span class='k'>type</span> int but is here used <span class='k'>with</span> <span class='k'>type</span> float
 <a href="javascript:octry('# 1 +. 2.5;;\nThis expression has type int but is here used with type float\n');">[try]</a></code></pre>
 <p>
@@ -304,7 +304,7 @@ Qui OCaml si sta ora lamentando per il primo argomento.</p>
 <p>E se davvere volete sommare insieme un intero ed un numero floating
 point? (Mettiamo che siano conservati in variabili chiamate <code>i</code> e <code>f</code>).
 In OCaml dovete fare un cast esplicito:</p>
-<pre><code class='ocaml'>float_of_int i <span class='o'>+.</span> f<span class='o'>;;</span>
+<pre><code class='tryocaml'>float_of_int i <span class='o'>+.</span> f<span class='o'>;;</span>
 <a href="javascript:octry('float_of_int i +. f;;\n');">[try]</a></code></pre>
 <p>
 <code>float_of_int</code> è una funzione che prende un <code>int</code> e restituisce un
@@ -314,7 +314,7 @@ via, e fanno per lo più ciò che ci si aspetta.</p>
 <p>Visto che convertire un <code>int</code> in un <code>float</code> è un&#39;operazione
 particolarmente comune, la funzione <code>float_of_int</code> ha un alias più
 breve: l&#39;esempio sopra avrebbe potuto essere semplicemente scritto</p>
-<pre><code class='ocaml'>float i <span class='o'>+.</span> f<span class='o'>;;</span>
+<pre><code class='tryocaml'>float i <span class='o'>+.</span> f<span class='o'>;;</span>
 <a href="javascript:octry('float i +. f;;\n');">[try]</a></code></pre>
 <p>
 (Si noti che diversamente da quanto si ha in C, è perfettamente valido
@@ -337,7 +337,7 @@ nascondendoli.</p>
 Diversamente che nei linguaggi derivati da C, una funzione non è
 ricorsiva se non lo dite esplicitamente utilizzando <code>let rec</code> invece che
 semplicemente <code>let</code>. Ecco un esempio di funzione ricorsiva:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let rec</span> range a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> <span class='o'>[</span><span class='o'>]</span>
   <span class='k'>else</span> a <span class='o'>::</span> range (a<span class='o'>+</span>1) b
   <span class='o'>;;</span>
@@ -359,7 +359,7 @@ spesso stampa quelli che pensa siano i tipi delle vostre funzioni,
 quindi dovete conoscere la relativa sintassi Per una funzione <code>f</code> che
 prende gli argomenti <code>arg1</code>, <code>arg2</code>, ... <code>argn</code>, e restituisce il tipo
 <code>rettype</code>, il compilatore stamperà:</p>
-<pre><code class='ocaml'>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
+<pre><code class='tryocaml'>f <span class='o'>:</span> arg1 <span class='k'>-></span> arg2 <span class='k'>-></span> <span class='o'>...</span> <span class='k'>-></span> argn <span class='k'>-></span> rettype
 <a href="javascript:octry('f : arg1 -&#62; arg2 -&#62; ... -&#62; argn -&#62; rettype\n');">[try]</a></code></pre>
 <p>
 La sintassi con le frecce sembrerà ora strana, ma quando più tardi
@@ -367,36 +367,36 @@ verremo al cosiddetto &quot;currying&quot; vedrete perché è stata scelta. Per 
 vi darò soltanto degli esempi.</p>
 <p>La nostra funzione <code>repeated</code> che prende una stringa e un intero e
 restituisce una stringa ha tipo:</p>
-<pre><code class='ocaml'>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
+<pre><code class='tryocaml'>repeated <span class='o'>:</span> string <span class='k'>-></span> int <span class='k'>-></span> string
 <a href="javascript:octry('repeated : string -&#62; int -&#62; string\n');">[try]</a></code></pre>
 <p>
 La nostra funzione <code>average</code> che prende due float e restituisce un float
 ha tipo:</p>
-<pre><code class='ocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+<pre><code class='tryocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
 <a href="javascript:octry('average : float -&#62; float -&#62; float\n');">[try]</a></code></pre>
 <p>
 La funzione standard OCaml di cast <code>int_of_char</code>:</p>
-<pre><code class='ocaml'>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
+<pre><code class='tryocaml'>int_of_char <span class='o'>:</span> char <span class='k'>-></span> int
 <a href="javascript:octry('int_of_char : char -&#62; int\n');">[try]</a></code></pre>
 <p>
 Se una funzione non ritorna nulla (<code>void</code> per programmatori C e Java),
 scriviamo che restituisce il tipo <code>unit</code>. Ecco, per esempio,
 l&#39;equivalente in OCaml di <code>fputc</code>:</p>
-<pre><code class='ocaml'>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
+<pre><code class='tryocaml'>output_char <span class='o'>:</span> out_channel <span class='k'>-></span> char <span class='k'>-></span> unit
 <a href="javascript:octry('output_char : out_channel -&#62; char -&#62; unit\n');">[try]</a></code></pre>
 <h3 id="Funzionipolimorfiche"> Funzioni polimorfiche</h3><p>
 
 Vediamo qualche cosa di un po&#39; più particolare. Che dire di una funzione
 che prende <em>qualsiasi cosa</em> come argomento? Ecco una strana funzione che
 prende un argomento, ma semplicemente lo ignora e restituisce sempre 3:</p>
-<pre><code class='ocaml'><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> give_me_a_three x <span class='k'>=</span> 3<span class='o'>;;</span>
 <a href="javascript:octry('let give_me_a_three x = 3;;\n');">[try]</a></code></pre>
 <p>
 Qual è il tipo di questa funzione? In OCaml utilizziamo uno speciale
 segnaposto per significare &quot;qualsiasi tipo voi immaginiate&quot;. È un
 carattere di virgoletta singola (NdT: un apice) seguito da una lettera.
 Il tipo dela funzione sopra sarebbe normalmente scritto:</p>
-<pre><code class='ocaml'>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
+<pre><code class='tryocaml'>give_me_a_three <span class='o'>:</span> 'a <span class='k'>-></span> int
 <a href="javascript:octry('give_me_a_three : &#39;a -&#62; int\n');">[try]</a></code></pre>
 <p>
 Dove <code>&#39;a</code> significa in realtà qualsiasi tipo. Potete, ad esempio,
@@ -427,7 +427,7 @@ questo controllo nelle rare occasioni in cui ha senso farlo. Soltanto i
 guru probabilmente necessiteranno di aggirare il controllo dei tipi.</p>
 <p>Ritorniamo alla funzione <code>average</code> che abbiamo digitato nel toplevel di
 OCaml:</p>
-<pre><code class='ocaml'><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='o'>#</span> <span class='k'>let</span> average a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <span class='k'>val</span> average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float <span class='k'>=</span> <span class='o'>&#60;</span><span class='k'>fun</span><span class='o'>&#62;</span>
 <a href="javascript:octry('# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n');">[try]</a></code></pre>
@@ -442,7 +442,7 @@ semplice deduzione <code>a</code> e <code>b</code> devono avere anch&#39;essi ti
 medesimo del valore restituito dalla funzione <code>average</code>, dunque
 <code>average</code> deve restituire un <code>float</code>. La conclusione è che <code>average</code> ha
 la seguente traccia di tipi:</p>
-<pre><code class='ocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
+<pre><code class='tryocaml'>average <span class='o'>:</span> float <span class='k'>-></span> float <span class='k'>-></span> float
 <a href="javascript:octry('average : float -&#62; float -&#62; float\n');">[try]</a></code></pre>
 <p>
 L&#39;inferenza dei tipi è ovviamente facile per un programma così corto, ma

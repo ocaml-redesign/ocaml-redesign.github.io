@@ -120,7 +120,7 @@ puts <code>%</code> in front of register names. The registers are: <code>%eax</c
 frames), and <code>%esp</code> (the stack pointer).</p>
 <p>The Linux assembler (in common with other Unix assemblers, but opposite
 to MS-derived assemblers) writes moves to and from registers/memory as:</p>
-<pre><code class='ocaml'>movl from<span class='o'>,</span> <span class='k'>to</span>
+<pre><code class='tryocaml'>movl from<span class='o'>,</span> <span class='k'>to</span>
 <a href="javascript:octry('movl from, to\n');">[try]</a></code></pre>
 <p>
 So <code>movl %ebx, %eax</code> means &quot;copy the contents of register <code>%ebx</code> into
@@ -138,7 +138,7 @@ the text segment.</p>
 <p><strong>.data</strong></p>
 <p>Similarly, the <code>.data</code> directive switches the assembler so it starts
 writing into the data segment (part) of the executable.</p>
-<pre><code class='ocaml'>  <span class='o'>.</span>globl foo
+<pre><code class='tryocaml'>  <span class='o'>.</span>globl foo
 foo<span class='o'>:</span>
 <a href="javascript:octry('  .globl foo\nfoo:\n');">[try]</a></code></pre>
 <p>
@@ -146,7 +146,7 @@ This declares a global symbol called <code>foo</code>. It means the address of t
 next thing to come can be named <code>foo</code>. Writing just <code>foo:</code> without the
 preceeding <code>.globl</code> directive declares a local symbol (local to just the
 current file).</p>
-<pre><code class='ocaml'><span class='o'>.</span>long 12345
+<pre><code class='tryocaml'><span class='o'>.</span>long 12345
 <span class='o'>.</span>byte 9
 <span class='o'>.</span>ascii <span class='s'>&#34;hello&#34;</span>
 <span class='o'>.</span>space 4
@@ -159,18 +159,18 @@ in the data segment.</p>
 <h3 id="Thequothelloworldquotprogram"> The &quot;hello, world&quot; program</h3><p>
 Enough assembler. Put the following program into a file called
 <code>smallest.ml</code>:</p>
-<pre><code class='ocaml'>print_string <span class='s'>&#34;hello, world\n&#34;</span>
+<pre><code class='tryocaml'>print_string <span class='s'>&#34;hello, world\n&#34;</span>
 <a href="javascript:octry('print_string &#34;hello, world\n&#34;\n');">[try]</a></code></pre>
 <p>
 And compile it to a native code executable using:</p>
-<pre><code class='ocaml'>ocamlopt <span class='o'>-</span>S smallest<span class='o'>.</span>ml <span class='o'>-</span>o smallest
+<pre><code class='tryocaml'>ocamlopt <span class='o'>-</span>S smallest<span class='o'>.</span>ml <span class='o'>-</span>o smallest
 <a href="javascript:octry('ocamlopt -S smallest.ml -o smallest\n');">[try]</a></code></pre>
 <p>
 The <code>-S</code> (capital S) tells the compiler to leave the assembly language
 file (called <code>smallest.s</code> - lowercase s) instead of deleting it.</p>
 <p>Here are the edited highlights of the <code>smallest.s</code> file with my comments
 added. First of all the data segment:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>data
+<pre><code class='tryocaml'>        <span class='o'>.</span>data
         <span class='o'>.</span>long   4348                     <span class='o'>;</span> header <span class='k'>for</span> string
         <span class='o'>.</span>globl  Smallest__1
 Smallest__1<span class='o'>:</span>
@@ -180,7 +180,7 @@ Smallest__1<span class='o'>:</span>
 <a href="javascript:octry('        .data\n        .long   4348                     ; header for string\n        .globl  Smallest__1\nSmallest__1:\n        .ascii  &#34;hello, world\12&#34;        ; string\n        .space  2                        ; padding ..\n        .byte   2                        ;  .. after string\n');">[try]</a></code></pre>
 <p>
 Next up the text (program code) segment:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>text
+<pre><code class='tryocaml'>        <span class='o'>.</span>text
         <span class='o'>.</span>globl  Smallest__entry          <span class='o'>;</span> entry point <span class='k'>to</span> the program
 Smallest__entry<span class='o'>:</span>
 
@@ -211,7 +211,7 @@ the top level commands in this file.</p>
 <code>print_string &quot;hello, world\n&quot;</code>, but OCaml has instead compiled the
 equivalent of <code>Pervasives.output_string stdout &quot;hello, world\n&quot;</code>. Why?
 If you look into <code>pervasives.ml</code> you&#39;ll see why:</p>
-<pre><code class='ocaml'><span class='k'>let</span> print_string s <span class='k'>=</span> output_string stdout s
+<pre><code class='tryocaml'><span class='k'>let</span> print_string s <span class='k'>=</span> output_string stdout s
 <a href="javascript:octry('let print_string s = output_string stdout s\n');">[try]</a></code></pre>
 <p>
 OCaml has <em>inlined</em> this function. <strong>Inlining</strong> - taking a function and
@@ -232,7 +232,7 @@ stack, but we&#39;ll see about that later.</p>
 by a trailing NUL (<code>\0</code>) character. OCaml stores strings in a different
 way, as we can see from the data segment above. This string is stored
 like this:</p>
-<pre><code class='ocaml'>4 byte header<span class='o'>:</span> 4348
+<pre><code class='tryocaml'>4 byte header<span class='o'>:</span> 4348
 the string<span class='o'>:</span>    h e l l o <span class='o'>,</span> SP w o r l d <span class='o'>\</span>n
 padding<span class='o'>:</span>       <span class='o'>\</span>0 <span class='o'>\</span>0 <span class='o'>\</span>002
 <a href="javascript:octry('4 byte header: 4348\nthe string:    h e l l o , SP w o r l d \n\npadding:       \0 \0 \002\n');">[try]</a></code></pre>
@@ -257,7 +257,7 @@ fail on it.</p>
 a header which tells the garbage collector about how large the object is
 in words, and something about what the object contains. Writing the
 number 4348 in binary:</p>
-<pre><code class='ocaml'>length <span class='k'>of</span> the object <span class='k'>in</span> words<span class='o'>:</span>  0000 0000 0000 0000 0001 00 (4 words)
+<pre><code class='tryocaml'>length <span class='k'>of</span> the object <span class='k'>in</span> words<span class='o'>:</span>  0000 0000 0000 0000 0001 00 (4 words)
 color (used by GC)<span class='o'>:</span>             00
 tag<span class='o'>:</span>                            1111 1100 (String_tag)
 <a href="javascript:octry('length of the object in words:  0000 0000 0000 0000 0001 00 (4 words)\ncolor (used by GC):             00\ntag:                            1111 1100 (String_tag)\n');">[try]</a></code></pre>
@@ -286,7 +286,7 @@ Java program and a second or so for a Perl script.</p>
 We mentioned in chapter 6 that OCaml can turn tail-recursive function
 calls into simple loops. Is this actually true? Let&#39;s look at what
 simple tail recursion compiles to:</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> loop () <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let rec</span> loop () <span class='k'>=</span>
   print_string <span class='s'>&#34;I go on forever ...&#34;</span><span class='o'>;</span>
   loop ()
 
@@ -298,7 +298,7 @@ naming functions, our function will be called <code>Tail__loop_nnn</code> (where
 <code>nnn</code> is some unique number which OCaml appends to distinguish
 identically named functions from one another).</p>
 <p>Here is the assembler for just the <code>loop</code> function defined above:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>text
+<pre><code class='tryocaml'>        <span class='o'>.</span>text
         <span class='o'>.</span>globl  Tail__loop_56
 Tail__loop_56<span class='o'>:</span>
 <span class='o'>.</span>L100<span class='o'>:</span>
@@ -356,20 +356,20 @@ is where the compiler <em>doesn&#39;t</em> have a fully known type for a functio
 at compile time, might have an impact on performance. Suppose we require
 a function to work out the maximum of two integers. Our first attempt
 is:</p>
-<pre><code class='ocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
 <a href="javascript:octry('let max a b =\n  if a &#62; b then a else b\n');">[try]</a></code></pre>
 <p>
 Simple enough, but recall that the \&gt; (greater than) operator in OCaml
 is polymorphic. It has type <code>&#39;a -&gt; &#39;a -&gt; bool</code>, and this means that the
 <code>max</code> function we defined above is going to be polymorphic:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> max a b <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> max a b <span class='k'>=</span>
     <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
 <a href="javascript:octry('  let max a b =\n    if a &#62; b then a else b\n');">[try]</a></code></pre>
 <p>
 This is indeed reflected in the code that OCaml generates for this
 function, which is pretty complex:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>text
+<pre><code class='tryocaml'>        <span class='o'>.</span>text
         <span class='o'>.</span>globl  Max__max_56
 Max__max_56<span class='o'>:</span>
 
@@ -420,12 +420,12 @@ language for doing the \&gt;.</p>
 hint to the OCaml compiler that the arguments are in fact integers. Then
 OCaml will generate a specialised version of <code>max</code> which only works on
 <code>int</code> arguments:</p>
-<pre><code class='ocaml'><span class='k'>let</span> max (a <span class='o'>:</span> int) (b <span class='o'>:</span> int) <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> max (a <span class='o'>:</span> int) (b <span class='o'>:</span> int) <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
 <a href="javascript:octry('let max (a : int) (b : int) =\n  if a &#62; b then a else b\n');">[try]</a></code></pre>
 <p>
 Here is the assembly code generated for this function:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>text
+<pre><code class='tryocaml'>        <span class='o'>.</span>text
         <span class='o'>.</span>globl  Max_int__max_56
 Max_int__max_56<span class='o'>:</span>
 
@@ -451,7 +451,7 @@ Max_int__max_56<span class='o'>:</span>
 That&#39;s just 5 lines of assembler, and is about as simple as you can make
 it.</p>
 <p>What about this code:</p>
-<pre><code class='ocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
 
 <span class='k'>let</span> () <span class='k'>=</span> print_int (max 2 3)
@@ -463,7 +463,7 @@ OCaml still has to generate the external <code>Max.max</code> symbol (because th
 is a module, and so that function might be called from outside the
 module), and it doesn&#39;t inline the function.</p>
 <p>Here&#39;s another variation:</p>
-<pre><code class='ocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
   <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b <span class='k'>in</span>
 print_int (max 2 3)
 <a href="javascript:octry('let max a b =\n  if a &#62; b then a else b in\nprint_int (max 2 3)\n');">[try]</a></code></pre>
@@ -479,7 +479,7 @@ There are a number of peculiarities about integers in OCaml. One of
 these is that integers are 31 bit entities, not 32 bit entities. What
 happens to the &quot;missing&quot; bit?</p>
 <p>Write this to <code>int.ml</code>:</p>
-<pre><code class='ocaml'>print_int 3<span class='o'>;;</span>
+<pre><code class='tryocaml'>print_int 3<span class='o'>;;</span>
 <a href="javascript:octry('print_int 3;;\n');">[try]</a></code></pre>
 <p>
 and compile with <code>ocamlopt -S int.ml -o int</code> to generate assembly
@@ -487,7 +487,7 @@ language in <code>int.s</code>. Recall from the discussion above that we are
 expecting OCaml to inline the <code>print_int</code> function as
 <code>output_string (string_of_int 3)</code>, and examining the assembly language
 output we can see that this is exactly what OCaml does:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>text
+<pre><code class='tryocaml'>        <span class='o'>.</span>text
         <span class='o'>.</span>globl  Int__entry
 Int__entry<span class='o'>:</span>
 
@@ -574,13 +574,13 @@ this at run time however.</p>
 <h3 id="Floats"> Floats</h3><p>
 Floats are, by default, boxed (allocated on the heap). Save this as
 <code>float.ml</code> and compile it with <code>ocamlopt -S float.ml -o float</code>:</p>
-<pre><code class='ocaml'>print_float 3.0
+<pre><code class='tryocaml'>print_float 3.0
 <a href="javascript:octry('print_float 3.0\n');">[try]</a></code></pre>
 <p>
 The number is not passed directly to <code>string_of_float</code> in the <code>%eax</code>
 register as happened above with ints. Instead, it is created statically
 in the data segment:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>data
+<pre><code class='tryocaml'>        <span class='o'>.</span>data
         <span class='o'>.</span>long   2301
         <span class='o'>.</span>globl  Float__1
 Float__1<span class='o'>:</span>
@@ -588,14 +588,14 @@ Float__1<span class='o'>:</span>
 <a href="javascript:octry('        .data\n        .long   2301\n        .globl  Float__1\nFloat__1:\n        .double 3.0\n');">[try]</a></code></pre>
 <p>
 and a pointer to the float is passed in <code>%eax</code> instead:</p>
-<pre><code class='ocaml'>        movl    <span class='o'>$</span>Float__1<span class='o'>,</span> <span class='o'>%</span>eax
+<pre><code class='tryocaml'>        movl    <span class='o'>$</span>Float__1<span class='o'>,</span> <span class='o'>%</span>eax
         call    Pervasives__string_of_float_157
 <a href="javascript:octry('        movl    $Float__1, %eax\n        call    Pervasives__string_of_float_157\n');">[try]</a></code></pre>
 <p>
 Note the structure of the floating point number: it has a header (2301),
 followed by the 8 byte (2 word) representation of the number itself. The
 header can be decoded by writing it as binary:</p>
-<pre><code class='ocaml'>Length <span class='k'>of</span> the object <span class='k'>in</span> words<span class='o'>:</span>  0000 0000 0000 0000 0000 10 (8 bytes)
+<pre><code class='tryocaml'>Length <span class='k'>of</span> the object <span class='k'>in</span> words<span class='o'>:</span>  0000 0000 0000 0000 0000 10 (8 bytes)
 Color<span class='o'>:</span>                          00
 Tag<span class='o'>:</span>                            1111 1101 (Double_tag)
 <a href="javascript:octry('Length of the object in words:  0000 0000 0000 0000 0000 10 (8 bytes)\nColor:                          00\nTag:                            1111 1101 (Double_tag)\n');">[try]</a></code></pre>
@@ -612,13 +612,13 @@ are essentially arrays of floats. As a special hack to make this go
 faster, OCaml implements \&lt;dfn\&gt;arrays of unboxed floats\&lt;/dfn\&gt;. This
 means that in the special case where we have an object of type
 <code>float array</code> (array of floats), OCaml stores them the same way as in C:</p>
-<pre><code class='ocaml'>double array<span class='o'>[</span>10<span class='o'>]</span><span class='o'>;</span>
+<pre><code class='tryocaml'>double array<span class='o'>[</span>10<span class='o'>]</span><span class='o'>;</span>
 <a href="javascript:octry('double array[10];\n');">[try]</a></code></pre>
 <p>
 ... instead of having an array of pointers to ten separately allocated
 floats on the heap.</p>
 <p>Let&#39;s see this in practice:</p>
-<pre><code class='ocaml'><span class='k'>let</span> a <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>create 10 0.0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> a <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>create 10 0.0<span class='o'>;;</span>
 <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 9 <span class='k'>do</span>
   a<span class='o'>.</span>(i) <span class='o'>&#60;-</span> float_of_int i
 <span class='k'>done</span>
@@ -627,7 +627,7 @@ floats on the heap.</p>
 I&#39;m going to compile this code with the <code>-unsafe</code> option to remove
 bounds checking (simplifying the code for our exposition here). The
 first line, which creates the array, is compiled to a simple C call:</p>
-<pre><code class='ocaml'>        pushl   <span class='o'>$</span>Arrayfloats__1     <span class='o'>;</span> Boxed float 0.0
+<pre><code class='tryocaml'>        pushl   <span class='o'>$</span>Arrayfloats__1     <span class='o'>;</span> Boxed float 0.0
         pushl   <span class='o'>$</span>21                 <span class='o'>;</span> The integer 10
         movl    <span class='o'>$</span>make_vect<span class='o'>,</span> <span class='o'>%</span>eax    <span class='o'>;</span> Address <span class='k'>of</span> the C <span class='k'>function</span> <span class='k'>to</span> call
         call    caml_c_call
@@ -637,7 +637,7 @@ first line, which creates the array, is compiled to a simple C call:</p>
 <a href="javascript:octry('        pushl   $Arrayfloats__1     ; Boxed float 0.0\n        pushl   $21                 ; The integer 10\n        movl    $make_vect, %eax    ; Address of the C function to call\n        call    caml_c_call\n    ; ...\n        movl    %eax, Arrayfloats   ; Store the resulting pointer to the\n                                    ; array at this place on the heap.\n');">[try]</a></code></pre>
 <p>
 The loop is compiled to this relatively simple assembly language:</p>
-<pre><code class='ocaml'>        movl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>eax            <span class='o'>;</span> Let <span class='o'>%</span>eax <span class='k'>=</span> 0. <span class='o'>%</span>eax is going <span class='k'>to</span> store i<span class='o'>.</span>
+<pre><code class='tryocaml'>        movl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>eax            <span class='o'>;</span> Let <span class='o'>%</span>eax <span class='k'>=</span> 0. <span class='o'>%</span>eax is going <span class='k'>to</span> store i<span class='o'>.</span>
         cmpl    <span class='o'>$</span>19<span class='o'>,</span> <span class='o'>%</span>eax           <span class='o'>;</span> If <span class='o'>%</span>eax <span class='o'>&#62;</span> 9<span class='o'>,</span> <span class='k'>then</span> jump out <span class='k'>of</span> the
         jg      <span class='o'>.</span>L100               <span class='o'>;</span>   loop (<span class='k'>to</span> label <span class='o'>.</span>L100 at the <span class='k'>end</span>)<span class='o'>.</span>
 
@@ -664,7 +664,7 @@ The loop is compiled to this relatively simple assembly language:</p>
 <p>
 The important statement is the one which stores the float into the
 array. It is:</p>
-<pre><code class='ocaml'>        fstpl   -4<span class='o'>(%</span>ecx<span class='o'>,</span> <span class='o'>%</span>eax<span class='o'>,</span> 4)
+<pre><code class='tryocaml'>        fstpl   -4<span class='o'>(%</span>ecx<span class='o'>,</span> <span class='o'>%</span>eax<span class='o'>,</span> 4)
 <a href="javascript:octry('        fstpl   -4(%ecx, %eax, 4)\n');">[try]</a></code></pre>
 <p>
 The assembler syntax is rather complex, but the bracketed expression
@@ -672,7 +672,7 @@ The assembler syntax is rather complex, but the bracketed expression
 that <code>%eax</code> is the OCaml representation of i, complete with tag bit, so
 it is essentially equal to <code>i*2+1</code>, so let&#39;s substitute that and
 multiply it out:</p>
-<pre><code class='ocaml'>  <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*%</span>eax <span class='o'>-</span> 4
+<pre><code class='tryocaml'>  <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*%</span>eax <span class='o'>-</span> 4
 <span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*</span>(i<span class='o'>*</span>2<span class='o'>+</span>1) <span class='o'>-</span> 4
 <span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*</span>i<span class='o'>*</span>2 <span class='o'>+</span> 4 <span class='o'>-</span> 4
 <span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 8<span class='o'>*</span>i
@@ -683,7 +683,7 @@ multiply it out:</p>
 <h3 id="Partiallyappliedfunctionsandclosures"> Partially applied functions and closures</h3><p>
 How does OCaml compile functions which are only partially applied? Let&#39;s
 compile this code:</p>
-<pre><code class='ocaml'><span class='m'>Array</span><span class='o'>.</span>map (<span class='o'>(+</span>) 2) <span class='o'>[</span><span class='o'>|</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>;</span> 4<span class='o'>;</span> 5 <span class='o'>|</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='m'>Array</span><span class='o'>.</span>map (<span class='o'>(+</span>) 2) <span class='o'>[</span><span class='o'>|</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>;</span> 4<span class='o'>;</span> 5 <span class='o'>|</span><span class='o'>]</span>
 <a href="javascript:octry('Array.map ((+) 2) [| 1; 2; 3; 4; 5 |]\n');">[try]</a></code></pre>
 <p>
 If you recall the syntax, <code>[| ... |]</code> declares an array (in this case an
@@ -691,7 +691,7 @@ If you recall the syntax, <code>[| ... |]</code> declares an array (in this case
 things&quot;.</p>
 <p>Compiling this code reveals some interesting new features. Firstly the
 code which allocates the array:</p>
-<pre><code class='ocaml'>        
+<pre><code class='tryocaml'>        
         movl    <span class='o'>$</span>24<span class='o'>,</span> <span class='o'>%</span>eax           <span class='o'>;</span> Allocate 5 <span class='o'>*</span> 4 <span class='o'>+</span> 4 <span class='k'>=</span> 24 bytes <span class='k'>of</span> memory<span class='o'>.</span>
         call    caml_alloc
 
@@ -704,7 +704,7 @@ case the data is 5 integers, so we allocate 4 bytes for the header plus
 5 * 4 bytes for the data. We update the pointer to point at the first
 data word, ie. 4 bytes into the allocated memory block.</p>
 <p>Next OCaml generates code to initialize the array:</p>
-<pre><code class='ocaml'>        movl    <span class='o'>$</span>5120<span class='o'>,</span> -4<span class='o'>(%</span>eax)
+<pre><code class='tryocaml'>        movl    <span class='o'>$</span>5120<span class='o'>,</span> -4<span class='o'>(%</span>eax)
         movl    <span class='o'>$</span>3<span class='o'>,</span> <span class='o'>(%</span>eax)
         movl    <span class='o'>$</span>5<span class='o'>,</span> 4<span class='o'>(%</span>eax)
         movl    <span class='o'>$</span>7<span class='o'>,</span> 8<span class='o'>(%</span>eax)
@@ -723,7 +723,7 @@ heap-allocated blocks (the GC does not have access to type information
 about this array).</p>
 <p>Next the closure <code>((+) 2)</code> is created. The closure is represented by
 this block allocated in the data segment:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>data
+<pre><code class='tryocaml'>        <span class='o'>.</span>data
         <span class='o'>.</span>long   3319
         <span class='o'>.</span>globl  Closure__1
 Closure__1<span class='o'>:</span>
@@ -735,7 +735,7 @@ Closure__1<span class='o'>:</span>
 The header is 3319, indicating a <code>Closure_tag</code> with length 3 words. The
 3 words in the block are the address of the function <code>caml_curry2</code>, the
 integer number 2 and the address of this function:</p>
-<pre><code class='ocaml'>        <span class='o'>.</span>text
+<pre><code class='tryocaml'>        <span class='o'>.</span>text
         <span class='o'>.</span>globl  Closure__fun_58
 Closure__fun_58<span class='o'>:</span>
 
@@ -757,7 +757,7 @@ the OCaml representation for integers. Let&#39;s represent them as:</p>
 
 <p>where <code>a</code> and <code>b</code> are the actual integer arguments. So this function
 returns:</p>
-<pre><code class='ocaml'>  <span class='o'>%</span>eax <span class='o'>+</span> <span class='o'>%</span>ebx <span class='o'>-</span> 1
+<pre><code class='tryocaml'>  <span class='o'>%</span>eax <span class='o'>+</span> <span class='o'>%</span>ebx <span class='o'>-</span> 1
 <span class='k'>=</span> 2 <span class='o'>*</span> a <span class='o'>+</span> 1 <span class='o'>+</span> 2 <span class='o'>*</span> b <span class='o'>+</span> 1 <span class='o'>-</span> 1
 <span class='k'>=</span> 2 <span class='o'>*</span> a <span class='o'>+</span> 2 <span class='o'>*</span> b <span class='o'>+</span> 1
 <span class='k'>=</span> 2 <span class='o'>*</span> (a <span class='o'>+</span> b) <span class='o'>+</span> 1
@@ -798,7 +798,7 @@ There are two types of profiling that you can do on OCaml programs:</p>
 
 <p>The <code>ocamlcp</code> and <code>ocamlprof</code> programs perform profiling on bytecode.
 Here is an example:</p>
-<pre><code class='ocaml'><span class='com2'>(* <span class='ic'>$</span> ocamlcp <span class='ic'>-</span>p a graphics<span class='ic'>.</span>cma graphtest<span class='ic'>.</span>ml <span class='ic'>-</span>o graphtest</span>
+<pre><code class='tryocaml'><span class='com2'>(* <span class='ic'>$</span> ocamlcp <span class='ic'>-</span>p a graphics<span class='ic'>.</span>cma graphtest<span class='ic'>.</span>ml <span class='ic'>-</span>o graphtest</span>
 <span class='com2'>   <span class='ic'>$</span> <span class='ic'>./</span>graphtest</span>
 <span class='com2'>   <span class='ic'>$</span> ocamlprof graphtest<span class='ic'>.</span>ml *)</span><!-- end comment -->
 
@@ -831,7 +831,7 @@ support for profiling. In the case of Linux, we use <code>gprof</code>.</p>
 code</a>).
 This program uses streams and camlp4, techniques which we haven&#39;t
 covered in this tutorial.</p>
-<pre><code class='ocaml'><span class='k'>let rec</span> filter p <span class='k'>=</span> parser
+<pre><code class='tryocaml'><span class='k'>let rec</span> filter p <span class='k'>=</span> parser
   <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>-></span> <span class='k'>if</span> p n <span class='k'>then</span> <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> filter p s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>else</span> <span class='o'>[</span><span class='o'>&#60;</span> filter p s <span class='o'>&#62;</span><span class='o'>]</span>
 
 <span class='k'>let</span> naturals <span class='k'>=</span>
@@ -850,12 +850,12 @@ covered in this tutorial.</p>
 <p>
 We compile it using the <code>-p</code> option to <code>ocamlopt</code> which tells the
 compiler to include profiling information for <code>gprof</code>:</p>
-<pre><code class='ocaml'><span class='o'>$</span> ocamlopt <span class='o'>-</span>p <span class='o'>-</span>pp <span class='s'>&#34;camlp4o pa_extend.cmo&#34;</span> <span class='o'>-</span>I <span class='o'>+</span>camlp4 sieve<span class='o'>.</span>ml <span class='o'>-</span>o sieve
+<pre><code class='tryocaml'><span class='o'>$</span> ocamlopt <span class='o'>-</span>p <span class='o'>-</span>pp <span class='s'>&#34;camlp4o pa_extend.cmo&#34;</span> <span class='o'>-</span>I <span class='o'>+</span>camlp4 sieve<span class='o'>.</span>ml <span class='o'>-</span>o sieve
 <a href="javascript:octry('$ ocamlopt -p -pp &#34;camlp4o pa_extend.cmo&#34; -I +camlp4 sieve.ml -o sieve\n');">[try]</a></code></pre>
 <p>
 After running the program as normal, the profiling code dumps out a file
 <code>gmon.out</code> which we can interpret with <code>gprof</code>:</p>
-<pre><code class='ocaml'><span class='o'>$</span> gprof <span class='o'>./</span>sieve
+<pre><code class='tryocaml'><span class='o'>$</span> gprof <span class='o'>./</span>sieve
 Flat profile<span class='o'>:</span>
 
 Each sample counts <span class='k'>as</span> 0.01 seconds<span class='o'>.</span>

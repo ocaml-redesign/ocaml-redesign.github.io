@@ -102,7 +102,7 @@ overall shape of the programs and the features which I&#39;ll point out.</p>
 <h3 id="Localquotvariablesquotreallylocalexpressions"> Local &quot;variables&quot; (<em>really</em> local expressions)</h3><p>
 Let&#39;s take the <code>average</code> function and add a local variable in C.
 (Compare it to the first definition we had above).</p>
-<pre><code class='ocaml'>double
+<pre><code class='tryocaml'>double
 average (double a<span class='o'>,</span> double b)
 <span class='o'>{</span>
   double sum <span class='k'>=</span> a <span class='o'>+</span> b<span class='o'>;</span>
@@ -111,7 +111,7 @@ average (double a<span class='o'>,</span> double b)
 <a href="javascript:octry('double\naverage (double a, double b)\n{\n  double sum = a + b;\n  return sum / 2;\n}\n');">[try]</a></code></pre>
 <p>
 Now let&#39;s do the same to our OCaml version:</p>
-<pre><code class='ocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
   <span class='k'>let</span> sum <span class='k'>=</span> a <span class='o'>+.</span> b <span class='k'>in</span>
   sum <span class='o'>/.</span> 2.0<span class='o'>;;</span>
 <a href="javascript:octry('let average a b =\n  let sum = a +. b in\n  sum /. 2.0;;\n');">[try]</a></code></pre>
@@ -132,7 +132,7 @@ do variables whose value changes in a minute).</p>
 <p>Here&#39;s another example to make this clearer. The following two code
 snippets should return the same value (namely (a+b) +
 (a+b)<sup>2</sup>):</p>
-<pre><code class='ocaml'><span class='k'>let</span> f a b <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> f a b <span class='k'>=</span>
   (a <span class='o'>+.</span> b) <span class='o'>+.</span> (a <span class='o'>+.</span> b) <span class='o'>**</span> 2.
   <span class='o'>;;</span>
 
@@ -150,7 +150,7 @@ shorthand for <code>a +. b</code>.</p>
 You can also define global names for things at the top level, and as
 with our local &quot;variables&quot; above, these aren&#39;t really variable at all,
 just shorthand names for things. Here&#39;s a real (but cut-down) example:</p>
-<pre><code class='ocaml'><span class='k'>let</span> html <span class='k'>=</span>
+<pre><code class='tryocaml'><span class='k'>let</span> html <span class='k'>=</span>
   <span class='k'>let</span> content <span class='k'>=</span> read_whole_file file <span class='k'>in</span>
   <span class='m'>GHtml</span><span class='o'>.</span>html_from_string content
   <span class='o'>;;</span>
@@ -187,23 +187,23 @@ References are very similar to pointers in C/C++. In Java, all variables
 which store objects are really references (pointers) to the objects. In
 Perl, references are references - the same thing as in OCaml.</p>
 <p>Here&#39;s how we create a reference to an <code>int</code> in OCaml:</p>
-<pre><code class='ocaml'>ref 0<span class='o'>;;</span>
+<pre><code class='tryocaml'>ref 0<span class='o'>;;</span>
 <a href="javascript:octry('ref 0;;\n');">[try]</a></code></pre>
 <p>
 Actually that statement wasn&#39;t really very useful. We created the
 reference and then, because we didn&#39;t name it, the garbage collector
 came along and collected it immediately afterwards! (actually, it was
 probably thrown away at compile-time.) Let&#39;s name the reference:</p>
-<pre><code class='ocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0
+<pre><code class='tryocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0
 <a href="javascript:octry('let my_ref = ref 0\n');">[try]</a></code></pre>
 <p>
 This reference is currently storing a zero integer. Let&#39;s put something
 else into it (assignment):</p>
-<pre><code class='ocaml'>my_ref <span class='o'>:=</span> 100
+<pre><code class='tryocaml'>my_ref <span class='o'>:=</span> 100
 <a href="javascript:octry('my_ref := 100\n');">[try]</a></code></pre>
 <p>
 And let&#39;s find out what the reference contains now:</p>
-<pre><code class='ocaml'><span class='o'>!</span>my_ref
+<pre><code class='tryocaml'><span class='o'>!</span>my_ref
 <a href="javascript:octry('!my_ref\n');">[try]</a></code></pre>
 <p>
 So the <code>:=</code> operator is used to assign to references, and the <code>!</code>
@@ -211,7 +211,7 @@ operator dereferences to get out the contents. Here&#39;s a rough-and-ready
 comparison with C/C++:</p>
 <p>OCaml</p>
 <p>C/C++</p>
-<pre><code class='ocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
 my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
 <span class='o'>!</span>my_ref
 
@@ -235,7 +235,7 @@ name is local to the block where it is defined. For example, here we
 define a nested function named</p>
 <pre><code>square&#39;, and call it twice:
 
-```ocaml
+```tryocaml
 foo (double a, double b)
 {
   double square (double z) { return z * z; }
@@ -248,7 +248,7 @@ function that are visible at the point of its definition. This is called
 &quot;lexical scoping&quot;. For example, here we show a nested function which
 uses an inherited variable named </code></pre>
 <p>offset&#39;:</p>
-<pre><code class='ocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
+<pre><code class='tryocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
 <span class='o'>{</span>
   int access (int <span class='o'>*</span>array<span class='o'>,</span> int index)
     <span class='o'>{</span> return array<span class='o'>[</span>index <span class='o'>+</span> offset<span class='o'>]</span><span class='o'>;</span> <span class='o'>}</span>
@@ -262,7 +262,7 @@ uses an inherited variable named </code></pre>
 You get the idea. Nested functions are, however, very useful and very
 heavily used in OCaml. Here is an example of a nested function from some
 real code:</p>
-<pre><code class='ocaml'>  <span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
+<pre><code class='tryocaml'>  <span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
     <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 4096 <span class='k'>in</span>
     <span class='k'>let rec</span> loop () <span class='k'>=</span>
       <span class='k'>let</span> newline <span class='k'>=</span> input_line chan <span class='k'>in</span>
@@ -296,7 +296,7 @@ structures, and making POSIX system calls. These libraries are located
 in <code>/usr/lib/ocaml/VERSION/</code> (on Unix anyway). For these examples we&#39;re
 going to concentrate on one quite simple module called <code>Graphics</code>.</p>
 <p>The <code>Graphics</code> module is installed into 5 files (on my system):</p>
-<pre><code class='ocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
+<pre><code class='tryocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cma
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmi
 <span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmxa
@@ -319,7 +319,7 @@ will need to create a custom toplevel. Issue the command
 <p>A couple of examples should make this clear. (The two examples draw
 different things - try them out). Note the first example calls
 <code>open_graph</code> and the second one <code>Graphics.open_graph</code>.</p>
-<pre><code class='ocaml'><span class='com2'>(* To compile this example<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* To compile this example<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
@@ -368,7 +368,7 @@ imported into every OCaml program.</p>
 What happens if you want to use symbols in the <code>Graphics</code> module, but
 you don&#39;t want to import all of them and you can&#39;t be bothered to type
 <code>Graphics</code> each time? Just rename it using this trick:</p>
-<pre><code class='ocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
 
 <span class='m'>Gr</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 <span class='m'>Gr</span><span class='o'>.</span>fill_circle 320 240 240<span class='o'>;;</span>
@@ -387,7 +387,7 @@ for a long time while he was learning OCaml too.</p>
 top-level of your code, and <em>never</em> within function definitions or any
 other kind of statement.</p>
 <p>Have a look at a section from the second graphics example above:</p>
-<pre><code class='ocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
 <span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
 
 <span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
@@ -419,7 +419,7 @@ other peoples&#39; code you&#39;ll need to know that sometimes we can elide
 </ul>
 
 <p>Here is some working code with <code>;;</code> elided wherever possible:</p>
-<pre><code class='ocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
 <span class='k'>open</span> Graphics<span class='o'>;;</span>
 
 self_init ()<span class='o'>;;</span>
@@ -456,7 +456,7 @@ single <code>;</code> after it.</p>
 them with a single <code>;</code>, <em>except</em> for the very last one.</p>
 <p>The inner for-loop in our example above is a good demonstration. Notice
 that we never use any single <code>;</code> in this code:</p>
-<pre><code class='ocaml'><span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
+<pre><code class='tryocaml'><span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
   <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
   <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
   <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
@@ -481,7 +481,7 @@ well - in OCaml, nearly everything is an expression. <code>if/then/else</code> i
 an expression. <code>a ; b</code> is an expression. <code>match foo with ...</code> is an
 expression. The following code is perfectly legal (and all do the same
 thing):</p>
-<pre><code class='ocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
+<pre><code class='tryocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>match</span> b <span class='k'>with</span> <span class='o'>true</span> <span class='k'>-></span> y <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> 0)
 <span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> g z <span class='k'>=</span> <span class='k'>function</span> <span class='o'>true</span> <span class='k'>-></span> z <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> 0 <span class='k'>in</span> g y b)
@@ -489,7 +489,7 @@ thing):</p>
 <a href="javascript:octry('let f x b y = if b then x+y else x+0\nlet f x b y = x + (if b then y else 0)\nlet f x b y = x + (match b with true -&#62; y | false -&#62; 0)\nlet f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)\nlet f x b y = x + (let _ = y + 3 in (); if b then y else 0)\n');">[try]</a></code></pre>
 <p>Note especially the last one - I&#39;m using <code>;</code> as an operator to &quot;join&quot;
 two statements. All functions in OCaml can be expressed as:</p>
-<pre><code class='ocaml'> <span class='k'>let</span> name <span class='o'>[</span>parameters<span class='o'>]</span> <span class='k'>=</span> expression
+<pre><code class='tryocaml'> <span class='k'>let</span> name <span class='o'>[</span>parameters<span class='o'>]</span> <span class='k'>=</span> expression
 <a href="javascript:octry(' let name [parameters] = expression\n');">[try]</a></code></pre>
 <p>OCaml&#39;s definition of what is an expression is just a little wider
 than C&#39;s. In fact, C has the concept of &quot;statements&quot;- but all of C&#39;s
@@ -498,7 +498,7 @@ operator).</p>
 <p>The one place that <code>;</code> is different from <code>+</code> is that I can refer to
 <code>+</code> just like a function. For instance, I can define a <code>sum_list</code>
 function, to sum a list of ints, like:</p>
-<pre><code class='ocaml'> <span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
+<pre><code class='tryocaml'> <span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
 <a href="javascript:octry(' let sum_list = List.fold_left ( + ) 0\n');">[try]</a></code></pre>
 </blockquote>
 <h3 id="Puttingitalltogethersomerealcode"> Putting it all together: some real code</h3><p>
@@ -528,7 +528,7 @@ respectively). He then creates a function called <code>file_dialog</code>. Insid
 this function he defines a named expression called <code>sel</code> using a
 two-line <code>let sel = ... in</code> statement. Then he calls several methods on
 <code>sel</code>.</p>
-<pre><code class='ocaml'><span class='com2'>(* First snippet *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* First snippet *)</span><!-- end comment -->
 <span class='k'>open</span> StdLabels
 <span class='k'>open</span> GMain
 
@@ -543,7 +543,7 @@ two-line <code>let sel = ... in</code> statement. Then he calls several methods 
 Second snippet: Just a long list of global names at the top level.
 Notice that the author elided every single one of the <code>;;</code> because of
 Rule #2.</p>
-<pre><code class='ocaml'><span class='com2'>(* Second snippet *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Second snippet *)</span><!-- end comment -->
 <span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>500 <span class='o'>~</span>height<span class='o'>:</span>300 <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;editor&#34;</span> ()
 <span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>window<span class='o'>#</span>add ()
 
@@ -569,7 +569,7 @@ insignificant - probably a <code>unit</code> return value, but I haven&#39;t che
 and it doesn&#39;t get returned until the application finally exits.</p>
 <p>Notice in this snippet how we have a long series of essentially
 procedural commands. This is really a classic imperative program.</p>
-<pre><code class='ocaml'><span class='com2'>(* Third snippet *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='com2'>(* Third snippet *)</span><!-- end comment -->
 <span class='k'>open</span> GdkKeysyms
 
 <span class='k'>let</span> () <span class='k'>=</span>
