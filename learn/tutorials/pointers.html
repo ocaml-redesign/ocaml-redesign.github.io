@@ -237,7 +237,7 @@ The general pointer type can be defined using the definition of a
 pointer: a pointer is either null, or a pointer to an assignable memory
 location:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>apointer</span> <span class='keywordsign'>=</span> <span class='constructor'>Null</span> <span class='keywordsign'>|</span> <span class='constructor'>Pointer</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>aref</span>
-<a href="javascript:octry('type &#39;a pointer = Null | Pointer of &#39;a ref\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a pointer = Null | Pointer of \&#39;a ref\n');">[try]</a></code></pre>
 <p>
 Explicit dereferencing (or reading the pointer&#39;s designated value) and
 pointer assignment (or writing to the pointer&#39;s designated memory
@@ -270,7 +270,7 @@ languages:</p>
 <pre><code class='tryocaml'>  <span class='comment'>(* The list type ``à la Pascal&#39;&#39; *)</span>
   <span class='keyword'>type</span> <span class='lower'>ilist</span> <span class='keywordsign'>=</span> <span class='lower'>cell</span> <span class='lower'>pointer</span>
   <span class='keyword'>and</span> <span class='lower'>cell</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='keyword'>mutable</span> <span class='lower'>hd</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>;</span> <span class='keyword'>mutable</span> <span class='lower'>tl</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>}</span>
-<a href="javascript:octry('  (* The list type ``à la Pascal&#39;&#39; *)\n  type ilist = cell pointer\n  and cell = {mutable hd : int; mutable tl : ilist}\n');">[try]</a></code></pre>
+<a href="javascript:octry('  (* The list type ``à la Pascal\&#39;\&#39; *)\n  type ilist = cell pointer\n  and cell = {mutable hd : int; mutable tl : ilist}\n');">[try]</a></code></pre>
 <p>
 We then define allocation of a new cell, the list constructor and its
 associated destructors.</p>
@@ -349,7 +349,7 @@ lists:</p>
     <span class='keyword'>done</span><span class='keywordsign'>;</span>
     <span class='prefix'>!^</span> <span class='prefix'>!</span><span class='lower'>temp</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l2</span><span class='keywordsign'>;;</span>
 
-<a href="javascript:octry('  type &#39;a lists = &#39;a cell pointer\n  and &#39;a cell = {mutable hd : &#39;a pointer; mutable tl : &#39;a lists};;\n\n  let new_cell () = {hd = Null; tl = Null};;\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- new_pointer x;\n    c.tl &#60;- l;\n    (new_pointer c : &#39;a lists);;\n  let hd (l : &#39;a lists) = !^l.hd;;\n  let tl (l : &#39;a lists) = !^l.tl;;\n\n  let append (l1 : &#39;a lists) (l2 : &#39;a lists) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n');">[try]</a></code></pre>
+<a href="javascript:octry('  type \&#39;a lists = \&#39;a cell pointer\n  and \&#39;a cell = {mutable hd : \&#39;a pointer; mutable tl : \&#39;a lists};;\n\n  let new_cell () = {hd = Null; tl = Null};;\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- new_pointer x;\n    c.tl &#60;- l;\n    (new_pointer c : \&#39;a lists);;\n  let hd (l : \&#39;a lists) = !^l.hd;;\n  let tl (l : \&#39;a lists) = !^l.tl;;\n\n  let append (l1 : \&#39;a lists) (l2 : \&#39;a lists) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n');">[try]</a></code></pre>
 
       </div>
     </div>

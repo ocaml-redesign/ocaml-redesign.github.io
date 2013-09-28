@@ -243,7 +243,7 @@ choses.</p>
 soit <code>a</code>, par la valeur <code>2</code> pour obtenir :</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>plus</span> <span class='number'>2</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='number'>2</span> <span class='keywordsign'>+</span> <span class='lower'>b</span> <span class='keywordsign'>;;</span>
 <span class='comment'>(* /!\ Ce n&#39;est pas du code OCaml valide *)</span>
-<a href="javascript:octry('let plus 2 b = 2 + b ;;\n(* /!\ Ce n&#39;est pas du code OCaml valide *)\n');">[try]</a></code></pre>
+<a href="javascript:octry('let plus 2 b = 2 + b ;;\n(* /!\ Ce n\&#39;est pas du code OCaml valide *)\n');">[try]</a></code></pre>
 <p>
 On peut maintenant mieux voir pourquoi <code>plus 2</code> est la fonction qui
 ajoute <code>2</code> à quelque chose.</p>
@@ -351,9 +351,9 @@ est que si une fonction est pure, alors elle peut être appelée plusieurs
 fois avec les même arguments, le compilateur n&#39;aura qu&#39;a appeler la
 fonction qu&#39;une seule fois. Un bon exemple en C est :</p>
 <pre><code class='tryocaml'><span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>&#60;</span> <span class='lower'>strlen</span><span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='infix'>++</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>{</span>
-    <span class='infix'>//</span> <span class='constructor'>Du</span> <span class='lower'>code</span> <span class='lower'>qui</span> <span class='lower'>n</span><span class='keywordsign'>&#39;</span><span class='lower'>afecte</span> <span class='lower'>pas</span> <span class='lower'>s</span>
+    <span class='infix'>//</span> <span class='constructor'>Du</span> <span class='lower'>code</span> <span class='lower'>qui</span> <span class='lower'>n&#39;affecte</span> <span class='lower'>pas</span> <span class='lower'>s</span>
 <span class='keywordsign'>}</span>
-<a href="javascript:octry('for (i = 0; i &#60; strlen(s); ++i) {\n    // Du code qui n&#39;affecte pas s\n}\n');">[try]</a></code></pre>
+<a href="javascript:octry('for (i = 0; i &#60; strlen(s); ++i) {\n    // Du code qui n\&#39;affecte pas s\n}\n');">[try]</a></code></pre>
 <p>
 Si nativement compilé, la boucle est en O(n²) sur la taille de s parce
 que <code>strlen(s)</code> est appelé à chaque fois et <code>strlen()</code> doit itérer sur

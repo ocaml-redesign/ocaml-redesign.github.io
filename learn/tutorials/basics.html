@@ -242,12 +242,12 @@ The basic types in OCaml are:</p>
 
 <span class='lower'>int</span>            <span class='number'>31</span><span class='keywordsign'>-</span><span class='lower'>bit</span> <span class='lower'>signed</span> <span class='lower'>int</span> <span class='keywordsign'>(</span><span class='lower'>roughly</span> <span class='infix'>+/-</span> <span class='number'>1</span> <span class='lower'>billion</span><span class='keywordsign'>)</span> <span class='lower'>on</span> <span class='number'>32</span><span class='keywordsign'>-</span><span class='lower'>bit</span> <span class='lower'>processors</span><span class='keywordsign'>,</span>
                <span class='keywordsign'>or</span> <span class='number'>63</span><span class='keywordsign'>-</span><span class='lower'>bit</span> <span class='lower'>signed</span> <span class='lower'>int</span> <span class='lower'>on</span> <span class='number'>64</span><span class='keywordsign'>-</span><span class='lower'>bit</span> <span class='lower'>processors</span>
-<span class='lower'>float</span>          <span class='constructor'>IEEE</span> <span class='lower'>double</span><span class='keywordsign'>-</span><span class='lower'>precision</span> <span class='lower'>floating</span> <span class='lower'>point</span><span class='keywordsign'>,</span> <span class='lower'>equivalent</span> <span class='keyword'>to</span> <span class='constructor'>C</span><span class='keywordsign'>&#39;</span><span class='lower'>sdouble</span>
+<span class='lower'>float</span>          <span class='constructor'>IEEE</span> <span class='lower'>double</span><span class='keywordsign'>-</span><span class='lower'>precision</span> <span class='lower'>floating</span> <span class='lower'>point</span><span class='keywordsign'>,</span> <span class='lower'>equivalent</span> <span class='keyword'>to</span> <span class='constructor'>C&#39;s</span> <span class='lower'>double</span>
 <span class='lower'>bool</span>           <span class='constructor'>A</span> <span class='lower'>boolean</span><span class='keywordsign'>,</span> <span class='lower'>written</span> <span class='lower'>either</span> <span class='keyword'>true</span> <span class='keywordsign'>or</span> <span class='keyword'>false</span>
 <span class='lower'>char</span>           <span class='constructor'>An</span> <span class='number'>8</span><span class='keywordsign'>-</span><span class='lower'>bit</span> <span class='lower'>character</span>
 <span class='lower'>string</span>         <span class='constructor'>A</span> <span class='lower'>string</span>
 <span class='lower'>unit</span>           <span class='constructor'>Written</span> <span class='keyword'>as</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('OCaml type     Range\n\nint            31-bit signed int (roughly +/- 1 billion) on 32-bit processors,\n               or 63-bit signed int on 64-bit processors\nfloat          IEEE double-precision floating point, equivalent to C&#39;s double\nbool           A boolean, written either true or false\nchar           An 8-bit character\nstring         A string\nunit           Written as ()\n');">[try]</a></code></pre>
+<a href="javascript:octry('OCaml type     Range\n\nint            31-bit signed int (roughly +/- 1 billion) on 32-bit processors,\n               or 63-bit signed int on 64-bit processors\nfloat          IEEE double-precision floating point, equivalent to C\&#39;s double\nbool           A boolean, written either true or false\nchar           An 8-bit character\nstring         A string\nunit           Written as ()\n');">[try]</a></code></pre>
 <p>
 OCaml uses one of the bits in an <code>int</code> internally in order to be able to
 automatically manage the memory use (garbage collection). This is why
@@ -400,7 +400,7 @@ What is the type of this function? In OCaml we use a special placeholder
 to mean &quot;any type you fancy&quot;. It&#39;s a single quote character followed by
 a letter. The type of the above function would normally be written:</p>
 <pre><code class='tryocaml'><span class='lower'>give_me_a_three</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('give_me_a_three : &#39;a -&#62; int\n');">[try]</a></code></pre>
+<a href="javascript:octry('give_me_a_three : \&#39;a -&#62; int\n');">[try]</a></code></pre>
 <p>
 where <code>&#39;a</code> really does mean any type. You can, for example, call this
 function as <code>give_me_a_three &quot;foo&quot;</code> or <code>give_me_a_three 2.0</code> and both

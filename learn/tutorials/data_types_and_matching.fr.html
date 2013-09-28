@@ -132,7 +132,7 @@ est un bon exemple. Peu importe si une liste contient des entiers, des
 chaînes, des objets ou des ratons-laveurs, la fonction <code>List.length</code>
 peut être utilisée dessus. Le type de <code>List.length</code> est donc :</p>
 <pre><code class='tryocaml'><span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('List.length : &#39;a list -&#62; int\n');">[try]</a></code></pre>
+<a href="javascript:octry('List.length : \&#39;a list -&#62; int\n');">[try]</a></code></pre>
 <h2 id="Structures"> Structures</h2><p>
 
 Le C et le C++ proposent le concept simple de <code>struct</code>, abbréviation de
@@ -258,7 +258,7 @@ données, en laissant le choix de ce qui doit être stocké dans chaque
 feuille pour plus tard ? On peut utiliser un variant paramétré (ou
 polymorphique), comme ceci :</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span> <span class='keywordsign'>=</span> <span class='constructor'>Leaf</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>|</span> <span class='constructor'>Tree</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span> <span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type &#39;a binary_tree = Leaf of &#39;a | Tree of &#39;a binary_tree * &#39;a binary_tree;;\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a binary_tree = Leaf of \&#39;a | Tree of \&#39;a binary_tree * \&#39;a binary_tree;;\n');">[try]</a></code></pre>
 <p>
 C&#39;est le type général. Le type où chaque feuille stocke un entier
 s&#39;appelle <code>int binary_tree</code>. De la même façon, le type où chaque feuille
@@ -278,7 +278,7 @@ types pour les listes, ie <code>int list</code>, etc.</p>
 l&#39;envers&quot;. Les types listes ne sont que des types variants paramétrés,
 avec une définition légèrement spéciale :</p>
 <pre><code class='tryocaml'> <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>=</span> <span class='operator'>[]</span> <span class='keywordsign'>|</span> <span class='keywordsign'>::</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span>   <span class='comment'>(* ceci n&#39;est pas du vrai code OCaml *)</span>
-<a href="javascript:octry(' type &#39;a list = [] | :: of &#39;a * &#39;a list   (* ceci n&#39;est pas du vrai code OCaml *)\n');">[try]</a></code></pre>
+<a href="javascript:octry(' type \&#39;a list = [] | :: of \&#39;a * \&#39;a list   (* ceci n\&#39;est pas du vrai code OCaml *)\n');">[try]</a></code></pre>
 <p>
 En fait la définition ci-dessus ne compile pas. La définition suivante,
 très similaire, compile correctement :</p>
@@ -290,7 +290,7 @@ très similaire, compile correctement :</p>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>::</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='constructor'>Nil</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>#</span> <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='number'>2</span> <span class='keywordsign'>::</span> <span class='constructor'>Nil</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>::</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='keywordsign'>::</span> <span class='keywordsign'>(</span><span class='number'>2</span><span class='keywordsign'>,</span> <span class='constructor'>Nil</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('# type &#39;a list = Nil | :: of &#39;a * &#39;a list;;\ntype &#39;a list = Nil | :: of &#39;a * &#39;a list\n# Nil;;\n- : &#39;a list = Nil\n# 1 :: Nil;;\n- : int list = :: (1, Nil)\n# 1 :: 2 :: Nil;;\n- : int list = :: (1, :: (2, Nil))\n');">[try]</a></code></pre>
+<a href="javascript:octry('# type \&#39;a list = Nil | :: of \&#39;a * \&#39;a list;;\ntype \&#39;a list = Nil | :: of \&#39;a * \&#39;a list\n# Nil;;\n- : \&#39;a list = Nil\n# 1 :: Nil;;\n- : int list = :: (1, Nil)\n# 1 :: 2 :: Nil;;\n- : int list = :: (1, :: (2, Nil))\n');">[try]</a></code></pre>
 <p>
 Rappelez vous quand nous avons dit précédemment que les listes pouvaient
 être écrites de deux façons, soit sous la forme syntaxiquement édulcorée
@@ -301,7 +301,7 @@ formelle devrait vous paraître plus clairement.</p>
 tableau en 3 colonnes avec nom et exemples de définition et de valeur.</p>
 <pre><code class='tryocaml'>Characters 1:30 - 1:31 :
 Error: Lexical error: don't know what to do with character '�'
-<a href="javascript:octry('nom OCaml        Example de définition de type          Exemple(s) de valeur(s) \nliste            int list                               [1; 2; 3]\nn-uplet          int * string                           (3, &#34;hello&#34;)\nenregistrement   type pair = { a : int; b : string }    { a = 3; b = &#34;hello&#34; }\nvariant          type foo = Int of int                  Int 3\n                           | Pair of int * string                                                                      \nvariant          type sign = Positive | Zero            Positive\n                           | Negative                   Zero\nvariant          type &#39;a my_list = Empty                Cons (1, Cons (2, Empty))\n  paramétré                | Cons of &#39;a * &#39;a my_list\n');">[try]</a></code></pre>
+<a href="javascript:octry('nom OCaml        Example de définition de type          Exemple(s) de valeur(s) \nliste            int list                               [1; 2; 3]\nn-uplet          int * string                           (3, &#34;hello&#34;)\nenregistrement   type pair = { a : int; b : string }    { a = 3; b = &#34;hello&#34; }\nvariant          type foo = Int of int                  Int 3\n                           | Pair of int * string                                                                      \nvariant          type sign = Positive | Zero            Positive\n                           | Negative                   Zero\nvariant          type \&#39;a my_list = Empty                Cons (1, Cons (2, Empty))\n  paramétré                | Cons of \&#39;a * \&#39;a my_list\n');">[try]</a></code></pre>
 <h2 id="Filtragesurlesstructuresdedonnes"> Filtrage (sur les structures de données)</h2><p>
 
 Une &quot;Fonctionnalité Vraiment Cool&quot;(tm) des langages fonctionnels est

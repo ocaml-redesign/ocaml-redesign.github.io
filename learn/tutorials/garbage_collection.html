@@ -344,7 +344,7 @@ We also need a function to create new, empty in-memory <code>record</code> objec
 <span class='keyword'>let</span> <span class='lower'>new_record</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='keywordsign'>{</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>name_size</span> <span class='string'>&#39; &#39;</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
     <span class='lower'>address</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>addr_size</span> <span class='string'>&#39; &#39;</span><span class='keywordsign'>)</span> <span class='keywordsign'>}</span>
-<a href="javascript:octry('(* Create a new, empty record. *)\nlet new_record () =\n  { name = (String.make name_size &#39; &#39;);\n    address = (String.make addr_size &#39; &#39;) }\n');">[try]</a></code></pre>
+<a href="javascript:octry('(* Create a new, empty record. *)\nlet new_record () =\n  { name = (String.make name_size \&#39; \&#39;);\n    address = (String.make addr_size \&#39; \&#39;) }\n');">[try]</a></code></pre>
 <p>
 Because this is a really simple program, we&#39;re going to fix the number
 of records in advance:</p>

@@ -145,7 +145,7 @@ be null, you&#39;d have to first box it up into an object allocated by
 <code>malloc</code> on the heap.</p>
 <p>OCaml has an elegant solution to the problem of nulls, using a simple
 polymorphic variant type defined (in <code>Pervasives</code>) as:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor'>None</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('  type &#39;a option = None | Some of &#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor'>None</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('  type \&#39;a option = None | Some of \&#39;a\n');">[try]</a></code></pre>
 <p>
 A &quot;null pointer&quot; is written <code>None</code>. The type of age in our example above
 (an <code>int</code> which can be null) is <code>int option</code> [remember: backwards like

@@ -324,9 +324,9 @@ times with the same arguments, the compiler only needs to actually call
 the function once. A good example in C is:</p>
 <pre><code class='tryocaml'><span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>&#60;</span> <span class='lower'>strlen</span> <span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='infix'>++</span><span class='lower'>i</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>{</span>
-    <span class='infix'>//</span> <span class='constructor'>Do</span> <span class='lower'>something</span> <span class='lower'>which</span> <span class='lower'>doesn</span><span class='keywordsign'>&#39;</span><span class='lower'>taffect</span> <span class='lower'>s</span><span class='keywordsign'>.</span>
+    <span class='infix'>//</span> <span class='constructor'>Do</span> <span class='lower'>something</span> <span class='lower'>which</span> <span class='lower'>doesn&#39;t</span> <span class='lower'>affect</span> <span class='lower'>s</span><span class='keywordsign'>.</span>
   <span class='keywordsign'>}</span>
-<a href="javascript:octry('for (i = 0; i &#60; strlen (s); ++i)\n  {\n    // Do something which doesn&#39;t affect s.\n  }\n');">[try]</a></code></pre>
+<a href="javascript:octry('for (i = 0; i &#60; strlen (s); ++i)\n  {\n    // Do something which doesn\&#39;t affect s.\n  }\n');">[try]</a></code></pre>
 <p>
 If naively compiled, this loop is O(n<sup>2</sup>) because <code>strlen (s)</code>
 is called each time and <code>strlen</code> needs to iterate over the whole of <code>s</code>.

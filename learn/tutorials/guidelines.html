@@ -219,7 +219,7 @@ followed by a space: <code>(1, 2)</code>, <code>let   triplet = (x, y, z)</code>
 simultaneously, not to construct a tuple. Moreover, the
 pattern is set off nicely between <code>let</code> and <code>=</code>.</p>
 </blockquote>
-<pre><code class='tryocaml'><span class='keywordsign'>-</span>   <span class='infix'>**</span><span class='constructor'>Matching</span> <span class='lower'>several</span> <span class='lower'>values</span> <span class='lower'>simultaneously</span><span class='infix'>**:</span> <span class='constructor'>It</span><span class='keywordsign'>&#39;</span><span class='lower'>sokay</span> <span class='keyword'>to</span> <span class='lower'>omit</span>
+<pre><code class='tryocaml'><span class='keywordsign'>-</span>   <span class='infix'>**</span><span class='constructor'>Matching</span> <span class='lower'>several</span> <span class='lower'>values</span> <span class='lower'>simultaneously</span><span class='infix'>**:</span> <span class='constructor'>It&#39;s</span> <span class='lower'>okay</span> <span class='keyword'>to</span> <span class='lower'>omit</span>
     <span class='lower'>parentheses</span> <span class='lower'>around</span> <span class='lower'>n</span><span class='keywordsign'>-</span><span class='lower'>tuples</span> <span class='keyword'>when</span> <span class='lower'>matching</span> <span class='lower'>several</span> <span class='lower'>values</span>
     <span class='lower'>simultaneously</span><span class='keywordsign'>.</span>
 
@@ -232,7 +232,7 @@ pattern is set off nicely between <code>let</code> and <code>=</code>.</p>
     <span class='keywordsign'>&#62;</span> <span class='lower'>parallel</span><span class='keywordsign'>,</span> <span class='lower'>not</span> <span class='keyword'>to</span> <span class='lower'>construct</span> <span class='lower'>a</span> <span class='lower'>tuple</span><span class='keywordsign'>.</span> <span class='constructor'>Moreover</span><span class='keywordsign'>,</span> <span class='lower'>the</span> <span class='lower'>expressions</span>
     <span class='keywordsign'>&#62;</span> <span class='lower'>being</span> <span class='lower'>matched</span> <span class='lower'>are</span> <span class='lower'>set</span> <span class='lower'>off</span> <span class='lower'>by</span> <span class='keywordsign'>`</span><span class='keyword'>match</span><span class='keywordsign'>`</span> <span class='keyword'>and</span> <span class='keywordsign'>`</span><span class='keyword'>with</span><span class='keywordsign'>`</span><span class='keywordsign'>,</span> <span class='keyword'>while</span> <span class='lower'>the</span>
     <span class='keywordsign'>&#62;</span> <span class='lower'>patterns</span> <span class='lower'>are</span> <span class='lower'>set</span> <span class='lower'>off</span> <span class='lower'>nicely</span> <span class='lower'>by</span> <span class='operator'>`|`</span> <span class='keyword'>and</span> <span class='operator'>`-&#62;`.</span>
-<a href="javascript:octry('-   **Matching several values simultaneously**: It&#39;s okay to omit\n    parentheses around n-tuples when matching several values\n    simultaneously.\n\n        match x, y with\n        | 1, _ -&#62; ...\n        | x, 1 -&#62; ...\n        | x, y -&#62; ...\n\n    &#62; **Justification**: The point is to match several values in\n    &#62; parallel, not to construct a tuple. Moreover, the expressions\n    &#62; being matched are set off by `match` and `with`, while the\n    &#62; patterns are set off nicely by `|` and `-&#62;`.\n');">[try]</a></code></pre>
+<a href="javascript:octry('-   **Matching several values simultaneously**: It\&#39;s okay to omit\n    parentheses around n-tuples when matching several values\n    simultaneously.\n\n        match x, y with\n        | 1, _ -&#62; ...\n        | x, 1 -&#62; ...\n        | x, y -&#62; ...\n\n    &#62; **Justification**: The point is to match several values in\n    &#62; parallel, not to construct a tuple. Moreover, the expressions\n    &#62; being matched are set off by `match` and `with`, while the\n    &#62; patterns are set off nicely by `|` and `-&#62;`.\n');">[try]</a></code></pre>
 <h4 id="Howtowritelists"> How to write lists</h4><p>
 
 Write <code>x :: l</code> with spaces around the <code>::</code> (since <code>::</code> is an infix
@@ -421,12 +421,12 @@ the final expression of the computation:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>e1</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
 <span class='keyword'>let</span> <span class='lower'>e2</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
 <span class='keyword'>let</span> <span class='lower'>new_expr</span> <span class='keywordsign'>=</span>
-  <span class='keyword'>let</span> <span class='lower'>e1</span><span class='keywordsign'>&#39;</span>  <span class='lower'>derive_expression</span> <span class='lower'>e1</span>
-  <span class='keyword'>and</span> <span class='lower'>e2</span><span class='keywordsign'>&#39;</span>  <span class='lower'>derive_expression</span> <span class='lower'>e2</span> <span class='keyword'>in</span>
-  <span class='constructor'>Add_expression</span> <span class='lower'>e1</span><span class='keywordsign'>&#39;</span> <span class='number'>2</span><span class='keywordsign'>&#39;</span>
-<span class='lower'>n</span>
+  <span class='keyword'>let</span> <span class='lower'>e1&#39;</span> <span class='keywordsign'>=</span> <span class='lower'>derive_expression</span> <span class='lower'>e1</span>
+  <span class='keyword'>and</span> <span class='lower'>e2&#39;</span> <span class='keywordsign'>=</span> <span class='lower'>derive_expression</span> <span class='lower'>e2</span> <span class='keyword'>in</span>
+  <span class='constructor'>Add_expression</span> <span class='lower'>e1&#39;</span> <span class='lower'>e2&#39;</span>
+<span class='keyword'>in</span>
 <span class='constructor'>Mult_expression</span> <span class='keywordsign'>(</span><span class='lower'>new_expr</span><span class='keywordsign'>,</span> <span class='lower'>new_expr</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let e1 = ... in\nlet e2 = ... in\nlet new_expr =\n  let e1&#39; = derive_expression e1\n  and e2&#39; = derive_expression e2 in\n  Add_expression e1&#39; e2&#39;\nin\nMult_expression (new_expr, new_expr)\n');">[try]</a></code></pre>
+<a href="javascript:octry('let e1 = ... in\nlet e2 = ... in\nlet new_expr =\n  let e1\&#39; = derive_expression e1\n  and e2\&#39; = derive_expression e2 in\n  Add_expression e1\&#39; e2\&#39;\nin\nMult_expression (new_expr, new_expr)\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Criticism</strong>: Lack of consistency.</p>
 </blockquote>
@@ -787,39 +787,40 @@ x + y + z</p>
 to define the </code></pre>
 <p>large expression&#39;&#39; with the help of a <code>let in</code>
 construction is preferable to having to indent the line. In place of</p>
-<pre><code class='tryocaml'>Characters 4:-1 - 4:0 :
-Error: Lexical error: Illegal backslash escape in character
-<a href="javascript:octry('x + y + z\n+ ``large\n  expression&#39;&#39;\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span>
+<span class='keywordsign'>+</span> <span class='operator'>``</span><span class='lower'>large</span>
+  <span class='lower'>expression&#39;&#39;</span>
+<a href="javascript:octry('x + y + z\n+ ``large\n  expression\&#39;\&#39;\n');">[try]</a></code></pre>
 <p>
 write</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>t</span> <span class='keywordsign'>=</span>
   <span class='operator'>``</span><span class='lower'>large</span>
-   <span class='lower'>expression</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>&#39;</span><span class='lower'>i</span>
+   <span class='lower'>expression&#39;&#39;</span> <span class='keyword'>in</span>
 <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>+</span> <span class='lower'>t</span>
-<a href="javascript:octry('let t =\n  ``large\n   expression&#39;&#39; in\nx + y + z + t\n');">[try]</a></code></pre>
+<a href="javascript:octry('let t =\n  ``large\n   expression\&#39;\&#39; in\nx + y + z + t\n');">[try]</a></code></pre>
 <p>
 You most certainly must bind those expressions too large to be written
 in one operation in the case of a combination of operators. In place of
 the unreadable expression</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>*</span> <span class='lower'>t</span><span class='keywordsign'>)</span>
 <span class='infix'>/</span> <span class='keywordsign'>(</span><span class='operator'>``</span><span class='lower'>large</span>
-    <span class='lower'>expression</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>&#39;</span>
-<a href="javascript:octry('(x + y + z * t)\n/ (``large\n    expression&#39;&#39;)\n');">[try]</a></code></pre>
+    <span class='lower'>expression&#39;&#39;</span><span class='keywordsign'>)</span>
+<a href="javascript:octry('(x + y + z * t)\n/ (``large\n    expression\&#39;\&#39;)\n');">[try]</a></code></pre>
 <p>
 write</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>u</span> <span class='keywordsign'>=</span>
   <span class='operator'>``</span><span class='lower'>large</span>
-  <span class='lower'>expression</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>&#39;</span><span class='lower'>i</span>
+  <span class='lower'>expression&#39;&#39;</span> <span class='keyword'>in</span>
 <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>*</span> <span class='lower'>t</span><span class='keywordsign'>)</span> <span class='infix'>/</span> <span class='lower'>u</span>
-<a href="javascript:octry('let u =\n  ``large\n  expression&#39;&#39; in\n(x + y + z * t) / u\n');">[try]</a></code></pre>
+<a href="javascript:octry('let u =\n  ``large\n  expression\&#39;\&#39; in\n(x + y + z * t) / u\n');">[try]</a></code></pre>
 <p>
 These guidelines extend to all operators. For example:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>u</span> <span class='keywordsign'>=</span>
   <span class='operator'>``</span><span class='lower'>large</span>
-  <span class='lower'>expression</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>&#39;</span><span class='lower'>i</span>
+  <span class='lower'>expression&#39;&#39;</span> <span class='keyword'>in</span>
 <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>y</span>
 <span class='keywordsign'>::</span> <span class='lower'>z</span> <span class='keywordsign'>+</span> <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='lower'>t</span> <span class='keywordsign'>::</span> <span class='lower'>u</span>
-<a href="javascript:octry('let u =\n  ``large\n  expression&#39;&#39; in\nx :: y\n:: z + 1 :: t :: u\n');">[try]</a></code></pre>
+<a href="javascript:octry('let u =\n  ``large\n  expression\&#39;\&#39; in\nx :: y\n:: z + 1 :: t :: u\n');">[try]</a></code></pre>
 <h2 id="Programmingguidelines"> Programming guidelines</h2>
 <h3 id="Howtoprogram"> How to program</h3><blockquote>
 <p><em>Always put your handiwork back on the bench,<br />

@@ -115,7 +115,7 @@ let is_prime n =
   (* pense-bête: demander ça aux mailing lists *) XXX;;
 
 *)</span>
-<a href="javascript:octry('(* Ce code n&#39;est pas au point...\n\n(* Test de primalité. *)\nlet is_prime n =\n  (* pense-bête: demander ça aux mailing lists *) XXX;;\n\n*)\n');">[try]</a></code></pre>
+<a href="javascript:octry('(* Ce code n\&#39;est pas au point...\n\n(* Test de primalité. *)\nlet is_prime n =\n  (* pense-bête: demander ça aux mailing lists *) XXX;;\n\n*)\n');">[try]</a></code></pre>
 <h2 id="Appelsdefonctions"> Appels de fonctions</h2><p>
 
 Supposons que vous ayez écrit une fonction nommée <code>repeated</code>, qui prend
@@ -123,8 +123,8 @@ en argument une chaîne de caractères <code>s</code> et un nombre <code>n</code
 nouvelle chaîne de caractères qui contient l&#39;originale répétée <code>n</code> fois.</p>
 <p>Dans la plupart des languages dérivés du C, un appel de fonction
 ressemble à ça :</p>
-<pre><code class='tryocaml'><span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span>  <span class='infix'>/*</span> <span class='lower'>c</span><span class='keywordsign'>&#39;</span><span class='lower'>et</span> <span class='lower'>du</span> <span class='lower'>code</span> <span class='constructor'>C</span> <span class='infix'>*/</span>
-<a href="javascript:octry('repeated (&#34;hello&#34;, 3)  /* c&#39;est du code C */\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span>  <span class='infix'>/*</span> <span class='lower'>c&#39;est</span> <span class='lower'>du</span> <span class='lower'>code</span> <span class='constructor'>C</span> <span class='infix'>*/</span>
+<a href="javascript:octry('repeated (&#34;hello&#34;, 3)  /* c\&#39;est du code C */\n');">[try]</a></code></pre>
 <p>
 Ca veut dire « appelle la fonction <code>repeated</code> avec deux arguments, le
 premier étant la chaîne de caractères hello et le second étant le nombre
@@ -133,7 +133,7 @@ premier étant la chaîne de caractères hello et le second étant le nombre
 différemment les appels de fonctions, ce qui entraîne bien des erreurs
 au début. Voici le même appel de fonction en OCaml :</p>
 <pre><code class='tryocaml'><span class='lower'>repeated</span> <span class='string'>&#34;hello&#34;</span> <span class='number'>3</span>  <span class='comment'>(* c&#39;est du code OCaml *)</span>
-<a href="javascript:octry('repeated &#34;hello&#34; 3  (* c&#39;est du code OCaml *)\n');">[try]</a></code></pre>
+<a href="javascript:octry('repeated &#34;hello&#34; 3  (* c\&#39;est du code OCaml *)\n');">[try]</a></code></pre>
 <p>
 Notez-bien : <strong>pas</strong> de parenthèses, et <strong>pas</strong> de virgule entre les
 arguments.</p>
@@ -168,7 +168,7 @@ une fonction ». Voici quelques exemples supplémentaires :</p>
 
 <span class='keywordsign'>#</span> <span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>     <span class='comment'>(* OCaml va repérer l&#39;erreur *)</span>
 <span class='constructor'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>int</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>string</span>
-<a href="javascript:octry('f 5 (g &#34;hello&#34;) 3    (* f a 3 arguments, g a un argument *)\nf (g 3 4)            (* f a un argument, g a 2 arguments *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml va repérer l&#39;erreur *)\nThis expression has type string * int but is here used with type string\n');">[try]</a></code></pre>
+<a href="javascript:octry('f 5 (g &#34;hello&#34;) 3    (* f a 3 arguments, g a un argument *)\nf (g 3 4)            (* f a un argument, g a 2 arguments *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml va repérer l\&#39;erreur *)\nThis expression has type string * int but is here used with type string\n');">[try]</a></code></pre>
 <h2 id="Dfinirunefonction"> Définir une fonction</h2><p>
 
 Vous savez tous comment on définit une fonction (ou une méthode
@@ -409,7 +409,7 @@ spéciale pour dire « le type que vous voulez ». C&#39;est un caractères
 apostrophe suivi d&#39;une lettre. Le type de la fonction ci-dessus s&#39;écrit
 donc normalement comme ceci :</p>
 <pre><code class='tryocaml'><span class='lower'>give_me_a_three</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('give_me_a_three : &#39;a -&#62; int\n');">[try]</a></code></pre>
+<a href="javascript:octry('give_me_a_three : \&#39;a -&#62; int\n');">[try]</a></code></pre>
 <p>
 où <code>&#39;a</code> est mis pour n&#39;importe quel type. Vous pouvez par exemple
 utiliser cette fonction comme ceci: <code>give_me_a_three &quot;foo&quot;</code>, ou comme

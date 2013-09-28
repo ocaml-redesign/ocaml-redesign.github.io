@@ -109,7 +109,7 @@ statements you may be used to.</p>
 As a short aside, if you type this into the OCaml toplevel, you&#39;ll
 notice that OCaml decides that this function is polymorphic, with the
 following type:</p>
-<pre><code class='tryocaml'><span class='lower'>max</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('max : &#39;a -&#62; &#39;a -&#62; &#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='lower'>max</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('max : \&#39;a -&#62; \&#39;a -&#62; \&#39;a\n');">[try]</a></code></pre>
 <p>
 And indeed OCaml lets you use <code>max</code> on any type:</p>
 <pre><code class='tryocaml'><span class='lower'>max</span> <span class='number'>3</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
@@ -172,7 +172,7 @@ pair of nested if expressions:</p>
     <span class='keyword'>else</span> <span class='keyword'>if</span> <span class='lower'>s</span><span class='operator'>.[</span><span class='lower'>i</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;.&#39;</span> <span class='infix'>||</span> <span class='lower'>s</span><span class='operator'>.[</span><span class='lower'>i</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;e&#39;</span> <span class='keyword'>then</span> <span class='lower'>s</span>
     <span class='keyword'>else</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='lower'>loop</span> <span class='number'>0</span>
-<a href="javascript:octry('let string_of_float f =\n  let s = format_float &#34;%.12g&#34; f in\n  let l = string_length s in\n  let rec loop i =\n    if i &#62;= l then s ^ &#34;.&#34;\n    else if s.[i] = &#39;.&#39; || s.[i] = &#39;e&#39; then s\n    else loop (i+1) in\n  loop 0\n');">[try]</a></code></pre>
+<a href="javascript:octry('let string_of_float f =\n  let s = format_float &#34;%.12g&#34; f in\n  let l = string_length s in\n  let rec loop i =\n    if i &#62;= l then s ^ &#34;.&#34;\n    else if s.[i] = \&#39;.\&#39; || s.[i] = \&#39;e\&#39; then s\n    else loop (i+1) in\n  loop 0\n');">[try]</a></code></pre>
 <p>
 Let&#39;s examine this function. Suppose the function is called with <code>f</code> =
 12.34. Then <code>s</code> = &quot;12.34&quot;, and <code>l</code> = 5. We call <code>loop</code> the first time
@@ -201,7 +201,7 @@ of writing <code>string_of_float</code>:</p>
   <span class='keyword'>if</span> <span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>contains</span> <span class='lower'>s</span> <span class='string'>&#39;.&#39;</span> <span class='infix'>||</span> <span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>contains</span> <span class='lower'>s</span> <span class='string'>&#39;e&#39;</span>
   <span class='keyword'>then</span> <span class='lower'>s</span>
   <span class='keyword'>else</span> <span class='lower'>s</span> <span class='infix'>^</span> <span class='string'>&#34;.&#34;</span>
-<a href="javascript:octry('let string_of_float f =\n  let s = format_float &#34;%.12g&#34; f in\n  if String.contains s &#39;.&#39; || String.contains s &#39;e&#39;\n  then s\n  else s ^ &#34;.&#34;\n');">[try]</a></code></pre>
+<a href="javascript:octry('let string_of_float f =\n  let s = format_float &#34;%.12g&#34; f in\n  if String.contains s \&#39;.\&#39; || String.contains s \&#39;e\&#39;\n  then s\n  else s ^ &#34;.&#34;\n');">[try]</a></code></pre>
 <h2 id="Usingbeginend"> Using begin ... end</h2><p>
 
 Here is some code from lablgtk:</p>
@@ -321,7 +321,7 @@ Let&#39;s imagine that OCaml didn&#39;t have references for a moment:</p>
   <span class='keyword'>if</span> <span class='lower'>str</span><span class='operator'>.[</span><span class='number'>0</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;y&#39;</span> <span class='keyword'>then</span>
     <span class='comment'>(* how do I set quit_loop to true ?!? *)</span>
 <span class='keyword'>done</span>
-<a href="javascript:octry('let quit_loop = false in\nwhile not quit_loop do\n  print_string &#34;Have you had enough yet? (y/n) &#34;;\n  let str = read_line () in\n  if str.[0] = &#39;y&#39; then\n    (* how do I set quit_loop to true ?!? *)\ndone\n');">[try]</a></code></pre>
+<a href="javascript:octry('let quit_loop = false in\nwhile not quit_loop do\n  print_string &#34;Have you had enough yet? (y/n) &#34;;\n  let str = read_line () in\n  if str.[0] = \&#39;y\&#39; then\n    (* how do I set quit_loop to true ?!? *)\ndone\n');">[try]</a></code></pre>
 <p>
 Remember that <code>quit_loop</code> is not a real &quot;variable&quot; - the let-binding
 just makes <code>quit_loop</code> a shorthand for <code>false</code>. This means the while
@@ -339,7 +339,7 @@ pointer&quot;, similar in fact to Forth. You&#39;re better off reading <code>!</
   <span class='keyword'>if</span> <span class='lower'>str</span><span class='operator'>.[</span><span class='number'>0</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;y&#39;</span> <span class='keyword'>then</span>
     <span class='lower'>quit_loop</span> <span class='keywordsign'>:=</span> <span class='keyword'>true</span>
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let quit_loop = ref false in\nwhile not !quit_loop do\n  print_string &#34;Have you had enough yet? (y/n) &#34;;\n  let str = read_line () in\n  if str.[0] = &#39;y&#39; then\n    quit_loop := true\ndone;;\n');">[try]</a></code></pre>
+<a href="javascript:octry('let quit_loop = ref false in\nwhile not !quit_loop do\n  print_string &#34;Have you had enough yet? (y/n) &#34;;\n  let str = read_line () in\n  if str.[0] = \&#39;y\&#39; then\n    quit_loop := true\ndone;;\n');">[try]</a></code></pre>
 <h2 id="Loopingoverlists"> Looping over lists</h2><p>
 
 If you want to loop over a list, don&#39;t be an imperative programmer and
@@ -356,7 +356,7 @@ If you want to call a function once on every element of the list, use
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>elem</span> <span class='keywordsign'>=</span>
     <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I&#39;m looking at element %d now\n&#34;</span> <span class='lower'>elem</span> <span class='keyword'>in</span>
   <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>f</span> <span class='lower'>my_list</span>
-<a href="javascript:octry('  let f elem =\n    Printf.printf &#34;I&#39;m looking at element %d now\n&#34; elem in\n  List.iter f my_list\n');">[try]</a></code></pre>
+<a href="javascript:octry('  let f elem =\n    Printf.printf &#34;I\&#39;m looking at element %d now\n&#34; elem in\n  List.iter f my_list\n');">[try]</a></code></pre>
 <p>
 <code>List.iter</code> is in fact what you should think about using first every
 time your cerebellum suggests you use a for loop.</p>
@@ -511,7 +511,7 @@ won&#39;t work on non-file channels like keyboard input or sockets. Approach
   <span class='keyword'>let</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>str</span> <span class='keywordsign'>=</span> <span class='lower'>read_whole_file</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
   <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I read %d characters from %s\n&#34;</span> <span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span><span class='keywordsign'>)</span> <span class='lower'>filename</span>
-<a href="javascript:octry('(* Read whole file: Approach 2 *)\n\nlet read_whole_chan chan =\n  let buf = Buffer.create 4096 in\n  try\n    while true do\n      let line = input_line chan in\n      Buffer.add_string buf line;\n      Buffer.add_char buf &#39;\n&#39;\n    done;\n    assert false (* This is never executed (always raise Assert_failure). *)\n  with\n    End_of_file -&#62; Buffer.contents buf\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
+<a href="javascript:octry('(* Read whole file: Approach 2 *)\n\nlet read_whole_chan chan =\n  let buf = Buffer.create 4096 in\n  try\n    while true do\n      let line = input_line chan in\n      Buffer.add_string buf line;\n      Buffer.add_char buf \&#39;\n\&#39;\n    done;\n    assert false (* This is never executed (always raise Assert_failure). *)\n  with\n    End_of_file -&#62; Buffer.contents buf\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
 <p>
 The key to approach 2 is to look at the central while loop. Remember
 that I said the only way to break out of a while loop early was with an
@@ -553,7 +553,7 @@ while loop the string could never actually be returned.</p>
   <span class='keyword'>let</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>str</span> <span class='keywordsign'>=</span> <span class='lower'>read_whole_file</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
   <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I read %d characters from %s\n&#34;</span> <span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span><span class='keywordsign'>)</span> <span class='lower'>filename</span>
-<a href="javascript:octry('(* Read whole file: Approach 3 *)\n\nlet read_whole_chan chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let line = input_line chan in\n    Buffer.add_string buf line;\n    Buffer.add_char buf &#39;\n&#39;;\n    loop () in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
+<a href="javascript:octry('(* Read whole file: Approach 3 *)\n\nlet read_whole_chan chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let line = input_line chan in\n    Buffer.add_string buf line;\n    Buffer.add_char buf \&#39;\n\&#39;;\n    loop () in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
 <p>
 Again we have an infinite loop - but in this case done using recursion.
 <code>loop</code> calls itself at the end of the function. The infinite recursion
@@ -1029,7 +1029,7 @@ References, with which we should be familiar by now, are implemented
 using records with a mutable <code>contents</code> field. Check out the definition
 in <code>Pervasives</code>:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aref</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='keyword'>mutable</span> <span class='lower'>contents</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>}</span>
-<a href="javascript:octry('type &#39;a ref = { mutable contents : &#39;a }\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a ref = { mutable contents : \&#39;a }\n');">[try]</a></code></pre>
 <p>
 And look closely at what the OCaml toplevel prints out for the value of
 a reference:</p>

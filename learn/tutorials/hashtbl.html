@@ -102,7 +102,7 @@ just your best guess as to the amount of data that you will be putting
 into the hash table. The hash table can grow if you under-estimate the
 size so don&#39;t worry about it too much. The type of my_hash is:</p>
 <pre><code class='tryocaml'><span class='keyword'>val</span> <span class='lower'>my_hash</span> <span class='keywordsign'>:</span> <span class='keywordsign'>(</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>_</span><span class='keywordsign'>,</span> <span class='keywordsign'>&#39;</span><span class='keywordsign'>_</span><span class='keywordsign'>)</span> <span class='constructor'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>t</span> <span class='keywordsign'>=</span> 
-<a href="javascript:octry('val my_hash : (&#39;_a, &#39;_b) Hashtbl.t = \n');">[try]</a></code></pre>
+<a href="javascript:octry('val my_hash : (\&#39;_a, \&#39;_b) Hashtbl.t = \n');">[try]</a></code></pre>
 <p>
 The &#39;_a and &#39;_b correspond to the key and value types, respectively.
 There are no concrete types (e.g., int or float * string) filled in in

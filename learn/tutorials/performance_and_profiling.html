@@ -840,7 +840,7 @@ covered in this tutorial.</p>
   <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keyword'>to</span> <span class='number'>3000</span> <span class='keyword'>do</span>
     <span class='lower'>ignore</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>primes</span><span class='keywordsign'>)</span>
   <span class='keyword'>done</span>
-<a href="javascript:octry('let rec filter p = parser\n  [&#60; &#39;n; s &#62;] -&#62; if p n then [&#60; &#39;n; filter p s &#62;] else [&#60; filter p s &#62;]\n\nlet naturals =\n  let rec gen n = [&#60; &#39;n; gen (succ n) &#62;] in gen 2\n\nlet primes =\n  let rec sieve = parser\n    [&#60; &#39;n; s &#62;] -&#62; [&#60; &#39;n; sieve (filter (fun m -&#62; m mod n &#60;&#62; 0) s) &#62;] in\n  sieve naturals\n\nlet () =\n  for i = 1 to 3000 do\n    ignore (Stream.next primes)\n  done\n');">[try]</a></code></pre>
+<a href="javascript:octry('let rec filter p = parser\n  [&#60; \&#39;n; s &#62;] -&#62; if p n then [&#60; \&#39;n; filter p s &#62;] else [&#60; filter p s &#62;]\n\nlet naturals =\n  let rec gen n = [&#60; \&#39;n; gen (succ n) &#62;] in gen 2\n\nlet primes =\n  let rec sieve = parser\n    [&#60; \&#39;n; s &#62;] -&#62; [&#60; \&#39;n; sieve (filter (fun m -&#62; m mod n &#60;&#62; 0) s) &#62;] in\n  sieve naturals\n\nlet () =\n  for i = 1 to 3000 do\n    ignore (Stream.next primes)\n  done\n');">[try]</a></code></pre>
 <p>
 We compile it using the <code>-p</code> option to <code>ocamlopt</code> which tells the
 compiler to include profiling information for <code>gprof</code>:</p>

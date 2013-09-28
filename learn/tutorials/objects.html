@@ -190,7 +190,7 @@ multiple stacks each storing objects of any single type). As with
       <span class='keyword'>method</span> <span class='lower'>size</span> <span class='keywordsign'>=</span>                          <span class='comment'>(* size method *)</span>
         <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>list</span>
     <span class='keyword'>end</span>
-<a href="javascript:octry('  class [&#39;a] stack =\n    object (self)\n      val mutable list = ( [] : &#39;a list )    (* instance variable *)\n      method push x =                        (* push method *)\n        list &#60;- x :: list\n      method pop =                           (* pop method *)\n        let result = List.hd list in\n        list &#60;- List.tl list;\n        result\n      method peek =                          (* peek method *)\n        List.hd list\n      method size =                          (* size method *)\n        List.length list\n    end\n');">[try]</a></code></pre>
+<a href="javascript:octry('  class [\&#39;a] stack =\n    object (self)\n      val mutable list = ( [] : \&#39;a list )    (* instance variable *)\n      method push x =                        (* push method *)\n        list &#60;- x :: list\n      method pop =                           (* pop method *)\n        let result = List.hd list in\n        list &#60;- List.tl list;\n        result\n      method peek =                          (* peek method *)\n        List.hd list\n      method size =                          (* size method *)\n        List.length list\n    end\n');">[try]</a></code></pre>
 <p>
 The <code>class [&#39;a] stack</code> doesn&#39;t really define just one class, but a whole
 &quot;class of classes&quot;, one for every possible type (ie. an infinitely large
@@ -236,7 +236,7 @@ this:</p>
     <span class='keyword'>while</span> <span class='lower'>s</span><span class='keywordsign'>#</span><span class='lower'>size</span> <span class='keywordsign'>&#62;</span> <span class='number'>0</span> <span class='keyword'>do</span>
       <span class='lower'>ignore</span> <span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>#</span><span class='lower'>pop</span><span class='keywordsign'>)</span>
     <span class='keyword'>done</span>
-<a href="javascript:octry('  let drain_stack (s : &#39;a stack) =\n    while s#size &#62; 0 do\n      ignore (s#pop)\n    done\n');">[try]</a></code></pre>
+<a href="javascript:octry('  let drain_stack (s : \&#39;a stack) =\n    while s#size &#62; 0 do\n      ignore (s#pop)\n    done\n');">[try]</a></code></pre>
 <h3 id="Inheritancevirtualclassesinitializers"> Inheritance, virtual classes, initializers</h3><p>
 
 I&#39;ve noticed programmers in Java tend to overuse inheritance, possibly

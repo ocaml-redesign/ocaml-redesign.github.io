@@ -359,14 +359,14 @@ programmers. OCaml has other mechanisms for OO and contains an advanced
 garbage collector. How does lablgtk unify the two?</p>
 <p>Lablgtk starts with this type definition (in module <code>Gtk</code>):</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aobj</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type &#39;a obj;;\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a obj;;\n');">[try]</a></code></pre>
 <p>
 On the face of it, this is a <em>very</em> strange type definition. It defines
 a polymorphic type called <code>obj</code> (polymorphic because you can create,
 say, <code>int obj</code>, etc.). But it doesn&#39;t actually define a way of creating
 these objects! [Recall that a normal type definition might be something
 like this:</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aobj</span> <span class='keywordsign'>=</span> <span class='constructor'>Something</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type &#39;a obj = Something of &#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aobj</span> <span class='keywordsign'>=</span> <span class='constructor'>Something</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type \&#39;a obj = Something of \&#39;a\n');">[try]</a></code></pre>
 <p>
 which gives you a very definite way to create, say, an <code>int obj</code>:</p>
 <pre><code class='tryocaml'><span class='constructor'>Something</span> <span class='number'>1</span>
@@ -374,7 +374,7 @@ which gives you a very definite way to create, say, an <code>int obj</code>:</p>
 <p>
 But our strange, bare definition just says:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aobj</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type &#39;a obj;;\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a obj;;\n');">[try]</a></code></pre>
 <p>
 How do we create objects of this type? The answer is that we don&#39;t.
 Instances of type <code>&#39;a obj</code> are <code>GtkObject</code> structures (actually, more
@@ -568,7 +568,7 @@ separately, and when we take them out try to match them up. We use the
   <span class='keyword'>method</span> <span class='lower'>find</span> <span class='keywordsign'>(</span><span class='lower'>obj</span> <span class='keywordsign'>:</span> <span class='lower'>widget</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>find</span> <span class='lower'>tbl</span> <span class='lower'>obj</span><span class='keywordsign'>#</span><span class='lower'>get_id</span>
   <span class='keyword'>method</span> <span class='lower'>remove</span> <span class='keywordsign'>(</span><span class='lower'>obj</span> <span class='keywordsign'>:</span> <span class='lower'>widget</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>remove</span> <span class='lower'>tbl</span> <span class='lower'>obj</span><span class='keywordsign'>#</span><span class='lower'>get_id</span>
 <span class='keyword'>end</span>
-<a href="javascript:octry('class [&#39;a] memo () = object\n  constraint &#39;a = #widget\n  val tbl = Hashtbl.create 7\n  method add (obj : &#39;a) =\n    Hashtbl.add tbl obj#get_id obj\n  method find (obj : widget) = Hashtbl.find tbl obj#get_id\n  method remove (obj : widget) = Hashtbl.remove tbl obj#get_id\nend\n');">[try]</a></code></pre>
+<a href="javascript:octry('class [\&#39;a] memo () = object\n  constraint \&#39;a = #widget\n  val tbl = Hashtbl.create 7\n  method add (obj : \&#39;a) =\n    Hashtbl.add tbl obj#get_id obj\n  method find (obj : widget) = Hashtbl.find tbl obj#get_id\n  method remove (obj : widget) = Hashtbl.remove tbl obj#get_id\nend\n');">[try]</a></code></pre>
 <p>
 (The constraint essentially says that <code>&#39;a</code> must be a widget, or some
 subclass of widget).</p>
@@ -619,7 +619,7 @@ mapped:</p>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>#</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>w</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>m</span><span class='keywordsign'>#</span><span class='lower'>find</span> <span class='lower'>w</span><span class='keywordsign'>)</span> <span class='lower'>c</span><span class='keywordsign'>#</span><span class='lower'>children</span><span class='keywordsign'>;;</span>
 <span class='constructor'>Exception</span><span class='keywordsign'>:</span> <span class='constructor'>Not_found</span><span class='keywordsign'>.</span>
-<a href="javascript:octry('# let b2 = GButton.button ~label:&#34;Don&#39;t push me!&#34; ();;\nval b2 : GButton.button = &#60;obj&#62;\n# c#add (b2 :&#62; GObj.widget);;\n- : unit = ()\n# List.map (fun w -&#62; m#find w) c#children;;\nException: Not_found.\n');">[try]</a></code></pre>
+<a href="javascript:octry('# let b2 = GButton.button ~label:&#34;Don\&#39;t push me!&#34; ();;\nval b2 : GButton.button = &#60;obj&#62;\n# c#add (b2 :&#62; GObj.widget);;\n- : unit = ()\n# List.map (fun w -&#62; m#find w) c#children;;\nException: Not_found.\n');">[try]</a></code></pre>
 <h3 id="Structureoflablgtksummary"> Structure of lablgtk — summary</h3>
 <ul>
  <li><code>GtkObject</code>s allocated by the C library are wrapped up in opaque

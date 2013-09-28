@@ -129,7 +129,7 @@ good example of this. It doesn&#39;t matter if the list contains ints or
 strings or objects or small furry animals, the <code>List.length</code> function
 can still be called on it. The type of <code>List.length</code> is therefore:</p>
 <pre><code class='tryocaml'><span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('List.length : &#39;a list -&#62; int\n');">[try]</a></code></pre>
+<a href="javascript:octry('List.length : \&#39;a list -&#62; int\n');">[try]</a></code></pre>
 <h2 id="Structures"> Structures</h2><p>
 
 C and C++ have the concept of a simple <code>struct</code>, short for structure.
@@ -241,7 +241,7 @@ what if we wanted to describe the <em>shape</em> of a binary tree, but decide
 exactly what to store at each leaf node later? We can do this by using a
 parameterized (or polymorphic) variant, like this:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span> <span class='keywordsign'>=</span> <span class='constructor'>Leaf</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>|</span> <span class='constructor'>Tree</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span> <span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span>
-<a href="javascript:octry('type &#39;a binary_tree = Leaf of &#39;a | Tree of &#39;a binary_tree * &#39;a binary_tree\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a binary_tree = Leaf of \&#39;a | Tree of \&#39;a binary_tree * \&#39;a binary_tree\n');">[try]</a></code></pre>
 <p>
 This is a general type. The specific type which stores integers at each
 leaf is called <code>int binary_tree</code>. Similarly the specific type which
@@ -258,7 +258,7 @@ for lists, eg. <code>int list</code> etc.</p>
 the same way. Lists are simply parameterized variant types with the
 following slightly strange definition:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>=</span> <span class='operator'>[]</span> <span class='keywordsign'>|</span> <span class='keywordsign'>::</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span>   <span class='comment'>(* not real OCaml code *)</span>
-<a href="javascript:octry('  type &#39;a list = [] | :: of &#39;a * &#39;a list   (* not real OCaml code *)\n');">[try]</a></code></pre>
+<a href="javascript:octry('  type \&#39;a list = [] | :: of \&#39;a * \&#39;a list   (* not real OCaml code *)\n');">[try]</a></code></pre>
 <p>
 Actually the definition above doesn&#39;t quite compile. Here&#39;s a
 pretty-much equivalent definition:</p>
@@ -266,7 +266,7 @@ pretty-much equivalent definition:</p>
 <span class='constructor'>Nil</span><span class='keywordsign'>;;</span>
 <span class='constructor'>Cons</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='constructor'>Nil</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='constructor'>Cons</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='constructor'>Cons</span><span class='keywordsign'>(</span><span class='number'>2</span><span class='keywordsign'>,</span> <span class='constructor'>Nil</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type &#39;a equiv_list = Nil | Cons of &#39;a * &#39;a equiv_list;;\nNil;;\nCons(1, Nil);;\nCons(1, Cons(2, Nil));;\n');">[try]</a></code></pre>
+<a href="javascript:octry('type \&#39;a equiv_list = Nil | Cons of \&#39;a * \&#39;a equiv_list;;\nNil;;\nCons(1, Nil);;\nCons(1, Cons(2, Nil));;\n');">[try]</a></code></pre>
 <p>
 Recall earlier that we said lists could be written two ways, either with
 the simple syntactic sugar of <code>[1; 2; 3]</code> or more formally as
@@ -283,7 +283,7 @@ OCaml name Example type definition Example usage</p>
                             <span class='keywordsign'>|</span> <span class='constructor'>Negative</span>                 <span class='constructor'>Zero</span>
 <span class='lower'>parameterized</span>   <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>amy_list</span> <span class='keywordsign'>=</span> <span class='constructor'>Empty</span>                <span class='constructor'>Cons</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='constructor'>Cons</span> <span class='keywordsign'>(</span><span class='number'>2</span><span class='keywordsign'>,</span> <span class='constructor'>Empty</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
   <span class='lower'>variant</span>                   <span class='keywordsign'>|</span> <span class='constructor'>Cons</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>amy_list</span>
-<a href="javascript:octry('list            int list                               [1; 2; 3]\ntuple           int * string                           (3, &#34;hello&#34;)\nrecord          type pair = { a : int; b : string }    { a = 3; b = &#34;hello&#34; }\nvariant         type foo = Int of int                  Int 3\n                           | Pair of int * string                                                                      \nvariant         type sign = Positive | Zero            Positive\n                            | Negative                 Zero\nparameterized   type &#39;a my_list = Empty                Cons (1, Cons (2, Empty))\n  variant                   | Cons of &#39;a * &#39;a my_list\n');">[try]</a></code></pre>
+<a href="javascript:octry('list            int list                               [1; 2; 3]\ntuple           int * string                           (3, &#34;hello&#34;)\nrecord          type pair = { a : int; b : string }    { a = 3; b = &#34;hello&#34; }\nvariant         type foo = Int of int                  Int 3\n                           | Pair of int * string                                                                      \nvariant         type sign = Positive | Zero            Positive\n                            | Negative                 Zero\nparameterized   type \&#39;a my_list = Empty                Cons (1, Cons (2, Empty))\n  variant                   | Cons of \&#39;a * \&#39;a my_list\n');">[try]</a></code></pre>
 <h2 id="Patternmatchingondatatypes"> Pattern matching (on datatypes)</h2><p>
 
 So one Really Cool Feature of functional languages is the ability to

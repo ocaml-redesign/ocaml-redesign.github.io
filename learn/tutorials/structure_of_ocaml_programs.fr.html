@@ -264,7 +264,7 @@ réel de fonction imbriquées :</p>
     <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
   <span class='keyword'>with</span>
     <span class='constructor'>End_of_file</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Buffer</span><span class='keywordsign'>.</span><span class='lower'>contents</span> <span class='lower'>buf</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let read_whole_channel chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let newline = input_line chan in\n    Buffer.add_string buf newline;\n    Buffer.add_char buf &#39;\n&#39;;\n    loop ()\n  in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf;;\n');">[try]</a></code></pre>
+<a href="javascript:octry('let read_whole_channel chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let newline = input_line chan in\n    Buffer.add_string buf newline;\n    Buffer.add_char buf \&#39;\n\&#39;;\n    loop ()\n  in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf;;\n');">[try]</a></code></pre>
 <p>
 Ne vous inquiétez pas de ce que ce code fait - il utilise beaucoup de
 concepts que nous n&#39;avons pas encore vu dans ce tutorial.

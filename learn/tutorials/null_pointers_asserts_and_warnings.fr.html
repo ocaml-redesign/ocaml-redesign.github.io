@@ -136,7 +136,7 @@ dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</
 <p>OCaml propose une solution élégante pour les valeurs nulles, en
 utilisant un simple type variant polymorphique, défini (jusqu&#39;à
 récemment, dans le module <code>Pervasives</code>) comme :</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor'>None</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type &#39;a option = None | Some of &#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor'>None</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type \&#39;a option = None | Some of \&#39;a\n');">[try]</a></code></pre>
 <p>
 Une &quot;valeur nulle&quot; s&#39;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
@@ -186,7 +186,7 @@ du filtrage, comme dans cet exemple réel :</p>
   <span class='keywordsign'>|</span> <span class='string'>&#34;Win32&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omit *)</span>
   <span class='keywordsign'>|</span> <span class='string'>&#34;MacOS&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omit *)</span>
   <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>failwith</span> <span class='string'>&#34;Ce système n&#39;est pas supporté&#34;</span>
-<a href="javascript:octry('  match Sys.os_type with\n    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)\n  | &#34;Win32&#34; -&#62;             (* code omit *)\n  | &#34;MacOS&#34; -&#62;             (* code omit *)\n  | _ -&#62; failwith &#34;Ce système n&#39;est pas supporté&#34;\n');">[try]</a></code></pre>
+<a href="javascript:octry('  match Sys.os_type with\n    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)\n  | &#34;Win32&#34; -&#62;             (* code omit *)\n  | &#34;MacOS&#34; -&#62;             (* code omit *)\n  | _ -&#62; failwith &#34;Ce système n\&#39;est pas supporté&#34;\n');">[try]</a></code></pre>
 <p>
 A noter l&#39;utilisation d&#39;un couple de fonctionnalités supplémentaires du
 système de filtrage. L&#39;union de motifs est utilisée pour reconnaître

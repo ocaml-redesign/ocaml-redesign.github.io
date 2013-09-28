@@ -149,7 +149,7 @@ but for some reason it cannot remain polymorphic. Example:</p>
 triggers the following message during the compilation:</p>
 <pre><code class='tryocaml'><span class='constructor'>The</span> <span class='keyword'>type</span> <span class='keyword'>of</span> <span class='lower'>this</span> <span class='lower'>expression</span><span class='keywordsign'>,</span> <span class='keywordsign'>&#39;</span><span class='keywordsign'>_</span> <span class='lower'>option</span> <span class='lower'>ref</span><span class='keywordsign'>,</span>
 <span class='lower'>contains</span> <span class='keyword'>type</span> <span class='lower'>variables</span> <span class='lower'>that</span> <span class='lower'>cannot</span> <span class='lower'>be</span> <span class='lower'>generalized</span>
-<a href="javascript:octry('The type of this expression, &#39;_a option ref,\ncontains type variables that cannot be generalized\n');">[try]</a></code></pre>
+<a href="javascript:octry('The type of this expression, \&#39;_a option ref,\ncontains type variables that cannot be generalized\n');">[try]</a></code></pre>
 <p>
 Solution: help the compiler with a type annotation, like for instance:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='lower'>option</span> <span class='lower'>ref</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor'>None</span>

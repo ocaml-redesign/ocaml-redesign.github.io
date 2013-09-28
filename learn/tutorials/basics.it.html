@@ -98,7 +98,7 @@ In OCaml i commenti sono delimitati da <code>(*</code> e <code>*)</code>, come s
  * commento su
  * più righe.
  *)</span>
-<a href="javascript:octry('(* Questo è un commento su un&#39;unica riga. *)\n\n(* Questo è un\n * commento su\n * più righe.\n *)\n');">[try]</a></code></pre>
+<a href="javascript:octry('(* Questo è un commento su un\&#39;unica riga. *)\n\n(* Questo è un\n * commento su\n * più righe.\n *)\n');">[try]</a></code></pre>
 <p>
 In altre parole, la convenzione per i commenti è molto simile a quella
 originale di C (<code>/* ... */</code>).</p>
@@ -166,7 +166,7 @@ chiamata di funzione&quot;. Seguono ulteriori esempi:</p>
 
 <span class='keywordsign'>#</span> <span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>     <span class='comment'>(* OCaml segnalerà l&#39;errore *)</span>
 <span class='constructor'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>int</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>string</span>
-<a href="javascript:octry('f 5 (g &#34;hello&#34;) 3    (* f ha tre argomenti, g ha un argomento *)\nf (g 3 4)            (* f ha un argomento, g ha due argomenti *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml segnalerà l&#39;errore *)\nThis expression has type string * int but is here used with type string\n');">[try]</a></code></pre>
+<a href="javascript:octry('f 5 (g &#34;hello&#34;) 3    (* f ha tre argomenti, g ha un argomento *)\nf (g 3 4)            (* f ha un argomento, g ha due argomenti *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml segnalerà l\&#39;errore *)\nThis expression has type string * int but is here used with type string\n');">[try]</a></code></pre>
 <h2 id="Definireunafunzione"> Definire una funzione</h2><p>
 
 Tutti voi sapete come definire una funzione (o un metodo statico, per
@@ -398,7 +398,7 @@ segnaposto per significare &quot;qualsiasi tipo voi immaginiate&quot;. È un
 carattere di virgoletta singola (NdT: un apice) seguito da una lettera.
 Il tipo dela funzione sopra sarebbe normalmente scritto:</p>
 <pre><code class='tryocaml'><span class='lower'>give_me_a_three</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('give_me_a_three : &#39;a -&#62; int\n');">[try]</a></code></pre>
+<a href="javascript:octry('give_me_a_three : \&#39;a -&#62; int\n');">[try]</a></code></pre>
 <p>
 Dove <code>&#39;a</code> significa in realtà qualsiasi tipo. Potete, ad esempio,
 chiamare questa funzione come <code>give_me_a_three &quot;foo&quot;</code> o

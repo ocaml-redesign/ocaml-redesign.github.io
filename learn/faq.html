@@ -349,9 +349,9 @@ function:</p>
 <p>
 These functions are named “curried” functions, as opposed to functions
 with tuples as argument:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>sum</span><span class='keywordsign'>&#39;</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span><span class='keywordsign'>;;</span>
-  <span class='lower'>sum</span><span class='keywordsign'>&#39;</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let sum&#39; (x, y) = x + y;;\n  sum&#39; (1, 2);;\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>sum&#39;</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span><span class='keywordsign'>;;</span>
+  <span class='lower'>sum&#39;</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<a href="javascript:octry('  let sum\&#39; (x, y) = x + y;;\n  sum\&#39; (1, 2);;\n');">[try]</a></code></pre>
 <p>
 How to define a function that has several results?</p>
 <p>You can define a function that return a pair or a tuple:</p>
