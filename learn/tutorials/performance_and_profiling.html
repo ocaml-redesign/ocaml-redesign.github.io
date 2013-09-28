@@ -120,7 +120,7 @@ puts <code>%</code> in front of register names. The registers are: <code>%eax</c
 frames), and <code>%esp</code> (the stack pointer).</p>
 <p>The Linux assembler (in common with other Unix assemblers, but opposite
 to MS-derived assemblers) writes moves to and from registers/memory as:</p>
-<pre><code class='tryocaml'>movl from<span class='o'>,</span> <span class='k'>to</span>
+<pre><code class='tryocaml'><span class='lower'>movl</span> <span class='lower'>from</span><span class='keywordsign'>,</span> <span class='keyword'>to</span>
 <a href="javascript:octry('movl from, to\n');">[try]</a></code></pre>
 <p>
 So <code>movl %ebx, %eax</code> means &quot;copy the contents of register <code>%ebx</code> into
@@ -138,18 +138,18 @@ the text segment.</p>
 <p><strong>.data</strong></p>
 <p>Similarly, the <code>.data</code> directive switches the assembler so it starts
 writing into the data segment (part) of the executable.</p>
-<pre><code class='tryocaml'>  <span class='o'>.</span>globl foo
-foo<span class='o'>:</span>
+<pre><code class='tryocaml'>  <span class='keywordsign'>.</span><span class='lower'>globl</span> <span class='lower'>foo</span>
+<span class='lower'>foo</span><span class='keywordsign'>:</span>
 <a href="javascript:octry('  .globl foo\nfoo:\n');">[try]</a></code></pre>
 <p>
 This declares a global symbol called <code>foo</code>. It means the address of the
 next thing to come can be named <code>foo</code>. Writing just <code>foo:</code> without the
 preceeding <code>.globl</code> directive declares a local symbol (local to just the
 current file).</p>
-<pre><code class='tryocaml'><span class='o'>.</span>long 12345
-<span class='o'>.</span>byte 9
-<span class='o'>.</span>ascii <span class='s'>&#34;hello&#34;</span>
-<span class='o'>.</span>space 4
+<pre><code class='tryocaml'><span class='keywordsign'>.</span><span class='lower'>long</span> <span class='number'>12345</span>
+<span class='keywordsign'>.</span><span class='lower'>byte</span> <span class='number'>9</span>
+<span class='keywordsign'>.</span><span class='lower'>ascii</span> <span class='string'>&#34;hello&#34;</span>
+<span class='keywordsign'>.</span><span class='lower'>space</span> <span class='number'>4</span>
 <a href="javascript:octry('.long 12345\n.byte 9\n.ascii &#34;hello&#34;\n.space 4\n');">[try]</a></code></pre>
 <p>
 <code>.long</code> writes a word (4 bytes) to the current segment. <code>.byte</code> writes a
@@ -159,42 +159,37 @@ in the data segment.</p>
 <h3 id="Thequothelloworldquotprogram"> The &quot;hello, world&quot; program</h3><p>
 Enough assembler. Put the following program into a file called
 <code>smallest.ml</code>:</p>
-<pre><code class='tryocaml'>print_string <span class='s'>&#34;hello, world\n&#34;</span>
+<pre><code class='tryocaml'><span class='lower'>print_string</span> <span class='string'>&#34;hello, world\n&#34;</span>
 <a href="javascript:octry('print_string &#34;hello, world\n&#34;\n');">[try]</a></code></pre>
 <p>
 And compile it to a native code executable using:</p>
-<pre><code class='tryocaml'>ocamlopt <span class='o'>-</span>S smallest<span class='o'>.</span>ml <span class='o'>-</span>o smallest
+<pre><code class='tryocaml'><span class='lower'>ocamlopt</span> <span class='keywordsign'>-</span><span class='constructor'>S</span> <span class='lower'>smallest</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='keywordsign'>-</span><span class='lower'>o</span> <span class='lower'>smallest</span>
 <a href="javascript:octry('ocamlopt -S smallest.ml -o smallest\n');">[try]</a></code></pre>
 <p>
 The <code>-S</code> (capital S) tells the compiler to leave the assembly language
 file (called <code>smallest.s</code> - lowercase s) instead of deleting it.</p>
 <p>Here are the edited highlights of the <code>smallest.s</code> file with my comments
 added. First of all the data segment:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>data
-        <span class='o'>.</span>long   4348                     <span class='o'>;</span> header <span class='k'>for</span> string
-        <span class='o'>.</span>globl  Smallest__1
-Smallest__1<span class='o'>:</span>
-        <span class='o'>.</span>ascii  <span class='s'>&#34;hello, world\12&#34;</span>        <span class='o'>;</span> string
-        <span class='o'>.</span>space  2                        <span class='o'>;</span> padding <span class='o'>..</span>
-        <span class='o'>.</span>byte   2                        <span class='o'>;</span>  <span class='o'>..</span> after string
+<pre><code class='tryocaml'>Characters 5:16 - 5:31 :
+Error: Lexical error: Illegal backslash escape in string
 <a href="javascript:octry('        .data\n        .long   4348                     ; header for string\n        .globl  Smallest__1\nSmallest__1:\n        .ascii  &#34;hello, world\12&#34;        ; string\n        .space  2                        ; padding ..\n        .byte   2                        ;  .. after string\n');">[try]</a></code></pre>
 <p>
 Next up the text (program code) segment:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>text
-        <span class='o'>.</span>globl  Smallest__entry          <span class='o'>;</span> entry point <span class='k'>to</span> the program
-Smallest__entry<span class='o'>:</span>
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>text</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Smallest__entry</span>          <span class='keywordsign'>;</span> <span class='lower'>entry</span> <span class='lower'>point</span> <span class='keyword'>to</span> <span class='lower'>the</span> <span class='lower'>program</span>
+<span class='constructor'>Smallest__entry</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> this is equivalent <span class='k'>to</span> the C pseudo<span class='o'>-</span>code<span class='o'>:</span>
-        <span class='o'>;</span> <span class='m'>Pervasives</span><span class='o'>.</span>output_string (stdout<span class='o'>,</span> <span class='o'>&#38;</span>Smallest__1)
+        <span class='keywordsign'>;</span> <span class='lower'>this</span> <span class='lower'>is</span> <span class='lower'>equivalent</span> <span class='keyword'>to</span> <span class='lower'>the</span> <span class='constructor'>C</span> <span class='lower'>pseudo</span><span class='keywordsign'>-</span><span class='lower'>code</span><span class='keywordsign'>:</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Pervasives</span><span class='keywordsign'>.</span><span class='lower'>output_string</span> <span class='keywordsign'>(</span><span class='lower'>stdout</span><span class='keywordsign'>,</span> <span class='keywordsign'>&#38;</span><span class='constructor'>Smallest__1</span><span class='keywordsign'>)</span>
 
-        movl    <span class='o'>$</span>Smallest__1<span class='o'>,</span> <span class='o'>%</span>ebx
-        movl    Pervasives <span class='o'>+</span> 92<span class='o'>,</span> <span class='o'>%</span>eax    <span class='o'>;</span> Pervasives <span class='o'>+</span> 92 <span class='o'>==</span> stdout
-        call    Pervasives__output_string_212
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='constructor'>Smallest__1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ebx</span>
+        <span class='lower'>movl</span>    <span class='constructor'>Pervasives</span> <span class='keywordsign'>+</span> <span class='number'>92</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>    <span class='keywordsign'>;</span> <span class='constructor'>Pervasives</span> <span class='keywordsign'>+</span> <span class='number'>92</span> <span class='infix'>==</span> <span class='lower'>stdout</span>
+        <span class='lower'>call</span>    <span class='constructor'>Pervasives__output_string_212</span>
 
-        <span class='o'>;</span> return 1
+        <span class='keywordsign'>;</span> <span class='lower'>return</span> <span class='number'>1</span>
 
-        movl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>eax
-        ret
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>ret</span>
 <a href="javascript:octry('        .text\n        .globl  Smallest__entry          ; entry point to the program\nSmallest__entry:\n\n        ; this is equivalent to the C pseudo-code:\n        ; Pervasives.output_string (stdout, &#38;Smallest__1)\n\n        movl    $Smallest__1, %ebx\n        movl    Pervasives + 92, %eax    ; Pervasives + 92 == stdout\n        call    Pervasives__output_string_212\n\n        ; return 1\n\n        movl    $1, %eax\n        ret\n');">[try]</a></code></pre>
 <p>
 In C everything has to be inside a function. Think about how you can&#39;t
@@ -211,7 +206,7 @@ the top level commands in this file.</p>
 <code>print_string &quot;hello, world\n&quot;</code>, but OCaml has instead compiled the
 equivalent of <code>Pervasives.output_string stdout &quot;hello, world\n&quot;</code>. Why?
 If you look into <code>pervasives.ml</code> you&#39;ll see why:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> print_string s <span class='k'>=</span> output_string stdout s
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>print_string</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> <span class='lower'>output_string</span> <span class='lower'>stdout</span> <span class='lower'>s</span>
 <a href="javascript:octry('let print_string s = output_string stdout s\n');">[try]</a></code></pre>
 <p>
 OCaml has <em>inlined</em> this function. <strong>Inlining</strong> - taking a function and
@@ -232,9 +227,8 @@ stack, but we&#39;ll see about that later.</p>
 by a trailing NUL (<code>\0</code>) character. OCaml stores strings in a different
 way, as we can see from the data segment above. This string is stored
 like this:</p>
-<pre><code class='tryocaml'>4 byte header<span class='o'>:</span> 4348
-the string<span class='o'>:</span>    h e l l o <span class='o'>,</span> SP w o r l d <span class='o'>\</span>n
-padding<span class='o'>:</span>       <span class='o'>\</span>0 <span class='o'>\</span>0 <span class='o'>\</span>002
+<pre><code class='tryocaml'>Characters 2:40 - 2:41 :
+Error: Lexical error: unexpected presence of a backslash
 <a href="javascript:octry('4 byte header: 4348\nthe string:    h e l l o , SP w o r l d \n\npadding:       \0 \0 \002\n');">[try]</a></code></pre>
 <p>
 The format is unusual. It&#39;s documented in <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2002/08/e109df224ff0150b302033e2002dbf87.en.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2002/08/e109df224ff0150b302033e2002dbf87.en.html'>this posting on the OCaml
@@ -257,9 +251,9 @@ fail on it.</p>
 a header which tells the garbage collector about how large the object is
 in words, and something about what the object contains. Writing the
 number 4348 in binary:</p>
-<pre><code class='tryocaml'>length <span class='k'>of</span> the object <span class='k'>in</span> words<span class='o'>:</span>  0000 0000 0000 0000 0001 00 (4 words)
-color (used by GC)<span class='o'>:</span>             00
-tag<span class='o'>:</span>                            1111 1100 (String_tag)
+<pre><code class='tryocaml'><span class='lower'>length</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='keyword'>object</span> <span class='keyword'>in</span> <span class='lower'>words</span><span class='keywordsign'>:</span>  <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>0001</span> <span class='number'>00</span> <span class='keywordsign'>(</span><span class='number'>4</span> <span class='lower'>words</span><span class='keywordsign'>)</span>
+<span class='lower'>color</span> <span class='keywordsign'>(</span><span class='lower'>used</span> <span class='lower'>by</span> <span class='constructor'>GC</span><span class='keywordsign'>)</span><span class='keywordsign'>:</span>             <span class='number'>00</span>
+<span class='lower'>tag</span><span class='keywordsign'>:</span>                            <span class='number'>1111</span> <span class='number'>1100</span> <span class='keywordsign'>(</span><span class='constructor'>String_tag</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('length of the object in words:  0000 0000 0000 0000 0001 00 (4 words)\ncolor (used by GC):             00\ntag:                            1111 1100 (String_tag)\n');">[try]</a></code></pre>
 <p>
 See <code>/usr/include/ocaml/3.08/caml/mlvalues.h</code> for more information about
@@ -286,11 +280,11 @@ Java program and a second or so for a Perl script.</p>
 We mentioned in chapter 6 that OCaml can turn tail-recursive function
 calls into simple loops. Is this actually true? Let&#39;s look at what
 simple tail recursion compiles to:</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> loop () <span class='k'>=</span>
-  print_string <span class='s'>&#34;I go on forever ...&#34;</span><span class='o'>;</span>
-  loop ()
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='lower'>print_string</span> <span class='string'>&#34;I go on forever ...&#34;</span><span class='keywordsign'>;</span>
+  <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 
-<span class='k'>let</span> () <span class='k'>=</span> loop ()
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let rec loop () =\n  print_string &#34;I go on forever ...&#34;;\n  loop ()\n\nlet () = loop ()\n');">[try]</a></code></pre>
 <p>
 The file is called <code>tail.ml</code>, so following OCaml&#39;s usual procedure for
@@ -298,25 +292,25 @@ naming functions, our function will be called <code>Tail__loop_nnn</code> (where
 <code>nnn</code> is some unique number which OCaml appends to distinguish
 identically named functions from one another).</p>
 <p>Here is the assembler for just the <code>loop</code> function defined above:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>text
-        <span class='o'>.</span>globl  Tail__loop_56
-Tail__loop_56<span class='o'>:</span>
-<span class='o'>.</span>L100<span class='o'>:</span>
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>text</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Tail__loop_56</span>
+<span class='constructor'>Tail__loop_56</span><span class='keywordsign'>:</span>
+<span class='keywordsign'>.</span><span class='constructor'>L100</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> Print the string
+        <span class='keywordsign'>;</span> <span class='constructor'>Print</span> <span class='lower'>the</span> <span class='lower'>string</span>
 
-        movl    <span class='o'>$</span>Tail__2<span class='o'>,</span> <span class='o'>%</span>ebx
-        movl    Pervasives <span class='o'>+</span> 92<span class='o'>,</span> <span class='o'>%</span>eax
-        call    <span class='m'>Pervasives__output_string_212</span>
-<span class='o'>.</span>L101<span class='o'>:</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='constructor'>Tail__2</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ebx</span>
+        <span class='lower'>movl</span>    <span class='constructor'>Pervasives</span> <span class='keywordsign'>+</span> <span class='number'>92</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>call</span>    <span class='constructor'>Pervasives__output_string_212</span>
+<span class='keywordsign'>.</span><span class='constructor'>L101</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> The following movl is <span class='k'>in</span> fact obsolete<span class='o'>:</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>The</span> <span class='lower'>following</span> <span class='lower'>movl</span> <span class='lower'>is</span> <span class='keyword'>in</span> <span class='lower'>fact</span> <span class='lower'>obsolete</span><span class='keywordsign'>:</span>
 
-        movl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>eax
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
 
-        <span class='o'>;</span> Jump back <span class='k'>to</span> the <span class='o'>.</span>L100 label above (ie<span class='o'>.</span> loop forever)
+        <span class='keywordsign'>;</span> <span class='constructor'>Jump</span> <span class='lower'>back</span> <span class='keyword'>to</span> <span class='lower'>the</span> <span class='keywordsign'>.</span><span class='constructor'>L100</span> <span class='lower'>label</span> <span class='lower'>above</span> <span class='keywordsign'>(</span><span class='lower'>ie</span><span class='keywordsign'>.</span> <span class='lower'>loop</span> <span class='lower'>forever</span><span class='keywordsign'>)</span>
 
-        jmp     <span class='o'>.</span>L100
+        <span class='lower'>jmp</span>     <span class='keywordsign'>.</span><span class='constructor'>L100</span>
 <a href="javascript:octry('        .text\n        .globl  Tail__loop_56\nTail__loop_56:\n.L100:\n\n        ; Print the string\n\n        movl    $Tail__2, %ebx\n        movl    Pervasives + 92, %eax\n        call    Pervasives__output_string_212\n.L101:\n\n        ; The following movl is in fact obsolete:\n\n        movl    $1, %eax\n\n        ; Jump back to the .L100 label above (ie. loop forever)\n\n        jmp     .L100\n');">[try]</a></code></pre>
 <p>
 So that&#39;s pretty conclusive. Calling <code>Tail__loop_56</code> will first print
@@ -356,60 +350,60 @@ is where the compiler <em>doesn&#39;t</em> have a fully known type for a functio
 at compile time, might have an impact on performance. Suppose we require
 a function to work out the maximum of two integers. Our first attempt
 is:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
-  <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>max</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>a</span> <span class='keyword'>else</span> <span class='lower'>b</span>
 <a href="javascript:octry('let max a b =\n  if a &#62; b then a else b\n');">[try]</a></code></pre>
 <p>
 Simple enough, but recall that the \&gt; (greater than) operator in OCaml
 is polymorphic. It has type <code>&#39;a -&gt; &#39;a -&gt; bool</code>, and this means that the
 <code>max</code> function we defined above is going to be polymorphic:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> max a b <span class='k'>=</span>
-    <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>max</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>a</span> <span class='keyword'>else</span> <span class='lower'>b</span>
 <a href="javascript:octry('  let max a b =\n    if a &#62; b then a else b\n');">[try]</a></code></pre>
 <p>
 This is indeed reflected in the code that OCaml generates for this
 function, which is pretty complex:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>text
-        <span class='o'>.</span>globl  Max__max_56
-Max__max_56<span class='o'>:</span>
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>text</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Max__max_56</span>
+<span class='constructor'>Max__max_56</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> Reserve two words <span class='k'>of</span> stack space<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Reserve</span> <span class='lower'>two</span> <span class='lower'>words</span> <span class='keyword'>of</span> <span class='lower'>stack</span> <span class='lower'>space</span><span class='keywordsign'>.</span>
 
-        subl    <span class='o'>$</span>8<span class='o'>,</span> <span class='o'>%</span>esp
+        <span class='lower'>subl</span>    <span class='infix'>$</span><span class='number'>8</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>esp</span>
 
-        <span class='o'>;</span> Save the first <span class='k'>and</span> second arguments (a <span class='k'>and</span> b) on the stack<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Save</span> <span class='lower'>the</span> <span class='lower'>first</span> <span class='keyword'>and</span> <span class='lower'>second</span> <span class='lower'>arguments</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keyword'>and</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='lower'>on</span> <span class='lower'>the</span> <span class='lower'>stack</span><span class='keywordsign'>.</span>
 
-        movl    <span class='o'>%</span>eax<span class='o'>,</span> 4<span class='o'>(%</span>esp)
-        movl    <span class='o'>%</span>ebx<span class='o'>,</span> 0<span class='o'>(%</span>esp)
+        <span class='lower'>movl</span>    <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>esp</span><span class='keywordsign'>)</span>
+        <span class='lower'>movl</span>    <span class='infix'>%</span><span class='lower'>ebx</span><span class='keywordsign'>,</span> <span class='number'>0</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>esp</span><span class='keywordsign'>)</span>
 
-        <span class='o'>;</span> Call the C <span class='s'>&#34;greaterthan&#34;</span> <span class='k'>function</span> (<span class='k'>in</span> the OCaml library)<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Call</span> <span class='lower'>the</span> <span class='constructor'>C</span> <span class='string'>&#34;greaterthan&#34;</span> <span class='keyword'>function</span> <span class='keywordsign'>(</span><span class='keyword'>in</span> <span class='lower'>the</span> <span class='constructor'>OCaml</span> <span class='lower'>library</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span>
 
-        pushl   <span class='o'>%</span>ebx
-        pushl   <span class='o'>%</span>eax
-        movl    <span class='o'>$</span>greaterthan<span class='o'>,</span> <span class='o'>%</span>eax
-        call    caml_c_call
-<span class='o'>.</span>L102<span class='o'>:</span>
-        addl    <span class='o'>$</span>8<span class='o'>,</span> <span class='o'>%</span>esp
+        <span class='lower'>pushl</span>   <span class='infix'>%</span><span class='lower'>ebx</span>
+        <span class='lower'>pushl</span>   <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='lower'>greaterthan</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>call</span>    <span class='lower'>caml_c_call</span>
+<span class='keywordsign'>.</span><span class='constructor'>L102</span><span class='keywordsign'>:</span>
+        <span class='lower'>addl</span>    <span class='infix'>$</span><span class='number'>8</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>esp</span>
 
-        <span class='o'>;</span> If the C <span class='s'>&#34;greaterthan&#34;</span> <span class='k'>function</span> returned 1<span class='o'>,</span> jump <span class='k'>to</span> <span class='o'>.</span>L100
+        <span class='keywordsign'>;</span> <span class='constructor'>If</span> <span class='lower'>the</span> <span class='constructor'>C</span> <span class='string'>&#34;greaterthan&#34;</span> <span class='keyword'>function</span> <span class='lower'>returned</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='lower'>jump</span> <span class='keyword'>to</span> <span class='keywordsign'>.</span><span class='constructor'>L100</span>
 
-        cmpl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>eax
-        je      <span class='o'>.</span>L100
+        <span class='lower'>cmpl</span>    <span class='infix'>$</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>je</span>      <span class='keywordsign'>.</span><span class='constructor'>L100</span>
 
-        <span class='o'>;</span> Returned 0<span class='o'>,</span> so get argument a which we previously saved on
-        <span class='o'>;</span> the stack <span class='k'>and</span> return it<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Returned</span> <span class='number'>0</span><span class='keywordsign'>,</span> <span class='lower'>so</span> <span class='lower'>get</span> <span class='lower'>argument</span> <span class='lower'>a</span> <span class='lower'>which</span> <span class='lower'>we</span> <span class='lower'>previously</span> <span class='lower'>saved</span> <span class='lower'>on</span>
+        <span class='keywordsign'>;</span> <span class='lower'>the</span> <span class='lower'>stack</span> <span class='keyword'>and</span> <span class='lower'>return</span> <span class='lower'>it</span><span class='keywordsign'>.</span>
 
-        movl    4<span class='o'>(%</span>esp)<span class='o'>,</span> <span class='o'>%</span>eax
-        addl    <span class='o'>$</span>8<span class='o'>,</span> <span class='o'>%</span>esp
-        ret
+        <span class='lower'>movl</span>    <span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>esp</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>addl</span>    <span class='infix'>$</span><span class='number'>8</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>esp</span>
+        <span class='lower'>ret</span>
 
-        <span class='o'>;</span> Returned 1<span class='o'>,</span> so get argument b which we previously saved on
-        <span class='o'>;</span> the stack <span class='k'>and</span> return it<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Returned</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='lower'>so</span> <span class='lower'>get</span> <span class='lower'>argument</span> <span class='lower'>b</span> <span class='lower'>which</span> <span class='lower'>we</span> <span class='lower'>previously</span> <span class='lower'>saved</span> <span class='lower'>on</span>
+        <span class='keywordsign'>;</span> <span class='lower'>the</span> <span class='lower'>stack</span> <span class='keyword'>and</span> <span class='lower'>return</span> <span class='lower'>it</span><span class='keywordsign'>.</span>
 
-<span class='o'>.</span>L100<span class='o'>:</span>
-        movl    0<span class='o'>(%</span>esp)<span class='o'>,</span> <span class='o'>%</span>eax
-        addl    <span class='o'>$</span>8<span class='o'>,</span> <span class='o'>%</span>esp
-        ret
+<span class='keywordsign'>.</span><span class='constructor'>L100</span><span class='keywordsign'>:</span>
+        <span class='lower'>movl</span>    <span class='number'>0</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>esp</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>addl</span>    <span class='infix'>$</span><span class='number'>8</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>esp</span>
+        <span class='lower'>ret</span>
 <a href="javascript:octry('        .text\n        .globl  Max__max_56\nMax__max_56:\n\n        ; Reserve two words of stack space.\n\n        subl    $8, %esp\n\n        ; Save the first and second arguments (a and b) on the stack.\n\n        movl    %eax, 4(%esp)\n        movl    %ebx, 0(%esp)\n\n        ; Call the C &#34;greaterthan&#34; function (in the OCaml library).\n\n        pushl   %ebx\n        pushl   %eax\n        movl    $greaterthan, %eax\n        call    caml_c_call\n.L102:\n        addl    $8, %esp\n\n        ; If the C &#34;greaterthan&#34; function returned 1, jump to .L100\n\n        cmpl    $1, %eax\n        je      .L100\n\n        ; Returned 0, so get argument a which we previously saved on\n        ; the stack and return it.\n\n        movl    4(%esp), %eax\n        addl    $8, %esp\n        ret\n\n        ; Returned 1, so get argument b which we previously saved on\n        ; the stack and return it.\n\n.L100:\n        movl    0(%esp), %eax\n        addl    $8, %esp\n        ret\n');">[try]</a></code></pre>
 <p>
 Basically the \&gt; operation is done by calling a C function from the
@@ -420,41 +414,41 @@ language for doing the \&gt;.</p>
 hint to the OCaml compiler that the arguments are in fact integers. Then
 OCaml will generate a specialised version of <code>max</code> which only works on
 <code>int</code> arguments:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> max (a <span class='o'>:</span> int) (b <span class='o'>:</span> int) <span class='k'>=</span>
-  <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>max</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='lower'>b</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>a</span> <span class='keyword'>else</span> <span class='lower'>b</span>
 <a href="javascript:octry('let max (a : int) (b : int) =\n  if a &#62; b then a else b\n');">[try]</a></code></pre>
 <p>
 Here is the assembly code generated for this function:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>text
-        <span class='o'>.</span>globl  Max_int__max_56
-Max_int__max_56<span class='o'>:</span>
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>text</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Max_int__max_56</span>
+<span class='constructor'>Max_int__max_56</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> Single assembly instruction <span class='s'>&#34;cmpl&#34;</span> <span class='k'>for</span> performing the <span class='o'>&#62;</span> op<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Single</span> <span class='lower'>assembly</span> <span class='lower'>instruction</span> <span class='string'>&#34;cmpl&#34;</span> <span class='keyword'>for</span> <span class='lower'>performing</span> <span class='lower'>the</span> <span class='keywordsign'>&#62;</span> <span class='lower'>op</span><span class='keywordsign'>.</span>
 
-        cmpl    <span class='o'>%</span>ebx<span class='o'>,</span> <span class='o'>%</span>eax
+        <span class='lower'>cmpl</span>    <span class='infix'>%</span><span class='lower'>ebx</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
 
-        <span class='o'>;</span> If <span class='o'>%</span>ebx <span class='o'>&#62;</span> <span class='o'>%</span>eax<span class='o'>,</span> jump <span class='k'>to</span> <span class='o'>.</span>L100
+        <span class='keywordsign'>;</span> <span class='constructor'>If</span> <span class='infix'>%</span><span class='lower'>ebx</span> <span class='keywordsign'>&#62;</span> <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='lower'>jump</span> <span class='keyword'>to</span> <span class='keywordsign'>.</span><span class='constructor'>L100</span>
 
-        jle     <span class='o'>.</span>L100
+        <span class='lower'>jle</span>     <span class='keywordsign'>.</span><span class='constructor'>L100</span>
 
-        <span class='o'>;</span> Just return argument a<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Just</span> <span class='lower'>return</span> <span class='lower'>argument</span> <span class='lower'>a</span><span class='keywordsign'>.</span>
 
-        ret
+        <span class='lower'>ret</span>
 
-        <span class='o'>;</span> Return argument b<span class='o'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>Return</span> <span class='lower'>argument</span> <span class='lower'>b</span><span class='keywordsign'>.</span>
 
-<span class='o'>.</span>L100<span class='o'>:</span>
-        movl    <span class='o'>%</span>ebx<span class='o'>,</span> <span class='o'>%</span>eax
-        ret
+<span class='keywordsign'>.</span><span class='constructor'>L100</span><span class='keywordsign'>:</span>
+        <span class='lower'>movl</span>    <span class='infix'>%</span><span class='lower'>ebx</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>ret</span>
 <a href="javascript:octry('        .text\n        .globl  Max_int__max_56\nMax_int__max_56:\n\n        ; Single assembly instruction &#34;cmpl&#34; for performing the &#62; op.\n\n        cmpl    %ebx, %eax\n\n        ; If %ebx &#62; %eax, jump to .L100\n\n        jle     .L100\n\n        ; Just return argument a.\n\n        ret\n\n        ; Return argument b.\n\n.L100:\n        movl    %ebx, %eax\n        ret\n');">[try]</a></code></pre>
 <p>
 That&#39;s just 5 lines of assembler, and is about as simple as you can make
 it.</p>
 <p>What about this code:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
-  <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>max</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>a</span> <span class='keyword'>else</span> <span class='lower'>b</span>
 
-<span class='k'>let</span> () <span class='k'>=</span> print_int (max 2 3)
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>print_int</span> <span class='keywordsign'>(</span><span class='lower'>max</span> <span class='number'>2</span> <span class='number'>3</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let max a b =\n  if a &#62; b then a else b\n\nlet () = print_int (max 2 3)\n');">[try]</a></code></pre>
 <p>
 Is OCaml going to be smart enough to inline the <code>max</code> function and
@@ -463,9 +457,9 @@ OCaml still has to generate the external <code>Max.max</code> symbol (because th
 is a module, and so that function might be called from outside the
 module), and it doesn&#39;t inline the function.</p>
 <p>Here&#39;s another variation:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> max a b <span class='k'>=</span>
-  <span class='k'>if</span> a <span class='o'>&#62;</span> b <span class='k'>then</span> a <span class='k'>else</span> b <span class='k'>in</span>
-print_int (max 2 3)
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>max</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>a</span> <span class='keyword'>else</span> <span class='lower'>b</span> <span class='keyword'>in</span>
+<span class='lower'>print_int</span> <span class='keywordsign'>(</span><span class='lower'>max</span> <span class='number'>2</span> <span class='number'>3</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let max a b =\n  if a &#62; b then a else b in\nprint_int (max 2 3)\n');">[try]</a></code></pre>
 <p>
 Disappointingly although the definition of <code>max</code> in this code is local
@@ -479,7 +473,7 @@ There are a number of peculiarities about integers in OCaml. One of
 these is that integers are 31 bit entities, not 32 bit entities. What
 happens to the &quot;missing&quot; bit?</p>
 <p>Write this to <code>int.ml</code>:</p>
-<pre><code class='tryocaml'>print_int 3<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='lower'>print_int</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('print_int 3;;\n');">[try]</a></code></pre>
 <p>
 and compile with <code>ocamlopt -S int.ml -o int</code> to generate assembly
@@ -487,20 +481,20 @@ language in <code>int.s</code>. Recall from the discussion above that we are
 expecting OCaml to inline the <code>print_int</code> function as
 <code>output_string (string_of_int 3)</code>, and examining the assembly language
 output we can see that this is exactly what OCaml does:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>text
-        <span class='o'>.</span>globl  Int__entry
-Int__entry<span class='o'>:</span>
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>text</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Int__entry</span>
+<span class='constructor'>Int__entry</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> Call <span class='m'>Pervasives</span><span class='o'>.</span>string_of_int (3)
+        <span class='keywordsign'>;</span> <span class='constructor'>Call</span> <span class='constructor'>Pervasives</span><span class='keywordsign'>.</span><span class='lower'>string_of_int</span> <span class='keywordsign'>(</span><span class='number'>3</span><span class='keywordsign'>)</span>
 
-        movl    <span class='o'>$</span>7<span class='o'>,</span> <span class='o'>%</span>eax
-        call    Pervasives__string_of_int_152
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>7</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>call</span>    <span class='constructor'>Pervasives__string_of_int_152</span>
 
-        <span class='o'>;</span> Call <span class='m'>Pervasives</span><span class='o'>.</span>output_string (stdout<span class='o'>,</span> result_of_previous)
+        <span class='keywordsign'>;</span> <span class='constructor'>Call</span> <span class='constructor'>Pervasives</span><span class='keywordsign'>.</span><span class='lower'>output_string</span> <span class='keywordsign'>(</span><span class='lower'>stdout</span><span class='keywordsign'>,</span> <span class='lower'>result_of_previous</span><span class='keywordsign'>)</span>
 
-        movl    <span class='o'>%</span>eax<span class='o'>,</span> <span class='o'>%</span>ebx
-        movl    Pervasives <span class='o'>+</span> 92<span class='o'>,</span> <span class='o'>%</span>eax
-        call    Pervasives__output_string_212
+        <span class='lower'>movl</span>    <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ebx</span>
+        <span class='lower'>movl</span>    <span class='constructor'>Pervasives</span> <span class='keywordsign'>+</span> <span class='number'>92</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>call</span>    <span class='constructor'>Pervasives__output_string_212</span>
 <a href="javascript:octry('        .text\n        .globl  Int__entry\nInt__entry:\n\n        ; Call Pervasives.string_of_int (3)\n\n        movl    $7, %eax\n        call    Pervasives__string_of_int_152\n\n        ; Call Pervasives.output_string (stdout, result_of_previous)\n\n        movl    %eax, %ebx\n        movl    Pervasives + 92, %eax\n        call    Pervasives__output_string_212\n');">[try]</a></code></pre>
 <p>
 The important code is shown in red. It shows two things: Firstly the
@@ -574,30 +568,30 @@ this at run time however.</p>
 <h3 id="Floats"> Floats</h3><p>
 Floats are, by default, boxed (allocated on the heap). Save this as
 <code>float.ml</code> and compile it with <code>ocamlopt -S float.ml -o float</code>:</p>
-<pre><code class='tryocaml'>print_float 3.0
+<pre><code class='tryocaml'><span class='lower'>print_float</span> <span class='number'>3.0</span>
 <a href="javascript:octry('print_float 3.0\n');">[try]</a></code></pre>
 <p>
 The number is not passed directly to <code>string_of_float</code> in the <code>%eax</code>
 register as happened above with ints. Instead, it is created statically
 in the data segment:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>data
-        <span class='o'>.</span>long   2301
-        <span class='o'>.</span>globl  Float__1
-Float__1<span class='o'>:</span>
-        <span class='o'>.</span>double 3.0
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>data</span>
+        <span class='keywordsign'>.</span><span class='lower'>long</span>   <span class='number'>2301</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Float__1</span>
+<span class='constructor'>Float__1</span><span class='keywordsign'>:</span>
+        <span class='keywordsign'>.</span><span class='lower'>double</span> <span class='number'>3.0</span>
 <a href="javascript:octry('        .data\n        .long   2301\n        .globl  Float__1\nFloat__1:\n        .double 3.0\n');">[try]</a></code></pre>
 <p>
 and a pointer to the float is passed in <code>%eax</code> instead:</p>
-<pre><code class='tryocaml'>        movl    <span class='o'>$</span>Float__1<span class='o'>,</span> <span class='o'>%</span>eax
-        call    Pervasives__string_of_float_157
+<pre><code class='tryocaml'>        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='constructor'>Float__1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>call</span>    <span class='constructor'>Pervasives__string_of_float_157</span>
 <a href="javascript:octry('        movl    $Float__1, %eax\n        call    Pervasives__string_of_float_157\n');">[try]</a></code></pre>
 <p>
 Note the structure of the floating point number: it has a header (2301),
 followed by the 8 byte (2 word) representation of the number itself. The
 header can be decoded by writing it as binary:</p>
-<pre><code class='tryocaml'>Length <span class='k'>of</span> the object <span class='k'>in</span> words<span class='o'>:</span>  0000 0000 0000 0000 0000 10 (8 bytes)
-Color<span class='o'>:</span>                          00
-Tag<span class='o'>:</span>                            1111 1101 (Double_tag)
+<pre><code class='tryocaml'><span class='constructor'>Length</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='keyword'>object</span> <span class='keyword'>in</span> <span class='lower'>words</span><span class='keywordsign'>:</span>  <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>0000</span> <span class='number'>10</span> <span class='keywordsign'>(</span><span class='number'>8</span> <span class='lower'>bytes</span><span class='keywordsign'>)</span>
+<span class='constructor'>Color</span><span class='keywordsign'>:</span>                          <span class='number'>00</span>
+<span class='constructor'>Tag</span><span class='keywordsign'>:</span>                            <span class='number'>1111</span> <span class='number'>1101</span> <span class='keywordsign'>(</span><span class='constructor'>Double_tag</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('Length of the object in words:  0000 0000 0000 0000 0000 10 (8 bytes)\nColor:                          00\nTag:                            1111 1101 (Double_tag)\n');">[try]</a></code></pre>
 <p>
 <code>string_of_float</code> isn&#39;t polymorphic, but suppose we have a polymorphic
@@ -612,59 +606,59 @@ are essentially arrays of floats. As a special hack to make this go
 faster, OCaml implements \&lt;dfn\&gt;arrays of unboxed floats\&lt;/dfn\&gt;. This
 means that in the special case where we have an object of type
 <code>float array</code> (array of floats), OCaml stores them the same way as in C:</p>
-<pre><code class='tryocaml'>double array<span class='o'>[</span>10<span class='o'>]</span><span class='o'>;</span>
+<pre><code class='tryocaml'><span class='lower'>double</span> <span class='lower'>array</span><span class='keywordsign'>[</span><span class='number'>10</span><span class='keywordsign'>]</span><span class='keywordsign'>;</span>
 <a href="javascript:octry('double array[10];\n');">[try]</a></code></pre>
 <p>
 ... instead of having an array of pointers to ten separately allocated
 floats on the heap.</p>
 <p>Let&#39;s see this in practice:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> a <span class='k'>=</span> <span class='m'>Array</span><span class='o'>.</span>create 10 0.0<span class='o'>;;</span>
-<span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 9 <span class='k'>do</span>
-  a<span class='o'>.</span>(i) <span class='o'>&#60;-</span> float_of_int i
-<span class='k'>done</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='number'>10</span> <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>0</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>9</span> <span class='keyword'>do</span>
+  <span class='lower'>a</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>float_of_int</span> <span class='lower'>i</span>
+<span class='keyword'>done</span>
 <a href="javascript:octry('let a = Array.create 10 0.0;;\nfor i = 0 to 9 do\n  a.(i) &#60;- float_of_int i\ndone\n');">[try]</a></code></pre>
 <p>
 I&#39;m going to compile this code with the <code>-unsafe</code> option to remove
 bounds checking (simplifying the code for our exposition here). The
 first line, which creates the array, is compiled to a simple C call:</p>
-<pre><code class='tryocaml'>        pushl   <span class='o'>$</span>Arrayfloats__1     <span class='o'>;</span> Boxed float 0.0
-        pushl   <span class='o'>$</span>21                 <span class='o'>;</span> The integer 10
-        movl    <span class='o'>$</span>make_vect<span class='o'>,</span> <span class='o'>%</span>eax    <span class='o'>;</span> Address <span class='k'>of</span> the C <span class='k'>function</span> <span class='k'>to</span> call
-        call    caml_c_call
-    <span class='o'>;</span> <span class='o'>...</span>
-        movl    <span class='o'>%</span>eax<span class='o'>,</span> Arrayfloats   <span class='o'>;</span> Store the resulting pointer <span class='k'>to</span> the
-                                    <span class='o'>;</span> array at this place on the heap<span class='o'>.</span>
+<pre><code class='tryocaml'>        <span class='lower'>pushl</span>   <span class='infix'>$</span><span class='constructor'>Arrayfloats__1</span>     <span class='keywordsign'>;</span> <span class='constructor'>Boxed</span> <span class='lower'>float</span> <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>0</span>
+        <span class='lower'>pushl</span>   <span class='infix'>$</span><span class='number'>21</span>                 <span class='keywordsign'>;</span> <span class='constructor'>The</span> <span class='lower'>integer</span> <span class='number'>10</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='lower'>make_vect</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>    <span class='keywordsign'>;</span> <span class='constructor'>Address</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='constructor'>C</span> <span class='keyword'>function</span> <span class='keyword'>to</span> <span class='lower'>call</span>
+        <span class='lower'>call</span>    <span class='lower'>caml_c_call</span>
+    <span class='keywordsign'>;</span> <span class='operator'>...</span>
+        <span class='lower'>movl</span>    <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='constructor'>Arrayfloats</span>   <span class='keywordsign'>;</span> <span class='constructor'>Store</span> <span class='lower'>the</span> <span class='lower'>resulting</span> <span class='lower'>pointer</span> <span class='keyword'>to</span> <span class='lower'>the</span>
+                                    <span class='keywordsign'>;</span> <span class='lower'>array</span> <span class='lower'>at</span> <span class='lower'>this</span> <span class='lower'>place</span> <span class='lower'>on</span> <span class='lower'>the</span> <span class='lower'>heap</span><span class='keywordsign'>.</span>
 <a href="javascript:octry('        pushl   $Arrayfloats__1     ; Boxed float 0.0\n        pushl   $21                 ; The integer 10\n        movl    $make_vect, %eax    ; Address of the C function to call\n        call    caml_c_call\n    ; ...\n        movl    %eax, Arrayfloats   ; Store the resulting pointer to the\n                                    ; array at this place on the heap.\n');">[try]</a></code></pre>
 <p>
 The loop is compiled to this relatively simple assembly language:</p>
-<pre><code class='tryocaml'>        movl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>eax            <span class='o'>;</span> Let <span class='o'>%</span>eax <span class='k'>=</span> 0. <span class='o'>%</span>eax is going <span class='k'>to</span> store i<span class='o'>.</span>
-        cmpl    <span class='o'>$</span>19<span class='o'>,</span> <span class='o'>%</span>eax           <span class='o'>;</span> If <span class='o'>%</span>eax <span class='o'>&#62;</span> 9<span class='o'>,</span> <span class='k'>then</span> jump out <span class='k'>of</span> the
-        jg      <span class='o'>.</span>L100               <span class='o'>;</span>   loop (<span class='k'>to</span> label <span class='o'>.</span>L100 at the <span class='k'>end</span>)<span class='o'>.</span>
+<pre><code class='tryocaml'>        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>            <span class='keywordsign'>;</span> <span class='constructor'>Let</span> <span class='infix'>%</span><span class='lower'>eax</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>.</span> <span class='infix'>%</span><span class='lower'>eax</span> <span class='lower'>is</span> <span class='lower'>going</span> <span class='keyword'>to</span> <span class='lower'>store</span> <span class='lower'>i</span><span class='keywordsign'>.</span>
+        <span class='lower'>cmpl</span>    <span class='infix'>$</span><span class='number'>19</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>           <span class='keywordsign'>;</span> <span class='constructor'>If</span> <span class='infix'>%</span><span class='lower'>eax</span> <span class='keywordsign'>&#62;</span> <span class='number'>9</span><span class='keywordsign'>,</span> <span class='keyword'>then</span> <span class='lower'>jump</span> <span class='lower'>out</span> <span class='keyword'>of</span> <span class='lower'>the</span>
+        <span class='lower'>jg</span>      <span class='keywordsign'>.</span><span class='constructor'>L100</span>               <span class='keywordsign'>;</span>   <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keyword'>to</span> <span class='lower'>label</span> <span class='keywordsign'>.</span><span class='constructor'>L100</span> <span class='lower'>at</span> <span class='lower'>the</span> <span class='keyword'>end</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span>
 
-<span class='o'>.</span>L101<span class='o'>:</span>                              <span class='o'>;</span> This is the start <span class='k'>of</span> the loop body<span class='o'>.</span>
-        movl    Arrayfloats<span class='o'>,</span> <span class='o'>%</span>ecx   <span class='o'>;</span> Address <span class='k'>of</span> the array <span class='k'>to</span> <span class='o'>%</span>ecx<span class='o'>.</span>
+<span class='keywordsign'>.</span><span class='constructor'>L101</span><span class='keywordsign'>:</span>                              <span class='keywordsign'>;</span> <span class='constructor'>This</span> <span class='lower'>is</span> <span class='lower'>the</span> <span class='lower'>start</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='lower'>loop</span> <span class='lower'>body</span><span class='keywordsign'>.</span>
+        <span class='lower'>movl</span>    <span class='constructor'>Arrayfloats</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ecx</span>   <span class='keywordsign'>;</span> <span class='constructor'>Address</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='lower'>array</span> <span class='keyword'>to</span> <span class='infix'>%</span><span class='lower'>ecx</span><span class='keywordsign'>.</span>
 
-        movl    <span class='o'>%</span>eax<span class='o'>,</span> <span class='o'>%</span>ebx          <span class='o'>;</span> Copy i <span class='k'>to</span> <span class='o'>%</span>ebx<span class='o'>.</span>
-        sarl    <span class='o'>$</span>1<span class='o'>,</span> <span class='o'>%</span>ebx            <span class='o'>;</span> Remove the tag bit from <span class='o'>%</span>ebx by
-                                    <span class='o'>;</span>   shifting it right 1 place<span class='o'>.</span> So <span class='o'>%</span>ebx
-                                    <span class='o'>;</span>   now contains the real integer i<span class='o'>.</span>
+        <span class='lower'>movl</span>    <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ebx</span>          <span class='keywordsign'>;</span> <span class='constructor'>Copy</span> <span class='lower'>i</span> <span class='keyword'>to</span> <span class='infix'>%</span><span class='lower'>ebx</span><span class='keywordsign'>.</span>
+        <span class='lower'>sarl</span>    <span class='infix'>$</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ebx</span>            <span class='keywordsign'>;</span> <span class='constructor'>Remove</span> <span class='lower'>the</span> <span class='lower'>tag</span> <span class='lower'>bit</span> <span class='lower'>from</span> <span class='infix'>%</span><span class='lower'>ebx</span> <span class='lower'>by</span>
+                                    <span class='keywordsign'>;</span>   <span class='lower'>shifting</span> <span class='lower'>it</span> <span class='lower'>right</span> <span class='number'>1</span> <span class='lower'>place</span><span class='keywordsign'>.</span> <span class='constructor'>So</span> <span class='infix'>%</span><span class='lower'>ebx</span>
+                                    <span class='keywordsign'>;</span>   <span class='lower'>now</span> <span class='lower'>contains</span> <span class='lower'>the</span> <span class='lower'>real</span> <span class='lower'>integer</span> <span class='lower'>i</span><span class='keywordsign'>.</span>
 
-        pushl   <span class='o'>%</span>ebx                <span class='o'>;</span> Convert <span class='o'>%</span>ebx <span class='k'>to</span> a float<span class='o'>.</span>
-        fildl   <span class='o'>(%</span>esp)
-        addl    <span class='o'>$</span>4<span class='o'>,</span> <span class='o'>%</span>esp
+        <span class='lower'>pushl</span>   <span class='infix'>%</span><span class='lower'>ebx</span>                <span class='keywordsign'>;</span> <span class='constructor'>Convert</span> <span class='infix'>%</span><span class='lower'>ebx</span> <span class='keyword'>to</span> <span class='lower'>a</span> <span class='lower'>float</span><span class='keywordsign'>.</span>
+        <span class='lower'>fildl</span>   <span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>esp</span><span class='keywordsign'>)</span>
+        <span class='lower'>addl</span>    <span class='infix'>$</span><span class='number'>4</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>esp</span>
 
-        fstpl   -4<span class='o'>(%</span>ecx<span class='o'>,</span> <span class='o'>%</span>eax<span class='o'>,</span> 4)   <span class='o'>;</span> Store the float <span class='k'>in</span> the array at the ith
-                                <span class='o'>;</span> position<span class='o'>.</span>
+        <span class='lower'>fstpl</span>   <span class='keywordsign'>-</span><span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>ecx</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='number'>4</span><span class='keywordsign'>)</span>   <span class='keywordsign'>;</span> <span class='constructor'>Store</span> <span class='lower'>the</span> <span class='lower'>float</span> <span class='keyword'>in</span> <span class='lower'>the</span> <span class='lower'>array</span> <span class='lower'>at</span> <span class='lower'>the</span> <span class='lower'>ith</span>
+                                <span class='keywordsign'>;</span> <span class='lower'>position</span><span class='keywordsign'>.</span>
 
-        addl    <span class='o'>$</span>2<span class='o'>,</span> <span class='o'>%</span>eax            <span class='o'>;</span> i <span class='o'>:=</span> i <span class='o'>+</span> 1
-        cmpl    <span class='o'>$</span>19<span class='o'>,</span> <span class='o'>%</span>eax           <span class='o'>;</span> If i <span class='o'>&#60;=</span> 9<span class='o'>,</span> loop around again<span class='o'>.</span>
-        jle     <span class='o'>.</span><span class='m'>L101</span>
-<span class='o'>.</span>L100<span class='o'>:</span>
+        <span class='lower'>addl</span>    <span class='infix'>$</span><span class='number'>2</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>            <span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>:=</span> <span class='lower'>i</span> <span class='keywordsign'>+</span> <span class='number'>1</span>
+        <span class='lower'>cmpl</span>    <span class='infix'>$</span><span class='number'>19</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>           <span class='keywordsign'>;</span> <span class='constructor'>If</span> <span class='lower'>i</span> <span class='infix'>&#60;=</span> <span class='number'>9</span><span class='keywordsign'>,</span> <span class='lower'>loop</span> <span class='lower'>around</span> <span class='lower'>again</span><span class='keywordsign'>.</span>
+        <span class='lower'>jle</span>     <span class='keywordsign'>.</span><span class='constructor'>L101</span>
+<span class='keywordsign'>.</span><span class='constructor'>L100</span><span class='keywordsign'>:</span>
 <a href="javascript:octry('        movl    $1, %eax            ; Let %eax = 0. %eax is going to store i.\n        cmpl    $19, %eax           ; If %eax &#62; 9, then jump out of the\n        jg      .L100               ;   loop (to label .L100 at the end).\n\n.L101:                              ; This is the start of the loop body.\n        movl    Arrayfloats, %ecx   ; Address of the array to %ecx.\n\n        movl    %eax, %ebx          ; Copy i to %ebx.\n        sarl    $1, %ebx            ; Remove the tag bit from %ebx by\n                                    ;   shifting it right 1 place. So %ebx\n                                    ;   now contains the real integer i.\n\n        pushl   %ebx                ; Convert %ebx to a float.\n        fildl   (%esp)\n        addl    $4, %esp\n\n        fstpl   -4(%ecx, %eax, 4)   ; Store the float in the array at the ith\n                                ; position.\n\n        addl    $2, %eax            ; i := i + 1\n        cmpl    $19, %eax           ; If i &#60;= 9, loop around again.\n        jle     .L101\n.L100:\n');">[try]</a></code></pre>
 <p>
 The important statement is the one which stores the float into the
 array. It is:</p>
-<pre><code class='tryocaml'>        fstpl   -4<span class='o'>(%</span>ecx<span class='o'>,</span> <span class='o'>%</span>eax<span class='o'>,</span> 4)
+<pre><code class='tryocaml'>        <span class='lower'>fstpl</span>   <span class='keywordsign'>-</span><span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>ecx</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='number'>4</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('        fstpl   -4(%ecx, %eax, 4)\n');">[try]</a></code></pre>
 <p>
 The assembler syntax is rather complex, but the bracketed expression
@@ -672,10 +666,10 @@ The assembler syntax is rather complex, but the bracketed expression
 that <code>%eax</code> is the OCaml representation of i, complete with tag bit, so
 it is essentially equal to <code>i*2+1</code>, so let&#39;s substitute that and
 multiply it out:</p>
-<pre><code class='tryocaml'>  <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*%</span>eax <span class='o'>-</span> 4
-<span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*</span>(i<span class='o'>*</span>2<span class='o'>+</span>1) <span class='o'>-</span> 4
-<span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 4<span class='o'>*</span>i<span class='o'>*</span>2 <span class='o'>+</span> 4 <span class='o'>-</span> 4
-<span class='k'>=</span> <span class='o'>%</span>ecx <span class='o'>+</span> 8<span class='o'>*</span>i
+<pre><code class='tryocaml'>  <span class='infix'>%</span><span class='lower'>ecx</span> <span class='keywordsign'>+</span> <span class='number'>4</span><span class='infix'>*%</span><span class='lower'>eax</span> <span class='keywordsign'>-</span> <span class='number'>4</span>
+<span class='keywordsign'>=</span> <span class='infix'>%</span><span class='lower'>ecx</span> <span class='keywordsign'>+</span> <span class='number'>4</span><span class='keywordsign'>*</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>*</span><span class='number'>2</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>-</span> <span class='number'>4</span>
+<span class='keywordsign'>=</span> <span class='infix'>%</span><span class='lower'>ecx</span> <span class='keywordsign'>+</span> <span class='number'>4</span><span class='keywordsign'>*</span><span class='lower'>i</span><span class='keywordsign'>*</span><span class='number'>2</span> <span class='keywordsign'>+</span> <span class='number'>4</span> <span class='keywordsign'>-</span> <span class='number'>4</span>
+<span class='keywordsign'>=</span> <span class='infix'>%</span><span class='lower'>ecx</span> <span class='keywordsign'>+</span> <span class='number'>8</span><span class='keywordsign'>*</span><span class='lower'>i</span>
 <a href="javascript:octry('  %ecx + 4*%eax - 4\n= %ecx + 4*(i*2+1) - 4\n= %ecx + 4*i*2 + 4 - 4\n= %ecx + 8*i\n');">[try]</a></code></pre>
 <p>
 (Each float in the array is 8 bytes long.)</p>
@@ -683,7 +677,7 @@ multiply it out:</p>
 <h3 id="Partiallyappliedfunctionsandclosures"> Partially applied functions and closures</h3><p>
 How does OCaml compile functions which are only partially applied? Let&#39;s
 compile this code:</p>
-<pre><code class='tryocaml'><span class='m'>Array</span><span class='o'>.</span>map (<span class='o'>(+</span>) 2) <span class='o'>[</span><span class='o'>|</span> 1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>;</span> 4<span class='o'>;</span> 5 <span class='o'>|</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keywordsign'>(</span><span class='keywordsign'>+</span><span class='keywordsign'>)</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>[|</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>4</span><span class='keywordsign'>;</span> <span class='number'>5</span> <span class='keywordsign'>|</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('Array.map ((+) 2) [| 1; 2; 3; 4; 5 |]\n');">[try]</a></code></pre>
 <p>
 If you recall the syntax, <code>[| ... |]</code> declares an array (in this case an
@@ -692,11 +686,11 @@ things&quot;.</p>
 <p>Compiling this code reveals some interesting new features. Firstly the
 code which allocates the array:</p>
 <pre><code class='tryocaml'>        
-        movl    <span class='o'>$</span>24<span class='o'>,</span> <span class='o'>%</span>eax           <span class='o'>;</span> Allocate 5 <span class='o'>*</span> 4 <span class='o'>+</span> 4 <span class='k'>=</span> 24 bytes <span class='k'>of</span> memory<span class='o'>.</span>
-        call    caml_alloc
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>24</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>           <span class='keywordsign'>;</span> <span class='constructor'>Allocate</span> <span class='number'>5</span> <span class='keywordsign'>*</span> <span class='number'>4</span> <span class='keywordsign'>+</span> <span class='number'>4</span> <span class='keywordsign'>=</span> <span class='number'>24</span> <span class='lower'>bytes</span> <span class='keyword'>of</span> <span class='lower'>memory</span><span class='keywordsign'>.</span>
+        <span class='lower'>call</span>    <span class='lower'>caml_alloc</span>
 
-        leal    4<span class='o'>(%</span>eax)<span class='o'>,</span> <span class='o'>%</span>eax       <span class='o'>;</span> Let <span class='o'>%</span>eax point <span class='k'>to</span> 4 bytes into the
-                                    <span class='o'>;</span>   allocated memory<span class='o'>.</span>
+        <span class='lower'>leal</span>    <span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>       <span class='keywordsign'>;</span> <span class='constructor'>Let</span> <span class='infix'>%</span><span class='lower'>eax</span> <span class='lower'>point</span> <span class='keyword'>to</span> <span class='number'>4</span> <span class='lower'>bytes</span> <span class='lower'>into</span> <span class='lower'>the</span>
+                                    <span class='keywordsign'>;</span>   <span class='lower'>allocated</span> <span class='lower'>memory</span><span class='keywordsign'>.</span>
 <a href="javascript:octry('        \n        movl    $24, %eax           ; Allocate 5 * 4 + 4 = 24 bytes of memory.\n        call    caml_alloc\n\n        leal    4(%eax), %eax       ; Let %eax point to 4 bytes into the\n                                    ;   allocated memory.\n');">[try]</a></code></pre>
 <p>
 All heap allocations have the same format: 4 byte header + data. In this
@@ -704,12 +698,12 @@ case the data is 5 integers, so we allocate 4 bytes for the header plus
 5 * 4 bytes for the data. We update the pointer to point at the first
 data word, ie. 4 bytes into the allocated memory block.</p>
 <p>Next OCaml generates code to initialize the array:</p>
-<pre><code class='tryocaml'>        movl    <span class='o'>$</span>5120<span class='o'>,</span> -4<span class='o'>(%</span>eax)
-        movl    <span class='o'>$</span>3<span class='o'>,</span> <span class='o'>(%</span>eax)
-        movl    <span class='o'>$</span>5<span class='o'>,</span> 4<span class='o'>(%</span>eax)
-        movl    <span class='o'>$</span>7<span class='o'>,</span> 8<span class='o'>(%</span>eax)
-        movl    <span class='o'>$</span>9<span class='o'>,</span> 12<span class='o'>(%</span>eax)
-        movl    <span class='o'>$</span>11<span class='o'>,</span> 16<span class='o'>(%</span>eax)
+<pre><code class='tryocaml'>        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>5120</span><span class='keywordsign'>,</span> <span class='keywordsign'>-</span><span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>3</span><span class='keywordsign'>,</span> <span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>5</span><span class='keywordsign'>,</span> <span class='number'>4</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>7</span><span class='keywordsign'>,</span> <span class='number'>8</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>9</span><span class='keywordsign'>,</span> <span class='number'>12</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span>
+        <span class='lower'>movl</span>    <span class='infix'>$</span><span class='number'>11</span><span class='keywordsign'>,</span> <span class='number'>16</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('        movl    $5120, -4(%eax)\n        movl    $3, (%eax)\n        movl    $5, 4(%eax)\n        movl    $7, 8(%eax)\n        movl    $9, 12(%eax)\n        movl    $11, 16(%eax)\n');">[try]</a></code></pre>
 <p>
 The header word is 5120, which if you write it in binary means a block
@@ -723,27 +717,27 @@ heap-allocated blocks (the GC does not have access to type information
 about this array).</p>
 <p>Next the closure <code>((+) 2)</code> is created. The closure is represented by
 this block allocated in the data segment:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>data
-        <span class='o'>.</span>long   3319
-        <span class='o'>.</span>globl  Closure__1
-Closure__1<span class='o'>:</span>
-        <span class='o'>.</span>long   caml_curry2
-        <span class='o'>.</span>long   5
-        <span class='o'>.</span>long   Closure__fun_58
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>data</span>
+        <span class='keywordsign'>.</span><span class='lower'>long</span>   <span class='number'>3319</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Closure__1</span>
+<span class='constructor'>Closure__1</span><span class='keywordsign'>:</span>
+        <span class='keywordsign'>.</span><span class='lower'>long</span>   <span class='lower'>caml_curry2</span>
+        <span class='keywordsign'>.</span><span class='lower'>long</span>   <span class='number'>5</span>
+        <span class='keywordsign'>.</span><span class='lower'>long</span>   <span class='constructor'>Closure__fun_58</span>
 <a href="javascript:octry('        .data\n        .long   3319\n        .globl  Closure__1\nClosure__1:\n        .long   caml_curry2\n        .long   5\n        .long   Closure__fun_58\n');">[try]</a></code></pre>
 <p>
 The header is 3319, indicating a <code>Closure_tag</code> with length 3 words. The
 3 words in the block are the address of the function <code>caml_curry2</code>, the
 integer number 2 and the address of this function:</p>
-<pre><code class='tryocaml'>        <span class='o'>.</span>text
-        <span class='o'>.</span>globl  Closure__fun_58
-Closure__fun_58<span class='o'>:</span>
+<pre><code class='tryocaml'>        <span class='keywordsign'>.</span><span class='lower'>text</span>
+        <span class='keywordsign'>.</span><span class='lower'>globl</span>  <span class='constructor'>Closure__fun_58</span>
+<span class='constructor'>Closure__fun_58</span><span class='keywordsign'>:</span>
 
-        <span class='o'>;</span> The <span class='k'>function</span> takes two arguments<span class='o'>,</span> <span class='o'>%</span>eax <span class='k'>and</span> <span class='o'>%</span>ebx<span class='o'>.</span>
-        <span class='o'>;</span> This line causes the <span class='k'>function</span> <span class='k'>to</span> return <span class='o'>%</span>eax <span class='o'>+</span> <span class='o'>%</span>ebx <span class='o'>-</span> 1.
+        <span class='keywordsign'>;</span> <span class='constructor'>The</span> <span class='keyword'>function</span> <span class='lower'>takes</span> <span class='lower'>two</span> <span class='lower'>arguments</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span> <span class='keyword'>and</span> <span class='infix'>%</span><span class='lower'>ebx</span><span class='keywordsign'>.</span>
+        <span class='keywordsign'>;</span> <span class='constructor'>This</span> <span class='lower'>line</span> <span class='lower'>causes</span> <span class='lower'>the</span> <span class='keyword'>function</span> <span class='keyword'>to</span> <span class='lower'>return</span> <span class='infix'>%</span><span class='lower'>eax</span> <span class='keywordsign'>+</span> <span class='infix'>%</span><span class='lower'>ebx</span> <span class='keywordsign'>-</span> <span class='number'>1.</span>
 
-        lea     -1<span class='o'>(%</span>eax<span class='o'>,</span> <span class='o'>%</span>ebx)<span class='o'>,</span> <span class='o'>%</span>eax
-        ret
+        <span class='lower'>lea</span>     <span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>(</span><span class='infix'>%</span><span class='lower'>eax</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>ebx</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='infix'>%</span><span class='lower'>eax</span>
+        <span class='lower'>ret</span>
 <a href="javascript:octry('        .text\n        .globl  Closure__fun_58\nClosure__fun_58:\n\n        ; The function takes two arguments, %eax and %ebx.\n        ; This line causes the function to return %eax + %ebx - 1.\n\n        lea     -1(%eax, %ebx), %eax\n        ret\n');">[try]</a></code></pre>
 <p>
 What does this function do? On the face of it, it adds the two
@@ -757,10 +751,10 @@ the OCaml representation for integers. Let&#39;s represent them as:</p>
 
 <p>where <code>a</code> and <code>b</code> are the actual integer arguments. So this function
 returns:</p>
-<pre><code class='tryocaml'>  <span class='o'>%</span>eax <span class='o'>+</span> <span class='o'>%</span>ebx <span class='o'>-</span> 1
-<span class='k'>=</span> 2 <span class='o'>*</span> a <span class='o'>+</span> 1 <span class='o'>+</span> 2 <span class='o'>*</span> b <span class='o'>+</span> 1 <span class='o'>-</span> 1
-<span class='k'>=</span> 2 <span class='o'>*</span> a <span class='o'>+</span> 2 <span class='o'>*</span> b <span class='o'>+</span> 1
-<span class='k'>=</span> 2 <span class='o'>*</span> (a <span class='o'>+</span> b) <span class='o'>+</span> 1
+<pre><code class='tryocaml'>  <span class='infix'>%</span><span class='lower'>eax</span> <span class='keywordsign'>+</span> <span class='infix'>%</span><span class='lower'>ebx</span> <span class='keywordsign'>-</span> <span class='number'>1</span>
+<span class='keywordsign'>=</span> <span class='number'>2</span> <span class='keywordsign'>*</span> <span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='number'>2</span> <span class='keywordsign'>*</span> <span class='lower'>b</span> <span class='keywordsign'>+</span> <span class='number'>1</span> <span class='keywordsign'>-</span> <span class='number'>1</span>
+<span class='keywordsign'>=</span> <span class='number'>2</span> <span class='keywordsign'>*</span> <span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='number'>2</span> <span class='keywordsign'>*</span> <span class='lower'>b</span> <span class='keywordsign'>+</span> <span class='number'>1</span>
+<span class='keywordsign'>=</span> <span class='number'>2</span> <span class='keywordsign'>*</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='number'>1</span>
 <a href="javascript:octry('  %eax + %ebx - 1\n= 2 * a + 1 + 2 * b + 1 - 1\n= 2 * a + 2 * b + 1\n= 2 * (a + b) + 1\n');">[try]</a></code></pre>
 <p>
 In other words, this function returns the OCaml integer representation
@@ -798,28 +792,28 @@ There are two types of profiling that you can do on OCaml programs:</p>
 
 <p>The <code>ocamlcp</code> and <code>ocamlprof</code> programs perform profiling on bytecode.
 Here is an example:</p>
-<pre><code class='tryocaml'><span class='com2'>(* <span class='ic'>$</span> ocamlcp <span class='ic'>-</span>p a graphics<span class='ic'>.</span>cma graphtest<span class='ic'>.</span>ml <span class='ic'>-</span>o graphtest</span>
-<span class='com2'>   <span class='ic'>$</span> <span class='ic'>./</span>graphtest</span>
-<span class='com2'>   <span class='ic'>$</span> ocamlprof graphtest<span class='ic'>.</span>ml *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(* $ ocamlcp -p a graphics.cma graphtest.ml -o graphtest
+   $ ./graphtest
+   $ ocamlprof graphtest.ml *)</span>
 
-<span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
-<span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
+<span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>self_init</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
 
-<span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
-  <span class='com2'>(* 12820000 *)</span><!-- end comment --> <span class='k'>if</span> i <span class='o'>==</span> 1 <span class='k'>then</span> <span class='com2'>(* 25640 *)</span><!-- end comment --> x_init
-  <span class='k'>else</span>
-    <span class='com2'>(* 12794360 *)</span><!-- end comment --> <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
-    r <span class='o'>*.</span> x <span class='o'>*.</span> (1.0 <span class='o'>-.</span> x)<span class='o'>;;</span>
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+  <span class='comment'>(* 12820000 *)</span> <span class='keyword'>if</span> <span class='lower'>i</span> <span class='infix'>==</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='comment'>(* 25640 *)</span> <span class='lower'>x_init</span>
+  <span class='keyword'>else</span>
+    <span class='comment'>(* 12794360 *)</span> <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='lower'>r</span> <span class='infix'>*.</span> <span class='lower'>x</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='number'>1.0</span> <span class='keywordsign'>-.</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-<span class='k'>for</span> x <span class='k'>=</span> 0 <span class='k'>to</span> 640 <span class='k'>do</span>
-  <span class='com2'>(* 641 *)</span><!-- end comment --> <span class='k'>let</span> r <span class='k'>=</span> 4.0 <span class='o'>*.</span> (float_of_int x) <span class='o'>/.</span> 640.0 <span class='k'>in</span>
-  <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
-    <span class='com2'>(* 25640 *)</span><!-- end comment --> <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
-    <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
-    <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
-    <span class='m'>Graphics</span><span class='o'>.</span>plot x y
-  <span class='k'>done</span>
-<span class='k'>done</span><span class='o'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>640</span> <span class='keyword'>do</span>
+  <span class='comment'>(* 641 *)</span> <span class='keyword'>let</span> <span class='lower'>r</span> <span class='keywordsign'>=</span> <span class='number'>4.0</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='lower'>float_of_int</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='infix'>/.</span> <span class='number'>640</span><span class='keywordsign'>.</span><span class='number'>0</span> <span class='keyword'>in</span>
+  <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>39</span> <span class='keyword'>do</span>
+    <span class='comment'>(* 25640 *)</span> <span class='keyword'>let</span> <span class='lower'>x_init</span> <span class='keywordsign'>=</span> <span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>float</span> <span class='number'>1.0</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>x_final</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='number'>500</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>int_of_float</span> <span class='keywordsign'>(</span><span class='lower'>x_final</span> <span class='infix'>*.</span> <span class='number'>480</span><span class='keywordsign'>.</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>plot</span> <span class='lower'>x</span> <span class='lower'>y</span>
+  <span class='keyword'>done</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('(* $ ocamlcp -p a graphics.cma graphtest.ml -o graphtest\n   $ ./graphtest\n   $ ocamlprof graphtest.ml *)\n\nRandom.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n  (* 12820000 *) if i == 1 then (* 25640 *) x_init\n  else\n    (* 12794360 *) let x = iterate r x_init (i-1) in\n    r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n  (* 641 *) let r = 4.0 *. (float_of_int x) /. 640.0 in\n  for i = 0 to 39 do\n    (* 25640 *) let x_init = Random.float 1.0 in\n    let x_final = iterate r x_init 500 in\n    let y = int_of_float (x_final *. 480.) in\n    Graphics.plot x y\n  done\ndone;;\n');">[try]</a></code></pre>
 <p>
 The comments <code>(* nnn *)</code> are added by <code>ocamlprof</code>, showing how many
@@ -831,59 +825,59 @@ support for profiling. In the case of Linux, we use <code>gprof</code>.</p>
 code</a>).
 This program uses streams and camlp4, techniques which we haven&#39;t
 covered in this tutorial.</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> filter p <span class='k'>=</span> parser
-  <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>-></span> <span class='k'>if</span> p n <span class='k'>then</span> <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> filter p s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>else</span> <span class='o'>[</span><span class='o'>&#60;</span> filter p s <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>filter</span> <span class='lower'>p</span> <span class='keywordsign'>=</span> <span class='keyword'>parser</span>
+  <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>n</span> <span class='lower'>s</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>if</span> <span class='lower'>p</span> <span class='lower'>n</span> <span class='keyword'>then</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>n</span> <span class='lower'>filter</span> <span class='lower'>p</span> <span class='lower'>s</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keyword'>else</span> <span class='keywordsign'>[&#60;</span> <span class='lower'>filter</span> <span class='lower'>p</span> <span class='lower'>s</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 
-<span class='k'>let</span> naturals <span class='k'>=</span>
-  <span class='k'>let rec</span> gen n <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> gen (succ n) <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>in</span> gen 2
+<span class='keyword'>let</span> <span class='lower'>naturals</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>gen</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>n</span> <span class='lower'>gen</span> <span class='keywordsign'>(</span><span class='lower'>succ</span> <span class='lower'>n</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span> <span class='lower'>gen</span> <span class='number'>2</span>
 
-<span class='k'>let</span> primes <span class='k'>=</span>
-  <span class='k'>let rec</span> sieve <span class='k'>=</span> parser
-    <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> s <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>&#60;</span> 'n<span class='o'>;</span> sieve (filter (<span class='k'>fun</span> m <span class='k'>-></span> m <span class='k'>mod</span> n <span class='o'>&#60;&#62;</span> 0) s) <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>in</span>
-  sieve naturals
+<span class='keyword'>let</span> <span class='lower'>primes</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>sieve</span> <span class='keywordsign'>=</span> <span class='keyword'>parser</span>
+    <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>n</span> <span class='lower'>s</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>n</span> <span class='lower'>sieve</span> <span class='keywordsign'>(</span><span class='lower'>filter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>m</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>m</span> <span class='keyword'>mod</span> <span class='lower'>n</span> <span class='infix'>&#60;&#62;</span> <span class='number'>0</span><span class='keywordsign'>)</span> <span class='lower'>s</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+  <span class='lower'>sieve</span> <span class='lower'>naturals</span>
 
-<span class='k'>let</span> () <span class='k'>=</span>
-  <span class='k'>for</span> i <span class='k'>=</span> 1 <span class='k'>to</span> 3000 <span class='k'>do</span>
-    ignore (<span class='m'>Stream</span><span class='o'>.</span>next primes)
-  <span class='k'>done</span>
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keyword'>to</span> <span class='number'>3000</span> <span class='keyword'>do</span>
+    <span class='lower'>ignore</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>primes</span><span class='keywordsign'>)</span>
+  <span class='keyword'>done</span>
 <a href="javascript:octry('let rec filter p = parser\n  [&#60; &#39;n; s &#62;] -&#62; if p n then [&#60; &#39;n; filter p s &#62;] else [&#60; filter p s &#62;]\n\nlet naturals =\n  let rec gen n = [&#60; &#39;n; gen (succ n) &#62;] in gen 2\n\nlet primes =\n  let rec sieve = parser\n    [&#60; &#39;n; s &#62;] -&#62; [&#60; &#39;n; sieve (filter (fun m -&#62; m mod n &#60;&#62; 0) s) &#62;] in\n  sieve naturals\n\nlet () =\n  for i = 1 to 3000 do\n    ignore (Stream.next primes)\n  done\n');">[try]</a></code></pre>
 <p>
 We compile it using the <code>-p</code> option to <code>ocamlopt</code> which tells the
 compiler to include profiling information for <code>gprof</code>:</p>
-<pre><code class='tryocaml'><span class='o'>$</span> ocamlopt <span class='o'>-</span>p <span class='o'>-</span>pp <span class='s'>&#34;camlp4o pa_extend.cmo&#34;</span> <span class='o'>-</span>I <span class='o'>+</span>camlp4 sieve<span class='o'>.</span>ml <span class='o'>-</span>o sieve
+<pre><code class='tryocaml'><span class='infix'>$</span> <span class='lower'>ocamlopt</span> <span class='keywordsign'>-</span><span class='lower'>p</span> <span class='keywordsign'>-</span><span class='lower'>pp</span> <span class='string'>&#34;camlp4o pa_extend.cmo&#34;</span> <span class='keywordsign'>-</span><span class='constructor'>I</span> <span class='keywordsign'>+</span><span class='lower'>camlp4</span> <span class='lower'>sieve</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='keywordsign'>-</span><span class='lower'>o</span> <span class='lower'>sieve</span>
 <a href="javascript:octry('$ ocamlopt -p -pp &#34;camlp4o pa_extend.cmo&#34; -I +camlp4 sieve.ml -o sieve\n');">[try]</a></code></pre>
 <p>
 After running the program as normal, the profiling code dumps out a file
 <code>gmon.out</code> which we can interpret with <code>gprof</code>:</p>
-<pre><code class='tryocaml'><span class='o'>$</span> gprof <span class='o'>./</span>sieve
-Flat profile<span class='o'>:</span>
+<pre><code class='tryocaml'><span class='infix'>$</span> <span class='lower'>gprof</span> <span class='keywordsign'>.</span><span class='infix'>/</span><span class='lower'>sieve</span>
+<span class='constructor'>Flat</span> <span class='lower'>profile</span><span class='keywordsign'>:</span>
 
-Each sample counts <span class='k'>as</span> 0.01 seconds<span class='o'>.</span>
-  <span class='o'>%</span>   cumulative   self              self     total
- time   seconds   seconds    calls   s<span class='o'>/</span>call   s<span class='o'>/</span>call  name
- 10.86      0.57     0.57     2109     0.00     0.00  sweep_slice
-  9.71      1.08     0.51     1113     0.00     0.00  mark_slice
-  7.24      1.46     0.38  4569034     0.00     0.00  Sieve__code_begin
-  6.86      1.82     0.36  9171515     0.00     0.00  Stream__set_data_140
-  6.57      2.17     0.34 12741964     0.00     0.00  fl_merge_block
-  6.29      2.50     0.33  4575034     0.00     0.00  Stream__peek_154
-  5.81      2.80     0.30 12561656     0.00     0.00  alloc_shr
-  5.71      3.10     0.30     3222     0.00     0.00  oldify_mopup
-  4.57      3.34     0.24 12561656     0.00     0.00  allocate_block
-  4.57      3.58     0.24  9171515     0.00     0.00  modify
-  4.38      3.81     0.23  8387342     0.00     0.00  oldify_one
-  3.81      4.01     0.20 12561658     0.00     0.00  fl_allocate
-  3.81      4.21     0.20  4569034     0.00     0.00  Sieve__filter_56
-  3.62      4.40     0.19     6444     0.00     0.00  empty_minor_heap
-  3.24      4.57     0.17     3222     0.00     0.00  oldify_local_roots
-  2.29      4.69     0.12  4599482     0.00     0.00  Stream__slazy_221
-  2.10      4.80     0.11  4597215     0.00     0.00  darken
-  1.90      4.90     0.10  4596481     0.00     0.00  Stream__fun_345
-  1.52      4.98     0.08  4575034     0.00     0.00  Stream__icons_207
-  1.52      5.06     0.08  4575034     0.00     0.00  Stream__junk_165
-  1.14      5.12     0.06     1112     0.00     0.00  do_local_roots
+<span class='constructor'>Each</span> <span class='lower'>sample</span> <span class='lower'>counts</span> <span class='keyword'>as</span> <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>01</span> <span class='lower'>seconds</span><span class='keywordsign'>.</span>
+  <span class='infix'>%</span>   <span class='lower'>cumulative</span>   <span class='lower'>self</span>              <span class='lower'>self</span>     <span class='lower'>total</span>
+ <span class='lower'>time</span>   <span class='lower'>seconds</span>   <span class='lower'>seconds</span>    <span class='lower'>calls</span>   <span class='lower'>s</span><span class='infix'>/</span><span class='lower'>call</span>   <span class='lower'>s</span><span class='infix'>/</span><span class='lower'>call</span>  <span class='lower'>name</span>
+ <span class='number'>10</span><span class='keywordsign'>.</span><span class='number'>86</span>      <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>57</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>57</span>     <span class='number'>2109</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>sweep_slice</span>
+  <span class='number'>9.71</span>      <span class='number'>1.08</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>51</span>     <span class='number'>1113</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>mark_slice</span>
+  <span class='number'>7.24</span>      <span class='number'>1.46</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>38</span>  <span class='number'>4569034</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Sieve__code_begin</span>
+  <span class='number'>6.86</span>      <span class='number'>1.82</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>36</span>  <span class='number'>9171515</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Stream__set_data_140</span>
+  <span class='number'>6.57</span>      <span class='number'>2.17</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>34</span> <span class='number'>12741964</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>fl_merge_block</span>
+  <span class='number'>6.29</span>      <span class='number'>2.50</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>33</span>  <span class='number'>4575034</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Stream__peek_154</span>
+  <span class='number'>5.81</span>      <span class='number'>2.80</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>30</span> <span class='number'>12561656</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>alloc_shr</span>
+  <span class='number'>5.71</span>      <span class='number'>3.10</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>30</span>     <span class='number'>3222</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>oldify_mopup</span>
+  <span class='number'>4.57</span>      <span class='number'>3.34</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>24</span> <span class='number'>12561656</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>allocate_block</span>
+  <span class='number'>4.57</span>      <span class='number'>3.58</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>24</span>  <span class='number'>9171515</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>modify</span>
+  <span class='number'>4.38</span>      <span class='number'>3.81</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>23</span>  <span class='number'>8387342</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>oldify_one</span>
+  <span class='number'>3.81</span>      <span class='number'>4.01</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>20</span> <span class='number'>12561658</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>fl_allocate</span>
+  <span class='number'>3.81</span>      <span class='number'>4.21</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>20</span>  <span class='number'>4569034</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Sieve__filter_56</span>
+  <span class='number'>3.62</span>      <span class='number'>4.40</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>19</span>     <span class='number'>6444</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>empty_minor_heap</span>
+  <span class='number'>3.24</span>      <span class='number'>4.57</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>17</span>     <span class='number'>3222</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>oldify_local_roots</span>
+  <span class='number'>2.29</span>      <span class='number'>4.69</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>12</span>  <span class='number'>4599482</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Stream__slazy_221</span>
+  <span class='number'>2.10</span>      <span class='number'>4.80</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>11</span>  <span class='number'>4597215</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>darken</span>
+  <span class='number'>1.90</span>      <span class='number'>4.90</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>10</span>  <span class='number'>4596481</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Stream__fun_345</span>
+  <span class='number'>1.52</span>      <span class='number'>4.98</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>08</span>  <span class='number'>4575034</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Stream__icons_207</span>
+  <span class='number'>1.52</span>      <span class='number'>5.06</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>08</span>  <span class='number'>4575034</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='constructor'>Stream__junk_165</span>
+  <span class='number'>1.14</span>      <span class='number'>5.12</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>06</span>     <span class='number'>1112</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>     <span class='number'>0</span><span class='keywordsign'>.</span><span class='number'>00</span>  <span class='lower'>do_local_roots</span>
 
-<span class='o'>[</span> etc<span class='o'>.</span> <span class='o'>]</span>
+<span class='keywordsign'>[</span> <span class='lower'>etc</span><span class='keywordsign'>.</span> <span class='keywordsign'>]</span>
 <a href="javascript:octry('$ gprof ./sieve\nFlat profile:\n\nEach sample counts as 0.01 seconds.\n  %   cumulative   self              self     total\n time   seconds   seconds    calls   s/call   s/call  name\n 10.86      0.57     0.57     2109     0.00     0.00  sweep_slice\n  9.71      1.08     0.51     1113     0.00     0.00  mark_slice\n  7.24      1.46     0.38  4569034     0.00     0.00  Sieve__code_begin\n  6.86      1.82     0.36  9171515     0.00     0.00  Stream__set_data_140\n  6.57      2.17     0.34 12741964     0.00     0.00  fl_merge_block\n  6.29      2.50     0.33  4575034     0.00     0.00  Stream__peek_154\n  5.81      2.80     0.30 12561656     0.00     0.00  alloc_shr\n  5.71      3.10     0.30     3222     0.00     0.00  oldify_mopup\n  4.57      3.34     0.24 12561656     0.00     0.00  allocate_block\n  4.57      3.58     0.24  9171515     0.00     0.00  modify\n  4.38      3.81     0.23  8387342     0.00     0.00  oldify_one\n  3.81      4.01     0.20 12561658     0.00     0.00  fl_allocate\n  3.81      4.21     0.20  4569034     0.00     0.00  Sieve__filter_56\n  3.62      4.40     0.19     6444     0.00     0.00  empty_minor_heap\n  3.24      4.57     0.17     3222     0.00     0.00  oldify_local_roots\n  2.29      4.69     0.12  4599482     0.00     0.00  Stream__slazy_221\n  2.10      4.80     0.11  4597215     0.00     0.00  darken\n  1.90      4.90     0.10  4596481     0.00     0.00  Stream__fun_345\n  1.52      4.98     0.08  4575034     0.00     0.00  Stream__icons_207\n  1.52      5.06     0.08  4575034     0.00     0.00  Stream__junk_165\n  1.14      5.12     0.06     1112     0.00     0.00  do_local_roots\n\n[ etc. ]\n');">[try]</a></code></pre>
 <p>
 In fact this program spends much of its time in the garbage collector

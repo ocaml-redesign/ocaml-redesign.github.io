@@ -198,17 +198,17 @@
       </div>
 
             <pre><code class='tryocaml'><span class='com2'>(* Binary tree <span class='ic'>with</span> leaves carrying an integer<span class='ic'>.</span> *)</span><!-- end comment -->
-<span class='k'>type</span> tree <span class='k'>=</span> Leaf <span class='k'>of</span> int <span class='o'>|</span> Node <span class='k'>of</span> tree <span class='o'>*</span> tree
+<span class='keyword 1'>type</span> tree <span class='keyword 3'>=</span> Leaf <span class='keyword 3'>of</span> int <span class='keywordsign'>|</span> Node <span class='keyword 3'>of</span> tree <span class='keywordsign'>*</span> tree
 
-<span class='k'>let rec</span> exists_leaf test tree <span class='k'>=</span>
-  <span class='k'>match</span> tree <span class='k'>with</span>
-  <span class='o'>|</span> Leaf v <span class='k'>-></span> test v
-  <span class='o'>|</span> Node (left<span class='o'>,</span> right) <span class='k'>-></span>
+<span class='keyword 1'>let rec</span> exists_leaf test tree <span class='keyword 3'>=</span>
+  <span class='keyword 3'>match</span> tree <span class='keyword 1'>with</span>
+  <span class='keywordsign'>|</span> Leaf v <span class='keyword 3'>-></span> test v
+  <span class='keywordsign'>|</span> Node (left<span class='keywordsign'>,</span> right) <span class='keyword 3'>-></span>
       exists_leaf test left
-      <span class='o'>||</span> exists_leaf test right
+      <span class='keywordsign'>||</span> exists_leaf test right
 
-<span class='k'>let</span> has_even_leaf tree <span class='k'>=</span>
-  exists_leaf (<span class='k'>fun</span> n <span class='k'>-></span> n <span class='k'>mod</span> 2 <span class='k'>=</span> 0) tree
+<span class='keyword 1'>let</span> has_even_leaf tree <span class='keyword 3'>=</span>
+  exists_leaf (<span class='keyword 1'>fun</span> n <span class='keyword 3'>-></span> n <span class='keyword 3'>mod</span> 2 <span class='keyword 3'>=</span> 0) tree
 <a href="javascript:octry('(* Binary tree with leaves carrying an integer. *)\ntype tree = Leaf of int | Node of tree * tree\n\nlet rec exists_leaf test tree =\n  match tree with\n  | Leaf v -&#62; test v\n  | Node (left, right) -&#62;\n      exists_leaf test left\n      || exists_leaf test right\n\nlet has_even_leaf tree =\n  exists_leaf (fun n -&#62; n mod 2 = 0) tree\n');">[try]</a></code></pre>
 
         </section>

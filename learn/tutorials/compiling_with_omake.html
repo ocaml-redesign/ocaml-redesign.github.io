@@ -108,46 +108,8 @@ findlib/ocamlfind:</p>
  and put the following:</li>
 </ol>
 
-<!-- --><pre><code class='tryocaml'><span class='o'>#</span> Program name (without extension)
-PROGRAM <span class='k'>=</span> myprog
-
-<span class='o'>#</span> Source files without extension<span class='o'>.</span> One item per line<span class='o'>,</span> no trailing spaces<span class='o'>.</span>
-FILES<span class='o'>[</span><span class='o'>]</span> <span class='k'>=</span>
-   parser
-   lexer
-   main
-<span class='o'>#</span> Another syntax <span class='k'>for</span> the same thing<span class='o'>:</span>
-<span class='o'>#</span> FILES <span class='k'>=</span> parser lexer <span class='o'>\</span>
-<span class='o'>#</span>         main
-
-<span class='o'>#</span> We use ocamlfind
-USE_OCAMLFIND <span class='k'>=</span> <span class='o'>true</span>
-<span class='o'>#</span> All ocamlfind packages that we use
-OCAMLPACKS<span class='o'>[</span><span class='o'>]</span> <span class='k'>=</span>
-   unix
-   micmatch_pcre
-   labltk
-<span class='o'>#</span> We need <span class='k'>to</span> tell omake that we want camlp4 preprocessing
-OCAMLFINDFLAGS <span class='k'>=</span> <span class='o'>-</span>syntax camlp4o
-
-<span class='o'>#</span> We need <span class='k'>to</span> tell OMake that these files need <span class='k'>to</span> be created
-<span class='o'>#</span> before it attempts <span class='k'>to</span> run ocamldep<span class='o'>.</span>
-<span class='o'>#</span> (OMake knows that ocamllex <span class='k'>and</span> ocamlyacc should be used)
-OCamlGeneratedFiles(lexer<span class='o'>.</span>ml parser<span class='o'>.</span>mli parser<span class='o'>.</span>ml)
-
-<span class='o'>#</span> Compile into an executable
-OCamlProgram<span class='o'>($</span>(PROGRAM)<span class='o'>,</span> <span class='o'>$</span>(FILES))
-
-<span class='o'>#</span> Default target<span class='o'>:</span> compile into bytecode <span class='k'>or</span> native code<span class='o'>,</span> <span class='k'>or</span> both
-<span class='o'>.</span>DEFAULT<span class='o'>:</span> <span class='o'>$</span>(<span class='k'>if</span> <span class='o'>$</span>(BYTE_ENABLED)<span class='o'>,</span> <span class='o'>$</span>(PROGRAM)<span class='o'>.</span>run) <span class='o'>\</span>
-          <span class='o'>$</span>(<span class='k'>if</span> <span class='o'>$</span>(NATIVE_ENABLED)<span class='o'>,</span> <span class='o'>$</span>(PROGRAM)<span class='o'>.</span>opt)
-
-<span class='o'>#</span> <span class='m'>Cleanup</span>
-<span class='o'>.</span>PHONY<span class='o'>:</span> clean
-clean<span class='o'>:</span>
-  rm <span class='o'>-</span>f <span class='o'>\</span>
-     <span class='o'>$</span>(filter<span class='o'>-</span>proper<span class='o'>-</span>targets <span class='o'>$</span>(glob <span class='o'>$</span>(addsuffix <span class='o'>.*</span><span class='o'>,</span> <span class='o'>$</span>(FILES)))) <span class='o'>\</span>
-     <span class='o'>$</span>(PROGRAM)<span class='o'>.</span>run <span class='o'>$</span>(PROGRAM)<span class='o'>.</span>opt
+<!-- --><pre><code class='tryocaml'>Characters 10:23 - 10:24 :
+Error: Lexical error: unexpected presence of a backslash
 <a href="javascript:octry('# Program name (without extension)\nPROGRAM = myprog\n\n# Source files without extension. One item per line, no trailing spaces.\nFILES[] =\n   parser\n   lexer\n   main\n# Another syntax for the same thing:\n# FILES = parser lexer \\n#         main\n\n# We use ocamlfind\nUSE_OCAMLFIND = true\n# All ocamlfind packages that we use\nOCAMLPACKS[] =\n   unix\n   micmatch_pcre\n   labltk\n# We need to tell omake that we want camlp4 preprocessing\nOCAMLFINDFLAGS = -syntax camlp4o\n\n# We need to tell OMake that these files need to be created\n# before it attempts to run ocamldep.\n# (OMake knows that ocamllex and ocamlyacc should be used)\nOCamlGeneratedFiles(lexer.ml parser.mli parser.ml)\n\n# Compile into an executable\nOCamlProgram($(PROGRAM), $(FILES))\n\n# Default target: compile into bytecode or native code, or both\n.DEFAULT: $(if $(BYTE_ENABLED), $(PROGRAM).run) \\n          $(if $(NATIVE_ENABLED), $(PROGRAM).opt)\n\n# Cleanup\n.PHONY: clean\nclean:\n  rm -f \\n     $(filter-proper-targets $(glob $(addsuffix .*, $(FILES)))) \\n     $(PROGRAM).run $(PROGRAM).opt\n');">[try]</a></code></pre>
 <p>
 

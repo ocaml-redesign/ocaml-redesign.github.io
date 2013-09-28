@@ -91,32 +91,32 @@
       <div id='main-contents' class="content">
         <h1 id="Camlp4310dynamicfunctorexampleml"> Camlp4 3.10 dynamic_functor_example.ml</h1><p>
 dynamic_functor_example.ml:</p>
-<pre><code class='tryocaml'><span class='k'>type</span> t1 <span class='k'>=</span> A <span class='o'>|</span> B
-<span class='k'>type</span> t2 <span class='k'>=</span> Foo <span class='k'>of</span> string <span class='o'>*</span> t1
-<span class='k'>open</span> Camlp4
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>t1</span> <span class='keywordsign'>=</span> <span class='constructor'>A</span> <span class='keywordsign'>|</span> <span class='constructor'>B</span>
+<span class='keyword'>type</span> <span class='lower'>t2</span> <span class='keywordsign'>=</span> <span class='constructor'>Foo</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>t1</span>
+<span class='keyword'>open</span> <span class='constructor'>Camlp4</span>
 
-<span class='k'>module</span> Id <span class='k'>=</span> <span class='k'>struct</span> <span class='com2'>(* Information <span class='ic'>for</span> dynamic loading *)</span><!-- end comment -->
-  <span class='k'>let</span> name <span class='k'>=</span> <span class='s'>&#34;My_extension&#34;</span>
-  <span class='k'>let</span> version <span class='k'>=</span> <span class='s'>&#34;$Id$&#34;</span>
-<span class='k'>end</span>
+<span class='keyword'>module</span> <span class='constructor'>Id</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span> <span class='comment'>(* Information for dynamic loading *)</span>
+  <span class='keyword'>let</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='string'>&#34;My_extension&#34;</span>
+  <span class='keyword'>let</span> <span class='lower'>version</span> <span class='keywordsign'>=</span> <span class='string'>&#34;$Id$&#34;</span>
+<span class='keyword'>end</span>
 
-<span class='com2'>(* An extension is just a <span class='ic'>functor</span><span class='ic'>:</span> Syntax <span class='ic'>-></span> Syntax *)</span><!-- end comment -->
-<span class='k'>module</span> Make (Syntax <span class='o'>:</span> <span class='m'>Sig</span><span class='o'>.</span>Syntax) <span class='k'>=</span> <span class='k'>struct</span>
-  <span class='k'>include</span> Syntax
-  <span class='k'>let</span> foo <span class='k'>=</span> <span class='m'>Gram</span><span class='o'>.</span><span class='m'>Entry</span><span class='o'>.</span>mk <span class='s'>&#34;foo&#34;</span>
-  <span class='k'>let</span> bar <span class='k'>=</span> <span class='m'>Gram</span><span class='o'>.</span><span class='m'>Entry</span><span class='o'>.</span>mk <span class='s'>&#34;bar&#34;</span>
-  <span class='k'>open</span> <span class='m'>Camlp4</span><span class='o'>.</span>Sig
-  EXTEND Gram
-    GLOBAL<span class='o'>:</span> foo bar<span class='o'>;</span>
-    foo<span class='o'>:</span> <span class='o'>[</span> <span class='o'>[</span> <span class='s'>&#34;foo&#34;</span><span class='o'>;</span> i <span class='k'>=</span> LIDENT<span class='o'>;</span> b <span class='k'>=</span> bar <span class='k'>-></span> Foo(i<span class='o'>,</span> b) <span class='o'>]</span> <span class='o'>]</span><span class='o'>;</span>
-    bar<span class='o'>:</span> <span class='o'>[</span> <span class='o'>[</span> <span class='s'>&#34;?&#34;</span> <span class='k'>-></span> A <span class='o'>|</span> <span class='s'>&#34;.&#34;</span> <span class='k'>-></span> B <span class='o'>]</span> <span class='o'>]</span><span class='o'>;</span>
-  END<span class='o'>;;</span>
-  <span class='m'>Gram</span><span class='o'>.</span>parse_string foo (<span class='m'>Loc</span><span class='o'>.</span>mk <span class='s'>&#34;&#60;string&#62;&#34;</span>) <span class='s'>&#34;foo x?&#34;</span> <span class='k'>=</span> Foo(<span class='s'>&#34;x&#34;</span><span class='o'>,</span> A)
-  DELETE_RULE Gram foo<span class='o'>:</span> <span class='s'>&#34;foo&#34;</span><span class='o'>;</span> LIDENT<span class='o'>;</span> bar END
-<span class='k'>end</span>
+<span class='comment'>(* An extension is just a functor: Syntax -&#62; Syntax *)</span>
+<span class='keyword'>module</span> <span class='constructor'>Make</span> <span class='keywordsign'>(</span><span class='constructor'>Syntax</span> <span class='keywordsign'>:</span> <span class='constructor'>Sig</span><span class='keywordsign'>.</span><span class='constructor'>Syntax</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+  <span class='keyword'>include</span> <span class='constructor'>Syntax</span>
+  <span class='keyword'>let</span> <span class='lower'>foo</span> <span class='keywordsign'>=</span> <span class='constructor'>Gram</span><span class='keywordsign'>.</span><span class='constructor'>Entry</span><span class='keywordsign'>.</span><span class='lower'>mk</span> <span class='string'>&#34;foo&#34;</span>
+  <span class='keyword'>let</span> <span class='lower'>bar</span> <span class='keywordsign'>=</span> <span class='constructor'>Gram</span><span class='keywordsign'>.</span><span class='constructor'>Entry</span><span class='keywordsign'>.</span><span class='lower'>mk</span> <span class='string'>&#34;bar&#34;</span>
+  <span class='keyword'>open</span> <span class='constructor'>Camlp4</span><span class='keywordsign'>.</span><span class='constructor'>Sig</span>
+  <span class='constructor'>EXTEND</span> <span class='constructor'>Gram</span>
+    <span class='constructor'>GLOBAL</span><span class='keywordsign'>:</span> <span class='lower'>foo</span> <span class='lower'>bar</span><span class='keywordsign'>;</span>
+    <span class='lower'>foo</span><span class='keywordsign'>:</span> <span class='keywordsign'>[</span> <span class='keywordsign'>[</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='constructor'>LIDENT</span><span class='keywordsign'>;</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='lower'>bar</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Foo</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>,</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign'>]</span> <span class='keywordsign'>]</span><span class='keywordsign'>;</span>
+    <span class='lower'>bar</span><span class='keywordsign'>:</span> <span class='keywordsign'>[</span> <span class='keywordsign'>[</span> <span class='string'>&#34;?&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>A</span> <span class='keywordsign'>|</span> <span class='string'>&#34;.&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>B</span> <span class='keywordsign'>]</span> <span class='keywordsign'>]</span><span class='keywordsign'>;</span>
+  <span class='constructor'>END</span><span class='keywordsign'>;;</span>
+  <span class='constructor'>Gram</span><span class='keywordsign'>.</span><span class='lower'>parse_string</span> <span class='lower'>foo</span> <span class='keywordsign'>(</span><span class='constructor'>Loc</span><span class='keywordsign'>.</span><span class='lower'>mk</span> <span class='string'>&#34;&#60;string&#62;&#34;</span><span class='keywordsign'>)</span> <span class='string'>&#34;foo x?&#34;</span> <span class='keywordsign'>=</span> <span class='constructor'>Foo</span><span class='keywordsign'>(</span><span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor'>A</span><span class='keywordsign'>)</span>
+  <span class='constructor'>DELETE_RULE</span> <span class='constructor'>Gram</span> <span class='lower'>foo</span><span class='keywordsign'>:</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>;</span> <span class='constructor'>LIDENT</span><span class='keywordsign'>;</span> <span class='lower'>bar</span> <span class='constructor'>END</span>
+<span class='keyword'>end</span>
 
-<span class='com2'>(* Register it <span class='ic'>to</span> make it usable via the camlp4 binary<span class='ic'>.</span> *)</span><!-- end comment -->
-<span class='k'>module</span> M <span class='k'>=</span> <span class='m'>Register</span><span class='o'>.</span>SyntaxExtension(Id)(Make)
+<span class='comment'>(* Register it to make it usable via the camlp4 binary. *)</span>
+<span class='keyword'>module</span> <span class='constructor'>M</span> <span class='keywordsign'>=</span> <span class='constructor'>Register</span><span class='keywordsign'>.</span><span class='constructor'>SyntaxExtension</span><span class='keywordsign'>(</span><span class='constructor'>Id</span><span class='keywordsign'>)</span><span class='keywordsign'>(</span><span class='constructor'>Make</span><span class='keywordsign'>)</span>
 
 <a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4\n\nmodule Id = struct (* Information for dynamic loading *)\n  let name = &#34;My_extension&#34;\n  let version = &#34;$Id$&#34;\nend\n\n(* An extension is just a functor: Syntax -&#62; Syntax *)\nmodule Make (Syntax : Sig.Syntax) = struct\n  include Syntax\n  let foo = Gram.Entry.mk &#34;foo&#34;\n  let bar = Gram.Entry.mk &#34;bar&#34;\n  open Camlp4.Sig\n  EXTEND Gram\n    GLOBAL: foo bar;\n    foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n    bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\n  END;;\n  Gram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\n  DELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\nend\n\n(* Register it to make it usable via the camlp4 binary. *)\nmodule M = Register.SyntaxExtension(Id)(Make)\n\n');">[try]</a></code></pre>
 

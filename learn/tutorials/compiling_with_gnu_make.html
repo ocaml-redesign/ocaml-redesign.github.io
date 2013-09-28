@@ -97,14 +97,8 @@ complex OCaml projects.</p>
 <p>For a basic OCaml program or library that doesn&#39;t use any library
 besides the standard library, just copy OCamlMakefile to the current
 directory and create the following Makefile:</p>
-<pre><code class='tryocaml'>RESULT <span class='k'>=</span> myprogram
-SOURCES <span class='k'>=</span> <span class='o'>\</span>
-  mymodule1<span class='o'>.</span>mli mymodule1<span class='o'>.</span>ml <span class='o'>\</span>
-  myparser<span class='o'>.</span>mli myparser<span class='o'>.</span>mly mylexer<span class='o'>.</span>mll mymodule2<span class='o'>.</span>ml <span class='o'>\</span>
-  mymainprogram<span class='o'>.</span>ml
-
-OCAMLMAKEFILE <span class='k'>=</span> OCamlMakefile
-<span class='k'>include</span> <span class='o'>$</span>(OCAMLMAKEFILE)
+<pre><code class='tryocaml'>Characters 2:10 - 2:11 :
+Error: Lexical error: unexpected presence of a backslash
 <a href="javascript:octry('RESULT = myprogram\nSOURCES = \\n  mymodule1.mli mymodule1.ml \\n  myparser.mli myparser.mly mylexer.mll mymodule2.ml \\n  mymainprogram.ml\n\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n');">[try]</a></code></pre>
 <p>
 This is already a fairly complex program which has 5 compilation units
@@ -114,15 +108,15 @@ in the example.</p>
 <p>The included OCamlMakefile provides a variety of targets. For details
 please refer to the documentation of OCamlMakefile, but here are the
 main ones:</p>
-<pre><code class='tryocaml'>nc     make a native code executable
-bc     make a bytecode executable
-ncl    make a native code library
-bcl    make a bytecode library
-libinstall    install library <span class='k'>with</span> ocamlfind
-libuninstall  uninstall library <span class='k'>with</span> ocamlfind
-top    make a custom toplevel from all your modules
-clean  remove everything that matches one <span class='k'>of</span> the files that could have been
-       automatically created by OCamlMakefile
+<pre><code class='tryocaml'><span class='lower'>nc</span>     <span class='lower'>make</span> <span class='lower'>a</span> <span class='lower'>native</span> <span class='lower'>code</span> <span class='lower'>executable</span>
+<span class='lower'>bc</span>     <span class='lower'>make</span> <span class='lower'>a</span> <span class='lower'>bytecode</span> <span class='lower'>executable</span>
+<span class='lower'>ncl</span>    <span class='lower'>make</span> <span class='lower'>a</span> <span class='lower'>native</span> <span class='lower'>code</span> <span class='lower'>library</span>
+<span class='lower'>bcl</span>    <span class='lower'>make</span> <span class='lower'>a</span> <span class='lower'>bytecode</span> <span class='lower'>library</span>
+<span class='lower'>libinstall</span>    <span class='lower'>install</span> <span class='lower'>library</span> <span class='keyword'>with</span> <span class='lower'>ocamlfind</span>
+<span class='lower'>libuninstall</span>  <span class='lower'>uninstall</span> <span class='lower'>library</span> <span class='keyword'>with</span> <span class='lower'>ocamlfind</span>
+<span class='lower'>top</span>    <span class='lower'>make</span> <span class='lower'>a</span> <span class='lower'>custom</span> <span class='lower'>toplevel</span> <span class='lower'>from</span> <span class='lower'>all</span> <span class='lower'>your</span> <span class='lower'>modules</span>
+<span class='lower'>clean</span>  <span class='lower'>remove</span> <span class='lower'>everything</span> <span class='lower'>that</span> <span class='lower'>matches</span> <span class='lower'>one</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='lower'>files</span> <span class='lower'>that</span> <span class='lower'>could</span> <span class='lower'>have</span> <span class='lower'>been</span>
+       <span class='lower'>automatically</span> <span class='lower'>created</span> <span class='lower'>by</span> <span class='constructor'>OCamlMakefile</span>
 <a href="javascript:octry('nc     make a native code executable\nbc     make a bytecode executable\nncl    make a native code library\nbcl    make a bytecode library\nlibinstall    install library with ocamlfind\nlibuninstall  uninstall library with ocamlfind\ntop    make a custom toplevel from all your modules\nclean  remove everything that matches one of the files that could have been\n       automatically created by OCamlMakefile\n');">[try]</a></code></pre>
 <h2 id="OCamlMakefilelibrariesCamlp4parsing"> OCamlMakefile + libraries + Camlp4 parsing</h2><p>
 
@@ -135,13 +129,13 @@ situation.</p>
 by setting the LIBS and INCDIRS variable. LIBS is the list of the name
 of the library files (xxx.cma or xxx.cmxa) without the .cma or .cmxa
 extension:</p>
-<pre><code class='tryocaml'>LIBS <span class='k'>=</span> str unix
+<pre><code class='tryocaml'><span class='constructor'>LIBS</span> <span class='keywordsign'>=</span> <span class='lower'>str</span> <span class='lower'>unix</span>
 <a href="javascript:octry('LIBS = str unix\n');">[try]</a></code></pre>
 <p>
 If you use non-standard libraries that are not installed in the same
 directory as the standard library, the INCDIRS variable must contain the
 list of these directories:</p>
-<pre><code class='tryocaml'>INCDIRS <span class='k'>=</span> <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>somelibdirectory<span class='o'>/</span>
+<pre><code class='tryocaml'><span class='constructor'>INCDIRS</span> <span class='keywordsign'>=</span> <span class='infix'>/</span><span class='lower'>path</span><span class='infix'>/</span><span class='keyword'>to</span><span class='infix'>/</span><span class='lower'>somelibdirectory</span><span class='infix'>/</span>
 <a href="javascript:octry('INCDIRS = /path/to/somelibdirectory/\n');">[try]</a></code></pre>
 <p>
 Usually this requires some preliminary configuration as it is
@@ -150,12 +144,12 @@ from one installation to another. An exception is when using standard
 directories which are not included in the search path by default such as
 /path/to/stdlib/camlp4. In this case, this should be enough and
 portable:</p>
-<pre><code class='tryocaml'>INCDIRS <span class='k'>=</span> <span class='o'>+</span>camlp4
+<pre><code class='tryocaml'><span class='constructor'>INCDIRS</span> <span class='keywordsign'>=</span> <span class='keywordsign'>+</span><span class='lower'>camlp4</span>
 <a href="javascript:octry('INCDIRS = +camlp4\n');">[try]</a></code></pre>
 <p>
 OK, but we prefer libraries that are installed with ocamlfind. To use
 them with OCamlMakefile, the PACKS variable must be set:</p>
-<pre><code class='tryocaml'>PACKS <span class='k'>=</span> netstring num
+<pre><code class='tryocaml'><span class='constructor'>PACKS</span> <span class='keywordsign'>=</span> <span class='lower'>netstring</span> <span class='lower'>num</span>
 <a href="javascript:octry('PACKS = netstring num\n');">[try]</a></code></pre>
 <p>
 Note that libraries that not part of the standard library but are
@@ -167,22 +161,23 @@ pcre) is automatically loaded.</p>
 extensions, which are bytecode units that are loaded by the
 preprocessor. With OCamlMakefile, a preprocessor to be used can be
 defined in the first line of the file:</p>
-<pre><code class='tryocaml'><span class='com2'>(*pp <span class='ic'>...</span></span>
-<span class='com2'></span><a href="javascript:octry('(*pp ...\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'>Characters 1:2 - 2:0 :
+Error: Lexical error: Incomplete comment
+<a href="javascript:octry('(*pp ...\n');">[try]</a></code></pre>
 <p>
 So it could be something like:</p>
-<pre><code class='tryocaml'><span class='com2'>(*pp camlp4o <span class='ic'>-</span>I <span class='ic'>/</span>path<span class='ic'>/</span><span class='ic'>to</span><span class='ic'>/</span>pa_infix pa_infix<span class='ic'>.</span>cmo *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(*pp camlp4o -I /path/to/pa_infix pa_infix.cmo *)</span>
 <a href="javascript:octry('(*pp camlp4o -I /path/to/pa_infix pa_infix.cmo *)\n');">[try]</a></code></pre>
 <p>
 Well, this form is not very convenient, so we will use the same
 preprocessor for each file and store its value in the PP variable of the
 Makefile:</p>
-<pre><code class='tryocaml'>PP <span class='k'>=</span> camlp4o <span class='o'>-</span>I <span class='o'>/</span>path<span class='o'>/</span><span class='k'>to</span><span class='o'>/</span>pa_infix pa_infix<span class='o'>.</span>cmo
-export PP
+<pre><code class='tryocaml'><span class='constructor'>PP</span> <span class='keywordsign'>=</span> <span class='lower'>camlp4o</span> <span class='keywordsign'>-</span><span class='constructor'>I</span> <span class='infix'>/</span><span class='lower'>path</span><span class='infix'>/</span><span class='keyword'>to</span><span class='infix'>/</span><span class='lower'>pa_infix</span> <span class='lower'>pa_infix</span><span class='keywordsign'>.</span><span class='lower'>cmo</span>
+<span class='lower'>export</span> <span class='constructor'>PP</span>
 <a href="javascript:octry('PP = camlp4o -I /path/to/pa_infix pa_infix.cmo\nexport PP\n');">[try]</a></code></pre>
 <p>
 So each OCaml file will start with:</p>
-<pre><code class='tryocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(*pp $PP *)</span>
 <a href="javascript:octry('(*pp $PP *)\n');">[try]</a></code></pre>
 <p>
 This way of defining the preprocessor is still not satisfying: we would
@@ -192,10 +187,8 @@ script</a>.
 Every package which we use will listed as usual in the PACKS variable,
 and camlp4find will call ocamlfind to know which syntax extensions to
 load:</p>
-<pre><code class='tryocaml'>PACKS <span class='k'>=</span> unix micmatch_pcre <span class='o'>\</span>
-   pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg
-PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
-export PP
+<pre><code class='tryocaml'>Characters 1:28 - 1:29 :
+Error: Lexical error: unexpected presence of a backslash
 <a href="javascript:octry('PACKS = unix micmatch_pcre \\n   pa_tryfinally pa_lettry pa_forin pa_forstep pa_repeat pa_arg\nPP = camlp4find $(PACKS)\nexport PP\n');">[try]</a></code></pre>
 <p>
 <strong>Summary:</strong></p>
@@ -218,18 +211,18 @@ export PP
 
 <p>Full example using ocamllex and the unix and micmatch_pcre libraries.
 The Makefile file would be:</p>
-<pre><code class='tryocaml'>RESULT <span class='k'>=</span> myprogram
-SOURCES <span class='k'>=</span> mymodule1<span class='o'>.</span>mll mymodule2<span class='o'>.</span>mli mymodule2<span class='o'>.</span>ml mymainmodule<span class='o'>.</span>ml
-PACKS <span class='k'>=</span> unix micmatch_pcre
-PP <span class='k'>=</span> camlp4find <span class='o'>$</span>(PACKS)
-export PP
-CREATE_LIB <span class='k'>=</span> yes <span class='o'>#</span> <span class='o'>???</span>
-OCAMLMAKEFILE <span class='k'>=</span> OCamlMakefile
-<span class='k'>include</span> <span class='o'>$</span>(OCAMLMAKEFILE)
+<pre><code class='tryocaml'><span class='constructor'>RESULT</span> <span class='keywordsign'>=</span> <span class='lower'>myprogram</span>
+<span class='constructor'>SOURCES</span> <span class='keywordsign'>=</span> <span class='lower'>mymodule1</span><span class='keywordsign'>.</span><span class='lower'>mll</span> <span class='lower'>mymodule2</span><span class='keywordsign'>.</span><span class='lower'>mli</span> <span class='lower'>mymodule2</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='lower'>mymainmodule</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
+<span class='constructor'>PACKS</span> <span class='keywordsign'>=</span> <span class='lower'>unix</span> <span class='lower'>micmatch_pcre</span>
+<span class='constructor'>PP</span> <span class='keywordsign'>=</span> <span class='lower'>camlp4find</span> <span class='infix'>$</span><span class='keywordsign'>(</span><span class='constructor'>PACKS</span><span class='keywordsign'>)</span>
+<span class='lower'>export</span> <span class='constructor'>PP</span>
+<span class='constructor'>CREATE_LIB</span> <span class='keywordsign'>=</span> <span class='lower'>yes</span> <span class='keywordsign'>#</span> <span class='prefix'>???</span>
+<span class='constructor'>OCAMLMAKEFILE</span> <span class='keywordsign'>=</span> <span class='constructor'>OCamlMakefile</span>
+<span class='keyword'>include</span> <span class='infix'>$</span><span class='keywordsign'>(</span><span class='constructor'>OCAMLMAKEFILE</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('RESULT = myprogram\nSOURCES = mymodule1.mll mymodule2.mli mymodule2.ml mymainmodule.ml\nPACKS = unix micmatch_pcre\nPP = camlp4find $(PACKS)\nexport PP\nCREATE_LIB = yes # ???\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n');">[try]</a></code></pre>
 <p>
 And each .ml or .mli file starts with:</p>
-<pre><code class='tryocaml'><span class='com2'>(*pp <span class='ic'>$</span>PP *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(*pp $PP *)</span>
 
 <a href="javascript:octry('(*pp $PP *)\n\n');">[try]</a></code></pre>
 

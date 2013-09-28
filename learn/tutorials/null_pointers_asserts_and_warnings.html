@@ -122,12 +122,12 @@ of visitors is 7½ years old, and you employ web designers to remove all
 the long words and use primary colours everywhere.</p>
 <p>The other, correct method is to store the age in a field which has type
 &quot;int or null&quot;. Here&#39;s a SQL table for storing ages:</p>
-<pre><code class='tryocaml'>create table users
-(
-  userid serial<span class='o'>,</span>
-  name text not null<span class='o'>,</span>
-  age int             <span class='o'>--</span> may be null
-)<span class='o'>;</span>
+<pre><code class='tryocaml'><span class='lower'>create</span> <span class='lower'>table</span> <span class='lower'>users</span>
+<span class='keywordsign'>(</span>
+  <span class='lower'>userid</span> <span class='lower'>serial</span><span class='keywordsign'>,</span>
+  <span class='lower'>name</span> <span class='lower'>text</span> <span class='lower'>not</span> <span class='lower'>null</span><span class='keywordsign'>,</span>
+  <span class='lower'>age</span> <span class='lower'>int</span>             <span class='infix'>--</span> <span class='lower'>may</span> <span class='lower'>be</span> <span class='lower'>null</span>
+<span class='keywordsign'>)</span><span class='keywordsign'>;</span>
 <a href="javascript:octry('create table users\n(\n  userid serial,\n  name text not null,\n  age int             -- may be null\n);\n');">[try]</a></code></pre>
 <p>
 If the age data isn&#39;t collected, then it goes into the database as a
@@ -145,21 +145,20 @@ be null, you&#39;d have to first box it up into an object allocated by
 <code>malloc</code> on the heap.</p>
 <p>OCaml has an elegant solution to the problem of nulls, using a simple
 polymorphic variant type defined (in <code>Pervasives</code>) as:</p>
-<pre><code class='tryocaml'>  <span class='k'>type</span> 'a option <span class='k'>=</span> None <span class='o'>|</span> Some <span class='k'>of</span> 'a
-<a href="javascript:octry('  type &#39;a option = None | Some of &#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor'>None</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('  type &#39;a option = None | Some of &#39;a\n');">[try]</a></code></pre>
 <p>
 A &quot;null pointer&quot; is written <code>None</code>. The type of age in our example above
 (an <code>int</code> which can be null) is <code>int option</code> [remember: backwards like
 <code>int list</code> and <code>int binary_tree</code>].</p>
-<pre><code class='tryocaml'>  Some 3
+<pre><code class='tryocaml'>  <span class='constructor'>Some</span> <span class='number'>3</span>
 <a href="javascript:octry('  Some 3\n');">[try]</a></code></pre>
 <p>
 What about a list of optional ints?</p>
-<pre><code class='tryocaml'>  <span class='o'>[</span> None<span class='o'>;</span> Some 3<span class='o'>;</span> Some 6<span class='o'>;</span> None <span class='o'>]</span>
+<pre><code class='tryocaml'>  <span class='keywordsign'>[</span> <span class='constructor'>None</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor'>None</span> <span class='keywordsign'>]</span>
 <a href="javascript:octry('  [ None; Some 3; Some 6; None ]\n');">[try]</a></code></pre>
 <p>
 And what about an optional list of ints?</p>
-<pre><code class='tryocaml'>  Some <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>
+<pre><code class='tryocaml'>  <span class='constructor'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('  Some [1; 2; 3]\n');">[try]</a></code></pre>
 <h2 id="Assertwarningsfatalerrorsandprintingtostderr"> Assert, warnings, fatal errors, and printing to stderr</h2><p>
 
@@ -174,7 +173,7 @@ exception. Assuming that you don&#39;t catch this exception (it&#39;s probably
 unwise to catch this exception, particularly for beginners), this
 results in the program stopping and printing out the source file and
 line number where the error occurred. An example:</p>
-<pre><code class='tryocaml'>  <span class='k'>assert</span> (<span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>=</span> <span class='s'>&#34;Win32&#34;</span>)
+<pre><code class='tryocaml'>  <span class='keyword'>assert</span> <span class='keywordsign'>(</span><span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keywordsign'>=</span> <span class='string'>&#34;Win32&#34;</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  assert (Sys.os_type = &#34;Win32&#34;)\n');">[try]</a></code></pre>
 <p>
 (Running this on Win32, of course, won&#39;t throw an error).</p>
@@ -184,11 +183,11 @@ just aren&#39;t going well, but you&#39;re probably better to use ...</p>
 assuming you don&#39;t try to catch it, will stop the program with the given
 error message. <code>failwith</code> is often used during pattern matching, like
 this real example:</p>
-<pre><code class='tryocaml'><span class='k'>match</span> <span class='m'>Sys</span><span class='o'>.</span>os_type <span class='k'>with</span>
-<span class='o'>|</span> <span class='s'>&#34;Unix&#34;</span> <span class='o'>|</span> <span class='s'>&#34;Cygwin&#34;</span> <span class='k'>-></span>   <span class='com2'>(* code omitted *)</span><!-- end comment -->
-<span class='o'>|</span> <span class='s'>&#34;Win32&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omitted *)</span><!-- end comment -->
-<span class='o'>|</span> <span class='s'>&#34;MacOS&#34;</span> <span class='k'>-></span>             <span class='com2'>(* code omitted *)</span><!-- end comment -->
-<span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> failwith <span class='s'>&#34;this system is not supported&#34;</span>
+<pre><code class='tryocaml'><span class='keyword'>match</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keyword'>with</span>
+<span class='keywordsign'>|</span> <span class='string'>&#34;Unix&#34;</span> <span class='keywordsign'>|</span> <span class='string'>&#34;Cygwin&#34;</span> <span class='keywordsign'>-&#62;</span>   <span class='comment'>(* code omitted *)</span>
+<span class='keywordsign'>|</span> <span class='string'>&#34;Win32&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omitted *)</span>
+<span class='keywordsign'>|</span> <span class='string'>&#34;MacOS&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omitted *)</span>
+<span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>failwith</span> <span class='string'>&#34;this system is not supported&#34;</span>
 <a href="javascript:octry('match Sys.os_type with\n| &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omitted *)\n| &#34;Win32&#34; -&#62;             (* code omitted *)\n| &#34;MacOS&#34; -&#62;             (* code omitted *)\n| _ -&#62; failwith &#34;this system is not supported&#34;\n');">[try]</a></code></pre>
 <p>
 Note a couple of extra pattern matching features in this example too. A
@@ -197,33 +196,33 @@ so-called &quot;range pattern&quot; is used to match either <code>&quot;Unix&quo
 <p>If you want to debug your program, but, like me, you have an aversion to
 debuggers which aren&#39;t gdb, then you&#39;ll probably want to print out a
 warning some way through your function. Here&#39;s an example:</p>
-<pre><code class='tryocaml'><span class='k'>open</span> Graphics
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Graphics</span>
 
-<span class='k'>let</span> () <span class='k'>=</span>
-  open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;</span>
-  <span class='k'>for</span> i <span class='k'>=</span> 12 <span class='k'>downto</span> 1 <span class='k'>do</span>
-    <span class='k'>let</span> radius <span class='k'>=</span> i <span class='o'>*</span> 20 <span class='k'>in</span>
-    prerr_endline (<span class='s'>&#34;radius is &#34;</span> <span class='o'>^</span> string_of_int radius)<span class='o'>;</span>
-    set_color (<span class='k'>if</span> i <span class='k'>mod</span> 2 <span class='k'>=</span> 0 <span class='k'>then</span> red <span class='k'>else</span> yellow)<span class='o'>;</span>
-    fill_circle 320 240 radius
-  <span class='k'>done</span><span class='o'>;</span>
-  read_line ()
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;</span>
+  <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>12</span> <span class='keyword'>downto</span> <span class='number'>1</span> <span class='keyword'>do</span>
+    <span class='keyword'>let</span> <span class='lower'>radius</span> <span class='keywordsign'>=</span> <span class='lower'>i</span> <span class='keywordsign'>*</span> <span class='number'>20</span> <span class='keyword'>in</span>
+    <span class='lower'>prerr_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;radius is &#34;</span> <span class='infix'>^</span> <span class='lower'>string_of_int</span> <span class='lower'>radius</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='lower'>set_color</span> <span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='lower'>i</span> <span class='keyword'>mod</span> <span class='number'>2</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>red</span> <span class='keyword'>else</span> <span class='lower'>yellow</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='lower'>radius</span>
+  <span class='keyword'>done</span><span class='keywordsign'>;</span>
+  <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('open Graphics\n\nlet () =\n  open_graph &#34; 640x480&#34;;\n  for i = 12 downto 1 do\n    let radius = i * 20 in\n    prerr_endline (&#34;radius is &#34; ^ string_of_int radius);\n    set_color (if i mod 2 = 0 then red else yellow);\n    fill_circle 320 240 radius\n  done;\n  read_line ()\n');">[try]</a></code></pre>
 <p>
 If you prefer C-style <code>printf</code>&#39;s then try using OCaml&#39;s <code>Printf</code> module
 instead:</p>
-<pre><code class='tryocaml'><span class='k'>open</span> Graphics
-<span class='k'>open</span> Printf
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Graphics</span>
+<span class='keyword'>open</span> <span class='constructor'>Printf</span>
 
-<span class='k'>let</span> () <span class='k'>=</span>
-  open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;</span>
-  <span class='k'>for</span> i <span class='k'>=</span> 12 <span class='k'>downto</span> 1 <span class='k'>do</span>
-    <span class='k'>let</span> radius <span class='k'>=</span> i <span class='o'>*</span> 20 <span class='k'>in</span>
-    eprintf <span class='s'>&#34;radius is %d\n&#34;</span> radius<span class='o'>;</span>
-    set_color (<span class='k'>if</span> i <span class='k'>mod</span> 2 <span class='k'>=</span> 0 <span class='k'>then</span> red <span class='k'>else</span> yellow)<span class='o'>;</span>
-    fill_circle 320 240 radius
-  <span class='k'>done</span><span class='o'>;</span>
-  read_line ()
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;</span>
+  <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>12</span> <span class='keyword'>downto</span> <span class='number'>1</span> <span class='keyword'>do</span>
+    <span class='keyword'>let</span> <span class='lower'>radius</span> <span class='keywordsign'>=</span> <span class='lower'>i</span> <span class='keywordsign'>*</span> <span class='number'>20</span> <span class='keyword'>in</span>
+    <span class='lower'>eprintf</span> <span class='string'>&#34;radius is %d\n&#34;</span> <span class='lower'>radius</span><span class='keywordsign'>;</span>
+    <span class='lower'>set_color</span> <span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='lower'>i</span> <span class='keyword'>mod</span> <span class='number'>2</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>red</span> <span class='keyword'>else</span> <span class='lower'>yellow</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='lower'>radius</span>
+  <span class='keyword'>done</span><span class='keywordsign'>;</span>
+  <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 
 <a href="javascript:octry('open Graphics\nopen Printf\n\nlet () =\n  open_graph &#34; 640x480&#34;;\n  for i = 12 downto 1 do\n    let radius = i * 20 in\n    eprintf &#34;radius is %d\n&#34; radius;\n    set_color (if i mod 2 = 0 then red else yellow);\n    fill_circle 320 240 radius\n  done;\n  read_line ()\n\n');">[try]</a></code></pre>
 

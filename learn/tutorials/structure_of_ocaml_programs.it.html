@@ -102,18 +102,18 @@ rileverò.</p>
 <h3 id="quotVariabiliquotlocaliinrealtespressionilocali"> &quot;Variabili&quot; locali (<em>in realtà</em> espressioni locali)</h3><p>
 Prendiamo la funzione <code>average</code> ed aggiungiamovi una variabile locale in
 C. (Confrontatela con la prima definizione che ne avevamo sopra).</p>
-<pre><code class='tryocaml'>double
-average (double a<span class='o'>,</span> double b)
-<span class='o'>{</span>
-  double sum <span class='k'>=</span> a <span class='o'>+</span> b<span class='o'>;</span>
-  return sum <span class='o'>/</span> 2<span class='o'>;</span>
-<span class='o'>}</span>
+<pre><code class='tryocaml'><span class='lower'>double</span>
+<span class='lower'>average</span> <span class='keywordsign'>(</span><span class='lower'>double</span> <span class='lower'>a</span><span class='keywordsign'>,</span> <span class='lower'>double</span> <span class='lower'>b</span><span class='keywordsign'>)</span>
+<span class='keywordsign'>{</span>
+  <span class='lower'>double</span> <span class='lower'>sum</span> <span class='keywordsign'>=</span> <span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>;</span>
+  <span class='lower'>return</span> <span class='lower'>sum</span> <span class='infix'>/</span> <span class='number'>2</span><span class='keywordsign'>;</span>
+<span class='keywordsign'>}</span>
 <a href="javascript:octry('double\naverage (double a, double b)\n{\n  double sum = a + b;\n  return sum / 2;\n}\n');">[try]</a></code></pre>
 <p>
 Faccia ora lo stesso con la nostra versione in OCaml:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> average a b <span class='k'>=</span>
-  <span class='k'>let</span> sum <span class='k'>=</span> a <span class='o'>+.</span> b <span class='k'>in</span>
-  sum <span class='o'>/.</span> 2.0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='lower'>sum</span> <span class='keywordsign'>=</span> <span class='lower'>a</span> <span class='infix'>+.</span> <span class='lower'>b</span> <span class='keyword'>in</span>
+  <span class='lower'>sum</span> <span class='infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let average a b =\n  let sum = a +. b in\n  sum /. 2.0;;\n');">[try]</a></code></pre>
 <p>
 La frase standard <code>let nome = espressione in</code> è usata per definire
@@ -154,21 +154,8 @@ Potete anche definire nomi globali per cose al livello superiore, e come
 le nostre &quot;variabili&quot; locali sopra queste non sono affatto realmente
 variabili, ma soltanto nomi abbreviati per queste cose. Ecco un esempio
 reale (ma ridotto):</p>
-<pre><code class='tryocaml'><span class='k'>let</span> html <span class='k'>=</span>
-  <span class='k'>let</span> content <span class='k'>=</span> read_whole_file file <span class='k'>in</span>
-  <span class='m'>GHtml</span><span class='o'>.</span>html_from_string content
-  <span class='o'>;;</span>
-
-<span class='k'>let</span> menu_bold () <span class='k'>=</span>
-  <span class='k'>match</span> bold_button<span class='o'>#</span>active <span class='k'>with</span>
-    <span class='o'>true</span> <span class='k'>-></span> html<span class='o'>#</span>set_font_style <span class='o'>~</span>enable<span class='o'>:</span><span class='o'>[</span>`BOLD<span class='o'>]</span> ()
-  <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> html<span class='o'>#</span>set_font_style <span class='o'>~</span>disable<span class='o'>:</span><span class='o'>[</span>`BOLD<span class='o'>]</span> ()
-  <span class='o'>;;</span>
-
-<span class='k'>let</span> main () <span class='k'>=</span>
-  <span class='com2'>(* codice omesso *)</span><!-- end comment -->
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Cut&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>X <span class='o'>~</span>callback<span class='o'>:</span> html<span class='o'>#</span>cut
-  <span class='o'>;;</span>
+<pre><code class='tryocaml'>Characters 14:29 - 14:31 :
+Error: Lexical error while reading an operator
 <a href="javascript:octry('let html =\n  let content = read_whole_file file in\n  GHtml.html_from_string content\n  ;;\n\nlet menu_bold () =\n  match bold_button#active with\n    true -&#62; html#set_font_style ~enable:[`BOLD] ()\n  | false -&#62; html#set_font_style ~disable:[`BOLD] ()\n  ;;\n\nlet main () =\n  (* codice omesso *)\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback: html#cut\n  ;;\n');">[try]</a></code></pre>
 <p>
 In questo reale pezzo di codice, <code>html</code> è un accessorio di editing HTML
@@ -194,7 +181,7 @@ ai puntatori in C/C++. In Java, tutte le variabili che immagazzinano
 oggetti sono in realtà riferiment (puntatori) agli oggetti. In Perl, i
 riferimenti sono riferimenti - la medesima cosa che sono in OCaml.</p>
 <p>Ecco come creiamo un riferimento ad un <code>int</code> in OCaml:</p>
-<pre><code class='tryocaml'>ref 0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='lower'>ref</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('ref 0;;\n');">[try]</a></code></pre>
 <p>
 In realtà tale istruzione non era veramente molto utile. Abbiamo creato
@@ -202,27 +189,27 @@ il riferimento e quindi, poiché che non gli abbiamo dato un nome, il
 garbage collector è arrivato e l&#39;ha raccolto immediatamente dopo! (in
 realtà, è stato probabilmente gettato via durante la compilazione.)
 Diamo un nome al riferimento:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>my_ref</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let my_ref = ref 0;;\n');">[try]</a></code></pre>
 <p>
 Questo riferimento sta attualmente immagazzinando un intero pari a zero.
 Mettiamoci dentro qualcosa d&#39;altro (assegnamento):</p>
-<pre><code class='tryocaml'>my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='lower'>my_ref</span> <span class='keywordsign'>:=</span> <span class='number'>100</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('my_ref := 100;;\n');">[try]</a></code></pre>
 <p>
 E troviamo che cosa contiene ora il riferimento:</p>
-<pre><code class='tryocaml'><span class='o'>#</span> <span class='o'>!</span>my_ref<span class='o'>;;</span>
-<span class='o'>-</span> <span class='o'>:</span> int <span class='k'>=</span> 100
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='prefix'>!</span><span class='lower'>my_ref</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>=</span> <span class='number'>100</span>
 <a href="javascript:octry('# !my_ref;;\n- : int = 100\n');">[try]</a></code></pre>
 <p>
 Quindi l&#39;operatore <code>:=</code> è utilizzato per fare assegnamenti a
 riferimenti, e l&#39;operatore <code>!</code> dereferenzia per ottenere i contenuti.
 Ecco un pronto ed approssimativo confronto con C/C++:</p>
-<pre><code class='tryocaml'>OCaml                   C<span class='o'>/</span>C<span class='o'>++</span>
+<pre><code class='tryocaml'><span class='constructor'>OCaml</span>                   <span class='constructor'>C</span><span class='infix'>/</span><span class='constructor'>C</span><span class='infix'>++</span>
 
-<span class='k'>let</span> my_ref <span class='k'>=</span> ref 0<span class='o'>;;</span>    int a <span class='k'>=</span> 0<span class='o'>;</span> int <span class='o'>*</span>my_ptr <span class='k'>=</span> <span class='o'>&#38;</span>a<span class='o'>;</span>
-my_ref <span class='o'>:=</span> 100<span class='o'>;;</span>         <span class='o'>*</span>my_ptr <span class='k'>=</span> 100<span class='o'>;</span>
-<span class='o'>!</span>my_ref                 <span class='o'>*</span>my_ptr
+<span class='keyword'>let</span> <span class='lower'>my_ref</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>0</span><span class='keywordsign'>;;</span>    <span class='lower'>int</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>int</span> <span class='keywordsign'>*</span><span class='lower'>my_ptr</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#38;</span><span class='lower'>a</span><span class='keywordsign'>;</span>
+<span class='lower'>my_ref</span> <span class='keywordsign'>:=</span> <span class='number'>100</span><span class='keywordsign'>;;</span>         <span class='keywordsign'>*</span><span class='lower'>my_ptr</span> <span class='keywordsign'>=</span> <span class='number'>100</span><span class='keywordsign'>;</span>
+<span class='prefix'>!</span><span class='lower'>my_ref</span>                 <span class='keywordsign'>*</span><span class='lower'>my_ptr</span>
 <a href="javascript:octry('OCaml                   C/C++\n\nlet my_ref = ref 0;;    int a = 0; int *my_ptr = &#38;a;\nmy_ref := 100;;         *my_ptr = 100;\n!my_ref                 *my_ptr\n');">[try]</a></code></pre>
 <p>
 I riferimenti hanno il loro posto, ma potrete trovare di non utilizzare
@@ -256,32 +243,32 @@ Ciò è detto &quot;scoping lessicale&quot; (&quot;lexical scoping&quot; nell&#3
 Ad esempio, mostriamo qui una funzione annidata che utilizza una
 variabile ereditata chiamata </code></pre>
 <p>offset&#39;:</p>
-<pre><code class='tryocaml'>bar (int <span class='o'>*</span>array<span class='o'>,</span> int offset<span class='o'>,</span> int size)
-<span class='o'>{</span>
-  int access (int <span class='o'>*</span>array<span class='o'>,</span> int index)
-    <span class='o'>{</span> return array<span class='o'>[</span>index <span class='o'>+</span> offset<span class='o'>]</span><span class='o'>;</span> <span class='o'>}</span>
-  int i<span class='o'>;</span>
-  <span class='o'>/*</span> <span class='o'>...</span> <span class='o'>*/</span>
-  <span class='k'>for</span> (i <span class='k'>=</span> 0<span class='o'>;</span> i <span class='o'>&#60;</span> size<span class='o'>;</span> i<span class='o'>++)</span>
-    <span class='o'>/*</span> <span class='o'>...</span> <span class='o'>*/</span> access (array<span class='o'>,</span> i) <span class='o'>/*</span> <span class='o'>...</span> <span class='o'>*/</span>
-<span class='o'>}</span>
+<pre><code class='tryocaml'><span class='lower'>bar</span> <span class='keywordsign'>(</span><span class='lower'>int</span> <span class='keywordsign'>*</span><span class='lower'>array</span><span class='keywordsign'>,</span> <span class='lower'>int</span> <span class='lower'>offset</span><span class='keywordsign'>,</span> <span class='lower'>int</span> <span class='lower'>size</span><span class='keywordsign'>)</span>
+<span class='keywordsign'>{</span>
+  <span class='lower'>int</span> <span class='lower'>access</span> <span class='keywordsign'>(</span><span class='lower'>int</span> <span class='keywordsign'>*</span><span class='lower'>array</span><span class='keywordsign'>,</span> <span class='lower'>int</span> <span class='lower'>index</span><span class='keywordsign'>)</span>
+    <span class='keywordsign'>{</span> <span class='lower'>return</span> <span class='lower'>array</span><span class='keywordsign'>[</span><span class='lower'>index</span> <span class='keywordsign'>+</span> <span class='lower'>offset</span><span class='keywordsign'>]</span><span class='keywordsign'>;</span> <span class='keywordsign'>}</span>
+  <span class='lower'>int</span> <span class='lower'>i</span><span class='keywordsign'>;</span>
+  <span class='infix'>/*</span> <span class='operator'>...</span> <span class='infix'>*/</span>
+  <span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>&#60;</span> <span class='lower'>size</span><span class='keywordsign'>;</span> <span class='lower'>i</span><span class='infix'>++</span><span class='keywordsign'>)</span>
+    <span class='infix'>/*</span> <span class='operator'>...</span> <span class='infix'>*/</span> <span class='lower'>access</span> <span class='keywordsign'>(</span><span class='lower'>array</span><span class='keywordsign'>,</span> <span class='lower'>i</span><span class='keywordsign'>)</span> <span class='infix'>/*</span> <span class='operator'>...</span> <span class='infix'>*/</span>
+<span class='keywordsign'>}</span>
 <a href="javascript:octry('bar (int *array, int offset, int size)\n{\n  int access (int *array, int index)\n    { return array[index + offset]; }\n  int i;\n  /* ... */\n  for (i = 0; i &#60; size; i++)\n    /* ... */ access (array, i) /* ... */\n}\n');">[try]</a></code></pre>
 <p>
 Afferrate l&#39;idea. Le funzioni annidate sono tuttavia molto utili e molto
 diffusamente utilizzate in OCaml. Ecco un esempio di funzione annidata
 proveniente da codice reale:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> read_whole_channel chan <span class='k'>=</span>
-  <span class='k'>let</span> buf <span class='k'>=</span> <span class='m'>Buffer</span><span class='o'>.</span>create 4096 <span class='k'>in</span>
-  <span class='k'>let rec</span> loop () <span class='k'>=</span>
-    <span class='k'>let</span> newline <span class='k'>=</span> input_line chan <span class='k'>in</span>
-    <span class='m'>Buffer</span><span class='o'>.</span>add_string buf newline<span class='o'>;</span>
-    <span class='m'>Buffer</span><span class='o'>.</span>add_char buf <span class='s'>&#39;\n&#39;</span><span class='o'>;</span>
-    loop ()
-  <span class='k'>in</span>
-  <span class='k'>try</span>
-    loop ()
-  <span class='k'>with</span>
-    End_of_file <span class='k'>-></span> <span class='m'>Buffer</span><span class='o'>.</span>contents buf<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>read_whole_channel</span> <span class='lower'>chan</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='lower'>buf</span> <span class='keywordsign'>=</span> <span class='constructor'>Buffer</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='number'>4096</span> <span class='keyword'>in</span>
+  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>newline</span> <span class='keywordsign'>=</span> <span class='lower'>input_line</span> <span class='lower'>chan</span> <span class='keyword'>in</span>
+    <span class='constructor'>Buffer</span><span class='keywordsign'>.</span><span class='lower'>add_string</span> <span class='lower'>buf</span> <span class='lower'>newline</span><span class='keywordsign'>;</span>
+    <span class='constructor'>Buffer</span><span class='keywordsign'>.</span><span class='lower'>add_char</span> <span class='lower'>buf</span> <span class='string'>&#39;\n&#39;</span><span class='keywordsign'>;</span>
+    <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+  <span class='keyword'>in</span>
+  <span class='keyword'>try</span>
+    <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+  <span class='keyword'>with</span>
+    <span class='constructor'>End_of_file</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Buffer</span><span class='keywordsign'>.</span><span class='lower'>contents</span> <span class='lower'>buf</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let read_whole_channel chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let newline = input_line chan in\n    Buffer.add_string buf newline;\n    Buffer.add_char buf &#39;\n&#39;;\n    loop ()\n  in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf;;\n');">[try]</a></code></pre>
 <p>
 Non preoccupatevi di che cosa fa questo codice - contiene molti concetti
@@ -306,11 +293,11 @@ chiamate di sistema POSIX. Tali librerie sono collocate in
 <code>/usr/lib/ocaml/VERSIONE/</code> (negli Unix comunque). Per questi esempi ci
 concentreremo su un modulo piuttosto semplice chiamato <code>Graphics</code>.</p>
 <p>Il modulo <code>Graphics</code> è installato in 5 file (sul mio sistema):</p>
-<pre><code class='tryocaml'><span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>a
-<span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cma
-<span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmi
-<span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>cmxa
-<span class='o'>/</span>usr<span class='o'>/</span>lib<span class='o'>/</span>ocaml<span class='o'>/</span>3.08<span class='o'>/</span>graphics<span class='o'>.</span>mli
+<pre><code class='tryocaml'><span class='infix'>/</span><span class='lower'>usr</span><span class='infix'>/</span><span class='lower'>lib</span><span class='infix'>/</span><span class='lower'>ocaml</span><span class='infix'>/</span><span class='number'>3.08</span><span class='infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>a</span>
+<span class='infix'>/</span><span class='lower'>usr</span><span class='infix'>/</span><span class='lower'>lib</span><span class='infix'>/</span><span class='lower'>ocaml</span><span class='infix'>/</span><span class='number'>3.08</span><span class='infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>cma</span>
+<span class='infix'>/</span><span class='lower'>usr</span><span class='infix'>/</span><span class='lower'>lib</span><span class='infix'>/</span><span class='lower'>ocaml</span><span class='infix'>/</span><span class='number'>3.08</span><span class='infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>cmi</span>
+<span class='infix'>/</span><span class='lower'>usr</span><span class='infix'>/</span><span class='lower'>lib</span><span class='infix'>/</span><span class='lower'>ocaml</span><span class='infix'>/</span><span class='number'>3.08</span><span class='infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>cmxa</span>
+<span class='infix'>/</span><span class='lower'>usr</span><span class='infix'>/</span><span class='lower'>lib</span><span class='infix'>/</span><span class='lower'>ocaml</span><span class='infix'>/</span><span class='number'>3.08</span><span class='infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>mli</span>
 <a href="javascript:octry('/usr/lib/ocaml/3.08/graphics.a\n/usr/lib/ocaml/3.08/graphics.cma\n/usr/lib/ocaml/3.08/graphics.cmi\n/usr/lib/ocaml/3.08/graphics.cmxa\n/usr/lib/ocaml/3.08/graphics.mli\n');">[try]</a></code></pre>
 <p>
 Concentriamoci per un momento soltanto sul file <code>graphics.mli</code>. Questo è
@@ -327,40 +314,40 @@ poco come l&#39;istruzione <code>import</code> di Java, e molto più come l&#39;
 <p>Un paio di esempi dovrebbero rendere chiaro quanto detto. (I due esempi
 disegnano cose diverse - provateli). Si noti che il primo esempio chiama
 <code>open_graph</code> ed il secondo <code>Graphics.open_graph</code>.</p>
-<pre><code class='tryocaml'><span class='com2'>(* Per compilare questo esempio<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest1<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest1 *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)</span>
 
-<span class='k'>open</span> Graphics<span class='o'>;;</span>
+<span class='keyword'>open</span> <span class='constructor'>Graphics</span><span class='keywordsign'>;;</span>
 
-open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
-<span class='k'>for</span> i <span class='k'>=</span> 12 <span class='k'>downto</span> 1 <span class='k'>do</span>
-  <span class='k'>let</span> radius <span class='k'>=</span> i <span class='o'>*</span> 20 <span class='k'>in</span>
-  set_color (<span class='k'>if</span> (i <span class='k'>mod</span> 2) <span class='k'>=</span> 0 <span class='k'>then</span> red <span class='k'>else</span> yellow)<span class='o'>;</span>
-  fill_circle 320 240 radius
-<span class='k'>done</span><span class='o'>;;</span>
-read_line ()<span class='o'>;;</span>
+<span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>12</span> <span class='keyword'>downto</span> <span class='number'>1</span> <span class='keyword'>do</span>
+  <span class='keyword'>let</span> <span class='lower'>radius</span> <span class='keywordsign'>=</span> <span class='lower'>i</span> <span class='keywordsign'>*</span> <span class='number'>20</span> <span class='keyword'>in</span>
+  <span class='lower'>set_color</span> <span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keyword'>mod</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>red</span> <span class='keyword'>else</span> <span class='lower'>yellow</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='lower'>radius</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
+<span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-<span class='com2'>(* Per compilare questo esempio<span class='ic'>:</span> ocamlc graphics<span class='ic'>.</span>cma grtest2<span class='ic'>.</span>ml <span class='ic'>-</span>o grtest2 *)</span><!-- end comment -->
+<span class='comment'>(* Per compilare questo esempio: ocamlc graphics.cma grtest2.ml -o grtest2 *)</span>
 
-<span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
-<span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
+<span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>self_init</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
 
-<span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
-        <span class='k'>if</span> i <span class='o'>==</span> 1 <span class='k'>then</span> x_init
-        <span class='k'>else</span>
-                <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
-                r <span class='o'>*.</span> x <span class='o'>*.</span> (1.0 <span class='o'>-.</span> x)<span class='o'>;;</span>
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+        <span class='keyword'>if</span> <span class='lower'>i</span> <span class='infix'>==</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='lower'>x_init</span>
+        <span class='keyword'>else</span>
+                <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+                <span class='lower'>r</span> <span class='infix'>*.</span> <span class='lower'>x</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='number'>1.0</span> <span class='keywordsign'>-.</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-<span class='k'>for</span> x <span class='k'>=</span> 0 <span class='k'>to</span> 640 <span class='k'>do</span>
-        <span class='k'>let</span> r <span class='k'>=</span> 4.0 <span class='o'>*.</span> (float_of_int x) <span class='o'>/.</span> 640.0 <span class='k'>in</span>
-        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
-                <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
-                <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
-                <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
-                <span class='m'>Graphics</span><span class='o'>.</span>plot x y
-        <span class='k'>done</span>
-<span class='k'>done</span><span class='o'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>640</span> <span class='keyword'>do</span>
+        <span class='keyword'>let</span> <span class='lower'>r</span> <span class='keywordsign'>=</span> <span class='number'>4.0</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='lower'>float_of_int</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='infix'>/.</span> <span class='number'>640</span><span class='keywordsign'>.</span><span class='number'>0</span> <span class='keyword'>in</span>
+        <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>39</span> <span class='keyword'>do</span>
+                <span class='keyword'>let</span> <span class='lower'>x_init</span> <span class='keywordsign'>=</span> <span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>float</span> <span class='number'>1.0</span> <span class='keyword'>in</span>
+                <span class='keyword'>let</span> <span class='lower'>x_final</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='number'>500</span> <span class='keyword'>in</span>
+                <span class='keyword'>let</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>int_of_float</span> <span class='keywordsign'>(</span><span class='lower'>x_final</span> <span class='infix'>*.</span> <span class='number'>480</span><span class='keywordsign'>.</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+                <span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>plot</span> <span class='lower'>x</span> <span class='lower'>y</span>
+        <span class='keyword'>done</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
 
-read_line ()<span class='o'>;;</span>
+<span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('(* Per compilare questo esempio: ocamlc graphics.cma grtest1.ml -o grtest1 *)\n\nopen Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n(* Per compilare questo esempio: ocamlc graphics.cma grtest2.ml -o grtest2 *)\n\nRandom.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n        let r = 4.0 *. (float_of_int x) /. 640.0 in\n        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\ndone;;\n\nread_line ();;\n');">[try]</a></code></pre>
 <p>
 Entrambi gli esempi fanno uso di alcune caratteristiche di cui non
@@ -378,11 +365,11 @@ OCaml.</p>
 Che cosa succede se volete utilizzare i simboli del modulo <code>Graphics</code>,
 ma non volete importarli tutti e non sopportate il fastidio di digitare
 <code>Graphics</code> ogni volta? Semplicemente rinominatelo usando questo trucco:</p>
-<pre><code class='tryocaml'><span class='k'>module</span> Gr <span class='k'>=</span> Graphics<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>Gr</span> <span class='keywordsign'>=</span> <span class='constructor'>Graphics</span><span class='keywordsign'>;;</span>
 
-<span class='m'>Gr</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
-<span class='m'>Gr</span><span class='o'>.</span>fill_circle 320 240 240<span class='o'>;;</span>
-read_line ()<span class='o'>;;</span>
+<span class='constructor'>Gr</span><span class='keywordsign'>.</span><span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Gr</span><span class='keywordsign'>.</span><span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='number'>240</span><span class='keywordsign'>;;</span>
+<span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('module Gr = Graphics;;\n\nGr.open_graph &#34; 640x480&#34;;;\nGr.fill_circle 320 240 240;;\nread_line ();;\n');">[try]</a></code></pre>
 <p>
 In realtà questo è utile quando volete importare un modulo annidato (i
@@ -398,14 +385,14 @@ imparando OCaml.</p>
 altto livello del vostro codice, e <em>mai</em> all&#39;interno di definizioni di
 funzioni o di qualunque altro tipo di istruzione.</p>
 <p>Osservate una sezione dal secondo esempio su &quot;graphics&quot; sopra:</p>
-<pre><code class='tryocaml'><span class='m'>Random</span><span class='o'>.</span>self_init ()<span class='o'>;;</span>
-<span class='m'>Graphics</span><span class='o'>.</span>open_graph <span class='s'>&#34; 640x480&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>self_init</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
 
-<span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
-        <span class='k'>if</span> i <span class='o'>==</span> 1 <span class='k'>then</span> x_init
-        <span class='k'>else</span>
-                <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
-                r <span class='o'>*.</span> x <span class='o'>*.</span> (1.0 <span class='o'>-.</span> x)<span class='o'>;;</span>
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+        <span class='keyword'>if</span> <span class='lower'>i</span> <span class='infix'>==</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='lower'>x_init</span>
+        <span class='keyword'>else</span>
+                <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+                <span class='lower'>r</span> <span class='infix'>*.</span> <span class='lower'>x</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='number'>1.0</span> <span class='keywordsign'>-.</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('Random.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n');">[try]</a></code></pre>
 <p>
 Abbiamo due istruzioni del livello più alto ed una definizione di
@@ -432,29 +419,29 @@ sono:</p>
 </ul>
 
 <p>Ecco del codice funzionante con <code>;;</code> eliso ovunque possibile:</p>
-<pre><code class='tryocaml'><span class='k'>open</span> Random                   <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
-<span class='k'>open</span> Graphics<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Random</span>                   <span class='comment'>(* ;; *)</span>
+<span class='keyword'>open</span> <span class='constructor'>Graphics</span><span class='keywordsign'>;;</span>
 
-self_init ()<span class='o'>;;</span>
-open_graph <span class='s'>&#34; 640x480&#34;</span>         <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
+<span class='lower'>self_init</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span>         <span class='comment'>(* ;; *)</span>
 
-<span class='k'>let rec</span> iterate r x_init i <span class='k'>=</span>
-        <span class='k'>if</span> i <span class='o'>==</span> 1 <span class='k'>then</span> x_init
-        <span class='k'>else</span>
-                <span class='k'>let</span> x <span class='k'>=</span> iterate r x_init (i-1) <span class='k'>in</span>
-                r <span class='o'>*.</span> x <span class='o'>*.</span> (1.0 <span class='o'>-.</span> x)<span class='o'>;;</span>
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+        <span class='keyword'>if</span> <span class='lower'>i</span> <span class='infix'>==</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='lower'>x_init</span>
+        <span class='keyword'>else</span>
+                <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+                <span class='lower'>r</span> <span class='infix'>*.</span> <span class='lower'>x</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='number'>1.0</span> <span class='keywordsign'>-.</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-<span class='k'>for</span> x <span class='k'>=</span> 0 <span class='k'>to</span> 640 <span class='k'>do</span>
-        <span class='k'>let</span> r <span class='k'>=</span> 4.0 <span class='o'>*.</span> (float_of_int x) <span class='o'>/.</span> 640.0 <span class='k'>in</span>
-        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
-                <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
-                <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
-                <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
-                <span class='m'>Graphics</span><span class='o'>.</span>plot x y
-        <span class='k'>done</span>
-<span class='k'>done</span><span class='o'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>640</span> <span class='keyword'>do</span>
+        <span class='keyword'>let</span> <span class='lower'>r</span> <span class='keywordsign'>=</span> <span class='number'>4.0</span> <span class='infix'>*.</span> <span class='keywordsign'>(</span><span class='lower'>float_of_int</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='infix'>/.</span> <span class='number'>640</span><span class='keywordsign'>.</span><span class='number'>0</span> <span class='keyword'>in</span>
+        <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>39</span> <span class='keyword'>do</span>
+                <span class='keyword'>let</span> <span class='lower'>x_init</span> <span class='keywordsign'>=</span> <span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>float</span> <span class='number'>1.0</span> <span class='keyword'>in</span>
+                <span class='keyword'>let</span> <span class='lower'>x_final</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='number'>500</span> <span class='keyword'>in</span>
+                <span class='keyword'>let</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>int_of_float</span> <span class='keywordsign'>(</span><span class='lower'>x_final</span> <span class='infix'>*.</span> <span class='number'>480</span><span class='keywordsign'>.</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+                <span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>plot</span> <span class='lower'>x</span> <span class='lower'>y</span>
+        <span class='keyword'>done</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
 
-read_line ()                  <span class='com2'>(* <span class='ic'>;;</span> *)</span><!-- end comment -->
+<span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>                  <span class='comment'>(* ;; *)</span>
 <a href="javascript:octry('open Random                   (* ;; *)\nopen Graphics;;\n\nself_init ();;\nopen_graph &#34; 640x480&#34;         (* ;; *)\n\nlet rec iterate r x_init i =\n        if i == 1 then x_init\n        else\n                let x = iterate r x_init (i-1) in\n                r *. x *. (1.0 -. x);;\n\nfor x = 0 to 640 do\n        let r = 4.0 *. (float_of_int x) /. 640.0 in\n        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\ndone;;\n\nread_line ()                  (* ;; *)\n');">[try]</a></code></pre>
 <p>
 Le regole n° 3 e n° 4 sono riferite al <code>;</code> singolo. Esso è del tutto
@@ -471,12 +458,12 @@ di codice, falle seguire da un singolo <code>;</code>, <em>eccetto</em> per l&#3
 fondo.</p>
 <p>Il ciclo for interno nel nostro esempio sopra è una buona dimostrazione.
 Notate che in questo codice non usiamo mai un singolo <code>;</code>:</p>
-<pre><code class='tryocaml'>        <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> 39 <span class='k'>do</span>
-                <span class='k'>let</span> x_init <span class='k'>=</span> <span class='m'>Random</span><span class='o'>.</span>float 1.0 <span class='k'>in</span>
-                <span class='k'>let</span> x_final <span class='k'>=</span> iterate r x_init 500 <span class='k'>in</span>
-                <span class='k'>let</span> y <span class='k'>=</span> int_of_float (x_final <span class='o'>*.</span> 480.) <span class='k'>in</span>
-                <span class='m'>Graphics</span><span class='o'>.</span>plot x y
-        <span class='k'>done</span>
+<pre><code class='tryocaml'>        <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>39</span> <span class='keyword'>do</span>
+                <span class='keyword'>let</span> <span class='lower'>x_init</span> <span class='keywordsign'>=</span> <span class='constructor'>Random</span><span class='keywordsign'>.</span><span class='lower'>float</span> <span class='number'>1.0</span> <span class='keyword'>in</span>
+                <span class='keyword'>let</span> <span class='lower'>x_final</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='number'>500</span> <span class='keyword'>in</span>
+                <span class='keyword'>let</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>int_of_float</span> <span class='keywordsign'>(</span><span class='lower'>x_final</span> <span class='infix'>*.</span> <span class='number'>480</span><span class='keywordsign'>.</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+                <span class='constructor'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>plot</span> <span class='lower'>x</span> <span class='lower'>y</span>
+        <span class='keyword'>done</span>
 <a href="javascript:octry('        for i = 0 to 39 do\n                let x_init = Random.float 1.0 in\n                let x_final = iterate r x_init 500 in\n                let y = int_of_float (x_final *. 480.) in\n                Graphics.plot x y\n        done\n');">[try]</a></code></pre>
 <p>
 L&#39;unico posto nel codice sopra dove si potrebbe pensare di inserire un
@@ -495,20 +482,20 @@ bene - in OCaml, pressoché ogni cosa è un&#39;espressione. <code>if/then/else<
 un&#39;espressione. <code>a ; b</code> è un&#39;espressione. <code>match foo with ...</code> è un
 espressione. Il codice che segue è perfettamente legale (e tutto fa la
 medesima cosa):</p>
-<pre><code class='tryocaml'><span class='k'>let</span> f x b y <span class='k'>=</span> <span class='k'>if</span> b <span class='k'>then</span> x<span class='o'>+</span>y <span class='k'>else</span> x<span class='o'>+</span>0
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='keyword'>if</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>x</span><span class='keywordsign'>+</span><span class='lower'>y</span> <span class='keyword'>else</span> <span class='lower'>x</span><span class='keywordsign'>+</span><span class='number'>0</span>
 
-<span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
+<span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>y</span> <span class='keyword'>else</span> <span class='number'>0</span><span class='keywordsign'>)</span>
 
-<span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>match</span> b <span class='k'>with</span> <span class='o'>true</span> <span class='k'>-></span> y <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> 0)
+<span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>match</span> <span class='lower'>b</span> <span class='keyword'>with</span> <span class='keyword'>true</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>y</span> <span class='keywordsign'>|</span> <span class='keyword'>false</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span><span class='keywordsign'>)</span>
 
-<span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> g z <span class='k'>=</span> <span class='k'>function</span> <span class='o'>true</span> <span class='k'>-></span> z <span class='o'>|</span> <span class='o'>false</span> <span class='k'>-></span> 0 <span class='k'>in</span> g y b)
+<span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>let</span> <span class='lower'>g</span> <span class='lower'>z</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='keyword'>true</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>z</span> <span class='keywordsign'>|</span> <span class='keyword'>false</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span> <span class='keyword'>in</span> <span class='lower'>g</span> <span class='lower'>y</span> <span class='lower'>b</span><span class='keywordsign'>)</span>
 
-<span class='k'>let</span> f x b y <span class='k'>=</span> x <span class='o'>+</span> (<span class='k'>let</span> <span class='o'>_</span> <span class='k'>=</span> y <span class='o'>+</span> 3 <span class='k'>in</span> ()<span class='o'>;</span> <span class='k'>if</span> b <span class='k'>then</span> y <span class='k'>else</span> 0)
+<span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>let</span> <span class='keywordsign'>_</span> <span class='keywordsign'>=</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='number'>3</span> <span class='keyword'>in</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='keyword'>if</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>y</span> <span class='keyword'>else</span> <span class='number'>0</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let f x b y = if b then x+y else x+0\n\nlet f x b y = x + (if b then y else 0)\n\nlet f x b y = x + (match b with true -&#62; y | false -&#62; 0)\n\nlet f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)\n\nlet f x b y = x + (let _ = y + 3 in (); if b then y else 0)\n');">[try]</a></code></pre>
 <p>
 Si noti in special modo la prima - uso <code>;</code> come operatore per &quot;unire&quot;
 due istruzioni. Tutte le funzioni in OCaml possono essere espresse come:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> nome <span class='o'>[</span>parametri<span class='o'>]</span> <span class='k'>=</span> espressione
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>nome</span> <span class='keywordsign'>[</span><span class='lower'>parametri</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='lower'>espressione</span>
 <a href="javascript:octry('let nome [parametri] = espressione\n');">[try]</a></code></pre>
 <p>
 La definizione di OCaml di che cos&#39;è un&#39;espressione è soltanto un po&#39;
@@ -518,7 +505,7 @@ ma tutte le istruzioni di C sono in OCaml semplicemente espressioni
 <p>L&#39;unico punto in cui <code>;</code> differisce da <code>+</code> è che posso fare riferimento
 a <code>+</code> semplicemente come ad una funzione. Ad esempio, posso definire una
 funzione <code>sum_list</code>, per sommare una lista di int, come segue:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> sum_list <span class='k'>=</span> <span class='m'>List</span><span class='o'>.</span>fold_left ( <span class='o'>+</span> ) 0
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>sum_list</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_left</span> <span class='keywordsign'>(</span> <span class='keywordsign'>+</span> <span class='keywordsign'>)</span> <span class='number'>0</span>
 <a href="javascript:octry('let sum_list = List.fold_left ( + ) 0\n');">[try]</a></code></pre>
 <h3 id="Metteretuttoinsiemedelcodicereale"> Mettere tutto insieme: del codice reale</h3><p>
 
@@ -550,36 +537,36 @@ espressioni con nomi locali e globali.</p>
 All&#39;interno di questa funzione definisce un&#39;espressione con nome
 chiamata <code>sel</code> usando un&#39;istruzione <code>let sel = ... in</code> su due righe.
 Quindi chiama diversi metodi su <code>sel</code>.</p>
-<pre><code class='tryocaml'><span class='com2'>(* Primo frammento *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(* Primo frammento *)</span>
 
-<span class='k'>open</span> StdLabels
-<span class='k'>open</span> GMain
+<span class='keyword'>open</span> <span class='constructor'>StdLabels</span>
+<span class='keyword'>open</span> <span class='constructor'>GMain</span>
 
-<span class='k'>let</span> file_dialog <span class='o'>~</span>title <span class='o'>~</span>callback <span class='o'>?</span>filename () <span class='k'>=</span>
-  <span class='k'>let</span> sel <span class='k'>=</span>
-    <span class='m'>GWindow</span><span class='o'>.</span>file_selection <span class='o'>~</span>title <span class='o'>~</span>modal<span class='o'>:</span><span class='o'>true</span> <span class='o'>?</span>filename () <span class='k'>in</span>
-  sel<span class='o'>#</span>cancel_button<span class='o'>#</span>connect<span class='o'>#</span>clicked <span class='o'>~</span>callback<span class='o'>:</span>sel<span class='o'>#</span>destroy<span class='o'>;</span>
-  sel<span class='o'>#</span>ok_button<span class='o'>#</span>connect<span class='o'>#</span>clicked <span class='o'>~</span>callback<span class='o'>:</span>do_ok<span class='o'>;</span>
-  sel<span class='o'>#</span>show ()
+<span class='keyword'>let</span> <span class='lower'>file_dialog</span> <span class='keywordsign'>~</span><span class='lower'>title</span> <span class='keywordsign'>~</span><span class='lower'>callback</span> <span class='keywordsign'>?</span><span class='lower'>filename</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='lower'>sel</span> <span class='keywordsign'>=</span>
+    <span class='constructor'>GWindow</span><span class='keywordsign'>.</span><span class='lower'>file_selection</span> <span class='keywordsign'>~</span><span class='lower'>title</span> <span class='keywordsign'>~</span><span class='lower'>modal</span><span class='keywordsign'>:</span><span class='keyword'>true</span> <span class='keywordsign'>?</span><span class='lower'>filename</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+  <span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>cancel_button</span><span class='keywordsign'>#</span><span class='lower'>connect</span><span class='keywordsign'>#</span><span class='lower'>clicked</span> <span class='keywordsign'>~</span><span class='lower'>callback</span><span class='keywordsign'>:</span><span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>destroy</span><span class='keywordsign'>;</span>
+  <span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>ok_button</span><span class='keywordsign'>#</span><span class='lower'>connect</span><span class='keywordsign'>#</span><span class='lower'>clicked</span> <span class='keywordsign'>~</span><span class='lower'>callback</span><span class='keywordsign'>:</span><span class='lower'>do_ok</span><span class='keywordsign'>;</span>
+  <span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>show</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('(* Primo frammento *)\n\nopen StdLabels\nopen GMain\n\nlet file_dialog ~title ~callback ?filename () =\n  let sel =\n    GWindow.file_selection ~title ~modal:true ?filename () in\n  sel#cancel_button#connect#clicked ~callback:sel#destroy;\n  sel#ok_button#connect#clicked ~callback:do_ok;\n  sel#show ()\n');">[try]</a></code></pre>
 <p>
 Secondo frammento: Solo una lunga lista di nomi globali al livello
 superiore. Notate che l&#39;autore ha eliso ogni singolo <code>;;</code> grazie alla
 regola n° 2.</p>
-<pre><code class='tryocaml'><span class='com2'>(* Secondo frammento *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='comment'>(* Secondo frammento *)</span>
 
-<span class='k'>let</span> window <span class='k'>=</span> <span class='m'>GWindow</span><span class='o'>.</span>window <span class='o'>~</span>width<span class='o'>:</span>500 <span class='o'>~</span>height<span class='o'>:</span>300 <span class='o'>~</span>title<span class='o'>:</span><span class='s'>&#34;editor&#34;</span> ()
-<span class='k'>let</span> vbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>vbox <span class='o'>~</span>packing<span class='o'>:</span>window<span class='o'>#</span>add ()
+<span class='keyword'>let</span> <span class='lower'>window</span> <span class='keywordsign'>=</span> <span class='constructor'>GWindow</span><span class='keywordsign'>.</span><span class='lower'>window</span> <span class='keywordsign'>~</span><span class='lower'>width</span><span class='keywordsign'>:</span><span class='number'>500</span> <span class='keywordsign'>~</span><span class='lower'>height</span><span class='keywordsign'>:</span><span class='number'>300</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;editor&#34;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='keyword'>let</span> <span class='lower'>vbox</span> <span class='keywordsign'>=</span> <span class='constructor'>GPack</span><span class='keywordsign'>.</span><span class='lower'>vbox</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>window</span><span class='keywordsign'>#</span><span class='lower'>add</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 
-<span class='k'>let</span> menubar <span class='k'>=</span> <span class='m'>GMenu</span><span class='o'>.</span>menu_bar <span class='o'>~</span>packing<span class='o'>:</span>vbox<span class='o'>#</span>pack ()
-<span class='k'>let</span> factory <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GMenu</span><span class='o'>.</span>factory menubar
-<span class='k'>let</span> accel_group <span class='k'>=</span> factory<span class='o'>#</span>accel_group
-<span class='k'>let</span> file_menu <span class='k'>=</span> factory<span class='o'>#</span>add_submenu <span class='s'>&#34;File&#34;</span>
-<span class='k'>let</span> edit_menu <span class='k'>=</span> factory<span class='o'>#</span>add_submenu <span class='s'>&#34;Edit&#34;</span>
+<span class='keyword'>let</span> <span class='lower'>menubar</span> <span class='keywordsign'>=</span> <span class='constructor'>GMenu</span><span class='keywordsign'>.</span><span class='lower'>menu_bar</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>vbox</span><span class='keywordsign'>#</span><span class='lower'>pack</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='keyword'>let</span> <span class='lower'>factory</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='constructor'>GMenu</span><span class='keywordsign'>.</span><span class='lower'>factory</span> <span class='lower'>menubar</span>
+<span class='keyword'>let</span> <span class='lower'>accel_group</span> <span class='keywordsign'>=</span> <span class='lower'>factory</span><span class='keywordsign'>#</span><span class='lower'>accel_group</span>
+<span class='keyword'>let</span> <span class='lower'>file_menu</span> <span class='keywordsign'>=</span> <span class='lower'>factory</span><span class='keywordsign'>#</span><span class='lower'>add_submenu</span> <span class='string'>&#34;File&#34;</span>
+<span class='keyword'>let</span> <span class='lower'>edit_menu</span> <span class='keywordsign'>=</span> <span class='lower'>factory</span><span class='keywordsign'>#</span><span class='lower'>add_submenu</span> <span class='string'>&#34;Edit&#34;</span>
 
-<span class='k'>let</span> hbox <span class='k'>=</span> <span class='m'>GPack</span><span class='o'>.</span>hbox <span class='o'>~</span>packing<span class='o'>:</span>vbox<span class='o'>#</span>add ()
-<span class='k'>let</span> editor <span class='k'>=</span> <span class='k'>new</span> editor <span class='o'>~</span>packing<span class='o'>:</span>hbox<span class='o'>#</span>add ()
-<span class='k'>let</span> scrollbar <span class='k'>=</span> <span class='m'>GRange</span><span class='o'>.</span>scrollbar `VERTICAL <span class='o'>~</span>packing<span class='o'>:</span>hbox<span class='o'>#</span>pack ()
+<span class='keyword'>let</span> <span class='lower'>hbox</span> <span class='keywordsign'>=</span> <span class='constructor'>GPack</span><span class='keywordsign'>.</span><span class='lower'>hbox</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>vbox</span><span class='keywordsign'>#</span><span class='lower'>add</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='keyword'>let</span> <span class='lower'>editor</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='lower'>editor</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>hbox</span><span class='keywordsign'>#</span><span class='lower'>add</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='keyword'>let</span> <span class='lower'>scrollbar</span> <span class='keywordsign'>=</span> <span class='constructor'>GRange</span><span class='keywordsign'>.</span><span class='lower'>scrollbar</span> <span class='keywordsign'>`</span><span class='constructor'>VERTICAL</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>hbox</span><span class='keywordsign'>#</span><span class='lower'>pack</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('(* Secondo frammento *)\n\nlet window = GWindow.window ~width:500 ~height:300 ~title:&#34;editor&#34; ()\nlet vbox = GPack.vbox ~packing:window#add ()\n\nlet menubar = GMenu.menu_bar ~packing:vbox#pack ()\nlet factory = new GMenu.factory menubar\nlet accel_group = factory#accel_group\nlet file_menu = factory#add_submenu &#34;File&#34;\nlet edit_menu = factory#add_submenu &#34;Edit&#34;\n\nlet hbox = GPack.hbox ~packing:vbox#add ()\nlet editor = new editor ~packing:hbox#add ()\nlet scrollbar = GRange.scrollbar `VERTICAL ~packing:hbox#pack ()\n');">[try]</a></code></pre>
 <p>
 Terzo frammento: L&#39;autore importa tutti i simboli dal modulo
@@ -595,39 +582,8 @@ probabilmente un valore di ritorno <code>unit</code>, ma non ho verificato - e n
 <p>Notate che in questo frammento abbiamo una lunga serie di comandi
 essenzialmente procedurali. Questo è in realtà un classico programma
 imperativo.</p>
-<pre><code class='tryocaml'><span class='com2'>(* Terzo frammento *)</span><!-- end comment -->
-
-<span class='k'>open</span> GdkKeysyms
-
-<span class='k'>let</span> <span class='o'>_</span> <span class='k'>=</span>
-  window<span class='o'>#</span>connect<span class='o'>#</span>destroy <span class='o'>~</span>callback<span class='o'>:</span><span class='m'>Main</span><span class='o'>.</span>quit<span class='o'>;</span>
-  <span class='k'>let</span> factory <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GMenu</span><span class='o'>.</span>factory file_menu <span class='o'>~</span>accel_group <span class='k'>in</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Open...&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>O <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>open_file<span class='o'>;</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Save&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>S <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>save_file<span class='o'>;</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Save as...&#34;</span> <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>save_dialog<span class='o'>;</span>
-  factory<span class='o'>#</span>add_separator ()<span class='o'>;</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Quit&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>Q <span class='o'>~</span>callback<span class='o'>:</span>window<span class='o'>#</span>destroy<span class='o'>;</span>
-  <span class='k'>let</span> factory <span class='k'>=</span> <span class='k'>new</span> <span class='m'>GMenu</span><span class='o'>.</span>factory edit_menu <span class='o'>~</span>accel_group <span class='k'>in</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Copy&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>C <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>text<span class='o'>#</span>copy_clipboard<span class='o'>;</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Cut&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>X <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>text<span class='o'>#</span>cut_clipboard<span class='o'>;</span>
-  factory<span class='o'>#</span>add_item <span class='s'>&#34;Paste&#34;</span> <span class='o'>~</span>key<span class='o'>:_</span>V <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>text<span class='o'>#</span>paste_clipboard<span class='o'>;</span>
-  factory<span class='o'>#</span>add_separator ()<span class='o'>;</span>
-  factory<span class='o'>#</span>add_check_item <span class='s'>&#34;Word wrap&#34;</span> <span class='o'>~</span>active<span class='o'>:</span><span class='o'>false</span>
-    <span class='o'>~</span>callback<span class='o'>:</span>editor<span class='o'>#</span>text<span class='o'>#</span>set_word_wrap<span class='o'>;</span>
-  factory<span class='o'>#</span>add_check_item <span class='s'>&#34;Read only&#34;</span> <span class='o'>~</span>active<span class='o'>:</span><span class='o'>false</span>
-    <span class='o'>~</span>callback<span class='o'>:</span>(<span class='k'>fun</span> b <span class='k'>-></span> editor<span class='o'>#</span>text<span class='o'>#</span>set_editable (not b))<span class='o'>;</span>
-  window<span class='o'>#</span>add_accel_group accel_group<span class='o'>;</span>
-  editor<span class='o'>#</span>text<span class='o'>#</span>event<span class='o'>#</span>connect<span class='o'>#</span>button_press
-    <span class='o'>~</span>callback<span class='o'>:</span>(<span class='k'>fun</span> ev <span class='k'>-></span>
-
-      <span class='k'>let</span> button <span class='k'>=</span> <span class='m'>GdkEvent</span><span class='o'>.</span><span class='m'>Button</span><span class='o'>.</span>button ev <span class='k'>in</span>
-      <span class='k'>if</span> button <span class='k'>=</span> 3 <span class='k'>then</span> <span class='k'>begin</span>
-        file_menu<span class='o'>#</span>popup <span class='o'>~</span>button <span class='o'>~</span>time<span class='o'>:</span>(<span class='m'>GdkEvent</span><span class='o'>.</span><span class='m'>Button</span><span class='o'>.</span>time ev)<span class='o'>;</span> <span class='o'>true</span>
-      <span class='k'>end</span> <span class='k'>else</span> <span class='o'>false</span>)<span class='o'>;</span>
-  editor<span class='o'>#</span>text<span class='o'>#</span>set_vadjustment scrollbar<span class='o'>#</span>adjustment<span class='o'>;</span>
-  window<span class='o'>#</span>show ()<span class='o'>;</span>
-  <span class='m'>Main</span><span class='o'>.</span>main ()
-
+<pre><code class='tryocaml'>Characters 8:33 - 8:35 :
+Error: Lexical error while reading an operator
 <a href="javascript:octry('(* Terzo frammento *)\n\nopen GdkKeysyms\n\nlet _ =\n  window#connect#destroy ~callback:Main.quit;\n  let factory = new GMenu.factory file_menu ~accel_group in\n  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;\n  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;\n  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;\n  factory#add_separator ();\n  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;\n  let factory = new GMenu.factory edit_menu ~accel_group in\n  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;\n  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;\n  factory#add_separator ();\n  factory#add_check_item &#34;Word wrap&#34; ~active:false\n    ~callback:editor#text#set_word_wrap;\n  factory#add_check_item &#34;Read only&#34; ~active:false\n    ~callback:(fun b -&#62; editor#text#set_editable (not b));\n  window#add_accel_group accel_group;\n  editor#text#event#connect#button_press\n    ~callback:(fun ev -&#62;\n\n      let button = GdkEvent.Button.button ev in\n      if button = 3 then begin\n        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true\n      end else false);\n  editor#text#set_vadjustment scrollbar#adjustment;\n  window#show ();\n  Main.main ()\n\n');">[try]</a></code></pre>
 
       </div>

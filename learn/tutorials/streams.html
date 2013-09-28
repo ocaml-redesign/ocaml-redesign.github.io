@@ -98,14 +98,14 @@ but because the entire file is loaded into memory, it does not scale
 well when the file is large.</p>
 <p>More commonly, the <code>input_line</code> function can be used to read one line at
 a time from a channel. This typically looks like:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;lines.txt&#34;</span> <span class='k'>in</span>
-<span class='k'>try</span>
-  <span class='k'>while</span> <span class='o'>true</span> <span class='k'>do</span>
-    <span class='k'>let</span> line <span class='k'>=</span> input_line in_channel <span class='k'>in</span>
-    <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> line *)</span><!-- end comment -->
-  <span class='k'>done</span>
-<span class='k'>with</span> End_of_file <span class='k'>-></span>
-  close_in in_channel
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>in_channel</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='string'>&#34;lines.txt&#34;</span> <span class='keyword'>in</span>
+<span class='keyword'>try</span>
+  <span class='keyword'>while</span> <span class='keyword'>true</span> <span class='keyword'>do</span>
+    <span class='keyword'>let</span> <span class='lower'>line</span> <span class='keywordsign'>=</span> <span class='lower'>input_line</span> <span class='lower'>in_channel</span> <span class='keyword'>in</span>
+    <span class='comment'>(* do something with line *)</span>
+  <span class='keyword'>done</span>
+<span class='keyword'>with</span> <span class='constructor'>End_of_file</span> <span class='keywordsign'>-&#62;</span>
+  <span class='lower'>close_in</span> <span class='lower'>in_channel</span>
 <a href="javascript:octry('let in_channel = open_in &#34;lines.txt&#34; in\ntry\n  while true do\n    let line = input_line in_channel in\n    (* do something with line *)\n  done\nwith End_of_file -&#62;\n  close_in in_channel\n');">[try]</a></code></pre>
 <p>
 The above code is efficient with memory, but it can be inconvenient in
@@ -121,10 +121,10 @@ items from a sequence. They don&#39;t assume anything about files or
 channels, and they replace the <code>End_of_file</code> exception with a more
 structured approach to dealing with the end of input. Here is a function
 that builds a stream of lines from an input channel:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> line_stream_of_channel channel <span class='k'>=</span>
-  <span class='m'>Stream</span><span class='o'>.</span>from
-    (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span>
-       <span class='k'>try</span> Some (input_line channel) <span class='k'>with</span> End_of_file <span class='k'>-></span> None)
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>line_stream_of_channel</span> <span class='lower'>channel</span> <span class='keywordsign'>=</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span>
+    <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span>
+       <span class='keyword'>try</span> <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='lower'>input_line</span> <span class='lower'>channel</span><span class='keywordsign'>)</span> <span class='keyword'>with</span> <span class='constructor'>End_of_file</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let line_stream_of_channel channel =\n  Stream.from\n    (fun _ -&#62;\n       try Some (input_line channel) with End_of_file -&#62; None)\n');">[try]</a></code></pre>
 <p>
 The &quot;Stream.from&quot; function builds a stream from a callback function.
@@ -137,17 +137,17 @@ further reads will be attempted. Since the option is polymorphic,
 type of <code>&#39;a Stream.t</code>.</p>
 <p>With this simple function, we can now easily construct line streams from
 any input channel:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span><span class='o'>;;</span>
-<span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_channel in_channel<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>in_channel</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='string'>&#34;_oasis&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>lines</span> <span class='keywordsign'>=</span> <span class='lower'>line_stream_of_channel</span> <span class='lower'>in_channel</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let in_channel = open_in &#34;_oasis&#34;;;\nlet lines = line_stream_of_channel in_channel;;\n');">[try]</a></code></pre>
 <p>
 This variable <code>lines</code> is a stream of strings, one string per line. We
 can now begin reading lines from it by passing it to <code>Stream.next</code>:</p>
-<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='k'>while</span> <span class='o'>true</span> <span class='k'>do</span> ignore(<span class='m'>Stream</span><span class='o'>.</span>next lines) <span class='k'>done</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='keyword'>while</span> <span class='keyword'>true</span> <span class='keyword'>do</span> <span class='lower'>ignore</span><span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>)</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('Stream.next lines;;\nStream.next lines;;\nStream.next lines;;\nStream.next lines;;\nwhile true do ignore(Stream.next lines) done;;\n');">[try]</a></code></pre>
 <p>
 As you can see, <code>Stream.next</code> either returns the next item in the stream
@@ -155,17 +155,17 @@ or raises a <code>Stream.Failure</code> exception indicating that the stream is
 empty. Likewise, with a little help from the <code>Stream.of_list</code>
 constructor and the <code>Str</code> regular expression module, we could build a
 stream of lines from a string in memory:</p>
-<pre><code class='tryocaml'><span class='o'>#</span>load <span class='s'>&#34;str.cma&#34;</span><span class='o'>;;</span>
-<span class='k'>let</span> line_stream_of_string string <span class='k'>=</span>
-  <span class='m'>Stream</span><span class='o'>.</span>of_list (<span class='m'>Str</span><span class='o'>.</span>split (<span class='m'>Str</span><span class='o'>.</span>regexp <span class='s'>&#34;\n&#34;</span>) string)
+<pre><code class='tryocaml'><span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;str.cma&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>line_stream_of_string</span> <span class='lower'>string</span> <span class='keywordsign'>=</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='keywordsign'>(</span><span class='constructor'>Str</span><span class='keywordsign'>.</span><span class='lower'>split</span> <span class='keywordsign'>(</span><span class='constructor'>Str</span><span class='keywordsign'>.</span><span class='lower'>regexp</span> <span class='string'>&#34;\n&#34;</span><span class='keywordsign'>)</span> <span class='lower'>string</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('#load &#34;str.cma&#34;;;\nlet line_stream_of_string string =\n  Stream.of_list (Str.split (Str.regexp &#34;\n&#34;) string)\n');">[try]</a></code></pre>
 <p>
 and these streams could be used exactly the same way:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nstream\nworld&#34;</span><span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next lines<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>lines</span> <span class='keywordsign'>=</span> <span class='lower'>line_stream_of_string</span> <span class='string'>&#34;hello\nstream\nworld&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let lines = line_stream_of_string &#34;hello\nstream\nworld&#34;;;\nStream.next lines;;\nStream.next lines;;\nStream.next lines;;\nStream.next lines;;\n');">[try]</a></code></pre>
 <p>
 Since both cases raise <code>Stream.Failure</code> on an empty stream, there is no
@@ -175,40 +175,40 @@ receive data from multiple sources.</p>
 <p>The <code>Stream.iter</code> function automates the common task of performing an
 operation for each item. With it, we can rewrite the original example as
 follows:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> in_channel <span class='k'>=</span> open_in <span class='s'>&#34;_oasis&#34;</span> <span class='k'>in</span>
-  <span class='k'>try</span>
-    <span class='m'>Stream</span><span class='o'>.</span>iter
-      (<span class='k'>fun</span> line <span class='k'>-></span>
-         <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> line *)</span><!-- end comment -->
-         print_endline line)
-      (line_stream_of_channel in_channel)<span class='o'>;</span>
-    close_in in_channel
-  <span class='k'>with</span> e <span class='k'>-></span>
-    close_in in_channel<span class='o'>;</span>
-    raise e
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>in_channel</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='string'>&#34;_oasis&#34;</span> <span class='keyword'>in</span>
+  <span class='keyword'>try</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+      <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>line</span> <span class='keywordsign'>-&#62;</span>
+         <span class='comment'>(* do something with line *)</span>
+         <span class='lower'>print_endline</span> <span class='lower'>line</span><span class='keywordsign'>)</span>
+      <span class='keywordsign'>(</span><span class='lower'>line_stream_of_channel</span> <span class='lower'>in_channel</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='lower'>close_in</span> <span class='lower'>in_channel</span>
+  <span class='keyword'>with</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span>
+    <span class='lower'>close_in</span> <span class='lower'>in_channel</span><span class='keywordsign'>;</span>
+    <span class='lower'>raise</span> <span class='lower'>e</span>
 <a href="javascript:octry('  let in_channel = open_in &#34;_oasis&#34; in\n  try\n    Stream.iter\n      (fun line -&#62;\n         (* do something with line *)\n         print_endline line)\n      (line_stream_of_channel in_channel);\n    close_in in_channel\n  with e -&#62;\n    close_in in_channel;\n    raise e\n');">[try]</a></code></pre>
 <p>
 Note how much easier it is to handle I/O exceptions properly, since we
 can deal with them independently from the end-of-file condition. This
 separation of concerns allows us to decompose this into simpler and more
 reusable functions:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> process_line line <span class='k'>=</span>
-  print_endline line
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>process_line</span> <span class='lower'>line</span> <span class='keywordsign'>=</span>
+  <span class='lower'>print_endline</span> <span class='lower'>line</span>
 
-<span class='k'>let</span> process_lines lines <span class='k'>=</span>
-  <span class='m'>Stream</span><span class='o'>.</span>iter process_line lines
+<span class='keyword'>let</span> <span class='lower'>process_lines</span> <span class='lower'>lines</span> <span class='keywordsign'>=</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>process_line</span> <span class='lower'>lines</span>
 
-<span class='k'>let</span> process_file filename <span class='k'>=</span>
-  <span class='k'>let</span> in_channel <span class='k'>=</span> open_in filename <span class='k'>in</span>
-  <span class='k'>try</span>
-    process_lines (line_stream_of_channel in_channel)<span class='o'>;</span>
-    close_in in_channel
-  <span class='k'>with</span> e <span class='k'>-></span>
-    close_in in_channel
-    raise e
+<span class='keyword'>let</span> <span class='lower'>process_file</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='lower'>in_channel</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
+  <span class='keyword'>try</span>
+    <span class='lower'>process_lines</span> <span class='keywordsign'>(</span><span class='lower'>line_stream_of_channel</span> <span class='lower'>in_channel</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='lower'>close_in</span> <span class='lower'>in_channel</span>
+  <span class='keyword'>with</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span>
+    <span class='lower'>close_in</span> <span class='lower'>in_channel</span>
+    <span class='lower'>raise</span> <span class='lower'>e</span>
 
-<span class='k'>let</span> process_string string <span class='k'>=</span>
-  process_lines (line_stream_of_string string)
+<span class='keyword'>let</span> <span class='lower'>process_string</span> <span class='lower'>string</span> <span class='keywordsign'>=</span>
+  <span class='lower'>process_lines</span> <span class='keywordsign'>(</span><span class='lower'>line_stream_of_string</span> <span class='lower'>string</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let process_line line =\n  print_endline line\n\nlet process_lines lines =\n  Stream.iter process_line lines\n\nlet process_file filename =\n  let in_channel = open_in filename in\n  try\n    process_lines (line_stream_of_channel in_channel);\n    close_in in_channel\n  with e -&#62;\n    close_in in_channel\n    raise e\n\nlet process_string string =\n  process_lines (line_stream_of_string string)\n');">[try]</a></code></pre>
 <h2 id="Constructingstreams"> Constructing streams</h2><p>
 
@@ -230,12 +230,12 @@ In the above examples, we saw two methods for constructing streams:</p>
 of any type. It is not limited to I/O and can even produce infinite
 sequences. Here are a few simple stream builders defined with
 <code>Stream.from</code>:</p>
-<pre><code class='tryocaml'>  <span class='com2'>(* A stream that is always empty<span class='ic'>.</span> *)</span><!-- end comment -->
-  <span class='k'>let</span> empty_stream () <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> None)<span class='o'>;;</span>
-  <span class='com2'>(* A stream that yields the same item repeatedly<span class='ic'>.</span> *)</span><!-- end comment -->
-  <span class='k'>let</span> const_stream k <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> <span class='o'>_</span> <span class='k'>-></span> Some k)<span class='o'>;;</span>
-  <span class='com2'>(* A stream that yields consecutive integers starting <span class='ic'>with</span> <span class='ic'>&#39;i&#39;</span><span class='ic'>.</span> *)</span><!-- end comment -->
-  <span class='k'>let</span> count_stream i <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>from (<span class='k'>fun</span> j <span class='k'>-></span> Some (i <span class='o'>+</span> j))<span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='comment'>(* A stream that is always empty. *)</span>
+  <span class='keyword'>let</span> <span class='lower'>empty_stream</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+  <span class='comment'>(* A stream that yields the same item repeatedly. *)</span>
+  <span class='keyword'>let</span> <span class='lower'>const_stream</span> <span class='lower'>k</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Some</span> <span class='lower'>k</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+  <span class='comment'>(* A stream that yields consecutive integers starting with &#39;i&#39;. *)</span>
+  <span class='keyword'>let</span> <span class='lower'>count_stream</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>j</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>+</span> <span class='lower'>j</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  (* A stream that is always empty. *)\n  let empty_stream () = Stream.from (fun _ -&#62; None);;\n  (* A stream that yields the same item repeatedly. *)\n  let const_stream k = Stream.from (fun _ -&#62; Some k);;\n  (* A stream that yields consecutive integers starting with &#39;i&#39;. *)\n  let count_stream i = Stream.from (fun j -&#62; Some (i + j));;\n');">[try]</a></code></pre>
 <h2 id="Deconstructingstreams"> Deconstructing streams</h2><p>
 
@@ -246,13 +246,13 @@ functions allow you to see what the next item would be. This feature,
 known as &quot;look ahead&quot;, is very useful when writing parsers. Even if you
 don&#39;t need to look ahead, the peek/junk protocol may be nicer to work
 with because it uses options instead of exceptions:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_string <span class='s'>&#34;hello\nworld&#34;</span><span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>lines</span> <span class='keywordsign'>=</span> <span class='lower'>line_stream_of_string</span> <span class='string'>&#34;hello\nworld&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>peek</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>peek</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>junk</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>peek</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>junk</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>peek</span> <span class='lower'>lines</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let lines = line_stream_of_string &#34;hello\nworld&#34;;;\nStream.peek lines;;\nStream.peek lines;;\nStream.junk lines;;\nStream.peek lines;;\nStream.junk lines;;\nStream.peek lines;;\n');">[try]</a></code></pre>
 <p>
 As you can see, it is necessary to call <code>Stream.junk</code> to advance to the
@@ -262,19 +262,19 @@ next item. <code>Stream.peek</code> will always give you either the next item or
 <h2 id="AmorecomplexquotStreamfromquotexample"> A more complex &quot;Stream.from&quot; example</h2><p>
 Here is a function that converts a line stream into a paragraph stream.
 As such, it is both a stream consumer and a stream producer.</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> paragraphs lines <span class='k'>=</span>
-    <span class='k'>let rec</span> next para_lines i <span class='k'>=</span>
-      <span class='k'>match</span> <span class='m'>Stream</span><span class='o'>.</span>peek lines<span class='o'>,</span> para_lines <span class='k'>with</span>
-      <span class='o'>|</span> None<span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None
-      <span class='o'>|</span> Some <span class='s'>&#34;&#34;</span><span class='o'>,</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span>
-          <span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;</span>
-          next para_lines i
-      <span class='o'>|</span> Some <span class='s'>&#34;&#34;</span><span class='o'>,</span> <span class='o'>_</span> <span class='o'>|</span> None<span class='o'>,</span> <span class='o'>_</span> <span class='k'>-></span>
-          Some (<span class='m'>String</span><span class='o'>.</span>concat <span class='s'>&#34;\n&#34;</span> (<span class='m'>List</span><span class='o'>.</span>rev para_lines))
-      <span class='o'>|</span> Some line<span class='o'>,</span> <span class='o'>_</span> <span class='k'>-></span>
-          <span class='m'>Stream</span><span class='o'>.</span>junk lines<span class='o'>;</span>
-          next (line <span class='o'>::</span> para_lines) i <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from (next <span class='o'>[</span><span class='o'>]</span>)
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>paragraphs</span> <span class='lower'>lines</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>para_lines</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>match</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>peek</span> <span class='lower'>lines</span><span class='keywordsign'>,</span> <span class='lower'>para_lines</span> <span class='keyword'>with</span>
+      <span class='keywordsign'>|</span> <span class='constructor'>None</span><span class='keywordsign'>,</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span>
+      <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='string'>&#34;&#34;</span><span class='keywordsign'>,</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span>
+          <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>junk</span> <span class='lower'>lines</span><span class='keywordsign'>;</span>
+          <span class='lower'>next</span> <span class='lower'>para_lines</span> <span class='lower'>i</span>
+      <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='string'>&#34;&#34;</span><span class='keywordsign'>,</span> <span class='keywordsign'>_</span> <span class='keywordsign'>|</span> <span class='constructor'>None</span><span class='keywordsign'>,</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span>
+          <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>concat</span> <span class='string'>&#34;\n&#34;</span> <span class='keywordsign'>(</span><span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>rev</span> <span class='lower'>para_lines</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+      <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='lower'>line</span><span class='keywordsign'>,</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span>
+          <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>junk</span> <span class='lower'>lines</span><span class='keywordsign'>;</span>
+          <span class='lower'>next</span> <span class='keywordsign'>(</span><span class='lower'>line</span> <span class='keywordsign'>::</span> <span class='lower'>para_lines</span><span class='keywordsign'>)</span> <span class='lower'>i</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='keywordsign'>(</span><span class='lower'>next</span> <span class='operator'>[]</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let paragraphs lines =\n    let rec next para_lines i =\n      match Stream.peek lines, para_lines with\n      | None, [] -&#62; None\n      | Some &#34;&#34;, [] -&#62;\n          Stream.junk lines;\n          next para_lines i\n      | Some &#34;&#34;, _ | None, _ -&#62;\n          Some (String.concat &#34;\n&#34; (List.rev para_lines))\n      | Some line, _ -&#62;\n          Stream.junk lines;\n          next (line :: para_lines) i in\n    Stream.from (next [])\n');">[try]</a></code></pre>
 <p>
 This function uses an extra parameter to <code>next</code> (the <code>Stream.from</code>
@@ -303,13 +303,13 @@ are handled:</p>
 ensure that we are handling all possible cases.</p>
 <p>With this new tool, we can now work just as easily with paragraphs as we
 could before with lines:</p>
-<pre><code class='tryocaml'>  <span class='com2'>(* Print each paragraph<span class='ic'>,</span> followed by a separator<span class='ic'>.</span> *)</span><!-- end comment -->
-  <span class='k'>let</span> lines <span class='k'>=</span> line_stream_of_channel in_channel <span class='k'>in</span>
-  <span class='m'>Stream</span><span class='o'>.</span>iter
-    (<span class='k'>fun</span> para <span class='k'>-></span>
-       print_endline para<span class='o'>;</span>
-       print_endline <span class='s'>&#34;--&#34;</span>)
-    (paragraphs lines)
+<pre><code class='tryocaml'>  <span class='comment'>(* Print each paragraph, followed by a separator. *)</span>
+  <span class='keyword'>let</span> <span class='lower'>lines</span> <span class='keywordsign'>=</span> <span class='lower'>line_stream_of_channel</span> <span class='lower'>in_channel</span> <span class='keyword'>in</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+    <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>para</span> <span class='keywordsign'>-&#62;</span>
+       <span class='lower'>print_endline</span> <span class='lower'>para</span><span class='keywordsign'>;</span>
+       <span class='lower'>print_endline</span> <span class='string'>&#34;--&#34;</span><span class='keywordsign'>)</span>
+    <span class='keywordsign'>(</span><span class='lower'>paragraphs</span> <span class='lower'>lines</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  (* Print each paragraph, followed by a separator. *)\n  let lines = line_stream_of_channel in_channel in\n  Stream.iter\n    (fun para -&#62;\n       print_endline para;\n       print_endline &#34;--&#34;)\n    (paragraphs lines)\n');">[try]</a></code></pre>
 <p>
 Functions like <code>paragraphs</code> that produce and consume streams can be
@@ -319,45 +319,45 @@ Just like lists and arrays, common iteration patterns such as <code>map</code>,
 <code>filter</code>, and <code>fold</code> can be very useful. The <code>Stream</code> module does not
 provide such functions, but they can be built easily using
 <code>Stream.from</code>:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> stream_map f stream <span class='k'>=</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>try</span> Some (f (<span class='m'>Stream</span><span class='o'>.</span>next stream))
-      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>stream_map</span> <span class='lower'>f</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>try</span> <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='lower'>f</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+      <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span>
 
-  <span class='k'>let</span> stream_filter p stream <span class='k'>=</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>try</span>
-        <span class='k'>let</span> value <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>next stream <span class='k'>in</span>
-        <span class='k'>if</span> p value <span class='k'>then</span> Some value <span class='k'>else</span> next i
-      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next
+  <span class='keyword'>let</span> <span class='lower'>stream_filter</span> <span class='lower'>p</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>try</span>
+        <span class='keyword'>let</span> <span class='lower'>value</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream</span> <span class='keyword'>in</span>
+        <span class='keyword'>if</span> <span class='lower'>p</span> <span class='lower'>value</span> <span class='keyword'>then</span> <span class='constructor'>Some</span> <span class='lower'>value</span> <span class='keyword'>else</span> <span class='lower'>next</span> <span class='lower'>i</span>
+      <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span>
   
-  <span class='k'>let</span> stream_fold f stream init <span class='k'>=</span>
-    <span class='k'>let</span> result <span class='k'>=</span> ref init <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>iter
-      (<span class='k'>fun</span> x <span class='k'>-></span> result <span class='o'>:=</span> f x <span class='o'>!</span>result)
-      stream<span class='o'>;</span>
-    <span class='o'>!</span>result
+  <span class='keyword'>let</span> <span class='lower'>stream_fold</span> <span class='lower'>f</span> <span class='lower'>stream</span> <span class='lower'>init</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='lower'>init</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+      <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>result</span> <span class='keywordsign'>:=</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='prefix'>!</span><span class='lower'>result</span><span class='keywordsign'>)</span>
+      <span class='lower'>stream</span><span class='keywordsign'>;</span>
+    <span class='prefix'>!</span><span class='lower'>result</span>
 <a href="javascript:octry('  let stream_map f stream =\n    let rec next i =\n      try Some (f (Stream.next stream))\n      with Stream.Failure -&#62; None in\n    Stream.from next\n\n  let stream_filter p stream =\n    let rec next i =\n      try\n        let value = Stream.next stream in\n        if p value then Some value else next i\n      with Stream.Failure -&#62; None in\n    Stream.from next\n  \n  let stream_fold f stream init =\n    let result = ref init in\n    Stream.iter\n      (fun x -&#62; result := f x !result)\n      stream;\n    !result\n');">[try]</a></code></pre>
 <p>
 For example, here is a stream of leap years starting with 2000:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> is_leap year <span class='k'>=</span>
-    year <span class='k'>mod</span> 4 <span class='k'>=</span> 0 <span class='o'>&#38;&#38;</span> (year <span class='k'>mod</span> 100 <span class='o'>&#60;&#62;</span> 0 <span class='o'>||</span> year <span class='k'>mod</span> 400 <span class='k'>=</span> 0)
-  <span class='k'>let</span> leap_years <span class='k'>=</span> stream_filter is_leap (count_stream 2000)
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>is_leap</span> <span class='lower'>year</span> <span class='keywordsign'>=</span>
+    <span class='lower'>year</span> <span class='keyword'>mod</span> <span class='number'>4</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keywordsign'>&#38;&#38;</span> <span class='keywordsign'>(</span><span class='lower'>year</span> <span class='keyword'>mod</span> <span class='number'>100</span> <span class='infix'>&#60;&#62;</span> <span class='number'>0</span> <span class='infix'>||</span> <span class='lower'>year</span> <span class='keyword'>mod</span> <span class='number'>400</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>)</span>
+  <span class='keyword'>let</span> <span class='lower'>leap_years</span> <span class='keywordsign'>=</span> <span class='lower'>stream_filter</span> <span class='lower'>is_leap</span> <span class='keywordsign'>(</span><span class='lower'>count_stream</span> <span class='number'>2000</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let is_leap year =\n    year mod 4 = 0 &#38;&#38; (year mod 100 &#60;&#62; 0 || year mod 400 = 0)\n  let leap_years = stream_filter is_leap (count_stream 2000)\n');">[try]</a></code></pre>
 <p>
 We can use the <code>Stream.npeek</code> function to look ahead by more than one
 item. In this case, we&#39;ll peek at the next 30 items to make sure that
 the year 2100 is not a leap year (since it&#39;s divisible by 100 but not
 400!):</p>
-<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 30 leap_years<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>30</span> <span class='lower'>leap_years</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('Stream.npeek 30 leap_years;;\n');">[try]</a></code></pre>
 <p>
 Note that we must be careful not to use <code>Stream.iter</code> on an infinite
 stream like <code>leap_years</code>. This applies to <code>stream_fold</code>, as well as any
 function that attempts to consume the entire stream.</p>
-<pre><code class='tryocaml'>stream_fold <span class='o'>(+</span>) (<span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span>1<span class='o'>;</span> 2<span class='o'>;</span> 3<span class='o'>]</span>) 0<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='lower'>stream_fold</span> <span class='keywordsign'>(</span><span class='keywordsign'>+</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>)</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('stream_fold (+) (Stream.of_list [1; 2; 3]) 0;;\n');">[try]</a></code></pre>
 <p>
 <code>stream_fold (+) (count_stream 0) 0</code> runs forever.</p>
@@ -365,14 +365,14 @@ function that attempts to consume the entire stream.</p>
 The previously defined <code>const_stream</code> function builds a stream that
 repeats a single value. It is also useful to build a stream that repeats
 a sequence of values. The following function does just that:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> cycle items <span class='k'>=</span>
-    <span class='k'>let</span> buf <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>if</span> <span class='o'>!</span>buf <span class='k'>=</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>then</span> buf <span class='o'>:=</span> items<span class='o'>;</span>
-      <span class='k'>match</span> <span class='o'>!</span>buf <span class='k'>with</span>
-        <span class='o'>|</span> h <span class='o'>::</span> t <span class='k'>-></span> (buf <span class='o'>:=</span> t<span class='o'>;</span> Some h)
-        <span class='o'>|</span> <span class='o'>[</span><span class='o'>]</span> <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>cycle</span> <span class='lower'>items</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>buf</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='operator'>[]</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>if</span> <span class='prefix'>!</span><span class='lower'>buf</span> <span class='keywordsign'>=</span> <span class='operator'>[]</span> <span class='keyword'>then</span> <span class='lower'>buf</span> <span class='keywordsign'>:=</span> <span class='lower'>items</span><span class='keywordsign'>;</span>
+      <span class='keyword'>match</span> <span class='prefix'>!</span><span class='lower'>buf</span> <span class='keyword'>with</span>
+        <span class='keywordsign'>|</span> <span class='lower'>h</span> <span class='keywordsign'>::</span> <span class='lower'>t</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='lower'>buf</span> <span class='keywordsign'>:=</span> <span class='lower'>t</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='lower'>h</span><span class='keywordsign'>)</span>
+        <span class='keywordsign'>|</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span>
 <a href="javascript:octry('  let cycle items =\n    let buf = ref [] in\n    let rec next i =\n      if !buf = [] then buf := items;\n      match !buf with\n        | h :: t -&#62; (buf := t; Some h)\n        | [] -&#62; None in\n    Stream.from next\n');">[try]</a></code></pre>
 <p>
 One common task that can benefit from this kind of stream is the
@@ -380,39 +380,39 @@ generation of alternating background colors for HTML. By using <code>cycle</code
 with <code>stream_combine</code>, explained in the next section, an infinite stream
 of background colors can be combined with a finite stream of data to
 produce a sequence of HTML blocks:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream1<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>next stream2)
-      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next<span class='o'>;;</span>
-  <span class='m'>Stream</span><span class='o'>.</span>iter print_endline
-    (stream_map
-       (<span class='k'>fun</span> (bg<span class='o'>,</span> s) <span class='k'>-></span>
-          <span class='m'>Printf</span><span class='o'>.</span>sprintf <span class='s'>&#34;&#60;div style=&#39;background: %s&#39;&#62;%s&#60;/div&#62;&#34;</span> bg s)
-       (stream_combine
-          (cycle <span class='o'>[</span><span class='s'>&#34;#eee&#34;</span><span class='o'>;</span> <span class='s'>&#34;#fff&#34;</span><span class='o'>]</span>)
-          (<span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span><span class='s'>&#34;hello&#34;</span><span class='o'>;</span> <span class='s'>&#34;html&#34;</span><span class='o'>;</span> <span class='s'>&#34;world&#34;</span><span class='o'>]</span>)))
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>stream_combine</span> <span class='lower'>stream1</span> <span class='lower'>stream2</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>try</span> <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream1</span><span class='keywordsign'>,</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream2</span><span class='keywordsign'>)</span>
+      <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span><span class='keywordsign'>;;</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>print_endline</span>
+    <span class='keywordsign'>(</span><span class='lower'>stream_map</span>
+       <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='lower'>bg</span><span class='keywordsign'>,</span> <span class='lower'>s</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+          <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>sprintf</span> <span class='string'>&#34;&#60;div style=&#39;background: %s&#39;&#62;%s&#60;/div&#62;&#34;</span> <span class='lower'>bg</span> <span class='lower'>s</span><span class='keywordsign'>)</span>
+       <span class='keywordsign'>(</span><span class='lower'>stream_combine</span>
+          <span class='keywordsign'>(</span><span class='lower'>cycle</span> <span class='keywordsign'>[</span><span class='string'>&#34;#eee&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;#fff&#34;</span><span class='keywordsign'>]</span><span class='keywordsign'>)</span>
+          <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;html&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let stream_combine stream1 stream2 =\n    let rec next i =\n      try Some (Stream.next stream1, Stream.next stream2)\n      with Stream.Failure -&#62; None in\n    Stream.from next;;\n  Stream.iter print_endline\n    (stream_map\n       (fun (bg, s) -&#62;\n          Printf.sprintf &#34;&#60;div style=&#39;background: %s&#39;&#62;%s&#60;/div&#62;&#34; bg s)\n       (stream_combine\n          (cycle [&#34;#eee&#34;; &#34;#fff&#34;])\n          (Stream.of_list [&#34;hello&#34;; &#34;html&#34;; &#34;world&#34;])))\n');">[try]</a></code></pre>
 <p>
 Here is a simple <code>range</code> function that produces a sequence of integers:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> range <span class='o'>?</span>(start<span class='k'>=</span>0) <span class='o'>?</span>(stop<span class='k'>=</span>0) <span class='o'>?</span>(step<span class='k'>=</span>1) () <span class='k'>=</span>
-    <span class='k'>let</span> in_range <span class='k'>=</span> <span class='k'>if</span> step <span class='o'>&#60;</span> 0 <span class='k'>then</span> <span class='o'>(&#62;</span>) <span class='k'>else</span> <span class='o'>(&#60;</span>) <span class='k'>in</span>
-    <span class='k'>let</span> current <span class='k'>=</span> ref start <span class='k'>in</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>if</span> in_range <span class='o'>!</span>current stop
-      <span class='k'>then</span> <span class='k'>let</span> result <span class='k'>=</span> <span class='o'>!</span>current <span class='k'>in</span> (current <span class='o'>:=</span> <span class='o'>!</span>current <span class='o'>+</span> step<span class='o'>;</span>
-                                     Some result)
-      <span class='k'>else</span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>range</span> <span class='keywordsign'>?</span><span class='keywordsign'>(</span><span class='lower'>start</span><span class='keywordsign'>=</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='keywordsign'>?</span><span class='keywordsign'>(</span><span class='lower'>stop</span><span class='keywordsign'>=</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='keywordsign'>?</span><span class='keywordsign'>(</span><span class='lower'>step</span><span class='keywordsign'>=</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>in_range</span> <span class='keywordsign'>=</span> <span class='keyword'>if</span> <span class='lower'>step</span> <span class='keywordsign'>&#60;</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='keywordsign'>(</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>)</span> <span class='keyword'>else</span> <span class='keywordsign'>(</span><span class='keywordsign'>&#60;</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>current</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='lower'>start</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>if</span> <span class='lower'>in_range</span> <span class='prefix'>!</span><span class='lower'>current</span> <span class='lower'>stop</span>
+      <span class='keyword'>then</span> <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='prefix'>!</span><span class='lower'>current</span> <span class='keyword'>in</span> <span class='keywordsign'>(</span><span class='lower'>current</span> <span class='keywordsign'>:=</span> <span class='prefix'>!</span><span class='lower'>current</span> <span class='keywordsign'>+</span> <span class='lower'>step</span><span class='keywordsign'>;</span>
+                                     <span class='constructor'>Some</span> <span class='lower'>result</span><span class='keywordsign'>)</span>
+      <span class='keyword'>else</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span>
 <a href="javascript:octry('  let range ?(start=0) ?(stop=0) ?(step=1) () =\n    let in_range = if step &#60; 0 then (&#62;) else (&#60;) in\n    let current = ref start in\n    let rec next i =\n      if in_range !current stop\n      then let result = !current in (current := !current + step;\n                                     Some result)\n      else None in\n    Stream.from next\n');">[try]</a></code></pre>
 <p>
 This works just like Python&#39;s <code>xrange</code> built-in function, providing an
 easy way to produce an assortment of lazy integer sequences by
 specifying combinations of <code>start</code>, <code>stop</code>, or <code>step</code> values:</p>
-<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>5 <span class='o'>~</span>stop<span class='o'>:</span>10 ())<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>stop<span class='o'>:</span>10 <span class='o'>~</span>step<span class='o'>:</span>2 ())<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>10 <span class='o'>~</span>step<span class='o'>:</span><span class='o'>(-</span>1) ())<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>npeek 10 (range <span class='o'>~</span>start<span class='o'>:</span>10 <span class='o'>~</span>stop<span class='o'>:</span>5 <span class='o'>~</span>step<span class='o'>:</span><span class='o'>(-</span>1) ())<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>10</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>start</span><span class='keywordsign'>:</span><span class='number'>5</span> <span class='keywordsign'>~</span><span class='lower'>stop</span><span class='keywordsign'>:</span><span class='number'>10</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>10</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>stop</span><span class='keywordsign'>:</span><span class='number'>10</span> <span class='keywordsign'>~</span><span class='lower'>step</span><span class='keywordsign'>:</span><span class='number'>2</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>10</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>start</span><span class='keywordsign'>:</span><span class='number'>10</span> <span class='keywordsign'>~</span><span class='lower'>step</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>10</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>start</span><span class='keywordsign'>:</span><span class='number'>10</span> <span class='keywordsign'>~</span><span class='lower'>stop</span><span class='keywordsign'>:</span><span class='number'>5</span> <span class='keywordsign'>~</span><span class='lower'>step</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('Stream.npeek 10 (range ~start:5 ~stop:10 ());;\nStream.npeek 10 (range ~stop:10 ~step:2 ());;\nStream.npeek 10 (range ~start:10 ~step:(-1) ());;\nStream.npeek 10 (range ~start:10 ~stop:5 ~step:(-1) ());;\n');">[try]</a></code></pre>
 <h2 id="Combiningstreams"> Combining streams</h2><p>
 
@@ -420,59 +420,59 @@ There are several ways to combine streams. One is to produce a stream of
 streams and then concatenate them into a single stream. The following
 function works just like <code>List.concat</code>, but instead of turning a list of
 lists into a list, it turns a stream of streams into a stream:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> stream_concat streams <span class='k'>=</span>
-    <span class='k'>let</span> current_stream <span class='k'>=</span> ref None <span class='k'>in</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>try</span>
-        <span class='k'>let</span> stream <span class='k'>=</span>
-          <span class='k'>match</span> <span class='o'>!</span>current_stream <span class='k'>with</span>
-          <span class='o'>|</span> Some stream <span class='k'>-></span> stream
-          <span class='o'>|</span> None <span class='k'>-></span>
-             <span class='k'>let</span> stream <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>next streams <span class='k'>in</span>
-             current_stream <span class='o'>:=</span> Some stream<span class='o'>;</span>
-             stream <span class='k'>in</span>
-        <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream)
-        <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> (current_stream <span class='o'>:=</span> None<span class='o'>;</span> next i)
-      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>stream_concat</span> <span class='lower'>streams</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>current_stream</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>try</span>
+        <span class='keyword'>let</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+          <span class='keyword'>match</span> <span class='prefix'>!</span><span class='lower'>current_stream</span> <span class='keyword'>with</span>
+          <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='lower'>stream</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>stream</span>
+          <span class='keywordsign'>|</span> <span class='constructor'>None</span> <span class='keywordsign'>-&#62;</span>
+             <span class='keyword'>let</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>streams</span> <span class='keyword'>in</span>
+             <span class='lower'>current_stream</span> <span class='keywordsign'>:=</span> <span class='constructor'>Some</span> <span class='lower'>stream</span><span class='keywordsign'>;</span>
+             <span class='lower'>stream</span> <span class='keyword'>in</span>
+        <span class='keyword'>try</span> <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream</span><span class='keywordsign'>)</span>
+        <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='lower'>current_stream</span> <span class='keywordsign'>:=</span> <span class='constructor'>None</span><span class='keywordsign'>;</span> <span class='lower'>next</span> <span class='lower'>i</span><span class='keywordsign'>)</span>
+      <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span>
 <a href="javascript:octry('  let stream_concat streams =\n    let current_stream = ref None in\n    let rec next i =\n      try\n        let stream =\n          match !current_stream with\n          | Some stream -&#62; stream\n          | None -&#62;\n             let stream = Stream.next streams in\n             current_stream := Some stream;\n             stream in\n        try Some (Stream.next stream)\n        with Stream.Failure -&#62; (current_stream := None; next i)\n      with Stream.Failure -&#62; None in\n    Stream.from next\n');">[try]</a></code></pre>
 <p>
 Here is a sequence of ranges which are themselves derived from a range,
 concatenated with <code>stream_concat</code> to produce a flattened <code>int Stream.t</code>.</p>
-<pre><code class='tryocaml'>  <span class='m'>Stream</span><span class='o'>.</span>npeek 10
-    (stream_concat
-       (stream_map
-          (<span class='k'>fun</span> i <span class='k'>-></span> range <span class='o'>~</span>stop<span class='o'>:</span>i ())
-          (range <span class='o'>~</span>stop<span class='o'>:</span>5 ())))
+<pre><code class='tryocaml'>  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>10</span>
+    <span class='keywordsign'>(</span><span class='lower'>stream_concat</span>
+       <span class='keywordsign'>(</span><span class='lower'>stream_map</span>
+          <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>i</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>stop</span><span class='keywordsign'>:</span><span class='lower'>i</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+          <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>stop</span><span class='keywordsign'>:</span><span class='number'>5</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  Stream.npeek 10\n    (stream_concat\n       (stream_map\n          (fun i -&#62; range ~stop:i ())\n          (range ~stop:5 ())))\n');">[try]</a></code></pre>
 <p>
 Another way to combine streams is to iterate through them in a pairwise
 fashion:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> stream_combine stream1 stream2 <span class='k'>=</span>
-    <span class='k'>let rec</span> next i <span class='k'>=</span>
-      <span class='k'>try</span> Some (<span class='m'>Stream</span><span class='o'>.</span>next stream1<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>next stream2)
-      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from next
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>stream_combine</span> <span class='lower'>stream1</span> <span class='lower'>stream2</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>next</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>try</span> <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream1</span><span class='keywordsign'>,</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream2</span><span class='keywordsign'>)</span>
+      <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>next</span>
 <a href="javascript:octry('  let stream_combine stream1 stream2 =\n    let rec next i =\n      try Some (Stream.next stream1, Stream.next stream2)\n      with Stream.Failure -&#62; None in\n    Stream.from next\n');">[try]</a></code></pre>
 <p>
 This is useful, for instance, if you have a stream of keys and a stream
 of corresponding values. Iterating through key value pairs is then as
 simple as:</p>
-<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>iter
-  (<span class='k'>fun</span> (key<span class='o'>,</span> value) <span class='k'>-></span>
-     <span class='com2'>(* <span class='ic'>do</span> something <span class='ic'>with</span> 'key' <span class='ic'>and</span> 'value' *)</span><!-- end comment -->
-     ())
-  (stream_combine key_stream value_stream)
+<pre><code class='tryocaml'><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+  <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='lower'>key</span><span class='keywordsign'>,</span> <span class='lower'>value</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+     <span class='comment'>(* do something with &#39;key&#39; and &#39;value&#39; *)</span>
+     <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+  <span class='keywordsign'>(</span><span class='lower'>stream_combine</span> <span class='lower'>key_stream</span> <span class='lower'>value_stream</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('Stream.iter\n  (fun (key, value) -&#62;\n     (* do something with &#39;key&#39; and &#39;value&#39; *)\n     ())\n  (stream_combine key_stream value_stream)\n');">[try]</a></code></pre>
 <p>
 Since <code>stream_combine</code> stops as soon as either of its input streams runs
 out, it can be used to combine an infinite stream with a finite one.
 This provides a neat way to add indexes to a sequence:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> items <span class='k'>=</span> <span class='o'>[</span><span class='s'>&#34;this&#34;</span><span class='o'>;</span> <span class='s'>&#34;is&#34;</span><span class='o'>;</span> <span class='s'>&#34;a&#34;</span><span class='o'>;</span> <span class='s'>&#34;test&#34;</span><span class='o'>]</span><span class='o'>;;</span>
-  <span class='m'>Stream</span><span class='o'>.</span>iter
-    (<span class='k'>fun</span> (index<span class='o'>,</span> value) <span class='k'>-></span>
-       <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;%d. %s\n%!&#34;</span> index value)
-    (stream_combine (count_stream 1) (<span class='m'>Stream</span><span class='o'>.</span>of_list items))
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>items</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;this&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;is&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;a&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;test&#34;</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+    <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='lower'>index</span><span class='keywordsign'>,</span> <span class='lower'>value</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+       <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d. %s\n%!&#34;</span> <span class='lower'>index</span> <span class='lower'>value</span><span class='keywordsign'>)</span>
+    <span class='keywordsign'>(</span><span class='lower'>stream_combine</span> <span class='keywordsign'>(</span><span class='lower'>count_stream</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='lower'>items</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let items = [&#34;this&#34;; &#34;is&#34;; &#34;a&#34;; &#34;test&#34;];;\n  Stream.iter\n    (fun (index, value) -&#62;\n       Printf.printf &#34;%d. %s\n%!&#34; index value)\n    (stream_combine (count_stream 1) (Stream.of_list items))\n');">[try]</a></code></pre>
 <h2 id="Copyingstreams"> Copying streams</h2><p>
 
@@ -482,38 +482,38 @@ use the same stream more than once? One way is to create a &quot;tee&quot;. The
 following function creates two output streams from one input stream,
 intelligently queueing unseen values until they have been produced by
 both streams:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> stream_tee stream <span class='k'>=</span>
-    <span class='k'>let</span> next self other i <span class='k'>=</span>
-      <span class='k'>try</span>
-        <span class='k'>if</span> <span class='m'>Queue</span><span class='o'>.</span>is_empty self
-        <span class='k'>then</span>
-          <span class='k'>let</span> value <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>next stream <span class='k'>in</span>
-          <span class='m'>Queue</span><span class='o'>.</span>add value other<span class='o'>;</span>
-          Some value
-        <span class='k'>else</span>
-          Some (<span class='m'>Queue</span><span class='o'>.</span>take self)
-      <span class='k'>with</span> <span class='m'>Stream</span><span class='o'>.</span>Failure <span class='k'>-></span> None <span class='k'>in</span>
-    <span class='k'>let</span> q1 <span class='k'>=</span> <span class='m'>Queue</span><span class='o'>.</span>create () <span class='k'>in</span>
-    <span class='k'>let</span> q2 <span class='k'>=</span> <span class='m'>Queue</span><span class='o'>.</span>create () <span class='k'>in</span>
-    (<span class='m'>Stream</span><span class='o'>.</span>from (next q1 q2)<span class='o'>,</span> <span class='m'>Stream</span><span class='o'>.</span>from (next q2 q1))
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>stream_tee</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>next</span> <span class='lower'>self</span> <span class='lower'>other</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>try</span>
+        <span class='keyword'>if</span> <span class='constructor'>Queue</span><span class='keywordsign'>.</span><span class='lower'>is_empty</span> <span class='lower'>self</span>
+        <span class='keyword'>then</span>
+          <span class='keyword'>let</span> <span class='lower'>value</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>stream</span> <span class='keyword'>in</span>
+          <span class='constructor'>Queue</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>value</span> <span class='lower'>other</span><span class='keywordsign'>;</span>
+          <span class='constructor'>Some</span> <span class='lower'>value</span>
+        <span class='keyword'>else</span>
+          <span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='constructor'>Queue</span><span class='keywordsign'>.</span><span class='lower'>take</span> <span class='lower'>self</span><span class='keywordsign'>)</span>
+      <span class='keyword'>with</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='constructor'>Failure</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>None</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>q1</span> <span class='keywordsign'>=</span> <span class='constructor'>Queue</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>q2</span> <span class='keywordsign'>=</span> <span class='constructor'>Queue</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keywordsign'>(</span><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='keywordsign'>(</span><span class='lower'>next</span> <span class='lower'>q1</span> <span class='lower'>q2</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='keywordsign'>(</span><span class='lower'>next</span> <span class='lower'>q2</span> <span class='lower'>q1</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let stream_tee stream =\n    let next self other i =\n      try\n        if Queue.is_empty self\n        then\n          let value = Stream.next stream in\n          Queue.add value other;\n          Some value\n        else\n          Some (Queue.take self)\n      with Stream.Failure -&#62; None in\n    let q1 = Queue.create () in\n    let q2 = Queue.create () in\n    (Stream.from (next q1 q2), Stream.from (next q2 q1))\n');">[try]</a></code></pre>
 <p>
 Here is an example of a stream tee in action:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> let<span class='o'>ters</span> <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>[</span><span class='s'>&#39;a&#39;</span><span class='o'>;</span> <span class='s'>&#39;b&#39;</span><span class='o'>;</span> <span class='s'>&#39;c&#39;</span><span class='o'>;</span> <span class='s'>&#39;d&#39;</span><span class='o'>;</span> <span class='s'>&#39;e&#39;</span><span class='o'>]</span><span class='o'>;;</span>
-<span class='k'>let</span> s1<span class='o'>,</span> s2 <span class='k'>=</span> stream_tee let<span class='o'>ters</span><span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>letters</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='keywordsign'>[</span><span class='string'>&#39;a&#39;</span><span class='keywordsign'>;</span> <span class='string'>&#39;b&#39;</span><span class='keywordsign'>;</span> <span class='string'>&#39;c&#39;</span><span class='keywordsign'>;</span> <span class='string'>&#39;d&#39;</span><span class='keywordsign'>;</span> <span class='string'>&#39;e&#39;</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>s1</span><span class='keywordsign'>,</span> <span class='lower'>s2</span> <span class='keywordsign'>=</span> <span class='lower'>stream_tee</span> <span class='lower'>letters</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s1</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s1</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s2</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s1</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s2</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s2</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let letters = Stream.of_list [&#39;a&#39;; &#39;b&#39;; &#39;c&#39;; &#39;d&#39;; &#39;e&#39;];;\nlet s1, s2 = stream_tee letters;;\nStream.next s1;;\nStream.next s1;;\nStream.next s2;;\nStream.next s1;;\nStream.next s2;;\nStream.next s2;;\n');">[try]</a></code></pre>
 <p>
 Again, since streams are destructive, you probably want to leave the
 original stream alone or you will lose items from the copied streams:</p>
-<pre><code class='tryocaml'><span class='m'>Stream</span><span class='o'>.</span>next let<span class='o'>ters</span><span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s1<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>next s2<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>letters</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s1</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>next</span> <span class='lower'>s2</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('Stream.next letters;;\nStream.next s1;;\nStream.next s2;;\n');">[try]</a></code></pre>
 <h2 id="Convertingstreams"> Converting streams</h2><p>
 
@@ -521,84 +521,84 @@ Here are a few functions for converting between streams and lists,
 arrays, and hash tables. These probably belong in the standard library,
 but they are simple to define anyhow. Again, beware of infinite streams,
 which will cause these functions to hang.</p>
-<pre><code class='tryocaml'>  <span class='com2'>(* This one is free<span class='ic'>.</span> *)</span><!-- end comment -->
-  <span class='k'>let</span> stream_of_list <span class='k'>=</span> <span class='m'>Stream</span><span class='o'>.</span>of_list
+<pre><code class='tryocaml'>  <span class='comment'>(* This one is free. *)</span>
+  <span class='keyword'>let</span> <span class='lower'>stream_of_list</span> <span class='keywordsign'>=</span> <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span>
 
-  <span class='k'>let</span> list_of_stream stream <span class='k'>=</span>
-    <span class='k'>let</span> result <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>iter (<span class='k'>fun</span> value <span class='k'>-></span> result <span class='o'>:=</span> value <span class='o'>::</span> <span class='o'>!</span>result) stream<span class='o'>;</span>
-    <span class='m'>List</span><span class='o'>.</span>rev <span class='o'>!</span>result
+  <span class='keyword'>let</span> <span class='lower'>list_of_stream</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='operator'>[]</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>value</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>result</span> <span class='keywordsign'>:=</span> <span class='lower'>value</span> <span class='keywordsign'>::</span> <span class='prefix'>!</span><span class='lower'>result</span><span class='keywordsign'>)</span> <span class='lower'>stream</span><span class='keywordsign'>;</span>
+    <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>rev</span> <span class='prefix'>!</span><span class='lower'>result</span>
   
-  <span class='k'>let</span> stream_of_array array <span class='k'>=</span>
-    <span class='m'>Stream</span><span class='o'>.</span>of_list (<span class='m'>Array</span><span class='o'>.</span>to_list array)
+  <span class='keyword'>let</span> <span class='lower'>stream_of_array</span> <span class='lower'>array</span> <span class='keywordsign'>=</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='keywordsign'>(</span><span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>to_list</span> <span class='lower'>array</span><span class='keywordsign'>)</span>
   
-  <span class='k'>let</span> array_of_stream stream <span class='k'>=</span>
-    <span class='m'>Array</span><span class='o'>.</span>of_list (list_of_stream stream)
+  <span class='keyword'>let</span> <span class='lower'>array_of_stream</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+    <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='keywordsign'>(</span><span class='lower'>list_of_stream</span> <span class='lower'>stream</span><span class='keywordsign'>)</span>
   
-  <span class='k'>let</span> stream_of_hash hash <span class='k'>=</span>
-    <span class='k'>let</span> result <span class='k'>=</span> ref <span class='o'>[</span><span class='o'>]</span> <span class='k'>in</span>
-    <span class='m'>Hashtbl</span><span class='o'>.</span>iter
-      (<span class='k'>fun</span> key value <span class='k'>-></span> result <span class='o'>:=</span> (key<span class='o'>,</span> value) <span class='o'>::</span> <span class='o'>!</span>result)
-      hash<span class='o'>;</span>
-    <span class='m'>Stream</span><span class='o'>.</span>of_list <span class='o'>!</span>result
+  <span class='keyword'>let</span> <span class='lower'>stream_of_hash</span> <span class='lower'>hash</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='operator'>[]</span> <span class='keyword'>in</span>
+    <span class='constructor'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+      <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>key</span> <span class='lower'>value</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>result</span> <span class='keywordsign'>:=</span> <span class='keywordsign'>(</span><span class='lower'>key</span><span class='keywordsign'>,</span> <span class='lower'>value</span><span class='keywordsign'>)</span> <span class='keywordsign'>::</span> <span class='prefix'>!</span><span class='lower'>result</span><span class='keywordsign'>)</span>
+      <span class='lower'>hash</span><span class='keywordsign'>;</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_list</span> <span class='prefix'>!</span><span class='lower'>result</span>
   
-  <span class='k'>let</span> hash_of_stream stream <span class='k'>=</span>
-    <span class='k'>let</span> result <span class='k'>=</span> <span class='m'>Hashtbl</span><span class='o'>.</span>create 0 <span class='k'>in</span>
-    <span class='m'>Stream</span><span class='o'>.</span>iter
-      (<span class='k'>fun</span> (key<span class='o'>,</span> value) <span class='k'>-></span> <span class='m'>Hashtbl</span><span class='o'>.</span>replace result key value)
-      stream<span class='o'>;</span>
-    result
+  <span class='keyword'>let</span> <span class='lower'>hash_of_stream</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='number'>0</span> <span class='keyword'>in</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+      <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='lower'>key</span><span class='keywordsign'>,</span> <span class='lower'>value</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>replace</span> <span class='lower'>result</span> <span class='lower'>key</span> <span class='lower'>value</span><span class='keywordsign'>)</span>
+      <span class='lower'>stream</span><span class='keywordsign'>;</span>
+    <span class='lower'>result</span>
 <a href="javascript:octry('  (* This one is free. *)\n  let stream_of_list = Stream.of_list\n\n  let list_of_stream stream =\n    let result = ref [] in\n    Stream.iter (fun value -&#62; result := value :: !result) stream;\n    List.rev !result\n  \n  let stream_of_array array =\n    Stream.of_list (Array.to_list array)\n  \n  let array_of_stream stream =\n    Array.of_list (list_of_stream stream)\n  \n  let stream_of_hash hash =\n    let result = ref [] in\n    Hashtbl.iter\n      (fun key value -&#62; result := (key, value) :: !result)\n      hash;\n    Stream.of_list !result\n  \n  let hash_of_stream stream =\n    let result = Hashtbl.create 0 in\n    Stream.iter\n      (fun (key, value) -&#62; Hashtbl.replace result key value)\n      stream;\n    result\n');">[try]</a></code></pre>
 <p>
 What if you want to convert arbitary data types to streams? Well, if the
 data type defines an <code>iter</code> function, and you don&#39;t mind using threads,
 you can use a producer-consumer arrangement to invert control:</p>
-<pre><code class='tryocaml'>  <span class='o'>#</span>directory <span class='s'>&#34;+threads&#34;</span><span class='o'>;;</span>
-  <span class='o'>#</span>load <span class='s'>&#34;threads.cma&#34;</span><span class='o'>;;</span>
-  <span class='k'>let</span> elements iter coll <span class='k'>=</span>
-    <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
-    <span class='k'>let</span> producer () <span class='k'>=</span>
-      <span class='k'>let</span> () <span class='k'>=</span>
-        iter (<span class='k'>fun</span> x <span class='k'>-></span> <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel (Some x))) coll <span class='k'>in</span>
-      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel None) <span class='k'>in</span>
-    <span class='k'>let</span> consumer i <span class='k'>=</span>
-      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>receive channel) <span class='k'>in</span>
-    ignore (<span class='m'>Thread</span><span class='o'>.</span>create producer ())<span class='o'>;</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from consumer
+<pre><code class='tryocaml'>  <span class='keywordsign'>#</span><span class='lower'>directory</span> <span class='string'>&#34;+threads&#34;</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;threads.cma&#34;</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>elements</span> <span class='lower'>iter</span> <span class='lower'>coll</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>channel</span> <span class='keywordsign'>=</span> <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>new_channel</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>producer</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+        <span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>sync</span> <span class='keywordsign'>(</span><span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>send</span> <span class='lower'>channel</span> <span class='keywordsign'>(</span><span class='constructor'>Some</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span> <span class='lower'>coll</span> <span class='keyword'>in</span>
+      <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>sync</span> <span class='keywordsign'>(</span><span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>send</span> <span class='lower'>channel</span> <span class='constructor'>None</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>consumer</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>sync</span> <span class='keywordsign'>(</span><span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>receive</span> <span class='lower'>channel</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='lower'>ignore</span> <span class='keywordsign'>(</span><span class='constructor'>Thread</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='lower'>producer</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>consumer</span>
 <a href="javascript:octry('  #directory &#34;+threads&#34;;;\n  #load &#34;threads.cma&#34;;;\n  let elements iter coll =\n    let channel = Event.new_channel () in\n    let producer () =\n      let () =\n        iter (fun x -&#62; Event.sync (Event.send channel (Some x))) coll in\n      Event.sync (Event.send channel None) in\n    let consumer i =\n      Event.sync (Event.receive channel) in\n    ignore (Thread.create producer ());\n    Stream.from consumer\n');">[try]</a></code></pre>
 <p>
 Now it is possible to build a stream from an <code>iter</code> function and a
 corresponding value:</p>
-<pre><code class='tryocaml'><span class='k'>module</span> StringSet <span class='k'>=</span> <span class='m'>Set</span><span class='o'>.</span>Make(String)<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>StringSet</span> <span class='keywordsign'>=</span> <span class='constructor'>Set</span><span class='keywordsign'>.</span><span class='constructor'>Make</span><span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>empty<span class='o'>;;</span>
-<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;here&#34;</span> set<span class='o'>;;</span>
-<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;are&#34;</span> set<span class='o'>;;</span>
-<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;some&#34;</span> set<span class='o'>;;</span>
-<span class='k'>let</span> set <span class='k'>=</span> <span class='m'>StringSet</span><span class='o'>.</span>add <span class='s'>&#34;values&#34;</span> set<span class='o'>;;</span>
-<span class='k'>let</span> stream <span class='k'>=</span> elements <span class='m'>StringSet</span><span class='o'>.</span>iter set<span class='o'>;;</span>
-<span class='m'>Stream</span><span class='o'>.</span>iter print_endline stream<span class='o'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>set</span> <span class='keywordsign'>=</span> <span class='constructor'>StringSet</span><span class='keywordsign'>.</span><span class='lower'>empty</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>set</span> <span class='keywordsign'>=</span> <span class='constructor'>StringSet</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;here&#34;</span> <span class='lower'>set</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>set</span> <span class='keywordsign'>=</span> <span class='constructor'>StringSet</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;are&#34;</span> <span class='lower'>set</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>set</span> <span class='keywordsign'>=</span> <span class='constructor'>StringSet</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;some&#34;</span> <span class='lower'>set</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>set</span> <span class='keywordsign'>=</span> <span class='constructor'>StringSet</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;values&#34;</span> <span class='lower'>set</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>stream</span> <span class='keywordsign'>=</span> <span class='lower'>elements</span> <span class='constructor'>StringSet</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>set</span><span class='keywordsign'>;;</span>
+<span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>print_endline</span> <span class='lower'>stream</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('module StringSet = Set.Make(String);;\n\nlet set = StringSet.empty;;\nlet set = StringSet.add &#34;here&#34; set;;\nlet set = StringSet.add &#34;are&#34; set;;\nlet set = StringSet.add &#34;some&#34; set;;\nlet set = StringSet.add &#34;values&#34; set;;\nlet stream = elements StringSet.iter set;;\nStream.iter print_endline stream;;\n');">[try]</a></code></pre>
 <p>
 Some data types, like Hashtbl and Map, provide an <code>iter</code> function that
 iterates through key-value pairs. Here&#39;s a function for those, too:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> items iter coll <span class='k'>=</span>
-    <span class='k'>let</span> channel <span class='k'>=</span> <span class='m'>Event</span><span class='o'>.</span>new_channel () <span class='k'>in</span>
-    <span class='k'>let</span> producer () <span class='k'>=</span>
-      <span class='k'>let</span> () <span class='k'>=</span>
-        iter (<span class='k'>fun</span> k v <span class='k'>-></span>
-                <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel (Some (k<span class='o'>,</span> v)))) coll <span class='k'>in</span>
-      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>send channel None) <span class='k'>in</span>
-    <span class='k'>let</span> consumer i <span class='k'>=</span>
-      <span class='m'>Event</span><span class='o'>.</span>sync (<span class='m'>Event</span><span class='o'>.</span>receive channel) <span class='k'>in</span>
-    ignore (<span class='m'>Thread</span><span class='o'>.</span>create producer ())<span class='o'>;</span>
-    <span class='m'>Stream</span><span class='o'>.</span>from consumer
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>items</span> <span class='lower'>iter</span> <span class='lower'>coll</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='lower'>channel</span> <span class='keywordsign'>=</span> <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>new_channel</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>producer</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+      <span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+        <span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>k</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span>
+                <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>sync</span> <span class='keywordsign'>(</span><span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>send</span> <span class='lower'>channel</span> <span class='keywordsign'>(</span><span class='constructor'>Some</span> <span class='keywordsign'>(</span><span class='lower'>k</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span> <span class='lower'>coll</span> <span class='keyword'>in</span>
+      <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>sync</span> <span class='keywordsign'>(</span><span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>send</span> <span class='lower'>channel</span> <span class='constructor'>None</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>consumer</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+      <span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>sync</span> <span class='keywordsign'>(</span><span class='constructor'>Event</span><span class='keywordsign'>.</span><span class='lower'>receive</span> <span class='lower'>channel</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='lower'>ignore</span> <span class='keywordsign'>(</span><span class='constructor'>Thread</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='lower'>producer</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>from</span> <span class='lower'>consumer</span>
 <a href="javascript:octry('  let items iter coll =\n    let channel = Event.new_channel () in\n    let producer () =\n      let () =\n        iter (fun k v -&#62;\n                Event.sync (Event.send channel (Some (k, v)))) coll in\n      Event.sync (Event.send channel None) in\n    let consumer i =\n      Event.sync (Event.receive channel) in\n    ignore (Thread.create producer ());\n    Stream.from consumer\n');">[try]</a></code></pre>
 <p>
 If we want just the keys, or just the values, it is simple to transform
 the output of <code>items</code> using <code>stream_map</code>:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> keys iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> k) (items iter coll)
-<span class='k'>let</span> values iter coll <span class='k'>=</span> stream_map (<span class='k'>fun</span> (k<span class='o'>,</span> v) <span class='k'>-></span> v) (items iter coll)
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>keys</span> <span class='lower'>iter</span> <span class='lower'>coll</span> <span class='keywordsign'>=</span> <span class='lower'>stream_map</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='lower'>k</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>k</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='lower'>items</span> <span class='lower'>iter</span> <span class='lower'>coll</span><span class='keywordsign'>)</span>
+<span class='keyword'>let</span> <span class='lower'>values</span> <span class='lower'>iter</span> <span class='lower'>coll</span> <span class='keywordsign'>=</span> <span class='lower'>stream_map</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='lower'>k</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>v</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='lower'>items</span> <span class='lower'>iter</span> <span class='lower'>coll</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let keys iter coll = stream_map (fun (k, v) -&#62; k) (items iter coll)\nlet values iter coll = stream_map (fun (k, v) -&#62; v) (items iter coll)\n');">[try]</a></code></pre>
 <p>
 Keep in mind that these techniques spawn producer threads which carry a

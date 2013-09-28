@@ -175,31 +175,31 @@ channels that point to regular files, use <code>seek_in</code> or <code>seek_out
  exists! Use <code>open_out_gen</code> if you want an alternate behavior.</li>
 </ul>
 
-<h3 id="Example"> Example</h3><pre><code class='tryocaml'><span class='k'>open</span> Printf
+<h3 id="Example"> Example</h3><pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Printf</span>
 
-<span class='k'>let</span> file <span class='k'>=</span> <span class='s'>&#34;example.dat&#34;</span>
-<span class='k'>let</span> message <span class='k'>=</span> <span class='s'>&#34;Hello!&#34;</span>
+<span class='keyword'>let</span> <span class='lower'>file</span> <span class='keywordsign'>=</span> <span class='string'>&#34;example.dat&#34;</span>
+<span class='keyword'>let</span> <span class='lower'>message</span> <span class='keywordsign'>=</span> <span class='string'>&#34;Hello!&#34;</span>
 
-<span class='k'>let</span> () <span class='k'>=</span>
-  <span class='com2'>(* Write message <span class='ic'>to</span> file *)</span><!-- end comment -->
-  <span class='k'>let</span> oc <span class='k'>=</span> open_out file <span class='k'>in</span>    <span class='com2'>(* create <span class='ic'>or</span> truncate file<span class='ic'>,</span> return channel *)</span><!-- end comment -->
-  fprintf oc <span class='s'>&#34;%s\n&#34;</span> message<span class='o'>;</span>   <span class='com2'>(* write something *)</span><!-- end comment -->   
-  close_out oc<span class='o'>;</span>                <span class='com2'>(* flush <span class='ic'>and</span> close the channel *)</span><!-- end comment -->
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='comment'>(* Write message to file *)</span>
+  <span class='keyword'>let</span> <span class='lower'>oc</span> <span class='keywordsign'>=</span> <span class='lower'>open_out</span> <span class='lower'>file</span> <span class='keyword'>in</span>    <span class='comment'>(* create or truncate file, return channel *)</span>
+  <span class='lower'>fprintf</span> <span class='lower'>oc</span> <span class='string'>&#34;%s\n&#34;</span> <span class='lower'>message</span><span class='keywordsign'>;</span>   <span class='comment'>(* write something *)</span>   
+  <span class='lower'>close_out</span> <span class='lower'>oc</span><span class='keywordsign'>;</span>                <span class='comment'>(* flush and close the channel *)</span>
 
-  <span class='com2'>(* Read file <span class='ic'>and</span> display the first line *)</span><!-- end comment -->
-  <span class='k'>let</span> ic <span class='k'>=</span> open_in file <span class='k'>in</span>
-  <span class='k'>try</span> 
-    <span class='k'>let</span> line <span class='k'>=</span> input_line ic <span class='k'>in</span>  <span class='com2'>(* read line from in_channel <span class='ic'>and</span> discard <span class='ic'>\</span>n *)</span><!-- end comment -->
-    print_endline line<span class='o'>;</span>          <span class='com2'>(* write the result <span class='ic'>to</span> stdout *)</span><!-- end comment -->
-    flush stdout<span class='o'>;</span>                <span class='com2'>(* write on the underlying device now *)</span><!-- end comment -->
-    close_in ic                  <span class='com2'>(* close the input channel *)</span><!-- end comment --> 
+  <span class='comment'>(* Read file and display the first line *)</span>
+  <span class='keyword'>let</span> <span class='lower'>ic</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='lower'>file</span> <span class='keyword'>in</span>
+  <span class='keyword'>try</span> 
+    <span class='keyword'>let</span> <span class='lower'>line</span> <span class='keywordsign'>=</span> <span class='lower'>input_line</span> <span class='lower'>ic</span> <span class='keyword'>in</span>  <span class='comment'>(* read line from in_channel and discard \n *)</span>
+    <span class='lower'>print_endline</span> <span class='lower'>line</span><span class='keywordsign'>;</span>          <span class='comment'>(* write the result to stdout *)</span>
+    <span class='lower'>flush</span> <span class='lower'>stdout</span><span class='keywordsign'>;</span>                <span class='comment'>(* write on the underlying device now *)</span>
+    <span class='lower'>close_in</span> <span class='lower'>ic</span>                  <span class='comment'>(* close the input channel *)</span> 
 
-  <span class='k'>with</span> e <span class='k'>-></span>                      <span class='com2'>(* some unexpected <span class='ic'>exception</span> occurs *)</span><!-- end comment -->
-    close_in_noerr ic<span class='o'>;</span>           <span class='com2'>(* emergency closing *)</span><!-- end comment -->
-    raise e                      <span class='com2'>(* exit <span class='ic'>with</span> error<span class='ic'>:</span> files are closed but</span>
-<span class='com2'>                                    channels are not flushed *)</span><!-- end comment -->
+  <span class='keyword'>with</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span>                      <span class='comment'>(* some unexpected exception occurs *)</span>
+    <span class='lower'>close_in_noerr</span> <span class='lower'>ic</span><span class='keywordsign'>;</span>           <span class='comment'>(* emergency closing *)</span>
+    <span class='lower'>raise</span> <span class='lower'>e</span>                      <span class='comment'>(* exit with error: files are closed but
+                                    channels are not flushed *)</span>
 
-  <span class='com2'>(* normal exit<span class='ic'>:</span> all channels are flushed <span class='ic'>and</span> closed *)</span><!-- end comment -->
+  <span class='comment'>(* normal exit: all channels are flushed and closed *)</span>
 
 <a href="javascript:octry('open Printf\n\nlet file = &#34;example.dat&#34;\nlet message = &#34;Hello!&#34;\n\nlet () =\n  (* Write message to file *)\n  let oc = open_out file in    (* create or truncate file, return channel *)\n  fprintf oc &#34;%s\n&#34; message;   (* write something *)   \n  close_out oc;                (* flush and close the channel *)\n\n  (* Read file and display the first line *)\n  let ic = open_in file in\n  try \n    let line = input_line ic in  (* read line from in_channel and discard \n *)\n    print_endline line;          (* write the result to stdout *)\n    flush stdout;                (* write on the underlying device now *)\n    close_in ic                  (* close the input channel *) \n\n  with e -&#62;                      (* some unexpected exception occurs *)\n    close_in_noerr ic;           (* emergency closing *)\n    raise e                      (* exit with error: files are closed but\n                                    channels are not flushed *)\n\n  (* normal exit: all channels are flushed and closed *)\n\n');">[try]</a></code></pre>
 

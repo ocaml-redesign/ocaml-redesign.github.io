@@ -103,30 +103,30 @@ array. It is obtained using the <code>Array.length</code> function.</p>
 <h2 id="Simpleexample"> Simple example</h2><p>
 The following program displays the arguments with their position in
 <code>Sys.argv</code>:</p>
-<pre><code class='tryocaml'><span class='k'>open</span> Printf
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Printf</span>
 
-<span class='k'>let</span> () <span class='k'>=</span>
-  <span class='k'>for</span> i <span class='k'>=</span> 0 <span class='k'>to</span> <span class='m'>Array</span><span class='o'>.</span>length <span class='m'>Sys</span><span class='o'>.</span>argv <span class='o'>-</span> 1 <span class='k'>do</span>
-    printf <span class='s'>&#34;[%i] %s\n&#34;</span> i <span class='m'>Sys</span><span class='o'>.</span>argv<span class='o'>.</span>(i)
-  <span class='k'>done</span>
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>do</span>
+    <span class='lower'>printf</span> <span class='string'>&#34;[%i] %s\n&#34;</span> <span class='lower'>i</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span>
+  <span class='keyword'>done</span>
 <a href="javascript:octry('open Printf\n\nlet () =\n  for i = 0 to Array.length Sys.argv - 1 do\n    printf &#34;[%i] %s\n&#34; i Sys.argv.(i)\n  done\n');">[try]</a></code></pre>
 <p>
 If you save the program above as <code>args.ml</code>, and run
 <code>ocaml args.ml arg1 arg2 arg3</code>, here is what you get:</p>
-<pre><code class='tryocaml'><span class='o'>[</span>0<span class='o'>]</span> args<span class='o'>.</span>ml
-<span class='o'>[</span>1<span class='o'>]</span> arg1
-<span class='o'>[</span>2<span class='o'>]</span> arg2
-<span class='o'>[</span>3<span class='o'>]</span> arg3
+<pre><code class='tryocaml'><span class='keywordsign'>[</span><span class='number'>0</span><span class='keywordsign'>]</span> <span class='lower'>args</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
+<span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>]</span> <span class='lower'>arg1</span>
+<span class='keywordsign'>[</span><span class='number'>2</span><span class='keywordsign'>]</span> <span class='lower'>arg2</span>
+<span class='keywordsign'>[</span><span class='number'>3</span><span class='keywordsign'>]</span> <span class='lower'>arg3</span>
 <a href="javascript:octry('[0] args.ml\n[1] arg1\n[2] arg2\n[3] arg3\n');">[try]</a></code></pre>
 <p>
 Note that <code>ocaml</code> launched a subprocess that actually runs the program
 where argv is <code>args.ml arg1 arg2 arg3</code>. You can also compile your
 program using <code>ocamlopt -o args args.ml</code>, and then run
 <code>./args arg1 arg2 arg3</code> and you will get:</p>
-<pre><code class='tryocaml'><span class='o'>[</span>0<span class='o'>]</span> <span class='o'>./</span>args
-<span class='o'>[</span>1<span class='o'>]</span> arg1
-<span class='o'>[</span>2<span class='o'>]</span> arg2
-<span class='o'>[</span>3<span class='o'>]</span> arg3
+<pre><code class='tryocaml'><span class='keywordsign'>[</span><span class='number'>0</span><span class='keywordsign'>]</span> <span class='keywordsign'>.</span><span class='infix'>/</span><span class='lower'>args</span>
+<span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>]</span> <span class='lower'>arg1</span>
+<span class='keywordsign'>[</span><span class='number'>2</span><span class='keywordsign'>]</span> <span class='lower'>arg2</span>
+<span class='keywordsign'>[</span><span class='number'>3</span><span class='keywordsign'>]</span> <span class='lower'>arg3</span>
 <a href="javascript:octry('[0] ./args\n[1] arg1\n[2] arg2\n[3] arg3\n');">[try]</a></code></pre>
 <h2 id="Toolsforparsingcommandlineoptions"> Tools for parsing command-line options</h2><p>
 

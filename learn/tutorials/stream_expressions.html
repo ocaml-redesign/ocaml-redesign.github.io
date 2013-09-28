@@ -101,29 +101,29 @@ simplifying many common stream-oriented tasks.</p>
 <h2 id="InteractiveUse"> Interactive Use</h2><p>
 To enable stream expression support in the toplevel, you can type the
 following:</p>
-<pre><code class='tryocaml'><span class='o'>#</span>load <span class='s'>&#34;dynlink.cma&#34;</span><span class='o'>;;</span>
-<span class='o'>#</span>load <span class='s'>&#34;camlp4o.cma&#34;</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;dynlink.cma&#34;</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;camlp4o.cma&#34;</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('#load &#34;dynlink.cma&#34;;;\n#load &#34;camlp4o.cma&#34;;;\n');">[try]</a></code></pre>
 <p>
 Or, if you are using findlib:</p>
-<pre><code class='tryocaml'><span class='o'>#</span>use <span class='s'>&#34;topfind&#34;</span><span class='o'>;;</span>
-<span class='o'>#</span>camlp4o<span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span><span class='lower'>use</span> <span class='string'>&#34;topfind&#34;</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>#</span><span class='lower'>camlp4o</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('#use &#34;topfind&#34;;;\n#camlp4o;;\n');">[try]</a></code></pre>
 <h2 id="StreamLiterals"> Stream Literals</h2><p>
 
 Stream expressions are enclosed by &quot;[\&lt;&quot; and &quot;\&gt;]&quot; brackets, and using
 them is a lot like using lists. The simplest stream possible is the
 empty stream:</p>
-<pre><code class='tryocaml'><span class='o'>[</span><span class='o'>&#60;</span> <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('[&#60; &#62;]\n');">[try]</a></code></pre>
 <p>
 Literal values in stream expressions are prefixied by single-quotes:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> more_numbers <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> '2<span class='o'>;</span> '(1 <span class='o'>+</span> 2) <span class='o'>&#62;</span><span class='o'>]</span>  <span class='com2'>(* Equivalent <span class='ic'>to</span> <span class='ic'>Stream</span><span class='ic'>.</span>of_list <span class='ic'>[</span>1<span class='ic'>;</span> 2<span class='ic'>;</span> 3<span class='ic'>]</span> *)</span><!-- end comment -->
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>more_numbers</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='number'>1</span> <span class='keywordsign'>&#39;</span><span class='number'>2</span> <span class='keywordsign'>&#39;</span><span class='keywordsign'>(</span> <span class='keywordsign'>+</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>  <span class='comment'>(* Equivalent to Stream.of_list [1; 2; 3] *)</span>
 <a href="javascript:octry('let more_numbers = [&#60; &#39;1; &#39;2; &#39;(1 + 2) &#62;]  (* Equivalent to Stream.of_list [1; 2; 3] *)\n');">[try]</a></code></pre>
 <p>
 This is to distinguish them from streams, which are automatically
 concatenated:</p>
-<pre><code class='tryocaml'><span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> '2<span class='o'>;</span> more_numbers<span class='o'>;</span> '99 <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='number'>1</span> <span class='keywordsign'>&#39;</span><span class='number'>2</span> <span class='lower'>more_numbers</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#39;</span><span class='number'>9</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('[&#60; &#39;1; &#39;2; more_numbers; &#39;99 &#62;]\n');">[try]</a></code></pre>
 <p>
 In the above example, the stream will produce the integers 1 and 2,
@@ -134,66 +134,66 @@ and once <code>more_numbers</code> as been exhausted, it will produce the intege
 Streams can be defined with recursive functions, providing a
 straightforward and familiar mechanism to produce infinite sequences.
 The following defines an never-ending stream of 1s:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> ones <span class='k'>=</span>
-    <span class='k'>let rec</span> aux () <span class='k'>=</span>
-      <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> aux () <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>in</span>
-    aux ()
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>ones</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>aux</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+      <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='number'>1</span> <span class='lower'>aux</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+    <span class='lower'>aux</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let ones =\n    let rec aux () =\n      [&#60; &#39;1; aux () &#62;] in\n    aux ()\n');">[try]</a></code></pre>
 <p>
 Note the auxiliary function, <code>aux</code>, which is called recursively to form
 a loop. This is necessarily different from infinite lists, which can be
 defined with &quot;let rec&quot; without a helper function:</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> ones <span class='k'>=</span> 1 <span class='o'>::</span> ones
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>ones</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='lower'>ones</span>
 <a href="javascript:octry('let rec ones = 1 :: ones\n');">[try]</a></code></pre>
 <p>
 The stream expression syntax is not able to interpret recursive values
 like this, and attempts to do this will result in a syntax error:</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> ones <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> '1<span class='o'>;</span> ones <span class='o'>&#62;</span><span class='o'>]</span><span class='o'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>ones</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='number'>1</span> <span class='lower'>ones</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let rec ones = [&#60; &#39;1; ones &#62;];;\n');">[try]</a></code></pre>
 <p>
 This is only a minor inconvenience, since most streams will be built
 from one or more parameters. For example, here is the <code>const_stream</code>
 from the <a href='streams.html' title='Streams'>Streams</a> chapter, redefined using
 stream expression syntax:</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> const_stream k <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'k<span class='o'>;</span> const_stream k <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>const_stream</span> <span class='lower'>k</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>k</span> <span class='lower'>const_stream</span> <span class='lower'>k</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('let rec const_stream k = [&#60; &#39;k; const_stream k &#62;]\n');">[try]</a></code></pre>
 <p>
 Similarly, this simple one-liner is all it takes to produce a counter:</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> count_stream i <span class='k'>=</span> <span class='o'>[</span><span class='o'>&#60;</span> 'i<span class='o'>;</span> count_stream (i <span class='o'>+</span> 1) <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>count_stream</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>i</span> <span class='lower'>count_stream</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>+</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('let rec count_stream i = [&#60; &#39;i; count_stream (i + 1) &#62;]\n');">[try]</a></code></pre>
 <p>
 Below is a slightly more complicated example, using two stream
 expressions to define a Fibonacci sequence:</p>
-<pre><code class='tryocaml'>  <span class='k'>let</span> fib <span class='k'>=</span>
-    <span class='k'>let rec</span> aux a b <span class='k'>=</span>
-      <span class='o'>[</span><span class='o'>&#60;</span> '(a <span class='o'>+</span> b)<span class='o'>;</span> aux b (a <span class='o'>+</span> b) <span class='o'>&#62;</span><span class='o'>]</span> <span class='k'>in</span>
-    <span class='o'>[</span><span class='o'>&#60;</span> '0<span class='o'>;</span> '1<span class='o'>;</span> aux 0 1 <span class='o'>&#62;</span><span class='o'>]</span><span class='o'>;;</span>
-  <span class='m'>Stream</span><span class='o'>.</span>npeek 10 fib<span class='o'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>fib</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>aux</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
+      <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='keywordsign'>(</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>aux</span> <span class='lower'>b</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+    <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='number'>0</span> <span class='keywordsign'>&#39;</span><span class='number'>1</span> <span class='lower'>aux</span> <span class='number'>0</span> <span class='number'>1</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>npeek</span> <span class='number'>10</span> <span class='lower'>fib</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let fib =\n    let rec aux a b =\n      [&#60; &#39;(a + b); aux b (a + b) &#62;] in\n    [&#60; &#39;0; &#39;1; aux 0 1 &#62;];;\n  Stream.npeek 10 fib;;\n');">[try]</a></code></pre>
 <h2 id="ExampleDirectorywalker"> Example: Directory walker</h2><p>
 
 As a more practical example, we can define a recursive directory walker
 that avoids loading the entire directory tree into memory:</p>
-<pre><code class='tryocaml'><span class='k'>let rec</span> walk dir <span class='k'>=</span>
-  <span class='k'>let</span> items <span class='k'>=</span>
-    <span class='k'>try</span>
-      <span class='m'>Array</span><span class='o'>.</span>map
-        (<span class='k'>fun</span> fn <span class='k'>-></span>
-           <span class='k'>let</span> path <span class='k'>=</span> <span class='m'>Filename</span><span class='o'>.</span>concat dir fn <span class='k'>in</span>
-           <span class='k'>try</span>
-             <span class='k'>if</span> <span class='m'>Sys</span><span class='o'>.</span>is_directory path
-             <span class='k'>then</span> `Dir path
-             <span class='k'>else</span> `File path
-           <span class='k'>with</span> e <span class='k'>-></span> `Error (path<span class='o'>,</span> e))
-        (<span class='m'>Sys</span><span class='o'>.</span>readdir dir)
-    <span class='k'>with</span> e <span class='k'>-></span> <span class='o'>[</span><span class='o'>|</span> `Error (dir<span class='o'>,</span> e) <span class='o'>|</span><span class='o'>]</span> <span class='k'>in</span>
-  <span class='m'>Array</span><span class='o'>.</span>fold_right
-    (<span class='k'>fun</span> item rest <span class='k'>-></span>
-       <span class='k'>match</span> item <span class='k'>with</span>
-       <span class='o'>|</span> `Dir path <span class='k'>-></span> <span class='o'>[</span><span class='o'>&#60;</span> 'item<span class='o'>;</span> walk path<span class='o'>;</span> rest <span class='o'>&#62;</span><span class='o'>]</span>
-       <span class='o'>|</span> <span class='o'>_</span> <span class='k'>-></span> <span class='o'>[</span><span class='o'>&#60;</span> 'item<span class='o'>;</span> rest <span class='o'>&#62;</span><span class='o'>]</span>)
-    items
-    <span class='o'>[</span><span class='o'>&#60;</span> <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>walk</span> <span class='lower'>dir</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='lower'>items</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>try</span>
+      <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>map</span>
+        <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>fn</span> <span class='keywordsign'>-&#62;</span>
+           <span class='keyword'>let</span> <span class='lower'>path</span> <span class='keywordsign'>=</span> <span class='constructor'>Filename</span><span class='keywordsign'>.</span><span class='lower'>concat</span> <span class='lower'>dir</span> <span class='lower'>fn</span> <span class='keyword'>in</span>
+           <span class='keyword'>try</span>
+             <span class='keyword'>if</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>is_directory</span> <span class='lower'>path</span>
+             <span class='keyword'>then</span> <span class='keywordsign'>`</span><span class='constructor'>Dir</span> <span class='lower'>path</span>
+             <span class='keyword'>else</span> <span class='keywordsign'>`</span><span class='constructor'>File</span> <span class='lower'>path</span>
+           <span class='keyword'>with</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>`</span><span class='constructor'>Error</span> <span class='keywordsign'>(</span><span class='lower'>path</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+        <span class='keywordsign'>(</span><span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>readdir</span> <span class='lower'>dir</span><span class='keywordsign'>)</span>
+    <span class='keyword'>with</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>[|</span> <span class='keywordsign'>`</span><span class='constructor'>Error</span> <span class='keywordsign'>(</span><span class='lower'>dir</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span> <span class='keywordsign'>|</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+  <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>fold_right</span>
+    <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>item</span> <span class='lower'>rest</span> <span class='keywordsign'>-&#62;</span>
+       <span class='keyword'>match</span> <span class='lower'>item</span> <span class='keyword'>with</span>
+       <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor'>Dir</span> <span class='lower'>path</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>iem</span><span class='keywordsign'>;</span> <span class='lower'>walk</span> <span class='lower'>path</span><span class='keywordsign'>;</span> <span class='lower'>rest</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
+       <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>iem</span><span class='keywordsign'>;</span> <span class='lower'>rest</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span><span class='keywordsign'>)</span>
+    <span class='lower'>items</span>
+    <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('let rec walk dir =\n  let items =\n    try\n      Array.map\n        (fun fn -&#62;\n           let path = Filename.concat dir fn in\n           try\n             if Sys.is_directory path\n             then `Dir path\n             else `File path\n           with e -&#62; `Error (path, e))\n        (Sys.readdir dir)\n    with e -&#62; [| `Error (dir, e) |] in\n  Array.fold_right\n    (fun item rest -&#62;\n       match item with\n       | `Dir path -&#62; [&#60; &#39;item; walk path; rest &#62;]\n       | _ -&#62; [&#60; &#39;item; rest &#62;])\n    items\n    [&#60; &#62;]\n');">[try]</a></code></pre>
 <p>
 This function works by first assembling an array of paths for the
@@ -203,7 +203,7 @@ is then folded into a stream, expanding each subdirectory by recursively
 calling <code>walk</code> again. Errors are included in the variant so that
 exceptions can be handled or ignored as needed.</p>
 <p>The expanding of subdirectories</p>
-<pre><code class='tryocaml'><span class='o'>[</span><span class='o'>&#60;</span> 'item<span class='o'>;</span> walk path<span class='o'>;</span> rest <span class='o'>&#62;</span><span class='o'>]</span>
+<pre><code class='tryocaml'><span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>iem</span><span class='keywordsign'>;</span> <span class='lower'>walk</span> <span class='lower'>path</span><span class='keywordsign'>;</span> <span class='lower'>rest</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('[&#60; &#39;item; walk path; rest &#62;]\n');">[try]</a></code></pre>
 <p>
 illustrates a convenient feature of stream expressions: any number of
@@ -214,17 +214,17 @@ single stream, just as if we had used something like <code>stream_concat</code>,
 defined in the <a href='streams.html' title='Streams'>Streams</a> chapter.</p>
 <p>With little effort, we can now print the names of all the directories
 and files underneath &quot;/var/log&quot;:</p>
-<pre><code class='tryocaml'><span class='k'>let</span> () <span class='k'>=</span>
-  <span class='m'>Stream</span><span class='o'>.</span>iter
-    (<span class='k'>function</span>
-     <span class='o'>|</span> `Dir path <span class='k'>-></span>
-         <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;dir: %s%!\n&#34;</span> path
-     <span class='o'>|</span> `File path <span class='k'>-></span>
-         <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;file: %s%!\n&#34;</span> path
-     <span class='o'>|</span> `Error (path<span class='o'>,</span> e) <span class='k'>-></span>
-         <span class='m'>Printf</span><span class='o'>.</span>printf <span class='s'>&#34;error: %s (%s)%!\n&#34;</span> path
-           (<span class='m'>Printexc</span><span class='o'>.</span>to_string e))
-    (walk <span class='s'>&#34;/var/log&#34;</span>)
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='constructor'>Stream</span><span class='keywordsign'>.</span><span class='lower'>iter</span>
+    <span class='keywordsign'>(</span><span class='keyword'>function</span>
+     <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor'>Dir</span> <span class='lower'>path</span> <span class='keywordsign'>-&#62;</span>
+         <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;dir: %s%!\n&#34;</span> <span class='lower'>path</span>
+     <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor'>File</span> <span class='lower'>path</span> <span class='keywordsign'>-&#62;</span>
+         <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;file: %s%!\n&#34;</span> <span class='lower'>path</span>
+     <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor'>Error</span> <span class='keywordsign'>(</span><span class='lower'>path</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+         <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;error: %s (%s)%!\n&#34;</span> <span class='lower'>path</span>
+           <span class='keywordsign'>(</span><span class='constructor'>Printexc</span><span class='keywordsign'>.</span><span class='lower'>to_string</span> <span class='lower'>e</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+    <span class='keywordsign'>(</span><span class='lower'>walk</span> <span class='string'>&#34;/var/log&#34;</span><span class='keywordsign'>)</span>
 
 <a href="javascript:octry('let () =\n  Stream.iter\n    (function\n     | `Dir path -&#62;\n         Printf.printf &#34;dir: %s%!\n&#34; path\n     | `File path -&#62;\n         Printf.printf &#34;file: %s%!\n&#34; path\n     | `Error (path, e) -&#62;\n         Printf.printf &#34;error: %s (%s)%!\n&#34; path\n           (Printexc.to_string e))\n    (walk &#34;/var/log&#34;)\n\n');">[try]</a></code></pre>
 
