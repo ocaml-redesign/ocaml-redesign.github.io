@@ -123,7 +123,7 @@ en argument une chaîne de caractères <code>s</code> et un nombre <code>n</code
 nouvelle chaîne de caractères qui contient l&#39;originale répétée <code>n</code> fois.</p>
 <p>Dans la plupart des languages dérivés du C, un appel de fonction
 ressemble à ça :</p>
-<pre><code class='tryocaml'><span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span>  <span class='infix'>/*</span> <span class='lower'>c&#39;est</span> <span class='lower'>du</span> <span class='lower'>code</span> <span class='constructor'>C</span> <span class='infix'>*/</span>
+<pre><code class='tryocaml'><span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span>  <span class='keywordsign infix'>/*</span> <span class='lower'>c&#39;est</span> <span class='lower'>du</span> <span class='lower'>code</span> <span class='constructor module'>C</span> <span class='keywordsign infix'>*/</span>
 <a href="javascript:octry('repeated (&#34;hello&#34;, 3)  /* c\&#39;est du code C */\n');">[try]</a></code></pre>
 <p>
 Ca veut dire « appelle la fonction <code>repeated</code> avec deux arguments, le
@@ -152,7 +152,7 @@ fonctions.</p>
 qui demande à l&#39;utilisateur de taper quelque chose et renvoie la chaîne
 de caractère ainsi entrée. Nous voulons passer cette chaîne de
 caractères à la fonction <code>repeated</code>. Voici les versions C et OCaml :</p>
-<pre><code class='tryocaml'><span class='infix'>/*</span> <span class='lower'>code</span> <span class='constructor'>C</span><span class='keywordsign'>:</span> <span class='infix'>*/</span>
+<pre><code class='tryocaml'><span class='keywordsign infix'>/*</span> <span class='lower'>code</span> <span class='constructor module'>C</span><span class='keywordsign'>:</span> <span class='keywordsign infix'>*/</span>
 <span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='lower'>get_string_from_user</span> <span class='keywordsign'>(</span><span class='string'>&#34;Veuillez entrer une chaîne de caractères.&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span>
 
 <span class='comment'>(* code OCaml: *)</span>
@@ -167,7 +167,7 @@ une fonction ». Voici quelques exemples supplémentaires :</p>
 <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>g</span> <span class='number'>3</span> <span class='number'>4</span><span class='keywordsign'>)</span>            <span class='comment'>(* f a un argument, g a 2 arguments *)</span>
 
 <span class='keywordsign'>#</span> <span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='number'>3</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>     <span class='comment'>(* OCaml va repérer l&#39;erreur *)</span>
-<span class='constructor'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>int</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>string</span>
+<span class='constructor module'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>int</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>string</span>
 <a href="javascript:octry('f 5 (g &#34;hello&#34;) 3    (* f a 3 arguments, g a un argument *)\nf (g 3 4)            (* f a un argument, g a 2 arguments *)\n\n# repeated (&#34;hello&#34;, 3);;     (* OCaml va repérer l\&#39;erreur *)\nThis expression has type string * int but is here used with type string\n');">[try]</a></code></pre>
 <h2 id="Dfinirunefonction"> Définir une fonction</h2><p>
 
@@ -177,13 +177,13 @@ fait-on ça en OCaml ?</p>
 <p>La syntaxe d&#39;OCaml est agréablement concise. Voici une fonction qui
 prend deux nombres flottants et calcule leur moyenne :</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
-  <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let average a b =\n  (a +. b) /. 2.0;;\n');">[try]</a></code></pre>
 <p>
 Tapez ceci dans le « toplevel » OCaml (sous Unix, tapez <code>ocaml</code> depuis
 le shell) et voici ce que vous verrez :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
-  <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
 <span class='keyword'>val</span> <span class='lower'>average</span> <span class='keywordsign'>:</span> <span class='lower'>float</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>float</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>float</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
 <a href="javascript:octry('# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n');">[try]</a></code></pre>
 <p>
@@ -204,7 +204,7 @@ soulever encore plus d&#39;interrogations. Voici notre version C de
 <pre><code class='tryocaml'><span class='lower'>double</span>
 <span class='lower'>average</span> <span class='keywordsign'>(</span><span class='lower'>double</span> <span class='lower'>a</span><span class='keywordsign'>,</span> <span class='lower'>double</span> <span class='lower'>b</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>{</span>
-  <span class='lower'>return</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='infix'>/</span> <span class='number'>2</span><span class='keywordsign'>;</span>
+  <span class='lower'>return</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/</span> <span class='number'>2</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>}</span>
 <a href="javascript:octry('double\naverage (double a, double b)\n{\n  return (a + b) / 2;\n}\n');">[try]</a></code></pre>
 <p>
@@ -293,8 +293,8 @@ En OCaml, <code>1 + 2.5</code> est une erreur de type. L&#39;opérateur <code>+<
 requiert deux arguments entiers, et si on lui donne un int et un float,
 il indique cette erreur :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='number'>2.5</span><span class='keywordsign'>;;</span>
-      <span class='infix'>^^^</span>
-<span class='constructor'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>float</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>int</span>
+      <span class='keywordsign infix'>^^^</span>
+<span class='constructor module'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>float</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>int</span>
 <a href="javascript:octry('# 1 + 2.5;;\n      ^^^\nThis expression has type float but is here used with type int\n');">[try]</a></code></pre>
 <p>
 Cela signifie &quot;ceci est un float, mais ici j&#39;attendais un int&quot;.</p>
@@ -302,16 +302,16 @@ Cela signifie &quot;ceci est un float, mais ici j&#39;attendais un int&quot;.</p
 (notez le point qui suit le plus).</p>
 <p>OCaml ne convertit pas les ints en floats automatiquement, donc le code
 suivant est également incorrect :</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='number'>1</span> <span class='infix'>+.</span> <span class='number'>2.5</span><span class='keywordsign'>;;</span>
-  <span class='infix'>^</span>
-<span class='constructor'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>int</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>float</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='number'>1</span> <span class='keywordsign infix'>+.</span> <span class='number'>2.5</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign infix'>^</span>
+<span class='constructor module'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>int</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>float</span>
 <a href="javascript:octry('# 1 +. 2.5;;\n  ^\nThis expression has type int but is here used with type float\n');">[try]</a></code></pre>
 <p>
 Dans ce cas OCaml se plaint du premier argument.</p>
 <p>Comment faire alors si on veut vraiment ajouter un int à un float ?
 (Supposons qu&#39;ils soient stockés dans des variables appelées <code>i</code> et
 <code>f</code>). En OCaml la conversion doit être explicite :</p>
-<pre><code class='tryocaml'><span class='lower'>float_of_int</span> <span class='lower'>i</span> <span class='infix'>+.</span> <span class='lower'>f</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='lower'>float_of_int</span> <span class='lower'>i</span> <span class='keywordsign infix'>+.</span> <span class='lower'>f</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('float_of_int i +. f;;\n');">[try]</a></code></pre>
 <p>
 <code>float_of_int</code> est une fonction qui prend un <code>int</code> et renvoie un
@@ -322,7 +322,7 @@ ainsi de suite, et elle font essentiellement ce qu&#39;on attend d&#39;elles.</p
 particulièrement courante, la fonction <code>float_of_int</code> a également un
 autre nom, plus court : l&#39;exemple ci-dessus aurait pu simplement être
 écrit</p>
-<pre><code class='tryocaml'><span class='lower'>float</span> <span class='lower'>i</span> <span class='infix'>+.</span> <span class='lower'>f</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='lower'>float</span> <span class='lower'>i</span> <span class='keywordsign infix'>+.</span> <span class='lower'>f</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('float i +. f;;\n');">[try]</a></code></pre>
 <p>
 (Remarquez bien que contrairement au C, en OCaml il est parfaitement
@@ -347,7 +347,7 @@ Contrairement au langage C et ses dérivés, une fonction en OCaml n&#39;est
 récursive que si vous le précisez en utilisant <code>let rec</code> au lieu de
 seulement <code>let</code>. Voici un exemple de fonction récursive :</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
-  <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='operator'>[]</span>
+  <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
   <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span>
   <span class='keywordsign'>;;</span>
 <a href="javascript:octry('let rec range a b =\n  if a &#62; b then []\n  else a :: range (a+1) b\n  ;;\n');">[try]</a></code></pre>
@@ -369,7 +369,7 @@ pense être le type de vos fonctions, donc il vous faut connaître la
 syntax qu&#39;il utilise. Pour une fonction <code>f</code> qui prend comme arguments
 <code>arg1</code>, <code>arg2</code>, ... <code>argn</code>, et retourne quelque chose de type <code>rettype</code>,
 le compilateur affichera :</p>
-<pre><code class='tryocaml'><span class='lower'>f</span> <span class='keywordsign'>:</span> <span class='lower'>arg1</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>arg2</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>argn</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>rettype</span>
+<pre><code class='tryocaml'><span class='lower'>f</span> <span class='keywordsign'>:</span> <span class='lower'>arg1</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>arg2</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>argn</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>rettype</span>
 <a href="javascript:octry('f : arg1 -&#62; arg2 -&#62; ... -&#62; argn -&#62; rettype\n');">[try]</a></code></pre>
 <p>
 Cette syntaxe avec des flèches peut vous paraître étrange pour
@@ -439,7 +439,7 @@ pratiquer ce genre de sport.</p>
 <p>Retournons maintenant à la fonction <code>average</code> que nous avions tapé ainsi
 dans le toplevel :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
-  <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
 <span class='keyword'>val</span> <span class='lower'>average</span> <span class='keywordsign'>:</span> <span class='lower'>float</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>float</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>float</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
 <a href="javascript:octry('# let average a b =\n  (a +. b) /. 2.0;;\nval average : float -&#62; float -&#62; float = &#60;fun&#62;\n');">[try]</a></code></pre>
 <p>

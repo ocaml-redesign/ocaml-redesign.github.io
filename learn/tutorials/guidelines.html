@@ -219,19 +219,19 @@ followed by a space: <code>(1, 2)</code>, <code>let   triplet = (x, y, z)</code>
 simultaneously, not to construct a tuple. Moreover, the
 pattern is set off nicely between <code>let</code> and <code>=</code>.</p>
 </blockquote>
-<pre><code class='tryocaml'><span class='keywordsign'>-</span>   <span class='infix'>**</span><span class='constructor'>Matching</span> <span class='lower'>several</span> <span class='lower'>values</span> <span class='lower'>simultaneously</span><span class='infix'>**:</span> <span class='constructor'>It&#39;s</span> <span class='lower'>okay</span> <span class='keyword'>to</span> <span class='lower'>omit</span>
+<pre><code class='tryocaml'><span class='keywordsign'>-</span>   <span class='keywordsign infix'>**</span><span class='constructor module'>Matching</span> <span class='lower'>several</span> <span class='lower'>values</span> <span class='lower'>simultaneously</span><span class='keywordsign infix'>**:</span> <span class='constructor module'>It&#39;s</span> <span class='lower'>okay</span> <span class='keyword'>to</span> <span class='lower'>omit</span>
     <span class='lower'>parentheses</span> <span class='lower'>around</span> <span class='lower'>n</span><span class='keywordsign'>-</span><span class='lower'>tuples</span> <span class='keyword'>when</span> <span class='lower'>matching</span> <span class='lower'>several</span> <span class='lower'>values</span>
     <span class='lower'>simultaneously</span><span class='keywordsign'>.</span>
 
         <span class='keyword'>match</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span> <span class='keyword'>with</span>
-        <span class='keywordsign'>|</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-        <span class='keywordsign'>|</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-        <span class='keywordsign'>|</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+        <span class='keywordsign'>|</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+        <span class='keywordsign'>|</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+        <span class='keywordsign'>|</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 
-    <span class='keywordsign'>&#62;</span> <span class='infix'>**</span><span class='constructor'>Justification</span><span class='infix'>**:</span> <span class='constructor'>The</span> <span class='lower'>point</span> <span class='lower'>is</span> <span class='keyword'>to</span> <span class='keyword'>match</span> <span class='lower'>several</span> <span class='lower'>values</span> <span class='keyword'>in</span>
-    <span class='keywordsign'>&#62;</span> <span class='lower'>parallel</span><span class='keywordsign'>,</span> <span class='lower'>not</span> <span class='keyword'>to</span> <span class='lower'>construct</span> <span class='lower'>a</span> <span class='lower'>tuple</span><span class='keywordsign'>.</span> <span class='constructor'>Moreover</span><span class='keywordsign'>,</span> <span class='lower'>the</span> <span class='lower'>expressions</span>
+    <span class='keywordsign'>&#62;</span> <span class='keywordsign infix'>**</span><span class='constructor module'>Justification</span><span class='keywordsign infix'>**:</span> <span class='constructor module'>The</span> <span class='lower'>point</span> <span class='lower'>is</span> <span class='keyword'>to</span> <span class='keyword'>match</span> <span class='lower'>several</span> <span class='lower'>values</span> <span class='keyword'>in</span>
+    <span class='keywordsign'>&#62;</span> <span class='lower'>parallel</span><span class='keywordsign'>,</span> <span class='lower'>not</span> <span class='keyword'>to</span> <span class='lower'>construct</span> <span class='lower'>a</span> <span class='lower'>tuple</span><span class='keywordsign'>.</span> <span class='constructor module'>Moreover</span><span class='keywordsign'>,</span> <span class='lower'>the</span> <span class='lower'>expressions</span>
     <span class='keywordsign'>&#62;</span> <span class='lower'>being</span> <span class='lower'>matched</span> <span class='lower'>are</span> <span class='lower'>set</span> <span class='lower'>off</span> <span class='lower'>by</span> <span class='keywordsign'>`</span><span class='keyword'>match</span><span class='keywordsign'>`</span> <span class='keyword'>and</span> <span class='keywordsign'>`</span><span class='keyword'>with</span><span class='keywordsign'>`</span><span class='keywordsign'>,</span> <span class='keyword'>while</span> <span class='lower'>the</span>
-    <span class='keywordsign'>&#62;</span> <span class='lower'>patterns</span> <span class='lower'>are</span> <span class='lower'>set</span> <span class='lower'>off</span> <span class='lower'>nicely</span> <span class='lower'>by</span> <span class='operator'>`|`</span> <span class='keyword'>and</span> <span class='operator'>`-&#62;`.</span>
+    <span class='keywordsign'>&#62;</span> <span class='lower'>patterns</span> <span class='lower'>are</span> <span class='lower'>set</span> <span class='lower'>off</span> <span class='lower'>nicely</span> <span class='lower'>by</span> <span class='keywordsign operator'>`|`</span> <span class='keyword'>and</span> <span class='keywordsign operator'>`-&#62;`.</span>
 <a href="javascript:octry('-   **Matching several values simultaneously**: It\&#39;s okay to omit\n    parentheses around n-tuples when matching several values\n    simultaneously.\n\n        match x, y with\n        | 1, _ -&#62; ...\n        | x, 1 -&#62; ...\n        | x, y -&#62; ...\n\n    &#62; **Justification**: The point is to match several values in\n    &#62; parallel, not to construct a tuple. Moreover, the expressions\n    &#62; being matched are set off by `match` and `with`, while the\n    &#62; patterns are set off nicely by `|` and `-&#62;`.\n');">[try]</a></code></pre>
 <h4 id="Howtowritelists"> How to write lists</h4><p>
 
@@ -352,14 +352,14 @@ indented normally. However, it&#39;s okay to treat this case specially to
 set off the definition better.</p>
 <p>With a regular indentation of 1 or 2 spaces:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>C</span> <span class='keywordsign'>-&#62;</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>D</span> <span class='keywordsign'>-&#62;</span>
-  <span class='operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>C</span> <span class='keywordsign'>-&#62;</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>D</span> <span class='keywordsign'>-&#62;</span>
+  <span class='keywordsign operator'>...</span>
 
 <span class='keyword'>let</span> <span class='lower'>g</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>tmp</span> <span class='keywordsign'>=</span>
     <span class='keyword'>match</span> <span class='lower'>x</span> <span class='keyword'>with</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>C</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>C</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span>
     <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span> <span class='keyword'>in</span>
   <span class='lower'>tmp</span> <span class='keywordsign'>+</span> <span class='number'>1</span>
 <a href="javascript:octry('let f x = function\n  | C -&#62;\n  | D -&#62;\n  ...\n\nlet g x =\n  let tmp =\n    match x with\n    | C -&#62; 1\n    | x -&#62; 0 in\n  tmp + 1\n');">[try]</a></code></pre>
@@ -372,9 +372,9 @@ set off the definition better.</p>
 </ul>
 
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-<span class='keywordsign'>|</span> <span class='constructor'>C</span> <span class='keywordsign'>-&#62;</span>
-<span class='keywordsign'>|</span> <span class='constructor'>D</span> <span class='keywordsign'>-&#62;</span>
-<span class='operator'>...</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>C</span> <span class='keywordsign'>-&#62;</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>D</span> <span class='keywordsign'>-&#62;</span>
+<span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let f x = function\n| C -&#62;\n| D -&#62;\n...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: The vertical bars separating the patterns stop
@@ -387,10 +387,10 @@ following definition.</p>
 </ul>
 
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
-    <span class='keyword'>let</span> <span class='lower'>tmp</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>tmp</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
     <span class='keyword'>try</span> <span class='lower'>g</span> <span class='lower'>x</span> <span class='keyword'>with</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Not_found</span> <span class='keywordsign'>-&#62;</span>
-    <span class='operator'>...</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Not_found</span> <span class='keywordsign'>-&#62;</span>
+    <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let f x =\n    let tmp = ... in\n    try g x with\n    | Not_found -&#62;\n    ...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: The first line of the definition is set off
@@ -401,15 +401,15 @@ nicely, so it&#39;s easier to pass from definition to definition.</p>
 The expression following a definition introduced by <code>let</code> is indented to
 the same level as the keyword <code>let</code>, and the keyword <code>in</code> which
 introduces it is written at the end of the line:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>expr1</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>expr1</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
 <span class='lower'>expr1</span> <span class='keywordsign'>+</span> <span class='lower'>expr1</span>
 <a href="javascript:octry('let expr1 = ... in\nexpr1 + expr1\n');">[try]</a></code></pre>
 <p>
 In the case of a series of <code>let</code> definitions, the preceding rule implies
 that these definitions should be placed at the same indentation level:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>expr1</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
-<span class='keyword'>let</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
-<span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>expr1</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
+<span class='keyword'>let</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
+<span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let expr1 = ... in\nlet n = ... in\n...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: It is suggested that a series of “let ... in”
@@ -418,14 +418,14 @@ text, whence the same indentation level for all the assumptions.</p>
 </blockquote>
 <p>Variation: some write the keyword <code>in</code> alone on one line to set apart
 the final expression of the computation:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>e1</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
-<span class='keyword'>let</span> <span class='lower'>e2</span> <span class='keywordsign'>=</span> <span class='operator'>...</span> <span class='keyword'>in</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>e1</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
+<span class='keyword'>let</span> <span class='lower'>e2</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
 <span class='keyword'>let</span> <span class='lower'>new_expr</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>e1&#39;</span> <span class='keywordsign'>=</span> <span class='lower'>derive_expression</span> <span class='lower'>e1</span>
   <span class='keyword'>and</span> <span class='lower'>e2&#39;</span> <span class='keywordsign'>=</span> <span class='lower'>derive_expression</span> <span class='lower'>e2</span> <span class='keyword'>in</span>
-  <span class='constructor'>Add_expression</span> <span class='lower'>e1&#39;</span> <span class='lower'>e2&#39;</span>
+  <span class='constructor module'>Add_expression</span> <span class='lower'>e1&#39;</span> <span class='lower'>e2&#39;</span>
 <span class='keyword'>in</span>
-<span class='constructor'>Mult_expression</span> <span class='keywordsign'>(</span><span class='lower'>new_expr</span><span class='keywordsign'>,</span> <span class='lower'>new_expr</span><span class='keywordsign'>)</span>
+<span class='constructor module'>Mult_expression</span> <span class='keywordsign'>(</span><span class='lower'>new_expr</span><span class='keywordsign'>,</span> <span class='lower'>new_expr</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let e1 = ... in\nlet e2 = ... in\nlet new_expr =\n  let e1\&#39; = derive_expression e1\n  and e2\&#39; = derive_expression e2 in\n  Add_expression e1\&#39; e2\&#39;\nin\nMult_expression (new_expr, new_expr)\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Criticism</strong>: Lack of consistency.</p>
@@ -434,9 +434,9 @@ the final expression of the computation:</p>
 
 Write conditions with multiple branches at the same level of
 indentation:</p>
-<pre><code class='tryocaml'><span class='keyword'>if</span> <span class='lower'>cond1</span> <span class='operator'>...</span>
-<span class='keyword'>if</span> <span class='lower'>cond2</span> <span class='operator'>...</span>
-<span class='keyword'>if</span> <span class='lower'>cond3</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>if</span> <span class='lower'>cond1</span> <span class='keywordsign operator'>...</span>
+<span class='keyword'>if</span> <span class='lower'>cond2</span> <span class='keywordsign operator'>...</span>
+<span class='keyword'>if</span> <span class='lower'>cond3</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('if cond1 ...\nif cond2 ...\nif cond3 ...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: Analogous treatment to pattern-matching clauses,
@@ -458,14 +458,14 @@ enclosed (when they include statements for instance), write:</p>
 <span class='keyword'>if</span> <span class='lower'>cond2</span> <span class='keyword'>then</span> <span class='keyword'>begin</span>
     <span class='lower'>e2</span>
   <span class='keyword'>end</span> <span class='keyword'>else</span>
-<span class='keyword'>if</span> <span class='lower'>cond3</span> <span class='keyword'>then</span> <span class='operator'>...</span>
+<span class='keyword'>if</span> <span class='lower'>cond3</span> <span class='keyword'>then</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('if cond then begin\n    e1\n  end else\nif cond2 then begin\n    e2\n  end else\nif cond3 then ...\n');">[try]</a></code></pre>
 <p>
 Some suggest another method for multiple conditionals, starting each
 line by the keyword <code>else</code>:</p>
-<pre><code class='tryocaml'><span class='keyword'>if</span> <span class='lower'>cond1</span> <span class='operator'>...</span>
-<span class='keyword'>else</span> <span class='keyword'>if</span> <span class='lower'>cond2</span> <span class='operator'>...</span>
-<span class='keyword'>else</span> <span class='keyword'>if</span> <span class='lower'>cond3</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>if</span> <span class='lower'>cond1</span> <span class='keywordsign operator'>...</span>
+<span class='keyword'>else</span> <span class='keyword'>if</span> <span class='lower'>cond2</span> <span class='keywordsign operator'>...</span>
+<span class='keyword'>else</span> <span class='keyword'>if</span> <span class='lower'>cond3</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('if cond1 ...\nelse if cond2 ...\nelse if cond3 ...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: <code>elsif</code> is a keyword in many languages, so use
@@ -576,23 +576,23 @@ clause.</p>
 For a <code>match</code> or a <code>try</code> align the clauses with the beginning of the
 construct:</p>
 <pre><code class='tryocaml'><span class='keyword'>match</span> <span class='lower'>lam</span> <span class='keyword'>with</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='lower'>body</span>
-<span class='keywordsign'>|</span> <span class='constructor'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='lower'>lam1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='lower'>lam2</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='lower'>body</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='lower'>lam1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='lower'>lam2</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span>
 
 <span class='keyword'>try</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keyword'>with</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Not_found</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Failure</span> <span class='string'>&#34;not yet implemented&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Not_found</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Failure</span> <span class='string'>&#34;not yet implemented&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('match lam with\n| Abs (x, body) -&#62; 1 + size_lambda body\n| App (lam1, lam2) -&#62; size_lambda lam1 + size_lambda lam2\n| Var v -&#62; 1\n\ntry f x with\n| Not_found -&#62; ...\n| Failure &#34;not yet implemented&#34; -&#62; ...\n');">[try]</a></code></pre>
 <p>
 Put the keyword <code>with</code> at the end of the line. If the preceding
 expression extends beyond one line, put <code>with</code> on a line by itself:</p>
 <pre><code class='tryocaml'><span class='keyword'>try</span>
   <span class='keyword'>let</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keyword'>in</span>
-  <span class='keyword'>if</span> <span class='operator'>...</span>
+  <span class='keyword'>if</span> <span class='keywordsign operator'>...</span>
 <span class='keyword'>with</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Not_found</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Failure</span> <span class='string'>&#34;not yet implemented&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Not_found</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Failure</span> <span class='string'>&#34;not yet implemented&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('try\n  let y = f x in\n  if ...\nwith\n| Not_found -&#62; ...\n| Failure &#34;not yet implemented&#34; -&#62; ...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: The keyword <code>with</code>, on a line by itself shows that
@@ -602,16 +602,16 @@ the program enters the pattern matching part of the construct.</p>
 If the expression on the right of the pattern matching arrow is too
 large, cut the line after the arrow.</p>
 <pre><code class='tryocaml'><span class='keyword'>match</span> <span class='lower'>lam</span> <span class='keyword'>with</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
    <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='lower'>body</span>
-<span class='keywordsign'>|</span> <span class='constructor'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
    <span class='lower'>size_lambda</span> <span class='lower'>lam1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='lower'>lam2</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span>
 <a href="javascript:octry('match lam with\n| Abs (x, body) -&#62;\n   1 + size_lambda body\n| App (lam1, lam2) -&#62;\n   size_lambda lam1 + size_lambda lam2\n| Var v -&#62;\n');">[try]</a></code></pre>
 <p>
 Some programmers generalize this rule to all clauses, as soon as one
 expressions overflows. They will then indent the last clause like this:</p>
-<pre><code class='tryocaml'><span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span>
+<pre><code class='tryocaml'><span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span>
    <span class='number'>1</span>
 <a href="javascript:octry('| Var v -&#62;\n   1\n');">[try]</a></code></pre>
 <p>
@@ -640,9 +640,9 @@ starting by <code>function</code>, are indented with respect to the <code>functi
 keyword:</p>
 <pre><code class='tryocaml'><span class='lower'>map</span>
   <span class='keywordsign'>(</span><span class='keyword'>function</span>
-   <span class='keywordsign'>|</span> <span class='constructor'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='number'>0</span> <span class='lower'>body</span>
-   <span class='keywordsign'>|</span> <span class='constructor'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>size_lambda</span> <span class='number'>0</span> <span class='lower'>lam1</span><span class='keywordsign'>)</span> <span class='lower'>lam2</span>
-   <span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span><span class='keywordsign'>)</span>
+   <span class='keywordsign'>|</span> <span class='constructor module'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='lower'>size_lambda</span> <span class='number'>0</span> <span class='lower'>body</span>
+   <span class='keywordsign'>|</span> <span class='constructor module'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>size_lambda</span> <span class='number'>0</span> <span class='lower'>lam1</span><span class='keywordsign'>)</span> <span class='lower'>lam2</span>
+   <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span><span class='keywordsign'>)</span>
   <span class='lower'>lambda_list</span>
 <a href="javascript:octry('map\n  (function\n   | Abs (x, body) -&#62; 1 + size_lambda 0 body\n   | App (lam1, lam2) -&#62; size_lambda (size_lambda 0 lam1) lam2\n   | Var v -&#62; 1)\n  lambda_list\n');">[try]</a></code></pre>
 <h4 id="Patternmatchinginnamedfunctions"> Pattern matching in named functions</h4><p>
@@ -652,28 +652,28 @@ to several reasonable styles which obey the preceding rules for pattern
 matching (the one for anonymous functions being evidently excepted). See
 above for recommanded styles.</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>size_lambda</span> <span class='lower'>accu</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>succ</span> <span class='lower'>accu</span><span class='keywordsign'>)</span> <span class='lower'>body</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>size_lambda</span> <span class='lower'>accu</span> <span class='lower'>lam1</span><span class='keywordsign'>)</span> <span class='lower'>lam2</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>succ</span> <span class='lower'>accu</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>succ</span> <span class='lower'>accu</span><span class='keywordsign'>)</span> <span class='lower'>body</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>size_lambda</span> <span class='lower'>accu</span> <span class='lower'>lam1</span><span class='keywordsign'>)</span> <span class='lower'>lam2</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>succ</span> <span class='lower'>accu</span>
 
 <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>size_lambda</span> <span class='lower'>accu</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>succ</span> <span class='lower'>accu</span><span class='keywordsign'>)</span> <span class='lower'>body</span>
-<span class='keywordsign'>|</span> <span class='constructor'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>size_lambda</span> <span class='lower'>accu</span> <span class='lower'>lam1</span><span class='keywordsign'>)</span> <span class='lower'>lam2</span>
-<span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>succ</span> <span class='lower'>accu</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Abs</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>body</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>succ</span> <span class='lower'>accu</span><span class='keywordsign'>)</span> <span class='lower'>body</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>App</span> <span class='keywordsign'>(</span><span class='lower'>lam1</span><span class='keywordsign'>,</span> <span class='lower'>lam2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>size_lambda</span> <span class='keywordsign'>(</span><span class='lower'>size_lambda</span> <span class='lower'>accu</span> <span class='lower'>lam1</span><span class='keywordsign'>)</span> <span class='lower'>lam2</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>succ</span> <span class='lower'>accu</span>
 <a href="javascript:octry('let rec size_lambda accu = function\n  | Abs (x, body) -&#62; size_lambda (succ accu) body\n  | App (lam1, lam2) -&#62; size_lambda (size_lambda accu lam1) lam2\n  | Var v -&#62; succ accu\n\nlet rec size_lambda accu = function\n| Abs (x, body) -&#62; size_lambda (succ accu) body\n| App (lam1, lam2) -&#62; size_lambda (size_lambda accu lam1) lam2\n| Var v -&#62; succ accu\n');">[try]</a></code></pre>
 <h3 id="Badindentationofpatternmatchingconstructs"> Bad indentation of pattern-matching constructs</h3>
 <h4 id="Nobeastlyindentationoffunctionsandcaseanalyses"> No <em>beastly</em> indentation of functions and case analyses.</h4><p>
 This consists in indenting normally under the keyword <code>match</code> or
 <code>function</code> which has previously been pushed to the right. Don&#39;t write:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-              <span class='keywordsign'>|</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-              <span class='operator'>...</span>
+              <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+              <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let rec f x = function\n              | [] -&#62; ...\n              ...\n');">[try]</a></code></pre>
 <p>
 but choose to indent the line under the <code>let</code> keyword:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-  <span class='keywordsign'>|</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-  <span class='operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+  <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let rec f x = function\n  | [] -&#62; ...\n  ...\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: You bump into the margin. The aesthetic value is
@@ -683,8 +683,8 @@ doubtful...</p>
 Careful alignment of the arrows of a pattern matching is considered bad
 practice, as exemplify in the following fragment:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>C1</span>          <span class='keywordsign'>-&#62;</span> <span class='number'>1</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>Long_name</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='number'>2</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>C1</span>          <span class='keywordsign'>-&#62;</span> <span class='number'>1</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>Long_name</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='number'>2</span>
   <span class='keywordsign'>|</span> <span class='keywordsign'>_</span>           <span class='keywordsign'>-&#62;</span> <span class='number'>3</span>
 <a href="javascript:octry('let f = function\n  | C1          -&#62; 1\n  | Long_name _ -&#62; 2\n  | _           -&#62; 3\n');">[try]</a></code></pre>
 <blockquote>
@@ -788,13 +788,13 @@ to define the </code></pre>
 <p>large expression&#39;&#39; with the help of a <code>let in</code>
 construction is preferable to having to indent the line. In place of</p>
 <pre><code class='tryocaml'><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span>
-<span class='keywordsign'>+</span> <span class='operator'>``</span><span class='lower'>large</span>
+<span class='keywordsign'>+</span> <span class='keywordsign operator'>``</span><span class='lower'>large</span>
   <span class='lower'>expression&#39;&#39;</span>
 <a href="javascript:octry('x + y + z\n+ ``large\n  expression\&#39;\&#39;\n');">[try]</a></code></pre>
 <p>
 write</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>t</span> <span class='keywordsign'>=</span>
-  <span class='operator'>``</span><span class='lower'>large</span>
+  <span class='keywordsign operator'>``</span><span class='lower'>large</span>
    <span class='lower'>expression&#39;&#39;</span> <span class='keyword'>in</span>
 <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>+</span> <span class='lower'>t</span>
 <a href="javascript:octry('let t =\n  ``large\n   expression\&#39;\&#39; in\nx + y + z + t\n');">[try]</a></code></pre>
@@ -803,20 +803,20 @@ You most certainly must bind those expressions too large to be written
 in one operation in the case of a combination of operators. In place of
 the unreadable expression</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>*</span> <span class='lower'>t</span><span class='keywordsign'>)</span>
-<span class='infix'>/</span> <span class='keywordsign'>(</span><span class='operator'>``</span><span class='lower'>large</span>
+<span class='keywordsign infix'>/</span> <span class='keywordsign'>(</span><span class='keywordsign operator'>``</span><span class='lower'>large</span>
     <span class='lower'>expression&#39;&#39;</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('(x + y + z * t)\n/ (``large\n    expression\&#39;\&#39;)\n');">[try]</a></code></pre>
 <p>
 write</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>u</span> <span class='keywordsign'>=</span>
-  <span class='operator'>``</span><span class='lower'>large</span>
+  <span class='keywordsign operator'>``</span><span class='lower'>large</span>
   <span class='lower'>expression&#39;&#39;</span> <span class='keyword'>in</span>
-<span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>*</span> <span class='lower'>t</span><span class='keywordsign'>)</span> <span class='infix'>/</span> <span class='lower'>u</span>
+<span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='lower'>z</span> <span class='keywordsign'>*</span> <span class='lower'>t</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/</span> <span class='lower'>u</span>
 <a href="javascript:octry('let u =\n  ``large\n  expression\&#39;\&#39; in\n(x + y + z * t) / u\n');">[try]</a></code></pre>
 <p>
 These guidelines extend to all operators. For example:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>u</span> <span class='keywordsign'>=</span>
-  <span class='operator'>``</span><span class='lower'>large</span>
+  <span class='keywordsign operator'>``</span><span class='lower'>large</span>
   <span class='lower'>expression&#39;&#39;</span> <span class='keyword'>in</span>
 <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>y</span>
 <span class='keywordsign'>::</span> <span class='lower'>z</span> <span class='keywordsign'>+</span> <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='lower'>t</span> <span class='keywordsign'>::</span> <span class='lower'>u</span>
@@ -879,9 +879,9 @@ information of interest;</p>
 *)</span>
 <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>print_lambda</span> <span class='lower'>lam</span> <span class='keywordsign'>=</span>
   <span class='keyword'>match</span> <span class='lower'>lam</span> <span class='keyword'>with</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>printf</span> <span class='string'>&#34;%s&#34;</span> <span class='lower'>s</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>Abs</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>printf</span> <span class='string'>&#34;\\ %a&#34;</span> <span class='lower'>print_lambda</span> <span class='lower'>l</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>App</span> <span class='keywordsign'>(</span><span class='lower'>l1</span><span class='keywordsign'>,</span> <span class='lower'>l2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>printf</span> <span class='string'>&#34;%s&#34;</span> <span class='lower'>s</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>Abs</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>printf</span> <span class='string'>&#34;\\ %a&#34;</span> <span class='lower'>print_lambda</span> <span class='lower'>l</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>App</span> <span class='keywordsign'>(</span><span class='lower'>l1</span><span class='keywordsign'>,</span> <span class='lower'>l2</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
      <span class='lower'>printf</span> <span class='string'>&#34;(%a %a)&#34;</span> <span class='lower'>print_lambda</span> <span class='lower'>l1</span> <span class='lower'>print_lambda</span> <span class='lower'>l2</span>
 <a href="javascript:octry('(*\n  Function print_lambda:\n  print a lambda-expression given as argument.\n\n  Arguments: lam, any lambda-expression.\n  Returns: nothing.\n\n  Remark: print_lambda can only be used for its side effect.\n*)\nlet rec print_lambda lam =\n  match lam with\n  | Var s -&#62; printf &#34;%s&#34; s\n  | Abs l -&#62; printf &#34;\\ %a&#34; print_lambda l\n  | App (l1, l2) -&#62;\n     printf &#34;(%a %a)&#34; print_lambda l1 print_lambda l2\n');">[try]</a></code></pre>
 <h4 id="Usageinmoduleinterface"> Usage in module interface</h4><p>
@@ -897,8 +897,8 @@ while allowing a useful verification upon execution.</p>
 <p>For example, the conditions for the arguments of a function to be valid
 are usefully verified by assertions.</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
-  <span class='keyword'>assert</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='infix'>&#62;=</span> <span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-  <span class='operator'>...</span>
+  <span class='keyword'>assert</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign infix'>&#62;=</span> <span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let f x =\n  assert (x &#62;= 0);\n  ...\n');">[try]</a></code></pre>
 <p>
 Note as well that an assertion is often preferable to a comment because
@@ -940,8 +940,8 @@ This augments regularity of style. Avoid using identifiers whose
 appearance can lead to confusion such as <code>l</code> or <code>O</code>, easy to confuse
 with <code>1</code> and <code>0</code>.</p>
 <p>Example:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>add_expression</span> <span class='lower'>expr1</span> <span class='lower'>expr2</span> <span class='keywordsign'>=</span> <span class='operator'>...</span>
-<span class='keyword'>let</span> <span class='lower'>print_expression</span> <span class='lower'>expr</span> <span class='keywordsign'>=</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>add_expression</span> <span class='lower'>expr1</span> <span class='lower'>expr2</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span>
+<span class='keyword'>let</span> <span class='lower'>print_expression</span> <span class='lower'>expr</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let add_expression expr1 expr2 = ...\nlet print_expression expr = ...\n');">[try]</a></code></pre>
 <p>
 An exception to the recommendation not to use capitalization to separate
@@ -994,10 +994,10 @@ enclosed pattern-matching construct). For example:</p>
 <pre><code class='tryocaml'><span class='keyword'>match</span> <span class='lower'>x</span> <span class='keyword'>with</span>
 <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span>
   <span class='keyword'>begin</span> <span class='keyword'>match</span> <span class='lower'>y</span> <span class='keyword'>with</span>
-  <span class='keywordsign'>|</span> <span class='operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign operator'>...</span>
   <span class='keyword'>end</span>
 <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span>
-<span class='operator'>...</span>
+<span class='keywordsign operator'>...</span>
 <a href="javascript:octry('match x with\n| 1 -&#62;\n  begin match y with\n  | ...\n  end\n| 2 -&#62;\n...\n');">[try]</a></code></pre>
 <h4 id="Sequencesinsidebranchesofif"> Sequences inside branches of <code>if</code></h4><p>
 
@@ -1024,12 +1024,12 @@ notation. Thus you will prefer short but meaningful module names.</p>
 <p><strong>Justification</strong>: The use of unqualified identifiers is ambiguous and
 gives rise to difficult-to-detect semantic errors.</p>
 </blockquote>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>lim</span> <span class='keywordsign'>=</span> <span class='constructor'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>name</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>in</span>
-<span class='operator'>...</span>
-<span class='keyword'>let</span> <span class='lower'>lim</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>v</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>in</span>
-<span class='operator'>...</span>
-<span class='operator'>...</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>succ</span> <span class='operator'>...</span>
-<span class='operator'>...</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>succ</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>lim</span> <span class='keywordsign'>=</span> <span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>name</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>in</span>
+<span class='keywordsign operator'>...</span>
+<span class='keyword'>let</span> <span class='lower'>lim</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>v</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>in</span>
+<span class='keywordsign operator'>...</span>
+<span class='keywordsign operator'>...</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>succ</span> <span class='keywordsign operator'>...</span>
+<span class='keywordsign operator'>...</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>succ</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let lim = String.length name - 1 in\n...\nlet lim = Array.length v - 1 in\n...\n... List.map succ ...\n... Array.map succ ...\n');">[try]</a></code></pre>
 <h4 id="Whentouseopenmodulesratherthanleavingthemclosed"> When to use open modules rather than leaving them closed</h4><p>
 
@@ -1046,7 +1046,7 @@ printing function, and this could be perfectly silent, since many
 leads to subtle bugs in the display, that are difficult to trace. For
 instance:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-  <span class='constructor'>Format</span><span class='keywordsign'>.</span><span class='lower'>print_string</span> <span class='string'>&#34;Hello World!&#34;</span><span class='keywordsign'>;</span> <span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+  <span class='constructor module'>Format</span><span class='keywordsign'>.</span><span class='lower'>print_string</span> <span class='string'>&#34;Hello World!&#34;</span><span class='keywordsign'>;</span> <span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let f () =\n  Format.print_string &#34;Hello World!&#34;; print_newline ()\n');">[try]</a></code></pre>
 <p>
 is bogus since it does not call <code>Format.print_newline</code> to flush the
@@ -1061,10 +1061,10 @@ still open), while a spurious carriage return appeared on the screen!</p>
 <p>For the same reason, open large libraries such as the one with
 arbitrary-precision integers so as not to burden the program which uses
 them.</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Num</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Num</span>
 
 <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>fib</span> <span class='lower'>n</span> <span class='keywordsign'>=</span>
-  <span class='keyword'>if</span> <span class='lower'>n</span> <span class='infix'>&#60;=</span> <span class='number'>2</span> <span class='keyword'>then</span> <span class='constructor'>Int</span> <span class='number'>1</span> <span class='keyword'>else</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='infix'>+/</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>2</span><span class='keywordsign'>)</span>
+  <span class='keyword'>if</span> <span class='lower'>n</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>2</span> <span class='keyword'>then</span> <span class='constructor module'>Int</span> <span class='number'>1</span> <span class='keyword'>else</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>+/</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>2</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('open Num\n\nlet rec fib n =\n  if n &#60;= 2 then Int 1 else fib (n - 1) +/ fib (n - 2)\n');">[try]</a></code></pre>
 <blockquote>
 <p><strong>Justification</strong>: The program would be less readable if you had to
@@ -1540,16 +1540,16 @@ next future, but (fortunately) it is too new to be discussed here.</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>list_length</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='lower'>l</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>res</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>0</span> <span class='keyword'>in</span>
-  <span class='keyword'>while</span> <span class='prefix'>!</span><span class='lower'>l</span> <span class='infix'>&#60;&#62;</span> <span class='operator'>[]</span> <span class='keyword'>do</span>
-    <span class='lower'>incr</span> <span class='lower'>res</span><span class='keywordsign'>;</span> <span class='lower'>l</span> <span class='keywordsign'>:=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='prefix'>!</span><span class='lower'>l</span>
+  <span class='keyword'>while</span> <span class='keywordsign prefix'>!</span><span class='lower'>l</span> <span class='keywordsign infix'>&#60;&#62;</span> <span class='keywordsign operator'>[]</span> <span class='keyword'>do</span>
+    <span class='lower'>incr</span> <span class='lower'>res</span><span class='keywordsign'>;</span> <span class='lower'>l</span> <span class='keywordsign'>:=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign prefix'>!</span><span class='lower'>l</span>
   <span class='keyword'>done</span><span class='keywordsign'>;</span>
-  <span class='prefix'>!</span><span class='lower'>res</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign prefix'>!</span><span class='lower'>res</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let list_length l =\n  let l = ref l in\n  let res = ref 0 in\n  while !l &#60;&#62; [] do\n    incr res; l := List.tl !l\n  done;\n  !res;;\n');">[try]</a></code></pre>
 <p>
 in place of the following recursive function, so simple and
 clear:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>list_length</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-  <span class='keywordsign'>|</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span>
   <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>::</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='number'>1</span> <span class='keywordsign'>+</span> <span class='lower'>list_length</span> <span class='lower'>l</span>
 <a href="javascript:octry('let rec list_length = function\n  | [] -&#62; 0\n  | _ :: l -&#62; 1 + list_length l\n');">[try]</a></code></pre>
 <p>
@@ -1592,12 +1592,12 @@ unreadable program.</p>
 </ul>
 
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>flush_ps</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-  <span class='keyword'>if</span> <span class='lower'>not</span> <span class='prefix'>!</span><span class='lower'>psused</span> <span class='keyword'>then</span> <span class='lower'>psused</span> <span class='keywordsign'>:=</span> <span class='keyword'>true</span>
+  <span class='keyword'>if</span> <span class='lower'>not</span> <span class='keywordsign prefix'>!</span><span class='lower'>psused</span> <span class='keyword'>then</span> <span class='lower'>psused</span> <span class='keywordsign'>:=</span> <span class='keyword'>true</span>
 <a href="javascript:octry('let flush_ps () =\n  if not !psused then psused := true\n');">[try]</a></code></pre>
 <p>
 or (more subtle)</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>sync</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
-  <span class='keyword'>if</span> <span class='prefix'>!</span><span class='lower'>last_is_dvi</span> <span class='infix'>&#60;&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>last_is_dvi</span> <span class='keywordsign'>:=</span> <span class='lower'>b</span>
+  <span class='keyword'>if</span> <span class='keywordsign prefix'>!</span><span class='lower'>last_is_dvi</span> <span class='keywordsign infix'>&#60;&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>last_is_dvi</span> <span class='keywordsign'>:=</span> <span class='lower'>b</span>
 <a href="javascript:octry('let sync b =\n  if !last_is_dvi &#60;&#62; b then last_is_dvi := b\n');">[try]</a></code></pre>
 <ul>
  <li>Code one construct with another. For example code a <code>let ... in</code> by

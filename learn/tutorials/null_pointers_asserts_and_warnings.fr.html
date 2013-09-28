@@ -114,7 +114,7 @@ type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
 <span class='keywordsign'>(</span>
   <span class='lower'>userid</span> <span class='lower'>serial</span><span class='keywordsign'>,</span>
   <span class='lower'>name</span> <span class='lower'>text</span> <span class='lower'>not</span> <span class='lower'>null</span><span class='keywordsign'>,</span>
-  <span class='lower'>age</span> <span class='lower'>int</span>             <span class='infix'>--</span> <span class='lower'>may</span> <span class='lower'>be</span> <span class='lower'>null</span>
+  <span class='lower'>age</span> <span class='lower'>int</span>             <span class='keywordsign infix'>--</span> <span class='lower'>may</span> <span class='lower'>be</span> <span class='lower'>null</span>
 <span class='keywordsign'>)</span><span class='keywordsign'>;</span>
 <a href="javascript:octry('create table users\n(\n  userid serial,\n  name text not null,\n  age int             -- may be null\n);\n');">[try]</a></code></pre>
 <p>
@@ -136,24 +136,24 @@ dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</
 <p>OCaml propose une solution élégante pour les valeurs nulles, en
 utilisant un simple type variant polymorphique, défini (jusqu&#39;à
 récemment, dans le module <code>Pervasives</code>) comme :</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor'>None</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type \&#39;a option = None | Some of \&#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor module'>None</span> <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type \&#39;a option = None | Some of \&#39;a\n');">[try]</a></code></pre>
 <p>
 Une &quot;valeur nulle&quot; s&#39;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
 l&#39;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> dans le chapitre
 précédent).</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor'>Some</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
-<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>option</span> <span class='keywordsign'>=</span> <span class='constructor'>Some</span> <span class='number'>3</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor module'>Some</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>option</span> <span class='keywordsign'>=</span> <span class='constructor module'>Some</span> <span class='number'>3</span>
 <a href="javascript:octry('# Some 3;;\n- : int option = Some 3\n');">[try]</a></code></pre>
 <p>
 Une liste d&#39;entiers optionels ?</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keywordsign'>[</span> <span class='constructor'>None</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor'>None</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>option</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='constructor'>None</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor'>None</span><span class='keywordsign'>]</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keywordsign'>[</span> <span class='constructor module'>None</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor module'>None</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>option</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='constructor module'>None</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor module'>None</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('# [ None; Some 3; Some 6; None ];;\n- : int option list = [None; Some 3; Some 6; None]\n');">[try]</a></code></pre>
 <p>
 Et une liste optionelle d&#39;entiers ?</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='lower'>option</span> <span class='keywordsign'>=</span> <span class='constructor'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor module'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='lower'>option</span> <span class='keywordsign'>=</span> <span class='constructor module'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('# Some [1; 2; 3];;\n- : int list option = Some [1; 2; 3]\n');">[try]</a></code></pre>
 <h2 id="Assertionsavertissementserreursfatalesetcritureversstderr"> Assertions, avertissements, erreurs fatales, et écriture vers stderr</h2><p>
 
@@ -170,8 +170,8 @@ supposant que vous ne rattrapiez pas cette exception (ce qui est
 recommandé, tout particulièrement pour les débutants), son effet sera de
 stopper le programme, et d&#39;afficher l&#39;emplacement (nom du fichier,
 numéro de ligne et de colonne) où l&#39;erreur est survenue. Par exemple :</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>assert</span> <span class='keywordsign'>(</span><span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keywordsign'>=</span> <span class='string'>&#34;Win32&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<span class='constructor'>Exception</span><span class='keywordsign'>:</span> <span class='constructor'>Assert_failure</span> <span class='keywordsign'>(</span><span class='string'>&#34;&#34;</span><span class='keywordsign'>,</span> <span class='number'>0</span><span class='keywordsign'>,</span> <span class='number'>30</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>assert</span> <span class='keywordsign'>(</span><span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keywordsign'>=</span> <span class='string'>&#34;Win32&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Exception</span><span class='keywordsign'>:</span> <span class='constructor module'>Assert_failure</span> <span class='keywordsign'>(</span><span class='string'>&#34;&#34;</span><span class='keywordsign'>,</span> <span class='number'>0</span><span class='keywordsign'>,</span> <span class='number'>30</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span>
 <a href="javascript:octry('# assert (Sys.os_type = &#34;Win32&#34;);;\nException: Assert_failure (&#34;&#34;, 0, 30).\n');">[try]</a></code></pre>
 <p>
 (Bien entendu, cette exception ne sera pas levée sous Win32.)</p>
@@ -181,7 +181,7 @@ les situations critiques, mais il est souvent préférable d&#39;utiliser...</p>
 elle aussi, à moins d&#39;être rattrappée, va stopper le programme et
 afficher le message d&#39;erreur fourni. <code>failwith</code> est souvent utilisé lors
 du filtrage, comme dans cet exemple réel :</p>
-<pre><code class='tryocaml'>  <span class='keyword'>match</span> <span class='constructor'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keyword'>with</span>
+<pre><code class='tryocaml'>  <span class='keyword'>match</span> <span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keyword'>with</span>
     <span class='string'>&#34;Unix&#34;</span> <span class='keywordsign'>|</span> <span class='string'>&#34;Cygwin&#34;</span> <span class='keywordsign'>-&#62;</span>   <span class='comment'>(* code omit *)</span>
   <span class='keywordsign'>|</span> <span class='string'>&#34;Win32&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omit *)</span>
   <span class='keywordsign'>|</span> <span class='string'>&#34;MacOS&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omit *)</span>
@@ -196,12 +196,12 @@ système de filtrage. L&#39;union de motifs est utilisée pour reconnaître
 aversion pour les débogueurs autres que gdb, vous voudrez sûrement faire
 afficher des avertissements par vos fonctions. Voici un exemple (notez
 le code surligné) :</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Graphics</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Graphics</span><span class='keywordsign'>;;</span>
 
 <span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
 <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>12</span> <span class='keyword'>downto</span> <span class='number'>1</span> <span class='keyword'>do</span>
   <span class='keyword'>let</span> <span class='lower'>radius</span> <span class='keywordsign'>=</span> <span class='lower'>i</span> <span class='keywordsign'>*</span> <span class='number'>20</span> <span class='keyword'>in</span>
-  <span class='keywordsign'>&#60;</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span><span class='lower'>prerr_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;radius is &#34;</span> <span class='infix'>^</span> <span class='keywordsign'>(</span><span class='lower'>string_of_int</span> <span class='lower'>radius</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span><span class='infix'>&#60;/</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span>
+  <span class='keywordsign'>&#60;</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span><span class='lower'>prerr_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;radius is &#34;</span> <span class='keywordsign infix'>^</span> <span class='keywordsign'>(</span><span class='lower'>string_of_int</span> <span class='lower'>radius</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span><span class='keywordsign infix'>&#60;/</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span>
   <span class='lower'>set_color</span> <span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keyword'>mod</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>red</span> <span class='keyword'>else</span> <span class='lower'>yellow</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
   <span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='lower'>radius</span>
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
@@ -210,13 +210,13 @@ le code surligné) :</p>
 <p>
 Si vous préférez le style <code>printf</code> du langage C, essayez plutôt le
 module <code>Printf</code> d&#39;OCaml :</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Graphics</span><span class='keywordsign'>;;</span>
-<span class='keywordsign'>&#60;</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span><span class='keyword'>open</span> <span class='constructor'>Printf</span><span class='keywordsign'>;;</span><span class='infix'>&#60;/</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Graphics</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>&#60;</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span><span class='keyword'>open</span> <span class='constructor module'>Printf</span><span class='keywordsign'>;;</span><span class='keywordsign infix'>&#60;/</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span>
 
 <span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
 <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>12</span> <span class='keyword'>downto</span> <span class='number'>1</span> <span class='keyword'>do</span>
   <span class='keyword'>let</span> <span class='lower'>radius</span> <span class='keywordsign'>=</span> <span class='lower'>i</span> <span class='keywordsign'>*</span> <span class='number'>20</span> <span class='keyword'>in</span>
-  <span class='keywordsign'>&#60;</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span><span class='lower'>eprintf</span> <span class='string'>&#34;radius is %d\n&#34;</span> <span class='lower'>radius</span><span class='keywordsign'>;</span><span class='infix'>&#60;/</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span>
+  <span class='keywordsign'>&#60;</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span><span class='lower'>eprintf</span> <span class='string'>&#34;radius is %d\n&#34;</span> <span class='lower'>radius</span><span class='keywordsign'>;</span><span class='keywordsign infix'>&#60;/</span><span class='lower'>em</span><span class='keywordsign'>&#62;</span>
 
   <span class='lower'>set_color</span> <span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keyword'>mod</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>red</span> <span class='keyword'>else</span> <span class='lower'>yellow</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
   <span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='lower'>radius</span>

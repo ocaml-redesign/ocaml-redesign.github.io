@@ -140,7 +140,7 @@ this is normally a waste of time and effort.</p>
 <p>Let&#39;s examine the simple example of linked lists (integer lists to be
 simple). This data type is defined in C (or in Pascal) using explicit
 pointers, for instance:</p>
-<pre><code class='tryocaml'><span class='infix'>/*</span> <span class='constructor'>Cells</span> <span class='keyword'>and</span> <span class='lower'>lists</span> <span class='keyword'>type</span> <span class='keyword'>in</span> <span class='constructor'>C</span> <span class='infix'>*/</span>
+<pre><code class='tryocaml'><span class='keywordsign infix'>/*</span> <span class='constructor module'>Cells</span> <span class='keyword'>and</span> <span class='lower'>lists</span> <span class='keyword'>type</span> <span class='keyword'>in</span> <span class='constructor module'>C</span> <span class='keywordsign infix'>*/</span>
 <span class='keyword'>struct</span> <span class='lower'>cell</span> <span class='keywordsign'>{</span>
   <span class='lower'>int</span> <span class='lower'>hd</span><span class='keywordsign'>;</span>
   <span class='keyword'>struct</span> <span class='lower'>cell</span> <span class='keywordsign'>*</span><span class='lower'>tl</span><span class='keywordsign'>;</span>
@@ -148,9 +148,9 @@ pointers, for instance:</p>
 
 <span class='lower'>typedef</span> <span class='keyword'>struct</span> <span class='lower'>cell</span> <span class='lower'>cell</span><span class='keywordsign'>,</span> <span class='keywordsign'>*</span><span class='lower'>list</span><span class='keywordsign'>;</span>
 
-<span class='keywordsign'>{</span><span class='constructor'>Cells</span> <span class='keyword'>and</span> <span class='lower'>lists</span> <span class='keyword'>type</span> <span class='keyword'>in</span> <span class='constructor'>Pascal</span><span class='keywordsign'>}</span>
+<span class='keywordsign'>{</span><span class='constructor module'>Cells</span> <span class='keyword'>and</span> <span class='lower'>lists</span> <span class='keyword'>type</span> <span class='keyword'>in</span> <span class='constructor module'>Pascal</span><span class='keywordsign'>}</span>
 <span class='keyword'>type</span>
- <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='infix'>^</span><span class='lower'>cell</span><span class='keywordsign'>;</span>
+ <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign infix'>^</span><span class='lower'>cell</span><span class='keywordsign'>;</span>
  <span class='lower'>cell</span> <span class='keywordsign'>=</span> <span class='lower'>record</span>
   <span class='lower'>hd</span><span class='keywordsign'>:</span> <span class='lower'>integer</span><span class='keywordsign'>;</span>
   <span class='lower'>tl</span><span class='keywordsign'>:</span> <span class='lower'>cell</span><span class='keywordsign'>;</span>
@@ -159,7 +159,7 @@ pointers, for instance:</p>
 <p>
 We can translate this in OCaml, using a sum type definition, without
 pointers:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='constructor'>Nil</span> <span class='keywordsign'>|</span> <span class='constructor'>Cons</span> <span class='keyword'>of</span> <span class='lower'>int</span> <span class='keywordsign'>*</span> <span class='lower'>list</span>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='constructor module'>Nil</span> <span class='keywordsign'>|</span> <span class='constructor module'>Cons</span> <span class='keyword'>of</span> <span class='lower'>int</span> <span class='keywordsign'>*</span> <span class='lower'>list</span>
 <a href="javascript:octry('  type list = Nil | Cons of int * list\n');">[try]</a></code></pre>
 <p>
 Cell lists are thus represented as pairs, and the recursive structure of
@@ -169,10 +169,10 @@ lists is evident, with the two alternatives, empty list (the
 when allocating list values: one just writes <code>Cons (x, l)</code> to add <code>x</code> in
 front of the list <code>l</code>. In C, you need to write this function, to
 allocate a new cell and then fill its fields. For instance:</p>
-<pre><code class='tryocaml'><span class='infix'>/*</span> <span class='constructor'>The</span> <span class='lower'>empty</span> <span class='lower'>list</span> <span class='infix'>*/</span>
-<span class='keywordsign'>#</span><span class='lower'>define</span> <span class='lower'>nil</span> <span class='constructor'>NULL</span>
+<pre><code class='tryocaml'><span class='keywordsign infix'>/*</span> <span class='constructor module'>The</span> <span class='lower'>empty</span> <span class='lower'>list</span> <span class='keywordsign infix'>*/</span>
+<span class='keywordsign'>#</span><span class='lower'>define</span> <span class='lower'>nil</span> <span class='constructor module'>NULL</span>
 
-<span class='infix'>/*</span> <span class='constructor'>The</span> <span class='lower'>constructor</span> <span class='keyword'>of</span> <span class='lower'>lists</span> <span class='infix'>*/</span>
+<span class='keywordsign infix'>/*</span> <span class='constructor module'>The</span> <span class='lower'>constructor</span> <span class='keyword'>of</span> <span class='lower'>lists</span> <span class='keywordsign infix'>*/</span>
 <span class='lower'>list</span> <span class='lower'>cons</span> <span class='keywordsign'>(</span><span class='lower'>element</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>list</span> <span class='lower'>l</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>{</span>
   <span class='lower'>list</span> <span class='lower'>result</span><span class='keywordsign'>;</span>
@@ -184,13 +184,13 @@ allocate a new cell and then fill its fields. For instance:</p>
 <a href="javascript:octry('/* The empty list */\n#define nil NULL\n\n/* The constructor of lists */\nlist cons (element x, list l)\n{\n  list result;\n  result = (list) malloc (sizeof (cellule));\n  result -&#62; hd = x;\n  result -&#62; tl = l;\n  return (result);\n}\n');">[try]</a></code></pre>
 <p>
 Similarly, in Pascal:</p>
-<pre><code class='tryocaml'><span class='keywordsign'>{</span><span class='constructor'>Creating</span> <span class='lower'>a</span> <span class='lower'>list</span> <span class='lower'>cell</span><span class='keywordsign'>}</span>
+<pre><code class='tryocaml'><span class='keywordsign'>{</span><span class='constructor module'>Creating</span> <span class='lower'>a</span> <span class='lower'>list</span> <span class='lower'>cell</span><span class='keywordsign'>}</span>
 <span class='keyword'>function</span> <span class='lower'>cons</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>:</span> <span class='lower'>integer</span><span class='keywordsign'>;</span> <span class='lower'>l</span><span class='keywordsign'>:</span> <span class='lower'>list</span><span class='keywordsign'>)</span><span class='keywordsign'>:</span> <span class='lower'>list</span><span class='keywordsign'>;</span>
  <span class='lower'>var</span> <span class='lower'>p</span><span class='keywordsign'>:</span> <span class='lower'>list</span><span class='keywordsign'>;</span>
  <span class='keyword'>begin</span>
   <span class='keyword'>new</span><span class='keywordsign'>(</span><span class='lower'>p</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-  <span class='lower'>p</span><span class='infix'>^.</span><span class='lower'>hd</span> <span class='keywordsign'>:=</span> <span class='lower'>x</span><span class='keywordsign'>;</span>
-  <span class='lower'>p</span><span class='infix'>^.</span><span class='lower'>tl</span> <span class='keywordsign'>:=</span> <span class='lower'>l</span><span class='keywordsign'>;</span>
+  <span class='lower'>p</span><span class='keywordsign infix'>^.</span><span class='lower'>hd</span> <span class='keywordsign'>:=</span> <span class='lower'>x</span><span class='keywordsign'>;</span>
+  <span class='lower'>p</span><span class='keywordsign infix'>^.</span><span class='lower'>tl</span> <span class='keywordsign'>:=</span> <span class='lower'>l</span><span class='keywordsign'>;</span>
   <span class='lower'>cons</span> <span class='keywordsign'>:=</span> <span class='lower'>p</span>
  <span class='keyword'>end</span><span class='keywordsign'>;</span>
 <a href="javascript:octry('{Creating a list cell}\nfunction cons (x: integer; l: list): list;\n var p: list;\n begin\n  new(p);\n  p^.hd := x;\n  p^.tl := l;\n  cons := p\n end;\n');">[try]</a></code></pre>
@@ -204,14 +204,14 @@ definable (those data types are often refered to as “pure” or
 for other reasons than mere initialization, OCaml provides records with
 mutable fields. For instance, a list type defining lists whose elements
 can be in place modified could be written:</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='constructor'>Nil</span> <span class='keywordsign'>|</span> <span class='constructor'>Cons</span> <span class='keyword'>of</span> <span class='lower'>cell</span>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='constructor module'>Nil</span> <span class='keywordsign'>|</span> <span class='constructor module'>Cons</span> <span class='keyword'>of</span> <span class='lower'>cell</span>
 <span class='keyword'>and</span> <span class='lower'>cell</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='keyword'>mutable</span> <span class='lower'>hd</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>;</span> <span class='lower'>tl</span> <span class='keywordsign'>:</span> <span class='lower'>list</span> <span class='keywordsign'>}</span>
 <a href="javascript:octry('type list = Nil | Cons of cell\nand cell = { mutable hd : int; tl : list }\n');">[try]</a></code></pre>
 <p>
 If the structure of the list itself must also be modified (cells must be
 physically removed from the list), the <code>tl</code> field would also be declared
 as mutable:</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='constructor'>Nil</span> <span class='keywordsign'>|</span> <span class='constructor'>Cons</span> <span class='keyword'>of</span> <span class='lower'>cell</span>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='constructor module'>Nil</span> <span class='keywordsign'>|</span> <span class='constructor module'>Cons</span> <span class='keyword'>of</span> <span class='lower'>cell</span>
 <span class='keyword'>and</span> <span class='lower'>cell</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='keyword'>mutable</span> <span class='lower'>hd</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>;</span> <span class='keyword'>mutable</span> <span class='lower'>tl</span> <span class='keywordsign'>:</span> <span class='lower'>list</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('type list = Nil | Cons of cell\nand cell = {mutable hd : int; mutable tl : list};;\n');">[try]</a></code></pre>
 <p>
@@ -236,32 +236,32 @@ classical algorithmic languages. See a more complete example below.</p>
 The general pointer type can be defined using the definition of a
 pointer: a pointer is either null, or a pointer to an assignable memory
 location:</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>apointer</span> <span class='keywordsign'>=</span> <span class='constructor'>Null</span> <span class='keywordsign'>|</span> <span class='constructor'>Pointer</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>aref</span>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>apointer</span> <span class='keywordsign'>=</span> <span class='constructor module'>Null</span> <span class='keywordsign'>|</span> <span class='constructor module'>Pointer</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>aref</span>
 <a href="javascript:octry('type \&#39;a pointer = Null | Pointer of \&#39;a ref\n');">[try]</a></code></pre>
 <p>
 Explicit dereferencing (or reading the pointer&#39;s designated value) and
 pointer assignment (or writing to the pointer&#39;s designated memory
 location) are easily defined. We define dereferencing as a prefix
 operator named <code>!^</code>, and assigment as the infix <code>^:=</code>.</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keywordsign'>(</span> <span class='prefix'>!^</span> <span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Null</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>invalid_arg</span> <span class='string'>&#34;Attempt to dereference the null pointer&#34;</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Pointer</span> <span class='lower'>r</span> <span class='keywordsign'>-&#62;</span> <span class='prefix'>!</span><span class='lower'>r</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keywordsign'>(</span> <span class='keywordsign prefix'>!^</span> <span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Null</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>invalid_arg</span> <span class='string'>&#34;Attempt to dereference the null pointer&#34;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Pointer</span> <span class='lower'>r</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign prefix'>!</span><span class='lower'>r</span><span class='keywordsign'>;;</span>
   
-  <span class='keyword'>let</span> <span class='keywordsign'>(</span> <span class='infix'>^:=</span> <span class='keywordsign'>)</span> <span class='lower'>p</span> <span class='lower'>v</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='keywordsign'>(</span> <span class='keywordsign infix'>^:=</span> <span class='keywordsign'>)</span> <span class='lower'>p</span> <span class='lower'>v</span> <span class='keywordsign'>=</span>
     <span class='keyword'>match</span> <span class='lower'>p</span> <span class='keyword'>with</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Null</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>invalid_arg</span> <span class='string'>&#34;Attempt to assign the null pointer&#34;</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Pointer</span> <span class='lower'>r</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>r</span> <span class='keywordsign'>:=</span> <span class='lower'>v</span><span class='keywordsign'>;;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Null</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>invalid_arg</span> <span class='string'>&#34;Attempt to assign the null pointer&#34;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Pointer</span> <span class='lower'>r</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>r</span> <span class='keywordsign'>:=</span> <span class='lower'>v</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let ( !^ ) = function\n    | Null -&#62; invalid_arg &#34;Attempt to dereference the null pointer&#34;\n    | Pointer r -&#62; !r;;\n  \n  let ( ^:= ) p v =\n    match p with\n    | Null -&#62; invalid_arg &#34;Attempt to assign the null pointer&#34;\n    | Pointer r -&#62; r := v;;\n');">[try]</a></code></pre>
 <p>
 Now we define the allocation of a new pointer initialized to points to a
 given value:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>new_pointer</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='constructor'>Pointer</span> <span class='keywordsign'>(</span><span class='lower'>ref</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>new_pointer</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='constructor module'>Pointer</span> <span class='keywordsign'>(</span><span class='lower'>ref</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let new_pointer x = Pointer (ref x);;\n');">[try]</a></code></pre>
 <p>
 For instance, let&#39;s define and then assign a pointer to an integer:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>p</span> <span class='keywordsign'>=</span> <span class='lower'>new_pointer</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
-  <span class='lower'>p</span> <span class='infix'>^:=</span> <span class='number'>1</span><span class='keywordsign'>;;</span>
-  <span class='prefix'>!^</span><span class='lower'>p</span><span class='keywordsign'>;;</span>
+  <span class='lower'>p</span> <span class='keywordsign infix'>^:=</span> <span class='number'>1</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign prefix'>!^</span><span class='lower'>p</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let p = new_pointer 0;;\n  p ^:= 1;;\n  !^p;;\n');">[try]</a></code></pre>
 <h2 id="IntegerLists"> Integer Lists</h2><p>
 
@@ -274,7 +274,7 @@ languages:</p>
 <p>
 We then define allocation of a new cell, the list constructor and its
 associated destructors.</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>new_cell</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>hd</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>tl</span> <span class='keywordsign'>=</span> <span class='constructor'>Null</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>new_cell</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>hd</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>tl</span> <span class='keywordsign'>=</span> <span class='constructor module'>Null</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>let</span> <span class='lower'>cons</span> <span class='lower'>x</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
     <span class='keyword'>let</span> <span class='lower'>c</span> <span class='keywordsign'>=</span> <span class='lower'>new_cell</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
@@ -282,8 +282,8 @@ associated destructors.</p>
     <span class='lower'>c</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l</span><span class='keywordsign'>;</span>
     <span class='keywordsign'>(</span><span class='lower'>new_pointer</span> <span class='lower'>c</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-  <span class='keyword'>let</span> <span class='lower'>hd</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>hd</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>tl</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>tl</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>hd</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>hd</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>tl</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>tl</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let new_cell () = {hd = 0; tl = Null};;\n\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- x;\n    c.tl &#60;- l;\n    (new_pointer c : ilist);;\n\n  let hd (l : ilist) = !^l.hd;;\n  let tl (l : ilist) = !^l.tl;;\n');">[try]</a></code></pre>
 <p>
 We can now write all kind of classical algorithms, based on pointers
@@ -295,15 +295,15 @@ first:</p>
 <pre><code class='tryocaml'>  <span class='comment'>(* Physical append *)</span>
   <span class='keyword'>let</span> <span class='lower'>append</span> <span class='keywordsign'>(</span><span class='lower'>l1</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='lower'>l2</span> <span class='keywordsign'>:</span> <span class='lower'>ilist</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
     <span class='keyword'>let</span> <span class='lower'>temp</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='lower'>l1</span> <span class='keyword'>in</span>
-    <span class='keyword'>while</span> <span class='lower'>tl</span> <span class='prefix'>!</span><span class='lower'>temp</span> <span class='infix'>&#60;&#62;</span> <span class='constructor'>Null</span> <span class='keyword'>do</span>
-      <span class='lower'>temp</span> <span class='keywordsign'>:=</span> <span class='lower'>tl</span> <span class='prefix'>!</span><span class='lower'>temp</span>
+    <span class='keyword'>while</span> <span class='lower'>tl</span> <span class='keywordsign prefix'>!</span><span class='lower'>temp</span> <span class='keywordsign infix'>&#60;&#62;</span> <span class='constructor module'>Null</span> <span class='keyword'>do</span>
+      <span class='lower'>temp</span> <span class='keywordsign'>:=</span> <span class='lower'>tl</span> <span class='keywordsign prefix'>!</span><span class='lower'>temp</span>
     <span class='keyword'>done</span><span class='keywordsign'>;</span>
-    <span class='prefix'>!^</span> <span class='prefix'>!</span><span class='lower'>temp</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l2</span><span class='keywordsign'>;;</span>
+    <span class='keywordsign prefix'>!^</span> <span class='keywordsign prefix'>!</span><span class='lower'>temp</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l2</span><span class='keywordsign'>;;</span>
 
   <span class='comment'>(* An example: *)</span>
-  <span class='keyword'>let</span> <span class='lower'>l1</span> <span class='keywordsign'>=</span> <span class='lower'>cons</span> <span class='number'>1</span> <span class='keywordsign'>(</span><span class='lower'>cons</span> <span class='number'>2</span> <span class='constructor'>Null</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>l1</span> <span class='keywordsign'>=</span> <span class='lower'>cons</span> <span class='number'>1</span> <span class='keywordsign'>(</span><span class='lower'>cons</span> <span class='number'>2</span> <span class='constructor module'>Null</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-  <span class='keyword'>let</span> <span class='lower'>l2</span> <span class='keywordsign'>=</span> <span class='lower'>cons</span> <span class='number'>3</span> <span class='constructor'>Null</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>l2</span> <span class='keywordsign'>=</span> <span class='lower'>cons</span> <span class='number'>3</span> <span class='constructor module'>Null</span><span class='keywordsign'>;;</span>
 
   <span class='lower'>append</span> <span class='lower'>l1</span> <span class='lower'>l2</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  (* Physical append *)\n  let append (l1 : ilist) (l2 : ilist) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n  (* An example: *)\n  let l1 = cons 1 (cons 2 Null);;\n\n  let l2 = cons 3 Null;;\n\n  append l1 l2;;\n');">[try]</a></code></pre>
@@ -333,21 +333,21 @@ lists:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#39;</span><span class='lower'>acell</span> <span class='lower'>pointer</span>
   <span class='keyword'>and</span> <span class='keywordsign'>&#39;</span><span class='lower'>acell</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='keyword'>mutable</span> <span class='lower'>hd</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>apointer</span><span class='keywordsign'>;</span> <span class='keyword'>mutable</span> <span class='lower'>tl</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
 
-  <span class='keyword'>let</span> <span class='lower'>new_cell</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>hd</span> <span class='keywordsign'>=</span> <span class='constructor'>Null</span><span class='keywordsign'>;</span> <span class='lower'>tl</span> <span class='keywordsign'>=</span> <span class='constructor'>Null</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>new_cell</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>hd</span> <span class='keywordsign'>=</span> <span class='constructor module'>Null</span><span class='keywordsign'>;</span> <span class='lower'>tl</span> <span class='keywordsign'>=</span> <span class='constructor module'>Null</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='lower'>cons</span> <span class='lower'>x</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
     <span class='keyword'>let</span> <span class='lower'>c</span> <span class='keywordsign'>=</span> <span class='lower'>new_cell</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
     <span class='lower'>c</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>new_pointer</span> <span class='lower'>x</span><span class='keywordsign'>;</span>
     <span class='lower'>c</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l</span><span class='keywordsign'>;</span>
     <span class='keywordsign'>(</span><span class='lower'>new_pointer</span> <span class='lower'>c</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>hd</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>hd</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>tl</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>tl</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>hd</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>hd</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>tl</span> <span class='keywordsign'>(</span><span class='lower'>l</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keywordsign prefix'>!^</span><span class='lower'>l</span><span class='keywordsign'>.</span><span class='lower'>tl</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>let</span> <span class='lower'>append</span> <span class='keywordsign'>(</span><span class='lower'>l1</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='lower'>l2</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alists</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
     <span class='keyword'>let</span> <span class='lower'>temp</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='lower'>l1</span> <span class='keyword'>in</span>
-    <span class='keyword'>while</span> <span class='lower'>tl</span> <span class='prefix'>!</span><span class='lower'>temp</span> <span class='infix'>&#60;&#62;</span> <span class='constructor'>Null</span> <span class='keyword'>do</span>
-      <span class='lower'>temp</span> <span class='keywordsign'>:=</span> <span class='lower'>tl</span> <span class='prefix'>!</span><span class='lower'>temp</span>
+    <span class='keyword'>while</span> <span class='lower'>tl</span> <span class='keywordsign prefix'>!</span><span class='lower'>temp</span> <span class='keywordsign infix'>&#60;&#62;</span> <span class='constructor module'>Null</span> <span class='keyword'>do</span>
+      <span class='lower'>temp</span> <span class='keywordsign'>:=</span> <span class='lower'>tl</span> <span class='keywordsign prefix'>!</span><span class='lower'>temp</span>
     <span class='keyword'>done</span><span class='keywordsign'>;</span>
-    <span class='prefix'>!^</span> <span class='prefix'>!</span><span class='lower'>temp</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l2</span><span class='keywordsign'>;;</span>
+    <span class='keywordsign prefix'>!^</span> <span class='keywordsign prefix'>!</span><span class='lower'>temp</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>l2</span><span class='keywordsign'>;;</span>
 
 <a href="javascript:octry('  type \&#39;a lists = \&#39;a cell pointer\n  and \&#39;a cell = {mutable hd : \&#39;a pointer; mutable tl : \&#39;a lists};;\n\n  let new_cell () = {hd = Null; tl = Null};;\n  let cons x l =\n    let c = new_cell () in\n    c.hd &#60;- new_pointer x;\n    c.tl &#60;- l;\n    (new_pointer c : \&#39;a lists);;\n  let hd (l : \&#39;a lists) = !^l.hd;;\n  let tl (l : \&#39;a lists) = !^l.tl;;\n\n  let append (l1 : \&#39;a lists) (l2 : \&#39;a lists) =\n    let temp = ref l1 in\n    while tl !temp &#60;&#62; Null do\n      temp := tl !temp\n    done;\n    !^ !temp.tl &#60;- l2;;\n\n');">[try]</a></code></pre>
 

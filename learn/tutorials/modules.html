@@ -104,7 +104,7 @@ into the files.</p>
 <a href="javascript:octry('let hello () = print_endline &#34;Hello&#34;\n');">[try]</a></code></pre>
 <p>
 And here is what we have in <code>bmodule.ml</code>:</p>
-<pre><code class='tryocaml'><span class='constructor'>Amodule</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<pre><code class='tryocaml'><span class='constructor module'>Amodule</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('Amodule.hello ()\n');">[try]</a></code></pre>
 <p>
 Usually files are compiled one by one, let&#39;s do it:</p>
@@ -124,13 +124,13 @@ the <code>List</code> module.</p>
 <p>OK, if you are using a given module heavily, you may want to make its
 contents directly accessible. For this, we use the <code>open</code> directive. In
 our example, <code>bmodule.ml</code> could have been written:</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Amodule</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Amodule</span><span class='keywordsign'>;;</span>
 <span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('open Amodule;;\nhello ();;\n');">[try]</a></code></pre>
 <p>
 As a side note, people tend to avoid the ugly &quot;;;&quot;, so it more common to
 write it like:</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Amodule</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Amodule</span>
 <span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('open Amodule\nlet () =\n  hello ()\n');">[try]</a></code></pre>
@@ -143,9 +143,9 @@ conflicts, such as <code>printf</code>. In order to avoid writing <code>Printf.p
 all over the place, it often makes sense to place one <code>open Printf</code> at
 the beginning of the file.</p>
 <p>There is a short example illustrating what we just mentioned:</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Printf</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Printf</span>
 <span class='keyword'>let</span> <span class='lower'>my_data</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='string'>&#34;a&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;beautiful&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;day&#34;</span> <span class='keywordsign'>]</span>
-<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>printf</span> <span class='string'>&#34;%s\n&#34;</span> <span class='lower'>s</span><span class='keywordsign'>)</span> <span class='lower'>my_data</span>
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>printf</span> <span class='string'>&#34;%s\n&#34;</span> <span class='lower'>s</span><span class='keywordsign'>)</span> <span class='lower'>my_data</span>
 <a href="javascript:octry('open Printf\nlet my_data = [ &#34;a&#34;; &#34;beautiful&#34;; &#34;day&#34; ]\nlet () = List.iter (fun s -&#62; printf &#34;%s\n&#34; s) my_data\n');">[try]</a></code></pre>
 <h2 id="Interfacesandsignatures"> Interfaces and signatures</h2><p>
 
@@ -185,7 +185,7 @@ compiled using <code>ocamlc</code>, even if .ml files are compiled to native cod
 using <code>ocamlopt</code>:</p>
 <pre><code class='tryocaml'><span class='lower'>ocamlc</span> <span class='keywordsign'>-</span><span class='lower'>c</span> <span class='lower'>amodule</span><span class='keywordsign'>.</span><span class='lower'>mli</span>
 <span class='lower'>ocamlopt</span> <span class='keywordsign'>-</span><span class='lower'>c</span> <span class='lower'>amodule</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
-<span class='operator'>...</span>
+<span class='keywordsign operator'>...</span>
 <a href="javascript:octry('ocamlc -c amodule.mli\nocamlopt -c amodule.ml\n...\n');">[try]</a></code></pre>
 <h2 id="Abstracttypes"> Abstract types</h2><p>
 
@@ -245,27 +245,27 @@ derived and is the broadest possible, or can be restricted by writing an
 <p>That said, a given module can also be defined explicitely from within a
 file. That makes it a submodule of the current module. Let&#39;s consider
 this <code>example.ml</code> file:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>Hello</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>Hello</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
   <span class='keyword'>let</span> <span class='lower'>message</span> <span class='keywordsign'>=</span> <span class='string'>&#34;Hello&#34;</span>
   <span class='keyword'>let</span> <span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>print_endline</span> <span class='lower'>message</span>
 <span class='keyword'>end</span>
 <span class='keyword'>let</span> <span class='lower'>goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>print_endline</span> <span class='string'>&#34;Goodbye&#34;</span>
 <span class='keyword'>let</span> <span class='lower'>hello_goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-  <span class='constructor'>Hello</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>Hello</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
   <span class='lower'>goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('module Hello = struct\n  let message = &#34;Hello&#34;\n  let hello () = print_endline message\nend\nlet goodbye () = print_endline &#34;Goodbye&#34;\nlet hello_goodbye () =\n  Hello.hello ();\n  goodbye ()\n');">[try]</a></code></pre>
 <p>
 From another file, it is clear that we now have two levels of modules.
 We can write:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-  <span class='constructor'>Example</span><span class='keywordsign'>.</span><span class='constructor'>Hello</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-  <span class='constructor'>Example</span><span class='keywordsign'>.</span><span class='lower'>goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+  <span class='constructor module'>Example</span><span class='keywordsign'>.</span><span class='constructor module'>Hello</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>Example</span><span class='keywordsign'>.</span><span class='lower'>goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let () =\n  Example.Hello.hello ();\n  Example.goodbye ()\n');">[try]</a></code></pre>
 <h3 id="Submoduleinterface"> Submodule interface</h3><p>
 
 We can also restrict the interface of a given submodule. It is called a
 module type. Let&#39;s do it in our <code>example.ml</code> file:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>Hello</span> <span class='keywordsign'>:</span> <span class='keyword'>sig</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>Hello</span> <span class='keywordsign'>:</span> <span class='keyword'>sig</span>
  <span class='keyword'>val</span> <span class='lower'>hello</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span>
 <span class='keyword'>end</span> <span class='keywordsign'>=</span> 
 <span class='keyword'>struct</span>
@@ -276,7 +276,7 @@ module type. Let&#39;s do it in our <code>example.ml</code> file:</p>
 <span class='comment'>(* At this point, Hello.message is not accessible anymore. *)</span>
 <span class='keyword'>let</span> <span class='lower'>goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>print_endline</span> <span class='string'>&#34;Goodbye&#34;</span>
 <span class='keyword'>let</span> <span class='lower'>hello_goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-  <span class='constructor'>Hello</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>Hello</span><span class='keywordsign'>.</span><span class='lower'>hello</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
   <span class='lower'>goodbye</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('module Hello : sig\n val hello : unit -&#62; unit\nend = \nstruct\n  let message = &#34;Hello&#34;\n  let hello () = print_endline message\nend\n\n(* At this point, Hello.message is not accessible anymore. *)\nlet goodbye () = print_endline &#34;Goodbye&#34;\nlet hello_goodbye () =\n  Hello.hello ();\n  goodbye ()\n');">[try]</a></code></pre>
 <p>
@@ -284,12 +284,12 @@ The definition of the <code>Hello</code> module above is the equivalent of a
 <code>hello.mli</code>/<code>hello.ml</code> pair of files. Writing all of that in one block
 of code is not elegant, so in general we prefer to define the module
 signature separately:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='keyword'>type</span> <span class='constructor'>Hello_type</span> <span class='keywordsign'>=</span> <span class='keyword'>sig</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='keyword'>type</span> <span class='constructor module'>Hello_type</span> <span class='keywordsign'>=</span> <span class='keyword'>sig</span>
  <span class='keyword'>val</span> <span class='lower'>hello</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span>
 <span class='keyword'>end</span>
 
-<span class='keyword'>module</span> <span class='constructor'>Hello</span> <span class='keywordsign'>:</span> <span class='constructor'>Hello_type</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
-  <span class='operator'>...</span>
+<span class='keyword'>module</span> <span class='constructor module'>Hello</span> <span class='keywordsign'>:</span> <span class='constructor module'>Hello_type</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+  <span class='keywordsign operator'>...</span>
 <span class='keyword'>end</span>
 <a href="javascript:octry('module type Hello_type = sig\n val hello : unit -&#62; unit\nend\n\nmodule Hello : Hello_type = struct\n  ...\nend\n');">[try]</a></code></pre>
 <p>
@@ -324,7 +324,7 @@ the comparison function given as <code>compare</code>. The point of the functor 
 to ensure that the same comparison function will always be used, even if
 the programmer makes a mistake.</p>
 <p>For example, if we want to use sets of ints, we would use do this:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>Int_set</span> <span class='keywordsign'>=</span> <span class='constructor'>Set</span><span class='keywordsign'>.</span><span class='constructor'>Make</span> <span class='keywordsign'>(</span><span class='keyword'>struct</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>Int_set</span> <span class='keywordsign'>=</span> <span class='constructor module'>Set</span><span class='keywordsign'>.</span><span class='constructor module'>Make</span> <span class='keywordsign'>(</span><span class='keyword'>struct</span>
                              <span class='keyword'>type</span> <span class='lower'>t</span> <span class='keywordsign'>=</span> <span class='lower'>int</span>
                              <span class='keyword'>let</span> <span class='lower'>compare</span> <span class='keywordsign'>=</span> <span class='lower'>compare</span>
                            <span class='keyword'>end</span><span class='keywordsign'>)</span>
@@ -334,14 +334,14 @@ For sets of strings, it is even easier because the standard library
 provides a <code>String</code> module with a type <code>t</code> and a function <code>compare</code>. If
 you were following carefully, by now you must have guessed how to create
 a module for the manipulation of sets of strings:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>String_set</span> <span class='keywordsign'>=</span> <span class='constructor'>Set</span><span class='keywordsign'>.</span><span class='constructor'>Make</span> <span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>)</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>String_set</span> <span class='keywordsign'>=</span> <span class='constructor module'>Set</span><span class='keywordsign'>.</span><span class='constructor module'>Make</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('module String_set = Set.Make (String)\n');">[try]</a></code></pre>
 <p>
 (the parentheses are necessary)</p>
 <h3 id="Howtodefineafunctor"> How to define a functor?</h3><p>
 A functor with one argument can be defined like this:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>F</span> <span class='keywordsign'>(</span><span class='constructor'>X</span> <span class='keywordsign'>:</span> <span class='constructor'>X_type</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
- <span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>F</span> <span class='keywordsign'>(</span><span class='constructor module'>X</span> <span class='keywordsign'>:</span> <span class='constructor module'>X_type</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+ <span class='keywordsign operator'>...</span>
 <span class='keyword'>end</span>
 <a href="javascript:octry('module F (X : X_type) = struct\n ...\nend\n');">[try]</a></code></pre>
 <p>
@@ -349,14 +349,14 @@ where <code>X</code> is the module that will be passed as argument, and <code>X_
 its signature, which is mandatory.</p>
 <p>The signature of the returned module itself can be constrained, using
 this syntax:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>F</span> <span class='keywordsign'>(</span><span class='constructor'>X</span> <span class='keywordsign'>:</span> <span class='constructor'>X_type</span><span class='keywordsign'>)</span> <span class='keywordsign'>:</span> <span class='constructor'>Y_type</span> <span class='keywordsign'>=</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>F</span> <span class='keywordsign'>(</span><span class='constructor module'>X</span> <span class='keywordsign'>:</span> <span class='constructor module'>X_type</span><span class='keywordsign'>)</span> <span class='keywordsign'>:</span> <span class='constructor module'>Y_type</span> <span class='keywordsign'>=</span>
 <span class='keyword'>struct</span>
-  <span class='operator'>...</span>
+  <span class='keywordsign operator'>...</span>
 <span class='keyword'>end</span>
 <a href="javascript:octry('module F (X : X_type) : Y_type =\nstruct\n  ...\nend\n');">[try]</a></code></pre>
 <p>
 or by specifying this in the .mli file:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>F</span> <span class='keywordsign'>(</span><span class='constructor'>X</span> <span class='keywordsign'>:</span> <span class='constructor'>X_type</span><span class='keywordsign'>)</span> <span class='keywordsign'>:</span> <span class='constructor'>Y_type</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>F</span> <span class='keywordsign'>(</span><span class='constructor module'>X</span> <span class='keywordsign'>:</span> <span class='constructor module'>X_type</span><span class='keywordsign'>)</span> <span class='keywordsign'>:</span> <span class='constructor module'>Y_type</span>
 <a href="javascript:octry('module F (X : X_type) : Y_type\n');">[try]</a></code></pre>
 <p>
 Overall, the syntax of functors is hard to grasp. The best may be to
@@ -369,7 +369,7 @@ to the source code of the functor.</p>
 
 In the <code>ocaml</code> toplevel, the following trick allows to visualize the
 contents of an existing module, such as <code>List</code>:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>M</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>M</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('module M = List;;\n');">[try]</a></code></pre>
 <p>
 Otherwise, there is online documentation for most libraries or you can
@@ -380,14 +380,14 @@ Let&#39;s say we feel that a function is missing from the standard <code>List</c
 module, but we really want it as if it were part of it. In an
 <code>extensions.ml</code> file, we can achieve this effect by using the <code>include</code>
 directive:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>List</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
-  <span class='keyword'>include</span> <span class='constructor'>List</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>List</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+  <span class='keyword'>include</span> <span class='constructor module'>List</span>
   <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>optmap</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>[]</span>
+    <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>[]</span>
     <span class='keywordsign'>|</span> <span class='lower'>hd</span> <span class='keywordsign'>::</span> <span class='lower'>tl</span> <span class='keywordsign'>-&#62;</span>
        <span class='keyword'>match</span> <span class='lower'>f</span> <span class='lower'>hd</span> <span class='keyword'>with</span>
-       <span class='keywordsign'>|</span> <span class='constructor'>None</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>optmap</span> <span class='lower'>f</span> <span class='lower'>tl</span>
-       <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>optmap</span> <span class='lower'>f</span> <span class='lower'>tl</span>
+       <span class='keywordsign'>|</span> <span class='constructor module'>None</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>optmap</span> <span class='lower'>f</span> <span class='lower'>tl</span>
+       <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>optmap</span> <span class='lower'>f</span> <span class='lower'>tl</span>
 <span class='keyword'>end</span>
 <a href="javascript:octry('module List = struct\n  include List\n  let rec optmap f = function\n    | [] -&#62; []\n    | hd :: tl -&#62;\n       match f hd with\n       | None -&#62; optmap f tl\n       | Some x -&#62; x :: optmap f tl\nend\n');">[try]</a></code></pre>
 <p>
@@ -395,9 +395,9 @@ It creates a module <code>Extensions.List</code> that has everything the standar
 <code>List</code> module has, plus a new <code>optmap</code> function. From another file, all
 we have to do to override the default <code>List</code> module is <code>open Extensions</code>
 at the beginning of the .ml file:</p>
-<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor'>Extensions</span>
-<span class='operator'>...</span>
-<span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>optmap</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'><span class='keyword'>open</span> <span class='constructor module'>Extensions</span>
+<span class='keywordsign operator'>...</span>
+<span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>optmap</span> <span class='keywordsign operator'>...</span>
 
 <a href="javascript:octry('open Extensions\n...\nList.optmap ...\n\n');">[try]</a></code></pre>
 

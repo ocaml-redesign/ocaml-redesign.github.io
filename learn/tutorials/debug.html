@@ -134,20 +134,20 @@ This note quickly presents two techniques to debug OCaml programs:</p>
 <h2 id="Tracingfunctionscallsinthetoplevel"> Tracing functions calls in the toplevel</h2><p>
 The simplest way to debug programs in the toplevel is to follow the
 function calls, by “tracing” the faulty function:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>fib</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>if</span> <span class='lower'>x</span> <span class='infix'>&#60;=</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='number'>1</span> <span class='keyword'>else</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>-</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>fib</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>if</span> <span class='lower'>x</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='number'>1</span> <span class='keyword'>else</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>-</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>#</span> <span class='keywordsign'>#</span><span class='lower'>trace</span> <span class='lower'>fib</span><span class='keywordsign'>;;</span>
 <span class='lower'>fib</span> <span class='lower'>is</span> <span class='lower'>now</span> <span class='lower'>traced</span><span class='keywordsign'>.</span>
 <span class='keywordsign'>#</span> <span class='lower'>fib</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
-<span class='lower'>fib</span> <span class='infix'>&#60;--</span> <span class='number'>3</span>
-<span class='lower'>fib</span> <span class='infix'>&#60;--</span> <span class='number'>1</span>
-<span class='lower'>fib</span> <span class='infix'>--&#62;</span> <span class='number'>1</span>
-<span class='lower'>fib</span> <span class='infix'>&#60;--</span> <span class='number'>2</span>
-<span class='lower'>fib</span> <span class='infix'>&#60;--</span> <span class='number'>0</span>
-<span class='lower'>fib</span> <span class='infix'>--&#62;</span> <span class='number'>1</span>
-<span class='lower'>fib</span> <span class='infix'>&#60;--</span> <span class='number'>1</span>
-<span class='lower'>fib</span> <span class='infix'>--&#62;</span> <span class='number'>1</span>
-<span class='lower'>fib</span> <span class='infix'>--&#62;</span> <span class='number'>2</span>
-<span class='lower'>fib</span> <span class='infix'>--&#62;</span> <span class='number'>3</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>3</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>1</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>--&#62;</span> <span class='number'>1</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>2</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>0</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>--&#62;</span> <span class='number'>1</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>1</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>--&#62;</span> <span class='number'>1</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>--&#62;</span> <span class='number'>2</span>
+<span class='lower'>fib</span> <span class='keywordsign infix'>--&#62;</span> <span class='number'>3</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>=</span> <span class='number'>3</span>
 <span class='keywordsign'>#</span> <span class='keywordsign'>#</span><span class='lower'>untrace</span> <span class='lower'>fib</span><span class='keywordsign'>;;</span>
 <span class='lower'>fib</span> <span class='lower'>is</span> <span class='lower'>no</span> <span class='lower'>longer</span> <span class='lower'>traced</span><span class='keywordsign'>.</span>
@@ -167,7 +167,7 @@ results. Consider a sorting algorithm (say bubble sort):</p>
     <span class='keyword'>done</span><span class='keywordsign'>;;</span>
   
   <span class='keyword'>let</span> <span class='lower'>bubble_sort_vect</span> <span class='lower'>v</span> <span class='keywordsign'>=</span>
-    <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>v</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>downto</span> <span class='number'>0</span> <span class='keyword'>do</span>
+    <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>v</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>downto</span> <span class='number'>0</span> <span class='keyword'>do</span>
     <span class='lower'>one_pass_vect</span> <span class='lower'>i</span> <span class='lower'>v</span>
   <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 
@@ -176,18 +176,18 @@ results. Consider a sorting algorithm (say bubble sort):</p>
 <span class='keywordsign'>#</span> <span class='keywordsign'>#</span><span class='lower'>trace</span> <span class='lower'>one_pass_vect</span><span class='keywordsign'>;;</span>
 <span class='lower'>one_pass_vect</span> <span class='lower'>is</span> <span class='lower'>now</span> <span class='lower'>traced</span><span class='keywordsign'>.</span>
 <span class='keywordsign'>#</span> <span class='lower'>bubble_sort_vect</span> <span class='lower'>q</span><span class='keywordsign'>;;</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>&#60;--</span> <span class='number'>2</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>&#60;--</span> <span class='operator'>[|&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='infix'>&#62;|</span><span class='keywordsign'>]</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>&#60;--</span> <span class='number'>1</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>&#60;--</span> <span class='operator'>[|&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='infix'>&#62;|</span><span class='keywordsign'>]</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>&#60;--</span> <span class='number'>0</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>&#60;--</span> <span class='operator'>[|&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='infix'>&#62;|</span><span class='keywordsign'>]</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>2</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>&#60;--</span> <span class='keywordsign operator'>[|&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign infix'>&#62;|</span><span class='keywordsign'>]</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>1</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>&#60;--</span> <span class='keywordsign operator'>[|&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign infix'>&#62;|</span><span class='keywordsign'>]</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>0</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>&#60;--</span> <span class='keywordsign operator'>[|&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='lower'>poly</span><span class='keywordsign infix'>&#62;|</span><span class='keywordsign'>]</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('  let exchange i j v =\n    let aux = v.(i) in\n    v.(i) &#60;- v.(j); v.(j) &#60;- aux;;\n  \n  let one_pass_vect fin v =\n    for j = 1 to fin do\n      if v.(j - 1) &#62; v.(j) then exchange (j - 1) j v\n    done;;\n  \n  let bubble_sort_vect v =\n    for i = Array.length v - 1 downto 0 do\n    one_pass_vect i v\n  done;;\n\n  let q = [| 18; 3; 1 |];;\n\n# #trace one_pass_vect;;\none_pass_vect is now traced.\n# bubble_sort_vect q;;\none_pass_vect &#60;-- 2\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 1\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 0\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|&#60;poly&#62;; &#60;poly&#62;; &#60;poly&#62;|]\none_pass_vect* --&#62; ()\n- : unit = ()\n');">[try]</a></code></pre>
 <p>
@@ -204,29 +204,29 @@ polymorphic version of the function. For our sorting routine, a single
 type constraint on the argument of the <code>exchange</code> function warranties a
 monomorphic typing, that allows a proper trace of function calls:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>exchange</span> <span class='lower'>i</span> <span class='lower'>j</span> <span class='keywordsign'>(</span><span class='lower'>v</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>vect</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-    <span class='operator'>[...]</span>
+    <span class='keywordsign operator'>[...]</span>
 <span class='lower'>exchange</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='lower'>vect</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-    <span class='operator'>[...]</span>
+    <span class='keywordsign operator'>[...]</span>
 <span class='lower'>one_pass_vect</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='lower'>vect</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-    <span class='operator'>[...]</span>
+    <span class='keywordsign operator'>[...]</span>
 <span class='lower'>bubble_sort_vect</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>vect</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
 <span class='keywordsign'>#</span> <span class='keywordsign'>#</span><span class='lower'>trace</span> <span class='lower'>one_pass_vect</span><span class='keywordsign'>;;</span>
 <span class='lower'>one_pass_vect</span> <span class='lower'>is</span> <span class='lower'>now</span> <span class='lower'>traced</span><span class='keywordsign'>.</span>
 <span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>q</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[|</span> <span class='number'>18</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>1</span> <span class='keywordsign'>|</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='lower'>q</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>vect</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[|</span><span class='number'>18</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
 <span class='keywordsign'>#</span> <span class='lower'>bubble_sort_vect</span> <span class='lower'>q</span><span class='keywordsign'>;;</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>&#60;--</span> <span class='number'>2</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>&#60;--</span> <span class='keywordsign'>[|</span><span class='number'>18</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>&#60;--</span> <span class='number'>1</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>&#60;--</span> <span class='keywordsign'>[|</span><span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>18</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>&#60;--</span> <span class='number'>0</span>
-<span class='lower'>one_pass_vect</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>&#60;--</span> <span class='keywordsign'>[|</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>18</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
-<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>2</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>&#60;--</span> <span class='keywordsign'>[|</span><span class='number'>18</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>1</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>&#60;--</span> <span class='keywordsign'>[|</span><span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>18</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>&#60;--</span> <span class='number'>0</span>
+<span class='lower'>one_pass_vect</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>&#60;--</span> <span class='keywordsign'>[|</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>18</span><span class='keywordsign'>|</span><span class='keywordsign'>]</span>
+<span class='lower'>one_pass_vect</span><span class='keywordsign'>*</span> <span class='keywordsign infix'>--&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('# let exchange i j (v : int vect) =\n    [...]\nexchange : int -&#62; int -&#62; int vect -&#62; unit = &#60;fun&#62;\n    [...]\none_pass_vect : int -&#62; int vect -&#62; unit = &#60;fun&#62;\n    [...]\nbubble_sort_vect : int vect -&#62; unit = &#60;fun&#62;\n# #trace one_pass_vect;;\none_pass_vect is now traced.\n# let q = [| 18; 3; 1 |];;\nq : int vect = [|18; 3; 1|]\n# bubble_sort_vect q;;\none_pass_vect &#60;-- 2\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|18; 3; 1|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 1\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|3; 1; 18|]\none_pass_vect* --&#62; ()\none_pass_vect &#60;-- 0\none_pass_vect --&#62; &#60;fun&#62;\none_pass_vect* &#60;-- [|1; 3; 18|]\none_pass_vect* --&#62; ()\n- : unit = ()\n');">[try]</a></code></pre>
 <h3 id="Limitations"> Limitations</h3><p>
@@ -259,9 +259,9 @@ native Windows ports of OCaml (but it runs under the Cygwin port.</p>
 Consider the following obviously wrong program written in the file
 <code>uncaught.ml</code>:</p>
 <pre><code class='tryocaml'><span class='comment'>(* file uncaught.ml *)</span>
-<span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='operator'>[]</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>find_address</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>assoc</span> <span class='lower'>name</span> <span class='prefix'>!</span><span class='lower'>l</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>add_address</span> <span class='lower'>name</span> <span class='lower'>address</span> <span class='keywordsign'>=</span> <span class='lower'>l</span> <span class='keywordsign'>:=</span> <span class='keywordsign'>(</span><span class='lower'>name</span><span class='keywordsign'>,</span> <span class='lower'>address</span><span class='keywordsign'>)</span> <span class='keywordsign'>::</span> <span class='prefix'>!</span> <span class='lower'>l</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='keywordsign operator'>[]</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>find_address</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>assoc</span> <span class='lower'>name</span> <span class='keywordsign prefix'>!</span><span class='lower'>l</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>add_address</span> <span class='lower'>name</span> <span class='lower'>address</span> <span class='keywordsign'>=</span> <span class='lower'>l</span> <span class='keywordsign'>:=</span> <span class='keywordsign'>(</span><span class='lower'>name</span><span class='keywordsign'>,</span> <span class='lower'>address</span><span class='keywordsign'>)</span> <span class='keywordsign'>::</span> <span class='keywordsign prefix'>!</span> <span class='lower'>l</span><span class='keywordsign'>;;</span>
 <span class='lower'>add_address</span> <span class='string'>&#34;IRIA&#34;</span> <span class='string'>&#34;Rocquencourt&#34;</span><span class='keywordsign'>;;</span>
 <span class='lower'>print_string</span> <span class='keywordsign'>(</span><span class='lower'>find_address</span> <span class='string'>&#34;INRIA&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('(* file uncaught.ml *)\nlet l = ref [];;\nlet find_address name = List.assoc name !l;;\nlet add_address name address = l := (name, address) :: ! l;;\nadd_address &#34;IRIA&#34; &#34;Rocquencourt&#34;;;\nprint_string (find_address &#34;INRIA&#34;); print_newline ();;\n');">[try]</a></code></pre>
@@ -289,10 +289,10 @@ Error: Lexical error while trying to read a float
 
 Type <code>r</code> (for <em>run</em>); you get</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>r</span>
-<span class='constructor'>Loading</span> <span class='lower'>program</span><span class='operator'>...</span> <span class='keyword'>done</span><span class='keywordsign'>.</span>
-<span class='constructor'>Time</span> <span class='keywordsign'>:</span> <span class='number'>12</span>
-<span class='constructor'>Program</span> <span class='keyword'>end</span><span class='keywordsign'>.</span>
-<span class='constructor'>Uncaught</span> <span class='keyword'>exception</span><span class='keywordsign'>:</span> <span class='constructor'>Not_found</span>
+<span class='constructor module'>Loading</span> <span class='lower'>program</span><span class='keywordsign operator'>...</span> <span class='keyword'>done</span><span class='keywordsign'>.</span>
+<span class='constructor module'>Time</span> <span class='keywordsign'>:</span> <span class='number'>12</span>
+<span class='constructor module'>Program</span> <span class='keyword'>end</span><span class='keywordsign'>.</span>
+<span class='constructor module'>Uncaught</span> <span class='keyword'>exception</span><span class='keywordsign'>:</span> <span class='constructor module'>Not_found</span>
 <span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('(ocd) r\nLoading program... done.\nTime : 12\nProgram end.\nUncaught exception: Not_found\n(ocd)\n');">[try]</a></code></pre>
 <p>
@@ -300,8 +300,8 @@ Self explanatory, is&#39;nt it? So, you want to step backward to set the
 program counter before the time the exception is raised; hence type in
 <code>b</code> as <em>backstep</em>, and you get</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>b</span>
-<span class='constructor'>Time</span> <span class='keywordsign'>:</span> <span class='number'>11</span> <span class='keywordsign'>-</span> <span class='lower'>pc</span> <span class='keywordsign'>:</span> <span class='number'>15500</span> <span class='keywordsign'>-</span> <span class='keyword'>module</span> <span class='constructor'>List</span>
-<span class='number'>143</span>     <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='infix'>&#60;|</span><span class='lower'>b</span><span class='infix'>|&#62;</span><span class='lower'>raise</span> <span class='constructor'>Not_found</span>
+<span class='constructor module'>Time</span> <span class='keywordsign'>:</span> <span class='number'>11</span> <span class='keywordsign'>-</span> <span class='lower'>pc</span> <span class='keywordsign'>:</span> <span class='number'>15500</span> <span class='keywordsign'>-</span> <span class='keyword'>module</span> <span class='constructor module'>List</span>
+<span class='number'>143</span>     <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign infix'>&#60;|</span><span class='lower'>b</span><span class='keywordsign infix'>|&#62;</span><span class='lower'>raise</span> <span class='constructor module'>Not_found</span>
 <a href="javascript:octry('(ocd) b\nTime : 11 - pc : 15500 - module List\n143     [] -&#62; &#60;|b|&#62;raise Not_found\n');">[try]</a></code></pre>
 <p>
 The debugger tells you that you are in module <code>List</code>, inside a pattern
@@ -312,22 +312,22 @@ expression (as witnessed by the <code>&lt;|b|&gt;</code> mark).</p>
 calls the one from <code>List</code>, and also who calls the procedure that calls
 the one from <code>List</code>; hence, you want a backtrace of the execution stack:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>bt</span>
-<span class='keywordsign'>#</span><span class='number'>0</span>  <span class='constructor'>Pc</span> <span class='keywordsign'>:</span> <span class='number'>15500</span>  <span class='constructor'>List</span> <span class='lower'>char</span> <span class='number'>3562</span>
-<span class='keywordsign'>#</span><span class='number'>1</span>  <span class='constructor'>Pc</span> <span class='keywordsign'>:</span> <span class='number'>19128</span>  <span class='constructor'>Uncaught</span> <span class='lower'>char</span> <span class='number'>221</span>
+<span class='keywordsign'>#</span><span class='number'>0</span>  <span class='constructor module'>Pc</span> <span class='keywordsign'>:</span> <span class='number'>15500</span>  <span class='constructor module'>List</span> <span class='lower'>char</span> <span class='number'>3562</span>
+<span class='keywordsign'>#</span><span class='number'>1</span>  <span class='constructor module'>Pc</span> <span class='keywordsign'>:</span> <span class='number'>19128</span>  <span class='constructor module'>Uncaught</span> <span class='lower'>char</span> <span class='number'>221</span>
 <a href="javascript:octry('(ocd) bt\n#0  Pc : 15500  List char 3562\n#1  Pc : 19128  Uncaught char 221\n');">[try]</a></code></pre>
 <p>
 So the last function called is from module <code>List</code> at character 3562,
 that is :</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>assoc</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>raise</span> <span class='constructor'>Not_found</span>
-          <span class='infix'>^</span>
+    <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>raise</span> <span class='constructor module'>Not_found</span>
+          <span class='keywordsign infix'>^</span>
   <span class='keywordsign'>|</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>,</span><span class='lower'>b</span><span class='keywordsign'>)</span><span class='keywordsign'>::</span><span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keyword'>then</span> <span class='lower'>b</span> <span class='keyword'>else</span> <span class='lower'>assoc</span> <span class='lower'>x</span> <span class='lower'>l</span>
 <a href="javascript:octry('let rec assoc x = function\n    [] -&#62; raise Not_found\n          ^\n  | (a,b)::l -&#62; if a = x then b else assoc x l\n');">[try]</a></code></pre>
 <p>
 The function that calls it is in module <code>Uncaught</code>, file <code>uncaught.ml</code>
 char 221:</p>
 <pre><code class='tryocaml'><span class='lower'>print_string</span> <span class='keywordsign'>(</span><span class='lower'>find_address</span> <span class='string'>&#34;INRIA&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-                                  <span class='infix'>^</span>
+                                  <span class='keywordsign infix'>^</span>
 <a href="javascript:octry('print_string (find_address &#34;INRIA&#34;); print_newline ();;\n                                  ^\n');">[try]</a></code></pre>
 <p>
 To sum up: if you&#39;re developping a program you can compile it with the
@@ -338,43 +338,43 @@ find a spurious exception you just need to type <code>ocamldebug a.out</code>, t
 To get more info about the current status of the debugger you can ask it
 directly at the toplevel prompt of the debugger; for instance:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>info</span> <span class='lower'>breakpoints</span>
-<span class='constructor'>No</span> <span class='lower'>breakpoint</span><span class='keywordsign'>.</span>
+<span class='constructor module'>No</span> <span class='lower'>breakpoint</span><span class='keywordsign'>.</span>
 
 <span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>help</span> <span class='lower'>break</span>
-  <span class='number'>1</span>      <span class='number'>15396</span>  <span class='keyword'>in</span> <span class='constructor'>List</span><span class='keywordsign'>,</span> <span class='lower'>character</span> <span class='number'>3539</span>
-<span class='lower'>break</span> <span class='keywordsign'>:</span> <span class='constructor'>Set</span> <span class='lower'>breakpoint</span> <span class='lower'>at</span> <span class='lower'>specified</span> <span class='lower'>line</span> <span class='keywordsign'>or</span> <span class='keyword'>function</span><span class='keywordsign'>.</span>
-<span class='constructor'>Syntax</span><span class='keywordsign'>:</span> <span class='lower'>break</span> <span class='keyword'>function</span><span class='keywordsign'>-</span><span class='lower'>name</span>
-<span class='lower'>break</span> <span class='infix'>@</span> <span class='keywordsign'>[</span><span class='keyword'>module</span><span class='keywordsign'>]</span> <span class='lower'>linenum</span>
-<span class='lower'>break</span> <span class='infix'>@</span> <span class='keywordsign'>[</span><span class='keyword'>module</span><span class='keywordsign'>]</span> <span class='keywordsign'>#</span> <span class='lower'>characternum</span>
+  <span class='number'>1</span>      <span class='number'>15396</span>  <span class='keyword'>in</span> <span class='constructor module'>List</span><span class='keywordsign'>,</span> <span class='lower'>character</span> <span class='number'>3539</span>
+<span class='lower'>break</span> <span class='keywordsign'>:</span> <span class='constructor module'>Set</span> <span class='lower'>breakpoint</span> <span class='lower'>at</span> <span class='lower'>specified</span> <span class='lower'>line</span> <span class='keywordsign'>or</span> <span class='keyword'>function</span><span class='keywordsign'>.</span>
+<span class='constructor module'>Syntax</span><span class='keywordsign'>:</span> <span class='lower'>break</span> <span class='keyword'>function</span><span class='keywordsign'>-</span><span class='lower'>name</span>
+<span class='lower'>break</span> <span class='keywordsign infix'>@</span> <span class='keywordsign'>[</span><span class='keyword'>module</span><span class='keywordsign'>]</span> <span class='lower'>linenum</span>
+<span class='lower'>break</span> <span class='keywordsign infix'>@</span> <span class='keywordsign'>[</span><span class='keyword'>module</span><span class='keywordsign'>]</span> <span class='keywordsign'>#</span> <span class='lower'>characternum</span>
 <a href="javascript:octry('(ocd) info breakpoints\nNo breakpoint.\n\n(ocd) help break\n  1      15396  in List, character 3539\nbreak : Set breakpoint at specified line or function.\nSyntax: break function-name\nbreak @ [module] linenum\nbreak @ [module] # characternum\n');">[try]</a></code></pre>
 <h3 id="Settingbreakpoints"> Setting break points</h3><p>
 
 Let&#39;s set up a breakpoint and rerun the entire program from the
 beginning (<code>(g)oto 0</code> then <code>(r)un</code>):</p>
-<pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>break</span> <span class='infix'>@</span><span class='constructor'>Uncaught</span> <span class='number'>9</span>
-<span class='constructor'>Breakpoint</span> <span class='number'>3</span> <span class='lower'>at</span> <span class='number'>19112</span> <span class='keywordsign'>:</span> <span class='lower'>file</span> <span class='constructor'>Uncaught</span><span class='keywordsign'>,</span> <span class='lower'>line</span> <span class='number'>9</span> <span class='lower'>column</span> <span class='number'>34</span>
+<pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>break</span> <span class='keywordsign infix'>@</span><span class='constructor module'>Uncaught</span> <span class='number'>9</span>
+<span class='constructor module'>Breakpoint</span> <span class='number'>3</span> <span class='lower'>at</span> <span class='number'>19112</span> <span class='keywordsign'>:</span> <span class='lower'>file</span> <span class='constructor module'>Uncaught</span><span class='keywordsign'>,</span> <span class='lower'>line</span> <span class='number'>9</span> <span class='lower'>column</span> <span class='number'>34</span>
 
 <span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>g</span> <span class='number'>0</span>
-<span class='constructor'>Time</span> <span class='keywordsign'>:</span> <span class='number'>0</span>
-<span class='constructor'>Beginning</span> <span class='keyword'>of</span> <span class='lower'>program</span><span class='keywordsign'>.</span>
+<span class='constructor module'>Time</span> <span class='keywordsign'>:</span> <span class='number'>0</span>
+<span class='constructor module'>Beginning</span> <span class='keyword'>of</span> <span class='lower'>program</span><span class='keywordsign'>.</span>
 
 <span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>r</span>
-<span class='constructor'>Time</span> <span class='keywordsign'>:</span> <span class='number'>6</span> <span class='keywordsign'>-</span> <span class='lower'>pc</span> <span class='keywordsign'>:</span> <span class='number'>19112</span> <span class='keywordsign'>-</span> <span class='keyword'>module</span> <span class='constructor'>Uncaught</span>
-<span class='constructor'>Breakpoint</span> <span class='keywordsign'>:</span> <span class='number'>1</span>
-<span class='number'>9</span> <span class='lower'>add</span> <span class='string'>&#34;IRIA&#34;</span> <span class='string'>&#34;Rocquencourt&#34;</span><span class='infix'>&#60;|</span><span class='lower'>a</span><span class='infix'>|&#62;</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Time</span> <span class='keywordsign'>:</span> <span class='number'>6</span> <span class='keywordsign'>-</span> <span class='lower'>pc</span> <span class='keywordsign'>:</span> <span class='number'>19112</span> <span class='keywordsign'>-</span> <span class='keyword'>module</span> <span class='constructor module'>Uncaught</span>
+<span class='constructor module'>Breakpoint</span> <span class='keywordsign'>:</span> <span class='number'>1</span>
+<span class='number'>9</span> <span class='lower'>add</span> <span class='string'>&#34;IRIA&#34;</span> <span class='string'>&#34;Rocquencourt&#34;</span><span class='keywordsign infix'>&#60;|</span><span class='lower'>a</span><span class='keywordsign infix'>|&#62;</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('(ocd) break @Uncaught 9\nBreakpoint 3 at 19112 : file Uncaught, line 9 column 34\n\n(ocd) g 0\nTime : 0\nBeginning of program.\n\n(ocd) r\nTime : 6 - pc : 19112 - module Uncaught\nBreakpoint : 1\n9 add &#34;IRIA&#34; &#34;Rocquencourt&#34;&#60;|a|&#62;;;\n');">[try]</a></code></pre>
 <p>
 Then, we can step and find what happens when <code>find_address</code> is about to
 be called</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>s</span>
-<span class='constructor'>Time</span> <span class='keywordsign'>:</span> <span class='number'>7</span> <span class='keywordsign'>-</span> <span class='lower'>pc</span> <span class='keywordsign'>:</span> <span class='number'>19012</span> <span class='keywordsign'>-</span> <span class='keyword'>module</span> <span class='constructor'>Uncaught</span>
-<span class='number'>5</span> <span class='keyword'>let</span> <span class='lower'>find_address</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='infix'>&#60;|</span><span class='lower'>b</span><span class='infix'>|&#62;</span><span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>assoc</span> <span class='lower'>name</span> <span class='prefix'>!</span><span class='lower'>l</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Time</span> <span class='keywordsign'>:</span> <span class='number'>7</span> <span class='keywordsign'>-</span> <span class='lower'>pc</span> <span class='keywordsign'>:</span> <span class='number'>19012</span> <span class='keywordsign'>-</span> <span class='keyword'>module</span> <span class='constructor module'>Uncaught</span>
+<span class='number'>5</span> <span class='keyword'>let</span> <span class='lower'>find_address</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='keywordsign infix'>&#60;|</span><span class='lower'>b</span><span class='keywordsign infix'>|&#62;</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>assoc</span> <span class='lower'>name</span> <span class='keywordsign prefix'>!</span><span class='lower'>l</span><span class='keywordsign'>;;</span>
 
 <span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>p</span> <span class='lower'>name</span>
 <span class='lower'>name</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='keywordsign'>=</span> <span class='string'>&#34;INRIA&#34;</span>
 
-<span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>p</span> <span class='prefix'>!</span><span class='lower'>l</span>
-<span class='infix'>$</span><span class='number'>1</span> <span class='keywordsign'>:</span> <span class='keywordsign'>(</span><span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>string</span><span class='keywordsign'>)</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;IRIA&#34;</span><span class='keywordsign'>,</span> <span class='string'>&#34;Rocquencourt&#34;</span><span class='keywordsign'>]</span>
+<span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span> <span class='lower'>p</span> <span class='keywordsign prefix'>!</span><span class='lower'>l</span>
+<span class='keywordsign infix'>$</span><span class='number'>1</span> <span class='keywordsign'>:</span> <span class='keywordsign'>(</span><span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>string</span><span class='keywordsign'>)</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;IRIA&#34;</span><span class='keywordsign'>,</span> <span class='string'>&#34;Rocquencourt&#34;</span><span class='keywordsign'>]</span>
 <span class='keywordsign'>(</span><span class='lower'>ocd</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('(ocd) s\nTime : 7 - pc : 19012 - module Uncaught\n5 let find_address name = &#60;|b|&#62;List.assoc name !l;;\n\n(ocd) p name\nname : string = &#34;INRIA&#34;\n\n(ocd) p !l\n$1 : (string * string) list = [&#34;IRIA&#34;, &#34;Rocquencourt&#34;]\n(ocd)\n');">[try]</a></code></pre>
 <p>

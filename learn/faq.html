@@ -114,14 +114,14 @@ You build big numbers using conversion from (small) integers or
 character strings. For printing in the toplevel, a custom printer can be
 used. An example under OCaml is given below.</p>
 <pre><code class='tryocaml'>  <span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;nums.cma&#34;</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>open</span> <span class='constructor'>Num</span>
-  <span class='keyword'>open</span> <span class='constructor'>Format</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>open</span> <span class='constructor module'>Num</span>
+  <span class='keyword'>open</span> <span class='constructor module'>Format</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='lower'>print_num</span> <span class='lower'>ff</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='lower'>fprintf</span> <span class='lower'>ff</span> <span class='string'>&#34;%s&#34;</span> <span class='keywordsign'>(</span><span class='lower'>string_of_num</span> <span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='keywordsign'>#</span><span class='lower'>install_printer</span> <span class='lower'>print_num</span><span class='keywordsign'>;;</span>
   <span class='lower'>num_of_string</span> <span class='string'>&#34;2/3&#34;</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='lower'>num_of_string</span> <span class='string'>&#34;1/3&#34;</span> <span class='infix'>+/</span> <span class='lower'>num_of_string</span> <span class='string'>&#34;2/3&#34;</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='lower'>num_of_string</span> <span class='string'>&#34;1/3&#34;</span> <span class='keywordsign infix'>+/</span> <span class='lower'>num_of_string</span> <span class='string'>&#34;2/3&#34;</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>fact</span> <span class='lower'>n</span> <span class='keywordsign'>=</span>
-    <span class='keyword'>if</span> <span class='lower'>n</span> <span class='infix'>&#60;=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='keywordsign'>(</span><span class='lower'>num_of_int</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>else</span> <span class='lower'>num_of_int</span> <span class='lower'>n</span> <span class='infix'>*/</span> <span class='keywordsign'>(</span><span class='lower'>fact</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+    <span class='keyword'>if</span> <span class='lower'>n</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='keywordsign'>(</span><span class='lower'>num_of_int</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>else</span> <span class='lower'>num_of_int</span> <span class='lower'>n</span> <span class='keywordsign infix'>*/</span> <span class='keywordsign'>(</span><span class='lower'>fact</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='lower'>fact</span> <span class='number'>100</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  #load &#34;nums.cma&#34;;;\n  open Num\n  open Format;;\n  let print_num ff n = fprintf ff &#34;%s&#34; (string_of_num n);;\n  #install_printer print_num;;\n  num_of_string &#34;2/3&#34;;;\n  let n = num_of_string &#34;1/3&#34; +/ num_of_string &#34;2/3&#34;;;\n  let rec fact n =\n    if n &#60;= 0 then (num_of_int 1) else num_of_int n */ (fact (n - 1));;\n  fact 100;;\n');">[try]</a></code></pre>
 <h3 id="Datastructures"> Data structures</h3><p>
@@ -131,7 +131,7 @@ My array is modified, and I don&#39;t know why</p>
 OCaml there are no implicit array copying. If you give two names to the
 same array, every modification on one array will be visible to the
 other:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>v</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='number'>3</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>v</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='number'>3</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='lower'>w</span> <span class='keywordsign'>=</span> <span class='lower'>v</span><span class='keywordsign'>;;</span>
   <span class='lower'>w</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='number'>4</span><span class='keywordsign'>;;</span>
   <span class='lower'>v</span><span class='keywordsign'>;;</span>
@@ -147,7 +147,7 @@ entry below).</p>
 The naive way to define multidimensional arrays is bogus: the result is
 not right because there is some unexpected physical sharing between the
 lines of the new array (see also previous entry):</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='number'>2</span> <span class='keywordsign'>(</span><span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='number'>3</span> <span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='number'>2</span> <span class='keywordsign'>(</span><span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='number'>3</span> <span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='lower'>m</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='number'>1</span><span class='keywordsign'>;;</span>
   <span class='lower'>m</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let m = Array.make 2 (Array.make 3 0);;\n  m.(0).(0) &#60;- 1;;\n  m;;\n');">[try]</a></code></pre>
@@ -161,9 +161,9 @@ matrix with all elements equal to the initial value provided.
 Alternatively, write the program that allocates a new line for each line
 of your matrix. For instance:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>matrix</span> <span class='lower'>n</span> <span class='lower'>m</span> <span class='lower'>init</span> <span class='keywordsign'>=</span>
-    <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>n</span> <span class='keywordsign'>(</span><span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>m</span> <span class='lower'>init</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>n</span> <span class='keywordsign'>(</span><span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>m</span> <span class='lower'>init</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
     <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keyword'>to</span> <span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>do</span>
-      <span class='lower'>result</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>m</span> <span class='lower'>init</span>
+      <span class='lower'>result</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>m</span> <span class='lower'>init</span>
     <span class='keyword'>done</span><span class='keywordsign'>;</span>
     <span class='lower'>result</span>
 <a href="javascript:octry('  let matrix n m init =\n    let result = Array.make n (Array.make m init) in\n    for i = 1 to n - 1 do\n      result.(i) &#60;- Array.make m init\n    done;\n    result\n');">[try]</a></code></pre>
@@ -172,11 +172,11 @@ In the same vein, the <code>copy_vect</code> primitive gives strange results, wh
 applied to matrices: you need to write a function that explicitly copies
 each line of the matrix at hand:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>copy_matrix</span> <span class='lower'>m</span> <span class='keywordsign'>=</span>
-    <span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>m</span> <span class='keyword'>in</span>
+    <span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>m</span> <span class='keyword'>in</span>
     <span class='keyword'>if</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>m</span> <span class='keyword'>else</span>
-      <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>l</span> <span class='lower'>m</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+      <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>l</span> <span class='lower'>m</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
       <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='lower'>l</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>do</span>
-        <span class='lower'>result</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='constructor'>Array</span><span class='keywordsign'>.</span><span class='lower'>copy</span> <span class='lower'>m</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span>
+        <span class='lower'>result</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>copy</span> <span class='lower'>m</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span>
       <span class='keyword'>done</span><span class='keywordsign'>;</span>
       <span class='lower'>result</span>
 <a href="javascript:octry('  let copy_matrix m =\n    let l = Array.length m in\n    if l = 0 then m else\n      let result = Array.make l m.(0) in\n      for i = 0 to l - 1 do\n        result.(i) &#60;- Array.copy m.(i)\n      done;\n      result\n');">[try]</a></code></pre>
@@ -185,16 +185,16 @@ each line of the matrix at hand:</p>
 How to define an enumerated type?</p>
 <p>An enumerated type is a sum type with only constants. For instance, a
 type with 3 constants:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>color</span> <span class='keywordsign'>=</span> <span class='constructor'>Blue</span> <span class='keywordsign'>|</span> <span class='constructor'>White</span> <span class='keywordsign'>|</span> <span class='constructor'>Red</span><span class='keywordsign'>;;</span>
-  <span class='constructor'>Blue</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>color</span> <span class='keywordsign'>=</span> <span class='constructor module'>Blue</span> <span class='keywordsign'>|</span> <span class='constructor module'>White</span> <span class='keywordsign'>|</span> <span class='constructor module'>Red</span><span class='keywordsign'>;;</span>
+  <span class='constructor module'>Blue</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  type color = Blue | White | Red;;\n  Blue;;\n');">[try]</a></code></pre>
 <p>
 The names <code>Blue</code>, <code>White</code> and <code>Red</code> are the constructors of the <code>color</code>
 type. One can define functions on this type by pattern matching:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>string_of_color</span> <span class='keywordsign'>=</span><span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Blue</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;blue&#34;</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>White</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;white&#34;</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Red</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;red&#34;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Blue</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;blue&#34;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>White</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;white&#34;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Red</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;red&#34;</span>
 <a href="javascript:octry('  let string_of_color =function\n    | Blue -&#62; &#34;blue&#34;\n    | White -&#62; &#34;white&#34;\n    | Red -&#62; &#34;red&#34;\n');">[try]</a></code></pre>
 <p>
 How to share a label between two different record types?</p>
@@ -202,7 +202,7 @@ How to share a label between two different record types?</p>
 hides the labels of the first type. For instance:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>point_3d</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>;</span> <span class='lower'>y</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>;</span> <span class='lower'>z</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
   <span class='keyword'>type</span> <span class='lower'>point_2d</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>;</span> <span class='lower'>y</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
-  <span class='keywordsign'>{</span><span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>10</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='number'>20</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='lower'>z</span> <span class='keywordsign'>=</span> <span class='number'>30</span><span class='operator'>.}</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign'>{</span><span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>10</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='number'>20</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='lower'>z</span> <span class='keywordsign'>=</span> <span class='number'>30</span><span class='keywordsign operator'>.}</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  type point_3d = {x : float; y : float; z : float};;\n  type point_2d = {x : float; y : float};;\n  {x = 10.; y = 20.; z = 30.};;\n');">[try]</a></code></pre>
 <p>
 The simplest way to overcome this problem is simply ... to use different
@@ -213,18 +213,18 @@ names! For instance</p>
 <p>
 With OCaml, one can propose two others solutions. First, it is possible
 to use modules to define the two types in different name spaces:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>module</span> <span class='constructor'>D3</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+<pre><code class='tryocaml'>  <span class='keyword'>module</span> <span class='constructor module'>D3</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
     <span class='keyword'>type</span> <span class='lower'>point</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>;</span> <span class='lower'>y</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>;</span> <span class='lower'>z</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>}</span>
   <span class='keyword'>end</span><span class='keywordsign'>;;</span>
 
-  <span class='keyword'>module</span> <span class='constructor'>D2</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
+  <span class='keyword'>module</span> <span class='constructor module'>D2</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
     <span class='keyword'>type</span> <span class='lower'>point</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>;</span> <span class='lower'>y</span> <span class='keywordsign'>:</span> <span class='lower'>float</span><span class='keywordsign'>}</span>
   <span class='keyword'>end</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  module D3 = struct\n    type point = {x : float; y : float; z : float}\n  end;;\n\n  module D2 = struct\n    type point = {x : float; y : float}\n  end;;\n');">[try]</a></code></pre>
 <p>
 This way labels can be fully qualified as <code>D3.x</code> <code>D2.x</code>:</p>
-<pre><code class='tryocaml'>  <span class='keywordsign'>{</span><span class='constructor'>D3</span><span class='keywordsign'>.</span><span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>10</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='constructor'>D3</span><span class='keywordsign'>.</span><span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='number'>20</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='constructor'>D3</span><span class='keywordsign'>.</span><span class='lower'>z</span> <span class='keywordsign'>=</span> <span class='number'>30</span><span class='operator'>.}</span><span class='keywordsign'>;;</span>
-  <span class='keywordsign'>{</span><span class='constructor'>D2</span><span class='keywordsign'>.</span><span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>10</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='constructor'>D2</span><span class='keywordsign'>.</span><span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='number'>20</span><span class='operator'>.}</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keywordsign'>{</span><span class='constructor module'>D3</span><span class='keywordsign'>.</span><span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>10</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='constructor module'>D3</span><span class='keywordsign'>.</span><span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='number'>20</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='constructor module'>D3</span><span class='keywordsign'>.</span><span class='lower'>z</span> <span class='keywordsign'>=</span> <span class='number'>30</span><span class='keywordsign operator'>.}</span><span class='keywordsign'>;;</span>
+  <span class='keywordsign'>{</span><span class='constructor module'>D2</span><span class='keywordsign'>.</span><span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>10</span><span class='keywordsign'>.</span><span class='keywordsign'>;</span> <span class='constructor module'>D2</span><span class='keywordsign'>.</span><span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='number'>20</span><span class='keywordsign operator'>.}</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  {D3.x = 10.; D3.y = 20.; D3.z = 30.};;\n  {D2.x = 10.; D2.y = 20.};;\n');">[try]</a></code></pre>
 <p>
 You can also use objects that provide overloading on method names:</p>
@@ -251,10 +251,10 @@ discussed above, you obtain constructors that can be qualified by their
 module names. With OCaml you can alternatively use polymorphic variants,
 i.e. constructors that are, in some sense, <em>predefined</em>, since they are
 not defined by a type definition. For instance:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>ids</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='keywordsign'>`</span><span class='constructor'>Name</span> <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor'>Val</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>type</span> <span class='lower'>person</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='keywordsign'>`</span><span class='constructor'>Name</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>:</span> <span class='lower'>person</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>string</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='keywordsign'>`</span><span class='constructor'>Name</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>is_name</span> <span class='keywordsign'>:</span> <span class='lower'>ids</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>bool</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='keywordsign'>`</span><span class='constructor'>Name</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>true</span> <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>false</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>ids</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='keywordsign'>`</span><span class='constructor module'>Name</span> <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor module'>Val</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>type</span> <span class='lower'>person</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='keywordsign'>`</span><span class='constructor module'>Name</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>:</span> <span class='lower'>person</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>string</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='keywordsign'>`</span><span class='constructor module'>Name</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>is_name</span> <span class='keywordsign'>:</span> <span class='lower'>ids</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>bool</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='keywordsign'>`</span><span class='constructor module'>Name</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>true</span> <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>false</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  type ids = [ `Name | `Val ];;\n  type person = [ `Name of string ];;\n  let f : person -&#62; string = function `Name s -&#62; s;;\n  let is_name : ids -&#62; bool = function `Name -&#62; true | _ -&#62; false;;\n');">[try]</a></code></pre>
 <h3 id="Functionsandprocedures"> Functions and procedures</h3><p>
 
@@ -277,7 +277,7 @@ function: use “let rec” instead of “let”. For instance:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>fact</span> <span class='lower'>n</span> <span class='keywordsign'>=</span>
     <span class='keyword'>if</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='number'>1</span> <span class='keyword'>else</span> <span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>fact</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>fib</span> <span class='lower'>n</span> <span class='keywordsign'>=</span>
-    <span class='keyword'>if</span> <span class='lower'>n</span> <span class='infix'>&#60;=</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='lower'>n</span> <span class='keyword'>else</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+    <span class='keyword'>if</span> <span class='lower'>n</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='lower'>n</span> <span class='keyword'>else</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='lower'>fib</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let rec fact n =\n    if n = 0 then 1 else n * fact (n - 1);;\n  let rec fib n =\n    if n &#60;= 1 then n else fib (n - 1) + fib (n - 2);;\n');">[try]</a></code></pre>
 <p>
 Functions may be mutually recursive:</p>
@@ -355,7 +355,7 @@ with tuples as argument:</p>
 <p>
 How to define a function that has several results?</p>
 <p>You can define a function that return a pair or a tuple:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>div_mod</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='infix'>/</span> <span class='lower'>y</span><span class='keywordsign'>,</span> <span class='lower'>x</span> <span class='keyword'>mod</span> <span class='lower'>y</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>div_mod</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign infix'>/</span> <span class='lower'>y</span><span class='keywordsign'>,</span> <span class='lower'>x</span> <span class='keyword'>mod</span> <span class='lower'>y</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='lower'>div_mod</span> <span class='number'>15</span> <span class='number'>7</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  let div_mod x y = (x / y, x mod y);;\n  div_mod 15 7;;\n');">[try]</a></code></pre>
 <p>
@@ -371,17 +371,17 @@ body. For instance:</p>
 What is the difference between <code>fun</code> and <code>function</code>?</p>
 <p>Functions are usually introduced by the keyword <code>fun</code>. Each parameter is
 introduced by its own <code>fun</code> construct. For instance, the construct:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>fun</span> <span class='lower'>y</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'>  <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>fun</span> <span class='lower'>y</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('  fun x -&#62; fun y -&#62; ...\n');">[try]</a></code></pre>
 <p>
 defines a function with two parameters <code>x</code> and <code>y</code>. An equivalent but
 shorter form is:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+<pre><code class='tryocaml'>  <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('  fun x y -&#62; ...\n');">[try]</a></code></pre>
 <p>
 Functions that use pattern-matching are introduced by the keyword
 <code>function</code>. For example:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>function</span> <span class='constructor'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>false</span> <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>true</span>
+<pre><code class='tryocaml'>  <span class='keyword'>function</span> <span class='constructor module'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>false</span> <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>true</span>
 <a href="javascript:octry('  function None -&#62; false | Some _ -&#62; true\n');">[try]</a></code></pre>
 <p>
 My function is never applied</p>
@@ -402,19 +402,19 @@ is written inside another pattern matching. In effect, the internal
 pattern matching “catches” all the pattern matching clauses that are
 written after it. For instance:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-  <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>match</span> <span class='operator'>...</span> <span class='keyword'>with</span> <span class='keywordsign'>|</span> <span class='lower'>a</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span> <span class='keywordsign'>|</span> <span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-  <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-  <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>match</span> <span class='keywordsign operator'>...</span> <span class='keyword'>with</span> <span class='keywordsign'>|</span> <span class='lower'>a</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span> <span class='keywordsign'>|</span> <span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let f = function\n  | 0 -&#62; match ... with | a -&#62; ... | b -&#62; ...\n  | 1 -&#62; ...\n  | 2 -&#62; ...\n');">[try]</a></code></pre>
 <p>
 is parsed as</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
   <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span>
-     <span class='keyword'>match</span> <span class='operator'>...</span> <span class='keyword'>with</span>
-     <span class='keywordsign'>|</span> <span class='lower'>a</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-     <span class='keywordsign'>|</span> <span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-     <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-     <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+     <span class='keyword'>match</span> <span class='keywordsign operator'>...</span> <span class='keyword'>with</span>
+     <span class='keywordsign'>|</span> <span class='lower'>a</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+     <span class='keywordsign'>|</span> <span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+     <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+     <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let f = function\n  | 0 -&#62;\n     match ... with\n     | a -&#62; ...\n     | b -&#62; ...\n     | 1 -&#62; ...\n     | 2 -&#62; ...\n');">[try]</a></code></pre>
 <p>
 This error may occur for every syntactic construct that involves pattern
@@ -423,12 +423,12 @@ usual trick is to enclose inner pattern matchings with <code>begin</code> and
 <code>end</code>. One write:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
   <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span>
-     <span class='keyword'>begin</span> <span class='keyword'>match</span> <span class='operator'>...</span> <span class='keyword'>with</span>
-     <span class='keywordsign'>|</span> <span class='lower'>a</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-     <span class='keywordsign'>|</span> <span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+     <span class='keyword'>begin</span> <span class='keyword'>match</span> <span class='keywordsign operator'>...</span> <span class='keyword'>with</span>
+     <span class='keywordsign'>|</span> <span class='lower'>a</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+     <span class='keywordsign'>|</span> <span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
      <span class='keyword'>end</span>
-  <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
-  <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span> <span class='operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='number'>1</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
+  <span class='keywordsign'>|</span> <span class='number'>2</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>...</span>
 <a href="javascript:octry('let f = function\n  | 0 -&#62;\n     begin match ... with\n     | a -&#62; ...\n     | b -&#62; ...\n     end\n  | 1 -&#62; ...\n  | 2 -&#62; ...\n');">[try]</a></code></pre>
 <h3 id="Exceptions"> Exceptions</h3>
 <h3 id="Typing"> Typing</h3><p>
@@ -439,10 +439,10 @@ using the interactive system.<br />
  The reason is that two types with the same name have been defined the
 compiler does not confuse the two types, but the types are evidently
 written the same. Consider for instance:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>t</span> <span class='keywordsign'>=</span> <span class='constructor'>T</span> <span class='keyword'>of</span> <span class='lower'>int</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='constructor'>T</span> <span class='number'>1</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>type</span> <span class='lower'>t</span> <span class='keywordsign'>=</span> <span class='constructor'>T</span> <span class='keyword'>of</span> <span class='lower'>int</span><span class='keywordsign'>;;</span>
-  <span class='keyword'>let</span> <span class='lower'>incr</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='constructor'>T</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>T</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>t</span> <span class='keywordsign'>=</span> <span class='constructor module'>T</span> <span class='keyword'>of</span> <span class='lower'>int</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='constructor module'>T</span> <span class='number'>1</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>type</span> <span class='lower'>t</span> <span class='keywordsign'>=</span> <span class='constructor module'>T</span> <span class='keyword'>of</span> <span class='lower'>int</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>incr</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='constructor module'>T</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>T</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='lower'>incr</span> <span class='lower'>x</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  type t = T of int;;\n  let x = T 1;;\n  type t = T of int;;\n  let incr = function T x -&#62; T (x+1);;\n  incr x;;\n');">[try]</a></code></pre>
 <p>

@@ -116,7 +116,7 @@ main ones:</p>
 <span class='lower'>libuninstall</span>  <span class='lower'>uninstall</span> <span class='lower'>library</span> <span class='keyword'>with</span> <span class='lower'>ocamlfind</span>
 <span class='lower'>top</span>    <span class='lower'>make</span> <span class='lower'>a</span> <span class='lower'>custom</span> <span class='lower'>toplevel</span> <span class='lower'>from</span> <span class='lower'>all</span> <span class='lower'>your</span> <span class='lower'>modules</span>
 <span class='lower'>clean</span>  <span class='lower'>remove</span> <span class='lower'>everything</span> <span class='lower'>that</span> <span class='lower'>matches</span> <span class='lower'>one</span> <span class='keyword'>of</span> <span class='lower'>the</span> <span class='lower'>files</span> <span class='lower'>that</span> <span class='lower'>could</span> <span class='lower'>have</span> <span class='lower'>been</span>
-       <span class='lower'>automatically</span> <span class='lower'>created</span> <span class='lower'>by</span> <span class='constructor'>OCamlMakefile</span>
+       <span class='lower'>automatically</span> <span class='lower'>created</span> <span class='lower'>by</span> <span class='constructor module'>OCamlMakefile</span>
 <a href="javascript:octry('nc     make a native code executable\nbc     make a bytecode executable\nncl    make a native code library\nbcl    make a bytecode library\nlibinstall    install library with ocamlfind\nlibuninstall  uninstall library with ocamlfind\ntop    make a custom toplevel from all your modules\nclean  remove everything that matches one of the files that could have been\n       automatically created by OCamlMakefile\n');">[try]</a></code></pre>
 <h2 id="OCamlMakefilelibrariesCamlp4parsing"> OCamlMakefile + libraries + Camlp4 parsing</h2><p>
 
@@ -129,13 +129,13 @@ situation.</p>
 by setting the LIBS and INCDIRS variable. LIBS is the list of the name
 of the library files (xxx.cma or xxx.cmxa) without the .cma or .cmxa
 extension:</p>
-<pre><code class='tryocaml'><span class='constructor'>LIBS</span> <span class='keywordsign'>=</span> <span class='lower'>str</span> <span class='lower'>unix</span>
+<pre><code class='tryocaml'><span class='constructor module'>LIBS</span> <span class='keywordsign'>=</span> <span class='lower'>str</span> <span class='lower'>unix</span>
 <a href="javascript:octry('LIBS = str unix\n');">[try]</a></code></pre>
 <p>
 If you use non-standard libraries that are not installed in the same
 directory as the standard library, the INCDIRS variable must contain the
 list of these directories:</p>
-<pre><code class='tryocaml'><span class='constructor'>INCDIRS</span> <span class='keywordsign'>=</span> <span class='infix'>/</span><span class='lower'>path</span><span class='infix'>/</span><span class='keyword'>to</span><span class='infix'>/</span><span class='lower'>somelibdirectory</span><span class='infix'>/</span>
+<pre><code class='tryocaml'><span class='constructor module'>INCDIRS</span> <span class='keywordsign'>=</span> <span class='keywordsign infix'>/</span><span class='lower'>path</span><span class='keywordsign infix'>/</span><span class='keyword'>to</span><span class='keywordsign infix'>/</span><span class='lower'>somelibdirectory</span><span class='keywordsign infix'>/</span>
 <a href="javascript:octry('INCDIRS = /path/to/somelibdirectory/\n');">[try]</a></code></pre>
 <p>
 Usually this requires some preliminary configuration as it is
@@ -144,12 +144,12 @@ from one installation to another. An exception is when using standard
 directories which are not included in the search path by default such as
 /path/to/stdlib/camlp4. In this case, this should be enough and
 portable:</p>
-<pre><code class='tryocaml'><span class='constructor'>INCDIRS</span> <span class='keywordsign'>=</span> <span class='keywordsign'>+</span><span class='lower'>camlp4</span>
+<pre><code class='tryocaml'><span class='constructor module'>INCDIRS</span> <span class='keywordsign'>=</span> <span class='keywordsign'>+</span><span class='lower'>camlp4</span>
 <a href="javascript:octry('INCDIRS = +camlp4\n');">[try]</a></code></pre>
 <p>
 OK, but we prefer libraries that are installed with ocamlfind. To use
 them with OCamlMakefile, the PACKS variable must be set:</p>
-<pre><code class='tryocaml'><span class='constructor'>PACKS</span> <span class='keywordsign'>=</span> <span class='lower'>netstring</span> <span class='lower'>num</span>
+<pre><code class='tryocaml'><span class='constructor module'>PACKS</span> <span class='keywordsign'>=</span> <span class='lower'>netstring</span> <span class='lower'>num</span>
 <a href="javascript:octry('PACKS = netstring num\n');">[try]</a></code></pre>
 <p>
 Note that libraries that not part of the standard library but are
@@ -172,8 +172,8 @@ So it could be something like:</p>
 Well, this form is not very convenient, so we will use the same
 preprocessor for each file and store its value in the PP variable of the
 Makefile:</p>
-<pre><code class='tryocaml'><span class='constructor'>PP</span> <span class='keywordsign'>=</span> <span class='lower'>camlp4o</span> <span class='keywordsign'>-</span><span class='constructor'>I</span> <span class='infix'>/</span><span class='lower'>path</span><span class='infix'>/</span><span class='keyword'>to</span><span class='infix'>/</span><span class='lower'>pa_infix</span> <span class='lower'>pa_infix</span><span class='keywordsign'>.</span><span class='lower'>cmo</span>
-<span class='lower'>export</span> <span class='constructor'>PP</span>
+<pre><code class='tryocaml'><span class='constructor module'>PP</span> <span class='keywordsign'>=</span> <span class='lower'>camlp4o</span> <span class='keywordsign'>-</span><span class='constructor module'>I</span> <span class='keywordsign infix'>/</span><span class='lower'>path</span><span class='keywordsign infix'>/</span><span class='keyword'>to</span><span class='keywordsign infix'>/</span><span class='lower'>pa_infix</span> <span class='lower'>pa_infix</span><span class='keywordsign'>.</span><span class='lower'>cmo</span>
+<span class='lower'>export</span> <span class='constructor module'>PP</span>
 <a href="javascript:octry('PP = camlp4o -I /path/to/pa_infix pa_infix.cmo\nexport PP\n');">[try]</a></code></pre>
 <p>
 So each OCaml file will start with:</p>
@@ -211,14 +211,14 @@ Error: Lexical error: unexpected presence of a backslash
 
 <p>Full example using ocamllex and the unix and micmatch_pcre libraries.
 The Makefile file would be:</p>
-<pre><code class='tryocaml'><span class='constructor'>RESULT</span> <span class='keywordsign'>=</span> <span class='lower'>myprogram</span>
-<span class='constructor'>SOURCES</span> <span class='keywordsign'>=</span> <span class='lower'>mymodule1</span><span class='keywordsign'>.</span><span class='lower'>mll</span> <span class='lower'>mymodule2</span><span class='keywordsign'>.</span><span class='lower'>mli</span> <span class='lower'>mymodule2</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='lower'>mymainmodule</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
-<span class='constructor'>PACKS</span> <span class='keywordsign'>=</span> <span class='lower'>unix</span> <span class='lower'>micmatch_pcre</span>
-<span class='constructor'>PP</span> <span class='keywordsign'>=</span> <span class='lower'>camlp4find</span> <span class='infix'>$</span><span class='keywordsign'>(</span><span class='constructor'>PACKS</span><span class='keywordsign'>)</span>
-<span class='lower'>export</span> <span class='constructor'>PP</span>
-<span class='constructor'>CREATE_LIB</span> <span class='keywordsign'>=</span> <span class='lower'>yes</span> <span class='keywordsign'>#</span> <span class='prefix'>???</span>
-<span class='constructor'>OCAMLMAKEFILE</span> <span class='keywordsign'>=</span> <span class='constructor'>OCamlMakefile</span>
-<span class='keyword'>include</span> <span class='infix'>$</span><span class='keywordsign'>(</span><span class='constructor'>OCAMLMAKEFILE</span><span class='keywordsign'>)</span>
+<pre><code class='tryocaml'><span class='constructor module'>RESULT</span> <span class='keywordsign'>=</span> <span class='lower'>myprogram</span>
+<span class='constructor module'>SOURCES</span> <span class='keywordsign'>=</span> <span class='lower'>mymodule1</span><span class='keywordsign'>.</span><span class='lower'>mll</span> <span class='lower'>mymodule2</span><span class='keywordsign'>.</span><span class='lower'>mli</span> <span class='lower'>mymodule2</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='lower'>mymainmodule</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
+<span class='constructor module'>PACKS</span> <span class='keywordsign'>=</span> <span class='lower'>unix</span> <span class='lower'>micmatch_pcre</span>
+<span class='constructor module'>PP</span> <span class='keywordsign'>=</span> <span class='lower'>camlp4find</span> <span class='keywordsign infix'>$</span><span class='keywordsign'>(</span><span class='constructor module'>PACKS</span><span class='keywordsign'>)</span>
+<span class='lower'>export</span> <span class='constructor module'>PP</span>
+<span class='constructor module'>CREATE_LIB</span> <span class='keywordsign'>=</span> <span class='lower'>yes</span> <span class='keywordsign'>#</span> <span class='keywordsign prefix'>???</span>
+<span class='constructor module'>OCAMLMAKEFILE</span> <span class='keywordsign'>=</span> <span class='constructor module'>OCamlMakefile</span>
+<span class='keyword'>include</span> <span class='keywordsign infix'>$</span><span class='keywordsign'>(</span><span class='constructor module'>OCAMLMAKEFILE</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('RESULT = myprogram\nSOURCES = mymodule1.mll mymodule2.mli mymodule2.ml mymainmodule.ml\nPACKS = unix micmatch_pcre\nPP = camlp4find $(PACKS)\nexport PP\nCREATE_LIB = yes # ???\nOCAMLMAKEFILE = OCamlMakefile\ninclude $(OCAMLMAKEFILE)\n');">[try]</a></code></pre>
 <p>
 And each .ml or .mli file starts with:</p>

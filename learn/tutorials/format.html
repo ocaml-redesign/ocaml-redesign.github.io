@@ -201,40 +201,40 @@ the value of the break that is explained below):</p>
  <li>within a “h” box:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
 <ul>
  <li>within a “v” box:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>--</span><span class='lower'>b</span>
-   <span class='infix'>--</span><span class='lower'>b</span>
-   <span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span>
+   <span class='keywordsign infix'>--</span><span class='lower'>b</span>
+   <span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   --b\n   --b\n   --\n');">[try]</a></code></pre>
 <ul>
  <li>within a “hv” box:</li>
 </ul>
 
 <p>If there is enough room to print the box on the line:</p>
-<pre><code class='tryocaml'>   <span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
 <p>
 But &quot;---b---b---&quot; that cannot fit on the line is written</p>
-<pre><code class='tryocaml'>   <span class='infix'>---</span><span class='lower'>b</span>
-   <span class='infix'>---</span><span class='lower'>b</span>
-   <span class='infix'>---</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='lower'>b</span>
+   <span class='keywordsign infix'>---</span><span class='lower'>b</span>
+   <span class='keywordsign infix'>---</span>
 <a href="javascript:octry('   ---b\n   ---b\n   ---\n');">[try]</a></code></pre>
 <ul>
  <li>within a “hov” box:</li>
 </ul>
 
 <p>If there is enough room to print the box on the line:</p>
-<pre><code class='tryocaml'>   <span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
 <p>
 But if &quot;---b---b---&quot; cannot fit on the line, it is written as</p>
-<pre><code class='tryocaml'>   <span class='infix'>---</span><span class='lower'>b</span><span class='infix'>---</span><span class='lower'>b</span>
-   <span class='infix'>---</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='lower'>b</span><span class='keywordsign infix'>---</span><span class='lower'>b</span>
+   <span class='keywordsign infix'>---</span>
 <a href="javascript:octry('   ---b---b\n   ---\n');">[try]</a></code></pre>
 <p>
 The first break hint does not lead to a new line, since there is
@@ -242,9 +242,9 @@ enough room on the line. The second one leads to a new line since
 there is no more room to print the material following it. If the
 room left on the line were even shorter, the first break hint may
 lead to a new line and &quot;---b---b---&quot; is written as:</p>
-<pre><code class='tryocaml'>    <span class='infix'>---</span><span class='lower'>b</span>
-    <span class='infix'>---</span><span class='lower'>b</span>
-    <span class='infix'>---</span>
+<pre><code class='tryocaml'>    <span class='keywordsign infix'>---</span><span class='lower'>b</span>
+    <span class='keywordsign infix'>---</span><span class='lower'>b</span>
+    <span class='keywordsign infix'>---</span>
 <a href="javascript:octry('    ---b\n    ---b\n    ---\n');">[try]</a></code></pre>
 <h2 id="Printingspaces"> Printing spaces</h2><p>
 Break hints are also used to output spaces (if the line is not split
@@ -258,27 +258,27 @@ or output a new line.</p>
  <li>within a “h” box:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>--</span> <span class='infix'>--</span> <span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   -- -- --\n');">[try]</a></code></pre>
 <ul>
  <li>within a “v” box:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>--</span>
-   <span class='infix'>--</span>
-   <span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span>
+   <span class='keywordsign infix'>--</span>
+   <span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></code></pre>
 <ul>
  <li>within a “hv” box:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>--</span> <span class='infix'>--</span> <span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   -- -- --\n');">[try]</a></code></pre>
 <p>
 or, according to the remaining room on the line:</p>
-<pre><code class='tryocaml'>   <span class='infix'>--</span>
-   <span class='infix'>--</span>
-   <span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span>
+   <span class='keywordsign infix'>--</span>
+   <span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></code></pre>
 <ul>
  <li>and similarly for “hov” boxes.</li>
@@ -299,20 +299,20 @@ The user gets 2 ways to fix the indentation of new lines:</p>
  &quot;---[--b--b--b--&quot;, we get:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>---</span><span class='operator'>[--</span><span class='lower'>b</span><span class='infix'>--</span><span class='lower'>b</span>
-        <span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
+        <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   ---[--b--b\n        --b--\n');">[try]</a></code></pre>
 <p>
 with <code>open_hovbox 2</code>, we get</p>
-<pre><code class='tryocaml'>   <span class='infix'>---</span><span class='operator'>[--</span><span class='lower'>b</span><span class='infix'>--</span><span class='lower'>b</span>
-         <span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
+         <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   ---[--b--b\n         --b--\n');">[try]</a></code></pre>
 <p>
 Note: the <code>[</code> sign in the display is not visible on the screen, it
 is just there to materialise the aperture of the pretty-printing
 box. Last “screen” stands for:</p>
-<pre><code class='tryocaml'>    <span class='infix'>-----</span><span class='lower'>b</span><span class='infix'>--</span><span class='lower'>b</span>
-         <span class='infix'>--</span><span class='lower'>b</span><span class='infix'>--</span>
+<pre><code class='tryocaml'>    <span class='keywordsign infix'>-----</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
+         <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
 <a href="javascript:octry('    -----b--b\n         --b--\n');">[try]</a></code></pre>
 <ul>
  <li><strong>when defining the break that makes the new line</strong>. As said above,
@@ -326,9 +326,9 @@ box. Last “screen” stands for:</p>
  we get:</li>
 </ul>
 
-<pre><code class='tryocaml'>   <span class='infix'>---</span><span class='operator'>[--</span> <span class='infix'>--</span>
-         <span class='infix'>--</span>
-         <span class='infix'>--</span>
+<pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span> <span class='keywordsign infix'>--</span>
+         <span class='keywordsign infix'>--</span>
+         <span class='keywordsign infix'>--</span>
 <a href="javascript:octry('   ---[-- --\n         --\n         --\n');">[try]</a></code></pre>
 <h2 id="Refinementonhovboxes"> Refinement on “hov” boxes</h2><h3 id="Packingandstructuralhovboxes"> Packing and structural “hov” boxes</h3><p>
 
@@ -355,18 +355,18 @@ each break hint will lead to a new line. For instance, when printing
 &quot;[(---[(----[(---b)]b)]b)]&quot;, where &quot;b&quot; is a break hint without extra
 indentation (<code>print_cut ()</code>). If &quot;[&quot; means opening of a packing “hov”
 box (open_hovbox), &quot;[(---[(----[(---b)]b)]b)]&quot; is printed as follows:</p>
-<pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='infix'>---</span>
- <span class='keywordsign'>(</span><span class='infix'>----</span>
-  <span class='keywordsign'>(</span><span class='infix'>---</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+<pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='keywordsign infix'>---</span>
+ <span class='keywordsign'>(</span><span class='keywordsign infix'>----</span>
+  <span class='keywordsign'>(</span><span class='keywordsign infix'>---</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('(---\n (----\n  (---)))\n');">[try]</a></code></pre>
 <p>
 If we replace the packing boxes by structural boxes (open_box), each
 break hint that precedes a closing parenthesis can show the boxes
 structure, if it leads to a new line; hence &quot;[(---[(----[(---b)]b)]b)]&quot;
 is printed like this:</p>
-<pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='infix'>---</span>
- <span class='keywordsign'>(</span><span class='infix'>----</span>
-  <span class='keywordsign'>(</span><span class='infix'>---</span>
+<pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='keywordsign infix'>---</span>
+ <span class='keywordsign'>(</span><span class='keywordsign infix'>----</span>
+  <span class='keywordsign'>(</span><span class='keywordsign infix'>---</span>
   <span class='keywordsign'>)</span>
  <span class='keywordsign'>)</span>
 <span class='keywordsign'>)</span>
@@ -447,7 +447,7 @@ be called from within a <code>printf</code> format string. For instance</p>
 
 <p>For instance</p>
 <pre><code class='tryocaml'><span class='lower'>printf</span> <span class='string'>&#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34;</span> <span class='string'>&#34;Prix TTC&#34;</span> <span class='number'>100</span> <span class='string'>&#34;Euros&#34;</span><span class='keywordsign'>;;</span>
-<span class='constructor'>Prix</span> <span class='constructor'>TTC</span> <span class='keywordsign'>=</span> <span class='number'>100</span> <span class='constructor'>Euros</span>
+<span class='constructor module'>Prix</span> <span class='constructor module'>TTC</span> <span class='keywordsign'>=</span> <span class='number'>100</span> <span class='constructor module'>Euros</span>
 
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('printf &#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34; &#34;Prix TTC&#34; 100 &#34;Euros&#34;;;\nPrix TTC = 100 Euros\n\n- : unit = ()\n');">[try]</a></code></pre>
@@ -461,28 +461,28 @@ applications to arguments.</p>
 <p>First, I give the abstract syntax of lambda-terms (we illustrate is in
 the <a href='../description.html#interactive'>interactive system</a>):</p>
 <pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>lambda</span> <span class='keywordsign'>=</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Lambda</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='keyword'>of</span> <span class='lower'>string</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Apply</span> <span class='keyword'>of</span> <span class='lower'>lambda</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Lambda</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='keyword'>of</span> <span class='lower'>string</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Apply</span> <span class='keyword'>of</span> <span class='lower'>lambda</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
 <a href="javascript:octry('  type lambda =\n    | Lambda of string * lambda\n    | Var of string\n    | Apply of lambda * lambda\n');">[try]</a></code></pre>
 <p>
 I use the format library to print the lambda-terms:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>open</span> <span class='constructor'>Format</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>open</span> <span class='constructor module'>Format</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>let</span> <span class='lower'>ident</span> <span class='keywordsign'>=</span> <span class='lower'>print_string</span>
   <span class='keyword'>let</span> <span class='lower'>kwd</span> <span class='keywordsign'>=</span> <span class='lower'>print_string</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>print_exp0</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span>  <span class='lower'>ident</span> <span class='lower'>s</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span>  <span class='lower'>ident</span> <span class='lower'>s</span>
     <span class='keywordsign'>|</span> <span class='lower'>lam</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>open_hovbox</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='lower'>kwd</span> <span class='string'>&#34;(&#34;</span><span class='keywordsign'>;</span> <span class='lower'>print_lambda</span> <span class='lower'>lam</span><span class='keywordsign'>;</span> <span class='lower'>kwd</span> <span class='string'>&#34;)&#34;</span><span class='keywordsign'>;</span> <span class='lower'>close_box</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
   <span class='keyword'>and</span> <span class='lower'>print_app</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
     <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>open_hovbox</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='lower'>print_other_applications</span> <span class='lower'>e</span><span class='keywordsign'>;</span> <span class='lower'>close_box</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
   <span class='keyword'>and</span> <span class='lower'>print_other_applications</span> <span class='lower'>f</span> <span class='keywordsign'>=</span>
     <span class='keyword'>match</span> <span class='lower'>f</span> <span class='keyword'>with</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Apply</span> <span class='keywordsign'>(</span><span class='lower'>f</span><span class='keywordsign'>,</span> <span class='lower'>arg</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_app</span> <span class='lower'>f</span><span class='keywordsign'>;</span> <span class='lower'>print_space</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_exp0</span> <span class='lower'>arg</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Apply</span> <span class='keywordsign'>(</span><span class='lower'>f</span><span class='keywordsign'>,</span> <span class='lower'>arg</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_app</span> <span class='lower'>f</span><span class='keywordsign'>;</span> <span class='lower'>print_space</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_exp0</span> <span class='lower'>arg</span>
     <span class='keywordsign'>|</span> <span class='lower'>f</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_exp0</span> <span class='lower'>f</span>
   <span class='keyword'>and</span> <span class='lower'>print_lambda</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Lambda</span> <span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>,</span> <span class='lower'>lam</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Lambda</span> <span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>,</span> <span class='lower'>lam</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
         <span class='lower'>open_hovbox</span> <span class='number'>1</span><span class='keywordsign'>;</span>
         <span class='lower'>kwd</span> <span class='string'>&#34;\\&#34;</span><span class='keywordsign'>;</span> <span class='lower'>ident</span> <span class='lower'>s</span><span class='keywordsign'>;</span> <span class='lower'>kwd</span> <span class='string'>&#34;.&#34;</span><span class='keywordsign'>;</span> <span class='lower'>print_space</span><span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_lambda</span> <span class='lower'>lam</span><span class='keywordsign'>;</span>
         <span class='lower'>close_box</span><span class='keywordsign'>(</span><span class='keywordsign'>)</span>
@@ -507,22 +507,22 @@ function (these user&#39;s supplied functions also have a formatter as first
 argument).</p>
 <p>Using <code>fprintf</code>, the lambda-terms printing routines can be written as
 follows:</p>
-<pre><code class='tryocaml'>  <span class='keyword'>open</span> <span class='constructor'>Format</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>open</span> <span class='constructor module'>Format</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>let</span> <span class='lower'>ident</span> <span class='lower'>ppf</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;%s&#34;</span> <span class='lower'>s</span>
   <span class='keyword'>let</span> <span class='lower'>kwd</span> <span class='lower'>ppf</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;%s&#34;</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>pr_exp0</span> <span class='lower'>ppf</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Var</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;%a&#34;</span> <span class='lower'>ident</span> <span class='lower'>s</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;%a&#34;</span> <span class='lower'>ident</span> <span class='lower'>s</span>
     <span class='keywordsign'>|</span> <span class='lower'>lam</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;@[&#60;1&#62;(%a)@]&#34;</span> <span class='lower'>pr_lambda</span> <span class='lower'>lam</span>
   <span class='keyword'>and</span> <span class='lower'>pr_app</span> <span class='lower'>ppf</span> <span class='lower'>e</span> <span class='keywordsign'>=</span>
     <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;@[&#60;2&#62;%a@]&#34;</span> <span class='lower'>pr_other_applications</span> <span class='lower'>e</span>
   <span class='keyword'>and</span> <span class='lower'>pr_other_applications</span> <span class='lower'>ppf</span> <span class='lower'>f</span> <span class='keywordsign'>=</span>
     <span class='keyword'>match</span> <span class='lower'>f</span> <span class='keyword'>with</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Apply</span> <span class='keywordsign'>(</span><span class='lower'>f</span><span class='keywordsign'>,</span> <span class='lower'>arg</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;%a@ %a&#34;</span> <span class='lower'>pr_app</span> <span class='lower'>f</span> <span class='lower'>pr_exp0</span> <span class='lower'>arg</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Apply</span> <span class='keywordsign'>(</span><span class='lower'>f</span><span class='keywordsign'>,</span> <span class='lower'>arg</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;%a@ %a&#34;</span> <span class='lower'>pr_app</span> <span class='lower'>f</span> <span class='lower'>pr_exp0</span> <span class='lower'>arg</span>
     <span class='keywordsign'>|</span> <span class='lower'>f</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>pr_exp0</span> <span class='lower'>ppf</span> <span class='lower'>f</span>
   <span class='keyword'>and</span> <span class='lower'>pr_lambda</span> <span class='lower'>ppf</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
-    <span class='keywordsign'>|</span> <span class='constructor'>Lambda</span> <span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>,</span> <span class='lower'>lam</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+    <span class='keywordsign'>|</span> <span class='constructor module'>Lambda</span> <span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>,</span> <span class='lower'>lam</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
        <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;</span>
                <span class='lower'>kwd</span> <span class='string'>&#34;\\&#34;</span> <span class='lower'>ident</span> <span class='lower'>s</span> <span class='lower'>kwd</span> <span class='string'>&#34;.&#34;</span> <span class='lower'>pr_lambda</span> <span class='lower'>lam</span>
     <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>pr_app</span> <span class='lower'>ppf</span> <span class='lower'>e</span>

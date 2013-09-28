@@ -100,16 +100,16 @@ functional way. In the example below I am going to do a mapping from
 strings to strings. However it is possible to do mappings with all
 different types of data.</p>
 <p>To create a Map I can do:</p>
-<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor'>MyUsers</span> <span class='keywordsign'>=</span> <span class='constructor'>Map</span><span class='keywordsign'>.</span><span class='constructor'>Make</span><span class='keywordsign'>(</span><span class='constructor'>String</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>MyUsers</span> <span class='keywordsign'>=</span> <span class='constructor module'>Map</span><span class='keywordsign'>.</span><span class='constructor module'>Make</span><span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('module MyUsers = Map.Make(String);;\n');">[try]</a></code></pre>
 <p>
 Ok, we have created the module. Now, lets start putting something into
 it. Where do we start? Well, lets try an empty module to begin with:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>empty</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>empty</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let m = MyUsers.empty;;\n');">[try]</a></code></pre>
 <p>
 Hummm. An empty module is kind of boring, so lets add some data.</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;fred&#34;</span> <span class='string'>&#34;sugarplums&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;fred&#34;</span> <span class='string'>&#34;sugarplums&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let m = MyUsers.add &#34;fred&#34; &#34;sugarplums&#34; m;;\n');">[try]</a></code></pre>
 <p>
 We have now added &quot;fred&quot; and his password of &quot;sugarplums&quot; to our module.
@@ -119,27 +119,27 @@ This means our mapping in our module MyUsers is from strings to strings.
 If we want a mapping from strings to integers or a mapping from integers
 to whatever we will have to create a different mapping.</p>
 <p>Lets add in some additional data just for kicks.</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;tom&#34;</span> <span class='string'>&#34;ilovelucy&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;mark&#34;</span> <span class='string'>&#34;ocamlrules&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;pete&#34;</span> <span class='string'>&#34;linux&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;tom&#34;</span> <span class='string'>&#34;ilovelucy&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;mark&#34;</span> <span class='string'>&#34;ocamlrules&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='string'>&#34;pete&#34;</span> <span class='string'>&#34;linux&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let m = MyUsers.add &#34;tom&#34; &#34;ilovelucy&#34; m;;\nlet m = MyUsers.add &#34;mark&#34; &#34;ocamlrules&#34; m;;\nlet m = MyUsers.add &#34;pete&#34; &#34;linux&#34; m;;\n');">[try]</a></code></pre>
 <p>
 Now that we have some data inside of our Map module, wouldn&#39;t it be nice
 to be able to view that data at some point? Lets begin by creating a
 simple print function.</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>print_users</span> <span class='lower'>key</span> <span class='lower'>password</span> <span class='keywordsign'>=</span> <span class='lower'>print_string</span><span class='keywordsign'>(</span><span class='lower'>key</span> <span class='infix'>^</span> <span class='string'>&#34; &#34;</span> <span class='infix'>^</span> <span class='lower'>password</span> <span class='infix'>^</span> <span class='string'>&#34;\n&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>print_users</span> <span class='lower'>key</span> <span class='lower'>password</span> <span class='keywordsign'>=</span> <span class='lower'>print_string</span><span class='keywordsign'>(</span><span class='lower'>key</span> <span class='keywordsign infix'>^</span> <span class='string'>&#34; &#34;</span> <span class='keywordsign infix'>^</span> <span class='lower'>password</span> <span class='keywordsign infix'>^</span> <span class='string'>&#34;\n&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let print_users key password = print_string(key ^ &#34; &#34; ^ password ^ &#34;\n&#34;);;\n');">[try]</a></code></pre>
 <p>
 We have here a function that will take two strings, a key and a pasword,
 and print them out nicely, including a new line character at the end.
 All we need to do is to have this function applied to our mapping. Here
 is what that would look like.</p>
-<pre><code class='tryocaml'><span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>print_users</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>print_users</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('MyUsers.iter print_users m;;\n');">[try]</a></code></pre>
 <p>
 The reason we put our data into a mapping however is probably so we can
 quickly find the data. Lets actually show how to do a find.</p>
-<pre><code class='tryocaml'><span class='constructor'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>find</span> <span class='string'>&#34;fred&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='constructor module'>MyUsers</span><span class='keywordsign'>.</span><span class='lower'>find</span> <span class='string'>&#34;fred&#34;</span> <span class='lower'>m</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('MyUsers.find &#34;fred&#34; m;;\n');">[try]</a></code></pre>
 <p>
 This should quickly and efficienty return Fred&#39;s password: &quot;sugarplums&quot;.</p>

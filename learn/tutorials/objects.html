@@ -105,17 +105,17 @@ basics of writing object-oriented OCaml.</p>
 implemented using a linked list.</p>
 <pre><code class='tryocaml'>  <span class='keyword'>class</span> <span class='lower'>stack_of_ints</span> <span class='keywordsign'>=</span>
     <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
-      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>the_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='operator'>[]</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>)</span>   <span class='comment'>(* instance variable *)</span>
+      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>the_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>)</span>   <span class='comment'>(* instance variable *)</span>
       <span class='keyword'>method</span> <span class='lower'>push</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>                        <span class='comment'>(* push method *)</span>
         <span class='lower'>the_list</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>the_list</span>
       <span class='keyword'>method</span> <span class='lower'>pop</span> <span class='keywordsign'>=</span>                           <span class='comment'>(* pop method *)</span>
-        <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>the_list</span> <span class='keyword'>in</span>
-        <span class='lower'>the_list</span> <span class='keywordsign'>&#60;-</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='lower'>the_list</span><span class='keywordsign'>;</span>
+        <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>the_list</span> <span class='keyword'>in</span>
+        <span class='lower'>the_list</span> <span class='keywordsign'>&#60;-</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='lower'>the_list</span><span class='keywordsign'>;</span>
         <span class='lower'>result</span>
       <span class='keyword'>method</span> <span class='lower'>peek</span> <span class='keywordsign'>=</span>                          <span class='comment'>(* peek method *)</span>
-        <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>the_list</span>
+        <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>the_list</span>
       <span class='keyword'>method</span> <span class='lower'>size</span> <span class='keywordsign'>=</span>                          <span class='comment'>(* size method *)</span>
-        <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>the_list</span>
+        <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>the_list</span>
     <span class='keyword'>end</span>
 <a href="javascript:octry('  class stack_of_ints =\n    object (self)\n      val mutable the_list = ( [] : int list )   (* instance variable *)\n      method push x =                        (* push method *)\n        the_list &#60;- x :: the_list\n      method pop =                           (* pop method *)\n        let result = List.hd the_list in\n        the_list &#60;- List.tl the_list;\n        result\n      method peek =                          (* peek method *)\n        List.hd the_list\n      method size =                          (* size method *)\n        List.length the_list\n    end\n');">[try]</a></code></pre>
 <p>
@@ -156,7 +156,7 @@ Now we&#39;ll push and pop some elements off the stack:</p>
     <span class='lower'>s</span><span class='keywordsign'>#</span><span class='lower'>push</span> <span class='lower'>i</span>
   <span class='keyword'>done</span><span class='keywordsign'>;;</span>
   <span class='keyword'>while</span> <span class='lower'>s</span><span class='keywordsign'>#</span><span class='lower'>size</span> <span class='keywordsign'>&#62;</span> <span class='number'>0</span> <span class='keyword'>do</span>
-    <span class='constructor'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;Popped %d off the stack.\n&#34;</span> <span class='lower'>s</span><span class='keywordsign'>#</span><span class='lower'>pop</span>
+    <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;Popped %d off the stack.\n&#34;</span> <span class='lower'>s</span><span class='keywordsign'>#</span><span class='lower'>pop</span>
   <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  for i = 1 to 10 do\n    s#push i\n  done;;\n  while s#size &#62; 0 do\n    Printf.printf &#34;Popped %d off the stack.\n&#34; s#pop\n  done;;\n');">[try]</a></code></pre>
 <p>
@@ -178,17 +178,17 @@ multiple stacks each storing objects of any single type). As with
 <code>&#39;a list</code>, we can define <code>&#39;a stack</code>:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>class</span> <span class='keywordsign'>[</span><span class='keywordsign'>&#39;</span><span class='lower'>a</span> <span class='lower'>stack</span> <span class='keywordsign'>=</span>
     <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
-      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='operator'>[]</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>)</span>    <span class='comment'>(* instance variable *)</span>
+      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>)</span>    <span class='comment'>(* instance variable *)</span>
       <span class='keyword'>method</span> <span class='lower'>push</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>                        <span class='comment'>(* push method *)</span>
         <span class='lower'>list</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>list</span>
       <span class='keyword'>method</span> <span class='lower'>pop</span> <span class='keywordsign'>=</span>                           <span class='comment'>(* pop method *)</span>
-        <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>list</span> <span class='keyword'>in</span>
-        <span class='lower'>list</span> <span class='keywordsign'>&#60;-</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='lower'>list</span><span class='keywordsign'>;</span>
+        <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>list</span> <span class='keyword'>in</span>
+        <span class='lower'>list</span> <span class='keywordsign'>&#60;-</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>tl</span> <span class='lower'>list</span><span class='keywordsign'>;</span>
         <span class='lower'>result</span>
       <span class='keyword'>method</span> <span class='lower'>peek</span> <span class='keywordsign'>=</span>                          <span class='comment'>(* peek method *)</span>
-        <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>list</span>
+        <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>hd</span> <span class='lower'>list</span>
       <span class='keyword'>method</span> <span class='lower'>size</span> <span class='keywordsign'>=</span>                          <span class='comment'>(* size method *)</span>
-        <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>list</span>
+        <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>list</span>
     <span class='keyword'>end</span>
 <a href="javascript:octry('  class [\&#39;a] stack =\n    object (self)\n      val mutable list = ( [] : \&#39;a list )    (* instance variable *)\n      method push x =                        (* push method *)\n        list &#60;- x :: list\n      method pop =                           (* pop method *)\n        let result = List.hd list in\n        list &#60;- List.tl list;\n        result\n      method peek =                          (* peek method *)\n        List.hd list\n      method size =                          (* size method *)\n        List.length list\n    end\n');">[try]</a></code></pre>
 <p>
@@ -250,11 +250,11 @@ Swing. We will define buttons and labels with the following class
 hierarchy:</p>
 <pre><code class='tryocaml'><span class='lower'>widget</span>  <span class='keywordsign'>(</span><span class='lower'>superclass</span> <span class='keyword'>for</span> <span class='lower'>all</span> <span class='lower'>widgets</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>|</span>
-  <span class='infix'>+----&#62;</span> <span class='lower'>container</span>  <span class='keywordsign'>(</span><span class='lower'>any</span> <span class='lower'>widget</span> <span class='lower'>that</span> <span class='lower'>can</span> <span class='lower'>contain</span> <span class='lower'>other</span> <span class='lower'>widgets</span><span class='keywordsign'>)</span>
+  <span class='keywordsign infix'>+----&#62;</span> <span class='lower'>container</span>  <span class='keywordsign'>(</span><span class='lower'>any</span> <span class='lower'>widget</span> <span class='lower'>that</span> <span class='lower'>can</span> <span class='lower'>contain</span> <span class='lower'>other</span> <span class='lower'>widgets</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>|</span>        <span class='keywordsign'>|</span>
-  <span class='keywordsign'>|</span>        <span class='infix'>+----&#62;</span> <span class='lower'>button</span>
+  <span class='keywordsign'>|</span>        <span class='keywordsign infix'>+----&#62;</span> <span class='lower'>button</span>
   <span class='keywordsign'>|</span>
-  <span class='infix'>+-------------&#62;</span> <span class='lower'>label</span>
+  <span class='keywordsign infix'>+-------------&#62;</span> <span class='lower'>label</span>
 <a href="javascript:octry('widget  (superclass for all widgets)\n  |\n  +----&#62; container  (any widget that can contain other widgets)\n  |        |\n  |        +----&#62; button\n  |\n  +-------------&#62; label\n');">[try]</a></code></pre>
 <p>
 (Notice that a <code>button</code> is a <code>container</code> because it can contain either a
@@ -286,11 +286,11 @@ Now there are several new things going on in this code. Firstly the
 class contains an <strong>initializer</strong>. This is an argument to the class
 (<code>name</code>) which you can think of as exactly the equivalent of an argument
 to a constructor in, eg., Java:</p>
-<pre><code class='tryocaml'><span class='lower'>public</span> <span class='keyword'>class</span> <span class='constructor'>Widget</span>
+<pre><code class='tryocaml'><span class='lower'>public</span> <span class='keyword'>class</span> <span class='constructor module'>Widget</span>
 <span class='keywordsign'>{</span>
-  <span class='lower'>public</span> <span class='constructor'>Widget</span> <span class='keywordsign'>(</span><span class='constructor'>String</span> <span class='lower'>name</span><span class='keywordsign'>)</span>
+  <span class='lower'>public</span> <span class='constructor module'>Widget</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span> <span class='lower'>name</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>{</span>
-    <span class='operator'>...</span>
+    <span class='keywordsign operator'>...</span>
   <span class='keywordsign'>}</span>
 <span class='keywordsign'>}</span>
 <a href="javascript:octry('public class Widget\n{\n  public Widget (String name)\n  {\n    ...\n  }\n}\n');">[try]</a></code></pre>
@@ -298,7 +298,7 @@ to a constructor in, eg., Java:</p>
 In OCaml a constructor constructs the whole class, it&#39;s not just a
 specially named function, so we write the arguments as if they are
 arguments to the class:</p>
-<pre><code class='tryocaml'><span class='keyword'>class</span> <span class='lower'>foo</span> <span class='lower'>arg1</span> <span class='lower'>arg2</span> <span class='operator'>...</span> <span class='keywordsign'>=</span>
+<pre><code class='tryocaml'><span class='keyword'>class</span> <span class='lower'>foo</span> <span class='lower'>arg1</span> <span class='lower'>arg2</span> <span class='keywordsign operator'>...</span> <span class='keywordsign'>=</span>
 <a href="javascript:octry('class foo arg1 arg2 ... =\n');">[try]</a></code></pre>
 <p>
 Secondly the class contains a virtual method, and thus the whole class
@@ -321,13 +321,13 @@ widgets. Here is my simple implementation for <code>container</code>:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>class</span> <span class='keyword'>virtual</span> <span class='lower'>container</span> <span class='lower'>name</span> <span class='keywordsign'>=</span>
     <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
       <span class='keyword'>inherit</span> <span class='lower'>widget</span> <span class='lower'>name</span>
-      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>widgets</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='operator'>[]</span> <span class='keywordsign'>:</span> <span class='lower'>widget</span> <span class='lower'>list</span> <span class='keywordsign'>)</span>
+      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>widgets</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>:</span> <span class='lower'>widget</span> <span class='lower'>list</span> <span class='keywordsign'>)</span>
       <span class='keyword'>method</span> <span class='lower'>add</span> <span class='lower'>w</span> <span class='keywordsign'>=</span>
         <span class='lower'>widgets</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>w</span> <span class='keywordsign'>::</span> <span class='lower'>widgets</span>
       <span class='keyword'>method</span> <span class='lower'>get_widgets</span> <span class='keywordsign'>=</span>
         <span class='lower'>widgets</span>
       <span class='keyword'>method</span> <span class='lower'>repaint</span> <span class='keywordsign'>=</span>
-        <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>w</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>w</span><span class='keywordsign'>#</span><span class='lower'>repaint</span><span class='keywordsign'>)</span> <span class='lower'>widgets</span>
+        <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>w</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>w</span><span class='keywordsign'>#</span><span class='lower'>repaint</span><span class='keywordsign'>)</span> <span class='lower'>widgets</span>
     <span class='keyword'>end</span>
 <a href="javascript:octry('  class virtual container name =\n    object (self)\n      inherit widget name\n      val mutable widgets = ( [] : widget list )\n      method add w =\n        widgets &#60;- w :: widgets\n      method get_widgets =\n        widgets\n      method repaint =\n        List.iter (fun w -&#62; w#repaint) widgets\n    end\n');">[try]</a></code></pre>
 <p>
@@ -376,25 +376,25 @@ which defines an anonymous function with one argument <code>w</code> that just
 calls <code>w#repaint</code> (the <code>repaint</code> method on widget <code>w</code>).</p>
 <p>In this instance our <code>button</code> class is simple (rather unrealistically
 simple in fact, but nevermind that):</p>
-<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>button_state</span> <span class='keywordsign'>=</span> <span class='constructor'>Released</span> <span class='keywordsign'>|</span> <span class='constructor'>Pressed</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>button_state</span> <span class='keywordsign'>=</span> <span class='constructor module'>Released</span> <span class='keywordsign'>|</span> <span class='constructor module'>Pressed</span><span class='keywordsign'>;;</span>
 
   <span class='keyword'>class</span> <span class='lower'>button</span> <span class='keywordsign'>?</span><span class='lower'>callback</span> <span class='lower'>name</span> <span class='keywordsign'>=</span>
     <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
       <span class='keyword'>inherit</span> <span class='lower'>container</span> <span class='lower'>name</span> <span class='keyword'>as</span> <span class='lower'>super</span>
-      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>state</span> <span class='keywordsign'>=</span> <span class='constructor'>Released</span>
+      <span class='keyword'>val</span> <span class='keyword'>mutable</span> <span class='lower'>state</span> <span class='keywordsign'>=</span> <span class='constructor module'>Released</span>
       <span class='keyword'>method</span> <span class='lower'>press</span> <span class='keywordsign'>=</span>
-        <span class='lower'>state</span> <span class='keywordsign'>&#60;-</span> <span class='constructor'>Pressed</span><span class='keywordsign'>;</span>
+        <span class='lower'>state</span> <span class='keywordsign'>&#60;-</span> <span class='constructor module'>Pressed</span><span class='keywordsign'>;</span>
         <span class='keyword'>match</span> <span class='lower'>callback</span> <span class='keyword'>with</span>
-        <span class='keywordsign'>|</span> <span class='constructor'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-        <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='lower'>f</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+        <span class='keywordsign'>|</span> <span class='constructor module'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+        <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='lower'>f</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
       <span class='keyword'>method</span> <span class='lower'>release</span> <span class='keywordsign'>=</span>
-        <span class='lower'>state</span> <span class='keywordsign'>&#60;-</span> <span class='constructor'>Released</span>
+        <span class='lower'>state</span> <span class='keywordsign'>&#60;-</span> <span class='constructor module'>Released</span>
       <span class='keyword'>method</span> <span class='lower'>repaint</span> <span class='keywordsign'>=</span>
         <span class='lower'>super</span><span class='keywordsign'>#</span><span class='lower'>repaint</span><span class='keywordsign'>;</span>
-        <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;Button being repainted, state is &#34;</span> <span class='infix'>^</span>
+        <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;Button being repainted, state is &#34;</span> <span class='keywordsign infix'>^</span>
                        <span class='keywordsign'>(</span><span class='keyword'>match</span> <span class='lower'>state</span> <span class='keyword'>with</span>
-                        <span class='keywordsign'>|</span> <span class='constructor'>Pressed</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;Pressed&#34;</span>
-                        <span class='keywordsign'>|</span> <span class='constructor'>Released</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;Released&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
+                        <span class='keywordsign'>|</span> <span class='constructor module'>Pressed</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;Pressed&#34;</span>
+                        <span class='keywordsign'>|</span> <span class='constructor module'>Released</span> <span class='keywordsign'>-&#62;</span> <span class='string'>&#34;Released&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
     <span class='keyword'>end</span>
 <a href="javascript:octry('  type button_state = Released | Pressed;;\n\n  class button ?callback name =\n    object (self)\n      inherit container name as super\n      val mutable state = Released\n      method press =\n        state &#60;- Pressed;\n        match callback with\n        | None -&#62; ()\n        | Some f -&#62; f ()\n      method release =\n        state &#60;- Released\n      method repaint =\n        super#repaint;\n        print_endline (&#34;Button being repainted, state is &#34; ^\n                       (match state with\n                        | Pressed -&#62; &#34;Pressed&#34;\n                        | Released -&#62; &#34;Released&#34;))\n    end\n');">[try]</a></code></pre>
 <p>
@@ -439,7 +439,7 @@ Here&#39;s our comparatively trivial <code>label</code> class:</p>
     <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
       <span class='keyword'>inherit</span> <span class='lower'>widget</span> <span class='lower'>name</span>
       <span class='keyword'>method</span> <span class='lower'>repaint</span> <span class='keywordsign'>=</span>
-        <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;Label: &#34;</span> <span class='infix'>^</span> <span class='lower'>text</span><span class='keywordsign'>)</span>
+        <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;Label: &#34;</span> <span class='keywordsign infix'>^</span> <span class='lower'>text</span><span class='keywordsign'>)</span>
     <span class='keyword'>end</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('  class label name text =\n    object (self)\n      inherit widget name\n      method repaint =\n        print_endline (&#34;Label: &#34; ^ text)\n    end;;\n');">[try]</a></code></pre>
 <p>
@@ -476,7 +476,7 @@ I created a button <code>b</code> and a label <code>l</code> and I tried to crea
 containing both, but I got an error. Yet <code>b</code> and <code>l</code> are both <code>widget</code>s,
 so why can&#39;t I put them into the same list? Perhaps OCaml can&#39;t guess
 that I want a <code>widget list</code>? Let&#39;s try telling it:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>wl</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='operator'>[]</span> <span class='keywordsign'>:</span> <span class='lower'>widget</span> <span class='lower'>list</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>wl</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign operator'>[]</span> <span class='keywordsign'>:</span> <span class='lower'>widget</span> <span class='lower'>list</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keyword'>let</span> <span class='lower'>wl</span> <span class='keywordsign'>=</span> <span class='lower'>b</span> <span class='keywordsign'>::</span> <span class='lower'>wl</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('let wl = ([] : widget list);;\nlet wl = b :: wl;;\n');">[try]</a></code></pre>
 <p>
@@ -570,7 +570,7 @@ Compare with an equivalent record type definition:</p>
 The implementation of a record working like our object would be:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>r</span> <span class='keywordsign'>=</span>
     <span class='keyword'>let</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>0</span> <span class='keyword'>in</span>
-    <span class='keywordsign'>{</span> <span class='lower'>get</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='prefix'>!</span><span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+    <span class='keywordsign'>{</span> <span class='lower'>get</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign prefix'>!</span><span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
       <span class='lower'>incr</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>incr</span> <span class='lower'>n</span><span class='keywordsign'>)</span> <span class='keywordsign'>}</span>
 <a href="javascript:octry('  let r =\n    let n = ref 0 in\n    { get = (fun () -&#62; !n);\n      incr = (fun () -&#62; incr n) }\n');">[try]</a></code></pre>
 <p>

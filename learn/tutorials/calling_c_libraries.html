@@ -116,12 +116,12 @@ directly translate into calls to the C <code>libgtk-1.2.so</code> library.</p>
 <p>I also wanted to rationalise the module naming scheme for Gtk. So there
 is exactly one top-level module called (surprise!) <code>Gtk</code> and all classes
 are inside this module. A test program looks like this:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>win</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='constructor'>Gtk</span><span class='keywordsign'>.</span><span class='lower'>window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My window&#34;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>lbl</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='constructor'>Gtk</span><span class='keywordsign'>.</span><span class='lower'>label</span> <span class='keywordsign'>~</span><span class='lower'>text</span><span class='keywordsign'>:</span><span class='string'>&#34;Hello&#34;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>win</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='constructor module'>Gtk</span><span class='keywordsign'>.</span><span class='lower'>window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My window&#34;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>lbl</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='constructor module'>Gtk</span><span class='keywordsign'>.</span><span class='lower'>label</span> <span class='keywordsign'>~</span><span class='lower'>text</span><span class='keywordsign'>:</span><span class='string'>&#34;Hello&#34;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='lower'>win</span><span class='keywordsign'>#</span><span class='lower'>add</span> <span class='lower'>lbl</span><span class='keywordsign'>;;</span>
 
 <span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
-  <span class='constructor'>Gtk</span><span class='keywordsign'>.</span><span class='lower'>main</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+  <span class='constructor module'>Gtk</span><span class='keywordsign'>.</span><span class='lower'>main</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let win = new Gtk.window ~title:&#34;My window&#34; ();;\nlet lbl = new Gtk.label ~text:&#34;Hello&#34; ();;\nwin#add lbl;;\n\nlet () =\n  Gtk.main ()\n');">[try]</a></code></pre>
 <p>
 I defined a single abstract type to cover all <code>GtkObject</code>s (and
@@ -147,12 +147,12 @@ a little C wrapper around the library&#39;s function to translate to and
 from OCaml&#39;s internal types and C types. <code>gtk_label_new_c</code> (note the
 additional <code>_c</code>) is my wrapper around the real Gtk C function called
 <code>gtk_label_new</code>. Here it is. I&#39;ll explain more about it later.</p>
-<pre><code class='tryocaml'><span class='constructor'>CAMLprim</span> <span class='lower'>value</span>
+<pre><code class='tryocaml'><span class='constructor module'>CAMLprim</span> <span class='lower'>value</span>
 <span class='lower'>gtk_label_new_c</span> <span class='keywordsign'>(</span><span class='lower'>value</span> <span class='lower'>str</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>{</span>
-  <span class='constructor'>CAMLparam1</span> <span class='keywordsign'>(</span><span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-  <span class='constructor'>CAMLreturn</span> <span class='keywordsign'>(</span><span class='lower'>wrap</span> <span class='keywordsign'>(</span><span class='constructor'>GTK_OBJECT</span> <span class='keywordsign'>(</span>
-    <span class='lower'>gtk_label_new</span> <span class='keywordsign'>(</span><span class='constructor'>String_val</span> <span class='keywordsign'>(</span><span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>CAMLparam1</span> <span class='keywordsign'>(</span><span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>CAMLreturn</span> <span class='keywordsign'>(</span><span class='lower'>wrap</span> <span class='keywordsign'>(</span><span class='constructor module'>GTK_OBJECT</span> <span class='keywordsign'>(</span>
+    <span class='lower'>gtk_label_new</span> <span class='keywordsign'>(</span><span class='constructor module'>String_val</span> <span class='keywordsign'>(</span><span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
  <span class='keywordsign'>}</span>
 <a href="javascript:octry('CAMLprim value\ngtk_label_new_c (value str)\n{\n  CAMLparam1 (str);\n  CAMLreturn (wrap (GTK_OBJECT (\n    gtk_label_new (String_val (str)))));\n }\n');">[try]</a></code></pre>
 <p>
@@ -202,7 +202,7 @@ Of course the real <code>label</code> class doesn&#39;t inherit directly from
     <span class='keyword'>inherit</span> <span class='lower'>gtk_object</span> <span class='lower'>obj</span>
     <span class='keyword'>method</span> <span class='lower'>show</span> <span class='keywordsign'>=</span> <span class='lower'>gtk_widget_show</span> <span class='lower'>obj</span>
     <span class='keyword'>method</span> <span class='lower'>show_all</span> <span class='keywordsign'>=</span> <span class='lower'>gtk_widget_show_all</span> <span class='lower'>obj</span>
-    <span class='keyword'>initializer</span> <span class='keyword'>if</span> <span class='lower'>show</span> <span class='infix'>&#60;&#62;</span> <span class='constructor'>Some</span> <span class='keyword'>false</span> <span class='keyword'>then</span> <span class='lower'>self</span><span class='keywordsign'>#</span><span class='lower'>show</span>
+    <span class='keyword'>initializer</span> <span class='keyword'>if</span> <span class='lower'>show</span> <span class='keywordsign infix'>&#60;&#62;</span> <span class='constructor module'>Some</span> <span class='keyword'>false</span> <span class='keyword'>then</span> <span class='lower'>self</span><span class='keywordsign'>#</span><span class='lower'>show</span>
   <span class='keyword'>end</span>
 <a href="javascript:octry('external gtk_widget_show : obj -&#62; unit = &#34;gtk_widget_show_c&#34;\nexternal gtk_widget_show_all : obj -&#62; unit = &#34;gtk_widget_show_all_c&#34;\n\nclass virtual widget ?show obj =\n  object (self)\n    inherit gtk_object obj\n    method show = gtk_widget_show obj\n    method show_all = gtk_widget_show_all obj\n    initializer if show &#60;&#62; Some false then self#show\n  end\n');">[try]</a></code></pre>
 <p>
@@ -212,7 +212,7 @@ initialization code first:</p>
   <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
     <span class='keyword'>inherit</span> <span class='lower'>gtk_object</span> <span class='lower'>obj</span>
     <span class='keyword'>initializer</span>
-      <span class='keyword'>if</span> <span class='lower'>show</span> <span class='infix'>&#60;&#62;</span> <span class='constructor'>Some</span> <span class='keyword'>false</span> <span class='keyword'>then</span> <span class='lower'>self</span><span class='keywordsign'>#</span><span class='lower'>show</span>
+      <span class='keyword'>if</span> <span class='lower'>show</span> <span class='keywordsign infix'>&#60;&#62;</span> <span class='constructor module'>Some</span> <span class='keyword'>false</span> <span class='keyword'>then</span> <span class='lower'>self</span><span class='keywordsign'>#</span><span class='lower'>show</span>
   <span class='keyword'>end</span>
 <a href="javascript:octry('class virtual widget ?show obj =\n  object (self)\n    inherit gtk_object obj\n    initializer\n      if show &#60;&#62; Some false then self#show\n  end\n');">[try]</a></code></pre>
 <p>
@@ -241,8 +241,8 @@ a large class of miscellaneous widgets. This class just adds padding and
 alignment around a widget such as a label. Here is its definition:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>may</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
   <span class='keyword'>match</span> <span class='lower'>x</span> <span class='keyword'>with</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-  <span class='keywordsign'>|</span> <span class='constructor'>Some</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>f</span> <span class='lower'>x</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+  <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>f</span> <span class='lower'>x</span>
 
 <span class='keyword'>external</span> <span class='lower'>gtk_misc_set_alignment</span> <span class='keywordsign'>:</span>
   <span class='lower'>obj</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>float</span> <span class='keywordsign'>*</span> <span class='lower'>float</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_misc_set_alignment_c&#34;</span>
@@ -290,7 +290,7 @@ from <code>misc</code>:</p>
 <span class='keyword'>external</span> <span class='lower'>gtk_label_set_text</span> <span class='keywordsign'>:</span>
     <span class='lower'>obj</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>string</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_label_set_text_c&#34;</span>
 <span class='keyword'>external</span> <span class='lower'>gtk_label_set_justify</span> <span class='keywordsign'>:</span>
-    <span class='lower'>obj</span> <span class='keywordsign'>-&#62;</span> <span class='constructor'>Justification</span><span class='keywordsign'>.</span><span class='lower'>t</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_label_set_justify_c&#34;</span>
+    <span class='lower'>obj</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>Justification</span><span class='keywordsign'>.</span><span class='lower'>t</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_label_set_justify_c&#34;</span>
 <span class='keyword'>external</span> <span class='lower'>gtk_label_set_pattern</span> <span class='keywordsign'>:</span>
     <span class='lower'>obj</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>string</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_label_set_pattern_c&#34;</span>
 <span class='keyword'>external</span> <span class='lower'>gtk_label_set_line_wrap</span> <span class='keywordsign'>:</span>
@@ -318,10 +318,10 @@ it&#39;s really more of the same idea, <em>except</em> that this class isn&#39;t
 virtual. You can create instances of this class which means it finally
 has to call <code>gtk_..._new</code>. This is the initialization code (we discussed
 this pattern above):</p>
-<pre><code class='tryocaml'><span class='keyword'>class</span> <span class='lower'>label</span> <span class='keywordsign'>~</span><span class='lower'>text</span> <span class='operator'>...</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+<pre><code class='tryocaml'><span class='keyword'>class</span> <span class='lower'>label</span> <span class='keywordsign'>~</span><span class='lower'>text</span> <span class='keywordsign operator'>...</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>obj</span> <span class='keywordsign'>=</span> <span class='lower'>gtk_label_new</span> <span class='lower'>text</span> <span class='keyword'>in</span>
   <span class='keyword'>object</span> <span class='keywordsign'>(</span><span class='lower'>self</span><span class='keywordsign'>)</span>
-    <span class='keyword'>inherit</span> <span class='lower'>misc</span> <span class='operator'>...</span> <span class='lower'>obj</span>
+    <span class='keyword'>inherit</span> <span class='lower'>misc</span> <span class='keywordsign operator'>...</span> <span class='lower'>obj</span>
   <span class='keyword'>end</span>
 <a href="javascript:octry('class label ~text ... () =\n  let obj = gtk_label_new text in\n  object (self)\n    inherit misc ... obj\n  end\n');">[try]</a></code></pre>
 <p>
@@ -332,17 +332,17 @@ instances?)</p>
 <h4 id="WrappingcallstoClibraries"> Wrapping calls to C libraries</h4><p>
 Now we&#39;ll look in more detail at actually wrapping up calls to C library
 functions. Here&#39;s a simple example:</p>
-<pre><code class='tryocaml'><span class='infix'>/*</span> <span class='keyword'>external</span> <span class='lower'>gtk_label_set_text</span> <span class='keywordsign'>:</span>
+<pre><code class='tryocaml'><span class='keywordsign infix'>/*</span> <span class='keyword'>external</span> <span class='lower'>gtk_label_set_text</span> <span class='keywordsign'>:</span>
      <span class='lower'>obj</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>string</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span>
-       <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_label_set_text_c&#34;</span> <span class='infix'>*/</span>
+       <span class='keywordsign'>=</span> <span class='string'>&#34;gtk_label_set_text_c&#34;</span> <span class='keywordsign infix'>*/</span>
 
-<span class='constructor'>CAMLprim</span> <span class='lower'>value</span>
+<span class='constructor module'>CAMLprim</span> <span class='lower'>value</span>
 <span class='lower'>gtk_label_set_text_c</span> <span class='keywordsign'>(</span><span class='lower'>value</span> <span class='lower'>obj</span><span class='keywordsign'>,</span> <span class='lower'>value</span> <span class='lower'>str</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>{</span>
-  <span class='constructor'>CAMLparam2</span> <span class='keywordsign'>(</span><span class='lower'>obj</span><span class='keywordsign'>,</span> <span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-  <span class='lower'>gtk_label_set_text</span> <span class='keywordsign'>(</span><span class='lower'>unwrap</span> <span class='keywordsign'>(</span><span class='constructor'>GtkLabel</span><span class='keywordsign'>,</span> <span class='lower'>obj</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span>
-    <span class='constructor'>String_val</span> <span class='keywordsign'>(</span><span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-  <span class='constructor'>CAMLreturn</span> <span class='keywordsign'>(</span><span class='constructor'>Val_unit</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>CAMLparam2</span> <span class='keywordsign'>(</span><span class='lower'>obj</span><span class='keywordsign'>,</span> <span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='lower'>gtk_label_set_text</span> <span class='keywordsign'>(</span><span class='lower'>unwrap</span> <span class='keywordsign'>(</span><span class='constructor module'>GtkLabel</span><span class='keywordsign'>,</span> <span class='lower'>obj</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span>
+    <span class='constructor module'>String_val</span> <span class='keywordsign'>(</span><span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>CAMLreturn</span> <span class='keywordsign'>(</span><span class='constructor module'>Val_unit</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>}</span>
 <a href="javascript:octry('/* external gtk_label_set_text :\n     obj -&#62; string -&#62; unit\n       = &#34;gtk_label_set_text_c&#34; */\n\nCAMLprim value\ngtk_label_set_text_c (value obj, value str)\n{\n  CAMLparam2 (obj, str);\n  gtk_label_set_text (unwrap (GtkLabel, obj),\n    String_val (str));\n  CAMLreturn (Val_unit);\n}\n');">[try]</a></code></pre>
 <p>
@@ -388,9 +388,9 @@ garbage collector about the &quot;roots&quot; that you&#39;re using. And tell th
 garbage collector when you finish using those roots too, of course. This
 is done by framing the function within <code>CAMLparamN</code> ... <code>CAMLreturn</code>.
 Hence:</p>
-<pre><code class='tryocaml'><span class='constructor'>CAMLparam2</span> <span class='keywordsign'>(</span><span class='lower'>obj</span><span class='keywordsign'>,</span> <span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-<span class='operator'>...</span>
-<span class='constructor'>CAMLreturn</span> <span class='keywordsign'>(</span><span class='constructor'>Val_unit</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> 
+<pre><code class='tryocaml'><span class='constructor module'>CAMLparam2</span> <span class='keywordsign'>(</span><span class='lower'>obj</span><span class='keywordsign'>,</span> <span class='lower'>str</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+<span class='keywordsign operator'>...</span>
+<span class='constructor module'>CAMLreturn</span> <span class='keywordsign'>(</span><span class='constructor module'>Val_unit</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> 
 <a href="javascript:octry('CAMLparam2 (obj, str);\n...\nCAMLreturn (Val_unit); \n');">[try]</a></code></pre>
 <p>
 <code>CAMLparam2</code> is a macro saying that you&#39;re using two <code>value</code> parameters.

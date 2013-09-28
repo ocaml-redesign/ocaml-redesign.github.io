@@ -115,7 +115,7 @@ programmation fonctionnelle.</p>
 langage fonctionnel, les fonctions sont des citoyens de première classe»</p>
 <p>Que de mots qui n&#39;ont pas vraiment de sens. Voyons plutôt un exemple :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>double</span> <span class='lower'>x</span><span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>*</span><span class='number'>2</span> <span class='keyword'>in</span>
-   <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>double</span> <span class='keywordsign'>[</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+   <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>double</span> <span class='keywordsign'>[</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>4</span><span class='keywordsign'>,</span> <span class='number'>6</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('# let double x= x *2 in\n   List.map double [ 1; 2; 3 ];;\n- : int list = [2; 4, 6]\n');">[try]</a></code></pre>
 <p>
@@ -142,7 +142,7 @@ par une valeur <code>n</code> arbitraire :</p>
     <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
         <span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>x</span>
     <span class='keyword'>in</span>
-    <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>list</span>
+    <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>list</span>
     <span class='keywordsign'>;</span><span class='keywordsign'>:</span>
 <a href="javascript:octry('let multiply n list =\n    let f x =\n        n * x\n    in\n    List.map f list\n    ;:\n');">[try]</a></code></pre>
 <p>
@@ -172,8 +172,8 @@ donc à <code>n</code>.</p>
 l&#39;instant, mais considérons juste cela comme une définition de fonction
 pour l&#39;instant).</p>
 <p><code> class html_skel obj = object (self)</code></p>
-<pre><code class='tryocaml'> <span class='operator'>...</span>
- <span class='operator'>...</span>
+<pre><code class='tryocaml'> <span class='keywordsign operator'>...</span>
+ <span class='keywordsign operator'>...</span>
  <span class='keyword'>method</span> <span class='lower'>save_to_channel</span> <span class='lower'>chan</span> <span class='keywordsign'>=</span>
    <span class='keyword'>let</span> <span class='lower'>receiver_fn</span> <span class='lower'>content</span> <span class='keywordsign'>=</span>
      <span class='lower'>output_string</span> <span class='lower'>chan</span> <span class='lower'>content</span><span class='keywordsign'>;</span>
@@ -267,7 +267,7 @@ suffit.</p>
 précédemment ? <code>multiply</code> était définit ainsi :</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>multiply</span> <span class='lower'>n</span> <span class='lower'>list</span> <span class='keywordsign'>=</span>
     <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>x</span> <span class='keyword'>in</span>
-    <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>list</span>
+    <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>list</span>
     <span class='keywordsign'>;;</span>
 <a href="javascript:octry('let multiply n list =\n    let f x = n * x in\n    List.map f list\n    ;;\n');">[try]</a></code></pre>
 <p>
@@ -286,7 +286,7 @@ Ce sont de réelles fonctions, la preuve :</p>
 <p>
 On peut aussi utiliser l&#39;application partielle (sans la fonction
 intermédiaire <code>f</code>) de cette façon :</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>multiply</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keywordsign'>(</span> <span class='keywordsign'>*</span> <span class='keywordsign'>)</span> <span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>multiply</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keywordsign'>(</span> <span class='keywordsign'>*</span> <span class='keywordsign'>)</span> <span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keyword'>val</span> <span class='lower'>multiply</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span>
 
 <span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>double</span> <span class='keywordsign'>=</span> <span class='lower'>multiply</span> <span class='number'>2</span><span class='keywordsign'>;;</span>
@@ -313,9 +313,9 @@ fonction <code>plus</code> :</p>
 <a href="javascript:octry('# let plus = (+);;\nval plus : int -&#62; int -&#62; int = &#60;fun&#62;\n# plus 2 3;;\n- : int = 5\n');">[try]</a></code></pre>
 <p>
 Voici encore plus de curryfication :</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='lower'>plus</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='lower'>plus</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>4</span><span class='keywordsign'>;</span> <span class='number'>5</span><span class='keywordsign'>]</span>
-<span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>list_of_functions</span> <span class='keywordsign'>=</span> <span class='constructor'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>plus</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>list_of_functions</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>plus</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keyword'>val</span> <span class='lower'>list_of_functions</span> <span class='keywordsign'>:</span> <span class='keywordsign'>(</span><span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span><span class='keywordsign'>)</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>;</span> <span class='keywordsign'>&#60;</span><span class='keyword'>fun</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 <a href="javascript:octry('# List.map (plus 2) [1; 2; 3];;\n- : int list = [3; 4; 5]\n# let list_of_functions = List.map plus [1; 2; 3];;\nval list_of_functions : (int -&#62; int) list = [&#60;fun&#62;; &#60;fun&#62;; &#60;fun&#62;]\n');">[try]</a></code></pre>
 <h2 id="Enquoilaprogrammationfonctionnelleestutile"> En quoi la programmation fonctionnelle est utile ?</h2><p>
@@ -350,8 +350,8 @@ qu&#39;écrire des fonctions impures est parfois utile.</p>
 est que si une fonction est pure, alors elle peut être appelée plusieurs
 fois avec les même arguments, le compilateur n&#39;aura qu&#39;a appeler la
 fonction qu&#39;une seule fois. Un bon exemple en C est :</p>
-<pre><code class='tryocaml'><span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>&#60;</span> <span class='lower'>strlen</span><span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='infix'>++</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>{</span>
-    <span class='infix'>//</span> <span class='constructor'>Du</span> <span class='lower'>code</span> <span class='lower'>qui</span> <span class='lower'>n&#39;affecte</span> <span class='lower'>pas</span> <span class='lower'>s</span>
+<pre><code class='tryocaml'><span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>&#60;</span> <span class='lower'>strlen</span><span class='keywordsign'>(</span><span class='lower'>s</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='keywordsign infix'>++</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>{</span>
+    <span class='keywordsign infix'>//</span> <span class='constructor module'>Du</span> <span class='lower'>code</span> <span class='lower'>qui</span> <span class='lower'>n&#39;affecte</span> <span class='lower'>pas</span> <span class='lower'>s</span>
 <span class='keywordsign'>}</span>
 <a href="javascript:octry('for (i = 0; i &#60; strlen(s); ++i) {\n    // Du code qui n\&#39;affecte pas s\n}\n');">[try]</a></code></pre>
 <p>
@@ -378,7 +378,7 @@ nécessaire.</p>
 toujours évalués en premier, et le résultat est alors passé à la
 fonction. Par exemple dans un langage à évaluation stricte, cet appel va
 toujours sortir par une erreur de division par zéro :</p>
-<pre><code class='tryocaml'> <span class='lower'>give_me_a_three</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='infix'>/</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'> <span class='lower'>give_me_a_three</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign infix'>/</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry(' give_me_a_three (1/0);;\n');">[try]</a></code></pre>
 <p>
 Si vous avez programmé dans n&#39;importe quel langage conventionnel, c&#39;est
@@ -398,7 +398,7 @@ d&#39;itérer sur la totalité de la liste, cela fonctionne.</p>
 paresseuse (<code>Lazy</code>) qui permettent d&#39;écrire des expressions paresseuses.
 Voici un exemple. D&#39;abord nous créons une expression paresseuse pour
 <code>1/0</code> :</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>lazy_expr</span> <span class='keywordsign'>=</span> <span class='keyword'>lazy</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='infix'>/</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>let</span> <span class='lower'>lazy_expr</span> <span class='keywordsign'>=</span> <span class='keyword'>lazy</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign infix'>/</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keyword'>val</span> <span class='lower'>lazy_expr</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>lazy_t</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#60;</span><span class='keyword'>lazy</span><span class='keywordsign'>&#62;</span>
 <a href="javascript:octry('# let lazy_expr = lazy (1/0);;\nval lazy_expr : int lazy_t = &#60;lazy&#62;\n');">[try]</a></code></pre>
 <p>
@@ -411,8 +411,8 @@ cette expression à la fonction :</p>
 <p>
 Pour évaluer une expression paresseuse, nous devons utiliser la fonction
 <code>Lazy.force</code> :</p>
-<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor'>Lazy</span><span class='keywordsign'>.</span><span class='lower'>force</span> <span class='lower'>lazy_expr</span><span class='keywordsign'>;;</span>
-<span class='constructor'>Exception</span> <span class='keywordsign'>:</span> <span class='constructor'>Division_by_zero</span><span class='keywordsign'>.</span>
+<pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor module'>Lazy</span><span class='keywordsign'>.</span><span class='lower'>force</span> <span class='lower'>lazy_expr</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Exception</span> <span class='keywordsign'>:</span> <span class='constructor module'>Division_by_zero</span><span class='keywordsign'>.</span>
 <a href="javascript:octry('# Lazy.force lazy_expr;;\nException : Division_by_zero.\n');">[try]</a></code></pre>
 <h2 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h2><p>
 

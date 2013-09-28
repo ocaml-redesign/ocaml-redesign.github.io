@@ -106,16 +106,16 @@ inferred as <em>X</em> (float). But the context, i.e. everything which is
 around (1 + ...) tells that the gap expects an expression of type <em>Y</em>
 (int) which is not compatible with <em>X</em>.</p>
 <p>More disturbing is the following message:</p>
-<pre><code class='tryocaml'> <span class='constructor'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>my_type</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>my_type</span>
+<pre><code class='tryocaml'> <span class='constructor module'>This</span> <span class='lower'>expression</span> <span class='lower'>has</span> <span class='keyword'>type</span> <span class='lower'>my_type</span> <span class='lower'>but</span> <span class='lower'>is</span> <span class='lower'>here</span> <span class='lower'>used</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>my_type</span>
 <a href="javascript:octry(' This expression has type my_type but is here used with type my_type\n');">[try]</a></code></pre>
 <p>
 This error happens often while testing some type definitions using the
 toplevel. In OCaml, it is perfectly legal to define a type with a name
 that is already taken by another type. Consider the following session:</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>my_type</span> <span class='keywordsign'>=</span> <span class='constructor'>A</span> <span class='keywordsign'>|</span> <span class='constructor'>B</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='constructor'>A</span><span class='keywordsign'>;;</span>
-<span class='keyword'>type</span> <span class='lower'>my_type</span> <span class='keywordsign'>=</span> <span class='constructor'>A</span> <span class='keywordsign'>|</span> <span class='constructor'>B</span><span class='keywordsign'>;;</span>
-<span class='keyword'>let</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='constructor'>B</span><span class='keywordsign'>;;</span>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>my_type</span> <span class='keywordsign'>=</span> <span class='constructor module'>A</span> <span class='keywordsign'>|</span> <span class='constructor module'>B</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='constructor module'>A</span><span class='keywordsign'>;;</span>
+<span class='keyword'>type</span> <span class='lower'>my_type</span> <span class='keywordsign'>=</span> <span class='constructor module'>A</span> <span class='keywordsign'>|</span> <span class='constructor module'>B</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='constructor module'>B</span><span class='keywordsign'>;;</span>
 <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='lower'>b</span><span class='keywordsign'>;;</span>
 <a href="javascript:octry('type my_type = A | B;;\nlet a = A;;\ntype my_type = A | B;;\nlet b = B;;\na = b;;\n');">[try]</a></code></pre>
 <p>
@@ -143,32 +143,32 @@ functions with labelled arguments.</p>
 This happens in some cases when the full type of an object is not known
 by the compiler when it reaches the end of the compilation unit (file)
 but for some reason it cannot remain polymorphic. Example:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor'>None</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor module'>None</span>
 <a href="javascript:octry('let x = ref None\n');">[try]</a></code></pre>
 <p>
 triggers the following message during the compilation:</p>
-<pre><code class='tryocaml'><span class='constructor'>The</span> <span class='keyword'>type</span> <span class='keyword'>of</span> <span class='lower'>this</span> <span class='lower'>expression</span><span class='keywordsign'>,</span> <span class='keywordsign'>&#39;</span><span class='keywordsign'>_</span> <span class='lower'>option</span> <span class='lower'>ref</span><span class='keywordsign'>,</span>
+<pre><code class='tryocaml'><span class='constructor module'>The</span> <span class='keyword'>type</span> <span class='keyword'>of</span> <span class='lower'>this</span> <span class='lower'>expression</span><span class='keywordsign'>,</span> <span class='keywordsign'>&#39;</span><span class='keywordsign'>_</span> <span class='lower'>option</span> <span class='lower'>ref</span><span class='keywordsign'>,</span>
 <span class='lower'>contains</span> <span class='keyword'>type</span> <span class='lower'>variables</span> <span class='lower'>that</span> <span class='lower'>cannot</span> <span class='lower'>be</span> <span class='lower'>generalized</span>
 <a href="javascript:octry('The type of this expression, \&#39;_a option ref,\ncontains type variables that cannot be generalized\n');">[try]</a></code></pre>
 <p>
 Solution: help the compiler with a type annotation, like for instance:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='lower'>option</span> <span class='lower'>ref</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor'>None</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='lower'>option</span> <span class='lower'>ref</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor module'>None</span>
 <a href="javascript:octry('let x : string option ref = ref None\n');">[try]</a></code></pre>
 <p>
 or:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='keywordsign'>(</span><span class='constructor'>None</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='lower'>option</span><span class='keywordsign'>)</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='keywordsign'>(</span><span class='constructor module'>None</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='lower'>option</span><span class='keywordsign'>)</span>
 <a href="javascript:octry('let x = ref (None : string option)\n');">[try]</a></code></pre>
 <p>
 Data of type <code>&#39;_a</code> may be allowed temporarily, for instance during a
 toplevel session. It means that the given object has an unknown type,
 but it cannot be any type: it is not polymorphic data. In the toplevel,
 our example gives these results:</p>
-<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor'>None</span>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='constructor module'>None</span>
 <a href="javascript:octry('let x = ref None\n');">[try]</a></code></pre>
 <p>
 The compiler tells us that the type of x is not fully known yet. But by
 using <code>x</code> later, the compiler can infer the type of <code>x</code>:</p>
-<pre><code class='tryocaml'><span class='lower'>x</span> <span class='keywordsign'>:=</span> <span class='constructor'>Some</span> <span class='number'>0</span>
+<pre><code class='tryocaml'><span class='lower'>x</span> <span class='keywordsign'>:=</span> <span class='constructor module'>Some</span> <span class='number'>0</span>
 <a href="javascript:octry('x := Some 0\n');">[try]</a></code></pre>
 <p>
 Now <code>x</code> has a known type:</p>
