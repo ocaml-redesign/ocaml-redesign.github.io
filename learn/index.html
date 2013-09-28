@@ -135,18 +135,18 @@
         </div>
       </div>
 
-            <pre><code class='tryocaml'><span class='com2'>(* Binary tree <span class='ic'>with</span> leaves carrying an integer<span class='ic'>.</span> *)</span><!-- end comment -->
-<span class='keyword 1'>type</span> tree <span class='keyword 3'>=</span> Leaf <span class='keyword 3'>of</span> int <span class='keywordsign'>|</span> Node <span class='keyword 3'>of</span> tree <span class='keywordsign'>*</span> tree
+            <pre><code class='tryocaml'><span class='comment'>(* Binary tree with leaves carrying an integer. *)</span>
+<span class='keyword'>type</span> <span class='lower'>tree</span> <span class='keywordsign'>=</span> <span class='constructor'>Leaf</span> <span class='keyword'>of</span> <span class='lower'>int</span> <span class='keywordsign'>|</span> <span class='constructor'>Node</span> <span class='keyword'>of</span> <span class='lower'>tree</span> <span class='keywordsign'>*</span> <span class='lower'>tree</span>
 
-<span class='keyword 1'>let rec</span> exists_leaf test tree <span class='keyword 3'>=</span>
-  <span class='keyword 3'>match</span> tree <span class='keyword 1'>with</span>
-  <span class='keywordsign'>|</span> Leaf v <span class='keyword 3'>-></span> test v
-  <span class='keywordsign'>|</span> Node (left<span class='keywordsign'>,</span> right) <span class='keyword 3'>-></span>
-      exists_leaf test left
-      <span class='keywordsign'>||</span> exists_leaf test right
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>exists_leaf</span> <span class='lower'>test</span> <span class='lower'>tree</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>match</span> <span class='lower'>tree</span> <span class='keyword'>with</span>
+  <span class='keywordsign'>|</span> <span class='constructor'>Leaf</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>test</span> <span class='lower'>v</span>
+  <span class='keywordsign'>|</span> <span class='constructor'>Node</span> <span class='keywordsign'>(</span><span class='lower'>left</span><span class='keywordsign'>,</span> <span class='lower'>right</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+      <span class='lower'>exists_leaf</span> <span class='lower'>test</span> <span class='lower'>left</span>
+      <span class='infix'>||</span> <span class='lower'>exists_leaf</span> <span class='lower'>test</span> <span class='lower'>right</span>
 
-<span class='keyword 1'>let</span> has_even_leaf tree <span class='keyword 3'>=</span>
-  exists_leaf (<span class='keyword 1'>fun</span> n <span class='keyword 3'>-></span> n <span class='keyword 3'>mod</span> 2 <span class='keyword 3'>=</span> 0) tree
+<span class='keyword'>let</span> <span class='lower'>has_even_leaf</span> <span class='lower'>tree</span> <span class='keywordsign'>=</span>
+  <span class='lower'>exists_leaf</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>n</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>n</span> <span class='keyword'>mod</span> <span class='number'>2</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>)</span> <span class='lower'>tree</span>
 <a href="javascript:octry('(* Binary tree with leaves carrying an integer. *)\ntype tree = Leaf of int | Node of tree * tree\n\nlet rec exists_leaf test tree =\n  match tree with\n  | Leaf v -&#62; test v\n  | Node (left, right) -&#62;\n      exists_leaf test left\n      || exists_leaf test right\n\nlet has_even_leaf tree =\n  exists_leaf (fun n -&#62; n mod 2 = 0) tree\n');">[try]</a></code></pre>
 
         </section>
