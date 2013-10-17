@@ -104,7 +104,7 @@ static_old_syntax.ml:</p>
 <span class='constructor module'>Gram</span><span class='keywordsign'>.</span><span class='constructor module'>Entry</span><span class='keywordsign'>.</span><span class='lower'>parse</span> <span class='lower'>foo</span> <span class='keywordsign'>(</span><span class='constructor module'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_string</span> <span class='string'>&#34;foo x?&#34;</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor module'>Foo</span><span class='keywordsign'>(</span><span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>A</span><span class='keywordsign'>)</span>
 <span class='constructor module'>GDELETE_RULE</span> <span class='constructor module'>Gram</span> <span class='lower'>foo</span><span class='keywordsign'>:</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>;</span> <span class='constructor module'>LIDENT</span><span class='keywordsign'>;</span> <span class='lower'>bar</span> <span class='constructor module'>END</span>
 
-<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nmodule Gram = Grammar.GMake(...)\nlet foo = Gram.Entry.mk &#34;foo&#34;\nlet bar = Gram.Entry.mk &#34;bar&#34;\nGEXTEND Gram\n  GLOBAL: foo bor;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nGram.Entry.parse foo (Stream.of_string &#34;foo x?&#34;) = Foo(&#34;x&#34;, A)\nGDELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

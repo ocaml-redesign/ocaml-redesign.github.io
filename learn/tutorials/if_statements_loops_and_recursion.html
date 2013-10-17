@@ -95,7 +95,7 @@ OCaml has an if statement with two variations, and the obvious meaning:</p>
 <pre><code class='tryocaml'><span class='keyword'>if</span> <span class='lower'>boolean</span><span class='keywordsign'>-</span><span class='lower'>condition</span> <span class='keyword'>then</span> <span class='lower'>expression</span>
 
 <span class='keyword'>if</span> <span class='lower'>boolean</span><span class='keywordsign'>-</span><span class='lower'>condition</span> <span class='keyword'>then</span> <span class='lower'>expression</span> <span class='keyword'>else</span> <span class='lower'>other</span><span class='keywordsign'>-</span><span class='lower'>expression</span>
-<a href="javascript:octry('if boolean-condition then expression\n\nif boolean-condition then expression else other-expression\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Unlike in the conventional languages you&#39;ll be used to, if statements
 are really expressions. In other words, they&#39;re much more like
@@ -104,18 +104,18 @@ statements you may be used to.</p>
 <p>Here&#39;s a simple example of an <code>if</code> statement:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>max</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>a</span> <span class='keyword'>else</span> <span class='lower'>b</span>
-<a href="javascript:octry('let max a b =\n  if a &#62; b then a else b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 As a short aside, if you type this into the OCaml toplevel, you&#39;ll
 notice that OCaml decides that this function is polymorphic, with the
 following type:</p>
-<pre><code class='tryocaml'><span class='lower'>max</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('max : \&#39;a -&#62; \&#39;a -&#62; \&#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='lower'>max</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span></code></pre>
 <p>
 And indeed OCaml lets you use <code>max</code> on any type:</p>
 <pre><code class='tryocaml'><span class='lower'>max</span> <span class='number'>3</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
 <span class='lower'>max</span> <span class='number'>3.5</span> <span class='number'>13.0</span><span class='keywordsign'>;;</span>
 <span class='lower'>max</span> <span class='string'>&#34;a&#34;</span> <span class='string'>&#34;b&#34;</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('max 3 5;;\nmax 3.5 13.0;;\nmax &#34;a&#34; &#34;b&#34;;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This is because <code>&gt;</code> is in fact polymorphic. It works on any type, even
 objects (it does a binary comparison).</p>
@@ -127,7 +127,7 @@ expressions to see what it does:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
     <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
     <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span>
-<a href="javascript:octry('  let rec range a b =\n    if a &#62; b then []\n    else a :: range (a+1) b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Let&#39;s examine some typical calls to this function. Let&#39;s start with the
 easy case of <code>a &gt; b</code>. A call to <code>range 11 10</code> returns <code>[]</code> (the empty
@@ -141,7 +141,7 @@ is just the same as <code>[ 10 ]</code>.</p>
 <p>Let&#39;s try <code>range 9 10</code>:</p>
 <pre><code class='tryocaml'>Characters 2:0 - 2:1 :
 Error: Lexical error: don't know what to do with character '�'
-<a href="javascript:octry('range 9 10\n→ 9 :: (range 10 10)\n→ 9 :: [ 10 ]\n→ [9; 10]\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 It should be fairly clear that <code>range 1 10</code> evaluates to
 <code>[ 1; 2; 3; 4; 5; 6; 7; 8; 9; 10 ]</code>.</p>
@@ -152,7 +152,7 @@ chapter.</p>
 <p>Back, temporarily, to if statements. What does this function do?</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span>
   <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keyword'>if</span> <span class='lower'>y</span> <span class='keywordsign'>&#62;</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>y</span> <span class='keyword'>else</span> <span class='number'>0</span>
-<a href="javascript:octry('let f x y =\n  x + if y &#62; 0 then y else 0\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Clue: add brackets around the whole of the if expression. It clips <code>y</code>
 like an <a href='http://www.noir-medical.com/graphics/diode_graph.gif' title='http://www.noir-medical.com/graphics/diode_graph.gif'>electronic
@@ -160,7 +160,7 @@ diode</a>.</p>
 <p>The <code>abs</code> (absolute value) function is defined in <code>Pervasives</code> as:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>abs</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
   <span class='keyword'>if</span> <span class='lower'>x</span> <span class='keywordsign infix'>&#62;=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='lower'>x</span> <span class='keyword'>else</span> <span class='keywordsign'>-</span><span class='lower'>x</span>
-<a href="javascript:octry('let abs x =\n  if x &#62;= 0 then x else -x\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Also in <code>Pervasives</code>, the <code>string_of_float</code> function contains a complex
 pair of nested if expressions:</p>
@@ -172,7 +172,7 @@ pair of nested if expressions:</p>
     <span class='keyword'>else</span> <span class='keyword'>if</span> <span class='lower'>s</span><span class='keywordsign operator'>.[</span><span class='lower'>i</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;.&#39;</span> <span class='keywordsign infix'>||</span> <span class='lower'>s</span><span class='keywordsign operator'>.[</span><span class='lower'>i</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;e&#39;</span> <span class='keyword'>then</span> <span class='lower'>s</span>
     <span class='keyword'>else</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='lower'>loop</span> <span class='number'>0</span>
-<a href="javascript:octry('let string_of_float f =\n  let s = format_float &#34;%.12g&#34; f in\n  let l = string_length s in\n  let rec loop i =\n    if i &#62;= l then s ^ &#34;.&#34;\n    else if s.[i] = \&#39;.\&#39; || s.[i] = \&#39;e\&#39; then s\n    else loop (i+1) in\n  loop 0\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Let&#39;s examine this function. Suppose the function is called with <code>f</code> =
 12.34. Then <code>s</code> = &quot;12.34&quot;, and <code>l</code> = 5. We call <code>loop</code> the first time
@@ -201,7 +201,7 @@ of writing <code>string_of_float</code>:</p>
   <span class='keyword'>if</span> <span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>contains</span> <span class='lower'>s</span> <span class='string'>&#39;.&#39;</span> <span class='keywordsign infix'>||</span> <span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>contains</span> <span class='lower'>s</span> <span class='string'>&#39;e&#39;</span>
   <span class='keyword'>then</span> <span class='lower'>s</span>
   <span class='keyword'>else</span> <span class='lower'>s</span> <span class='keywordsign infix'>^</span> <span class='string'>&#34;.&#34;</span>
-<a href="javascript:octry('let string_of_float f =\n  let s = format_float &#34;%.12g&#34; f in\n  if String.contains s \&#39;.\&#39; || String.contains s \&#39;e\&#39;\n  then s\n  else s ^ &#34;.&#34;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Usingbeginend"> Using begin ... end</h2><p>
 
 Here is some code from lablgtk:</p>
@@ -211,7 +211,7 @@ Here is some code from lablgtk:</p>
   <span class='lower'>eprintf</span> <span class='string'>&#34;Glade-warning: %s expects a %s argument.\n&#34;</span> <span class='lower'>name</span> <span class='lower'>cls</span><span class='keywordsign'>;</span>
   <span class='lower'>raise</span> <span class='constructor module'>Not_found</span>
 <span class='keyword'>end</span>
-<a href="javascript:octry('if GtkBase.Object.is_a obj cls then\n  fun _ -&#62; f obj\nelse begin\n  eprintf &#34;Glade-warning: %s expects a %s argument.\n&#34; name cls;\n  raise Not_found\nend\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code>begin</code> and <code>end</code> are what is known as <strong>syntactic sugar</strong> for open and
 close parentheses. In the example above, all they do is group the two
@@ -222,7 +222,7 @@ this instead:</p>
 <span class='keyword'>else</span>
   <span class='lower'>eprintf</span> <span class='string'>&#34;Glade-warning: %s expects a %s argument.\n&#34;</span> <span class='lower'>name</span> <span class='lower'>cls</span><span class='keywordsign'>;</span>
   <span class='lower'>raise</span> <span class='constructor module'>Not_found</span>
-<a href="javascript:octry('if GtkBase.Object.is_a obj cls then\n  fun _ -&#62; f obj\nelse\n  eprintf &#34;Glade-warning: %s expects a %s argument.\n&#34; name cls;\n  raise Not_found\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Fully bracketing and properly indenting the above expression gives:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='keyword'>if</span> <span class='constructor module'>GtkBase</span><span class='keywordsign'>.</span><span class='constructor module'>Object</span><span class='keywordsign'>.</span><span class='lower'>is_a</span> <span class='lower'>obj</span> <span class='lower'>cls</span> <span class='keyword'>then</span>
@@ -231,7 +231,7 @@ Fully bracketing and properly indenting the above expression gives:</p>
    <span class='lower'>eprintf</span> <span class='string'>&#34;Glade-warning: %s expects a %s argument.\n&#34;</span> <span class='lower'>name</span> <span class='lower'>cls</span>
 <span class='keywordsign'>)</span><span class='keywordsign'>;</span>
 <span class='lower'>raise</span> <span class='constructor module'>Not_found</span>
-<a href="javascript:octry('(if GtkBase.Object.is_a obj cls then\n   fun _ -&#62; f obj\n else\n   eprintf &#34;Glade-warning: %s expects a %s argument.\n&#34; name cls\n);\nraise Not_found\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Not what was intended at all. So the <code>begin</code> and <code>end</code> are necessary to
 group together multiple statements in a <code>then</code> or <code>else</code> clause of an if
@@ -251,7 +251,7 @@ simple examples:</p>
     <span class='lower'>print_endline</span> <span class='string'>&#34;ELSE&#34;</span><span class='keywordsign'>;</span>
     <span class='lower'>failwith</span> <span class='string'>&#34;else clause&#34;</span>
   <span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  if 1 = 0 then\n    print_endline &#34;THEN&#34;\n  else begin\n    print_endline &#34;ELSE&#34;;\n    failwith &#34;else clause&#34;\n  end;;\n\n  if 1 = 0 then\n    print_endline &#34;THEN&#34;\n  else (\n    print_endline &#34;ELSE&#34;;\n    failwith &#34;else clause&#34;\n  );;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Forloopsandwhileloops"> For loops and while loops</h2><p>
 
 OCaml supports a rather limited form of the familiar <code>for</code> loop:</p>
@@ -262,13 +262,13 @@ OCaml supports a rather limited form of the familiar <code>for</code> loop:</p>
 <span class='keyword'>for</span> <span class='lower'>variable</span> <span class='keywordsign'>=</span> <span class='lower'>start_value</span> <span class='keyword'>downto</span> <span class='lower'>end_value</span> <span class='keyword'>do</span>
   <span class='lower'>expression</span>
 <span class='keyword'>done</span>
-<a href="javascript:octry('for variable = start_value to end_value do\n  expression\ndone\n\nfor variable = start_value downto end_value do\n  expression\ndone\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 A simple but real example from lablgtk:</p>
 <pre><code class='tryocaml'><span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keyword'>to</span> <span class='lower'>n_jobs</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>do</span>
   <span class='lower'>do_next_job</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <span class='keyword'>done</span>
-<a href="javascript:octry('for i = 1 to n_jobs () do\n  do_next_job ()\ndone\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In OCaml, <code>for</code> loops are just shorthand for writing:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keyword'>in</span>
@@ -281,7 +281,7 @@ In OCaml, <code>for</code> loops are just shorthand for writing:</p>
 <span class='keyword'>let</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='lower'>n_jobs</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
 <span class='lower'>do_next_job</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let i = 1 in\ndo_next_job ();\nlet i = 2 in\ndo_next_job ();\nlet i = 3 in\ndo_next_job ();\n  ...\nlet i = n_jobs () in\ndo_next_job ();\n()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 OCaml doesn&#39;t support the concept of breaking out of a <code>for</code> loop early</p>
 <ul>
@@ -294,7 +294,7 @@ often looks clumsy.)</li>
 (otherwise you&#39;ll get a warning), and the for loop expression as a whole
 returns <code>unit</code>:</p>
 <pre><code class='tryocaml'><span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keyword'>to</span> <span class='number'>10</span> <span class='keyword'>do</span> <span class='lower'>i</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('for i = 1 to 10 do i done;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Functional programmers tend to use recursion instead of explicit loops,
 and regard <strong>for</strong> loops with suspicion since it can&#39;t return anything,
@@ -304,7 +304,7 @@ below.</p>
 <pre><code class='tryocaml'><span class='keyword'>while</span> <span class='lower'>boolean</span><span class='keywordsign'>-</span><span class='lower'>condition</span> <span class='keyword'>do</span>
   <span class='lower'>expression</span>
 <span class='keyword'>done</span>
-<a href="javascript:octry('while boolean-condition do\n  expression\ndone\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 As with for loops, there is no way provided by the language to break out
 of a while loop, except by throwing an exception, and this means that
@@ -321,7 +321,7 @@ Let&#39;s imagine that OCaml didn&#39;t have references for a moment:</p>
   <span class='keyword'>if</span> <span class='lower'>str</span><span class='keywordsign operator'>.[</span><span class='number'>0</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;y&#39;</span> <span class='keyword'>then</span>
     <span class='comment'>(* how do I set quit_loop to true ?!? *)</span>
 <span class='keyword'>done</span>
-<a href="javascript:octry('let quit_loop = false in\nwhile not quit_loop do\n  print_string &#34;Have you had enough yet? (y/n) &#34;;\n  let str = read_line () in\n  if str.[0] = \&#39;y\&#39; then\n    (* how do I set quit_loop to true ?!? *)\ndone\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Remember that <code>quit_loop</code> is not a real &quot;variable&quot; - the let-binding
 just makes <code>quit_loop</code> a shorthand for <code>false</code>. This means the while
@@ -339,7 +339,7 @@ pointer&quot;, similar in fact to Forth. You&#39;re better off reading <code>!</
   <span class='keyword'>if</span> <span class='lower'>str</span><span class='keywordsign operator'>.[</span><span class='number'>0</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='string'>&#39;y&#39;</span> <span class='keyword'>then</span>
     <span class='lower'>quit_loop</span> <span class='keywordsign'>:=</span> <span class='keyword'>true</span>
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let quit_loop = ref false in\nwhile not !quit_loop do\n  print_string &#34;Have you had enough yet? (y/n) &#34;;\n  let str = read_line () in\n  if str.[0] = \&#39;y\&#39; then\n    quit_loop := true\ndone;;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Loopingoverlists"> Looping over lists</h2><p>
 
 If you want to loop over a list, don&#39;t be an imperative programmer and
@@ -349,14 +349,14 @@ and faster ways to loop over lists, and they are all located in the
 I&#39;ll only talk about the most useful ones here.</p>
 <p>First off, let&#39;s define a list for us to use:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>my_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>4</span><span class='keywordsign'>;</span> <span class='number'>5</span><span class='keywordsign'>;</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='number'>7</span><span class='keywordsign'>;</span> <span class='number'>8</span><span class='keywordsign'>;</span> <span class='number'>9</span><span class='keywordsign'>;</span> <span class='number'>10</span><span class='keywordsign'>]</span>
-<a href="javascript:octry('let my_list = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If you want to call a function once on every element of the list, use
 <code>List.iter</code>, like this:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>elem</span> <span class='keywordsign'>=</span>
     <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I&#39;m looking at element %d now\n&#34;</span> <span class='lower'>elem</span> <span class='keyword'>in</span>
   <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>f</span> <span class='lower'>my_list</span>
-<a href="javascript:octry('  let f elem =\n    Printf.printf &#34;I\&#39;m looking at element %d now\n&#34; elem in\n  List.iter f my_list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code>List.iter</code> is in fact what you should think about using first every
 time your cerebellum suggests you use a for loop.</p>
@@ -365,7 +365,7 @@ example, doubling each element in the list - then use <code>List.map</code>. Thi
 function will be familiar to people who&#39;ve</p>
 <p>programmed in Perl before.</p>
 <pre><code class='tryocaml'>  <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keywordsign'>(</span> <span class='keywordsign'>*</span> <span class='keywordsign'>)</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='lower'>my_list</span>
-<a href="javascript:octry('  List.map (( * ) 2) my_list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Perl has the useful function &quot;grep&quot; for filtering only elements of a
 list which satisfy some condition - eg. returning all even numbers in a
@@ -373,12 +373,12 @@ list. In OCaml this function is called <code>List.filter</code>:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>is_even</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
     <span class='lower'>i</span> <span class='keyword'>mod</span> <span class='number'>2</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>in</span>
   <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>filter</span> <span class='lower'>is_even</span> <span class='lower'>my_list</span>
-<a href="javascript:octry('  let is_even i =\n    i mod 2 = 0 in\n  List.filter is_even my_list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To find out if a list contains some element, use <code>List.mem</code> (short for
 member):</p>
 <pre><code class='tryocaml'>  <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>mem</span> <span class='number'>12</span> <span class='lower'>my_list</span>
-<a href="javascript:octry('  List.mem 12 my_list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code>List.for_all</code> and <code>List.exists</code> are the same as the &quot;forall&quot; and
 &quot;exist&quot; operators in predicate logic.</p>
@@ -392,7 +392,7 @@ list&quot;. Suppose I wanted to add all the numbers in my list together. In
 hand-waving terms what I want to do is insert a plus sign between the
 elements in my list:</p>
 <pre><code class='tryocaml'><span class='number'>1</span> <span class='keywordsign'>+</span> <span class='number'>2</span> <span class='keywordsign'>+</span> <span class='number'>3</span> <span class='keywordsign'>+</span> <span class='number'>4</span> <span class='keywordsign'>+</span> <span class='number'>5</span> <span class='keywordsign'>+</span> <span class='number'>6</span> <span class='keywordsign'>+</span> <span class='number'>7</span> <span class='keywordsign'>+</span> <span class='number'>8</span> <span class='keywordsign'>+</span> <span class='number'>9</span> <span class='keywordsign'>+</span> <span class='number'>10</span>
-<a href="javascript:octry('1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The fold operation does this, although the exact details are a little
 bit more tricky. First of all, what happens if I try to fold an empty
@@ -413,13 +413,13 @@ integer lists:</p>
 <span class='keyword'>let</span> <span class='lower'>product</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_left</span> <span class='keywordsign'>(</span> <span class='keywordsign'>*</span> <span class='keywordsign'>)</span> <span class='number'>1</span><span class='keywordsign'>;;</span>
 <span class='lower'>sum</span> <span class='lower'>my_list</span><span class='keywordsign'>;;</span>
 <span class='lower'>product</span> <span class='lower'>my_list</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let sum = List.fold_left ( + ) 0;;\nlet product = List.fold_left ( * ) 1;;\nsum my_list;;\nproduct my_list;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 That was easy! Notice that I&#39;ve accidentally come up with a way to do
 mathematical factorials:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>fact</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='lower'>product</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='number'>1</span> <span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='lower'>fact</span> <span class='number'>10</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let fact n = product (range 1 n);;\nfact 10;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (Notice that this factorial function isn&#39;t very useful because it
 overflows the integers and gives wrong answers even for quite small
@@ -484,7 +484,7 @@ line parameter.</li>
   <span class='keyword'>let</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span> <span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>str</span> <span class='keywordsign'>=</span> <span class='lower'>read_whole_file</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
   <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I read %d characters from %s\n&#34;</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span><span class='keywordsign'>)</span> <span class='lower'>filename</span>
-<a href="javascript:octry('(* Read whole file: Approach 1 *)\n\nlet read_whole_chan chan =\n  let len = in_channel_length chan in\n  let result = String.create len in\n  really_input chan result 0 len;\n  result\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Approach 1 works but is not very satisfactory because <code>read_whole_chan</code>
 won&#39;t work on non-file channels like keyboard input or sockets. Approach
@@ -511,7 +511,7 @@ won&#39;t work on non-file channels like keyboard input or sockets. Approach
   <span class='keyword'>let</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span> <span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>str</span> <span class='keywordsign'>=</span> <span class='lower'>read_whole_file</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
   <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I read %d characters from %s\n&#34;</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span><span class='keywordsign'>)</span> <span class='lower'>filename</span>
-<a href="javascript:octry('(* Read whole file: Approach 2 *)\n\nlet read_whole_chan chan =\n  let buf = Buffer.create 4096 in\n  try\n    while true do\n      let line = input_line chan in\n      Buffer.add_string buf line;\n      Buffer.add_char buf \&#39;\n\&#39;\n    done;\n    assert false (* This is never executed (always raise Assert_failure). *)\n  with\n    End_of_file -&#62; Buffer.contents buf\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The key to approach 2 is to look at the central while loop. Remember
 that I said the only way to break out of a while loop early was with an
@@ -553,7 +553,7 @@ while loop the string could never actually be returned.</p>
   <span class='keyword'>let</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span> <span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>str</span> <span class='keywordsign'>=</span> <span class='lower'>read_whole_file</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
   <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;I read %d characters from %s\n&#34;</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span><span class='keywordsign'>)</span> <span class='lower'>filename</span>
-<a href="javascript:octry('(* Read whole file: Approach 3 *)\n\nlet read_whole_chan chan =\n  let buf = Buffer.create 4096 in\n  let rec loop () =\n    let line = input_line chan in\n    Buffer.add_string buf line;\n    Buffer.add_char buf \&#39;\n\&#39;;\n    loop () in\n  try\n    loop ()\n  with\n    End_of_file -&#62; Buffer.contents buf\n\nlet read_whole_file filename =\n  let chan = open_in filename in\n  read_whole_chan chan\n\nlet () =\n  let filename = Sys.argv.(1) in\n  let str = read_whole_file filename in\n  Printf.printf &#34;I read %d characters from %s\n&#34; (String.length str) filename\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Again we have an infinite loop - but in this case done using recursion.
 <code>loop</code> calls itself at the end of the function. The infinite recursion
@@ -567,7 +567,7 @@ space.</p>
 or examining certain types of data structures, particularly trees. Let&#39;s
 have a recursive type to represent files in a filesystem:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>filesystem</span> <span class='keywordsign'>=</span> <span class='constructor module'>File</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>|</span> <span class='constructor module'>Directory</span> <span class='keyword'>of</span> <span class='lower'>filesystem</span> <span class='lower'>list</span>
-<a href="javascript:octry('type filesystem = File of string | Directory of filesystem list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>opendir</code> and <code>readdir</code> functions are used to open a directory and
 read elements from the directory. I&#39;m going to define a handy
@@ -581,12 +581,12 @@ directory:</p>
     <span class='constructor module'>Some</span> <span class='keywordsign'>(</span><span class='lower'>readdir</span> <span class='lower'>dirh</span><span class='keywordsign'>)</span>
   <span class='keyword'>with</span>
     <span class='constructor module'>End_of_file</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>None</span>
-<a href="javascript:octry('open Unix  (*  You may need to #load &#34;Unix.cma&#34; *)\n\nlet readdir_no_ex dirh =\n  try\n    Some (readdir dirh)\n  with\n    End_of_file -&#62; None\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The type of <code>readdir_no_ex</code> is this. Recall our earlier discussion about
 null pointers.</p>
 <pre><code class='tryocaml'><span class='lower'>readdir_no_ex</span> <span class='keywordsign'>:</span> <span class='lower'>dir_handle</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>string</span> <span class='lower'>option</span>
-<a href="javascript:octry('readdir_no_ex : dir_handle -&#62; string option\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 I&#39;m also going to define a simple recursive function which I can use to
 convert the <code>filesystem</code> type into a string for (eg) printing:</p>
@@ -595,7 +595,7 @@ convert the <code>filesystem</code> type into a string for (eg) printing:</p>
   <span class='keywordsign'>|</span> <span class='constructor module'>File</span> <span class='lower'>filename</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>filename</span> <span class='keywordsign infix'>^</span> <span class='string'>&#34;\n&#34;</span>
   <span class='keywordsign'>|</span> <span class='constructor module'>Directory</span> <span class='lower'>fs_list</span> <span class='keywordsign'>-&#62;</span>
       <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_left</span> <span class='keywordsign'>(</span><span class='keywordsign infix'>^</span><span class='keywordsign'>)</span> <span class='string'>&#34;&#34;</span> <span class='keywordsign'>(</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>string_of_filesystem</span> <span class='lower'>fs_list</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec string_of_filesystem fs =\n  match fs with\n  | File filename -&#62; filename ^ &#34;\n&#34;\n  | Directory fs_list -&#62;\n      List.fold_left (^) &#34;&#34; (List.map string_of_filesystem fs_list)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note the use of <code>fold_left</code> and <code>map</code>. The <code>map</code> is used to
 (recursively) convert each <code>filesystem</code> in the list into a <code>string</code>.
@@ -612,7 +612,7 @@ end of this section. First the outline of the function:</p>
   <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
     <span class='comment'>(* ..... *)</span> <span class='keyword'>in</span>
   <span class='constructor module'>Directory</span> <span class='keywordsign'>(</span><span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec read_directory path =\n  let dirh = opendir path in\n  let rec loop () =\n    (* ..... *) in\n  Directory (loop ())\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The call to <code>opendir</code> opens up the given path and returns a <code>dir_handle</code>
 from which we will be able to read the names using <code>readdir_no_ex</code>
@@ -621,13 +621,13 @@ later. The return value of the function is going to be a
 write our function <code>loop</code> which returns a list of <code>filesystem</code>s. The
 type of <code>loop</code> will be:</p>
 <pre><code class='tryocaml'><span class='lower'>loop</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>filesystem</span> <span class='lower'>list</span>
-<a href="javascript:octry('loop : unit -&#62; filesystem list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 How do we define loop? Let&#39;s take it in steps again.</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>filename</span> <span class='keywordsign'>=</span> <span class='lower'>readdir_no_ex</span> <span class='lower'>dirh</span> <span class='keyword'>in</span>
   <span class='comment'>(* ..... *)</span>
-<a href="javascript:octry('let rec loop () =\n  let filename = readdir_no_ex dirh in\n  (* ..... *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 First we read the next filename from the directory handle. <code>filename</code>
 has type <code>string option</code>, in other words it could be <code>None</code> or
@@ -643,7 +643,7 @@ nice pattern match:</p>
   <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='string'>&#34;..&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='lower'>filename</span> <span class='keywordsign'>-&#62;</span>
      <span class='comment'>(* ..... *)</span>
-<a href="javascript:octry('let rec loop () =\n  let filename = readdir_no_ex dirh in\n  match filename with\n  | None -&#62; []\n  | Some &#34;.&#34; -&#62; loop ()\n  | Some &#34;..&#34; -&#62; loop ()\n  | Some filename -&#62;\n     (* ..... *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>None</code> case is easy. Thinking recursively (!) if <code>loop</code> is called
 and we&#39;ve reached the end of the directory, <code>loop</code> needs to return a
@@ -677,7 +677,7 @@ to which we prepend <code>this</code>.</p>
                      <span class='constructor module'>File</span> <span class='lower'>pathname</span> <span class='keyword'>in</span>
         <span class='lower'>this</span> <span class='keywordsign'>::</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='constructor module'>Directory</span> <span class='keywordsign'>(</span><span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec read_directory path =\n  let dirh = opendir path in\n  let rec loop () =\n    let filename = readdir_no_ex dirh in\n    match filename with\n    | None -&#62; []\n    | Some &#34;.&#34; -&#62; loop ()\n    | Some &#34;..&#34; -&#62; loop ()\n    | Some filename -&#62;\n        let pathname = path ^ &#34;/&#34; ^ filename in\n        let stat = lstat pathname in\n        let this = if stat.st_kind = S_DIR then\n                     read_directory pathname\n                   else\n                     File pathname in\n        this :: loop () in\n  Directory (loop ())\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 That&#39;s quite a complex bit of recursion, but although this is a made-up
 example, it&#39;s fairly typical of the complex patterns of recursion found
@@ -691,7 +691,7 @@ away from this are:</p>
   <span class='lower'>a</span> <span class='keyword'>match</span> <span class='keywordsign'>or</span> <span class='keyword'>if</span> <span class='lower'>statement</span>
   <span class='keywordsign'>|</span> <span class='lower'>base</span> <span class='lower'>case</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>[]</span>
   <span class='keywordsign'>|</span> <span class='lower'>recursive</span> <span class='lower'>case</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>element</span> <span class='keywordsign'>::</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec loop () =\n  a match or if statement\n  | base case -&#62; []\n  | recursive case -&#62; element :: loop ()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 
 Compare this to our previous <code>range</code> function. The pattern of recursion
@@ -700,7 +700,7 @@ is exactly the same:</p>
   <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>            <span class='comment'>(* Base case *)</span>
   <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span>     <span class='comment'>(* Recursive case *)</span>
   <span class='keywordsign'>;;</span>
-<a href="javascript:octry('let rec range a b =\n  if a &#62; b then []            (* Base case *)\n  else a :: range (a+1) b     (* Recursive case *)\n  ;;\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>The use of recursion to build up trees:</li>
 </ul>
@@ -711,7 +711,7 @@ is exactly the same:</p>
     <span class='lower'>read_directory</span> <span class='lower'>path</span><span class='keywordsign'>-</span><span class='keyword'>to</span><span class='keywordsign'>-</span><span class='lower'>file</span>
   <span class='keyword'>else</span>
     <span class='constructor module'>Leaf</span> <span class='lower'>file</span>
-<a href="javascript:octry('let rec read_directory path =\n  (* blah blah *)\n  if file-is-a-directory then\n    read_directory path-to-file\n  else\n    Leaf file\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 
 All that remains now to make this a working program is a little bit of
@@ -719,7 +719,7 @@ code to call <code>read_directory</code> and display the result:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>path</span> <span class='keywordsign'>=</span> <span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>argv</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
 <span class='keyword'>let</span> <span class='lower'>fs</span> <span class='keywordsign'>=</span> <span class='lower'>read_directory</span> <span class='lower'>path</span> <span class='keyword'>in</span>
 <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='lower'>string_of_filesystem</span> <span class='lower'>fs</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let path = Sys.argv.(1) in\nlet fs = read_directory path in\nprint_endline (string_of_filesystem fs)\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Addendum"> Addendum</h3><p>
 
 After I posted this example to the caml-list mailing list I received
@@ -739,7 +739,7 @@ handles.</p>
   <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='constructor module'>Directory</span> <span class='keywordsign'>(</span><span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='lower'>closedir</span> <span class='lower'>dirh</span><span class='keywordsign'>;</span>
   <span class='lower'>result</span>
-<a href="javascript:octry('let rec read_directory path =\n  let dirh = opendir path in\n    (* ... *)\n  let result = Directory (loop ()) in\n  closedir dirh;\n  result\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Next up is the issue of <code>readdir</code> throwing an exception in a rather
 &quot;unexceptional&quot; situation, namely <code>End_of_file</code>. I don&#39;t agree that
@@ -775,7 +775,7 @@ accumulator argument in red:</p>
   <span class='keyword'>let</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='lower'>loop</span> <span class='keywordsign operator'>[]</span> <span class='keyword'>in</span>
   <span class='lower'>closedir</span> <span class='lower'>dirh</span><span class='keywordsign'>;</span>
   <span class='lower'>list</span>
-<a href="javascript:octry('let rec read_filesystem path =\n  if (lstat path).st_kind = S_DIR then\n    Directory (read_directory path)\n  else\n    File path\n\nand read_directory path =\n  let dirh = opendir path in\n  let rec loop entries =\n    try\n      match readdir dirh with\n      | &#34;.&#34; | &#34;..&#34; -&#62; loop entries\n      | filename -&#62; loop (read_filesystem (path ^ &#34;/&#34; ^ filename) :: entries)\n    with End_of_file -&#62; entries in\n  let list = loop [] in\n  closedir dirh;\n  list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice <code>End_of_file -&gt; entries</code> which means &quot;when we get the exception,
 give up and return the result so far&quot;.</p>
@@ -804,7 +804,7 @@ doesn&#39;t mind you using the imperative approach when it makes sense.</p>
     <span class='keywordsign'>|</span> <span class='lower'>filename</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>list</span> <span class='keywordsign'>:=</span> <span class='lower'>filename</span> <span class='keywordsign'>::</span> <span class='keywordsign prefix'>!</span><span class='lower'>list</span>
   <span class='keyword'>done</span>
 <span class='keyword'>with</span> <span class='constructor module'>End_of_file</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign prefix'>!</span><span class='lower'>list</span>
-<a href="javascript:octry('let list = ref [] in\nlet dir = opendir &#34;.......&#34; in\ntry\n  while true do\n    match readdir dir with\n    | &#34;.&#34; | &#34;..&#34; -&#62; ()\n    | filename -&#62; list := filename :: !list\n  done\nwith End_of_file -&#62; !list\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Recursionexamplemaximumelementinalist"> Recursion example: maximum element in a list</h3><p>
 
 Remember the basic recursion pattern for lists:</p>
@@ -812,7 +812,7 @@ Remember the basic recursion pattern for lists:</p>
   <span class='lower'>a</span> <span class='keyword'>match</span> <span class='keywordsign'>or</span> <span class='keyword'>if</span> <span class='lower'>statement</span>
   <span class='keywordsign'>|</span> <span class='lower'>base</span> <span class='lower'>case</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>[]</span>
   <span class='keywordsign'>|</span> <span class='lower'>recursive</span> <span class='lower'>case</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>element</span> <span class='keywordsign'>::</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec loop () =\n  a match or if statement\n  | base case -&#62; []\n  | recursive case -&#62; element :: loop ()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The key here is actually the use of the match / base case / recursive
 case pattern. In this example - finding the maximum element in a list -
@@ -848,7 +848,7 @@ the overall maximum of the whole list is <code>y = 4</code>.</p>
     <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>failwith</span> <span class='string'>&#34;list_max called on empty list&#34;</span>  <span class='comment'>(* empty list: fail *)</span>
     <span class='keywordsign'>|</span> <span class='keywordsign'>[</span><span class='lower'>x</span><span class='keywordsign'>]</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span>                                        <span class='comment'>(* single element list: return the element *)</span>
     <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>remainder</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>max</span> <span class='lower'>x</span> <span class='keywordsign'>(</span><span class='lower'>list_max</span> <span class='lower'>remainder</span><span class='keywordsign'>)</span>    <span class='comment'>(* multiple element list: recursive case *)</span>
-<a href="javascript:octry('  let rec list_max xs =\n    match xs with\n    | [] -&#62; failwith &#34;list_max called on empty list&#34;  (* empty list: fail *)\n    | [x] -&#62; x                                        (* single element list: return the element *)\n    | x :: remainder -&#62; max x (list_max remainder)    (* multiple element list: recursive case *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 I&#39;ve added comments so you can see how the rules / special cases we
 decided upon above really correspond to lines of code.</p>
@@ -857,7 +857,7 @@ decided upon above really correspond to lines of code.</p>
 <span class='lower'>list_max</span> <span class='keywordsign operator'>[]</span><span class='keywordsign'>;;</span>
 <span class='lower'>list_max</span> <span class='keywordsign'>[</span><span class='number'>5</span><span class='keywordsign'>;</span> <span class='number'>4</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='lower'>list_max</span> <span class='keywordsign'>[</span><span class='number'>5</span><span class='keywordsign'>;</span> <span class='number'>4</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>100</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('list_max [1; 2; 3; 4; 1];;\nlist_max [];;\nlist_max [5; 4; 3; 2; 1];;\nlist_max [5; 4; 3; 2; 1; 100];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice how the solution proposed is both (a) very different from the
 imperative for-loop solution, and (b) much more closely tied to the
@@ -874,7 +874,7 @@ Let&#39;s look at the <code>range</code> function again for about the twentieth 
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
   <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span>
-<a href="javascript:octry('let rec range a b =\n  if a &#62; b then []\n  else a :: range (a+1) b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 I&#39;m going to rewrite it slightly to make something about the structure
 of the program clearer (still the same function however):</p>
@@ -883,12 +883,12 @@ of the program clearer (still the same function however):</p>
   <span class='keyword'>else</span>
     <span class='keyword'>let</span> <span class='lower'>result</span> <span class='keywordsign'>=</span> <span class='lower'>range</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span> <span class='keyword'>in</span>
     <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>result</span>
-<a href="javascript:octry('let rec range a b =\n  if a &#62; b then []\n  else\n    let result = range (a+1) b in\n    a :: result\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Let&#39;s call it:</p>
 <pre><code class='tryocaml'><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='number'>1</span> <span class='number'>10</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='number'>1</span> <span class='number'>1000000</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('List.length (range 1 10);;\nList.length (range 1 1000000);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Hmmm ... at first sight this looks like a problem with recursive
 programming, and hence with the whole of functional programming! If you
@@ -904,7 +904,7 @@ Remember our <code>loop ()</code> functions above? They all had the form:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='comment'>(* do something *)</span>
   <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec loop () =\n  (* do something *)\n  loop ()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Because the recursive call to <code>loop ()</code> happens as the very last thing,
 <code>loop</code> is tail-recursive and the compiler will turn the whole thing into
@@ -927,7 +927,7 @@ argument to store the &quot;result so far&quot;:</p>
 
 <span class='keyword'>let</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='lower'>range2</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign operator'>[]</span>
-<a href="javascript:octry('let rec range2 a b accum =\n  (* ... *)\n\nlet range a b =\n  range2 a b []\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (I could and probably should have used a nested function here.)</p>
 <p>The <code>accum</code> argument is going to accumulate the result. It&#39;s the &quot;result
@@ -937,7 +937,7 @@ is when <code>a &gt; b</code>:</p>
   <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>accum</span>
   <span class='keyword'>else</span>
     <span class='comment'>(* ... *)</span>
-<a href="javascript:octry('let rec range2 a b accum =\n  if a &#62; b then accum\n  else\n    (* ... *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If <code>a &gt; b</code> (ie. if we&#39;ve reached the end of the recursion), then stop
 and return the result (<code>accum</code>).</p>
@@ -947,17 +947,17 @@ tail-recursive:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range2</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='lower'>accum</span> <span class='keywordsign'>=</span>
     <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>accum</span>
     <span class='keyword'>else</span> <span class='lower'>range2</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span> <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>accum</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('  let rec range2 a b accum =\n    if a &#62; b then accum\n    else range2 (a+1) b (a :: accum)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 There&#39;s only one slight problem with this function: it constructs the
 list backwards! However, this is easy to rectify by redefining range as:</p>
 <pre><code class='tryocaml'> <span class='keyword'>let</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>rev</span> <span class='keywordsign'>(</span><span class='lower'>range2</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign operator'>[]</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry(' let range a b = List.rev (range2 a b []);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 It works this time, although it&#39;s a bit slow to run because it really
 does have to construct a list with a million elements in it:</p>
 <pre><code class='tryocaml'>  <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='keywordsign'>(</span><span class='lower'>range</span> <span class='number'>1</span> <span class='number'>1000000</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('  List.length (range 1 1000000)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The following implementation is twice as fast as the previous one,
 because it does not need to reverse a list:</p>
@@ -967,7 +967,7 @@ because it does not need to reverse a list:</p>
 
   <span class='keyword'>let</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
     <span class='lower'>range2</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign operator'>[]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let rec range2 a b accum =\n    if b &#60; a then accum\n    else range2 a (b-1) (b :: accum);;\n\n  let range a b =\n    range2 a b [];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 That was a brief overview of tail recursion, but in real world
 situations determining if a function is tail recursive can be quite
@@ -982,7 +982,7 @@ Previously we mentioned records in passing. These are like C <code>struct</code>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>pair_of_ints</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='lower'>a</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>;</span> <span class='lower'>b</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>{</span><span class='lower'>a</span><span class='keywordsign'>=</span><span class='number'>3</span><span class='keywordsign'>;</span> <span class='lower'>b</span><span class='keywordsign'>=</span><span class='number'>5</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>{</span><span class='lower'>a</span><span class='keywordsign'>=</span><span class='number'>3</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type pair_of_ints = { a : int; b : int };;\n{a=3; b=5};;\n{a=3};;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 One feature which I didn&#39;t cover: OCaml records can have mutable fields.
 Normally an expression like <code>{a = 3; b = 5}</code> is an immutable, constant
@@ -996,14 +996,14 @@ count how many times the object has been accessed. You could imagine
 this being used in a caching scheme to decide which objects you&#39;d evict
 from memory.</p>
 <pre><code class='tryocaml'>  <span class='keyword'>type</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='lower'>name</span> <span class='keywordsign'>:</span> <span class='lower'>string</span><span class='keywordsign'>;</span> <span class='keyword'>mutable</span> <span class='lower'>access_count</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>}</span>
-<a href="javascript:octry('  type name = { name : string; mutable access_count : int }\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Here is a function defined on names which prints the <code>name</code> field and
 increments the mutable <code>access_count</code> field:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>print_name</span> <span class='lower'>name</span> <span class='keywordsign'>=</span>
     <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='string'>&#34;The name is &#34;</span> <span class='keywordsign infix'>^</span> <span class='lower'>name</span><span class='keywordsign'>.</span><span class='lower'>name</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
     <span class='lower'>name</span><span class='keywordsign'>.</span><span class='lower'>access_count</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>name</span><span class='keywordsign'>.</span><span class='lower'>access_count</span> <span class='keywordsign'>+</span> <span class='number'>1</span>
-<a href="javascript:octry('  let print_name name =\n    print_endline (&#34;The name is &#34; ^ name.name);\n    name.access_count &#60;- name.access_count + 1\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice a strange, and very non-functional feature of <code>print_name</code>: it
 modifies its <code>access_count</code> parameter. If you read chapter 5 closely,
@@ -1017,24 +1017,24 @@ down your throat.</p>
   <span class='lower'>n</span><span class='keywordsign'>;;</span>
   <span class='lower'>print_name</span> <span class='lower'>n</span><span class='keywordsign'>;;</span>
   <span class='lower'>n</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let n = { name = &#34;Richard Jones&#34;; access_count = 0 };;\n  n;;\n  print_name n;;\n  n;;\n  print_name n;;\n  n;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Only fields explicitly marked as <code>mutable</code> can be assigned to using the
 <code>&lt;-</code> operator. If you try to assign to a non-mutable field, OCaml won&#39;t
 let you:</p>
 <pre><code class='tryocaml'>  <span class='lower'>n</span><span class='keywordsign'>.</span><span class='lower'>name</span> <span class='keywordsign'>&#60;-</span> <span class='string'>&#34;John Smith&#34;</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  n.name &#60;- &#34;John Smith&#34;;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 References, with which we should be familiar by now, are implemented
 using records with a mutable <code>contents</code> field. Check out the definition
 in <code>Pervasives</code>:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aref</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='keyword'>mutable</span> <span class='lower'>contents</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>}</span>
-<a href="javascript:octry('type \&#39;a ref = { mutable contents : \&#39;a }\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 And look closely at what the OCaml toplevel prints out for the value of
 a reference:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>r</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>100</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let r = ref 100;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Arrays are another sort of mutable structure provided by OCaml. In
 OCaml, plain lists are implemented as linked lists, and linked lists are
@@ -1051,7 +1051,7 @@ you can randomly change elements too.</p>
     <span class='lower'>a</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>i</span>
   <span class='keyword'>done</span><span class='keywordsign'>;;</span>
   <span class='lower'>a</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let a = Array.create 10 0;;\n  for i = 0 to Array.length a - 1 do\n    a.(i) &#60;- i\n  done;;\n  a;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice the syntax for writing arrays: <code>[| element; element; ... |]</code></p>
 <p>The OCaml compiler was designed with heavy numerical processing in mind
@@ -1108,7 +1108,7 @@ imperative in style:</p>
   <span class='lower'>mmult</span> <span class='lower'>size</span> <span class='lower'>size</span> <span class='lower'>m1</span> <span class='lower'>m2</span> <span class='lower'>m3</span><span class='keywordsign'>;</span>
   <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d %d %d %d\n&#34;</span> <span class='lower'>m3</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>)</span> <span class='lower'>m3</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>3</span><span class='keywordsign'>)</span> <span class='lower'>m3</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>3</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>2</span><span class='keywordsign'>)</span> <span class='lower'>m3</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>4</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='number'>4</span><span class='keywordsign'>)</span>
 
-<a href="javascript:octry('(*\n * $Id: index.shtml,v 1.3 2004/04/23 12:33:00 rich Exp $\n * http://www.bagley.org/~doug/shootout/\n * from Markus Mottl\n *)\n\nlet size = 30\n\nlet mkmatrix rows cols =\n  let count = ref 1\n  and last_col = cols - 1\n  and m = Array.make_matrix rows cols 0 in\n  for i = 0 to rows - 1 do\n    let mi = m.(i) in\n    for j = 0 to last_col do\n      mi.(j) &#60;- !count;\n      incr count\n    done;\n  done;\n  m\n\nlet rec inner_loop k v m1i m2 j =\n  if k &#60; 0 then v\n  else inner_loop (k - 1) (v + m1i.(k) * m2.(k).(j)) m1i m2 j\n\nlet mmult rows cols m1 m2 m3 =\n  let last_col = cols - 1\n  and last_row = rows - 1 in\n  for i = 0 to last_row do\n    let m1i = m1.(i) and m3i = m3.(i) in\n    for j = 0 to last_col do\n      m3i.(j) &#60;- inner_loop last_row 0 m1i m2 j\n    done;\n  done\n\nlet () =\n  let n =\n    try int_of_string Sys.argv.(1)\n    with Invalid_argument _ -&#62; 1\n  and m1 = mkmatrix size size\n  and m2 = mkmatrix size size\n  and m3 = Array.make_matrix size size 0 in\n  for i = 1 to n - 1 do\n    mmult size size m1 m2 m3\n  done;\n  mmult size size m1 m2 m3;\n  Printf.printf &#34;%d %d %d %d\n&#34; m3.(0).(0) m3.(2).(3) m3.(3).(2) m3.(4).(4)\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

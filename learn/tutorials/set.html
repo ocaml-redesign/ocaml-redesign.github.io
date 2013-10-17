@@ -94,21 +94,21 @@
 
 To make a set of strings:</p>
 <pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>SS</span> <span class='keywordsign'>=</span> <span class='constructor module'>Set</span><span class='keywordsign'>.</span><span class='constructor module'>Make</span><span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('module SS = Set.Make(String);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To create a set you need to start somewhere so here is the empty set</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> <span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>empty</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let s = SS.empty;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Alternatively if we know an element to start with we can create a set
 like</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> <span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>singleton</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let s = SS.singleton &#34;hello&#34;;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To add some elements to the the set we can do.</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_right</span> <span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;community&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;manager&#34;</span><span class='keywordsign'>;</span>
                                  <span class='string'>&#34;stuff&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;blue&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;green&#34;</span><span class='keywordsign'>]</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let s = List.fold_right SS.add [&#34;hello&#34;; &#34;world&#34;; &#34;community&#34;; &#34;manager&#34;;\n                                 &#34;stuff&#34;; &#34;blue&#34;; &#34;green&#34;] s;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Now if we are playing around with sets we will probably want to see what
 is in the set that we have created. To do this we can write a function
@@ -116,7 +116,7 @@ that will print the set out.</p>
 <pre><code class='tryocaml'><span class='comment'>(* Prints a new line &#34;\n&#34; after each string is printed *)</span>
 <span class='keyword'>let</span> <span class='lower'>print_set</span> <span class='lower'>s</span> <span class='keywordsign'>=</span> 
    <span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>print_endline</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('(* Prints a new line &#34;\n&#34; after each string is printed *)\nlet print_set s = \n   SS.iter print_endline s;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If we want to remove a specific element of a set there is a remove
 function. However if we want to remove several elements at once we could
@@ -126,27 +126,27 @@ longer than 5 characters.</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>my_filter</span> <span class='lower'>str</span> <span class='keywordsign'>=</span>
   <span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
 <span class='keyword'>let</span> <span class='lower'>s2</span> <span class='keywordsign'>=</span> <span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>filter</span> <span class='lower'>my_filter</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let my_filter str =\n  String.length str &#60;= 5;;\nlet s2 = SS.filter my_filter s;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 or using an anonymous function:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>s2</span> <span class='keywordsign'>=</span> <span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>filter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>str</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>str</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>5</span><span class='keywordsign'>)</span> <span class='lower'>s</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let s2 = SS.filter (fun str -&#62; String.length str &#60;= 5) s;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If we want to check and see if an element is in the set it might look
 like this.</p>
 <pre><code class='tryocaml'><span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>exists</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>str</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>str</span> <span class='keywordsign'>=</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>)</span> <span class='lower'>s2</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('SS.exists (fun str -&#62; str = &#34;hello&#34;) s2;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 or even:</p>
 <pre><code class='tryocaml'><span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>exists</span> <span class='keywordsign'>(</span><span class='keywordsign'>(</span> <span class='keywordsign'>=</span> <span class='keywordsign'>)</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>)</span> <span class='lower'>s2</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('SS.exists (( = ) &#34;hello&#34;) s2;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The Set module also provides the set theoretic operations union,
 intersection and difference. For example, the difference of the original
 set and the set with short strings (\&lt;=5 characters) is the set of long
 strings:</p>
 <pre><code class='tryocaml'><span class='lower'>print_set</span> <span class='keywordsign'>(</span><span class='constructor module'>SS</span><span class='keywordsign'>.</span><span class='lower'>diff</span> <span class='lower'>s</span> <span class='lower'>s2</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('print_set (SS.diff s s2);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note that the Set module provides a purely functional data structure:
 removing an element from a set does not alter that set but, rather,

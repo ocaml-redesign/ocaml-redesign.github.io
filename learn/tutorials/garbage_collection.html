@@ -144,7 +144,7 @@ calls to <code>close</code>/<code>closedir</code> in code. For example:</p>
   <span class='lower'>my</span> <span class='keywordsign infix'>$</span><span class='lower'>io</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='constructor module'>IO</span><span class='keywordsign'>::</span><span class='constructor module'>File</span> <span class='string'>&#34;&#60; $_&#34;</span> <span class='keywordsign'>or</span> <span class='lower'>die</span><span class='keywordsign'>;</span>
   <span class='keywordsign'>#</span> <span class='lower'>read</span> <span class='lower'>from</span> <span class='keywordsign infix'>$</span><span class='lower'>io</span>
 <span class='keywordsign'>}</span>
-<a href="javascript:octry('foreach (@files)\n{\n  my $io = new IO::File &#34;&#60; $_&#34; or die;\n  # read from $io\n}\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This Perl code iterates over a list of <code>@files</code>, opening and reading
 each one. There is no need to close the <code>$io</code> file handle at the end of
@@ -157,7 +157,7 @@ closed).</p>
   <span class='keyword'>let</span> <span class='lower'>chan</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='lower'>filename</span> <span class='keyword'>in</span>
   <span class='comment'>(* read from chan *)</span> <span class='keyword'>in</span>
 <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>read_file</span> <span class='lower'>files</span>
-<a href="javascript:octry('let read_file filename =\n  let chan = open_in filename in\n  (* read from chan *) in\nList.iter read_file files\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Calls to <code>read_file</code> open the file but don&#39;t close it. Because OCaml
 uses a full garbage collector <code>chan</code> isn&#39;t collected until some time
@@ -212,7 +212,7 @@ before quitting:</p>
   <span class='keyword'>done</span><span class='keywordsign'>;</span>
   <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
   <span class='constructor module'>Gc</span><span class='keywordsign'>.</span><span class='lower'>print_stat</span> <span class='lower'>stdout</span>
-<a href="javascript:octry('let rec iterate r x_init i =\n  if i = 1 then x_init\n  else\n    let x = iterate r x_init (i-1) in\n    r *. x *. (1.0 -. x)\n\nlet () =\n  Random.self_init ();\n  Graphics.open_graph &#34; 640x480&#34;\n  for x = 0 to 640 do\n    let r = 4.0 *. (float_of_int x) /. 640.0 in\n    for i = 0 to 39 do\n      let x_init = Random.float 1.0 in\n      let x_final = iterate r x_init 500 in\n      let y = int_of_float (x_final *. 480.) in\n      Graphics.plot x y\n    done\n  done;\n  read_line ();\n  Gc.print_stat stdout\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Here is what it printed out for me:</p>
 <pre><code class='tryocaml'><span class='lower'>minor_words</span><span class='keywordsign'>:</span> <span class='number'>115926165</span>          <span class='keywordsign'>#</span> <span class='constructor module'>Total</span> <span class='lower'>number</span> <span class='keyword'>of</span> <span class='lower'>words</span> <span class='lower'>allocated</span>
@@ -230,7 +230,7 @@ Here is what it printed out for me:</p>
 <span class='lower'>largest_free</span><span class='keywordsign'>:</span> <span class='number'>31586</span>
 <span class='lower'>fragments</span><span class='keywordsign'>:</span> <span class='number'>0</span>
 <span class='lower'>compactions</span><span class='keywordsign'>:</span> <span class='number'>0</span>
-<a href="javascript:octry('minor_words: 115926165          # Total number of words allocated\npromoted_words: 31217           # Promoted from minor -&#62; major\nmajor_words: 31902              # Large objects allocated in major directly\nminor_collections: 3538         # Number of minor heap collections\nmajor_collections: 39           # Number of major heap collections\nheap_words: 63488               # Size of the heap, in words = approx. 256K\nheap_chunks: 1\ntop_heap_words: 63488\nlive_words: 2694\nlive_blocks: 733\nfree_words: 60794\nfree_blocks: 4\nlargest_free: 31586\nfragments: 0\ncompactions: 0\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 We can see that minor heap collections are approximately 100 times more
 frequent than major heap collections (in this example, not necessarily
@@ -245,7 +245,7 @@ several events happen (eg. on every major collection). Try adding the
 following code to the example above near the beginning:</p>
 <pre><code class='tryocaml'>Characters 1:42 - 1:44 :
 Error: Lexical error: you gave a weird number
-<a href="javascript:octry('Gc.set { (Gc.get ()) with Gc.verbose = 0x01 }\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (We haven&#39;t seen the <code>{ expression with field = value }</code> form before,
 but it should be mostly obvious what it does). The above code anyway
@@ -277,7 +277,7 @@ to be just two functions:</p>
 
 <span class='keyword'>val</span> <span class='lower'>get_record</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>record</span>
 <span class='keyword'>val</span> <span class='lower'>sync_records</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span>
-<a href="javascript:octry('type record = { mutable name : string; mutable address : string }\n\nval get_record : int -&#62; record\nval sync_records : unit -&#62; unit\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>get_record</code> call is the only call that most programs will need to
 make. It gets the n<sup>th</sup> record either out of the cache or from
@@ -291,7 +291,7 @@ function synchronises the disk copy and in-memory copies of all records.</p>
 force it to by adding the following command to your code. This command
 causes a full major GC cycle on exit:</p>
 <pre><code class='tryocaml'><span class='lower'>at_exit</span> <span class='constructor module'>Gc</span><span class='keywordsign'>.</span><span class='lower'>full_major</span>
-<a href="javascript:octry('at_exit Gc.full_major\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Our code is also going to implement a cache of recently accessed records
 using the <code>Weak</code> module. The advantage of using the <code>Weak</code> module rather
@@ -337,14 +337,14 @@ some low-level functions to read, write, lock and unlock records:</p>
 <span class='keyword'>let</span> <span class='lower'>unlock_record</span> <span class='lower'>n</span> <span class='lower'>fd</span> <span class='keywordsign'>=</span>
   <span class='lower'>seek_record</span> <span class='lower'>n</span> <span class='lower'>fd</span><span class='keywordsign'>;</span>
   <span class='lower'>lockf</span> <span class='lower'>fd</span> <span class='constructor module'>F_ULOCK</span> <span class='lower'>record_size</span>
-<a href="javascript:octry('open Unix\n\n(* On-disk format. *)\nlet record_size = 256\nlet name_size = 64\nlet addr_size = 192\n\n(* Low-level load/save records to file. *)\nlet seek_record n fd =\n  lseek fd (n * record_size) SEEK_SET\n\nlet write_record record n fd =\n  seek_record n fd;\n  write fd record.name 0 name_size;\n  write fd record.address 0 addr_size\n\nlet read_record record n fd =\n  seek_record n fd;\n  read fd record.name 0 name_size;\n  read fd record.address 0 addr_size\n\n(* Lock/unlock the nth record in a file. *)\nlet lock_record n fd =\n  seek_record n fd;\n  lockf fd F_LOCK record_size\n\nlet unlock_record n fd =\n  seek_record n fd;\n  lockf fd F_ULOCK record_size\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 We also need a function to create new, empty in-memory <code>record</code> objects:</p>
 <pre><code class='tryocaml'><span class='comment'>(* Create a new, empty record. *)</span>
 <span class='keyword'>let</span> <span class='lower'>new_record</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='keywordsign'>{</span> <span class='lower'>name</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>name_size</span> <span class='string'>&#39; &#39;</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
     <span class='lower'>address</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='constructor module'>String</span><span class='keywordsign'>.</span><span class='lower'>make</span> <span class='lower'>addr_size</span> <span class='string'>&#39; &#39;</span><span class='keywordsign'>)</span> <span class='keywordsign'>}</span>
-<a href="javascript:octry('(* Create a new, empty record. *)\nlet new_record () =\n  { name = (String.make name_size \&#39; \&#39;);\n    address = (String.make addr_size \&#39; \&#39;) }\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Because this is a really simple program, we&#39;re going to fix the number
 of records in advance:</p>
@@ -353,14 +353,14 @@ of records in advance:</p>
 
 <span class='comment'>(* On-disk file. *)</span>
 <span class='keyword'>let</span> <span class='lower'>diskfile</span> <span class='keywordsign'>=</span> <span class='lower'>openfile</span> <span class='string'>&#34;users.bin&#34;</span> <span class='keywordsign'>[</span> <span class='constructor module'>O_RDWR</span> <span class='keywordsign'>]</span> <span class='number'>0</span>
-<a href="javascript:octry('(* Total number of records. *)\nlet nr_records = 10000\n\n(* On-disk file. *)\nlet diskfile = openfile &#34;users.bin&#34; [ O_RDWR ] 0\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Download <a href='../img/users.bin.gz'>users.bin.gz</a> and decompress it before
 running the program.</p>
 <p>Our cache of records is very simple:</p>
 <pre><code class='tryocaml'><span class='comment'>(* Cache of records. *)</span>
 <span class='keyword'>let</span> <span class='lower'>cache</span> <span class='keywordsign'>=</span> <span class='constructor module'>Weak</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='lower'>nr_records</span>
-<a href="javascript:octry('(* Cache of records. *)\nlet cache = Weak.create nr_records\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>get_record</code> function is very short and basically composed of two
 halves. We grab the record from the cache. If the cache gives us <code>None</code>,
@@ -391,7 +391,7 @@ pointer).</p>
       <span class='lower'>read_record</span> <span class='lower'>record</span> <span class='lower'>n</span> <span class='lower'>diskfile</span><span class='keywordsign'>;</span>
       <span class='constructor module'>Weak</span><span class='keywordsign'>.</span><span class='lower'>set</span> <span class='lower'>cache</span> <span class='lower'>n</span> <span class='keywordsign'>(</span><span class='constructor module'>Some</span> <span class='lower'>record</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
       <span class='lower'>record</span>
-<a href="javascript:octry('open Printf\n\n(* The finaliser function. *)\nlet finaliser n record =\n  printf &#34;*** objcache: finalising record %d\n&#34; n;\n  write_record record n diskfile;\n  unlock_record n diskfile\n\n(* Get a record from the cache or off disk. *)\nlet get_record n =\n  match Weak.get cache n with\n  | Some record -&#62;\n      printf &#34;*** objcache: fetching record %d from memory cache\n&#34; n;\n      record\n  | None -&#62;\n      printf &#34;*** objcache: loading record %d from disk\n&#34; n;\n      let record = new_record () in\n      Gc.finalise (finaliser n) record;\n      lock_record n diskfile;\n      read_record record n diskfile;\n      Weak.set cache n (Some record);\n      record\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>sync_records</code> function is even easier. First of all it empties the
 cache by replacing all the weak pointers with <code>None</code>. This now means
@@ -403,13 +403,13 @@ the GC to collect the records immediately, we also invoke a major cycle:</p>
 <span class='keyword'>let</span> <span class='lower'>sync_records</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
   <span class='constructor module'>Weak</span><span class='keywordsign'>.</span><span class='lower'>fill</span> <span class='lower'>cache</span> <span class='number'>0</span> <span class='lower'>nr_records</span> <span class='constructor module'>None</span><span class='keywordsign'>;</span>
   <span class='constructor module'>Gc</span><span class='keywordsign'>.</span><span class='lower'>full_major</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('(* Synchronise all records. *)\nlet sync_records () =\n  Weak.fill cache 0 nr_records None;\n  Gc.full_major ()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Finally we have some test code. I won&#39;t reproduce the test code, but you
 can download the complete program and test code
 <a href='_file/objcache.ml'>objcache.ml</a>, and compile it with:</p>
 <pre><code class='tryocaml'><span class='lower'>ocamlc</span> <span class='keywordsign'>-</span><span class='lower'>w</span> <span class='lower'>s</span> <span class='lower'>unix</span><span class='keywordsign'>.</span><span class='lower'>cma</span> <span class='lower'>objcache</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='keywordsign'>-</span><span class='lower'>o</span> <span class='lower'>objcache</span>
-<a href="javascript:octry('ocamlc -w s unix.cma objcache.ml -o objcache\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Exercises"> Exercises</h2><p>
 
 Here are some ways to extend the example above, in approximately

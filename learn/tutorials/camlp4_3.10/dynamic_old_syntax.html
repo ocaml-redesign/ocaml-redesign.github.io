@@ -104,7 +104,7 @@ dynamic_old_syntax.ml:</p>
 <span class='constructor module'>Entry</span><span class='keywordsign'>.</span><span class='lower'>parse</span> <span class='lower'>foo</span> <span class='keywordsign'>(</span><span class='constructor module'>Stream</span><span class='keywordsign'>.</span><span class='lower'>of_string</span> <span class='string'>&#34;foo x?&#34;</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='constructor module'>Foo</span><span class='keywordsign'>(</span><span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>A</span><span class='keywordsign'>)</span>
 <span class='constructor module'>DELETE_RULE</span> <span class='lower'>foo</span><span class='keywordsign'>:</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>;</span> <span class='constructor module'>LIDENT</span><span class='keywordsign'>;</span> <span class='lower'>bar</span> <span class='constructor module'>END</span>
 
-<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Pcaml\nlet foo = Entry.mk gram &#34;foo&#34;\nlet bar = Entry.mk gram &#34;bar&#34;\nEXTEND\n  GLOBAL: foo bar;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nEntry.parse foo (Stream.of_string &#34;foo x?&#34;) = Foo(&#34;x&#34;, A)\nDELETE_RULE foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

@@ -98,7 +98,7 @@ OCaml comments are delimited by <code>(*</code> and <code>*)</code>, like this:<
  * multi-line
  * comment.
  *)</span>
-<a href="javascript:octry('(* This is a single-line comment. *)\n\n(* This is a\n * multi-line\n * comment.\n *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In other words, the commenting convention is very similar to original C
 (<code>/* ... */</code>). There is currently no single-line comment syntax (like
@@ -112,7 +112,7 @@ let is_prime n =
   (* note to self: ask about this on the mailing lists *) XXX;;
 
 *)</span>
-<a href="javascript:octry('(* This code is broken ...\n\n(* Primality test. *)\nlet is_prime n =\n  (* note to self: ask about this on the mailing lists *) XXX;;\n\n*)\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Callingfunctions"> Calling functions</h2><p>
 
 Let&#39;s say you&#39;ve written a function - we&#39;ll call it <code>repeated</code> - which
@@ -128,7 +128,7 @@ argument the string hello and second argument the number 3&quot;.</p>
 function calls differently, and this is the cause of many mistakes. Here
 is the same function call in OCaml:</p>
 <pre><code class='tryocaml'><span class='lower'>repeated</span> <span class='string'>&#34;hello&#34;</span> <span class='number'>3</span>  <span class='comment'>(* this is OCaml code *)</span>
-<a href="javascript:octry('repeated &#34;hello&#34; 3  (* this is OCaml code *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note — <strong>no</strong> brackets, and <strong>no</strong> comma between the arguments.</p>
 <p>The syntax <code>repeated (&quot;hello&quot;, 3)</code> <strong>is</strong> meaningful in OCaml. It means
@@ -147,7 +147,7 @@ repeated (prompt_string (&quot;Name please: &quot;), 3)
 </code></pre>
 <pre><code class='tryocaml'><span class='comment'>(* OCaml code: *)</span>
 <span class='lower'>repeated</span> <span class='keywordsign'>(</span><span class='lower'>prompt_string</span> <span class='string'>&#34;Name please: &#34;</span><span class='keywordsign'>)</span> <span class='number'>3</span>
-<a href="javascript:octry('(* OCaml code: *)\nrepeated (prompt_string &#34;Name please: &#34;) 3\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Take a careful look at the bracketing and the missing comma. In the
 OCaml version, the brackets enclose the first argument of repeated
@@ -169,13 +169,13 @@ in our existing languages. How do we do it in OCaml?</p>
 two floating point numbers and calculates the average:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let average a b =\n  (a +. b) /. 2.0;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Type this into the OCaml &quot;toplevel&quot; (on Unix, type the command <code>ocaml</code>
 from the shell) and you&#39;ll see this:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
     <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let average a b =\n    (a +. b) /. 2.0;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If you look at the function definition closely, and also at what OCaml
 prints back at you, you&#39;ll have a number of questions:</p>
@@ -283,7 +283,7 @@ written <code>((double) 1) + 2.5</code>, but all done implicitly.</p>
 error. The <code>+</code> operator in OCaml requires two ints as arguments, and
 here we&#39;re giving it an int and a float, so it reports this error:</p>
 <pre><code class='tryocaml'><span class='number'>1</span> <span class='keywordsign'>+</span> <span class='number'>2.5</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('1 + 2.5;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (In the &quot;translated from the French&quot; language of OCaml error messages
 this means &quot;you put a float here, but I was expecting an int&quot;).</p>
@@ -292,14 +292,14 @@ this means &quot;you put a float here, but I was expecting an int&quot;).</p>
 <p>OCaml doesn&#39;t promote ints to floats automatically so this is also an
 error:</p>
 <pre><code class='tryocaml'><span class='number'>1</span> <span class='keywordsign infix'>+.</span> <span class='number'>2.5</span>
-<a href="javascript:octry('1 +. 2.5\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Here OCaml is now complaining about the first argument.</p>
 <p>What if you actually want to add an integer and a floating point number
 together? (Say they are stored as <code>i</code> and <code>f</code>). In OCaml you need to
 explicitly cast:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='lower'>float_of_int</span> <span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>+.</span> <span class='lower'>f</span>
-<a href="javascript:octry('(float_of_int i) +. f\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code>float_of_int</code> is a function which takes an <code>int</code> and returns a <code>float</code>.
 There are a whole load of these functions, called such things as
@@ -309,7 +309,7 @@ and they mostly do what you expect.</p>
 operation, the <code>float_of_int</code> function has a shorter alias: the above
 example could simply have been written</p>
 <pre><code class='tryocaml'><span class='lower'>float</span> <span class='lower'>i</span> <span class='keywordsign infix'>+.</span> <span class='lower'>f</span>
-<a href="javascript:octry('float i +. f\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (Note that unlike C, it is perfectly valid in OCaml for a type and a
 function to have the same name.)</p>
@@ -333,7 +333,7 @@ example of a recursive function:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
   <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>b</span>
-<a href="javascript:octry('let rec range a b =\n  if a &#62; b then []\n  else a :: range (a+1) b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice that <code>range</code> calls itself.</p>
 <p>The only difference between <code>let</code> and <code>let rec</code> is in the scoping of the
@@ -346,7 +346,7 @@ to re-define a value in terms of the previous definition. For example:</p>
   <span class='keyword'>let</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='lower'>max</span> <span class='lower'>a</span> <span class='number'>0</span>
   <span class='keyword'>and</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='lower'>max</span> <span class='lower'>b</span> <span class='number'>0</span> <span class='keyword'>in</span>
   <span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span>
-<a href="javascript:octry('let positive_sum a b = \n  let a = max a 0\n  and b = max b 0 in\n  a + b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This redefinition hides the previous &quot;bindings&quot; of <code>a</code> and <code>b</code> from the
 function definition. In some situations coders prefer this pattern to
@@ -393,7 +393,7 @@ Now for something a bit stranger. What about a function which takes
 <em>anything</em> as an argument? Here&#39;s a odd function which takes an
 argument, but just ignores it and always returns 3:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>give_me_a_three</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='number'>3</span>
-<a href="javascript:octry('let give_me_a_three x = 3\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 What is the type of this function? In OCaml we use a special placeholder
 to mean &quot;any type you fancy&quot;. It&#39;s a single quote character followed by
@@ -429,7 +429,7 @@ probably need to bypass the type checking.</p>
 toplevel:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='keywordsign'>(</span><span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span>
-<a href="javascript:octry('let average a b =\n  (a +. b) /. 2.0\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Mirabile dictu! OCaml worked out all on its own that the function takes
 two <code>float</code> arguments and returns a <code>float</code>.</p>

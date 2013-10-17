@@ -95,7 +95,7 @@ Comme en Perl, la notion de liste est directement supportée dans le
 langage OCaml. En OCaml, tous les éléments d&#39;une liste doivent avoir le
 même type. Une liste s&#39;écrit :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span>
-<a href="javascript:octry('[1; 2; 3]\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (Remarquez l&#39;utilisation de points-virgules, et non de virgules).</p>
 <p><code>[]</code> est la liste vide.</p>
@@ -110,7 +110,7 @@ dans cet exemple la tête est l&#39;entier <code>1</code> alors que la queue est
 <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='keywordsign'>[</span><span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span>
 <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='number'>2</span> <span class='keywordsign'>::</span> <span class='keywordsign'>[</span><span class='number'>3</span><span class='keywordsign'>]</span>
 <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='number'>2</span> <span class='keywordsign'>::</span> <span class='number'>3</span> <span class='keywordsign'>::</span> <span class='keywordsign operator'>[]</span>
-<a href="javascript:octry('[1; 2; 3]\n1 :: [2; 3]\n1 :: 2 :: [3]\n1 :: 2 :: 3 :: []\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Pourquoi mentionner l&#39;opérateur cons ? Et bien nous en aurons besoin un
 peu plus bas, pour faire du <em>filtrage</em> (<em>pattern matching</em>) sur les
@@ -132,7 +132,7 @@ est un bon exemple. Peu importe si une liste contient des entiers, des
 chaînes, des objets ou des ratons-laveurs, la fonction <code>List.length</code>
 peut être utilisée dessus. Le type de <code>List.length</code> est donc :</p>
 <pre><code class='tryocaml'><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('List.length : \&#39;a list -&#62; int\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Structures"> Structures</h2><p>
 
 Le C et le C++ proposent le concept simple de <code>struct</code>, abbréviation de
@@ -142,7 +142,7 @@ beaucoup plus laborieux.</p>
 <pre><code class='tryocaml'><span class='keyword'>struct</span> <span class='lower'>paire_dentiers</span> <span class='keywordsign'>{</span>
   <span class='lower'>int</span> <span class='lower'>a</span><span class='keywordsign'>,</span> <span class='lower'>b</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>}</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('struct paire_dentiers {\n  int a, b;\n};\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 L&#39;équivalent le plus simple en OCaml sont les <strong>n-uplets</strong> (tuples),
 comme la paire <code>(3, 4)</code> qui a pour type <code>int * int</code>. Contrairement aux
@@ -155,12 +155,12 @@ n-uplets ne peuvent pas être nommées, et il faut se souvenir de l&#39;ordre
 dans lequel ils apparaissent. Voici l&#39;enregistrement équivalent au
 struct C ci-dessus :</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>paire_dentiers</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='lower'>a</span> <span class='keywordsign'>:</span> <span class='lower'>int</span><span class='keywordsign'>;</span> <span class='lower'>b</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type paire_dentiers = { a : int; b : int };;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Ceci définit le type, et voici comment <em>créer</em> effectivement des valeurs
 de ce type :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>{</span> <span class='lower'>a</span><span class='keywordsign'>=</span><span class='number'>3</span><span class='keywordsign'>;</span> <span class='lower'>b</span><span class='keywordsign'>=</span><span class='number'>5</span> <span class='keywordsign'>}</span>
-<a href="javascript:octry('{ a=3; b=5 }\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Remarquez l&#39;utilisation de &quot;:&quot; dans la définition du type et de &quot;=&quot; pour
 créer des valeurs de ce type.</p>
@@ -172,7 +172,7 @@ interactive :</p>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>paire_dentiers</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span><span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='lower'>b</span> <span class='keywordsign'>=</span> <span class='number'>5</span><span class='keywordsign'>}</span>
 <span class='keywordsign'>#</span> <span class='keywordsign'>{</span><span class='lower'>a</span><span class='keywordsign'>=</span><span class='number'>3</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
 <span class='constructor module'>Some</span> <span class='lower'>record</span> <span class='lower'>field</span> <span class='lower'>labels</span> <span class='lower'>are</span> <span class='lower'>undefined</span><span class='keywordsign'>:</span> <span class='lower'>b</span>
-<a href="javascript:octry('# type paire_dentiers = { a : int; b : int };;\ntype paire_dentiers = { a : int; b : int; }\n# {a=3; b=5};;\n- : paire_dentiers = {a = 3; b = 5}\n# {a=3};;\nSome record field labels are undefined: b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Donc OCaml refuse de laisser certains champs d&#39;un enregistrement non
 définis.</p>
@@ -191,7 +191,7 @@ union marquée en C:</p>
     <span class='lower'>char</span> <span class='keywordsign'>*</span><span class='lower'>str</span><span class='keywordsign'>;</span>    <span class='keywordsign infix'>//</span> <span class='constructor module'>Si</span> <span class='keyword'>type</span> <span class='keywordsign infix'>==</span> <span class='constructor module'>TYPE_STRING</span><span class='keywordsign'>.</span>
   <span class='keywordsign'>}</span> <span class='lower'>u</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>}</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('struct foo {\n  int type;\n#define TYPE_INT 1\n#define TYPE_PAIR_OF_INTS 2\n#define TYPE_STRING 3\n  union {\n    int i;        // Si type == TYPE_INT.\n    int pair[2];  // Si type == TYPE_PAIR_OF_INTS.\n    char *str;    // Si type == TYPE_STRING.\n  } u;\n};\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Je suppose que nous avons tous déjà vu ça, et ce n&#39;est pas beau à voir.
 Pour commencer, ce n&#39;est pas sûr : le programmeur peut accidentellement
@@ -204,7 +204,7 @@ modifier le champ <code>type</code>, ce qui peut procurer des heures de jeu. Pou
 finir, c&#39;est lourdingue.</p>
 <p>Voici l&#39;équivalent en OCaml, élégant et concis:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>foo</span> <span class='keywordsign'>=</span> <span class='constructor module'>Nothing</span> <span class='keywordsign'>|</span> <span class='constructor module'>Int</span> <span class='keyword'>of</span> <span class='lower'>int</span> <span class='keywordsign'>|</span> <span class='constructor module'>Pair</span> <span class='keyword'>of</span> <span class='lower'>int</span> <span class='keywordsign'>*</span> <span class='lower'>int</span> <span class='keywordsign'>|</span> <span class='constructor module'>String</span> <span class='keyword'>of</span> <span class='lower'>string</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type foo = Nothing | Int of int | Pair of int * int | String of string;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Voilà pour la définition du type. Au début de chacune des sections,
 séparées par des <code>|</code>, se trouve un constructeur. On peut les nommer
@@ -219,25 +219,25 @@ constructeurs définissent des valeurs.</p>
 <span class='constructor module'>Pair</span> <span class='keywordsign'>(</span><span class='number'>4</span><span class='keywordsign'>,</span> <span class='number'>5</span><span class='keywordsign'>)</span>
 <span class='constructor module'>String</span> <span class='string'>&#34;hello&#34;</span>
      <span class='lower'>etc</span><span class='keywordsign'>.</span>
-<a href="javascript:octry('Nothing\nInt 3\nPair (4, 5)\nString &#34;hello&#34;\n     etc.\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Toutes ces expressions ont pour type <code>foo</code>.</p>
 <p>Remarquez l&#39;utilisation de <code>of</code> dans la définition du type, qui ne se
 retrouve PAS dans l&#39;écriture des valeurs de ce type.</p>
 <p>Par extension, un simple <code>enum</code> C définit comme</p>
 <pre><code class='tryocaml'><span class='lower'>enum</span> <span class='lower'>sign</span> <span class='keywordsign'>{</span> <span class='lower'>positive</span><span class='keywordsign'>,</span> <span class='lower'>zero</span><span class='keywordsign'>,</span> <span class='lower'>negative</span> <span class='keywordsign'>}</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('enum sign { positive, zero, negative };\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 peut être traduit en OCaml par</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>sign</span> <span class='keywordsign'>=</span> <span class='constructor module'>Positive</span> <span class='keywordsign'>|</span> <span class='constructor module'>Zero</span> <span class='keywordsign'>|</span> <span class='constructor module'>Negative</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type sign = Positive | Zero | Negative;;\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Variantsrcursifsutilisspourlesarbres"> Variants récursifs (utilisés pour les arbres)</h3><p>
 
 Les variants peuvent être récursifs, ce qui est souvent utilisé pour
 définir des structures de données arborescentes. C&#39;est vraiment là que
 se révèle l&#39;expressivité des langages fonctionnels :</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>binary_tree</span> <span class='keywordsign'>=</span> <span class='constructor module'>Leaf</span> <span class='keyword'>of</span> <span class='lower'>int</span> <span class='keywordsign'>|</span> <span class='constructor module'>Tree</span> <span class='keyword'>of</span> <span class='lower'>binary_tree</span> <span class='keywordsign'>*</span> <span class='lower'>binary_tree</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type binary_tree = Leaf of int | Tree of binary_tree * binary_tree;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Voilà quelques arbres binaires. Comme exercice, essayez de les dessiner
 sur un bout de papier.</p>
@@ -249,7 +249,7 @@ sur un bout de papier.</p>
 <span class='constructor module'>Tree</span> <span class='keywordsign'>(</span><span class='constructor module'>Tree</span> <span class='keywordsign'>(</span><span class='constructor module'>Leaf</span> <span class='number'>3</span><span class='keywordsign'>,</span> <span class='constructor module'>Leaf</span> <span class='number'>4</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='constructor module'>Leaf</span> <span class='number'>5</span><span class='keywordsign'>)</span>
 
 <span class='constructor module'>Tree</span> <span class='keywordsign'>(</span><span class='constructor module'>Tree</span> <span class='keywordsign'>(</span><span class='constructor module'>Leaf</span> <span class='number'>3</span><span class='keywordsign'>,</span> <span class='constructor module'>Leaf</span> <span class='number'>4</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='constructor module'>Tree</span> <span class='keywordsign'>(</span><span class='constructor module'>Tree</span> <span class='keywordsign'>(</span><span class='constructor module'>Leaf</span> <span class='number'>3</span><span class='keywordsign'>,</span> <span class='constructor module'>Leaf</span> <span class='number'>4</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='constructor module'>Leaf</span> <span class='number'>5</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('Leaf 3\n\nTree (Leaf 3, Leaf 4)\n\n\nTree (Tree (Leaf 3, Leaf 4), Leaf 5)\n\nTree (Tree (Leaf 3, Leaf 4), Tree (Tree (Leaf 3, Leaf 4), Leaf 5))\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Variantsparamtrs"> Variants paramétrés</h3><p>
 
 L&#39;arbre binaire de la section précédente comporte un entier à chaque
@@ -258,7 +258,7 @@ données, en laissant le choix de ce qui doit être stocké dans chaque
 feuille pour plus tard ? On peut utiliser un variant paramétré (ou
 polymorphique), comme ceci :</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span> <span class='keywordsign'>=</span> <span class='constructor module'>Leaf</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>|</span> <span class='constructor module'>Tree</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span> <span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>abinary_tree</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type \&#39;a binary_tree = Leaf of \&#39;a | Tree of \&#39;a binary_tree * \&#39;a binary_tree;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 C&#39;est le type général. Le type où chaque feuille stocke un entier
 s&#39;appelle <code>int binary_tree</code>. De la même façon, le type où chaque feuille
@@ -269,7 +269,7 @@ système d&#39;inférence de types nous donner leurs types :</p>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>string</span> <span class='lower'>binary_tree</span> <span class='keywordsign'>=</span> <span class='constructor module'>Leaf</span> <span class='string'>&#34;hello&#34;</span>
 <span class='keywordsign'>#</span> <span class='constructor module'>Leaf</span> <span class='number'>3.0</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>float</span> <span class='lower'>binary_tree</span> <span class='keywordsign'>=</span> <span class='constructor module'>Leaf</span> <span class='number'>3.</span>
-<a href="javascript:octry('# Leaf &#34;hello&#34;;;\n- : string binary_tree = Leaf &#34;hello&#34;\n# Leaf 3.0;;\n- : float binary_tree = Leaf 3.\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Remarquez que le nom des types est à l&#39;envers (arbre binaire de
 flottants -\&gt; float binary_tree). C&#39;est comparable avec le nom des
@@ -278,7 +278,7 @@ types pour les listes, ie <code>int list</code>, etc.</p>
 l&#39;envers&quot;. Les types listes ne sont que des types variants paramétrés,
 avec une définition légèrement spéciale :</p>
 <pre><code class='tryocaml'> <span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span> <span class='keywordsign'>=</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>|</span> <span class='keywordsign'>::</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>*</span> <span class='keywordsign'>&#39;</span><span class='lower'>alist</span>   <span class='comment'>(* ceci n&#39;est pas du vrai code OCaml *)</span>
-<a href="javascript:octry(' type \&#39;a list = [] | :: of \&#39;a * \&#39;a list   (* ceci n\&#39;est pas du vrai code OCaml *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 En fait la définition ci-dessus ne compile pas. La définition suivante,
 très similaire, compile correctement :</p>
@@ -290,7 +290,7 @@ très similaire, compile correctement :</p>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>::</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='constructor module'>Nil</span><span class='keywordsign'>)</span>
 <span class='keywordsign'>#</span> <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='number'>2</span> <span class='keywordsign'>::</span> <span class='constructor module'>Nil</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>::</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='keywordsign'>::</span> <span class='keywordsign'>(</span><span class='number'>2</span><span class='keywordsign'>,</span> <span class='constructor module'>Nil</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('# type \&#39;a list = Nil | :: of \&#39;a * \&#39;a list;;\ntype \&#39;a list = Nil | :: of \&#39;a * \&#39;a list\n# Nil;;\n- : \&#39;a list = Nil\n# 1 :: Nil;;\n- : int list = :: (1, Nil)\n# 1 :: 2 :: Nil;;\n- : int list = :: (1, :: (2, Nil))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Rappelez vous quand nous avons dit précédemment que les listes pouvaient
 être écrites de deux façons, soit sous la forme syntaxiquement édulcorée
@@ -301,7 +301,7 @@ formelle devrait vous paraître plus clairement.</p>
 tableau en 3 colonnes avec nom et exemples de définition et de valeur.</p>
 <pre><code class='tryocaml'>Characters 1:30 - 1:31 :
 Error: Lexical error: don't know what to do with character '�'
-<a href="javascript:octry('nom OCaml        Example de définition de type          Exemple(s) de valeur(s) \nliste            int list                               [1; 2; 3]\nn-uplet          int * string                           (3, &#34;hello&#34;)\nenregistrement   type pair = { a : int; b : string }    { a = 3; b = &#34;hello&#34; }\nvariant          type foo = Int of int                  Int 3\n                           | Pair of int * string                                                                      \nvariant          type sign = Positive | Zero            Positive\n                           | Negative                   Zero\nvariant          type \&#39;a my_list = Empty                Cons (1, Cons (2, Empty))\n  paramétré                | Cons of \&#39;a * \&#39;a my_list\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Filtragesurlesstructuresdedonnes"> Filtrage (sur les structures de données)</h2><p>
 
 Une &quot;Fonctionnalité Vraiment Cool&quot;(tm) des langages fonctionnels est
@@ -320,11 +320,11 @@ multiplications symboliquement pour obtenir <code>n * x + n * y</code>.</p>
       <span class='keywordsign'>|</span> <span class='constructor module'>Divide</span> <span class='keyword'>of</span> <span class='lower'>expr</span> <span class='keywordsign'>*</span> <span class='lower'>expr</span>      <span class='comment'>(* pour a / b *)</span>
           <span class='keywordsign'>|</span> <span class='constructor module'>Value</span> <span class='keyword'>of</span> <span class='lower'>string</span>            <span class='comment'>(* &#34;x&#34;, &#34;y&#34;, &#34;n&#34;, etc. *)</span>
       <span class='keywordsign'>;;</span>
-<a href="javascript:octry('type expr = Plus of expr * expr        (* pour a + b *)\n          | Minus of expr * expr       (* pour a - b *)\n          | Times of expr * expr       (* pour a * b *)\n      | Divide of expr * expr      (* pour a / b *)\n          | Value of string            (* &#34;x&#34;, &#34;y&#34;, &#34;n&#34;, etc. *)\n      ;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 L&#39;expression <code>n * (x + y)</code> s&#39;écrirait:</p>
 <pre><code class='tryocaml'><span class='constructor module'>Times</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;n&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Plus</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Value</span> <span class='string'>&#34;y&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('Times (Value &#34;n&#34;, Plus (Value &#34;x&#34;, Value &#34;y&#34;))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Ecrivons une fonction qui affiche
 <code>Times (Value &quot;n&quot;, Plus (Value &quot;x&quot;, Value &quot;y&quot;))</code> comme <code>n * (x + y)</code>. En
@@ -345,18 +345,18 @@ fonction en entier juste pour ça).</p>
 
 <span class='keyword'>let</span> <span class='lower'>print_expr</span> <span class='lower'>e</span> <span class='keywordsign'>=</span>
   <span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='lower'>to_string</span> <span class='lower'>e</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let rec to_string e =\n  match e with\n    Plus (left, right)   -&#62; &#34;(&#34; ^ (to_string left) ^ &#34; + &#34; ^ (to_string right) ^ &#34;)&#34;\n  | Minus (left, right)  -&#62; &#34;(&#34; ^ (to_string left) ^ &#34; - &#34; ^ (to_string right) ^ &#34;)&#34;\n\n  | Times (left, right)  -&#62; &#34;(&#34; ^ (to_string left) ^ &#34; * &#34; ^ (to_string right) ^ &#34;)&#34;\n  | Divide (left, right) -&#62; &#34;(&#34; ^ (to_string left) ^ &#34; / &#34; ^ (to_string right) ^ &#34;)&#34;\n\n  | Value v -&#62; v\n  ;;\n\nlet print_expr e =\n  print_endline (to_string e);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (NB: L&#39;opérateur <code>^</code> sert à concaténer les chaînes.)</p>
 <p>Voilà la fonction d&#39;affichage à l&#39;oeuvre:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='lower'>print_expr</span> <span class='keywordsign'>(</span><span class='constructor module'>Times</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;n&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Plus</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Value</span> <span class='string'>&#34;y&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('# print_expr (Times (Value &#34;n&#34;, Plus (Value &#34;x&#34;, Value &#34;y&#34;)));;\n(n * (x + y))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 La forme générale pour le filtrage est:</p>
 <pre><code class='tryocaml'>Characters 2:16 - 2:17 :
 Error: Lexical error: don't know what to do with character '�'
-<a href="javascript:octry('match valeur with\n  motif    -&#62;  résultat\n| motif    -&#62;  résultat\n    ...\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Les motifs dans la colonne de gauche peuvent être simples, comme dans la
 fonction <code>to_string</code> ci-dessus, ou plus complexe et imbriqués. L&#39;exemple
@@ -377,12 +377,12 @@ multiplication des expressions de la forme <code>n * (x + y)</code> ou
   <span class='keywordsign'>|</span> <span class='constructor module'>Divide</span> <span class='keywordsign'>(</span><span class='lower'>left</span><span class='keywordsign'>,</span> <span class='lower'>right</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>Divide</span> <span class='keywordsign'>(</span><span class='lower'>multiply_out</span> <span class='lower'>left</span><span class='keywordsign'>,</span> <span class='lower'>multiply_out</span> <span class='lower'>right</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>|</span> <span class='constructor module'>Value</span> <span class='lower'>v</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>Value</span> <span class='lower'>v</span>
   <span class='keywordsign'>;;</span>
-<a href="javascript:octry('let rec multiply_out e =\n  match e with\n    Times (e1, Plus (e2, e3)) -&#62;\n      Plus (Times (multiply_out e1, multiply_out e2),\n            Times (multiply_out e1, multiply_out e3))\n  | Times (Plus (e1, e2), e3) -&#62;\n      Plus (Times (multiply_out e1, multiply_out e3),\n            Times (multiply_out e2, multiply_out e3))\n  | Plus (left, right) -&#62; Plus (multiply_out left, multiply_out right)\n  | Minus (left, right) -&#62; Minus (multiply_out left, multiply_out right)\n  | Times (left, right) -&#62; Times (multiply_out left, multiply_out right)\n  | Divide (left, right) -&#62; Divide (multiply_out left, multiply_out right)\n  | Value v -&#62; Value v\n  ;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 La voilà en action:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='lower'>print_expr</span> <span class='keywordsign'>(</span><span class='lower'>multiply_out</span> <span class='keywordsign'>(</span><span class='constructor module'>Times</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;n&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Plus</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Value</span> <span class='string'>&#34;y&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>(</span><span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>y</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('# print_expr (multiply_out (Times (Value &#34;n&#34;, Plus (Value &#34;x&#34;, Value &#34;y&#34;))));;\n((n * x) + (n * y))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Comment est-ce que marche la fonction <code>multiply_out</code> ? L&#39;essentiel se
 trouve dans les deux premiers motifs. Le premier est
@@ -412,7 +412,7 @@ sous-expressions, et des cas plus complexes :</p>
 
 <span class='keywordsign'>#</span> <span class='lower'>factorize</span> <span class='keywordsign'>(</span><span class='constructor module'>Plus</span> <span class='keywordsign'>(</span><span class='constructor module'>Times</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;n&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Value</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>,</span> <span class='constructor module'>Times</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;n&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Value</span> <span class='string'>&#34;y&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>expr</span> <span class='keywordsign'>=</span> <span class='constructor module'>Times</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;n&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Plus</span> <span class='keywordsign'>(</span><span class='constructor module'>Value</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Value</span> <span class='string'>&#34;y&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let factorize e =\n  match e with\n    Plus (Times (e1, e2), Times (e3, e4)) when e1 = e3 -&#62; Times (e1, Plus (e2, e4))\n  | Plus (Times (e1, e2), Times (e3, e4)) when e2 = e4 -&#62; Times (Plus (e1, e3), e4)\n  | e -&#62; e\n  ;;\n\n# factorize (Plus (Times (Value &#34;n&#34;, Value &#34;x&#34;), Times (Value &#34;n&#34;, Value &#34;y&#34;)));;\n- : expr = Times (Value &#34;n&#34;, Plus (Value &#34;x&#34;, Value &#34;y&#34;))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 La fonction de factorisation ci-dessus introduit une paire de nouvelles
 fonctionnalités. Vous pouvez ajouter ce qui s&#39;appelle une <strong>garde</strong> à
@@ -421,7 +421,7 @@ signifie que le filtrage n&#39;est fructueux que si le motif correspond <em>et</
 la condition après la clause <code>when</code> est satisfaite.</p>
 <pre><code class='tryocaml'>Characters 2:39 - 2:40 :
 Error: Lexical error: don't know what to do with character '�'
-<a href="javascript:octry('match valeur with\n  motif      [ when condition ]   -&#62;  résultat\n  motif      [ when condition ]   -&#62;  résultat\n    ...\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 La seconde fonctionalité est l&#39;opérateur <code>=</code> qui teste l&#39;&quot;égalité
 structurelle&quot; de deux expressions. Cela signifie qu&#39;il descend
@@ -437,7 +437,7 @@ cas sont couverts par vos motifs. J&#39;ai modifié la définition du
       <span class='keywordsign'>|</span> <span class='constructor module'>Product</span> <span class='keyword'>of</span> <span class='lower'>expr</span> <span class='lower'>list</span>       <span class='comment'>(* pour a * b * c * ... *)</span>
           <span class='keywordsign'>|</span> <span class='constructor module'>Value</span> <span class='keyword'>of</span> <span class='lower'>string</span>            <span class='comment'>(* &#34;x&#34;, &#34;y&#34;, &#34;n&#34;, etc. *)</span>
       <span class='keywordsign'>;;</span>
-<a href="javascript:octry('type expr = Plus of expr * expr        (* pour a + b *)\n          | Minus of expr * expr       (* pour a - b *)\n          | Times of expr * expr       (* pour a * b *)\n      | Divide of expr * expr      (* pour a / b *)\n      | Product of expr list       (* pour a * b * c * ... *)\n          | Value of string            (* &#34;x&#34;, &#34;y&#34;, &#34;n&#34;, etc. *)\n      ;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 J&#39;ai ensuite recompilé la fonction <code>to_string</code> sans modifications. OCaml
 a renvoyé l&#39;avertissement suivant :</p>
@@ -445,7 +445,7 @@ a renvoyé l&#39;avertissement suivant :</p>
 <span class='constructor module'>Here</span> <span class='lower'>is</span> <span class='lower'>an</span> <span class='lower'>example</span> <span class='keyword'>of</span> <span class='lower'>a</span> <span class='lower'>value</span> <span class='lower'>that</span> <span class='lower'>is</span> <span class='lower'>not</span> <span class='lower'>matched</span><span class='keywordsign'>:</span>
 <span class='constructor module'>Product</span> <span class='keywordsign'>_</span>
 
-<a href="javascript:octry('Warning: this pattern-matching is not exhaustive.\nHere is an example of a value that is not matched:\nProduct _\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

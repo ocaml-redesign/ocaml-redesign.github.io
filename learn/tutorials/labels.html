@@ -102,7 +102,7 @@ Hence:</p>
   <span class='keyword'>match</span> <span class='lower'>n</span> <span class='keyword'>with</span>
   <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>true</span>
   <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>odd</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The code above doesn&#39;t compile because we haven&#39;t defined the function
 <code>odd</code> yet! That&#39;s easy though. Zero is not odd, and other numbers
@@ -117,7 +117,7 @@ complete we need that function too:</p>
   <span class='keyword'>match</span> <span class='lower'>n</span> <span class='keyword'>with</span>
   <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>false</span>
   <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>even</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\n\nlet rec odd n =\n  match n with\n  | 0 -&#62; false\n  | x -&#62; even (x-1)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The only problem is... this program doesn&#39;t compile. In order to compile
 the <code>even</code> function, we already need the definition of <code>odd</code>, and to
@@ -134,7 +134,7 @@ for defining a set of two or more mutually recursive functions, like
   <span class='keyword'>match</span> <span class='lower'>n</span> <span class='keyword'>with</span>
   <span class='keywordsign'>|</span> <span class='number'>0</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>false</span>
   <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>even</span> <span class='keywordsign'>(</span><span class='lower'>x</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let rec even n =\n  match n with\n  | 0 -&#62; true\n  | x -&#62; odd (x-1)\nand odd n =\n  match n with\n  | 0 -&#62; false\n  | x -&#62; even (x-1)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 It&#39;s hard to know exactly how useful this is in practice, since I&#39;ve
 never had cause to write mutually recursive functions, nor have I been
@@ -161,23 +161,23 @@ aliased function call. All you need to know is that
   <span class='lower'>out</span> <span class='string'>&#34;&#60;/head&#62;\n&#34;</span><span class='keywordsign'>;</span>
   <span class='lower'>out</span> <span class='string'>&#34;&#60;body&#62;\n&#34;</span><span class='keywordsign'>;</span>
   <span class='lower'>out</span> <span class='keywordsign'>(</span><span class='string'>&#34;&#60;h1&#62;&#34;</span> <span class='keywordsign infix'>^</span> <span class='lower'>text</span> <span class='lower'>title</span> <span class='keywordsign infix'>^</span> <span class='string'>&#34;&#60;/h1&#62;\n&#34;</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let begin_page cgi title =\n  let out = cgi # output # output_string in\n  out &#34;&#60;html&#62;\n&#34;;\n  out &#34;&#60;head&#62;\n&#34;;\n  out (&#34;&#60;title&#62;&#34; ^ text title ^ &#34;&#60;/title&#62;\n&#34;);\n  out (&#34;&#60;style type=\&#34;text/css\&#34;&#62;\n&#34;);\n  out &#34;body { background: white; color: black; }\n&#34;;\n  out &#34;&#60;/style&#62;\n&#34;;\n  out &#34;&#60;/head&#62;\n&#34;;\n  out &#34;&#60;body&#62;\n&#34;;\n  out (&#34;&#60;h1&#62;&#34; ^ text title ^ &#34;&#60;/h1&#62;\n&#34;)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>let out = ... </code> is a partial function application for that method
 call (partial, because the string parameter hasn&#39;t been applied). <code>out</code>
 is therefore a function, which takes a string parameter.</p>
 <pre><code class='tryocaml'>  <span class='lower'>out</span> <span class='string'>&#34;&#60;html&#62;\n&#34;</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('  out &#34;&#60;html&#62;\n&#34;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 is equivalent to:</p>
 <pre><code class='tryocaml'>  <span class='lower'>cgi</span> <span class='keywordsign'>#</span> <span class='lower'>output</span> <span class='keywordsign'>#</span> <span class='lower'>output_string</span> <span class='string'>&#34;&#60;html&#62;\n&#34;</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('  cgi # output # output_string &#34;&#60;html&#62;\n&#34;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 We saved ourselves a lot of typing there.</p>
 <p>We can also add arguments. This alternative definition of <code>print_string</code>
 can be thought of as a kind of alias for a function name plus arguments:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>print_string</span> <span class='keywordsign'>=</span> <span class='lower'>output_string</span> <span class='lower'>stdout</span>
-<a href="javascript:octry('  let print_string = output_string stdout\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code>output_string</code> takes two arguments (a channel and a string), but since
 we have only supplied one, it is partially applied. So <code>print_string</code> is
@@ -189,11 +189,11 @@ an example (from the Python tutorial, since I&#39;m not a Python
 programmer):</p>
 <pre><code class='tryocaml'><span class='lower'>def</span> <span class='lower'>ask_ok</span><span class='keywordsign'>(</span><span class='lower'>prompt</span><span class='keywordsign'>,</span> <span class='lower'>retries</span><span class='keywordsign'>=</span><span class='number'>4</span><span class='keywordsign'>,</span> <span class='lower'>complaint</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Ys</span> <span class='keywordsign'>or</span> <span class='lower'>no</span><span class='keywordsign'>,</span> <span class='lower'>please</span><span class='keywordsign prefix'>!</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>)</span>
   <span class='keywordsign'>#</span> <span class='keyword'>function</span> <span class='lower'>definition</span> <span class='lower'>omitted</span>
-<a href="javascript:octry('def ask_ok(prompt, retries=4, complaint=\&#39;Yes or no, please!\&#39;):\n  # function definition omitted\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Here are the ways we can call this Python function:</p>
 <pre><code class='tryocaml'><span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='keywordsign'>&#39;</span><span class='constructor module'>D</span> <span class='lower'>you</span> <span class='lower'>really</span> <span class='lower'>want</span> <span class='keyword'>to</span> <span class='lower'>quit</span><span class='keywordsign'>?</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>)</span><span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Oerwrite</span> <span class='lower'>the</span> <span class='lower'>file</span><span class='keywordsign'>?</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>,</span><span class='number'>2</span><span class='keywordsign'>)</span>
-<span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='lower'>prompt</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Ae</span> <span class='lower'>you</span> <span class='lower'>sure</span><span class='keywordsign'>?</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>)</span><span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='lower'>complaint</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Pease</span> <span class='lower'>answer</span> <span class='lower'>yes</span> <span class='keywordsign'>or</span> <span class='lower'>no</span><span class='keywordsign prefix'>!</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>,</span><span class='lower'>prompt</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Ae</span> <span class='lower'>you</span> <span class='lower'>sure</span><span class='keywordsign'>?</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>)</span><a href="javascript:octry('ask_ok (\&#39;Do you really want to quit?\&#39;)\nask_ok (\&#39;Overwrite the file?\&#39;, 2)\nask_ok (prompt=\&#39;Are you sure?\&#39;)\nask_ok (complaint=\&#39;Please answer yes or no!\&#39;, prompt=\&#39;Are you sure?\&#39;)\n');">[try]</a></code></pre>
+<span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='lower'>prompt</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Ae</span> <span class='lower'>you</span> <span class='lower'>sure</span><span class='keywordsign'>?</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>)</span><span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='lower'>complaint</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Pease</span> <span class='lower'>answer</span> <span class='lower'>yes</span> <span class='keywordsign'>or</span> <span class='lower'>no</span><span class='keywordsign prefix'>!</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>,</span><span class='lower'>prompt</span><span class='keywordsign'>=</span><span class='keywordsign'>&#39;</span><span class='constructor module'>Ae</span> <span class='lower'>you</span> <span class='lower'>sure</span><span class='keywordsign'>?</span><span class='keywordsign'>&#39;</span><span class='keywordsign'>)</span></code></pre>
 <p>
 Notice that in Python we are allowed to name arguments when we call
 them, or use the usual function call syntax, and we can have optional
@@ -210,7 +210,7 @@ arguments with default values.</p>
 <span class='keywordsign'>}</span>
 
 <span class='lower'>ask_ok</span> <span class='keywordsign'>(</span><span class='lower'>prompt</span> <span class='keywordsign infix'>=&#62;</span> <span class='string'>&#34;Are you sure?&#34;</span><span class='keywordsign'>,</span> <span class='lower'>retries</span> <span class='keywordsign infix'>=&#62;</span> <span class='number'>2</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('sub ask_ok\n{\n  my %params = @_;\n\n  my $prompt = $params{prompt};\n  my $retries = exists $params{retries} ? $params{retries} : 4;\n\n  # ... etc.\n}\n\nask_ok (prompt =&#62; &#34;Are you sure?&#34;, retries =&#62; 2);\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 OCaml also has a way to label arguments and have optional arguments with
 default values.</p>
@@ -218,18 +218,18 @@ default values.</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>first</span><span class='keywordsign'>:</span><span class='lower'>a</span> <span class='keywordsign'>~</span><span class='lower'>last</span><span class='keywordsign'>:</span><span class='lower'>b</span> <span class='keywordsign'>=</span>
     <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
     <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>first</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>~</span><span class='lower'>last</span><span class='keywordsign'>:</span><span class='lower'>b</span>
-<a href="javascript:octry('  let rec range ~first:a ~last:b =\n    if a &#62; b then []\n    else a :: range ~first:(a+1) ~last:b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (Notice that both <code>to</code> and <code>end</code> are reserved words in OCaml, so they
 cannot be used as labels. So you cannot have <code>~from/~to</code> or
 <code>~start/~end</code>.)</p>
 <p>The type of our previous <code>range</code> function was:</p>
 <pre><code class='tryocaml'><span class='lower'>range</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='lower'>list</span>
-<a href="javascript:octry('range : int -&#62; int -&#62; int list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 And the type of our new <code>range</code> function with labelled arguments is:</p>
 <pre><code class='tryocaml'><span class='lower'>range</span> <span class='keywordsign'>:</span> <span class='lower'>first</span><span class='keywordsign'>:</span><span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>last</span><span class='keywordsign'>:</span><span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='lower'>list</span>
-<a href="javascript:octry('range : first:int -&#62; last:int -&#62; int list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (Confusingly, the <code>~</code> (tilde) is <em>not</em> shown in the type definition, but
 you need to use it everywhere else).</p>
@@ -237,7 +237,7 @@ you need to use it everywhere else).</p>
 arguments anymore:</p>
 <pre><code class='tryocaml'><span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>first</span><span class='keywordsign'>:</span><span class='number'>1</span> <span class='keywordsign'>~</span><span class='lower'>last</span><span class='keywordsign'>:</span><span class='number'>10</span><span class='keywordsign'>;;</span>
 <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>last</span><span class='keywordsign'>:</span><span class='number'>10</span> <span class='keywordsign'>~</span><span class='lower'>first</span><span class='keywordsign'>:</span><span class='number'>1</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('range ~first:1 ~last:10;;\nrange ~last:10 ~first:1;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 There is also a shorthand way to name the arguments, so that the label
 is the same as the variable in the function definition. Here is a
@@ -247,7 +247,7 @@ in lablgtk):</p>
     <span class='keyword'>match</span> <span class='lower'>x</span> <span class='keyword'>with</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>None</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>ignore</span><span class='keywordsign'>(</span><span class='lower'>f</span> <span class='lower'>x</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('  let may ~f x =\n    match x with\n    | None -&#62; ()\n    | Some x -&#62; ignore(f x)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 It&#39;s worth spending some time working out exactly what this function
 does, and also working out by hand its type signature. There&#39;s a lot
@@ -268,13 +268,13 @@ gives us a clue. It&#39;s an <code>&#39;a option</code>.</p>
 <p>Thus the type of the <code>may</code> function is (and you can verify this in the
 OCaml toplevel if you want):</p>
 <pre><code class='tryocaml'><span class='lower'>may</span> <span class='keywordsign'>:</span> <span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>b</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>unit</span>
-<a href="javascript:octry('may : f:(\&#39;a -&#62; \&#39;b) -&#62; \&#39;a option -&#62; unit\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 What does this function do? Running the function in the OCaml toplevel
 gives us some clues:</p>
 <pre><code class='tryocaml'><span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='lower'>print_endline</span> <span class='constructor module'>None</span><span class='keywordsign'>;;</span>
 <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='lower'>print_endline</span> <span class='keywordsign'>(</span><span class='constructor module'>Some</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('may ~f:print_endline None;;\nmay ~f:print_endline (Some &#34;hello&#34;);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If the unlabelled argument is a &quot;null pointer&quot; then <code>may</code> does nothing.
 Otherwise <code>may</code> calls the <code>f</code> function on the argument. Why is this
@@ -285,13 +285,13 @@ of <code>~</code> in front of them. Here is an example:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='keywordsign'>?</span><span class='keywordsign'>(</span><span class='lower'>step</span><span class='keywordsign'>=</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
     <span class='keyword'>if</span> <span class='lower'>a</span> <span class='keywordsign'>&#62;</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
     <span class='keyword'>else</span> <span class='lower'>a</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>step</span> <span class='keywordsign'>(</span><span class='lower'>a</span><span class='keywordsign'>+</span><span class='lower'>step</span><span class='keywordsign'>)</span> <span class='lower'>b</span>
-<a href="javascript:octry('  let rec range ?(step=1) a b =\n    if a &#62; b then []\n    else a :: range ~step (a+step) b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note the somewhat confusing syntax, switching between <code>?</code> and <code>~</code>. We&#39;ll
 talk about that in the next section. Here is how you call this function:</p>
 <pre><code class='tryocaml'><span class='lower'>range</span> <span class='number'>1</span> <span class='number'>10</span><span class='keywordsign'>;;</span>
 <span class='lower'>range</span> <span class='number'>1</span> <span class='number'>10</span> <span class='keywordsign'>~</span><span class='lower'>step</span><span class='keywordsign'>:</span><span class='number'>2</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('range 1 10;;\nrange 1 10 ~step:2;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In this case, <code>?(step=1)</code> fairly obviously means that <code>~step</code> is an
 optional argument which defaults to 1. We can also omit the default
@@ -319,7 +319,7 @@ lablgtk:</p>
     <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_width</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>width</span><span class='keywordsign'>;</span>
     <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_height</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>height</span><span class='keywordsign'>;</span>
     <span class='lower'>window</span>
-<a href="javascript:octry('  type window = { mutable title: string;\n                  mutable width: int;\n                  mutable height: int }\n  \n  let create_window () =\n    { title = &#34;none&#34;; width = 640; height = 480; }\n  \n  let set_title window title =\n    window.title &#60;- title\n  \n  let set_width window width =\n    window.width &#60;- width\n  \n  let set_height window height =\n    window.height &#60;- height\n  \n  let open_window ?title ?width ?height () =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This example is significantly complex and quite subtle, but the pattern
 used is very common in the lablgtk source code. Let&#39;s concentrate on the
@@ -327,7 +327,7 @@ simple <code>create_window</code> function first. This function takes a <code>un
 returns a <code>window</code>, initialized with default settings for title, width
 and height:</p>
 <pre><code class='tryocaml'><span class='lower'>create_window</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('create_window ();;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>set_title</code>, <code>set_width</code> and <code>set_height</code> functions are impure
 functions which modify the <code>window</code> structure, in the obvious way. For
@@ -335,7 +335,7 @@ example:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>w</span> <span class='keywordsign'>=</span> <span class='lower'>create_window</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='lower'>set_title</span> <span class='lower'>w</span> <span class='string'>&#34;My Application&#34;</span><span class='keywordsign'>;</span>
   <span class='lower'>w</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let w = create_window () in\n  set_title w &#34;My Application&#34;;\n  w;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 So far this is just the imperative &quot;mutable records&quot; which we talked
 about in the previous chapter. Now the complex part is the <code>open_window</code>
@@ -344,7 +344,7 @@ followed by a required, unlabelled <code>unit</code>. Let&#39;s first see this f
 in action:</p>
 <pre><code class='tryocaml'><span class='lower'>open_window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My Application&#34;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='lower'>open_window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;Clock&#34;</span> <span class='keywordsign'>~</span><span class='lower'>width</span><span class='keywordsign'>:</span><span class='number'>128</span> <span class='keywordsign'>~</span><span class='lower'>height</span><span class='keywordsign'>:</span><span class='number'>128</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('open_window ~title:&#34;My Application&#34; ();;\nopen_window ~title:&#34;Clock&#34; ~width:128 ~height:128 ();;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 It does what you expect, but how?! The secret is in the <code>may</code> function
 (see above) and the fact that the optional parameters <em>don&#39;t</em> have
@@ -356,7 +356,7 @@ in the case of <code>?title</code> above, this has type <code>string option</cod
 calls the function on the argument provided the argument isn&#39;t <code>None</code>.
 So:</p>
 <pre><code class='tryocaml'><span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_title</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>title</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('may ~f:(set_title window) title;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If the optional title argument is not specified by the caller, then
 <code>title</code> = <code>None</code>, so <code>may</code> does nothing. But if we call the function
@@ -376,7 +376,7 @@ function without the extra <code>unit</code>:</p>
     <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_width</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>width</span><span class='keywordsign'>;</span>
     <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_height</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>height</span><span class='keywordsign'>;</span>
     <span class='lower'>window</span>
-<a href="javascript:octry('  let open_window ?title ?width ?height =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Although OCaml has compiled the function, it has generated a somewhat
 infamous warning: &quot;This optional argument cannot be erased&quot;, referring
@@ -384,7 +384,7 @@ to the final <code>?height</code> argument. To try to show what&#39;s going on h
 let&#39;s call our modified <code>open_window</code> function:</p>
 <pre><code class='tryocaml'><span class='lower'>open_window</span><span class='keywordsign'>;;</span>
 <span class='lower'>open_window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My Application&#34;</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('open_window;;\nopen_window ~title:&#34;My Application&#34;;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Did that work or not? No it didn&#39;t. In fact it didn&#39;t even run the
 <code>open_window</code> function at all. Instead it printed some strange type
@@ -393,14 +393,14 @@ information. What&#39;s going on?</p>
 we have a function <code>plus</code> defined as:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>plus</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span>
     <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span>
-<a href="javascript:octry('  let plus x y =\n    x + y\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 We can partially apply this, for example as <code>plus 2</code> which is &quot;the
 function that adds 2 to things&quot;:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='lower'>plus</span> <span class='number'>2</span><span class='keywordsign'>;;</span>
   <span class='lower'>f</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
   <span class='lower'>f</span> <span class='number'>100</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let f = plus 2;;\n  f 5;;\n  f 100;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In the <code>plus</code> example, the OCaml compiler can easily work out that
 <code>plus 2</code> doesn&#39;t have enough arguments supplied yet. It needs another
@@ -423,17 +423,17 @@ where we had the extra unlabelled <code>unit</code> argument at the end:</p>
     <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_width</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>width</span><span class='keywordsign'>;</span>
     <span class='lower'>may</span> <span class='keywordsign'>~</span><span class='lower'>f</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>set_height</span> <span class='lower'>window</span><span class='keywordsign'>)</span> <span class='lower'>height</span><span class='keywordsign'>;</span>
     <span class='lower'>window</span>
-<a href="javascript:octry('  let open_window ?title ?width ?height () =\n    let window = create_window () in\n    may ~f:(set_title window) title;\n    may ~f:(set_width window) width;\n    may ~f:(set_height window) height;\n    window\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If you want to pass optional arguments to <code>open_window</code> you must do so
 before the final <code>unit</code>, so if you type:</p>
 <pre><code class='tryocaml'>  <span class='lower'>open_window</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  open_window ();;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 you must mean &quot;execute <code>open_window</code> now with all optional arguments
 unspecified&quot;. Whereas if you type:</p>
 <pre><code class='tryocaml'><span class='lower'>open_window</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('open_window;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 you mean &quot;give me the functional value&quot; or (more usually in the
 toplevel) &quot;print out the type of <code>open_window</code>&quot;.</p>
@@ -443,7 +443,7 @@ shorthand as possible for the labels:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>first</span> <span class='keywordsign'>~</span><span class='lower'>last</span> <span class='keywordsign'>=</span>
     <span class='keyword'>if</span> <span class='lower'>first</span> <span class='keywordsign'>&#62;</span> <span class='lower'>last</span> <span class='keyword'>then</span> <span class='keywordsign operator'>[]</span>
     <span class='keyword'>else</span> <span class='lower'>first</span> <span class='keywordsign'>::</span> <span class='lower'>range</span> <span class='keywordsign'>~</span><span class='lower'>first</span><span class='keywordsign'>:</span><span class='keywordsign'>(</span><span class='lower'>first</span><span class='keywordsign'>+</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keywordsign'>~</span><span class='lower'>last</span>
-<a href="javascript:octry('  let rec range ~first ~last =\n    if first &#62; last then []\n    else first :: range ~first:(first+1) ~last\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Recall that <code>~foo</code> on its own is short for <code>~foo:foo</code>. This applies also
 when calling functions as well as declaring the arguments to functions,
@@ -454,7 +454,7 @@ There&#39;s another little wrinkle concerning optional arguments. Suppose we
 write a function around <code>open_window</code> to open up an application:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>open_application</span> <span class='keywordsign'>?</span><span class='lower'>width</span> <span class='keywordsign'>?</span><span class='lower'>height</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
     <span class='lower'>open_window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My Application&#34;</span> <span class='keywordsign'>~</span><span class='lower'>width</span> <span class='keywordsign'>~</span><span class='lower'>height</span>
-<a href="javascript:octry('  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ~width ~height\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Recall that <code>~width</code> is shorthand for <code>~width:width</code>. The type of
 <code>width</code> is <code>&#39;a option</code>, but <code>open_window ~width:</code> expects an <code>int</code>.</p>
@@ -466,7 +466,7 @@ this, but conceptually that&#39;s the idea). So the correct way to write
 this function is:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>open_application</span> <span class='keywordsign'>?</span><span class='lower'>width</span> <span class='keywordsign'>?</span><span class='lower'>height</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
     <span class='lower'>open_window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My Application&#34;</span> <span class='keywordsign'>?</span><span class='lower'>width</span> <span class='keywordsign'>?</span><span class='lower'>height</span>
-<a href="javascript:octry('  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ?width ?height\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Whenandwhennottouseand"> When and when not to use <code>~</code> and <code>?</code></h3><p>
 
 The syntax for labels and optional arguments is confusing, and you may
@@ -475,20 +475,20 @@ plain <code>foo</code>. It&#39;s something of a black art which takes practice t
 right.</p>
 <p><code>?foo</code> is only used when declaring the arguments of a function, ie:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>?</span><span class='lower'>arg1</span> <span class='keywordsign operator'>...</span> <span class='keywordsign'>=</span>
-<a href="javascript:octry('let f ?arg1 ... =\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 or when using the specialised &quot;unwrap <code>option</code> wrapper&quot; form for
 function calls:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>open_application</span> <span class='keywordsign'>?</span><span class='lower'>width</span> <span class='keywordsign'>?</span><span class='lower'>height</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
     <span class='lower'>open_window</span> <span class='keywordsign'>~</span><span class='lower'>title</span><span class='keywordsign'>:</span><span class='string'>&#34;My Application&#34;</span> <span class='keywordsign'>?</span><span class='lower'>width</span> <span class='keywordsign'>?</span><span class='lower'>height</span>
-<a href="javascript:octry('  let open_application ?width ?height () =\n    open_window ~title:&#34;My Application&#34; ?width ?height\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The declaration <code>?foo</code> creates a variable called <code>foo</code>, so if you need
 the value of <code>?foo</code>, use just <code>foo</code>.</p>
 <p>The same applies to labels. Only use the <code>~foo</code> form when declaring
 arguments of a function, ie:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>~</span><span class='lower'>foo</span><span class='keywordsign'>:</span><span class='lower'>foo</span> <span class='keywordsign operator'>...</span> <span class='keywordsign'>=</span>
-<a href="javascript:octry('let f ~foo:foo ... =\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The declaration <code>~foo:foo</code> creates a variable called simply <code>foo</code>, so if
 you need the value just use plain <code>foo</code>.</p>
@@ -503,7 +503,7 @@ this:</p>
   <span class='lower'>load_empty</span> <span class='lower'>w</span><span class='keywordsign'>;</span>
   <span class='constructor module'>Container</span><span class='keywordsign'>.</span><span class='lower'>set</span> <span class='lower'>w</span> <span class='keywordsign'>?</span><span class='lower'>border_width</span> <span class='keywordsign'>?</span><span class='lower'>width</span> <span class='keywordsign'>?</span><span class='lower'>height</span><span class='keywordsign'>;</span>            <span class='comment'>(* line 4 *)</span>
   <span class='lower'>pack_return</span> <span class='keywordsign'>(</span><span class='keyword'>new</span> <span class='lower'>html</span> <span class='lower'>w</span><span class='keywordsign'>)</span> <span class='keywordsign'>~</span><span class='lower'>packing</span> <span class='keywordsign'>~</span><span class='lower'>show</span>                  <span class='comment'>(* line 5 *)</span>
-<a href="javascript:octry('let html ?border_width ?width ?height ?packing ?show () =  (* line 1 *)\n  let w = create () in\n  load_empty w;\n  Container.set w ?border_width ?width ?height;            (* line 4 *)\n  pack_return (new html w) ~packing ~show                  (* line 5 *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 On line 1 we have the function definition. Notice there are 5 optional
 arguments, and the mandatory <code>unit</code> 6<sup>th</sup> argument. Each of the
@@ -515,11 +515,11 @@ following type:</p>
 <pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>Container</span> <span class='keywordsign'>=</span> <span class='keyword'>struct</span>
   <span class='keyword'>let</span> <span class='lower'>set</span> <span class='keywordsign'>?</span><span class='lower'>border_width</span> <span class='keywordsign'>?</span><span class='keywordsign'>(</span><span class='lower'>width</span> <span class='keywordsign'>=</span> <span class='keywordsign'>-</span><span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>?</span><span class='keywordsign'>(</span><span class='lower'>height</span> <span class='keywordsign'>=</span> <span class='keywordsign'>-</span><span class='number'>2</span><span class='keywordsign'>)</span> <span class='lower'>w</span> <span class='keywordsign'>=</span>
     <span class='comment'>(* ... *)</span>
-<a href="javascript:octry('module Container = struct\n  let set ?border_width ?(width = -2) ?(height = -2) w =\n    (* ... *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Line 5 uses the <code>~</code>shorthand. Writing this in long form:</p>
 <pre><code class='tryocaml'>  <span class='lower'>pack_return</span> <span class='keywordsign'>(</span><span class='keyword'>new</span> <span class='lower'>html</span> <span class='lower'>w</span><span class='keywordsign'>)</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>packing</span> <span class='keywordsign'>~</span><span class='lower'>show</span><span class='keywordsign'>:</span><span class='lower'>show</span>
-<a href="javascript:octry('  pack_return (new html w) ~packing:packing ~show:show\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The <code>pack_return</code> function actually takes mandatory labelled arguments
 called <code>~packing</code> and <code>~show</code>, each of type <code>&#39;a option</code>. In other words,
@@ -548,27 +548,27 @@ Try compiling the following C code:</p>
     <span class='lower'>write</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='lower'>buffer</span><span class='keywordsign'>,</span> <span class='lower'>n</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
   <span class='lower'>close</span> <span class='keywordsign'>(</span><span class='lower'>fd</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>                                            <span class='keywordsign infix'>//</span> <span class='lower'>line</span> <span class='number'>15</span>
 <span class='keywordsign'>}</span>
-<a href="javascript:octry('#include &#60;stdio.h&#62;\n#include &#60;fcntl.h&#62;\n#include &#60;unistd.h&#62;\n\nenum lock { open, close };\n\nmain ()\n{\n  int fd, n;\n  char buffer[256];\n\n  fd = open (&#34;/etc/motd&#34;, O_RDONLY);                     // line 12\n  while ((n = read (fd, buffer, sizeof buffer)) &#62; 0)\n    write (1, buffer, n);\n  close (fd);                                            // line 15\n}\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 When I compile the code I get a whole bunch of errors including:</p>
 <pre><code class='tryocaml'><span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span> <span class='constructor module'>In</span> <span class='keyword'>function</span> <span class='keywordsign'>`</span><span class='lower'>main&#39;</span><span class='keywordsign'>:</span>
 <span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span><span class='number'>12</span><span class='keywordsign'>:</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='lower'>called</span> <span class='keyword'>object</span> <span class='lower'>is</span> <span class='lower'>not</span> <span class='lower'>a</span> <span class='keyword'>function</span>
 <span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span><span class='number'>15</span><span class='keywordsign'>:</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='lower'>called</span> <span class='keyword'>object</span> <span class='lower'>is</span> <span class='lower'>not</span> <span class='lower'>a</span> <span class='keyword'>function</span>
-<a href="javascript:octry('test.c: In function `main\&#39;:\ntest.c:12: error: called object is not a function\ntest.c:15: error: called object is not a function\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This illustrates one problem with enumerated types (enums) in C. In the
 example above, one enum statement reserves <em>three</em> symbols, namely
 <code>lock</code>, <code>open</code> and <code>close</code>. Here&#39;s another example:</p>
 <pre><code class='tryocaml'><span class='lower'>enum</span> <span class='lower'>lock</span> <span class='keywordsign'>{</span> <span class='keyword'>open</span><span class='keywordsign'>,</span> <span class='lower'>close</span> <span class='keywordsign'>}</span><span class='keywordsign'>;</span>
 <span class='lower'>enum</span> <span class='lower'>door</span> <span class='keywordsign'>{</span> <span class='keyword'>open</span><span class='keywordsign'>,</span> <span class='lower'>close</span> <span class='keywordsign'>}</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('enum lock { open, close };\nenum door { open, close };\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Compiling gives:</p>
 <pre><code class='tryocaml'><span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span><span class='number'>2</span><span class='keywordsign'>:</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='lower'>conflicting</span> <span class='lower'>types</span> <span class='keyword'>for</span> <span class='keywordsign'>`</span><span class='lower'>open&#39;</span>
 <span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span><span class='number'>1</span><span class='keywordsign'>:</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='lower'>previous</span> <span class='lower'>declaration</span> <span class='keyword'>of</span> <span class='keywordsign'>`</span><span class='lower'>open&#39;</span>
 <span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span><span class='number'>2</span><span class='keywordsign'>:</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='lower'>conflicting</span> <span class='lower'>types</span> <span class='keyword'>for</span> <span class='keywordsign'>`</span><span class='lower'>close&#39;</span>
 <span class='lower'>test</span><span class='keywordsign'>.</span><span class='lower'>c</span><span class='keywordsign'>:</span><span class='number'>1</span><span class='keywordsign'>:</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='lower'>previous</span> <span class='lower'>declaration</span> <span class='keyword'>of</span> <span class='keywordsign'>`</span><span class='lower'>close&#39;</span>
-<a href="javascript:octry('test.c:2: error: conflicting types for `open\&#39;\ntest.c:1: error: previous declaration of `open\&#39;\ntest.c:2: error: conflicting types for `close\&#39;\ntest.c:1: error: previous declaration of `close\&#39;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The first enum defines the symbol <code>open</code> as something of type
 <code>enum lock</code>. You cannot reuse that symbol in another enum.</p>
@@ -578,14 +578,14 @@ variants, but OCaml provides a way to work around it.</p>
 <p>Here is some OCaml code, which actually <em>does</em> compile:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>lock</span> <span class='keywordsign'>=</span> <span class='constructor module'>Open</span> <span class='keywordsign'>|</span> <span class='constructor module'>Close</span>
 <span class='keyword'>type</span> <span class='lower'>door</span> <span class='keywordsign'>=</span> <span class='constructor module'>Open</span> <span class='keywordsign'>|</span> <span class='constructor module'>Close</span>
-<a href="javascript:octry('type lock = Open | Close\ntype door = Open | Close\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 After running those two statements, what is the type of <code>Open</code>? We can
 find out easily enough in the toplevel:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>lock</span> <span class='keywordsign'>=</span> <span class='constructor module'>Open</span> <span class='keywordsign'>|</span> <span class='constructor module'>Close</span><span class='keywordsign'>;;</span>
 <span class='keyword'>type</span> <span class='lower'>door</span> <span class='keywordsign'>=</span> <span class='constructor module'>Open</span> <span class='keywordsign'>|</span> <span class='constructor module'>Close</span><span class='keywordsign'>;;</span>
 <span class='constructor module'>Open</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type lock = Open | Close;;\ntype door = Open | Close;;\nOpen;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 OCaml uses the most recent definition for <code>Open</code>, giving it the type
 <code>door</code>. This is actually not such a serious problem because if you
@@ -600,7 +600,7 @@ which one I mean.</p>
 <p>The syntax is slightly different, but here is how we do it:</p>
 <pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>lock</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='keywordsign'>`</span><span class='constructor module'>Open</span> <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor module'>Close</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keyword'>type</span> <span class='lower'>door</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span> <span class='keywordsign'>`</span><span class='constructor module'>Open</span> <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor module'>Close</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('type lock = [ `Open | `Close ];;\ntype door = [ `Open | `Close ];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice the syntactic differences:</p>
 <ol>
@@ -611,7 +611,7 @@ Notice the syntactic differences:</p>
 
 <p>The question naturally arises: What is the type of <code>`Ope</code>?</p>
 <pre><code class='tryocaml'><span class='keywordsign'>`</span><span class='constructor module'>Open</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('`Open;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code> [&gt; `Open] </code> can be read as
 <code> [ `Open | and some other possibilities which we don&#39;t know about ] </code>.
@@ -621,14 +621,14 @@ bigger than those listed (open-ended).</p>
 used as a type, even one which we haven&#39;t mentioned before:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>`</span><span class='constructor module'>Foo</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>`</span><span class='constructor module'>Foo</span> <span class='number'>42</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('`Foo;;\n`Foo 42;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Let&#39;s write a function to print the state of a <code>lock</code>:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>print_lock</span> <span class='lower'>st</span> <span class='keywordsign'>=</span>
     <span class='keyword'>match</span> <span class='lower'>st</span> <span class='keyword'>with</span>
     <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor module'>Open</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_endline</span> <span class='string'>&#34;The lock is open&#34;</span>
     <span class='keywordsign'>|</span> <span class='keywordsign'>`</span><span class='constructor module'>Close</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_endline</span> <span class='string'>&#34;The lock is closed&#34;</span>
-<a href="javascript:octry('  let print_lock st =\n    match st with\n    | `Open -&#62; print_endline &#34;The lock is open&#34;\n    | `Close -&#62; print_endline &#34;The lock is closed&#34;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Take a careful look at the type of that function. Type inference has
 worked out that the <code>st</code> argument has type <code> [&lt; `Close | `Open] </code>. The
@@ -636,7 +636,7 @@ worked out that the <code>st</code> argument has type <code> [&lt; `Close | `Ope
 other words, this function will only work on <code>`Clos</code> or <code>`Ope</code>
 and not on anything else.</p>
 <pre><code class='tryocaml'><span class='lower'>print_lock</span> <span class='keywordsign'>`</span><span class='constructor module'>Open</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('print_lock `Open;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice that <code>print_lock</code> works just as well with a <code>door</code> as with a
 <code>lock</code>! We&#39;ve deliberately given up some type safety, and type inference

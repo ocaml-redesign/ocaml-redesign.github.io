@@ -116,7 +116,7 @@ anyhow.</p>
 example:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>double</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>*</span> <span class='number'>2</span> <span class='keyword'>in</span>
   <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>double</span> <span class='keywordsign'>[</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span> <span class='keywordsign'>]</span>
-<a href="javascript:octry('  let double x = x * 2 in\n  List.map double [ 1; 2; 3 ]\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In this example, I&#39;ve first defined a nested function called <code>double</code>
 which takes an argument <code>x</code> and returns <code>x * 2</code>. Then <code>map</code> calls
@@ -141,12 +141,12 @@ integers and multiply each element by an arbitrary value <code>n</code>:</p>
     <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
       <span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>x</span> <span class='keyword'>in</span>
     <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>list</span>
-<a href="javascript:octry('  let multiply n list =\n    let f x =\n      n * x in\n    List.map f list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Hence:</p>
 <pre><code class='tryocaml'><span class='lower'>multiply</span> <span class='number'>2</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='lower'>multiply</span> <span class='number'>5</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('multiply 2 [1; 2; 3];;\nmultiply 5 [1; 2; 3];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The important point to note about the <code>multiply</code> function is the nested
 function <code>f</code>. This is a closure. Look at how <code>f</code> uses the value of <code>n</code>
@@ -172,7 +172,7 @@ as a function definition for now).</p>
       <span class='lower'>output_string</span> <span class='lower'>chan</span> <span class='lower'>content</span><span class='keywordsign'>;</span>
       <span class='keyword'>true</span> <span class='keyword'>in</span>
     <span class='lower'>save</span> <span class='lower'>obj</span> <span class='lower'>receiver_fn</span>
-<a href="javascript:octry('class html_skel obj = object (self)\n  ...\n  ...\n  method save_to_channel chan =\n    let receiver_fn content =\n      output_string chan content;\n      true in\n    save obj receiver_fn\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 First of all you need to know that the <code>save</code> function called at the end
 of the method takes as its second argument a function (<code>receiver_fn</code>).
@@ -184,7 +184,7 @@ alright because it keeps a reference to <code>chan</code> from its environment.<
 Let&#39;s define a plus function which just adds two integers:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>plus</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
     <span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span>
-<a href="javascript:octry('  let plus a b =\n    a + b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Some questions for people asleep at the back of the class.</p>
 <ol>
@@ -198,18 +198,18 @@ Some questions for people asleep at the back of the class.</p>
 <p>Question 1 is easy. <code>plus</code> is a function, it takes two arguments which
 are integers and it returns an integer. We write its type like this:</p>
 <pre><code class='tryocaml'>  <span class='lower'>plus</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
-<a href="javascript:octry('  plus : int -&#62; int -&#62; int\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Question 2 is even easier. <code>plus 2 3</code> is a number, the integer <code>5</code>. We
 write its value and type like this:</p>
 <pre><code class='tryocaml'>  <span class='number'>5</span> <span class='keywordsign'>:</span> <span class='lower'>int</span>
-<a href="javascript:octry('  5 : int\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 But what about question 3? It looks like <code>plus 2</code> is a mistake, a bug.
 In fact, however, it isn&#39;t. If we type this into the OCaml toplevel, it
 tells us:</p>
 <pre><code class='tryocaml'>  <span class='lower'>plus</span> <span class='number'>2</span>
-<a href="javascript:octry('  plus 2\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This isn&#39;t an error. It&#39;s telling us that <code>plus 2</code> is in fact a
 <em>function</em>, which takes an <code>int</code> and returns an <code>int</code>. What sort of
@@ -220,7 +220,7 @@ what it does:</p>
 <span class='lower'>f</span> <span class='number'>10</span><span class='keywordsign'>;;</span>
 <span class='lower'>f</span> <span class='number'>15</span><span class='keywordsign'>;;</span>
 <span class='lower'>f</span> <span class='number'>99</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let f = plus 2;;\nf 10;;\nf 15;;\nf 99;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In engineering this is sufficient <a href='http://www.princeton.edu/~sacm/humor/proof.html' title='http://www.princeton.edu/~sacm/humor/proof.html'>proof by
 example</a>
@@ -229,7 +229,7 @@ for us to state that <code>plus 2</code> is the function which adds 2 to things.
 argument (<code>a</code>) setting it to 2 to get:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>plus</span> <span class='number'>2</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>       <span class='comment'>(* This is not real OCaml code! *)</span>
   <span class='number'>2</span> <span class='keywordsign'>+</span> <span class='lower'>b</span>
-<a href="javascript:octry('let plus 2 b =       (* This is not real OCaml code! *)\n  2 + b\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 You can kind of see, I hope, why <code>plus 2</code> is the function which adds 2
 to things.</p>
@@ -238,7 +238,7 @@ rationale for the strange -\&gt; arrow notation used for function types:</p>
 <pre><code class='tryocaml'>    <span class='lower'>plus</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
   <span class='lower'>plus</span> <span class='number'>2</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>int</span>
 <span class='lower'>plus</span> <span class='number'>2</span> <span class='number'>3</span> <span class='keywordsign'>:</span> <span class='lower'>int</span>
-<a href="javascript:octry('    plus : int -&#62; int -&#62; int\n  plus 2 : int -&#62; int\nplus 2 3 : int\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This process is called <strong>currying</strong> (or perhaps it&#39;s called
 <strong>uncurrying</strong>, I never was really sure which was which). It is called
@@ -254,18 +254,18 @@ Google</a>.</p>
     <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
       <span class='lower'>n</span> <span class='keywordsign'>*</span> <span class='lower'>x</span> <span class='keyword'>in</span>
     <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>list</span>
-<a href="javascript:octry('  let multiply n list =\n    let f x =\n      n * x in\n    List.map f list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 We can now define <code>double</code>, <code>triple</code> &amp;c functions very easily just like
 this:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>double</span> <span class='keywordsign'>=</span> <span class='lower'>multiply</span> <span class='number'>2</span><span class='keywordsign'>;;</span>
 <span class='keyword'>let</span> <span class='lower'>triple</span> <span class='keywordsign'>=</span> <span class='lower'>multiply</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let double = multiply 2;;\nlet triple = multiply 3;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 They really are functions, look:</p>
 <pre><code class='tryocaml'><span class='lower'>double</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='lower'>triple</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('double [1; 2; 3];;\ntriple [1; 2; 3];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 You can also use partial application directly (without the intermediate
 <code>f</code> function) like this:</p>
@@ -274,7 +274,7 @@ You can also use partial application directly (without the intermediate
 <span class='keyword'>let</span> <span class='lower'>triple</span> <span class='keywordsign'>=</span> <span class='lower'>multiply</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
 <span class='lower'>double</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='lower'>triple</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let multiply n = List.map (( * ) n);;\nlet double = multiply 2;;\nlet triple = multiply 3;;\ndouble [1; 2; 3];;\ntriple [1; 2; 3];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In the example above, <code>((*) n)</code> is the partial application of the <code>(*)</code>
 (times) function. Note the extra spaces needed so that OCaml doesn&#39;t
@@ -283,12 +283,12 @@ think <code>(*</code> starts a comment.</p>
 identical definition of the <code>plus</code> function as before:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>plus</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span> <span class='keywordsign'>+</span> <span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='lower'>plus</span> <span class='number'>2</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let plus = ( + );;\nplus 2 3;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Here&#39;s some more currying fun:</p>
 <pre><code class='tryocaml'><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='lower'>plus</span> <span class='number'>2</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keyword'>let</span> <span class='lower'>list_of_functions</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>plus</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('List.map (plus 2) [1; 2; 3];;\nlet list_of_functions = List.map plus [1; 2; 3];;\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Whatisfunctionalprogramminggoodfor"> What is functional programming good for?</h3><p>
 
 Functional programming, like any good programming technique, is a useful
@@ -326,7 +326,7 @@ the function once. A good example in C is:</p>
   <span class='keywordsign'>{</span>
     <span class='keywordsign infix'>//</span> <span class='constructor module'>Do</span> <span class='lower'>something</span> <span class='lower'>which</span> <span class='lower'>doesn&#39;t</span> <span class='lower'>affect</span> <span class='lower'>s</span><span class='keywordsign'>.</span>
   <span class='keywordsign'>}</span>
-<a href="javascript:octry('for (i = 0; i &#60; strlen (s); ++i)\n  {\n    // Do something which doesn\&#39;t affect s.\n  }\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If naively compiled, this loop is O(n<sup>2</sup>) because <code>strlen (s)</code>
 is called each time and <code>strlen</code> needs to iterate over the whole of <code>s</code>.
@@ -350,7 +350,7 @@ language, the call <code>give_me_a_three (1/0)</code> is always going to result 
 a divide-by-zero error:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>give_me_a_three</span> <span class='keywordsign'>_</span> <span class='keywordsign'>=</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
 <span class='lower'>give_me_a_three</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign infix'>/</span><span class='number'>0</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let give_me_a_three _ = 3;;\ngive_me_a_three (1/0);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If you&#39;ve programmed in any conventional language, this is just how
 things work, and you&#39;d be surprised that things could work any other
@@ -369,17 +369,17 @@ first 10 elements).</p>
 lazy expressions. Here&#39;s an example. First we create a lazy expression
 for <code>1/0</code>:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>lazy_expr</span> <span class='keywordsign'>=</span> <span class='keyword'>lazy</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign infix'>/</span><span class='number'>0</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let lazy_expr = lazy (1/0)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Notice the type of this lazy expression is <code>int lazy_t</code>.</p>
 <p>Because <code>give_me_a_three</code> takes <code>&#39;a</code> (any type) we can pass this lazy
 expression into the function:</p>
 <pre><code class='tryocaml'><span class='lower'>give_me_a_three</span> <span class='lower'>lazy_expr</span>
-<a href="javascript:octry('give_me_a_three lazy_expr\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To evaluate a lazy expression, you must use the <code>Lazy.force</code> function:</p>
 <pre><code class='tryocaml'><span class='constructor module'>Lazy</span><span class='keywordsign'>.</span><span class='lower'>force</span> <span class='lower'>lazy_expr</span>
-<a href="javascript:octry('Lazy.force lazy_expr\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Boxedvsunboxedtypes"> Boxed vs. unboxed types</h3><p>
 
 One term which you&#39;ll hear a lot when discussing functional languages is
@@ -406,7 +406,7 @@ example C program:</p>
 
   <span class='lower'>printit</span> <span class='keywordsign'>(</span><span class='lower'>p</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>}</span>
-<a href="javascript:octry('#include &#60;stdio.h&#62;\n\nvoid\nprintit (int *ptr)\n{\n  printf (&#34;the number is %d\n&#34;, *ptr);\n}\n\nvoid\nmain ()\n{\n  int a = 3;\n  int *p = &#38;a;\n\n  printit (p);\n}\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The variable <code>a</code> is allocated on the stack, and is quite definitely
 unboxed.</p>

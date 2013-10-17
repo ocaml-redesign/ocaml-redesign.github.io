@@ -118,7 +118,7 @@ dynamic_functor_example.ml:</p>
 <span class='comment'>(* Register it to make it usable via the camlp4 binary. *)</span>
 <span class='keyword'>module</span> <span class='constructor module'>M</span> <span class='keywordsign'>=</span> <span class='constructor module'>Register</span><span class='keywordsign'>.</span><span class='constructor module'>SyntaxExtension</span><span class='keywordsign'>(</span><span class='constructor module'>Id</span><span class='keywordsign'>)</span><span class='keywordsign'>(</span><span class='constructor module'>Make</span><span class='keywordsign'>)</span>
 
-<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4\n\nmodule Id = struct (* Information for dynamic loading *)\n  let name = &#34;My_extension&#34;\n  let version = &#34;$Id$&#34;\nend\n\n(* An extension is just a functor: Syntax -&#62; Syntax *)\nmodule Make (Syntax : Sig.Syntax) = struct\n  include Syntax\n  let foo = Gram.Entry.mk &#34;foo&#34;\n  let bar = Gram.Entry.mk &#34;bar&#34;\n  open Camlp4.Sig\n  EXTEND Gram\n    GLOBAL: foo bar;\n    foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n    bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\n  END;;\n  Gram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\n  DELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\nend\n\n(* Register it to make it usable via the camlp4 binary. *)\nmodule M = Register.SyntaxExtension(Id)(Make)\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

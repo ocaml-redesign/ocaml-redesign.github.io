@@ -108,13 +108,13 @@ Let&#39;s take the <code>average</code> function and add a local variable in C.
   <span class='lower'>double</span> <span class='lower'>sum</span> <span class='keywordsign'>=</span> <span class='lower'>a</span> <span class='keywordsign'>+</span> <span class='lower'>b</span><span class='keywordsign'>;</span>
   <span class='lower'>return</span> <span class='lower'>sum</span> <span class='keywordsign infix'>/</span> <span class='number'>2</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>}</span>
-<a href="javascript:octry('double\naverage (double a, double b)\n{\n  double sum = a + b;\n  return sum / 2;\n}\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Now let&#39;s do the same to our OCaml version:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>average</span> <span class='lower'>a</span> <span class='lower'>b</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>sum</span> <span class='keywordsign'>=</span> <span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span> <span class='keyword'>in</span>
   <span class='lower'>sum</span> <span class='keywordsign infix'>/.</span> <span class='number'>2.0</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let average a b =\n  let sum = a +. b in\n  sum /. 2.0;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The standard phrase <code>let name = expression in</code> is used to define a named
 local expression, and <code>name</code> can then be used later on in the function
@@ -140,7 +140,7 @@ snippets should return the same value (namely (a+b) +
   <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>a</span> <span class='keywordsign infix'>+.</span> <span class='lower'>b</span> <span class='keyword'>in</span>
   <span class='lower'>x</span> <span class='keywordsign infix'>+.</span> <span class='lower'>x</span> <span class='keywordsign infix'>**</span> <span class='number'>2.</span>
   <span class='keywordsign'>;;</span>
-<a href="javascript:octry('let f a b =\n  (a +. b) +. (a +. b) ** 2.\n  ;;\n\nlet f a b =\n  let x = a +. b in\n  x +. x ** 2.\n  ;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The second version might be faster (but most compilers ought to be able
 to perform this step of &quot;common subexpression elimination&quot; for you), and
@@ -152,7 +152,7 @@ with our local &quot;variables&quot; above, these aren&#39;t really variable at 
 just shorthand names for things. Here&#39;s a real (but cut-down) example:</p>
 <pre><code class='tryocaml'>Characters 14:29 - 14:31 :
 Error: Lexical error while reading an operator
-<a href="javascript:octry('let html =\n  let content = read_whole_file file in\n  GHtml.html_from_string content\n  ;;\n\nlet menu_bold () =\n  match bold_button#active with\n    true -&#62; html#set_font_style ~enable:[`BOLD] ()\n  | false -&#62; html#set_font_style ~disable:[`BOLD] ()\n  ;;\n\nlet main () =\n  (* code omitted *)\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback: html#cut\n  ;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In this real piece of code, <code>html</code> is an HTML editing widget (an object
 from the lablgtk library) which is created once at the beginning of the
@@ -175,23 +175,23 @@ which store objects are really references (pointers) to the objects. In
 Perl, references are references - the same thing as in OCaml.</p>
 <p>Here&#39;s how we create a reference to an <code>int</code> in OCaml:</p>
 <pre><code class='tryocaml'><span class='lower'>ref</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('ref 0;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Actually that statement wasn&#39;t really very useful. We created the
 reference and then, because we didn&#39;t name it, the garbage collector
 came along and collected it immediately afterwards! (actually, it was
 probably thrown away at compile-time.) Let&#39;s name the reference:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>my_ref</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>0</span>
-<a href="javascript:octry('let my_ref = ref 0\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This reference is currently storing a zero integer. Let&#39;s put something
 else into it (assignment):</p>
 <pre><code class='tryocaml'><span class='lower'>my_ref</span> <span class='keywordsign'>:=</span> <span class='number'>100</span>
-<a href="javascript:octry('my_ref := 100\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 And let&#39;s find out what the reference contains now:</p>
 <pre><code class='tryocaml'><span class='keywordsign prefix'>!</span><span class='lower'>my_ref</span>
-<a href="javascript:octry('!my_ref\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 So the <code>:=</code> operator is used to assign to references, and the <code>!</code>
 operator dereferences to get out the contents. Here&#39;s a rough-and-ready
@@ -205,7 +205,7 @@ comparison with C/C++:</p>
 <span class='lower'>int</span> <span class='lower'>a</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>int</span> <span class='keywordsign'>*</span><span class='lower'>my_ptr</span> <span class='keywordsign'>=</span> <span class='keywordsign'>&#38;</span><span class='lower'>a</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>*</span><span class='lower'>my_ptr</span> <span class='keywordsign'>=</span> <span class='number'>100</span><span class='keywordsign'>;</span>
 <span class='keywordsign'>*</span><span class='lower'>my_ptr</span>
-<a href="javascript:octry('let my_ref = ref 0;;\nmy_ref := 100;;\n!my_ref\n\nint a = 0; int *my_ptr = &#38;a;\n*my_ptr = 100;\n*my_ptr\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 References have their place, but you may find that you don&#39;t use
 references very often. Much more often you&#39;ll be using
@@ -244,7 +244,7 @@ uses an inherited variable named </code></pre>
   <span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>&#60;</span> <span class='lower'>size</span><span class='keywordsign'>;</span> <span class='lower'>i</span><span class='keywordsign infix'>++</span><span class='keywordsign'>)</span>
     <span class='keywordsign infix'>/*</span> <span class='keywordsign operator'>...</span> <span class='keywordsign infix'>*/</span> <span class='lower'>access</span> <span class='keywordsign'>(</span><span class='lower'>array</span><span class='keywordsign'>,</span> <span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/*</span> <span class='keywordsign operator'>...</span> <span class='keywordsign infix'>*/</span>
 <span class='keywordsign'>}</span>
-<a href="javascript:octry('bar (int *array, int offset, int size)\n{\n  int access (int *array, int index)\n    { return array[index + offset]; }\n  int i;\n  /* ... */\n  for (i = 0; i &#60; size; i++)\n    /* ... */ access (array, i) /* ... */\n}\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 You get the idea. Nested functions are, however, very useful and very
 heavily used in OCaml. Here is an example of a nested function from some
@@ -261,7 +261,7 @@ real code:</p>
       <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
     <span class='keyword'>with</span>
       <span class='constructor module'>End_of_file</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>Buffer</span><span class='keywordsign'>.</span><span class='lower'>contents</span> <span class='lower'>buf</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let read_whole_channel chan =\n    let buf = Buffer.create 4096 in\n    let rec loop () =\n      let newline = input_line chan in\n      Buffer.add_string buf newline;\n      Buffer.add_char buf \&#39;\n\&#39;;\n      loop ()\n    in\n    try\n      loop ()\n    with\n      End_of_file -&#62; Buffer.contents buf;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Don&#39;t worry about what this code does - it contains many concepts which
 haven&#39;t been discussed in this tutorial yet. Concentrate instead on the
@@ -288,7 +288,7 @@ going to concentrate on one quite simple module called <code>Graphics</code>.</p
 <span class='keywordsign infix'>/</span><span class='lower'>usr</span><span class='keywordsign infix'>/</span><span class='lower'>lib</span><span class='keywordsign infix'>/</span><span class='lower'>ocaml</span><span class='keywordsign infix'>/</span><span class='number'>3.08</span><span class='keywordsign infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>cmi</span>
 <span class='keywordsign infix'>/</span><span class='lower'>usr</span><span class='keywordsign infix'>/</span><span class='lower'>lib</span><span class='keywordsign infix'>/</span><span class='lower'>ocaml</span><span class='keywordsign infix'>/</span><span class='number'>3.08</span><span class='keywordsign infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>cmxa</span>
 <span class='keywordsign infix'>/</span><span class='lower'>usr</span><span class='keywordsign infix'>/</span><span class='lower'>lib</span><span class='keywordsign infix'>/</span><span class='lower'>ocaml</span><span class='keywordsign infix'>/</span><span class='number'>3.08</span><span class='keywordsign infix'>/</span><span class='lower'>graphics</span><span class='keywordsign'>.</span><span class='lower'>mli</span>
-<a href="javascript:octry('/usr/lib/ocaml/3.08/graphics.a\n/usr/lib/ocaml/3.08/graphics.cma\n/usr/lib/ocaml/3.08/graphics.cmi\n/usr/lib/ocaml/3.08/graphics.cmxa\n/usr/lib/ocaml/3.08/graphics.mli\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 For the moment let&#39;s just concentrate on the file <code>graphics.mli</code>. This
 is a text file, so you can read it now. Notice first of all that the
@@ -339,7 +339,7 @@ different things - try them out). Note the first example calls
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 
 <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('(* To compile this example: ocamlc graphics.cma grtest1.ml -o grtest1 *)\nopen Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  set_color (if i mod 2 = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n(* To compile this example: ocamlc graphics.cma grtest2.ml -o grtest2 *)\n\nRandom.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n  if i = 1 then x_init\n  else\n    let x = iterate r x_init (i-1) in\n    r *. x *. (1.0 -. x);;\n\nfor x = 0 to 639 do\n  let r = 4.0 *. (float_of_int x) /. 640.0 in\n  for i = 0 to 39 do\n    let x_init = Random.float 1.0 in\n    let x_final = iterate r x_init 500 in\n    let y = int_of_float (x_final *. 480.) in\n    Graphics.plot x y\n  done\ndone;;\n\nread_line ();;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Both of these examples make use of some features we haven&#39;t talked about
 yet: imperative-style for-loops, if-then-else and recursion. We&#39;ll talk
@@ -360,7 +360,7 @@ you don&#39;t want to import all of them and you can&#39;t be bothered to type
 <span class='constructor module'>Gr</span><span class='keywordsign'>.</span><span class='lower'>open_graph</span> <span class='string'>&#34; 640x480&#34;</span><span class='keywordsign'>;;</span>
 <span class='constructor module'>Gr</span><span class='keywordsign'>.</span><span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='number'>240</span><span class='keywordsign'>;;</span>
 <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('module Gr = Graphics;;\n\nGr.open_graph &#34; 640x480&#34;;;\nGr.fill_circle 320 240 240;;\nread_line ();;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Actually this is really useful when you want to import a nested module
 (modules can be nested inside one another), but you don&#39;t want to type
@@ -382,7 +382,7 @@ other kind of statement.</p>
   <span class='keyword'>else</span>
     <span class='keyword'>let</span> <span class='lower'>x</span> <span class='keywordsign'>=</span> <span class='lower'>iterate</span> <span class='lower'>r</span> <span class='lower'>x_init</span> <span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>-</span><span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
     <span class='lower'>r</span> <span class='keywordsign infix'>*.</span> <span class='lower'>x</span> <span class='keywordsign infix'>*.</span> <span class='keywordsign'>(</span><span class='number'>1.0</span> <span class='keywordsign'>-.</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('Random.self_init ();;\nGraphics.open_graph &#34; 640x480&#34;;;\n\nlet rec iterate r x_init i =\n  if i = 1 then x_init\n  else\n    let x = iterate r x_init (i-1) in\n    r *. x *. (1.0 -. x);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 We have two top-level statements and a function definition (of a
 function called <code>iterate</code>). Each one is followed by <code>;;</code>.</p>
@@ -429,7 +429,7 @@ other peoples&#39; code you&#39;ll need to know that sometimes we can elide
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 
 <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>                  <span class='comment'>(* ;; *)</span>
-<a href="javascript:octry('open Random                   (* ;; *)\nopen Graphics;;\n\nself_init ();;\nopen_graph &#34; 640x480&#34;         (* ;; *)\n\nlet rec iterate r x_init i =\n  if i = 1 then x_init\n  else\n    let x = iterate r x_init (i-1) in\n    r *. x *. (1.0 -. x);;\n\nfor x = 0 to 639 do\n  let r = 4.0 *. (float_of_int x) /. 640.0 in\n  for i = 0 to 39 do\n    let x_init = Random.float 1.0 in\n    let x_final = iterate r x_init 500 in\n    let y = int_of_float (x_final *. 480.) in\n    Graphics.plot x y\n  done\ndone;;\n\nread_line ()                  (* ;; *)\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Rules #3 and #4 refer to the single <code>;</code>. This is completely different
 from <code>;;</code>. The single semicolon <code>;</code> is what is known as a <strong>sequence
@@ -449,7 +449,7 @@ that we never use any single <code>;</code> in this code:</p>
   <span class='keyword'>let</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>int_of_float</span> <span class='keywordsign'>(</span><span class='lower'>x_final</span> <span class='keywordsign infix'>*.</span> <span class='number'>480</span><span class='keywordsign'>.</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
   <span class='constructor module'>Graphics</span><span class='keywordsign'>.</span><span class='lower'>plot</span> <span class='lower'>x</span> <span class='lower'>y</span>
 <span class='keyword'>done</span>
-<a href="javascript:octry('for i = 0 to 39 do\n  let x_init = Random.float 1.0 in\n  let x_final = iterate r x_init 500 in\n  let y = int_of_float (x_final *. 480.) in\n  Graphics.plot x y\ndone\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The only place in the above code where might think about putting in a
 <code>;</code> is after the <code>Graphics.plot x y</code>, but because this is the last
@@ -473,11 +473,11 @@ thing):</p>
 <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>match</span> <span class='lower'>b</span> <span class='keyword'>with</span> <span class='keyword'>true</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>y</span> <span class='keywordsign'>|</span> <span class='keyword'>false</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span><span class='keywordsign'>)</span>
 <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>let</span> <span class='lower'>g</span> <span class='lower'>z</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span> <span class='keyword'>true</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>z</span> <span class='keywordsign'>|</span> <span class='keyword'>false</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span> <span class='keyword'>in</span> <span class='lower'>g</span> <span class='lower'>y</span> <span class='lower'>b</span><span class='keywordsign'>)</span>
 <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>b</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='keywordsign'>(</span><span class='keyword'>let</span> <span class='keywordsign'>_</span> <span class='keywordsign'>=</span> <span class='lower'>y</span> <span class='keywordsign'>+</span> <span class='number'>3</span> <span class='keyword'>in</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='keyword'>if</span> <span class='lower'>b</span> <span class='keyword'>then</span> <span class='lower'>y</span> <span class='keyword'>else</span> <span class='number'>0</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('let f x b y = if b then x+y else x+0\nlet f x b y = x + (if b then y else 0)\nlet f x b y = x + (match b with true -&#62; y | false -&#62; 0)\nlet f x b y = x + (let g z = function true -&#62; z | false -&#62; 0 in g y b)\nlet f x b y = x + (let _ = y + 3 in (); if b then y else 0)\n');">[try]</a></code></pre>
+</code></pre>
 <p>Note especially the last one - I&#39;m using <code>;</code> as an operator to &quot;join&quot;
 two statements. All functions in OCaml can be expressed as:</p>
 <pre><code class='tryocaml'> <span class='keyword'>let</span> <span class='lower'>name</span> <span class='keywordsign'>[</span><span class='lower'>parameters</span><span class='keywordsign'>]</span> <span class='keywordsign'>=</span> <span class='lower'>expression</span>
-<a href="javascript:octry(' let name [parameters] = expression\n');">[try]</a></code></pre>
+</code></pre>
 <p>OCaml&#39;s definition of what is an expression is just a little wider
 than C&#39;s. In fact, C has the concept of &quot;statements&quot;- but all of C&#39;s
 statements are just expressions in OCaml (combined with the <code>;</code>
@@ -486,7 +486,7 @@ operator).</p>
 <code>+</code> just like a function. For instance, I can define a <code>sum_list</code>
 function, to sum a list of ints, like:</p>
 <pre><code class='tryocaml'> <span class='keyword'>let</span> <span class='lower'>sum_list</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_left</span> <span class='keywordsign'>(</span> <span class='keywordsign'>+</span> <span class='keywordsign'>)</span> <span class='number'>0</span>
-<a href="javascript:octry(' let sum_list = List.fold_left ( + ) 0\n');">[try]</a></code></pre>
+</code></pre>
 </blockquote>
 <h3 id="Puttingitalltogethersomerealcode"> Putting it all together: some real code</h3><p>
 In this section we&#39;re going to show some real code fragments from the
@@ -525,7 +525,7 @@ two-line <code>let sel = ... in</code> statement. Then he calls several methods 
   <span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>cancel_button</span><span class='keywordsign'>#</span><span class='lower'>connect</span><span class='keywordsign'>#</span><span class='lower'>clicked</span> <span class='keywordsign'>~</span><span class='lower'>callback</span><span class='keywordsign'>:</span><span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>destroy</span><span class='keywordsign'>;</span>
   <span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>ok_button</span><span class='keywordsign'>#</span><span class='lower'>connect</span><span class='keywordsign'>#</span><span class='lower'>clicked</span> <span class='keywordsign'>~</span><span class='lower'>callback</span><span class='keywordsign'>:</span><span class='lower'>do_ok</span><span class='keywordsign'>;</span>
   <span class='lower'>sel</span><span class='keywordsign'>#</span><span class='lower'>show</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('(* First snippet *)\nopen StdLabels\nopen GMain\n\nlet file_dialog ~title ~callback ?filename () =\n  let sel =\n    GWindow.file_selection ~title ~modal:true ?filename () in\n  sel#cancel_button#connect#clicked ~callback:sel#destroy;\n  sel#ok_button#connect#clicked ~callback:do_ok;\n  sel#show ()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Second snippet: Just a long list of global names at the top level.
 Notice that the author elided every single one of the <code>;;</code> because of
@@ -543,7 +543,7 @@ Rule #2.</p>
 <span class='keyword'>let</span> <span class='lower'>hbox</span> <span class='keywordsign'>=</span> <span class='constructor module'>GPack</span><span class='keywordsign'>.</span><span class='lower'>hbox</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>vbox</span><span class='keywordsign'>#</span><span class='lower'>add</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <span class='keyword'>let</span> <span class='lower'>editor</span> <span class='keywordsign'>=</span> <span class='keyword'>new</span> <span class='lower'>editor</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>hbox</span><span class='keywordsign'>#</span><span class='lower'>add</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
 <span class='keyword'>let</span> <span class='lower'>scrollbar</span> <span class='keywordsign'>=</span> <span class='constructor module'>GRange</span><span class='keywordsign'>.</span><span class='lower'>scrollbar</span> <span class='keywordsign'>`</span><span class='constructor module'>VERTICAL</span> <span class='keywordsign'>~</span><span class='lower'>packing</span><span class='keywordsign'>:</span><span class='lower'>hbox</span><span class='keywordsign'>#</span><span class='lower'>pack</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('(* Second snippet *)\nlet window = GWindow.window ~width:500 ~height:300 ~title:&#34;editor&#34; ()\nlet vbox = GPack.vbox ~packing:window#add ()\n\nlet menubar = GMenu.menu_bar ~packing:vbox#pack ()\nlet factory = new GMenu.factory menubar\nlet accel_group = factory#accel_group\nlet file_menu = factory#add_submenu &#34;File&#34;\nlet edit_menu = factory#add_submenu &#34;Edit&#34;\n\nlet hbox = GPack.hbox ~packing:vbox#add ()\nlet editor = new editor ~packing:hbox#add ()\nlet scrollbar = GRange.scrollbar `VERTICAL ~packing:hbox#pack ()\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Third snippet: The author imports all the symbols from the <code>GdkKeysyms</code>
 module. Now we have an unusual let-binding. <code>let _ = expression</code> means
@@ -558,7 +558,7 @@ and it doesn&#39;t get returned until the application finally exits.</p>
 procedural commands. This is really a classic imperative program.</p>
 <pre><code class='tryocaml'>Characters 7:33 - 7:35 :
 Error: Lexical error while reading an operator
-<a href="javascript:octry('(* Third snippet *)\nopen GdkKeysyms\n\nlet () =\n  window#connect#destroy ~callback:Main.quit;\n  let factory = new GMenu.factory file_menu ~accel_group in\n  factory#add_item &#34;Open...&#34; ~key:_O ~callback:editor#open_file;\n  factory#add_item &#34;Save&#34; ~key:_S ~callback:editor#save_file;\n  factory#add_item &#34;Save as...&#34; ~callback:editor#save_dialog;\n  factory#add_separator ();\n  factory#add_item &#34;Quit&#34; ~key:_Q ~callback:window#destroy;\n  let factory = new GMenu.factory edit_menu ~accel_group in\n  factory#add_item &#34;Copy&#34; ~key:_C ~callback:editor#text#copy_clipboard;\n  factory#add_item &#34;Cut&#34; ~key:_X ~callback:editor#text#cut_clipboard;\n  factory#add_item &#34;Paste&#34; ~key:_V ~callback:editor#text#paste_clipboard;\n  factory#add_separator ();\n  factory#add_check_item &#34;Word wrap&#34; ~active:false\n    ~callback:editor#text#set_word_wrap;\n  factory#add_check_item &#34;Read only&#34; ~active:false\n    ~callback:(fun b -&#62; editor#text#set_editable (not b));\n  window#add_accel_group accel_group;\n  editor#text#event#connect#button_press\n    ~callback:(fun ev -&#62;\n      let button = GdkEvent.Button.button ev in\n      if button = 3 then begin\n        file_menu#popup ~button ~time:(GdkEvent.Button.time ev); true\n      end else false);\n  editor#text#set_vadjustment scrollbar#adjustment;\n  window#show ();\n  Main.main ()\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

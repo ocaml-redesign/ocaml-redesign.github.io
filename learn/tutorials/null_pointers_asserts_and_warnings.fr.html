@@ -116,7 +116,7 @@ type &quot;entier ou NULL&quot;. Par exemple, en SQL, la table pour stocker les
   <span class='lower'>name</span> <span class='lower'>text</span> <span class='lower'>not</span> <span class='lower'>null</span><span class='keywordsign'>,</span>
   <span class='lower'>age</span> <span class='lower'>int</span>             <span class='keywordsign infix'>--</span> <span class='lower'>may</span> <span class='lower'>be</span> <span class='lower'>null</span>
 <span class='keywordsign'>)</span><span class='keywordsign'>;</span>
-<a href="javascript:octry('create table users\n(\n  userid serial,\n  name text not null,\n  age int             -- may be null\n);\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Si l&#39;âge n&#39;est pas connu, c&#39;est la valeur spéciale SQL <code>NULL</code> qui est
 enregistrée. SQL ne tient pas compte de ces entrées si on demande à
@@ -136,7 +136,7 @@ dans une structure allouée dynamiquement dans le tas (<code>malloc()</code>).</
 <p>OCaml propose une solution élégante pour les valeurs nulles, en
 utilisant un simple type variant polymorphique, défini (jusqu&#39;à
 récemment, dans le module <code>Pervasives</code>) comme :</p>
-<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor module'>None</span> <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><a href="javascript:octry('type \&#39;a option = None | Some of \&#39;a\n');">[try]</a></code></pre>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='keywordsign'>&#39;</span><span class='lower'>aoption</span> <span class='keywordsign'>=</span> <span class='constructor module'>None</span> <span class='keywordsign'>|</span> <span class='constructor module'>Some</span> <span class='keyword'>of</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span></code></pre>
 <p>
 Une &quot;valeur nulle&quot; s&#39;écrit <code>None</code>. Le type de age dans notre exemple (un
 entier ou la valeur nulle) est <code>int option</code> (le type est écrit &quot;à
@@ -144,17 +144,17 @@ l&#39;envers&quot;, comme <code>int list</code> ou <code>int binary_tree</code> 
 précédent).</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor module'>Some</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>option</span> <span class='keywordsign'>=</span> <span class='constructor module'>Some</span> <span class='number'>3</span>
-<a href="javascript:octry('# Some 3;;\n- : int option = Some 3\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Une liste d&#39;entiers optionels ?</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keywordsign'>[</span> <span class='constructor module'>None</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor module'>None</span> <span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>option</span> <span class='lower'>list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='constructor module'>None</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>3</span><span class='keywordsign'>;</span> <span class='constructor module'>Some</span> <span class='number'>6</span><span class='keywordsign'>;</span> <span class='constructor module'>None</span><span class='keywordsign'>]</span>
-<a href="javascript:octry('# [ None; Some 3; Some 6; None ];;\n- : int option list = [None; Some 3; Some 6; None]\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Et une liste optionelle d&#39;entiers ?</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='constructor module'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='lower'>list</span> <span class='lower'>option</span> <span class='keywordsign'>=</span> <span class='constructor module'>Some</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span>
-<a href="javascript:octry('# Some [1; 2; 3];;\n- : int list option = Some [1; 2; 3]\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Assertionsavertissementserreursfatalesetcritureversstderr"> Assertions, avertissements, erreurs fatales, et écriture vers stderr</h2><p>
 
 Perl se distingue par un riche ensemble de commandes pour déboguer les
@@ -172,7 +172,7 @@ stopper le programme, et d&#39;afficher l&#39;emplacement (nom du fichier,
 numéro de ligne et de colonne) où l&#39;erreur est survenue. Par exemple :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span> <span class='keyword'>assert</span> <span class='keywordsign'>(</span><span class='constructor module'>Sys</span><span class='keywordsign'>.</span><span class='lower'>os_type</span> <span class='keywordsign'>=</span> <span class='string'>&#34;Win32&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='constructor module'>Exception</span><span class='keywordsign'>:</span> <span class='constructor module'>Assert_failure</span> <span class='keywordsign'>(</span><span class='string'>&#34;&#34;</span><span class='keywordsign'>,</span> <span class='number'>0</span><span class='keywordsign'>,</span> <span class='number'>30</span><span class='keywordsign'>)</span><span class='keywordsign'>.</span>
-<a href="javascript:octry('# assert (Sys.os_type = &#34;Win32&#34;);;\nException: Assert_failure (&#34;&#34;, 0, 30).\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 (Bien entendu, cette exception ne sera pas levée sous Win32.)</p>
 <p>Vous pouvez utiliser <code>assert false</code> pour stopper votre programme dans
@@ -186,7 +186,7 @@ du filtrage, comme dans cet exemple réel :</p>
   <span class='keywordsign'>|</span> <span class='string'>&#34;Win32&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omit *)</span>
   <span class='keywordsign'>|</span> <span class='string'>&#34;MacOS&#34;</span> <span class='keywordsign'>-&#62;</span>             <span class='comment'>(* code omit *)</span>
   <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>failwith</span> <span class='string'>&#34;Ce système n&#39;est pas supporté&#34;</span>
-<a href="javascript:octry('  match Sys.os_type with\n    &#34;Unix&#34; | &#34;Cygwin&#34; -&#62;   (* code omit *)\n  | &#34;Win32&#34; -&#62;             (* code omit *)\n  | &#34;MacOS&#34; -&#62;             (* code omit *)\n  | _ -&#62; failwith &#34;Ce système n\&#39;est pas supporté&#34;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 A noter l&#39;utilisation d&#39;un couple de fonctionnalités supplémentaires du
 système de filtrage. L&#39;union de motifs est utilisée pour reconnaître
@@ -206,7 +206,7 @@ le code surligné) :</p>
   <span class='lower'>fill_circle</span> <span class='number'>320</span> <span class='number'>240</span> <span class='lower'>radius</span>
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('open Graphics;;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;prerr_endline (&#34;radius is &#34; ^ (string_of_int radius));&#60;/em&#62;\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Si vous préférez le style <code>printf</code> du langage C, essayez plutôt le
 module <code>Printf</code> d&#39;OCaml :</p>
@@ -223,7 +223,7 @@ module <code>Printf</code> d&#39;OCaml :</p>
 <span class='keyword'>done</span><span class='keywordsign'>;;</span>
 <span class='lower'>read_line</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 
-<a href="javascript:octry('open Graphics;;\n&#60;em&#62;open Printf;;&#60;/em&#62;\n\nopen_graph &#34; 640x480&#34;;;\nfor i = 12 downto 1 do\n  let radius = i * 20 in\n  &#60;em&#62;eprintf &#34;radius is %d\n&#34; radius;&#60;/em&#62;\n\n  set_color (if (i mod 2) = 0 then red else yellow);\n  fill_circle 320 240 radius\ndone;;\nread_line ();;\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

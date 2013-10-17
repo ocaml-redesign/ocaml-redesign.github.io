@@ -202,7 +202,7 @@ the value of the break that is explained below):</p>
 </ul>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>within a “v” box:</li>
 </ul>
@@ -210,32 +210,32 @@ the value of the break that is explained below):</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span>
    <span class='keywordsign infix'>--</span><span class='lower'>b</span>
    <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b\n   --b\n   --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>within a “hv” box:</li>
 </ul>
 
 <p>If there is enough room to print the box on the line:</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 But &quot;---b---b---&quot; that cannot fit on the line is written</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='lower'>b</span>
    <span class='keywordsign infix'>---</span><span class='lower'>b</span>
    <span class='keywordsign infix'>---</span>
-<a href="javascript:octry('   ---b\n   ---b\n   ---\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>within a “hov” box:</li>
 </ul>
 
 <p>If there is enough room to print the box on the line:</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 But if &quot;---b---b---&quot; cannot fit on the line, it is written as</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='lower'>b</span><span class='keywordsign infix'>---</span><span class='lower'>b</span>
    <span class='keywordsign infix'>---</span>
-<a href="javascript:octry('   ---b---b\n   ---\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The first break hint does not lead to a new line, since there is
 enough room on the line. The second one leads to a new line since
@@ -245,7 +245,7 @@ lead to a new line and &quot;---b---b---&quot; is written as:</p>
 <pre><code class='tryocaml'>    <span class='keywordsign infix'>---</span><span class='lower'>b</span>
     <span class='keywordsign infix'>---</span><span class='lower'>b</span>
     <span class='keywordsign infix'>---</span>
-<a href="javascript:octry('    ---b\n    ---b\n    ---\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Printingspaces"> Printing spaces</h2><p>
 Break hints are also used to output spaces (if the line is not split
 when the break is encountered, otherwise the new line indicates properly
@@ -259,7 +259,7 @@ or output a new line.</p>
 </ul>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   -- -- --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>within a “v” box:</li>
 </ul>
@@ -267,19 +267,19 @@ or output a new line.</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>within a “hv” box:</li>
 </ul>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   -- -- --\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 or, according to the remaining room on the line:</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>and similarly for “hov” boxes.</li>
 </ul>
@@ -301,19 +301,19 @@ The user gets 2 ways to fix the indentation of new lines:</p>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
         <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   ---[--b--b\n        --b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 with <code>open_hovbox 2</code>, we get</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
          <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   ---[--b--b\n         --b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note: the <code>[</code> sign in the display is not visible on the screen, it
 is just there to materialise the aperture of the pretty-printing
 box. Last “screen” stands for:</p>
 <pre><code class='tryocaml'>    <span class='keywordsign infix'>-----</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
          <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('    -----b--b\n         --b--\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li><strong>when defining the break that makes the new line</strong>. As said above,
  you output a break hint using <code>print_break     sp           indent</code>.
@@ -329,7 +329,7 @@ box. Last “screen” stands for:</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span> <span class='keywordsign infix'>--</span>
          <span class='keywordsign infix'>--</span>
          <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   ---[-- --\n         --\n         --\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Refinementonhovboxes"> Refinement on “hov” boxes</h2><h3 id="Packingandstructuralhovboxes"> Packing and structural “hov” boxes</h3><p>
 
 The “hov” box type is refined into two categories.</p>
@@ -358,7 +358,7 @@ box (open_hovbox), &quot;[(---[(----[(---b)]b)]b)]&quot; is printed as follows:<
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='keywordsign infix'>---</span>
  <span class='keywordsign'>(</span><span class='keywordsign infix'>----</span>
   <span class='keywordsign'>(</span><span class='keywordsign infix'>---</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('(---\n (----\n  (---)))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 If we replace the packing boxes by structural boxes (open_box), each
 break hint that precedes a closing parenthesis can show the boxes
@@ -370,7 +370,7 @@ is printed like this:</p>
   <span class='keywordsign'>)</span>
  <span class='keywordsign'>)</span>
 <span class='keywordsign'>)</span>
-<a href="javascript:octry('(---\n (----\n  (---\n  )\n )\n)\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Practicaladvice"> Practical advice</h2><p>
 
 When writing a pretty-printing routine, follow these simple rules:</p>
@@ -450,7 +450,7 @@ be called from within a <code>printf</code> format string. For instance</p>
 <span class='constructor module'>Prix</span> <span class='constructor module'>TTC</span> <span class='keywordsign'>=</span> <span class='number'>100</span> <span class='constructor module'>Euros</span>
 
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('printf &#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34; &#34;Prix TTC&#34; 100 &#34;Euros&#34;;;\nPrix TTC = 100 Euros\n\n- : unit = ()\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Aconcreteexample"> A concrete example</h2><p>
 
 Let me give a full example: the shortest non trivial example you could
@@ -464,7 +464,7 @@ the <a href='../description.html#interactive'>interactive system</a>):</p>
     <span class='keywordsign'>|</span> <span class='constructor module'>Lambda</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='keyword'>of</span> <span class='lower'>string</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Apply</span> <span class='keyword'>of</span> <span class='lower'>lambda</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
-<a href="javascript:octry('  type lambda =\n    | Lambda of string * lambda\n    | Var of string\n    | Apply of lambda * lambda\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 I use the format library to print the lambda-terms:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>open</span> <span class='constructor module'>Format</span><span class='keywordsign'>;;</span>
@@ -487,11 +487,11 @@ I use the format library to print the lambda-terms:</p>
         <span class='lower'>kwd</span> <span class='string'>&#34;\\&#34;</span><span class='keywordsign'>;</span> <span class='lower'>ident</span> <span class='lower'>s</span><span class='keywordsign'>;</span> <span class='lower'>kwd</span> <span class='string'>&#34;.&#34;</span><span class='keywordsign'>;</span> <span class='lower'>print_space</span><span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_lambda</span> <span class='lower'>lam</span><span class='keywordsign'>;</span>
         <span class='lower'>close_box</span><span class='keywordsign'>(</span><span class='keywordsign'>)</span>
     <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_app</span> <span class='lower'>e</span>
-<a href="javascript:octry('  open Format;;\n\n  let ident = print_string\n  let kwd = print_string;;\n\n  let rec print_exp0 = function\n    | Var s -&#62;  ident s\n    | lam -&#62; open_hovbox 1; kwd &#34;(&#34;; print_lambda lam; kwd &#34;)&#34;; close_box ()\n  and print_app = function\n    | e -&#62; open_hovbox 2; print_other_applications e; close_box ()\n  and print_other_applications f =\n    match f with\n    | Apply (f, arg) -&#62; print_app f; print_space (); print_exp0 arg\n    | f -&#62; print_exp0 f\n  and print_lambda = function\n    | Lambda (s, lam) -&#62;\n        open_hovbox 1;\n        kwd &#34;\\&#34;; ident s; kwd &#34;.&#34;; print_space(); print_lambda lam;\n        close_box()\n    | e -&#62; print_app e\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 In Caml Light, replace the first line by:</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span><span class='keyword'>open</span> <span class='string'>&#34;format&#34;</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('#open &#34;format&#34;;;\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Mostgeneralprettyprintingusingfprintf"> Most general pretty-printing: using <code>fprintf</code></h3><p>
 
 We use the <code>fprintf</code> function to write the most versatile version of the
@@ -526,14 +526,14 @@ follows:</p>
        <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;</span>
                <span class='lower'>kwd</span> <span class='string'>&#34;\\&#34;</span> <span class='lower'>ident</span> <span class='lower'>s</span> <span class='lower'>kwd</span> <span class='string'>&#34;.&#34;</span> <span class='lower'>pr_lambda</span> <span class='lower'>lam</span>
     <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>pr_app</span> <span class='lower'>ppf</span> <span class='lower'>e</span>
-<a href="javascript:octry('  open Format;;\n\n  let ident ppf s = fprintf ppf &#34;%s&#34; s\n  let kwd ppf s = fprintf ppf &#34;%s&#34; s;;\n\n  let rec pr_exp0 ppf = function\n    | Var s -&#62; fprintf ppf &#34;%a&#34; ident s\n    | lam -&#62; fprintf ppf &#34;@[&#60;1&#62;(%a)@]&#34; pr_lambda lam\n  and pr_app ppf e =\n    fprintf ppf &#34;@[&#60;2&#62;%a@]&#34; pr_other_applications e\n  and pr_other_applications ppf f =\n    match f with\n    | Apply (f, arg) -&#62; fprintf ppf &#34;%a@ %a&#34; pr_app f pr_exp0 arg\n    | f -&#62; pr_exp0 ppf f\n  and pr_lambda ppf = function\n    | Lambda (s, lam) -&#62;\n       fprintf ppf &#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;\n               kwd &#34;\\&#34; ident s kwd &#34;.&#34; pr_lambda lam\n    | e -&#62; pr_app ppf e\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Given those general printing routines, procedures to print to <code>stdout</code>
 or <code>stderr</code> is just a matter of partial application:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>print_lambda</span> <span class='keywordsign'>=</span> <span class='lower'>pr_lambda</span> <span class='lower'>std_formatter</span>
   <span class='keyword'>let</span> <span class='lower'>eprint_lambda</span> <span class='keywordsign'>=</span> <span class='lower'>pr_lambda</span> <span class='lower'>err_formatter</span>
 
-<a href="javascript:octry('  let print_lambda = pr_lambda std_formatter\n  let eprint_lambda = pr_lambda err_formatter\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

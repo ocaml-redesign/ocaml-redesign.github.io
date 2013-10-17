@@ -101,7 +101,7 @@ fonctions à quelques valeurs choisies :</p>
     <span class='keyword'>if</span> <span class='lower'>x</span> <span class='keywordsign infix'>&#60;=</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='number'>1</span> <span class='keyword'>else</span> <span class='lower'>x</span> <span class='keywordsign'>*</span> <span class='lower'>fact</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
 <span class='lower'>fact</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
 <span class='lower'>square</span> <span class='number'>120</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let square x = x * x;;\n  square 3;;\n  let rec fact x =\n    if x &#60;= 1 then 1 else x * fact (x - 1);;\nfact 5;;\nsquare 120;;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Gestionautomatiquedelammoire"> Gestion automatique de la mémoire</h2><p>
 
 Toutes les opérations d&#39;allocation et de libération de la mémoire sont
@@ -113,7 +113,7 @@ infixe).</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='number'>1</span> <span class='keywordsign'>::</span> <span class='number'>2</span> <span class='keywordsign'>::</span> <span class='number'>3</span> <span class='keywordsign'>::</span> <span class='keywordsign operator'>[]</span><span class='keywordsign'>;;</span>
 <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='number'>5</span> <span class='keywordsign'>::</span> <span class='lower'>l</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let l = 1 :: 2 :: 3 :: [];;\n[1; 2; 3];;\n5 :: l;;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Polymorphismeletrideslistes"> Polymorphisme : le tri des listes</h2><p>
 
 Le tri par insertion est défini à l&#39;aide de deux fonctions récursives.</p>
@@ -124,7 +124,7 @@ Le tri par insertion est défini à l&#39;aide de deux fonctions récursives.</p
   <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>[</span><span class='lower'>elem</span><span class='keywordsign'>]</span>
   <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>if</span> <span class='lower'>elem</span> <span class='keywordsign'>&#60;</span> <span class='lower'>x</span> <span class='keyword'>then</span> <span class='lower'>elem</span> <span class='keywordsign'>::</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>l</span>
               <span class='keyword'>else</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>insert</span> <span class='lower'>elem</span> <span class='lower'>l</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let rec sort = function\n  | [] -&#62; []\n  | x :: l -&#62; insert x (sort l)\nand insert elem = function\n  | [] -&#62; [elem]\n  | x :: l -&#62; if elem &#60; x then elem :: x :: l\n              else x :: insert elem l;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 On notera que le type des éléments de la liste reste non spécifié: il
 est représenté par une <em>variable de types</em> <code>&#39;a</code>. La fonction <code>sort</code> peut
@@ -132,7 +132,7 @@ donc être appliquée aussi bien à une liste d&#39;entiers qu&#39;à une liste 
 chaînes de caractères.</p>
 <pre><code class='tryocaml'><span class='lower'>sort</span> <span class='keywordsign'>[</span><span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>0</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
 <span class='lower'>sort</span> <span class='keywordsign'>[</span><span class='string'>&#34;yes&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;ok&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;sure&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;ya&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;yep&#34;</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('sort [2; 1; 0];;\nsort [&#34;yes&#34;; &#34;ok&#34;; &#34;sure&#34;; &#34;ya&#34;; &#34;yep&#34;];;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Programmationimprative"> Programmation impérative</h2><p>
 
 Représentons les polynômes des tableaux de coefficients entiers. Alors,
@@ -146,7 +146,7 @@ on le remplit à l&#39;aide de deux boucles <code>for</code> successives.</p>
   <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='lower'>n2</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>do</span> <span class='lower'>result</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>&#60;-</span> <span class='lower'>result</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>+</span> <span class='lower'>p2</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keyword'>done</span><span class='keywordsign'>;</span>
   <span class='lower'>result</span><span class='keywordsign'>;;</span>
 <span class='lower'>add_polynom</span> <span class='keywordsign'>[|</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span> <span class='keywordsign'>|</span><span class='keywordsign'>]</span> <span class='keywordsign'>[|</span> <span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span> <span class='keywordsign'>|</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('let add_polynom p1 p2 =\n  let n1 = Array.length p1\n  and n2 = Array.length p2 in\n  let result = Array.create (max n1 n2) 0 in\n  for i = 0 to n1 - 1 do result.(i) &#60;- p1.(i) done;\n  for i = 0 to n2 - 1 do result.(i) &#60;- result.(i) + p2.(i) done;\n  result;;\nadd_polynom [| 1; 2 |] [| 1; 2; 3 |];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 OCaml offre des cellules mémoire modifiables appelées <em>références</em> :
 <code>ref init</code> renvoie une nouvelle cellule, dont le contenu initial est
@@ -161,7 +161,7 @@ OCaml offre des cellules mémoire modifiables appelées <em>références</em> :
     <span class='keyword'>done</span><span class='keywordsign'>;</span>
     <span class='keywordsign prefix'>!</span><span class='lower'>result</span><span class='keywordsign'>;;</span>
   <span class='lower'>fact</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let fact n =\n    let result = ref 1 in\n    for i = 2 to n do\n      result := i * !result\n    done;\n    !result;;\n  fact 5;;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Fonctionsd39ordresuprieur"> Fonctions d&#39;ordre supérieur</h2><p>
 
 Il n&#39;y a pas de restriction sur les fonctions, qui peuvent donc être
@@ -171,19 +171,19 @@ fonction <code>f</code> donnée aux éléments d&#39;une liste :</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>sigma</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
     <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='number'>0</span>
     <span class='keywordsign'>|</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>sigma</span> <span class='lower'>f</span> <span class='lower'>l</span>
-<a href="javascript:octry('  let rec sigma f = function\n    | [] -&#62; 0\n    | x :: l -&#62; f x + sigma f l\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 On peut définir des fonctions anonymes à l&#39;aide de la construction <code>fun</code>
 ou <code>function</code> :</p>
 <pre><code class='tryocaml'><span class='lower'>sigma</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span> <span class='keywordsign'>*</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('sigma (fun x -&#62; x * x) [1; 2; 3];;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Polymorphisme et fonctions d&#39;ordre supérieur permettent de définir la
 composition de fonctions sous sa forme la plus générale :</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>compose</span> <span class='lower'>f</span> <span class='lower'>g</span> <span class='keywordsign'>=</span> <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>g</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='lower'>square_o_fact</span> <span class='keywordsign'>=</span> <span class='lower'>compose</span> <span class='lower'>square</span> <span class='lower'>fact</span><span class='keywordsign'>;;</span>
   <span class='lower'>square_o_fact</span> <span class='number'>5</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let compose f g = fun x -&#62; f (g x);;\n  let square_o_fact = compose square fact;;\n  square_o_fact 5;;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Lapuissancedesfonctions"> La puissance des fonctions</h2><p>
 
 La puissance des fonctions ne peut pas être mieux illustrée que par la
@@ -191,14 +191,14 @@ fonction « puissance » :</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>power</span> <span class='lower'>f</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> 
     <span class='keyword'>if</span> <span class='lower'>n</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>then</span> <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span> 
     <span class='keyword'>else</span> <span class='lower'>compose</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>power</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>n</span> <span class='keywordsign'>-</span> <span class='number'>1</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let rec power f n = \n    if n = 0 then fun x -&#62; x \n    else compose f (power f (n - 1));;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 La dérivée <code>n</code><sup>ième</sup> d&#39;une fonction peut alors se définir comme
 en mathématiques en élevant la fonction dérivée à la puissance <code>n</code> :</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>derivative</span> <span class='lower'>dx</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign'>(</span><span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>x</span> <span class='keywordsign infix'>+.</span> <span class='lower'>dx</span><span class='keywordsign'>)</span> <span class='keywordsign'>-.</span> <span class='lower'>f</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>/.</span> <span class='lower'>dx</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='lower'>sin&#39;&#39;&#39;</span> <span class='keywordsign'>=</span> <span class='lower'>power</span> <span class='keywordsign'>(</span><span class='lower'>derivative</span> <span class='number'>1</span><span class='lower'>e</span><span class='keywordsign'>-</span><span class='number'>5</span><span class='keywordsign'>)</span> <span class='number'>3</span> <span class='lower'>sin</span><span class='keywordsign'>;;</span>
   <span class='keyword'>let</span> <span class='lower'>pi</span> <span class='keywordsign'>=</span> <span class='number'>4.0</span> <span class='keywordsign infix'>*.</span> <span class='lower'>atan</span> <span class='number'>1.0</span> <span class='keyword'>in</span> <span class='lower'>sin&#39;&#39;&#39;</span> <span class='lower'>pi</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let derivative dx f = fun x -&#62; (f (x +. dx) -. f x) /. dx;;\n  let sin\&#39;\&#39;\&#39; = power (derivative 1e-5) 3 sin;;\n  let pi = 4.0 *. atan 1.0 in sin\&#39;\&#39;\&#39; pi;;\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Calculsymbolique"> Calcul symbolique</h2><p>
 
 Considérons des expressions symboliques simples comprenant des entiers,
@@ -210,7 +210,7 @@ type de données, de la façon suivante :</p>
     <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='keyword'>of</span> <span class='lower'>string</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Let</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>expression</span> <span class='keywordsign'>*</span> <span class='lower'>expression</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Binop</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>expression</span> <span class='keywordsign'>*</span> <span class='lower'>expression</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  type expression =\n    | Num of int\n    | Var of string\n    | Let of string * expression * expression\n    | Binop of string * expression * expression;;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 L&#39;évaluation de ces expressions utilise un environnement qui à un
 identificateur associe une valeur, représenté par une liste de paires.</p>
@@ -231,11 +231,11 @@ identificateur associe une valeur, représenté par une liste de paires.</p>
     <span class='keywordsign'>|</span> <span class='string'>&#34;*&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>v1</span> <span class='keywordsign'>*</span> <span class='lower'>v2</span>
     <span class='keywordsign'>|</span> <span class='string'>&#34;/&#34;</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>v1</span> <span class='keywordsign infix'>/</span> <span class='lower'>v2</span>
     <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>failwith</span> <span class='keywordsign'>(</span><span class='string'>&#34;Unknown operator: &#34;</span> <span class='keywordsign infix'>^</span> <span class='lower'>op</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  let rec eval env = function\n    | Num i -&#62; i\n    | Var x -&#62; List.assoc x env\n    | Let (x, e1, in_e2) -&#62;\n       let val_x = eval env e1 in\n       eval ((x, val_x) :: env) in_e2\n    | Binop (op, e1, e2) -&#62;\n       let v1 = eval env e1 in\n       let v2 = eval env e2 in\n       eval_op op v1 v2\n  and eval_op op v1 v2 =\n    match op with\n    | &#34;+&#34; -&#62; v1 + v2\n    | &#34;-&#34; -&#62; v1 - v2\n    | &#34;*&#34; -&#62; v1 * v2\n    | &#34;/&#34; -&#62; v1 / v2\n    | _ -&#62; failwith (&#34;Unknown operator: &#34; ^ op);;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Évaluons par exemple la phrase <code>let x =   1 in x + x</code> :</p>
 <pre><code class='tryocaml'>  <span class='lower'>eval</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>(</span><span class='constructor module'>Let</span> <span class='keywordsign'>(</span><span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Num</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='constructor module'>Binop</span> <span class='keywordsign'>(</span><span class='string'>&#34;+&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Var</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>Var</span> <span class='string'>&#34;x&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('  eval [] (Let (&#34;x&#34;, Num 1, Binop (&#34;+&#34;, Var &#34;x&#34;, Var &#34;x&#34;)));;\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 L&#39;emploi du filtrage facilite la définition des fonctions opérant sur
 des données symboliques, en donnant aux définitions de fonctions une
@@ -261,7 +261,7 @@ fonctions :</p>
 <span class='lower'>fib</span> <span class='keywordsign infix'>--&#62;</span> <span class='number'>3</span>
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>int</span> <span class='keywordsign'>=</span> <span class='number'>3</span>
 
-<a href="javascript:octry('  let rec fib x = if x &#60;= 1 then 1 else fib (x - 1) + fib (x - 2);;\n# #trace fib;;\nfib is now traced.\n# fib 3;;\nfib &#60;-- 3\nfib &#60;-- 1\nfib --&#62; 1\nfib &#60;-- 2\nfib &#60;-- 0\nfib --&#62; 1\nfib &#60;-- 1\nfib --&#62; 1\nfib --&#62; 2\nfib --&#62; 3\n- : int = 3\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

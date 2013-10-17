@@ -157,7 +157,7 @@ the README.</p>
 <span class='lower'>tar</span> <span class='lower'>xzvf</span> <span class='lower'>http</span><span class='keywordsign'>:</span><span class='keywordsign infix'>//</span><span class='lower'>download</span><span class='keywordsign'>.</span><span class='lower'>camlcity</span><span class='keywordsign'>.</span><span class='lower'>org</span><span class='keywordsign infix'>/</span><span class='lower'>download</span><span class='keywordsign infix'>/</span><span class='lower'>godi</span><span class='keywordsign'>-</span><span class='lower'>rocketboost</span><span class='keywordsign'>-</span><span class='number'>20110811.</span><span class='lower'>tar</span><span class='keywordsign'>.</span><span class='lower'>gz</span>
 <span class='lower'>cd</span> <span class='lower'>godi</span><span class='keywordsign'>-</span><span class='lower'>rocketboost</span><span class='keywordsign'>-</span><span class='number'>20110811</span>
 <span class='keywordsign'>.</span><span class='keywordsign infix'>/</span><span class='lower'>bootstrap</span>
-<a href="javascript:octry('wget http://download.camlcity.org/download/godi-rocketboost-20110811.tar.gz\ntar xzvf http://download.camlcity.org/download/godi-rocketboost-20110811.tar.gz\ncd godi-rocketboost-20110811\n./bootstrap\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 You may need to use the <code>--prefix</code> option to the bootstrap command if
 you need to change the default installation location.</p>
@@ -173,12 +173,12 @@ click &quot;Try OPAM&quot; and follow the instructions.</p>
 <pre><code class='tryocaml'>          <span class='keywordsign infix'>$</span> <span class='lower'>wget</span> <span class='lower'>http</span><span class='keywordsign'>:</span><span class='keywordsign infix'>//</span><span class='lower'>www</span><span class='keywordsign'>.</span><span class='lower'>ocamlpro</span><span class='keywordsign'>.</span><span class='lower'>com</span><span class='keywordsign infix'>/</span><span class='lower'>pub</span><span class='keywordsign infix'>/</span><span class='lower'>opam_installer</span><span class='keywordsign'>.</span><span class='lower'>sh</span>
           <span class='keywordsign infix'>$</span> <span class='lower'>sh</span> <span class='keywordsign'>.</span><span class='keywordsign infix'>/</span><span class='lower'>opam_installer</span><span class='keywordsign'>.</span><span class='lower'>sh</span> <span class='keywordsign infix'>/</span><span class='lower'>usr</span><span class='keywordsign infix'>/</span><span class='lower'>local</span><span class='keywordsign infix'>/</span><span class='lower'>bin</span>  <span class='keywordsign'>#</span> <span class='constructor module'>You</span> <span class='lower'>can</span> <span class='lower'>change</span> <span class='lower'>the</span> <span class='lower'>path</span> <span class='keyword'>to</span> <span class='lower'>install</span> <span class='lower'>it</span> <span class='keyword'>in</span> <span class='lower'>an</span> <span class='lower'>other</span> <span class='lower'>place</span><span class='keywordsign'>.</span>
           
-<a href="javascript:octry('          $ wget http://www.ocamlpro.com/pub/opam_installer.sh\n          $ sh ./opam_installer.sh /usr/local/bin  # You can change the path to install it in an other place.\n          \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 From source:</p>
 <pre><code class='tryocaml'>Characters 8:24 - 8:24 :
 Error: Lexical error while trying to read a float
-<a href="javascript:octry('          $ git clone https://github.com/OCamlPro/opam\n          $ cd opam\n          $ ./configure # (or ./configure --prefix=$HOME if you want to install under your $HOME)\n          $ make\n          $ make install\n          $ opam init\n          $ eval `opam config -env`\n          $ opam switch 4.00.1\n          \n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Debian"> Debian</h2><p>
 
 OCaml is very easy to install under <a href='http://www.debian.org'>Debian</a>. We
@@ -215,21 +215,21 @@ maintainers who keep up to date with the latest OCaml, and there is a
 wide range of packages available.</p>
 <p>To install the OCaml compiler just do:</p>
 <pre><code class='tryocaml'>        <span class='lower'>yum</span> <span class='lower'>install</span> <span class='lower'>ocaml</span>
-<a href="javascript:octry('        yum install ocaml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To install an OCaml library called &#39;<code>foo</code>&#39;, and any dependencies it
 needs, you would do:</p>
 <pre><code class='tryocaml'>        <span class='lower'>yum</span> <span class='lower'>install</span> <span class='lower'>ocaml</span><span class='keywordsign'>-</span><span class='lower'>foo</span><span class='keywordsign'>-</span><span class='lower'>devel</span>
-<a href="javascript:octry('        yum install ocaml-foo-devel\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 A good set of basic development libraries can be installed by doing:</p>
 <pre><code class='tryocaml'>Characters 1:75 - 1:76 :
 Error: Lexical error: unexpected presence of a backslash
-<a href="javascript:octry('        yum install ocaml-camlp4-devel ocaml-ocamldoc ocaml-findlib-devel \\n          ocaml-extlib-devel ocaml-calendar-devel\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To list all OCaml packages use:</p>
 <pre><code class='tryocaml'>        <span class='lower'>yum</span> <span class='lower'>search</span> <span class='lower'>ocaml</span>
-<a href="javascript:octry('        yum search ocaml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <strong>Packaging policy and mailing lists</strong></p>
 <ul>
@@ -255,11 +255,11 @@ development tools. There is a framework available to make adding new
 ocaml application and libraries easy.</p>
 <p>To install the OCaml compiler using packages do:</p>
 <pre><code class='tryocaml'>        <span class='lower'>pkg_add</span> <span class='keywordsign'>-</span><span class='lower'>r</span> <span class='lower'>ocaml</span>
-<a href="javascript:octry('        pkg_add -r ocaml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 or</p>
 <pre><code class='tryocaml'>    <span class='lower'>pkg_add</span> <span class='keywordsign'>-</span><span class='lower'>r</span> <span class='lower'>ocaml</span><span class='keywordsign'>-</span><span class='lower'>nox11</span>
-<a href="javascript:octry('    pkg_add -r ocaml-nox11\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 to install OCaml without X11-dependent libraries (e.g. to deploy on a
 headless server).</p>
@@ -273,13 +273,13 @@ system as well as in the specific topic-related categories.</p>
 In order to get the basic tools under
 <a href='http://gentoo-portage.com/dev-ml/'>Gentoo</a>, execute:</p>
 <pre><code class='tryocaml'>        <span class='lower'>emerge</span> <span class='lower'>ocaml</span>  
-<a href="javascript:octry('        emerge ocaml  \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 while being logged in as a user that is a member of the <code>portage</code> group
 (e.g. root). If you want to see what other related packages are
 available execute</p>
 <pre><code class='tryocaml'>        <span class='lower'>emerge</span> <span class='keywordsign'>-</span><span class='constructor module'>S</span> <span class='lower'>ocaml</span> 
-<a href="javascript:octry('        emerge -S ocaml \n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="SuSE"> SuSE</h2><p>
 
 Getting Started with OCaml on <a href='http://www.suse.com/'>SuSE</a> is part in
@@ -290,30 +290,30 @@ the standard distribution. In openSuse 12.1, the package name is
 distribution.</p>
 <p>To install the OCaml compilers just do:</p>
 <pre><code class='tryocaml'>        <span class='lower'>urpmi</span> <span class='lower'>ocaml</span><span class='keywordsign'>-</span><span class='lower'>compiler</span>
-<a href="javascript:octry('        urpmi ocaml-compiler\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 ocaml-compiler has no dependency on X11 libs, to install the libs that
 have some (for example the module Graphics):</p>
 <pre><code class='tryocaml'>        <span class='lower'>urpmi</span> <span class='lower'>ocaml</span><span class='keywordsign'>-</span><span class='lower'>x11</span>
-<a href="javascript:octry('        urpmi ocaml-x11\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To install camlp4:</p>
 <pre><code class='tryocaml'>        <span class='lower'>urpmi</span> <span class='lower'>camlp4</span>
-<a href="javascript:octry('        urpmi camlp4\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To install an OCaml library called &#39;<code>foo</code>&#39;, and any dependencies it
 needs, you would do:</p>
 <pre><code class='tryocaml'>        <span class='lower'>urpmi</span> <span class='lower'>ocaml</span><span class='keywordsign'>-</span><span class='lower'>foo</span><span class='keywordsign'>-</span><span class='lower'>devel</span>
-<a href="javascript:octry('        urpmi ocaml-foo-devel\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 A good set of basic development libraries can be installed by doing:</p>
 <pre><code class='tryocaml'>Characters 1:58 - 1:59 :
 Error: Lexical error: unexpected presence of a backslash
-<a href="javascript:octry('        urpmi camlp4-devel ocaml-doc ocaml-findlib-devel \\n          ocaml-extlib-devel ocaml-extlib-doc ocaml-batteries-devel \\n          ocaml-ounit-devel ocaml-sexplib-devel ocaml-xml-light-devel \\n          ocamlmakefile\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 To list OCaml packages use:</p>
 <pre><code class='tryocaml'>        <span class='lower'>urpmq</span> <span class='keywordsign infix'>--</span><span class='lower'>list</span> <span class='keywordsign'>|</span> <span class='lower'>grep</span> <span class='lower'>ocaml</span>
-<a href="javascript:octry('        urpmq --list | grep ocaml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <strong>Packaging policy</strong></p>
 <ul>
@@ -548,7 +548,7 @@ This framework comes with OS X 10.4 and later. Configure the OCaml build
 by using the following flags:</p>
 <pre><code class='tryocaml'>Characters 1:31 - 1:32 :
 Error: Lexical error: unexpected presence of a backslash
-<a href="javascript:octry('          ./configure -tkdefs \\n          &#34;-I/Library/Frameworks/Tcl.framework/Headers \\n          -I/Library/Frameworks/Tk.framework/Headers&#34; \\n        -tklibs &#34;-framework Tcl -framework Tk&#34; \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Now building OCaml will also build labltk using the Tcl/Tk Aqua
 libraries.</p>
@@ -564,7 +564,7 @@ application can be used. For example, with the simple program,
           <span class='constructor module'>Button</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='keywordsign'>~</span><span class='lower'>text</span><span class='keywordsign'>:</span><span class='string'>&#34;Hello&#34;</span> <span class='keywordsign'>~</span><span class='lower'>command</span><span class='keywordsign'>:</span><span class='lower'>hello</span> <span class='lower'>top</span> <span class='keyword'>in</span>
           <span class='lower'>pack</span> <span class='keywordsign'>[</span><span class='lower'>hb</span><span class='keywordsign'>]</span><span class='keywordsign'>;</span>
           <span class='lower'>mainLoop</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>       
-<a href="javascript:octry('          open Tk;;\n          let hello () =\n          print_endline &#34;Hello!&#34;; flush stdout in\n          let top = openTk () in\n          let hb =\n          Button.create ~text:&#34;Hello&#34; ~command:hello top in\n          pack [hb];\n          mainLoop ()       \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 One would compile this program with the command
 <code>ocamlopt -o hello -I +labltk labltk.cmxa     hello.ml</code></p>
@@ -575,7 +575,7 @@ a Mac OS X .app structure.</p>
 the OS X Developer tools. This can be done with the following command:</p>
 <pre><code class='tryocaml'>Characters 1:61 - 1:62 :
 Error: Lexical error: unexpected presence of a backslash
-<a href="javascript:octry('          /Developer/Tools/Rez -t APPL -o hello ~/dev/mac.r \\n          -i /Library/Frameworks/Tcl.framework/Headers \\n          -i /Library/Frameworks/Tk.framework/Headers   \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Where mac.r is a Rez source file. It is part of the
 <a href='http://www.fltk.org/'>FLTK</a> distribution. This will add the required
@@ -594,7 +594,7 @@ steps will build the bundle:</p>
           <span class='lower'>mkdir</span> <span class='lower'>hello</span><span class='keywordsign'>.</span><span class='lower'>app</span><span class='keywordsign infix'>/</span><span class='constructor module'>Contents</span>
           <span class='lower'>mkdir</span> <span class='lower'>hello</span><span class='keywordsign'>.</span><span class='lower'>app</span><span class='keywordsign infix'>/</span><span class='constructor module'>Contents</span><span class='keywordsign infix'>/</span><span class='constructor module'>MacOS</span>
           <span class='lower'>mv</span> <span class='lower'>hello</span> <span class='lower'>hello</span><span class='keywordsign'>.</span><span class='lower'>app</span><span class='keywordsign infix'>/</span><span class='constructor module'>Contents</span><span class='keywordsign infix'>/</span><span class='constructor module'>MacOS</span>  
-<a href="javascript:octry('          mkdir hello.app\n          mkdir hello.app/Contents\n          mkdir hello.app/Contents/MacOS\n          mv hello hello.app/Contents/MacOS  \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Next, create a file <code>hello.app/Contents/Info.plist</code> with the following
 contents:</p>
@@ -606,7 +606,7 @@ contents:</p>
           <span class='lower'>hello</span>
           
                   
-<a href="javascript:octry('          &#60;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&#62;\n\n          \n          \n          CFBundleExecutable\n          hello\n          \n                  \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 The hello application can now be run from the command line by typing
 <code>open hello.app</code>, or by double-clicking on the app&#39;s icon (again, this
@@ -623,12 +623,12 @@ and hit return to get its html file loaded in your preferred browser.</p>
 with the option -p (this is unsupported) simply use Shark. Shark can be
 invoked directly from the command line as follows :</p>
 <pre><code class='tryocaml'>        <span class='keywordsign'>&#62;</span> <span class='lower'>shark</span> <span class='keywordsign'>-</span><span class='lower'>i</span> <span class='keywordsign'>-</span><span class='number'>1</span> <span class='keywordsign'>-</span><span class='lower'>q</span> <span class='lower'>myprogram</span><span class='keywordsign'>.</span><span class='lower'>opt</span> <span class='lower'>args</span>   
-<a href="javascript:octry('        &#62; shark -i -1 -q myprogram.opt args   \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This will write a .mshark file in the directory that you can open with
 Shark.app.</p>
 <pre><code class='tryocaml'>        <span class='keywordsign'>&#62;</span> <span class='keyword'>open</span> <span class='keywordsign infix'>*.</span><span class='lower'>mshark</span>  
-<a href="javascript:octry('        &#62; open *.mshark  \n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note that if your executable doesn&#39;t run for long enough Shark won&#39;t be
 able to take any samples and won&#39;t report any statistics. More function

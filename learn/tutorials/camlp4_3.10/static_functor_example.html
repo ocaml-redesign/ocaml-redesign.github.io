@@ -108,7 +108,7 @@ static_functor_example.ml</p>
 <span class='constructor module'>Gram</span><span class='keywordsign'>.</span><span class='lower'>parse_string</span> <span class='lower'>foo</span> <span class='keywordsign'>(</span><span class='constructor module'>Loc</span><span class='keywordsign'>.</span><span class='lower'>mk</span> <span class='string'>&#34;&#60;string&#62;&#34;</span><span class='keywordsign'>)</span> <span class='string'>&#34;foo x?&#34;</span> <span class='keywordsign'>=</span> <span class='constructor module'>Foo</span><span class='keywordsign'>(</span><span class='string'>&#34;x&#34;</span><span class='keywordsign'>,</span> <span class='constructor module'>A</span><span class='keywordsign'>)</span>
 <span class='constructor module'>DELETE_RULE</span> <span class='constructor module'>Gram</span> <span class='lower'>foo</span><span class='keywordsign'>:</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>;</span> <span class='constructor module'>LIDENT</span><span class='keywordsign'>;</span> <span class='lower'>bar</span> <span class='constructor module'>END</span>
 
-<a href="javascript:octry('type t1 = A | B\ntype t2 = Foo of string * t1\nopen Camlp4.PreCast\nmodule Lexer = struct\n  ... if you need a different lexer ...\nend\nmodule Gram = MakeGram(Lexer)\nlet foo = Gram.Entry.mk &#34;foo&#34;\nlet foo = Gram.Entry.mk &#34;foo&#34;\nEXTEND Gram\n  GLOBAL: foo;\n  foo: [ [ &#34;foo&#34;; i = LIDENT; b = bar -&#62; Foo(i, b) ] ];\n  bar: [ [ &#34;?&#34; -&#62; A | &#34;.&#34; -&#62; B ] ];\nEND;;\nGram.parse_string foo (Loc.mk &#34;&#60;string&#62;&#34;) &#34;foo x?&#34; = Foo(&#34;x&#34;, A)\nDELETE_RULE Gram foo: &#34;foo&#34;; LIDENT; bar END\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>

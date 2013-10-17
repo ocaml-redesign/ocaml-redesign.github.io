@@ -119,7 +119,7 @@ using <code>ocamlopt</code>. For now, we also assume that they do not use any ot
 library than the standard library, which is automatically loaded. You
 can compile the program in one single step:</p>
 <pre><code class='tryocaml'><span class='lower'>ocamlopt</span> <span class='keywordsign'>-</span><span class='lower'>o</span> <span class='lower'>progprog</span> <span class='lower'>module1</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='lower'>module2</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
-<a href="javascript:octry('ocamlopt -o progprog module1.ml module2.ml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 That&#39;s it. The compiler produced an executable named <code>progprog</code> or
 <code>progprog.exe</code>. If you are wondering how to write a program in multiple
@@ -149,7 +149,7 @@ to 3D graphics. You must understand the following:</p>
 <p>If your program uses only the unix library (provides system calls not
 only for Unix systems), the command line would be:</p>
 <pre><code class='tryocaml'><span class='lower'>ocamlopt</span> <span class='keywordsign'>-</span><span class='lower'>o</span> <span class='lower'>progprog</span> <span class='lower'>unix</span><span class='keywordsign'>.</span><span class='lower'>cmxa</span> <span class='lower'>module1</span><span class='keywordsign'>.</span><span class='lower'>ml</span> <span class='lower'>module2</span><span class='keywordsign'>.</span><span class='lower'>ml</span>
-<a href="javascript:octry('ocamlopt -o progprog unix.cmxa module1.ml module2.ml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 <code>.cmxa</code> is the extension of native code libraries, while <code>.cma</code> is the
 extension of bytecode libraries. The file <code>unix.cmxa</code> is found because
@@ -178,7 +178,7 @@ ocamlfind.</p>
 <p>You can see which packages and subpackages are available in your system
 by typing:</p>
 <pre><code class='tryocaml'><span class='lower'>ocamlfind</span> <span class='lower'>list</span>
-<a href="javascript:octry('ocamlfind list\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 This shows the list of package names, with their version ID.</p>
 <p>For our example using LablGL and OCamlSDL, we are going to use the
@@ -188,7 +188,7 @@ worry about that since <code>ocamlfind</code> knows it.</p>
 <p>The command for compiling our program will be:</p>
 <pre><code class='tryocaml'>Characters 1:41 - 1:42 :
 Error: Lexical error: unexpected presence of a backslash
-<a href="javascript:octry('ocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml module2.ml\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 And it will work regardless of the location of the libraries, as long as
 they are known by <code>ocamlfind</code>.</p>
@@ -198,7 +198,7 @@ equivalent commands that perform a separate compilation of the source
 files and link them together in a final step:</p>
 <pre><code class='tryocaml'>Characters 1:23 - 1:24 :
 Error: Lexical error: unexpected presence of a backslash
-<a href="javascript:octry('ocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.ml\nocamlfind ocamlopt -c \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module2.ml\nocamlfind ocamlopt -o progprog -linkpkg \\n  -package lablGL,sdl,sdl.sdlimage,sdl.sdlmixer,sdl.sdlttf \\n  module1.cmx module2.cmx\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Separate compilation is usually not performed manually but only when
 using a Makefile that will take care of recompiling only what it

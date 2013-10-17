@@ -172,7 +172,7 @@ valeur de la coupure comme expliqué ci-après) :</p>
 </ul>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>dans une boîte « v » :</li>
 </ul>
@@ -180,32 +180,32 @@ valeur de la coupure comme expliqué ci-après) :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span>
    <span class='keywordsign infix'>--</span><span class='lower'>b</span>
    <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b\n   --b\n   --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>dans une boîte « hv » :</li>
 </ul>
 
 <p>S&#39;il y a assez de place pour imprimer toute la boîte sur la ligne :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Mais si &quot;---b---b---&quot; ne peut tenir sur la ligne, la sortie est</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='lower'>b</span>
    <span class='keywordsign infix'>---</span><span class='lower'>b</span>
    <span class='keywordsign infix'>---</span>
-<a href="javascript:octry('   ---b\n   ---b\n   ---\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>dans une boîte « hov » :</li>
 </ul>
 
 <p>S&#39;il y a assez de place pour imprimer toute la boîte sur la ligne :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --b--b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Mais si &quot;---b---b---&quot; ne peut tenir sur la ligne, la sortie est</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='lower'>b</span><span class='keywordsign infix'>---</span><span class='lower'>b</span>
    <span class='keywordsign infix'>---</span>
-<a href="javascript:octry('   ---b---b\n   ---\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 La première indication de coupure ne donne pas lieu à un retour à la
 ligne, puisque la ligne n&#39;est pas pleine. La seconde indication de
@@ -217,7 +217,7 @@ coupure aurait aussi donné lieu à un retour à la ligne et
 <pre><code class='tryocaml'>    <span class='keywordsign infix'>---</span><span class='lower'>b</span>
     <span class='keywordsign infix'>---</span><span class='lower'>b</span>
     <span class='keywordsign infix'>---</span>
-<a href="javascript:octry('    ---b\n    ---b\n    ---\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Impressiondesespaces"> Impression des espaces</h2><p>
 Les indications de coupure sont aussi utilisées pour imprimer des
 espaces (si la ligne n&#39;est pas coupée quand l&#39;indication de coupure est
@@ -235,7 +235,7 @@ suivante :</p>
 </ul>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   -- -- --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>dans une boîte « v » :</li>
 </ul>
@@ -243,19 +243,19 @@ suivante :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>dans une boîte « hv » :</li>
 </ul>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span> <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   -- -- --\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 ou, suivant la place restante sur la ligne :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
    <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   --\n   --\n   --\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>et de même pour les boîtes « hov ».</li>
 </ul>
@@ -277,19 +277,19 @@ On dispose de deux moyens de fixer l&#39;indentation des lignes :</p>
 
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
         <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   ---[--b--b\n        --b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 tandis qu&#39;avec <code>open_hovbox 2</code>, on obtient :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
          <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   ---[--b--b\n         --b--\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Note: le symbole <code>[</code> n&#39;est évidemment pas visible sur la sortie
 écran, je l&#39;écris pour matérialiser l&#39;ouverture de la boîte
 d&#39;impression. Ainsi le dernier « écran » est en fait :</p>
 <pre><code class='tryocaml'>    <span class='keywordsign infix'>-----</span><span class='lower'>b</span><span class='keywordsign infix'>--</span><span class='lower'>b</span>
          <span class='keywordsign infix'>--</span><span class='lower'>b</span><span class='keywordsign infix'>--</span>
-<a href="javascript:octry('    -----b--b\n         --b--\n');">[try]</a></code></pre>
+</code></pre>
 <ul>
  <li>En définissant l&#39;indication de coupure qui a provoqué le retour à la
  ligne. On émet une indication de coupure avec
@@ -306,7 +306,7 @@ d&#39;impression. Ainsi le dernier « écran » est en fait :</p>
 <pre><code class='tryocaml'>   <span class='keywordsign infix'>---</span><span class='keywordsign operator'>[--</span> <span class='keywordsign infix'>--</span>
          <span class='keywordsign infix'>--</span>
          <span class='keywordsign infix'>--</span>
-<a href="javascript:octry('   ---[-- --\n         --\n         --\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Raffinementsurlesboteshov"> Raffinement sur les boîtes « hov »</h2><h3 id="Botehovtassanteetbotehovstructurelle"> Boîte « hov » tassante et boîte « hov » structurelle</h3><p>
 
 Les boîtes « hov » se subdivisent en deux catégories au comportement
@@ -344,7 +344,7 @@ représente l&#39;ouverture de boîtes « hov » tassantes (<code>open_hovbox</c
 <pre><code class='tryocaml'><span class='keywordsign'>(</span><span class='keywordsign infix'>---</span>
  <span class='keywordsign'>(</span><span class='keywordsign infix'>----</span>
   <span class='keywordsign'>(</span><span class='keywordsign infix'>---</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('(---\n (----\n  (---)))\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Si maintenant on remplace les boîtes « hov » tassantes par des boîtes «
 hov » structurelles (<code>open_box</code>), chaque indication de coupure placée
@@ -356,7 +356,7 @@ de boîte et produit donc une coupure; on obtient alors :</p>
   <span class='keywordsign'>)</span>
  <span class='keywordsign'>)</span>
 <span class='keywordsign'>)</span>
-<a href="javascript:octry('(---\n (----\n  (---\n  )\n )\n)\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Conseilspratiques"> Conseils pratiques</h2><p>
 
 En écrivant vos fonctions d&#39;impression, suivez les règles simples
@@ -443,7 +443,7 @@ Ainsi :</p>
 <span class='constructor module'>Prix</span> <span class='constructor module'>TTC</span> <span class='keywordsign'>=</span> <span class='number'>100</span> <span class='constructor module'>Euros</span>
 
 <span class='keywordsign'>-</span> <span class='keywordsign'>:</span> <span class='lower'>unit</span> <span class='keywordsign'>=</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
-<a href="javascript:octry('printf &#34;@[&#60;1&#62;%s@ =@ %d@ %s@]@.&#34; &#34;Prix TTC&#34; 100 &#34;Euros&#34;;;\nPrix TTC = 100 Euros\n\n- : unit = ()\n');">[try]</a></code></pre>
+</code></pre>
 <h2 id="Unexempleconcret"> Un exemple concret</h2><p>
 
 Voici un exemple complet : le plus petit exemple non trivial qu&#39;on
@@ -458,7 +458,7 @@ code) :</p>
     <span class='keywordsign'>|</span> <span class='constructor module'>Lambda</span> <span class='keyword'>of</span> <span class='lower'>string</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Var</span> <span class='keyword'>of</span> <span class='lower'>string</span>
     <span class='keywordsign'>|</span> <span class='constructor module'>Apply</span> <span class='keyword'>of</span> <span class='lower'>lambda</span> <span class='keywordsign'>*</span> <span class='lower'>lambda</span>
-<a href="javascript:octry('  type lambda =\n    | Lambda of string * lambda\n    | Var of string\n    | Apply of lambda * lambda\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 J&#39;utilise le module format pour imprimer les lambda-termes:</p>
 <pre><code class='tryocaml'>  <span class='keyword'>open</span> <span class='constructor module'>Format</span><span class='keywordsign'>;;</span>
@@ -481,11 +481,11 @@ J&#39;utilise le module format pour imprimer les lambda-termes:</p>
         <span class='lower'>kwd</span> <span class='string'>&#34;\\&#34;</span><span class='keywordsign'>;</span> <span class='lower'>ident</span> <span class='lower'>s</span><span class='keywordsign'>;</span> <span class='lower'>kwd</span> <span class='string'>&#34;.&#34;</span><span class='keywordsign'>;</span> <span class='lower'>print_space</span><span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='lower'>print_lambda</span> <span class='lower'>lam</span><span class='keywordsign'>;</span>
         <span class='lower'>close_box</span><span class='keywordsign'>(</span><span class='keywordsign'>)</span>
     <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_app</span> <span class='lower'>e</span>
-<a href="javascript:octry('  open Format;;\n\n  let ident = print_string\n  let kwd = print_string;;\n\n  let rec print_exp0 = function\n    | Var s -&#62;  ident s\n    | lam -&#62; open_hovbox 1; kwd &#34;(&#34;; print_lambda lam; kwd &#34;)&#34;; close_box ()\n  and print_app = function\n    | e -&#62; open_hovbox 2; print_other_applications e; close_box ()\n  and print_other_applications f =\n    match f with\n    | Apply (f, arg) -&#62; print_app f; print_space (); print_exp0 arg\n    | f -&#62; print_exp0 f\n  and print_lambda = function\n    | Lambda (s, lam) -&#62;\n        open_hovbox 1;\n        kwd &#34;\\&#34;; ident s; kwd &#34;.&#34;; print_space(); print_lambda lam;\n        close_box()\n    | e -&#62; print_app e\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 En Caml Light, remplacez la première ligne par :</p>
 <pre><code class='tryocaml'><span class='keywordsign'>#</span><span class='keyword'>open</span> <span class='string'>&#34;format&#34;</span><span class='keywordsign'>;;</span>
-<a href="javascript:octry('#open &#34;format&#34;;;\n');">[try]</a></code></pre>
+</code></pre>
 <h3 id="Impressionlaplusgnraleutilisationdefprintf"> Impression la plus générale: utilisation de <code>fprintf</code></h3><p>
 
 On utilise maintenant la fonction <code>fprintf</code> et toutes les fonctions
@@ -518,7 +518,7 @@ d&#39;impression à la <code>fprintf</code>.</p>
        <span class='lower'>fprintf</span> <span class='lower'>ppf</span> <span class='string'>&#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;</span>
                <span class='lower'>kwd</span> <span class='string'>&#34;\\&#34;</span> <span class='lower'>ident</span> <span class='lower'>s</span> <span class='lower'>kwd</span> <span class='string'>&#34;.&#34;</span> <span class='lower'>pr_lambda</span> <span class='lower'>lam</span>
     <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>pr_app</span> <span class='lower'>ppf</span> <span class='lower'>e</span>
-<a href="javascript:octry('  open Format;;\n\n  let ident ppf s = fprintf ppf &#34;%s&#34; s\n  let kwd ppf s = fprintf ppf &#34;%s&#34; s;;\n\n  let rec pr_exp0 ppf = function\n    | Var s -&#62; fprintf ppf &#34;%a&#34; ident s\n    | lam -&#62; fprintf ppf &#34;@[&#60;1&#62;(%a)@]&#34; pr_lambda lam\n  and pr_app ppf e =\n    fprintf ppf &#34;@[&#60;2&#62;%a@]&#34; pr_other_applications e\n  and pr_other_applications ppf f =\n    match f with\n    | Apply (f, arg) -&#62; fprintf ppf &#34;%a@ %a&#34; pr_app f pr_exp0 arg\n    | f -&#62; pr_exp0 ppf f\n  and pr_lambda ppf = function\n    | Lambda (s, lam) -&#62;\n       fprintf ppf &#34;@[&#60;1&#62;%a%a%a@ %a@]&#34;\n               kwd &#34;\\&#34; ident s kwd &#34;.&#34; pr_lambda lam\n    | e -&#62; pr_app ppf e\n');">[try]</a></code></pre>
+</code></pre>
 <p>
 Armés de ces fonctions d&#39;impression générales, les procédures
 d&#39;impression sur la sortie standard ou la sortie d&#39;erreur s&#39;obtiennent
@@ -526,7 +526,7 @@ facilement par application partielle:.</p>
 <pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>print_lambda</span> <span class='keywordsign'>=</span> <span class='lower'>pr_lambda</span> <span class='lower'>std_formatter</span>
   <span class='keyword'>let</span> <span class='lower'>eprint_lambda</span> <span class='keywordsign'>=</span> <span class='lower'>pr_lambda</span> <span class='lower'>err_formatter</span>
 
-<a href="javascript:octry('  let print_lambda = pr_lambda std_formatter\n  let eprint_lambda = pr_lambda err_formatter\n\n');">[try]</a></code></pre>
+</code></pre>
 
       </div>
     </div>
