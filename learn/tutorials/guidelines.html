@@ -123,6 +123,24 @@
    </li>
    <li><a href='#Compilerwarnings'> Compiler warnings</a>
    </li>
+   <li><a href='#Thehdandtlfunctions'> The <code>hd</code> and <code>tl</code> functions</a>
+   </li>
+   <li><a href='#Loops'> Loops</a>
+   </li>
+   <li><a href='#Exceptions'> Exceptions</a>
+   </li>
+   <li><a href='#Datastructures'> Data structures</a>
+   </li>
+   <li><a href='#Whentousemutables'> When to use mutables</a>
+   </li>
+   <li><a href='#Iterators'> Iterators</a>
+   </li>
+   <li><a href='#Howtooptimizeprograms'> How to optimize programs</a>
+   </li>
+   <li><a href='#Howtochoosebetweenclassesandmodules'> How to choose between classes and modules</a>
+   </li>
+   <li><a href='#ClarityofOCamlcode'> Clarity of OCaml code</a>
+   </li>
   </ul>
  </li>
  <li><a href='#Managingprogramdevelopment'> Managing program development</a>
@@ -775,10 +793,12 @@ and don&#39;t indent the rest of the operation. For example:
 x + y + z</p>
 <ul>
  <li>t + u
-<pre><code>&gt; 
-&gt; **Justification**: When the operator starts the line, it is clear that
-&gt; the operation continues on this line.
-&gt; </code></pre>
+```
+<blockquote>
+
+<strong>Justification</strong>: When the operator starts the line, it is clear that
+the operation continues on this line.
+</blockquote>
  </li>
 </ul>
 
@@ -1095,10 +1115,9 @@ Warnings about pattern-matching must be treated with the upmost care:</p>
 <ul>
  <li>For non-exhaustive pattern-matching you must complete the
  corresponding pattern-matching construct, without adding a default
- case <pre><code>catch-all&#39;&#39;, such as `| _ -&gt; ... `, but with an explicit
+ case ``catch-all&#39;&#39;, such as <code>| _ -&gt; ... </code>, but with an explicit
  list of the constructors not examined by the rest of the construct,
- for example `| Cn _ | Cn1 _ -&gt; ... `.</code></pre>
- </li>
+ for example <code>| Cn _ | Cn1 _ -&gt; ... </code>.</li>
 </ul>
 
 <blockquote>
@@ -1107,12 +1126,10 @@ it this way, and this allows the program to evolve more safely. In
 effect the addition of a new constructor to the datatype being
 matched will produce an alert anew, which will allow the
 programmer to add a clause corresponding to the new constructor if
-that is warranted. On the contrary, the</p>
-<pre><code>catch-all&#39;&#39; clause
+that is warranted. On the contrary, the ``catch-all&#39;&#39; clause
 will make the function compile silently and it might be thought
 that the function is correct as the new constructor will be
-handled by the default case.
-</code></pre>
+handled by the default case.</p>
 </blockquote>
 <ul>
  <li>Non-exhaustive pattern-matches induced by clauses with guards must
@@ -1121,8 +1138,7 @@ handled by the default case.
 </ul>
 
 <h4 id="Destructuringletbindings"> De-structuring <code>let</code> bindings</h4><p>
-[Translator&#39;s note: a</p>
-<pre><code>de-structuring `let` binding&#39;&#39; is one which
+[Translator&#39;s note: a ``de-structuring `let` binding&#39;&#39; is one which
 binds several names to several expressions simultaneously. You pack all
 the names you want bound into a collection such as a tuple or a list,
 and you correspondingly pack all the expressions into a collective
@@ -1130,383 +1146,324 @@ expression. When the `let` binding is evaluated, it unpacks the
 collections on both sides and binds each expression to its corresponding
 name. For example, `let x, y = 1, 2` is a de-structuring `let` binding
 which performs both the bindings `let x = 1` and `let y = 2`
-simultaneously.]
-The `let` binding is not limited to simple identifier definitions: you
-can use it with more complex or simpler patterns. For instance
+simultaneously.]<br />
+The <code>let</code> binding is not limited to simple identifier definitions: you
+can use it with more complex or simpler patterns. For instance</p>
+<ul>
+ <li><code>let</code> with complex patterns:<br />
+ <code>let [x; y] as l = ...</code><br />
+ simultaneously defines a list <code>l</code> and its two elements <code>x</code> and <code>y</code>.
+ </li>
+ <li><code>let</code> with simple pattern:<br />
+ <code>let _ = ...</code> does not define anything, it just evaluate the
+ expression on the right hand side of the <code>=</code> symbol.</li>
+</ul>
 
-* `let` with complex patterns:
- `let [x; y] as l = ...`
- simultaneously defines a list `l` and its two elements `x` and `y`.
-* `let` with simple pattern:
- `let _ = ...` does not define anything, it just evaluate the
- expression on the right hand side of the `=` symbol.
-
-####  The de-structuring `let` must be exhaustive
-Only use de-structuring `let` bindings in the case where the
+<h4 id="Thedestructuringletmustbeexhaustive"> The de-structuring <code>let</code> must be exhaustive</h4><p>
+Only use de-structuring <code>let</code> bindings in the case where the
 pattern-matching is exhaustive (the pattern can never fail to match).
 Typically, you will thus be limited to definitions of product types
 (tuples or records) or definitions of variant type with a single case.
-In any other case, you should use an explicit `match   ... with`
-construct.
-
-* `let ... in`: de-structuring `let` that give a warning must be
+In any other case, you should use an explicit <code>match   ... with</code>
+construct.</p>
+<ul>
+ <li><code>let ... in</code>: de-structuring <code>let</code> that give a warning must be
  replaced by an explicit pattern matching. For instance, instead of
- `let [x; y] as l = List.map succ     (l1 @ l2) in expression` write:
+ <code>let [x; y] as l = List.map succ     (l1 @ l2) in expression</code> write:</li>
+</ul>
 
-```tryocaml
-match List.map succ (l1 @ l2) with
-| [x; y] as l -&gt; expression
-| _ -&gt; assert false
-```
+<pre><code class='tryocaml'><span class='keyword'>match</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>succ</span> <span class='keywordsign'>(</span><span class='lower'>l1</span> <span class='keywordsign infix'>@</span> <span class='lower'>l2</span><span class='keywordsign'>)</span> <span class='keyword'>with</span>
+<span class='keywordsign'>|</span> <span class='keywordsign'>[</span><span class='lower'>x</span><span class='keywordsign'>;</span> <span class='lower'>y</span><span class='keywordsign'>]</span> <span class='keyword'>as</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>expression</span>
+<span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>assert</span> <span class='keyword'>false</span>
+</code></pre>
+<ul>
+ <li>Global definition with de-structuring lets should be rewritten with
+ explicit pattern matching and tuples:</li>
+</ul>
 
-
-* Global definition with de-structuring lets should be rewritten with
- explicit pattern matching and tuples:
-
-```tryocaml
-let x, y, l =
-  match List.map succ (l1 @ l2) with
-  | [x; y] as l -&gt; x, y, l
-  | _ -&gt; assert false
-```
-
-
-&gt; 
-&gt; **Justification**: There is no way to make the pattern-matching
-&gt; exhaustive if you use general de-structuring `let` bindings.
-&gt; 
-
-####  Sequence warnings and `let _ = ...`
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span><span class='keywordsign'>,</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>match</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>succ</span> <span class='keywordsign'>(</span><span class='lower'>l1</span> <span class='keywordsign infix'>@</span> <span class='lower'>l2</span><span class='keywordsign'>)</span> <span class='keyword'>with</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign'>[</span><span class='lower'>x</span><span class='keywordsign'>;</span> <span class='lower'>y</span><span class='keywordsign'>]</span> <span class='keyword'>as</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>y</span><span class='keywordsign'>,</span> <span class='lower'>l</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='keyword'>assert</span> <span class='keyword'>false</span>
+</code></pre>
+<blockquote>
+<p><strong>Justification</strong>: There is no way to make the pattern-matching
+exhaustive if you use general de-structuring <code>let</code> bindings.</p>
+</blockquote>
+<h4 id="Sequencewarningsandlet"> Sequence warnings and <code>let _ = ...</code></h4><p>
 When the compiler emits a warning about the type of an expression in a
 sequence, you have to explicitly indicate that you want to ignore the
-result of this expression. To this end:
+result of this expression. To this end:</p>
+<ul>
+ <li>use a vacuous binding and suppress the sequence warning of</li>
+</ul>
 
-* use a vacuous binding and suppress the sequence warning of
+<pre><code class='tryocaml'><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>l</span><span class='keywordsign'>;</span>
+<span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+</code></pre>
+<p>
+write</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keywordsign'>_</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>l</span> <span class='keyword'>in</span>
+<span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+</code></pre>
+<ul>
+ <li>you can also use the predefined function <code>ignore : &#39;a     -&gt; unit</code>
+ that ignores its argument to return <code>unit</code>.</li>
+</ul>
 
-```tryocaml
-List.map f l;
-print_newline ()
-```
-write
-
-```tryocaml
-let _ = List.map f l in
-print_newline ()
-```
-
-
-* you can also use the predefined function `ignore : &#39;a     -&gt; unit`
- that ignores its argument to return `unit`.
-
-```tryocaml
-ignore (List.map f l);
-print_newline ()
-```
-
-
-* In any case, the best way to suppress this warning is to understand
+<pre><code class='tryocaml'><span class='lower'>ignore</span> <span class='keywordsign'>(</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>f</span> <span class='lower'>l</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+<span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+</code></pre>
+<ul>
+ <li>In any case, the best way to suppress this warning is to understand
  why it is emitted by the compiler: the compiler warns you because
  your code computes a result that is useless since this result is
  just deleted after computation. Hence, if useful at all, this
  computation is performed only for its side-effects; hence it should
- return unit.
+ return unit.<br />
  Most of the time, the warning indicates the use of the wrong
  function, a probable confusion between the side-effect only version
  of a function (which is a procedure whose result is irrelevant) with
- its functional counterpart (whose result is meaningful).
+ its functional counterpart (whose result is meaningful).<br />
  In the example mentioned above, the first situation prevailed, and
- the programmer should have called `iter` instead of `map`, and
- simply write
+ the programmer should have called <code>iter</code> instead of <code>map</code>, and
+ simply write</li>
+</ul>
 
-```tryocaml
-List.iter f l;
-print_newline ()
-```
+<pre><code class='tryocaml'><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='lower'>f</span> <span class='lower'>l</span><span class='keywordsign'>;</span>
+<span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span>
+</code></pre>
+<p>
 In actual programs, the suitable (side-effect only) function may not
 exist and has to be written: very often, a careful separation of the
 procedural part from the functional part of the function at hand
 elegantly solves the problem, and the resulting program just looks
 better afterwards! For instance, you would turn the problematic
-definition:
-
-```tryocaml
-let add x y =
-  if x &gt; 1 then print_int x;
-  print_newline ();
-  x + y;;
-```
-into the clearer separate definitions and change old calls to `add`
-accordingly.
-
-
-
-In any case, use the `let _ = ...` construction exactly in those cases
+definition:</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>add</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>if</span> <span class='lower'>x</span> <span class='keywordsign'>&#62;</span> <span class='number'>1</span> <span class='keyword'>then</span> <span class='lower'>print_int</span> <span class='lower'>x</span><span class='keywordsign'>;</span>
+  <span class='lower'>print_newline</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span>
+  <span class='lower'>x</span> <span class='keywordsign'>+</span> <span class='lower'>y</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>
+into the clearer separate definitions and change old calls to <code>add</code>
+accordingly.</p>
+<p>In any case, use the <code>let _ = ...</code> construction exactly in those cases
 where you want to ignore a result. Don&#39;t systematically replace
-sequences with this construction.
+sequences with this construction.</p>
+<blockquote>
+<p><strong>Justification</strong>: Sequences are much clearer! Compare <code>e1; e2; e3</code> to</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keywordsign'>_</span> <span class='keywordsign'>=</span> <span class='lower'>e1</span> <span class='keyword'>in</span>
+<span class='keyword'>let</span> <span class='keywordsign'>_</span> <span class='keywordsign'>=</span> <span class='lower'>e2</span> <span class='keyword'>in</span>
+<span class='lower'>e3</span>
+</code></pre>
+</blockquote>
+<h3 id="Thehdandtlfunctions"> The <code>hd</code> and <code>tl</code> functions</h3><p>
+Don&#39;t use the <code>hd</code> and <code>tl</code> functions, but pattern-match the list
+argument explicitly.</p>
+<blockquote>
+<p><strong>Justification</strong>: This is just as brief as and much clearer than
+using <code>hd</code> and <code>tl</code> which must of necessity be protected by
+<code>try... with...</code> to catch the exception which might be raised by these
+functions.</p>
+</blockquote>
+<h3 id="Loops"> Loops</h3><h4 id="forloops"> <code>for</code> loops</h4><p>
 
-&gt; 
-&gt; **Justification**: Sequences are much clearer! Compare `e1; e2; e3` to
-&gt; 
-&gt; ```tryocaml
-&gt; let _ = e1 in
-&gt; let _ = e2 in
-&gt; e3
-&gt; ```
-
-###  The `hd` and `tl` functions
-Don&#39;t use the `hd` and `tl` functions, but pattern-match the list
-argument explicitly.
-
-&gt; 
-&gt; **Justification**: This is just as brief as and much clearer than
-&gt; using `hd` and `tl` which must of necessity be protected by
-&gt; `try... with...` to catch the exception which might be raised by these
-&gt; functions.
-&gt; 
-
-###  Loops
-####  `for` loops
-To simply traverse an array or a string, use a `for` loop.
-
-```tryocaml
-for i = 0 to Array.length v - 1 do
-  ...
-done
-```
-If the loop is complex or returns a result, use a recursive function.
-
-```tryocaml
-let find_index e v =
-  let rec loop i =
-    if i &gt;= Array.length v then raise Not_found else
-    if v.(i) = e then i else loop (i + 1) in
-  loop 0;;
-```
-&gt; 
-&gt; **Justification**: The recursive function lets you code any loop
-&gt; whatsoever simply, even a complex one, for example with multiple exit
-&gt; points or with strange index steps (steps depending on a data value
-&gt; for example).
-&gt; 
-&gt; Besides, the recursive loop avoids the use of mutables whose value can
-&gt; be modified in any part of the body of the loop whatsoever (or even
-&gt; outside): on the contrary the recursive loop explicitly takes as
-&gt; arguments the values susceptible to change during the recursive calls.
-&gt; 
-
-####  `while` loops
-&gt; 
-&gt; **While loops law**: Beware: usually a while loop is wrong, unless its
-&gt; loop invariant has been explicitly written.
-&gt; 
-
-The main use of the `while` loop is the infinite loop
-`while true do     ...`. You get out of it through an exception,
-generally on termination of the program.
-
-Other `while` loops are hard to use, unless they come from canned
-programs from algorithms courses where they were proved.
-
-&gt; 
-&gt; **Justification**: `while` loops require one or more mutables in order
-&gt; that the loop condition change value and the loop finally terminate.
-&gt; To prove their correctness, you must therefore discover the loop
-&gt; invariants, an interesting but difficult sport.
-&gt; 
-
-###  Exceptions
+To simply traverse an array or a string, use a <code>for</code> loop.</p>
+<pre><code class='tryocaml'><span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>v</span> <span class='keywordsign'>-</span> <span class='number'>1</span> <span class='keyword'>do</span>
+  <span class='keywordsign operator'>...</span>
+<span class='keyword'>done</span>
+</code></pre>
+<p>
+If the loop is complex or returns a result, use a recursive function.</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>find_index</span> <span class='lower'>e</span> <span class='lower'>v</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='lower'>i</span> <span class='keywordsign'>=</span>
+    <span class='keyword'>if</span> <span class='lower'>i</span> <span class='keywordsign infix'>&#62;=</span> <span class='constructor module'>Array</span><span class='keywordsign'>.</span><span class='lower'>length</span> <span class='lower'>v</span> <span class='keyword'>then</span> <span class='lower'>raise</span> <span class='constructor module'>Not_found</span> <span class='keyword'>else</span>
+    <span class='keyword'>if</span> <span class='lower'>v</span><span class='keywordsign'>.</span><span class='keywordsign'>(</span><span class='lower'>i</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span> <span class='lower'>e</span> <span class='keyword'>then</span> <span class='lower'>i</span> <span class='keyword'>else</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='lower'>i</span> <span class='keywordsign'>+</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='keyword'>in</span>
+  <span class='lower'>loop</span> <span class='number'>0</span><span class='keywordsign'>;;</span>
+</code></pre>
+<blockquote>
+<p><strong>Justification</strong>: The recursive function lets you code any loop
+whatsoever simply, even a complex one, for example with multiple exit
+points or with strange index steps (steps depending on a data value
+for example).</p>
+<p>Besides, the recursive loop avoids the use of mutables whose value can
+be modified in any part of the body of the loop whatsoever (or even
+outside): on the contrary the recursive loop explicitly takes as
+arguments the values susceptible to change during the recursive calls.</p>
+</blockquote>
+<h4 id="whileloops"> <code>while</code> loops</h4><blockquote>
+<p><strong>While loops law</strong>: Beware: usually a while loop is wrong, unless its
+loop invariant has been explicitly written.</p>
+</blockquote>
+<p>The main use of the <code>while</code> loop is the infinite loop
+<code>while true do     ...</code>. You get out of it through an exception,
+generally on termination of the program.</p>
+<p>Other <code>while</code> loops are hard to use, unless they come from canned
+programs from algorithms courses where they were proved.</p>
+<blockquote>
+<p><strong>Justification</strong>: <code>while</code> loops require one or more mutables in order
+that the loop condition change value and the loop finally terminate.
+To prove their correctness, you must therefore discover the loop
+invariants, an interesting but difficult sport.</p>
+</blockquote>
+<h3 id="Exceptions"> Exceptions</h3><p>
 Don&#39;t be afraid to define your own exceptions in your programs, but on
 the other hand use as much as possible the exceptions predefined by the
 system. For example every search function which fails should raise the
-predefined exception `Not_found`. Be careful to handle the exceptions
+predefined exception <code>Not_found</code>. Be careful to handle the exceptions
 which may be raised by a function call with the help of a
-`try ... with`.
-
-Handling all exceptions by `try     ... with _ -&gt;` is usually reserved
+<code>try ... with</code>.</p>
+<p>Handling all exceptions by <code>try     ... with _ -&gt;</code> is usually reserved
 for the main function of the program. If you need to catch all
 exceptions to maintain an invariant of an algorithm, be careful to name
 the exception and re-raise it, after having reset the invariant.
-Typically:
-
-```tryocaml
-let ic = open_in ...
-and oc = open_out ... in
-try
-  treatment ic oc;
-  close_in ic; close_out oc
-with x -&gt; close_in ic; close_out oc; raise x
-```
-&gt; 
-&gt; **Justification**: `try ... with _     -&gt;` silently catches all
-&gt; exceptions, even those which have nothing to do with the computation
-&gt; at hand (for example an interruption will be captured and the
-&gt; computation will continue anyway!).
-&gt; 
-
-###  Data structures
+Typically:</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>ic</span> <span class='keywordsign'>=</span> <span class='lower'>open_in</span> <span class='keywordsign operator'>...</span>
+<span class='keyword'>and</span> <span class='lower'>oc</span> <span class='keywordsign'>=</span> <span class='lower'>open_out</span> <span class='keywordsign operator'>...</span> <span class='keyword'>in</span>
+<span class='keyword'>try</span>
+  <span class='lower'>treatment</span> <span class='lower'>ic</span> <span class='lower'>oc</span><span class='keywordsign'>;</span>
+  <span class='lower'>close_in</span> <span class='lower'>ic</span><span class='keywordsign'>;</span> <span class='lower'>close_out</span> <span class='lower'>oc</span>
+<span class='keyword'>with</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>close_in</span> <span class='lower'>ic</span><span class='keywordsign'>;</span> <span class='lower'>close_out</span> <span class='lower'>oc</span><span class='keywordsign'>;</span> <span class='lower'>raise</span> <span class='lower'>x</span>
+</code></pre>
+<blockquote>
+<p><strong>Justification</strong>: <code>try ... with _     -&gt;</code> silently catches all
+exceptions, even those which have nothing to do with the computation
+at hand (for example an interruption will be captured and the
+computation will continue anyway!).</p>
+</blockquote>
+<h3 id="Datastructures"> Data structures</h3><p>
 One of the great strengths of OCaml is the power of the data structures
 which can be defined and the simplicity of manipulating them. So you
 must take advantage of this to the fullest extent; don&#39;t hesitate to
 define your own data structures. In particular, don&#39;t systematically
 represent enumerations by whole numbers, nor enumerations with two cases
-by booleans. Examples:
-
-```tryocaml
-type figure =
-   | Triangle | Square | Circle | Parallelogram
-type convexity =
-   | Convex | Concave | Other
-type type_of_definition =
-   | Recursive | Non_recursive
-```
-&gt; 
-&gt; **Justification**: A boolean value often prevents intuitive
-&gt; understanding of the corresponding code. For example, if
-&gt; `type_of_definition` is coded by a boolean, what does `true` signify?
-&gt; A “normal” definition (that is, non-recursive) or a recursive
-&gt; definition?
-&gt; 
-&gt; In the case of an enumerated type encode by an integer, it is very
-&gt; difficult to limit the range of acceptable integers: one must define
-&gt; construction functions that will ensure the mandatory invariants of
-&gt; the program (and verify afterwards that no values has been built
-&gt; directly), or add assertions in the program and guards in pattern
-&gt; matchings. This is not good practice, when the definition of a sum
-&gt; type elegantly solves this problem, with the additional benefit of
-&gt; firing the full power of pattern matching and compiler&#39;s verifications
-&gt; of exhaustiveness.
-&gt; 
-&gt; **Criticism**: For binary enumerations, one can systematically define
-&gt; predicates whose names carry the semantics of the boolean that
-&gt; implements the type. For instance, we can adopt the convention that a
-&gt; predicate ends by the letter `p`. Then, in place of defining a new sum
-&gt; type for `type_of_definition`, we will use a predicate function
-&gt; `recursivep` that returns true if the definition is recursive.
-&gt; 
-&gt; **Answer**: This method is specific to binary enumeration and cannot
-&gt; be easily extended; moreover it is not well suited to pattern
-&gt; matching. For instance, for definitions encoded by
-&gt; `| Let of bool * string * expression` a typical pattern matching would
-&gt; look like:
-&gt; 
-&gt; ```tryocaml
-&gt; | Let (_, v, e) as def -&gt;
-&gt;    if recursivep def then code_for_recursive_case
-&gt;    else code_for_non_recursive_case
-&gt; ```
-&gt; 
-&gt; or, if `recursivep` can be applied to booleans:
-&gt; 
-&gt; ```tryocaml
-&gt; | Let (b, v, e) -&gt;
-&gt;    if recursivep def then code_for_recursive_case
-&gt;    else code_for_non_recursive_case
-&gt; ```
-&gt; 
-&gt; contrast with an explicit encoding:
-&gt; 
-&gt; ```tryocaml
-&gt; | Let (Recursive, v, e) -&gt; code_for_recursive_case
-&gt; | Let (Non_recursive, v, e) -&gt; code_for_non_recursive_case
-&gt; ```
-&gt; 
-&gt; The difference between the two programs is subtle and you may think
-&gt; that this is just a matter of taste; however the explicit encoding is
-&gt; definitively more robust to modifications and fits better with the
-&gt; language.
-&gt; 
-
-*A contrario*, it is not necessary to systematically define new types
-for boolean flags, when the interpretation of constructors `true` and
-`false` is clear. The usefulness of the definition of the following
-types is then questionable:
-
-```tryocaml
-type switch = On | Off
-type bit = One | Zero
-```
+by booleans. Examples:</p>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>figure</span> <span class='keywordsign'>=</span>
+   <span class='keywordsign'>|</span> <span class='constructor module'>Triangle</span> <span class='keywordsign'>|</span> <span class='constructor module'>Square</span> <span class='keywordsign'>|</span> <span class='constructor module'>Circle</span> <span class='keywordsign'>|</span> <span class='constructor module'>Parallelogram</span>
+<span class='keyword'>type</span> <span class='lower'>convexity</span> <span class='keywordsign'>=</span>
+   <span class='keywordsign'>|</span> <span class='constructor module'>Convex</span> <span class='keywordsign'>|</span> <span class='constructor module'>Concave</span> <span class='keywordsign'>|</span> <span class='constructor module'>Other</span>
+<span class='keyword'>type</span> <span class='lower'>type_of_definition</span> <span class='keywordsign'>=</span>
+   <span class='keywordsign'>|</span> <span class='constructor module'>Recursive</span> <span class='keywordsign'>|</span> <span class='constructor module'>Non_recursive</span>
+</code></pre>
+<blockquote>
+<p><strong>Justification</strong>: A boolean value often prevents intuitive
+understanding of the corresponding code. For example, if
+<code>type_of_definition</code> is coded by a boolean, what does <code>true</code> signify?
+A “normal” definition (that is, non-recursive) or a recursive
+definition?</p>
+<p>In the case of an enumerated type encode by an integer, it is very
+difficult to limit the range of acceptable integers: one must define
+construction functions that will ensure the mandatory invariants of
+the program (and verify afterwards that no values has been built
+directly), or add assertions in the program and guards in pattern
+matchings. This is not good practice, when the definition of a sum
+type elegantly solves this problem, with the additional benefit of
+firing the full power of pattern matching and compiler&#39;s verifications
+of exhaustiveness.</p>
+<p><strong>Criticism</strong>: For binary enumerations, one can systematically define
+predicates whose names carry the semantics of the boolean that
+implements the type. For instance, we can adopt the convention that a
+predicate ends by the letter <code>p</code>. Then, in place of defining a new sum
+type for <code>type_of_definition</code>, we will use a predicate function
+<code>recursivep</code> that returns true if the definition is recursive.</p>
+<p><strong>Answer</strong>: This method is specific to binary enumeration and cannot
+be easily extended; moreover it is not well suited to pattern
+matching. For instance, for definitions encoded by
+<code>| Let of bool * string * expression</code> a typical pattern matching would
+look like:</p>
+<pre><code class='tryocaml'><span class='keywordsign'>|</span> <span class='constructor module'>Let</span> <span class='keywordsign'>(</span><span class='keywordsign'>_</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span> <span class='keyword'>as</span> <span class='lower'>def</span> <span class='keywordsign'>-&#62;</span>
+   <span class='keyword'>if</span> <span class='lower'>recursivep</span> <span class='lower'>def</span> <span class='keyword'>then</span> <span class='lower'>code_for_recursive_case</span>
+   <span class='keyword'>else</span> <span class='lower'>code_for_non_recursive_case</span>
+</code></pre>
+<p>or, if <code>recursivep</code> can be applied to booleans:</p>
+<pre><code class='tryocaml'><span class='keywordsign'>|</span> <span class='constructor module'>Let</span> <span class='keywordsign'>(</span><span class='lower'>b</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span>
+   <span class='keyword'>if</span> <span class='lower'>recursivep</span> <span class='lower'>def</span> <span class='keyword'>then</span> <span class='lower'>code_for_recursive_case</span>
+   <span class='keyword'>else</span> <span class='lower'>code_for_non_recursive_case</span>
+</code></pre>
+<p>contrast with an explicit encoding:</p>
+<pre><code class='tryocaml'><span class='keywordsign'>|</span> <span class='constructor module'>Let</span> <span class='keywordsign'>(</span><span class='constructor module'>Recursive</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>code_for_recursive_case</span>
+<span class='keywordsign'>|</span> <span class='constructor module'>Let</span> <span class='keywordsign'>(</span><span class='constructor module'>Non_recursive</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>,</span> <span class='lower'>e</span><span class='keywordsign'>)</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>code_for_non_recursive_case</span>
+</code></pre>
+<p>The difference between the two programs is subtle and you may think
+that this is just a matter of taste; however the explicit encoding is
+definitively more robust to modifications and fits better with the
+language.</p>
+</blockquote>
+<p><em>A contrario</em>, it is not necessary to systematically define new types
+for boolean flags, when the interpretation of constructors <code>true</code> and
+<code>false</code> is clear. The usefulness of the definition of the following
+types is then questionable:</p>
+<pre><code class='tryocaml'><span class='keyword'>type</span> <span class='lower'>switch</span> <span class='keywordsign'>=</span> <span class='constructor module'>On</span> <span class='keywordsign'>|</span> <span class='constructor module'>Off</span>
+<span class='keyword'>type</span> <span class='lower'>bit</span> <span class='keywordsign'>=</span> <span class='constructor module'>One</span> <span class='keywordsign'>|</span> <span class='constructor module'>Zero</span>
+</code></pre>
+<p>
 The same objection is admissible for enumerated types represented as
 integers, when those integers have an evident interpretation with
-respect to the data to be represented.
-
-###  When to use mutables
+respect to the data to be represented.</p>
+<h3 id="Whentousemutables"> When to use mutables</h3><p>
 Mutable values are useful and sometimes indispensable to simple and
 clear programming. Nevertheless, you must use them with discernment:
 OCaml&#39;s normal data structures are immutable. They are to be preferred
-for the clarity and safety of programming which they allow.
-
-###  Iterators
+for the clarity and safety of programming which they allow.</p>
+<h3 id="Iterators"> Iterators</h3><p>
 OCaml&#39;s iterators are a powerful and useful feature. However you should
-not overuse them, nor *a contrario* neglect them: they are provided to
+not overuse them, nor <em>a contrario</em> neglect them: they are provided to
 you by libraries and have every chance of being correct and
 well-thought-out by the author of the library. So it&#39;s useless to
-reinvent them.
-
-So write
-
-```tryocaml
-let square_elements elements = List.map carre elements
-```
-rather than:
-
-```tryocaml
-let rec square_elements = function
-  | [] -&gt; []
-  | elem :: elements -&gt; square elem :: square_elements elements
-```
-On the other hand avoid writing:
-
-```tryocaml
-let iterator f x l =
-  List.fold_right (List.fold_left f) [List.map x l] l
-```
-even though you get:
-
-```tryocaml
-  let iterator f x l =
-    List.fold_right (List.fold_left f) [List.map x l] l;;
-  iterator (fun l x -&gt; x :: l) (fun l -&gt; List.rev l) [[1; 2; 3]]
-```
+reinvent them.</p>
+<p>So write</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>square_elements</span> <span class='lower'>elements</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>carre</span> <span class='lower'>elements</span>
+</code></pre>
+<p>
+rather than:</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>square_elements</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign operator'>[]</span>
+  <span class='keywordsign'>|</span> <span class='lower'>elem</span> <span class='keywordsign'>::</span> <span class='lower'>elements</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>square</span> <span class='lower'>elem</span> <span class='keywordsign'>::</span> <span class='lower'>square_elements</span> <span class='lower'>elements</span>
+</code></pre>
+<p>
+On the other hand avoid writing:</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>iterator</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
+  <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_right</span> <span class='keywordsign'>(</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_left</span> <span class='lower'>f</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>x</span> <span class='lower'>l</span><span class='keywordsign'>]</span> <span class='lower'>l</span>
+</code></pre>
+<p>
+even though you get:</p>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>iterator</span> <span class='lower'>f</span> <span class='lower'>x</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
+    <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_right</span> <span class='keywordsign'>(</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>fold_left</span> <span class='lower'>f</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='lower'>x</span> <span class='lower'>l</span><span class='keywordsign'>]</span> <span class='lower'>l</span><span class='keywordsign'>;;</span>
+  <span class='lower'>iterator</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>l</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span> <span class='keywordsign'>::</span> <span class='lower'>l</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>rev</span> <span class='lower'>l</span><span class='keywordsign'>)</span> <span class='keywordsign operator'>[[</span><span class='number'>1</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>;</span> <span class='number'>3</span><span class='keywordsign operator'>]]</span>
+</code></pre>
+<p>
 In case of express need, you must be careful to add an explanatory
-comment: in my opinion it&#39;s absolutely necessary!
-
-###  How to optimize programs
-&gt; 
-&gt; **Pseudo law of optimization**: No optimization *a priori*.
-&gt;  No optimization *a posteriori* either.
-&gt; 
-
-Above all program simply and clearly. Don&#39;t start optimizing until the
+comment: in my opinion it&#39;s absolutely necessary!</p>
+<h3 id="Howtooptimizeprograms"> How to optimize programs</h3><blockquote>
+<p><strong>Pseudo law of optimization</strong>: No optimization <em>a priori</em>.<br />
+ No optimization <em>a posteriori</em> either.</p>
+</blockquote>
+<p>Above all program simply and clearly. Don&#39;t start optimizing until the
 program bottleneck has been identified (in general a few routines). Then
-optimization consists above all of changing *the complexity* of the
+optimization consists above all of changing <em>the complexity</em> of the
 algorithm used. This often happens through redefining the data
 structures being manipulated and completely rewriting the part of the
-program which poses a problem.
-
-&gt; 
-&gt; **Justification**: Clarity and correctness of programs take
-&gt; precedence. Besides, in a substantial program, it is practically
-&gt; impossible to identify *a priori* the parts of the program whose
-&gt; efficiency is of prime importance.
-&gt; 
-
-###  How to choose between classes and modules
+program which poses a problem.</p>
+<blockquote>
+<p><strong>Justification</strong>: Clarity and correctness of programs take
+precedence. Besides, in a substantial program, it is practically
+impossible to identify <em>a priori</em> the parts of the program whose
+efficiency is of prime importance.</p>
+</blockquote>
+<h3 id="Howtochoosebetweenclassesandmodules"> How to choose between classes and modules</h3><p>
 You should use OCaml classes when you need inheritance, that is,
-incremental refinement of data and their functionality.
-
-You should use conventional data structures (in particular, variant
-types) when you need pattern-matching.
-
-You should modules when the data structures are fixed and their
+incremental refinement of data and their functionality.</p>
+<p>You should use conventional data structures (in particular, variant
+types) when you need pattern-matching.</p>
+<p>You should modules when the data structures are fixed and their
 functionality is equally fixed or it&#39;s enough to add new functions in
-the programs which use them.
-
-###  Clarity of OCaml code
+the programs which use them.</p>
+<h3 id="ClarityofOCamlcode"> Clarity of OCaml code</h3><p>
 The OCaml language includes powerful constructs which allow simple and
 clear programming. The main problem to obtain crystal clear programs it
-to use them appropriately.
-
-The language features numerous programming styles (or programming
+to use them appropriately.</p>
+<p>The language features numerous programming styles (or programming
 paradigms): imperative programming (based on the notion of state and
 assignment), functional programming (based on the notion of function,
 function results, and calculus), object oriented programming (based of
@@ -1515,28 +1472,22 @@ methods that can modify the state). The first work of the programmer is
 to choose the programming paradigm that fits the best the problem at
 hand. When using one of those programming paradigms, the difficulty is
 to use the language construct that expresses in the most natural and
-easiest way the computation that implements the algorithm.
-
-####  Style dangers
+easiest way the computation that implements the algorithm.</p>
+<h4 id="Styledangers"> Style dangers</h4><p>
 Concerning programming styles, one can usually observe the two
-symmetrical problematic behaviors: on the one hand, the </code></pre>
-<p>all
-imperative&#39;&#39; way (<em>systematic</em> usage of loops and assignment), and on
-the other hand the</p>
-<pre><code>purely functional&#39;&#39; way (*never* use loops nor
-assignments); the </code></pre>
-<p>100% object&#39;&#39; style will certainly appear in the
-next future, but (fortunately) it is too new to be discussed here.</p>
-<ul>
- <li><strong>The <code>Too much imperative&#39;&#39; danger</code></strong>:
-  <ul>
-   <li>It is a bad idea to use imperative style to code a function that
- is <em>naturally</em> recursive. For instance, to compute the length of
- a list, you should not write:</li>
-  </ul>
- </li>
-</ul>
+symmetrical problematic behaviors: on the one hand, the</p>
+<pre><code class='all'>imperative&#39;&#39; way (*systematic* usage of loops and assignment), and on
+the other hand the </code></pre>
+<p>purely functional&#39;&#39; way (<em>never</em> use loops nor
+assignments); the</p>
+<pre><code>100% object&#39;&#39; style will certainly appear in the
+next future, but (fortunately) it is too new to be discussed here.
 
+* **The </code></pre>
+<p>Too much imperative&#39;&#39; danger**:</p>
+<pre><code>* It is a bad idea to use imperative style to code a function that</code></pre>
+<p> is <em>naturally</em> recursive. For instance, to compute the length of
+ a list, you should not write:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>list_length</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
   <span class='keyword'>let</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='lower'>l</span> <span class='keyword'>in</span>
   <span class='keyword'>let</span> <span class='lower'>res</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='number'>0</span> <span class='keyword'>in</span>
@@ -1746,24 +1697,19 @@ constant space requirement to run the functional program you just have
 to write a function that is recursive in its tail (or *tail-rec*), that
 is a function that just ends by a recursive call (which is not the case
 here since a call to </code></pre>
-<p>+</p>
-<pre><code> has to be perform after the recursive call has
-returned). Just use an accumulator for intermediate results, as in:
-
-```tryocaml
-let list_length l =
-  let rec loop accu = function
-    | [] -&gt; accu
-    | _ :: l -&gt; loop (accu + 1) l in
-  loop 0 l
-```
+<p>+` has to be perform after the recursive call has
+returned). Just use an accumulator for intermediate results, as in:</p>
+<pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>list_length</span> <span class='lower'>l</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>loop</span> <span class='lower'>accu</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
+    <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>accu</span>
+    <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>::</span> <span class='lower'>l</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>loop</span> <span class='keywordsign'>(</span><span class='lower'>accu</span> <span class='keywordsign'>+</span> <span class='number'>1</span><span class='keywordsign'>)</span> <span class='lower'>l</span> <span class='keyword'>in</span>
+  <span class='lower'>loop</span> <span class='number'>0</span> <span class='lower'>l</span>
+</code></pre>
+<p>
 This way, you get a program that has the same computational properties
 as the imperative program with the additional clarity and natural
 looking of an algorithm that performs pattern matching and recursive
-calls to handle an argument that belongs to a recursive sum data type.
-
-
-</code></pre>
+calls to handle an argument that belongs to a recursive sum data type.</p>
 
       </div>
     </div>

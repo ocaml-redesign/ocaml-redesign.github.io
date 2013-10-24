@@ -119,7 +119,7 @@ And indeed OCaml lets you use <code>max</code> on any type:</p>
 <p>
 This is because <code>&gt;</code> is in fact polymorphic. It works on any type, even
 objects (it does a binary comparison).</p>
-<p>[Note that the <code>Pervasives</code> module defines <code>min</code> and <code>max</code> for you.]</p>
+<p>[Note that the `Pervasives` module defines `min` and `max` for you.]</p>
 <p>Let&#39;s look a bit more closely at the <code>if</code> expression. Here&#39;s the <code>range</code>
 function which I showed you earlier without much explanation. You should
 be able to combine your knowledge of recursive functions, lists and if
@@ -155,7 +155,7 @@ chapter.</p>
 </code></pre>
 <p>
 Clue: add brackets around the whole of the if expression. It clips <code>y</code>
-like an <a href='http://www.noir-medical.com/graphics/diode_graph.gif' title='http://www.noir-medical.com/graphics/diode_graph.gif'>electronic
+like an <a href='http://www.noir-medical.com/graphics/diode_graph.gif ' title='http://www.noir-medical.com/graphics/diode_graph.gif'>electronic
 diode</a>.</p>
 <p>The <code>abs</code> (absolute value) function is defined in <code>Pervasives</code> as:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='lower'>abs</span> <span class='lower'>x</span> <span class='keywordsign'>=</span>
@@ -723,7 +723,7 @@ code to call <code>read_directory</code> and display the result:</p>
 <h3 id="Addendum"> Addendum</h3><p>
 
 After I posted this example to the caml-list mailing list I received
-many follow-ups. (You can <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2003/06/2732fbf1bed1ae50fefb6ea410ea9955.en.html' title='http://caml.inria.fr/pub/ml-archives/caml-list/2003/06/2732fbf1bed1ae50fefb6ea410ea9955.en.html'>read the full
+many follow-ups. (You can <a href='http://caml.inria.fr/pub/ml-archives/caml-list/2003/06/2732fbf1bed1ae50fefb6ea410ea9955.en.html ' title='http://caml.inria.fr/pub/ml-archives/caml-list/2003/06/2732fbf1bed1ae50fefb6ea410ea9955.en.html'>read the full
 thread</a>.)</p>
 <p>First of all there is a basic fault with <code>read_directory</code> directory
 which will cause it to fail if you try to run it on very large directory
@@ -790,7 +790,7 @@ the list of entries we&#39;ve built up).</p>
 best, <em>particularly</em> as in this case where
 <code>opendir ... readdir ... closedir</code> is essentially an imperative API,
 designed for C programmers. It&#39;s no surprise, therefore, that the
-imperative solution is easier. OCaml, not being a <a href='http://www.elsewhere.org/jargon/html/entry/bondage-and-discipline-language.html' title='http://www.elsewhere.org/jargon/html/entry/bondage-and-discipline-language.html'>bondage and
+imperative solution is easier. OCaml, not being a <a href='http://www.elsewhere.org/jargon/html/entry/bondage-and-discipline-language.html ' title='http://www.elsewhere.org/jargon/html/entry/bondage-and-discipline-language.html'>bondage and
 discipline
 language</a>,
 doesn&#39;t mind you using the imperative approach when it makes sense.</p>

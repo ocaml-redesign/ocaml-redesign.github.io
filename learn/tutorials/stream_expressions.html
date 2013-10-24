@@ -153,7 +153,7 @@ like this, and attempts to do this will result in a syntax error:</p>
 <p>
 This is only a minor inconvenience, since most streams will be built
 from one or more parameters. For example, here is the <code>const_stream</code>
-from the <a href='streams.html' title='Streams'>Streams</a> chapter, redefined using
+from the <a href='streams.html ' title='Streams'>Streams</a> chapter, redefined using
 stream expression syntax:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>const_stream</span> <span class='lower'>k</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[&#60;</span> <span class='keywordsign'>&#39;</span><span class='lower'>k</span> <span class='lower'>const_stream</span> <span class='lower'>k</span> <span class='keywordsign'>&#62;</span><span class='keywordsign'>]</span>
 </code></pre>
@@ -211,7 +211,7 @@ sub-streams can appear in any order, and they will be lazily evaluated
 as needed. <code>walk path</code> and <code>rest</code> both evaluate to streams that are
 concatenated with <code>item</code> at the front. The results are flattened into a
 single stream, just as if we had used something like <code>stream_concat</code>,
-defined in the <a href='streams.html' title='Streams'>Streams</a> chapter.</p>
+defined in the <a href='streams.html ' title='Streams'>Streams</a> chapter.</p>
 <p>With little effort, we can now print the names of all the directories
 and files underneath &quot;/var/log&quot;:</p>
 <pre><code class='tryocaml'><span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>

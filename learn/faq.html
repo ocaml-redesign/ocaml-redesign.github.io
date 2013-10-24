@@ -452,227 +452,188 @@ solution is to quit your interactive system and reload your files in a
 new session.</p>
 <p>A function obtained through partial application is not polymorphic
 enough</p>
-<p>The more common case to get a</p>
-<pre><code>not polymorphic enough&#39;&#39; definition is
+<p>The more common case to get a ``not polymorphic enough&#39;&#39; definition is
 when defining a function via partial application of a general
 polymorphic function. In OCaml polymorphism is introduced only through
 the “let” construct, and results from application are weakly polymorph;
 hence the function resulting from the application is not polymorph. In
 this case, you recover a fully polymorphic definition by clearly
 exhibiting the functionality to the type-checker : define the function
-with an explicit functional abstraction, that is, add a `function`
+with an explicit functional abstraction, that is, add a <code>function</code>
 construct or an extra parameter (this rewriting is known as
-eta-expansion):
-
-```tryocaml
-  let map_id = List.map (function x -&gt; x) (* Result is weakly polymorphic *);;
-  map_id [1;2];;
-  map_id (* No longer polymorphic *);;
-  let map_id&#39; l = List.map (function x -&gt; x) l;;
-  map_id&#39; [1;2];;
-  map_id&#39; (* Still fully polymorphic *);;
-```
+eta-expansion):</p>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>map_id</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keyword'>function</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='comment'>(* Result is weakly polymorphic *)</span><span class='keywordsign'>;;</span>
+  <span class='lower'>map_id</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span><span class='number'>2</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+  <span class='lower'>map_id</span> <span class='comment'>(* No longer polymorphic *)</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>map_id&#39;</span> <span class='lower'>l</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keyword'>function</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span><span class='keywordsign'>)</span> <span class='lower'>l</span><span class='keywordsign'>;;</span>
+  <span class='lower'>map_id&#39;</span> <span class='keywordsign'>[</span><span class='number'>1</span><span class='keywordsign'>;</span><span class='number'>2</span><span class='keywordsign'>]</span><span class='keywordsign'>;;</span>
+  <span class='lower'>map_id&#39;</span> <span class='comment'>(* Still fully polymorphic *)</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>
 The two definitions are semantically equivalent, and the new one can be
 assigned a polymorphic type scheme, since it is no more a function
-application.
-
-The type of this expression contains type variables that cannot be
-generalized
-
-This message appears when the OCaml compiler tries to compile a function
+application.</p>
+<p>The type of this expression contains type variables that cannot be
+generalized</p>
+<p>This message appears when the OCaml compiler tries to compile a function
 or a value which is monorphic, but for which some types have not been
 completely inferred. Some types variables are left in the type, which
-are are called “weak” (and are displayed by an underscore: `&#39;_a`); they
+are are called “weak” (and are displayed by an underscore: <code>&#39;_a</code>); they
 will disappear thanks to type inference as soon as enough informations
-will be given.
-
-```tryocaml
-  let r = ref [];;
-  let f = List.map (fun x -&gt; x);;
-```
+will be given.</p>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>r</span> <span class='keywordsign'>=</span> <span class='lower'>ref</span> <span class='keywordsign operator'>[]</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>map</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>x</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>x</span><span class='keywordsign'>)</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>
 Since the expression mentionned in the error message cannot be compiled
-as is, two cases must be envisioned:
-
-* The expression can really not be turned into a polymorphic
- expression, as in `r` above. You must use an explicit type
+as is, two cases must be envisioned:</p>
+<ul>
+ <li>The expression can really not be turned into a polymorphic
+ expression, as in <code>r</code> above. You must use an explicit type
  annotation, in order to turn it into something completely
  monomorphic.
-* The expression can be transformed into something polymorphic through
+ </li>
+ <li>The expression can be transformed into something polymorphic through
  rewriting some part of the code (for example using
- [eta-expansion](#eta-expansion)) as in the case of `f`.
+ <a href='#eta-expansion'>eta-expansion</a>) as in the case of <code>f</code>.</li>
+</ul>
 
-How to write a function with polymorphic arguments?
-
-In ML, an argument of a function cannot be polymorphic inside the body
-of the function; hence the following typing:
-
-```tryocaml
-  let f (g : &#39;a -&gt; &#39;a) x y = g x, g y;;
-```
-The function is not as polymorphic as we could have hoped.
+<p>How to write a function with polymorphic arguments?</p>
+<p>In ML, an argument of a function cannot be polymorphic inside the body
+of the function; hence the following typing:</p>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>g</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>g</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>g</span> <span class='lower'>y</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>
+The function is not as polymorphic as we could have hoped.<br />
  Nevertheless, in OCaml it is possible to use first-order polymorphism.
 For this, you can use either records or objects; in the case of records,
-you need to declare the type before using it in the function.
-
-```tryocaml
-  let f (o : &lt; g : &#39;a. &#39;a -&gt; &#39;a &gt;) x y = o#g x, o#g y;;
-  type id = { g : &#39;a. &#39;a -&gt; &#39;a };;
-  let f r x y = r.g x, r.g y;;
-```
-FIXME: A direct way now exists.
-
-###  Intput/output
+you need to declare the type before using it in the function.</p>
+<pre><code class='tryocaml'>  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>(</span><span class='lower'>o</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#60;</span> <span class='lower'>g</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>&#62;</span><span class='keywordsign'>)</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>o</span><span class='keywordsign'>#</span><span class='lower'>g</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>o</span><span class='keywordsign'>#</span><span class='lower'>g</span> <span class='lower'>y</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>type</span> <span class='lower'>id</span> <span class='keywordsign'>=</span> <span class='keywordsign'>{</span> <span class='lower'>g</span> <span class='keywordsign'>:</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>-&#62;</span> <span class='keywordsign'>&#39;</span><span class='lower'>a</span><span class='keywordsign'>}</span><span class='keywordsign'>;;</span>
+  <span class='keyword'>let</span> <span class='lower'>f</span> <span class='lower'>r</span> <span class='lower'>x</span> <span class='lower'>y</span> <span class='keywordsign'>=</span> <span class='lower'>r</span><span class='keywordsign'>.</span><span class='lower'>g</span> <span class='lower'>x</span><span class='keywordsign'>,</span> <span class='lower'>r</span><span class='keywordsign'>.</span><span class='lower'>g</span> <span class='lower'>y</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>
+FIXME: A direct way now exists.</p>
+<h3 id="Intputoutput"> Intput/output</h3><p>
 Why some printing material is mixed up and does not appear in the right
-order?
-
-If you use printing functions of the `format` module, you might not mix
-printing commands from `format` with printing commands from the basic
+order?</p>
+<p>If you use printing functions of the <code>format</code> module, you might not mix
+printing commands from <code>format</code> with printing commands from the basic
 I/O system. In effect, the material printed by functions from the
-`format` module is delayed (stored into the pretty-printing queue) in
+<code>format</code> module is delayed (stored into the pretty-printing queue) in
 order to find out the proper line breaking to perform with the material
 at hand. By contrast low level output is performed with no more
-buffering than usual I/O buffering.
-
-```tryocaml
-  print_endline &quot;before&quot;;
-  Format.print_string &quot;MIDDLE&quot;;
-  print_endline &quot;after&quot;;;
+buffering than usual I/O buffering.</p>
+<pre><code class='tryocaml'>  <span class='lower'>print_endline</span> <span class='string'>&#34;before&#34;</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>Format</span><span class='keywordsign'>.</span><span class='lower'>print_string</span> <span class='string'>&#34;MIDDLE&#34;</span><span class='keywordsign'>;</span>
+  <span class='lower'>print_endline</span> <span class='string'>&#34;after&#34;</span><span class='keywordsign'>;;</span>
   
-```
+</code></pre>
+<p>
 To avoid this kind of problems you should not mix printing orders from
-`format` and basic printing commands; that&#39;s the reason why when using
-functions from the `format` module, it is considered good programming
-habit to open `format` globally in order to completely mask low level
+<code>format</code> and basic printing commands; that&#39;s the reason why when using
+functions from the <code>format</code> module, it is considered good programming
+habit to open <code>format</code> globally in order to completely mask low level
 printing functions by the high level printing functions provided by
-`format`.
-
-## General Questions
-What is OCaml?
-
-OCaml is a programming language. It is a functional language, since the
+<code>format</code>.</p>
+<h2 id="GeneralQuestions"> General Questions</h2><p>
+What is OCaml?</p>
+<p>OCaml is a programming language. It is a functional language, since the
 basic units of programs are functions. It is a strongly-typed language;
 it means that the objects that you use belong to a set that has a name,
 called its type. In OCaml, types are managed by the computer, the user
 has nothing to do about types (types are synthesized). The language is
 available on almost every Unix platform (including Linux and MacOS X)
 and on PCs under Windows. A brief tour on main
-[features](description.html) of OCaml.
-
-Under what licensing terms is the OCaml software available?
-
-The OCaml system is open source software: the compiler is distributed
+<a href='description.html'>features</a> of OCaml.</p>
+<p>Under what licensing terms is the OCaml software available?</p>
+<p>The OCaml system is open source software: the compiler is distributed
 under the terms of the Q Public License, and its library is under LGPL;
-please read the [license](license.html) document for more details. A
-BSD-style license is also available for a fee through the [OCaml
-Consortium](support.html#consortium).
-
-What is the meaning of the name “OCaml”
-
-“Caml” is an acronym: it stands for “Categorical Abstract Machine
+please read the <a href='license.html'>license</a> document for more details. A
+BSD-style license is also available for a fee through the <a href='support.html#consortium'>OCaml
+Consortium</a>.</p>
+<p>What is the meaning of the name “OCaml”</p>
+<p>“Caml” is an acronym: it stands for “Categorical Abstract Machine
 Language”. The “Categorical Abstract Machine” is an abstract machine to
 define and execute functions. It is issued from theoretical
 considerations on the relationship between category theory and
 lambda-calculus. The first Caml compiler produced code for this abstract
 machine (in 1984). The “O” stands for “Objective” and was added after
-object oriented features were available in the language.
+object oriented features were available in the language.<br />
  In addition, OCaml is issued from the ML programming language, designed
 by Robin Milner in 1978, and used as the programming language to write
-the “proof tactics” in the LCF proof system.
-
-Do you write “Caml” or “CAML”, “OCaml”, “Ocaml” or “OCAML”?
-
-We write OCaml.
+the “proof tactics” in the LCF proof system.</p>
+<p>Do you write “Caml” or “CAML”, “OCaml”, “Ocaml” or “OCAML”?</p>
+<p>We write OCaml.<br />
  According to usual rules for acronyms, we should write CAML, as we
 write USA. On the other hand, this upper case name seems to yell all
 over the place, and writing OCaml is far more pretty and elegant — with
-“O” and “C” capitalized.
-
-Is OCaml a compiled or interpreted language?
-
-OCaml is compiled. However each OCaml compiler offers a top-level
+“O” and “C” capitalized.</p>
+<p>Is OCaml a compiled or interpreted language?</p>
+<p>OCaml is compiled. However each OCaml compiler offers a top-level
 interactive loop, that is similar to an interpreter. In fact, in the
 interactive system, the user may type in program chunks (we call these
 pieces OCaml “phrases”) that the system handles at once, compiling them,
-executing them, and writing their results.
-
-What are the differences between Caml V3.1, Caml Light, and OCaml?
-
-These are different Caml implementations that have been developed
+executing them, and writing their results.</p>
+<p>What are the differences between Caml V3.1, Caml Light, and OCaml?</p>
+<p>These are different Caml implementations that have been developed
 successively at Inria. These systems share many features since they all
 implement the core of the OCaml language; so the basic syntax is nearly
 the same. However, all these systems have their own extensions to the
-Caml core language.
- Caml V3.1 is no longer maintained nor distributed. [Caml
-Light](caml-light/) is no longer developed, but still maintained.
+Caml core language.<br />
+ Caml V3.1 is no longer maintained nor distributed. <a href='caml-light/'>Caml
+Light</a> is no longer developed, but still maintained.
 Because of its stable status, it is actively used in education. Most
 other users have switched to OCaml, the latest variant of the language.
 This is the version we suggest using in new software developments. See
-our brief [history](history.html) of the OCaml language.
-
-How to report a bug in the compilers?
-
-Use the [bug tracking system](http://caml.inria.fr/mantis/) to browse
-bug reports and features request, and submit new ones.
-
-## Module Language
+our brief <a href='history.html'>history</a> of the OCaml language.</p>
+<p>How to report a bug in the compilers?</p>
+<p>Use the <a href='http://caml.inria.fr/mantis/'>bug tracking system</a> to browse
+bug reports and features request, and submit new ones.</p>
+<h2 id="ModuleLanguage"> Module Language</h2><p>
 Can I have two mutually recursive compilation units / structures /
-signatures / functors?
-
-Currently not in the stable langage. However there exists an [OCaml
-extension](http://caml.inria.fr/pub/docs/manual-ocaml/manual021.html#toc75)
+signatures / functors?</p>
+<p>Currently not in the stable langage. However there exists an <a href='http://caml.inria.fr/pub/docs/manual-ocaml/manual021.html#toc75'>OCaml
+extension</a>
 (which is subject to change or removal at any time) which adresses some
-of these problems.
-
-How do I express sharing constraints between modules?
-
-Use manifest type specifications in the arguments of the functor. For
-instance, assume defined the following signatures:
-
-```tryocaml
-module type S1 = sig ... type t ... end
-module type S2 = sig ... type u ... end
-```
-To define a functor `F` that takes two arguments `X:S1` and `Y:S2` such
-that `X.t` and `Y.u` are the same, write:
-
-```tryocaml
-module F (X: S1) (Y: S2 with type u = X.t) =
-  struct ... end
-```
-Indeed, internally this expands to
-
-```tryocaml
-module F (X: S1) (Y: sig ... type u = X.t ... end) =
-  struct ... end
-```
-Compilation units are forced to be modules. What if I want to make a
-unit with a functor or a signature instead?
-
-In OCaml, functors and signatures (module types) can be components of
-modules. So, just make the functor or signature be a component of a
-compilation unit. A good example is the module `Set` from the standard
-library.
-
-## Development Tools
-###  Interactive loop (toplevel)
-How to stop the evaluation (execution) of an expression?
-
-It is often possible to interrupt a program or the OCaml system by
-typing some combination of keys that is operating system dependent:
-under Unix send an interrupt signal (generally `Control-C`), under
-Macintosh OS type `Command-.`, under Windows use the “OCaml” menu.
-
-How to quit the interactive loop?
-
-With Caml Light, type `quit();;`. With OCaml, type `#quit;;`. In both,
-you can also send an end-of-file (CTRL-D for Unix, CTRL-Z for DOS,
-etc.).
-
-###  Batch Compilers
-###  Yacc
-###  Lex
+of these problems.</p>
+<p>How do I express sharing constraints between modules?</p>
+<p>Use manifest type specifications in the arguments of the functor. For
+instance, assume defined the following signatures:</p>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='keyword'>type</span> <span class='constructor module'>S1</span> <span class='keywordsign'>=</span> <span class='keyword'>sig</span> <span class='keywordsign operator'>...</span> <span class='keyword'>type</span> <span class='lower'>t</span> <span class='keywordsign operator'>...</span> <span class='keyword'>end</span>
+<span class='keyword'>module</span> <span class='keyword'>type</span> <span class='constructor module'>S2</span> <span class='keywordsign'>=</span> <span class='keyword'>sig</span> <span class='keywordsign operator'>...</span> <span class='keyword'>type</span> <span class='lower'>u</span> <span class='keywordsign operator'>...</span> <span class='keyword'>end</span>
 </code></pre>
+<p>
+To define a functor <code>F</code> that takes two arguments <code>X:S1</code> and <code>Y:S2</code> such
+that <code>X.t</code> and <code>Y.u</code> are the same, write:</p>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>F</span> <span class='keywordsign'>(</span><span class='constructor module'>X</span><span class='keywordsign'>:</span> <span class='constructor module'>S1</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='constructor module'>Y</span><span class='keywordsign'>:</span> <span class='constructor module'>S2</span> <span class='keyword'>with</span> <span class='keyword'>type</span> <span class='lower'>u</span> <span class='keywordsign'>=</span> <span class='constructor module'>X</span><span class='keywordsign'>.</span><span class='lower'>t</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>struct</span> <span class='keywordsign operator'>...</span> <span class='keyword'>end</span>
+</code></pre>
+<p>
+Indeed, internally this expands to</p>
+<pre><code class='tryocaml'><span class='keyword'>module</span> <span class='constructor module'>F</span> <span class='keywordsign'>(</span><span class='constructor module'>X</span><span class='keywordsign'>:</span> <span class='constructor module'>S1</span><span class='keywordsign'>)</span> <span class='keywordsign'>(</span><span class='constructor module'>Y</span><span class='keywordsign'>:</span> <span class='keyword'>sig</span> <span class='keywordsign operator'>...</span> <span class='keyword'>type</span> <span class='lower'>u</span> <span class='keywordsign'>=</span> <span class='constructor module'>X</span><span class='keywordsign'>.</span><span class='lower'>t</span> <span class='keywordsign operator'>...</span> <span class='keyword'>end</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>struct</span> <span class='keywordsign operator'>...</span> <span class='keyword'>end</span>
+</code></pre>
+<p>
+Compilation units are forced to be modules. What if I want to make a
+unit with a functor or a signature instead?</p>
+<p>In OCaml, functors and signatures (module types) can be components of
+modules. So, just make the functor or signature be a component of a
+compilation unit. A good example is the module <code>Set</code> from the standard
+library.</p>
+<h2 id="DevelopmentTools"> Development Tools</h2><h3 id="Interactivelooptoplevel"> Interactive loop (toplevel)</h3><p>
 
+How to stop the evaluation (execution) of an expression?</p>
+<p>It is often possible to interrupt a program or the OCaml system by
+typing some combination of keys that is operating system dependent:
+under Unix send an interrupt signal (generally <code>Control-C</code>), under
+Macintosh OS type <code>Command-.</code>, under Windows use the “OCaml” menu.</p>
+<p>How to quit the interactive loop?</p>
+<p>With Caml Light, type <code>quit();;</code>. With OCaml, type <code>#quit;;</code>. In both,
+you can also send an end-of-file (CTRL-D for Unix, CTRL-Z for DOS,
+etc.).</p>
+<h3 id="BatchCompilers"> Batch Compilers</h3><h3 id="Yacc"> Yacc</h3>
+<h3 id="Lex"> Lex</h3>
       </div>
     </div>
   </div>
