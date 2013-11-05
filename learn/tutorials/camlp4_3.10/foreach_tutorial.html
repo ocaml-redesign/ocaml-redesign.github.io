@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title> &#8211; OCaml</title>
+    <title>Camlp4 3.10 Foreach Tutorial &#8211; OCaml</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Google Web Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
@@ -63,6 +63,26 @@
     <div class="container">
   <div class="row">
     
+    <div class="span4">
+      <nav id="nav-secondary">
+        <ul class="nav nav-list">
+          <li class="nav-header"><a href="#">Contents</a></li>
+          <ul>
+ <li><a href='#Motivation'> Motivation</a>
+ </li>
+ <li><a href='#TowardstheFirstTry'> Towards the First Try</a>
+ </li>
+ <li><a href='#SupportingMultiplePatterns'> Supporting Multiple Patterns</a>
+ </li>
+ <li><a href='#FinalTouchup'> Final Touch-up</a>
+ </li>
+ <li><a href='#Conclusion'> Conclusion</a>
+ </li>
+</ul>
+
+        </ul>
+      </nav>
+    </div>
 
     <div id="content-primary" class="span8">
       <div id='tryocaml' class="content" style='display:none;'>
@@ -90,157 +110,101 @@
       </div>
 
       <div id='main-contents' class="content">
-        <p>&lt;
-&lt;
-Camlp4 3.10 Foreach Tutorial
-&lt;/title&gt;
-&lt;/head&gt;
-&lt;</p>
-<div class="pull-right hero-unit" style="margin-left: 1em" >
-      
-<em>Table of contents</em>
-<div ml:replace="toc 2 2"></div>
-</div>
-<h1>
-<a name="Camlp4_3_10_Foreach_Tutorial">Camlp4 3.10 Foreach Tutorial</a>
-</h1>
-<p>
-This is a tutorial that guides you, step by step, how to write syntax
+        <!--  -->
+<h1 id="Camlp4310ForeachTutorial"> Camlp4 3.10 Foreach Tutorial</h1>
+<p>This is a tutorial that guides you, step by step, how to write syntax
 extension using Camlp4 in Objective CAML. The example we present in this
 tutorial should give you a practical idea how syntax extension works,
 but this is not meant to be comprehensive. There are many resources on
 the web for Camlp4 prior to version 3.10, but Camlp4 3.10 introduces
-incompatible changes. This tutorial targets Camlp4 3.10 only.
-</p>
-<p>
-Throughout the tutorial, we intentionally introduce subtle bugs in the
-interest of simplicity, but these bugs will be later explained.
-</p>
-<p>
-The reader is expected to be familiar with context-free parsing. Some
+incompatible changes. This tutorial targets Camlp4 3.10 only.</p>
+<p>Throughout the tutorial, we intentionally introduce subtle bugs in the
+interest of simplicity, but these bugs will be later explained.</p>
+<p>The reader is expected to be familiar with context-free parsing. Some
 experience with yacc or ocamlyacc will be helpful. Knowing the
-difference between LL, LR and LALR parsers is a plus.
-</p>
-<h2>
-<a name="Camlp4_3_10_Motivtion">Motivation</a>
-</h2>
-<p>
-One of the greatest strengths of OCaml is Camlp4, a modular
+difference between LL, LR and LALR parsers is a plus.</p>
+<h2 id="Motivation"> Motivation</h2>
+<p>One of the greatest strengths of OCaml is Camlp4, a modular
 pre-processor pretty-printer that lets you add syntactic sugar to the
 language without rewriting the entire grammar from scratch. A syntactic
 sugar is a language construct that can be decomposed to an existing
-construct. For example, OCaml doesn't have a "for-each" syntax, which
-can be illustrated by the following Python code:
-</p>
-<pre>
-a_list = ["hello", "world"]
-for s in a_list:
-  print s
-</pre>
-<p>
-This code outputs:
-</p>
-<pre>
-hello
+construct. For example, OCaml doesn&#39;t have a &quot;for-each&quot; syntax, which
+can be illustrated by the following Python code:</p>
+<pre><code class='ocaml'><span class='lower'>a_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>,</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span>
+<span class='keyword'>for</span> <span class='lower'>s</span> <span class='keyword'>in</span> <span class='lower'>a_list</span><span class='keywordsign'>:</span>
+  <span class='lower'>print</span> <span class='lower'>s</span>
+</code></pre>
+<p>This code outputs:</p>
+<pre><code>hello
 world
-</pre>
-<p>
-However, that doesn't mean OCaml can't support iterators! As it turns
+</code></pre>
+<p>However, that doesn&#39;t mean OCaml can&#39;t support iterators! As it turns
 out, many modules in OCaml that define a data structure also provide an
-"iter" higher-order function that works similarly:
-</p>
-<pre ml:content="ocaml noeval">
-let a_list = ["hello"; "world"] in
-List.iter (fun s -> print_endline s) a_list
-</pre>
-<p>
-Besides <code>List</code>, other modules that provide "iter" are
+&quot;iter&quot; higher-order function that works similarly:</p>
+<pre><code class='ocaml'><span class='keyword'>let</span> <span class='lower'>a_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+<span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_endline</span> <span class='lower'>s</span><span class='keywordsign'>)</span> <span class='lower'>a_list</span>
+</code></pre>
+<p>Besides <code>List</code>, other modules that provide &quot;iter&quot; are
 <code>Array</code>, <code>Hashtbl</code>, <code>Map.Make(*)</code>,
 <code>Queue</code>, <code>Set.Make(*)</code>, <code>Stack</code>, and
-even <code>String</code>. Wouldn't it be nice if one can write:
-</p>
-<pre ml:content="ocaml noeval">
-let a_list = ["hello"; "world"] in
-for s in a_list do
-  print_endline s
-done
-</pre>
-<p>
-instead? Imagine a long for-each body; this style of writing puts the
-"each" variable and the list next to each other, which results in
-cleaner code.
-</p>
-<p>
-The idea is to transform the latter code into former, leveraging the
-"iter" function provided by these modules.
-</p>
-<p>
-Notice that we can't generally look up a module specific "iter" function
+even <code>String</code>. Wouldn&#39;t it be nice if one can write:</p>
+<pre><code class='ocaml'><span class='keyword'>let</span> <span class='lower'>a_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+<span class='keyword'>for</span> <span class='lower'>s</span> <span class='keyword'>in</span> <span class='lower'>a_list</span> <span class='keyword'>do</span>
+  <span class='lower'>print_endline</span> <span class='lower'>s</span>
+<span class='keyword'>done</span>
+</code></pre>
+<p>instead? Imagine a long for-each body; this style of writing puts the
+&quot;each&quot; variable and the list next to each other, which results in
+cleaner code.</p>
+<p>The idea is to transform the latter code into former, leveraging the
+<code>iter</code> function provided by these modules.</p>
+<p>Notice that we can&#39;t generally look up a module specific <code>iter</code> function
 by the type of the expression we want to iterate over, so we have to
-specify a module like this:
-</p>
-<pre ml:content="ocaml noeval">
-let a_list = ["hello"; "world"] in
-for s in List a_list do
-  print_endline s
-done
-</pre>
-<p>
-More generally, the syntactic sugar takes the following form:
-</p>
-<pre  ml:content="ocaml noeval">
-for v in M e do
-  seq
-done
-</pre>
-<p>
-where module <code>M</code> implements an iterator over the elements in
+specify a module like this:</p>
+<pre><code class='ocaml'><span class='keyword'>let</span> <span class='lower'>a_list</span> <span class='keywordsign'>=</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span> <span class='keyword'>in</span>
+<span class='keyword'>for</span> <span class='lower'>s</span> <span class='keyword'>in</span> <span class='constructor module'>List</span> <span class='lower'>a_list</span> <span class='keyword'>do</span>
+  <span class='lower'>print_endline</span> <span class='lower'>s</span>
+<span class='keyword'>done</span>
+</code></pre>
+<p>More generally, the syntactic sugar takes the following form:</p>
+<pre><code class='ocaml'><span class='keyword'>for</span> <span class='lower'>v</span> <span class='keyword'>in</span> <span class='constructor module'>M</span> <span class='lower'>e</span> <span class='keyword'>do</span>
+  <span class='lower'>seq</span>
+<span class='keyword'>done</span>
+</code></pre>
+<p>where module <code>M</code> implements an iterator over the elements in
 collection <em>e</em>; most of the time, <em>e</em> also has the type
-<code>M.t</code>, though this is not strictly required.
-</p>
-<h2>
-<a name="Towards_the_First_Try">Towards the First Try</a>
-</h2>
-<p>
-Without going into too much detail, we can write a simple extension as
-the following:
-</p>
-<pre ml:content="ocaml noeval">
-open Camlp4.PreCast
-open Syntax
+<code>M.t</code>, though this is not strictly required.</p>
+<h2 id="TowardstheFirstTry"> Towards the First Try</h2>
+<p>Without going into too much detail, we can write a simple extension as
+the following:</p>
+<pre><code class='ocaml'><span class='keyword'>open</span> <span class='constructor module'>Camlp4</span><span class='keywordsign'>.</span><span class='constructor module'>PreCast</span>
+<span class='keyword'>open</span> <span class='constructor module'>Syntax</span>
 
-let () =
-  EXTEND Gram
-    expr: LEVEL "top"
-    [ [ "for"; v = a_LIDENT; "in"; m = a_UIDENT; e = expr; "do";
-        seq = sequence; "done" ->
-          <:expr< $uid:m$.iter (fun $lid:v$ -> $seq$) $e$ >>
-      ] ];
-  END
-</pre>
-<p>
-For what follows, it is assumed that this code is written to a file
-<code>pa\_foreach.ml</code>.
-</p>
-<p>
-All the prerequisites are provided by the module
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='constructor module'>EXTEND</span> <span class='constructor module'>Gram</span>
+    <span class='lower'>expr</span><span class='keywordsign'>:</span> <span class='constructor module'>LEVEL</span> <span class='string'>&#34;top&#34;</span>
+    <span class='keywordsign'>[</span> <span class='keywordsign'>[</span> <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>v</span> <span class='keywordsign'>=</span> <span class='lower'>a_LIDENT</span><span class='keywordsign'>;</span> <span class='string'>&#34;in&#34;</span><span class='keywordsign'>;</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='lower'>a_UIDENT</span><span class='keywordsign'>;</span> <span class='lower'>e</span> <span class='keywordsign'>=</span> <span class='lower'>expr</span><span class='keywordsign'>;</span> <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span>
+        <span class='lower'>seq</span> <span class='keywordsign'>=</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='string'>&#34;done&#34;</span> <span class='keywordsign'>-&#62;</span>
+          <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keywordsign infix'>$</span><span class='lower'>uid</span><span class='keywordsign'>:</span><span class='lower'>m</span><span class='keywordsign infix'>$.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='keywordsign infix'>$</span><span class='lower'>lid</span><span class='keywordsign'>:</span><span class='lower'>v</span><span class='keywordsign infix'>$</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign infix'>$</span><span class='lower'>seq</span><span class='keywordsign infix'>$</span><span class='keywordsign'>)</span> <span class='keywordsign infix'>$</span><span class='lower'>e</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span>
+      <span class='keywordsign'>]</span> <span class='keywordsign'>]</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>END</span>
+</code></pre>
+<p>For what follows, it is assumed that this code is written to a file
+<code>pa_foreach.ml</code>.</p>
+<p>All the prerequisites are provided by the module
 <code>Camlp4.PreCast</code>, including the <code>Syntax</code> module
-that provides the terminals <code>a\_LIDENT</code> and
-<code>a\_UIDENT</code> (for lowercase and uppercase identifiers
+that provides the terminals <code>a_LIDENT</code> and
+<code>a_UIDENT</code> (for lowercase and uppercase identifiers
 respectively), and the non-terminals <code>expr</code> (expressions) and
 <code>sequence</code> (semicolon separated expressions). The
 <code>Gram</code> module provides functions to manipulate non-terminal
-rules.
-</p>
-<p>
-Suppose we save this syntax extension in the file called
-<code>pa\_foreach.ml</code>. Notice that a syntax extension is just a
+rules.</p>
+<p>Suppose we save this syntax extension in the file called
+<code>pa_foreach.ml</code>. Notice that a syntax extension is just a
 regular OCaml file with some fancy <code>EXTEND</code> syntax. It can be
-compiled using the command:
-</p>
-<pre>
-ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach.ml
-</pre>
+compiled using the command:</p>
+<pre><code>ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach.ml
+</code></pre>
 <ul><li>
 FYI: Camlp4 is complicated to learn because a syntax extension consists
 of two domain-specific languages that are foreign to OCaml: parsing and
@@ -251,279 +215,216 @@ original OCaml dialect, both as the host (top-level) language and as the
 embedded language. This tutorial uses original OCaml as the host
 language and revised dialect as the embedded language. This choice is
 reflected in the camlp4 executable that we use here,
-<code>camlp4orf</code>. See
+`camlp4orf`. See
 <a href="http://brion.inria.fr/gallium/index.php/Using_Camlp4" class="external" title="http://brion.inria.fr/gallium/index.php/Using_Camlp4">Using
 Camlp4</a> for the explanation and additional options.
 </li></ul>
-<p>
-We can verify that it works:
-</p>
-<pre ml:content="ocaml">
-  #load "camlp4o.cma";;
-  (* Add directory where the syntax extension is compiled to the module
-     path (not required if pa_foreach.cmo is in the current directory). *)
-  #directory "_build/src/html/tutorials/camlp4_3.10/";;
-  #load "pa_foreach.cmo";;
-  for s in List ["hello"; "world"] do print_endline s done;;
-</pre>
-<p>
-Now we have a rudimentary syntax extension. However, it is quite
+<p>We can verify that it works:</p>
+<pre><code class='ocaml'><span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;camlp4o.cma&#34;</span><span class='keywordsign'>;;</span>
+<span class='comment'>(* Add directory where the syntax extension is compiled to the module
+   path (not required if pa_foreach.cmo is in the current directory). *)</span>
+<span class='keywordsign'>#</span><span class='lower'>directory</span> <span class='string'>&#34;_build/src/html/tutorials/camlp4_3.10/&#34;</span><span class='keywordsign'>;;</span>
+<span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;pa_foreach.cmo&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>s</span> <span class='keyword'>in</span> <span class='constructor module'>List</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span> <span class='keyword'>do</span> <span class='lower'>print_endline</span> <span class='lower'>s</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>Now we have a rudimentary syntax extension. However, it is quite
 restrictive. For example, it would be nice to do pattern matching like
-this:
-</p>
-<pre  ml:content="ocaml noeval">
-for (k, v) in List [(0, "hello"); (1, "world")] do
-  Printf.printf "%d: %sn" k v
-done
-</pre>
-<p>
-And it doesn't support <code>Hashtbl.iter</code> yet because, so far, we
-can only generate functions with one argument. <code>Hashtbl.iter</code>
-passes two arguments to the function, the key and the value. We will
-address these issues in the next section.
-</p>
-<h2>
-<a name="Supporting_Multiple_Patterns">Supporting Multiple Patterns</a>
-</h2>
-<p>
-We're now beginning to use Camlp4 features that are less documented. It
+this:</p>
+<pre><code class='ocaml'><span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>k</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>)</span> <span class='keyword'>in</span> <span class='constructor module'>List</span> <span class='keywordsign'>[</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>,</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>]</span> <span class='keyword'>do</span>
+  <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d: %sn&#34;</span> <span class='lower'>k</span> <span class='lower'>v</span>
+<span class='keyword'>done</span>
+</code></pre>
+<pre><code class='ocaml'><span class='constructor module'>And</span> <span class='lower'>it</span> <span class='lower'>doesn&#39;t</span> <span class='lower'>support</span> <span class='keywordsign'>`</span><span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>iter</span><span class='keywordsign'>`</span> <span class='lower'>yet</span> <span class='lower'>because</span><span class='keywordsign'>,</span> <span class='lower'>so</span> <span class='lower'>far</span><span class='keywordsign'>,</span> <span class='lower'>we</span>
+<span class='lower'>can</span> <span class='lower'>only</span> <span class='lower'>generate</span> <span class='lower'>functions</span> <span class='keyword'>with</span> <span class='lower'>one</span> <span class='lower'>argument</span><span class='keywordsign'>.</span> <span class='keywordsign'>`</span><span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>iter</span><span class='keywordsign'>`</span>
+<span class='lower'>passes</span> <span class='lower'>two</span> <span class='lower'>arguments</span> <span class='keyword'>to</span> <span class='lower'>the</span> <span class='keyword'>function</span><span class='keywordsign'>,</span> <span class='lower'>the</span> <span class='lower'>key</span> <span class='keyword'>and</span> <span class='lower'>the</span> <span class='lower'>value</span><span class='keywordsign'>.</span> <span class='constructor module'>We</span> <span class='lower'>will</span>
+<span class='lower'>address</span> <span class='lower'>these</span> <span class='lower'>issues</span> <span class='keyword'>in</span> <span class='lower'>the</span> <span class='lower'>next</span> <span class='lower'>section</span><span class='keywordsign'>.</span>
+</code></pre>
+<h2 id="SupportingMultiplePatterns"> Supporting Multiple Patterns</h2>
+<p>We&#39;re now beginning to use Camlp4 features that are less documented. It
 is useful to keep in mind that syntax extension <em>is</em> modifying
-existing parsing rules, and we can't do without an understanding of how
+existing parsing rules, and we can&#39;t do without an understanding of how
 existing rules work. It is recommended that you take a quick look at two
 files in the OCaml source distribution under
-<code>ocaml-3.10.0/camlp4/Camlp4Parsers</code>:
-</p>
+<code>ocaml-3.10.0/camlp4/Camlp4Parsers</code>:</p>
 <ul><li>
-<code>Camlp4OCamlRevisedParser.ml</code>; this provides the bulk of the
+`Camlp4OCamlRevisedParser.ml`; this provides the bulk of the
 syntax rules.
 </li>
 <li>
-<code>Camlp4OCamlParser.ml</code> implicitly borrows most of its rules
-from <code>Camlp4OCamlRevisedParser</code>, but clears some of the rules
+`Camlp4OCamlParser.ml` implicitly borrows most of its rules
+from `Camlp4OCamlRevisedParser`, but clears some of the rules
 that are particular to the revised syntax and replaces them with the
 original OCaml syntax.
 </li></ul>
-<p>
-From these files, we can see that <code>ipatt</code> rule supplies what
+<p>From these files, we can see that <code>ipatt</code> rule supplies what
 we want for matching patterns, and <code>LIST1</code> modifier allows us
 to take one or more patterns. There is also a <code>LIST0</code>
-modifier for "zero or more" matching.
-</p>
-<pre ml:content="ocaml noeval">
-open Camlp4.PreCast
-open Syntax
+modifier for &quot;zero or more&quot; matching.</p>
+<pre><code class='ocaml'><span class='keyword'>open</span> <span class='constructor module'>Camlp4</span><span class='keywordsign'>.</span><span class='constructor module'>PreCast</span>
+<span class='keyword'>open</span> <span class='constructor module'>Syntax</span>
 
-let rec mkfun _loc patts e =
-  match patts with
-  | p :: patts ->
-      <:expr< fun $p$ -> $mkfun _loc patts e$ >>
-  | [] ->
-      e
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>mkfun</span> <span class='lower'>_loc</span> <span class='lower'>patts</span> <span class='lower'>e</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>match</span> <span class='lower'>patts</span> <span class='keyword'>with</span>
+  <span class='keywordsign'>|</span> <span class='lower'>p</span> <span class='keywordsign'>::</span> <span class='lower'>patts</span> <span class='keywordsign'>-&#62;</span>
+      <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keyword'>fun</span> <span class='keywordsign infix'>$</span><span class='lower'>p</span><span class='keywordsign infix'>$</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign infix'>$</span><span class='lower'>mkfun</span> <span class='lower'>_loc</span> <span class='lower'>patts</span> <span class='lower'>e</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span>
+      <span class='lower'>e</span>
 
-let () =
-  EXTEND Gram
-    expr: LEVEL "top"
-    [ [ "for"; patts = LIST1 ipatt; "in"; m = a_UIDENT; e = expr; "do";
-        seq = sequence; "done" ->
-          let f = mkfun _loc patts seq in
-          <:expr< $uid:m$.iter $f$ $e$ >>
-      ] ];
-  END
-</pre>
-<p>
-In order to generate a higher-order function according to a list of
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='constructor module'>EXTEND</span> <span class='constructor module'>Gram</span>
+    <span class='lower'>expr</span><span class='keywordsign'>:</span> <span class='constructor module'>LEVEL</span> <span class='string'>&#34;top&#34;</span>
+    <span class='keywordsign'>[</span> <span class='keywordsign'>[</span> <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>patts</span> <span class='keywordsign'>=</span> <span class='constructor module'>LIST1</span> <span class='lower'>ipatt</span><span class='keywordsign'>;</span> <span class='string'>&#34;in&#34;</span><span class='keywordsign'>;</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='lower'>a_UIDENT</span><span class='keywordsign'>;</span> <span class='lower'>e</span> <span class='keywordsign'>=</span> <span class='lower'>expr</span><span class='keywordsign'>;</span> <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span>
+        <span class='lower'>seq</span> <span class='keywordsign'>=</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='string'>&#34;done&#34;</span> <span class='keywordsign'>-&#62;</span>
+          <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='lower'>mkfun</span> <span class='lower'>_loc</span> <span class='lower'>patts</span> <span class='lower'>seq</span> <span class='keyword'>in</span>
+          <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keywordsign infix'>$</span><span class='lower'>uid</span><span class='keywordsign'>:</span><span class='lower'>m</span><span class='keywordsign infix'>$.</span><span class='lower'>iter</span> <span class='keywordsign infix'>$</span><span class='lower'>f</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>$</span><span class='lower'>e</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span>
+      <span class='keywordsign'>]</span> <span class='keywordsign'>]</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>END</span>
+</code></pre>
+<p>In order to generate a higher-order function according to a list of
 patterns, we use the helper <code>mkfun</code> that essentially
-generates, for patterns <code>patt1</code> ... <code>pattN</code>,
-</p>
-<pre ml:content="ocaml noeval">
-fun patt1 ->
-  ...
-    fun pattN ->
-      seq
-</pre>
-<p>
-which is the desugared form for <code ml:content="ocaml noeval"
-  >fun patt1 ... pattN -\> seq</code>.
-</p>
-<p>
-We can verify that pattern works:
-</p>
-<pre>
-ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach2.ml
-</pre>
-<pre ml:content="ocaml">
-  #load "pa_foreach2.cmo";;
-  for (k, v) in List [(0, "hello"); (1, "world")] do
-    Printf.printf "%d: %sn" k v
-  done;;
-</pre>
-<p>
-and that multiple arguments work:
-</p>
-<pre  ml:content="ocaml">
-  let tbl = Hashtbl.create 3;;
-  Hashtbl.add tbl 0 "hello";;
-  Hashtbl.add tbl 1 "world";;
-  Hashtbl.add tbl 2 "foobar";;
-  for k v in Hashtbl tbl do
-    Printf.printf "%d: %sn" k v
-  done;;
-</pre>
-<p>
-There are still some subtle problems with this approach. In the next
-section, we'll discuss solutions to these problems.
-</p>
-<h2>
-<a name="Final_Touch_up">Final Touch-up</a>
-</h2>
-<p>
-The first problem we find out is that foreach body is supposed to be a
-sequence, but that doesn't work:
-</p>
-<pre ml:content="ocaml noeval">
-# for s in List ["hello"; "world"] do print_endline s; () done;;
-Failure: "expr; expr: not allowed here, use do {...} or [|...|] to surround them"
-</pre>
-<p>
-The problem is due to the desugared form, which becomes:
-</p>
-<pre ml:content="ocaml noeval">
-  List.iter (fun s -> print_endline s; ()) ["hello"; "world"]
-</pre>
-<p>
-and this is ambiguous. Do we interpret the expression <code>fun s -\>
-print\_endline s; ()</code> as <code>(fun s -\> print\_endline s);
-()</code> or <code>fun s -\> (print\_endline (); ())</code>? In order to
-avoid ambiguity, we wrap the sequence using <code>do {*s**e**q*}</code>
-when it is a sequence. The function <code>mksequence'</code> in
+generates, for patterns <code>patt1</code> ... <code>pattN</code>,</p>
+<pre><code class='ocaml'><span class='keyword'>fun</span> <span class='lower'>patt1</span> <span class='keywordsign'>-&#62;</span>
+  <span class='keywordsign operator'>...</span>
+    <span class='keyword'>fun</span> <span class='lower'>pattN</span> <span class='keywordsign'>-&#62;</span>
+      <span class='lower'>seq</span>
+</code></pre>
+<p>which is the desugared form for <code>fun patt1 ... pattN -&gt; seq</code>.</p>
+<p>We can verify that pattern works:</p>
+<pre><code>ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach2.ml
+</code></pre>
+<pre><code class='ocaml'><span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;pa_foreach2.cmo&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='keywordsign'>(</span><span class='lower'>k</span><span class='keywordsign'>,</span> <span class='lower'>v</span><span class='keywordsign'>)</span> <span class='keyword'>in</span> <span class='constructor module'>List</span> <span class='keywordsign'>[</span><span class='keywordsign'>(</span><span class='number'>0</span><span class='keywordsign'>,</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>;</span> <span class='keywordsign'>(</span><span class='number'>1</span><span class='keywordsign'>,</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>)</span><span class='keywordsign'>]</span> <span class='keyword'>do</span>
+  <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d: %sn&#34;</span> <span class='lower'>k</span> <span class='lower'>v</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>and that multiple arguments work:</p>
+<pre><code class='ocaml'><span class='keyword'>let</span> <span class='lower'>tbl</span> <span class='keywordsign'>=</span> <span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>tbl</span> <span class='number'>0</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>tbl</span> <span class='number'>1</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>tbl</span> <span class='number'>2</span> <span class='string'>&#34;foobar&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>k</span> <span class='lower'>v</span> <span class='keyword'>in</span> <span class='constructor module'>Hashtbl</span> <span class='lower'>tbl</span> <span class='keyword'>do</span>
+  <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d: %sn&#34;</span> <span class='lower'>k</span> <span class='lower'>v</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
+</code></pre>
+<p>There are still some subtle problems with this approach. In the next
+section, we&#39;ll discuss solutions to these problems.</p>
+<h2 id="FinalTouchup"> Final Touch-up</h2>
+<p>The first problem we find out is that foreach body is supposed to be a
+sequence, but that doesn&#39;t work:</p>
+<pre><code class='ocaml'><span class='keywordsign'>#</span> <span class='keyword'>for</span> <span class='lower'>s</span> <span class='keyword'>in</span> <span class='constructor module'>List</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span> <span class='keyword'>do</span> <span class='lower'>print_endline</span> <span class='lower'>s</span><span class='keywordsign'>;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Failure</span><span class='keywordsign'>:</span> <span class='string'>&#34;expr; expr: not allowed here, use do {...} or [|...|] to surround them&#34;</span>
+</code></pre>
+<p>The problem is due to the desugared form, which becomes:</p>
+<pre><code class='ocaml'>  <span class='constructor module'>List</span><span class='keywordsign'>.</span><span class='lower'>iter</span> <span class='keywordsign'>(</span><span class='keyword'>fun</span> <span class='lower'>s</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>print_endline</span> <span class='lower'>s</span><span class='keywordsign'>;</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span><span class='keywordsign'>)</span> <span class='keywordsign'>[</span><span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>]</span>
+</code></pre>
+<p>and this is ambiguous. Do we interpret the expression 
+<code>fun s -&gt; print_endline s; ()</code> as 
+<code>(fun s -&gt; print_endline s); ()</code>
+or <code>fun s -&gt; (print_endline (); ())</code>? 
+In order to avoid ambiguity, we wrap the sequence using <code>do {*s**e**q*}</code>
+when it is a sequence. The function <code>mksequence&#39;</code> in
 <code>Camlp4OCamlRevisedParser.ml</code> provides some inspiration how
-to handle this.
-</p>
+to handle this.</p>
 <ul><li>
 FYI: see
 <a href="http://caml.inria.fr/pub/ml-archives/caml-list/2007/07/40966461d8ade5dcee6790fa32cc9983.en.html" class="external" title="http://caml.inria.fr/pub/ml-archives/caml-list/2007/07/40966461d8ade5dcee6790fa32cc9983.en.html">this
 post</a> by Nicolas Pouillard for a discussion of a similar issue.
 </li></ul>
-<p>
-We also notice that the original for-loop syntax ceases working:
-</p>
-<pre  ml:content="ocaml noeval">
-# for i = 0 to 5 do print_int i done;;
-Parse error: [ipatt] or [a_LIDENT] expected after "for" (in [expr])
-</pre>
+<p>We also notice that the original for-loop syntax ceases working:</p>
+<pre><code class='ocaml'><span class='keywordsign'>#</span> <span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>5</span> <span class='keyword'>do</span> <span class='lower'>print_int</span> <span class='lower'>i</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Parse</span> <span class='lower'>error</span><span class='keywordsign'>:</span> <span class='keywordsign'>[</span><span class='lower'>ipatt</span><span class='keywordsign'>]</span> <span class='keywordsign'>or</span> <span class='keywordsign'>[</span><span class='lower'>a_LIDENT</span><span class='keywordsign'>]</span> <span class='lower'>expected</span> <span class='lower'>after</span> <span class='string'>&#34;for&#34;</span> <span class='keywordsign'>(</span><span class='keyword'>in</span> <span class='keywordsign'>[</span><span class='lower'>expr</span><span class='keywordsign'>]</span><span class='keywordsign'>)</span>
+</code></pre>
 <!-- FIXME: If one tries to eval the code, an error is raised by
      Errors.report_error -->
-<p>
-It turns out that the new rule we add for "for" doesn't play nice with
+<p>It turns out that the new rule we add for <code>for</code> doesn&#39;t play nice with
 the original rule. The solution is to rewrite the original rule so it
-becomes compatible with the new rule.
-</p>
-<p>
-The code listing that addresses these issues can be found below:
-</p>
-<pre ml:content="ocaml noeval">
-open Camlp4.PreCast
-open Syntax
+becomes compatible with the new rule.</p>
+<p>The code listing that addresses these issues can be found below:</p>
+<pre><code class='ocaml'><span class='keyword'>open</span> <span class='constructor module'>Camlp4</span><span class='keywordsign'>.</span><span class='constructor module'>PreCast</span>
+<span class='keyword'>open</span> <span class='constructor module'>Syntax</span>
 
-let mksequence _loc = function
-  | <:expr< $_$; $_$ >> as e -> <:expr< $e$ >>
-  | e -> e
+<span class='keyword'>let</span> <span class='lower'>mksequence</span> <span class='lower'>_loc</span> <span class='keywordsign'>=</span> <span class='keyword'>function</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keywordsign infix'>$</span><span class='keywordsign'>_</span><span class='keywordsign infix'>$</span><span class='keywordsign'>;</span> <span class='keywordsign infix'>$</span><span class='keywordsign'>_</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span> <span class='keyword'>as</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keywordsign infix'>$</span><span class='lower'>e</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span>
+  <span class='keywordsign'>|</span> <span class='lower'>e</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>e</span>
 
-let rec mkfun _loc patts e =
-  match patts with
-  | p :: patts -> <:expr< fun $p$ -> $mkfun _loc patts e$ >>
-  | [] -> mksequence _loc e
+<span class='keyword'>let</span> <span class='keyword'>rec</span> <span class='lower'>mkfun</span> <span class='lower'>_loc</span> <span class='lower'>patts</span> <span class='lower'>e</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>match</span> <span class='lower'>patts</span> <span class='keyword'>with</span>
+  <span class='keywordsign'>|</span> <span class='lower'>p</span> <span class='keywordsign'>::</span> <span class='lower'>patts</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keyword'>fun</span> <span class='keywordsign infix'>$</span><span class='lower'>p</span><span class='keywordsign infix'>$</span> <span class='keywordsign'>-&#62;</span> <span class='keywordsign infix'>$</span><span class='lower'>mkfun</span> <span class='lower'>_loc</span> <span class='lower'>patts</span> <span class='lower'>e</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign operator'>[]</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>mksequence</span> <span class='lower'>_loc</span> <span class='lower'>e</span>
 
-let lident_of_patt p =
-  match p with
-  | <:patt< $lid:i$ >> -> i
-  | _ -> invalid_arg "lident_of_patt"
+<span class='keyword'>let</span> <span class='lower'>lident_of_patt</span> <span class='lower'>p</span> <span class='keywordsign'>=</span>
+  <span class='keyword'>match</span> <span class='lower'>p</span> <span class='keyword'>with</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign infix'>&#60;:</span><span class='lower'>patt</span><span class='keywordsign'>&#60;</span> <span class='keywordsign infix'>$</span><span class='lower'>lid</span><span class='keywordsign'>:</span><span class='lower'>i</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>i</span>
+  <span class='keywordsign'>|</span> <span class='keywordsign'>_</span> <span class='keywordsign'>-&#62;</span> <span class='lower'>invalid_arg</span> <span class='string'>&#34;lident_of_patt&#34;</span>
 
-let () =
-  DELETE_RULE Gram
-  expr:
-    "for"; a_LIDENT; "="; sequence; direction_flag; sequence; "do"; do_sequence
-  END;
+<span class='keyword'>let</span> <span class='keywordsign'>(</span><span class='keywordsign'>)</span> <span class='keywordsign'>=</span>
+  <span class='constructor module'>DELETE_RULE</span> <span class='constructor module'>Gram</span>
+  <span class='lower'>expr</span><span class='keywordsign'>:</span>
+    <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>a_LIDENT</span><span class='keywordsign'>;</span> <span class='string'>&#34;=&#34;</span><span class='keywordsign'>;</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='lower'>direction_flag</span><span class='keywordsign'>;</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span> <span class='lower'>do_sequence</span>
+  <span class='constructor module'>END</span><span class='keywordsign'>;</span>
 
-  EXTEND Gram
-  expr: LEVEL "top"
-    [ [ "for"; i = ipatt; "="; e1 = sequence; df = direction_flag;
-        e2 = sequence; "do"; seq = do_sequence ->
-         <:expr<
-           for $lident_of_patt i$ =
-             $mksequence _loc e1$ $to:df$ $mksequence _loc e2$
-             do $seq$ done
-         >>
-      | "for"; p = ipatt; patts = LIST0 ipatt; "in"; m = a_UIDENT; e = expr;
-        "do"; seq = do_sequence ->
-         let patts = p :: patts in
-         let f = mkfun _loc patts seq in
-         <:expr< $uid:m$.iter $f$ $e$ >>
-      ] ];
-  END
-</pre>
-<p>
-In order for alternative rules to "fall through" correctly, rules must
+  <span class='constructor module'>EXTEND</span> <span class='constructor module'>Gram</span>
+  <span class='lower'>expr</span><span class='keywordsign'>:</span> <span class='constructor module'>LEVEL</span> <span class='string'>&#34;top&#34;</span>
+    <span class='keywordsign'>[</span> <span class='keywordsign'>[</span> <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='lower'>ipatt</span><span class='keywordsign'>;</span> <span class='string'>&#34;=&#34;</span><span class='keywordsign'>;</span> <span class='lower'>e1</span> <span class='keywordsign'>=</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='lower'>df</span> <span class='keywordsign'>=</span> <span class='lower'>direction_flag</span><span class='keywordsign'>;</span>
+        <span class='lower'>e2</span> <span class='keywordsign'>=</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span> <span class='lower'>seq</span> <span class='keywordsign'>=</span> <span class='lower'>do_sequence</span> <span class='keywordsign'>-&#62;</span>
+         <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span>
+           <span class='keyword'>for</span> <span class='keywordsign infix'>$</span><span class='lower'>lident_of_patt</span> <span class='lower'>i</span><span class='keywordsign infix'>$</span> <span class='keywordsign'>=</span>
+             <span class='keywordsign infix'>$</span><span class='lower'>mksequence</span> <span class='lower'>_loc</span> <span class='lower'>e1</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>$</span><span class='keyword'>to</span><span class='keywordsign'>:</span><span class='lower'>df</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>$</span><span class='lower'>mksequence</span> <span class='lower'>_loc</span> <span class='lower'>e2</span><span class='keywordsign infix'>$</span>
+             <span class='keyword'>do</span> <span class='keywordsign infix'>$</span><span class='lower'>seq</span><span class='keywordsign infix'>$</span> <span class='keyword'>done</span>
+         <span class='keywordsign infix'>&#62;&#62;</span>
+      <span class='keywordsign'>|</span> <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>p</span> <span class='keywordsign'>=</span> <span class='lower'>ipatt</span><span class='keywordsign'>;</span> <span class='lower'>patts</span> <span class='keywordsign'>=</span> <span class='constructor module'>LIST0</span> <span class='lower'>ipatt</span><span class='keywordsign'>;</span> <span class='string'>&#34;in&#34;</span><span class='keywordsign'>;</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='lower'>a_UIDENT</span><span class='keywordsign'>;</span> <span class='lower'>e</span> <span class='keywordsign'>=</span> <span class='lower'>expr</span><span class='keywordsign'>;</span>
+        <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span> <span class='lower'>seq</span> <span class='keywordsign'>=</span> <span class='lower'>do_sequence</span> <span class='keywordsign'>-&#62;</span>
+         <span class='keyword'>let</span> <span class='lower'>patts</span> <span class='keywordsign'>=</span> <span class='lower'>p</span> <span class='keywordsign'>::</span> <span class='lower'>patts</span> <span class='keyword'>in</span>
+         <span class='keyword'>let</span> <span class='lower'>f</span> <span class='keywordsign'>=</span> <span class='lower'>mkfun</span> <span class='lower'>_loc</span> <span class='lower'>patts</span> <span class='lower'>seq</span> <span class='keyword'>in</span>
+         <span class='keywordsign infix'>&#60;:</span><span class='lower'>expr</span><span class='keywordsign'>&#60;</span> <span class='keywordsign infix'>$</span><span class='lower'>uid</span><span class='keywordsign'>:</span><span class='lower'>m</span><span class='keywordsign infix'>$.</span><span class='lower'>iter</span> <span class='keywordsign infix'>$</span><span class='lower'>f</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>$</span><span class='lower'>e</span><span class='keywordsign infix'>$</span> <span class='keywordsign infix'>&#62;&#62;</span>
+      <span class='keywordsign'>]</span> <span class='keywordsign'>]</span><span class='keywordsign'>;</span>
+  <span class='constructor module'>END</span>
+</code></pre>
+<p>In order for alternative rules to &quot;fall through&quot; correctly, rules must
 share a common prefix, and the rest of the non-terminals must be
-distinct enough. The way we structured the "for" syntax before, we
-essentially have the following two rules:
-</p>
-<pre ml:content="ocaml noeval">
-EXTEND Gram
-  expr: LEVEL "top"
-    [ [ "for"; patts = LIST1 ipatt; "in"; m = a_UIDENT; e = expr;
-       "do"; seq = do_sequence ->
-         (* ... *)
-      | "for"; i = a_LIDENT; "="; e1 = sequence; df = direction_flag;
-       e2 = sequence; "do"; seq = do_sequence ->
-         (* ... *)
-      ] ]
-  ;
-END
-</pre>
-<p>
-Once the "for" keyword is matched, the parser proceeds to match the next
-token, but <code>ipatt</code> also matches <code>a\_LIDENT</code> (a
+distinct enough. The way we structured the &quot;for&quot; syntax before, we
+essentially have the following two rules:</p>
+<pre><code class='ocaml'><span class='constructor module'>EXTEND</span> <span class='constructor module'>Gram</span>
+  <span class='lower'>expr</span><span class='keywordsign'>:</span> <span class='constructor module'>LEVEL</span> <span class='string'>&#34;top&#34;</span>
+    <span class='keywordsign'>[</span> <span class='keywordsign'>[</span> <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>patts</span> <span class='keywordsign'>=</span> <span class='constructor module'>LIST1</span> <span class='lower'>ipatt</span><span class='keywordsign'>;</span> <span class='string'>&#34;in&#34;</span><span class='keywordsign'>;</span> <span class='lower'>m</span> <span class='keywordsign'>=</span> <span class='lower'>a_UIDENT</span><span class='keywordsign'>;</span> <span class='lower'>e</span> <span class='keywordsign'>=</span> <span class='lower'>expr</span><span class='keywordsign'>;</span>
+       <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span> <span class='lower'>seq</span> <span class='keywordsign'>=</span> <span class='lower'>do_sequence</span> <span class='keywordsign'>-&#62;</span>
+         <span class='comment'>(* ... *)</span>
+      <span class='keywordsign'>|</span> <span class='string'>&#34;for&#34;</span><span class='keywordsign'>;</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='lower'>a_LIDENT</span><span class='keywordsign'>;</span> <span class='string'>&#34;=&#34;</span><span class='keywordsign'>;</span> <span class='lower'>e1</span> <span class='keywordsign'>=</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='lower'>df</span> <span class='keywordsign'>=</span> <span class='lower'>direction_flag</span><span class='keywordsign'>;</span>
+       <span class='lower'>e2</span> <span class='keywordsign'>=</span> <span class='lower'>sequence</span><span class='keywordsign'>;</span> <span class='string'>&#34;do&#34;</span><span class='keywordsign'>;</span> <span class='lower'>seq</span> <span class='keywordsign'>=</span> <span class='lower'>do_sequence</span> <span class='keywordsign'>-&#62;</span>
+         <span class='comment'>(* ... *)</span>
+      <span class='keywordsign'>]</span> <span class='keywordsign'>]</span>
+  <span class='keywordsign'>;</span>
+<span class='constructor module'>END</span>
+</code></pre>
+<p>Once the &quot;for&quot; keyword is matched, the parser proceeds to match the next
+token, but <code>ipatt</code> also matches <code>a_LIDENT</code> (a
 lowercase identifier is also a legal pattern). At this point, the parser
 fixes on a rule (whichever comes first) and no longer backtracks to the
-alternative option.
-</p>
-<p>
-The solution is to make the original for loop always match
-<code>ipatt</code>, but refuse anything except a lowercase identifier.
-</p>
-<p>
-We can now verify that everything works as expected.
-</p>
-<pre>
-$ ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach3.ml
-</pre>
-<pre ml:content="ocaml">
-  #load "pa_foreach3.cmo";;
-  let tbl = Hashtbl.create 3;;
-  Hashtbl.add tbl 0 "hello";;
-  Hashtbl.add tbl 1 "world";;
-  Hashtbl.add tbl 2 "foo";;
-  for k v in Hashtbl tbl do Printf.printf "%d: %sn" k v done;;
-  for i = 0 to 5 do print_int i done;;
-  for k, v in List [0, "hello"; 1, "world"; 2, "foo"] do
-    Printf.printf "%d: %sn" k v
-  done;;
-</pre>
-<h2>
-<a name="Conclusion">Conclusion</a>
-</h2>
-<p>
-We begin with a simple Camlp4 syntax extension for the for-each iterator
+alternative option.</p>
+<p>The solution is to make the original for loop always match
+<code>ipatt</code>, but refuse anything except a lowercase identifier.</p>
+<p>We can now verify that everything works as expected.</p>
+<pre><code>$ ocamlc -I +camlp4 camlp4lib.cma -pp camlp4orf -c pa_foreach3.ml
+</code></pre>
+<pre><code class='ocaml'><span class='keywordsign'>#</span><span class='lower'>load</span> <span class='string'>&#34;pa_foreach3.cmo&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>let</span> <span class='lower'>tbl</span> <span class='keywordsign'>=</span> <span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>create</span> <span class='number'>3</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>tbl</span> <span class='number'>0</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>tbl</span> <span class='number'>1</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>;;</span>
+<span class='constructor module'>Hashtbl</span><span class='keywordsign'>.</span><span class='lower'>add</span> <span class='lower'>tbl</span> <span class='number'>2</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>k</span> <span class='lower'>v</span> <span class='keyword'>in</span> <span class='constructor module'>Hashtbl</span> <span class='lower'>tbl</span> <span class='keyword'>do</span> <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d: %sn&#34;</span> <span class='lower'>k</span> <span class='lower'>v</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>i</span> <span class='keywordsign'>=</span> <span class='number'>0</span> <span class='keyword'>to</span> <span class='number'>5</span> <span class='keyword'>do</span> <span class='lower'>print_int</span> <span class='lower'>i</span> <span class='keyword'>done</span><span class='keywordsign'>;;</span>
+<span class='keyword'>for</span> <span class='lower'>k</span><span class='keywordsign'>,</span> <span class='lower'>v</span> <span class='keyword'>in</span> <span class='constructor module'>List</span> <span class='keywordsign'>[</span><span class='number'>0</span><span class='keywordsign'>,</span> <span class='string'>&#34;hello&#34;</span><span class='keywordsign'>;</span> <span class='number'>1</span><span class='keywordsign'>,</span> <span class='string'>&#34;world&#34;</span><span class='keywordsign'>;</span> <span class='number'>2</span><span class='keywordsign'>,</span> <span class='string'>&#34;foo&#34;</span><span class='keywordsign'>]</span> <span class='keyword'>do</span>
+  <span class='constructor module'>Printf</span><span class='keywordsign'>.</span><span class='lower'>printf</span> <span class='string'>&#34;%d: %sn&#34;</span> <span class='lower'>k</span> <span class='lower'>v</span>
+<span class='keyword'>done</span><span class='keywordsign'>;;</span>
+</code></pre>
+<h2 id="Conclusion"> Conclusion</h2>
+<p>We begin with a simple Camlp4 syntax extension for the for-each iterator
 syntax, then explored further refinements to that idea that works around
-parsing issues both in embedded code and in the rules.
-</p>
-<p>
-This tutorial is written by
+parsing issues both in embedded code and in the rules.</p>
+<p>This tutorial is written by
 <a href="http://cs-people.bu.edu/liulk" class="external" title="http://cs-people.bu.edu/liulk">Likai
 Liu</a>. The text has not been peer reviewed, so use this at your own
-risk. Questions and comments are welcome.
-</p>
+risk. Questions and comments are welcome.</p>
 
       </div>
     </div>
